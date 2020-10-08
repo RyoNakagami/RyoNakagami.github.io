@@ -4,11 +4,8 @@ title: "プログラムはなぜ動くのか (個人の勉強記録)"
 categories: IT全般
 ---
 
-# プログラムはなぜ動くのか (個人の勉強記録)
-
 ||概要|
 |---|---|
-|更新日|2020-10-09 Friday 00:22:58|
 |目的|プログラムが動作する根本的な仕組みを理解する|
 |対象|プログラミング初心者<br> 経済学研究科出身の僕がIT教養を身に着ける|
 |参考|[プログラムはなぜ動くのか？](https://www.amazon.co.jp/プログラムはなぜ動くのか-第２版-知っておきたいプログラムの基礎知識-矢沢久雄/dp/4822283151)<br> [はいぱーワークブック](https://hwb.ecc.u-tokyo.ac.jp/wp/)<br> [0から始める応用情報技術者](http://softwaredevelop.web.fc2.com/hardware.html) <br> [基本情報技術者試験ドットコム](https://www.fe-siken.com/kakomon/14_haru/q25.html)<br> [応用情報技術者試験ドットコム](https://www.ap-siken.com/kakomon/31_haru/q5.html)<br> [コンピューターリテラシー](https://www.gsic.titech.ac.jp/matsuda/l/CS/)|
