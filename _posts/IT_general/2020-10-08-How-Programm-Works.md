@@ -7,12 +7,11 @@ categories: IT全般
 ||概要|
 |---|---|
 |目的|プログラムが動作する根本的な仕組みを理解する|
-|対象|プログラミング初心者<br> 経済学研究科出身の僕がIT教養を身に着ける|
 |参考|[プログラムはなぜ動くのか？](https://www.amazon.co.jp/プログラムはなぜ動くのか-第２版-知っておきたいプログラムの基礎知識-矢沢久雄/dp/4822283151)<br> [はいぱーワークブック](https://hwb.ecc.u-tokyo.ac.jp/wp/)<br> [0から始める応用情報技術者](http://softwaredevelop.web.fc2.com/hardware.html) <br> [基本情報技術者試験ドットコム](https://www.fe-siken.com/kakomon/14_haru/q25.html)<br> [応用情報技術者試験ドットコム](https://www.ap-siken.com/kakomon/31_haru/q5.html)<br> [コンピューターリテラシー](https://www.gsic.titech.ac.jp/matsuda/l/CS/)|
 
 現在、Python, Javaといった様々な言語でIDEが提供されており、簡単に直感的な操作でプログラミングを実行することができます。一方、「メモリにロードされた機械語のプログラムが、CPUによって解釈・実行され、それによってコンピュータというシステム全体の制御やデータの演算が行われる」というプログラムが動く仕組みを理解することなくプログラミングができてしまうため、オリジナルプログラムを作成するための応用力に課題をもつプログラマーが増えてしまっています。
 
-このDocumentは、ある程度かけるけどスキルアップを目指すプログラミング初心者（自分）を対象に、プログラムが動作する仕組みを開設したものです。
+このDocumentは、ある程度かけるけどスキルアップを目指すプログラミング初心者（自分）を対象に、プログラムが動作する仕組みを解説したものです。
 
 <!-- START doctoc generated TOC please keep comment here to allow auto update -->
 <!-- DON'T EDIT THIS SECTION, INSTEAD RE-RUN doctoc TO UPDATE -->
