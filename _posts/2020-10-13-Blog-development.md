@@ -155,7 +155,8 @@ Configuration file: /hogehoge/_config.yml
 
 ```
 $ git checkout master
-Swited to branch 'master'
+Switched to branch 'master'
+Your branch is up to date with 'origin/master'.
 ```
 
 `test` ブランチをマージします。ブランチからマージしたことを明確に歴史に残すためにマージコミットをoption `--no--ff`を用いて実行します。
@@ -164,7 +165,12 @@ Swited to branch 'master'
 $ git merge --no-ff test
 ```
 
+するとviエディターが立ち上がって、マージコミットメッセージが求められるので、記入（記入せずとも良い）した後に保存して、終了します。ファイルが書き換わっているか確認すると
 
+```
+$ ls ./_posts/
+2020-10-08-How-Programm-Works.md  2020-10-13-Blog-development.md
+```
 
-
+となっており更新されてことが確認できます。
 
