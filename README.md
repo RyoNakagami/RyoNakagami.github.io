@@ -25,6 +25,12 @@ $ bundle install
 $ bundle exec jekyll serve  # alternatively, npm start
 ```
 
+### How to git push
+
+```
+git push --set-upstream origin master
+```
+
 ### Development (Build From Source)
 
 To modify the theme, you will need [Grunt](https://gruntjs.com/). There are numbers of tasks you can find in the `Gruntfile.js`, includes minifing JavaScript, compiling `.less` to `.css`, adding banners to keep the Apache 2.0 license intact, watching for changes, etc. 
