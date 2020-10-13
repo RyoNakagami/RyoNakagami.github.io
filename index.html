@@ -18,7 +18,9 @@ description: "Hand-built is just another way of saying something is broken but n
             {% if post.lang == 'en' %}
                 {{ post.content | strip_html | truncate:300 }}
             {% else %}
-                {{ post.abstract | strip_html | truncate:200 }}
+                {{ post.purpose | strip_html | truncate:200 }}
+                <br>
+                {{ post.goal | strip_html | truncate:200 }}
             {% endif %}
         </div>
     </a>

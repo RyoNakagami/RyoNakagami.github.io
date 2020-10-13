@@ -5,6 +5,8 @@ subtitle: "Git branchを用いたブログ更新テストのメモ"
 author: "Ryo"
 header-img: "img/post-git-github-logo.jpg"
 header-mask: 0.4
+purpose: 目的 git branchを活用したRyo's Tech blogの更新手順のメモ。
+goal: Goal git branchを用いたファイルバージョン管理やブログレイアウト管理を実現すること
 catelog: true
 tags:
   - git
@@ -65,7 +67,7 @@ current working directory
 
 |branch|説明|
 |---|---|
-|master||本番環境。公開されているブログのソースコードを格納しているブランチ|
+|master|本番環境。公開されているブログのソースコードを格納しているブランチ|
 |test|開発環境でブログの実装・動作確認を行うブランチ|
 
 ## 2. Git branchを用いたブログ編集
