@@ -2,7 +2,7 @@
 layout: post
 title: "プログラムはなぜ動くのか"
 subtitle: "個人の勉強記録"
-author: "Rio"
+author: "Ryo"
 header-img: "img/post-bg-dreamer.jpg"
 header-mask: 0.4
 catelog: true
