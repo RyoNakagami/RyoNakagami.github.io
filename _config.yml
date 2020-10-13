@@ -1,6 +1,6 @@
 # Site settings
-title: Ryo Blog
-SEOTitle: Ryo Blog
+title: Ryo's Tech Blog
+SEOTitle: Ryo's Tech Blog
 header-img: img/home-bg.jpg
 email: nakagamiryo0901@gmail.com
 description: "Football, Arsenal, Gooner | IT，PL，Data scientist，Business Analyst | TOYOTA 86GT"
@@ -57,7 +57,7 @@ kramdown:
 
 
 # Disqus settings
-disqus_username: Rio
+#disqus_username: Rio
 
 # Netease settings
 netease_comment: false
@@ -104,12 +104,6 @@ friends: [
     #     title: "Su",
     #     href: "http://su.gallery/"
     # },{
-    #    title: "乱序",
-    #    href: "http://mida.re/"
-    #},{
-    #    title: "Sherry Wu",
-    #    href: "https://xuechundesign.github.io"
-    #},{
         title: "bluesky0804",
         href: "https://twitter.com/bluesky0804?ref_src=twsrc%5Egoogle%7Ctwcamp%5Eserp%7Ctwgr%5Eauthor"
     }
