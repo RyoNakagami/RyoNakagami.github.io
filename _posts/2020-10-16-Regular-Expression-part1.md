@@ -6,6 +6,7 @@ author: "Ryo"
 header-img: "img/post-regular-expression.jpg"
 header-mask: 0.4
 catelog: true
+mathjax: true
 purpose: 目的：正規表現の構文の基礎を理解する
 goal: 成果物：文字列のキャプチャと置換ができるようになる
 tags:
