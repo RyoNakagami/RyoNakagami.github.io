@@ -21,8 +21,33 @@ tags:
 |参考|[Python 3.9 正規表現](https://docs.python.org/ja/3.9/howto/regex.html)<br>[正規表現技術入門 ――最新エンジン実装と理論的背景](https://www.amazon.co.jp/正規表現技術入門-――最新エンジン実装と理論的背景-WEB-PRESS-plus-ebook/dp/B07JHRL2NS/ref=sr_1_5?dchild=1&keywords=正規表現&qid=1602767146&sr=8-5)|
 |key word|正規表現, regular expression|
 
-<!-- START doctoc -->
-<!-- END doctoc -->
+<!-- START doctoc generated TOC please keep comment here to allow auto update -->
+<!-- DON'T EDIT THIS SECTION, INSTEAD RE-RUN doctoc TO UPDATE -->
+
+
+- [1. 正規表現の基本](#1-%E6%AD%A3%E8%A6%8F%E8%A1%A8%E7%8F%BE%E3%81%AE%E5%9F%BA%E6%9C%AC)
+  - [正規表現とは](#%E6%AD%A3%E8%A6%8F%E8%A1%A8%E7%8F%BE%E3%81%A8%E3%81%AF)
+  - [正規表現はどのような時に使うのか？](#%E6%AD%A3%E8%A6%8F%E8%A1%A8%E7%8F%BE%E3%81%AF%E3%81%A9%E3%81%AE%E3%82%88%E3%81%86%E3%81%AA%E6%99%82%E3%81%AB%E4%BD%BF%E3%81%86%E3%81%AE%E3%81%8B)
+  - [メタ文字とリテラル](#%E3%83%A1%E3%82%BF%E6%96%87%E5%AD%97%E3%81%A8%E3%83%AA%E3%83%86%E3%83%A9%E3%83%AB)
+    - [メタ文字の分類](#%E3%83%A1%E3%82%BF%E6%96%87%E5%AD%97%E3%81%AE%E5%88%86%E9%A1%9E)
+    - [量指定子](#%E9%87%8F%E6%8C%87%E5%AE%9A%E5%AD%90)
+    - [アンカー（位置指定子）](#%E3%82%A2%E3%83%B3%E3%82%AB%E3%83%BC%E4%BD%8D%E7%BD%AE%E6%8C%87%E5%AE%9A%E5%AD%90)
+    - [エスケープシーケンス](#%E3%82%A8%E3%82%B9%E3%82%B1%E3%83%BC%E3%83%97%E3%82%B7%E3%83%BC%E3%82%B1%E3%83%B3%E3%82%B9)
+  - [その他](#%E3%81%9D%E3%81%AE%E4%BB%96)
+- [2. 正規表現の基本演算：連接, 選択, 繰り返し](#2-%E6%AD%A3%E8%A6%8F%E8%A1%A8%E7%8F%BE%E3%81%AE%E5%9F%BA%E6%9C%AC%E6%BC%94%E7%AE%97%E9%80%A3%E6%8E%A5-%E9%81%B8%E6%8A%9E-%E7%B9%B0%E3%82%8A%E8%BF%94%E3%81%97)
+  - [連接](#%E9%80%A3%E6%8E%A5)
+  - [選択](#%E9%81%B8%E6%8A%9E)
+  - [繰り返し](#%E7%B9%B0%E3%82%8A%E8%BF%94%E3%81%97)
+  - [演算子の結合順位](#%E6%BC%94%E7%AE%97%E5%AD%90%E3%81%AE%E7%B5%90%E5%90%88%E9%A0%86%E4%BD%8D)
+  - [グループ化](#%E3%82%B0%E3%83%AB%E3%83%BC%E3%83%97%E5%8C%96)
+- [3. キャプチャと置換](#3-%E3%82%AD%E3%83%A3%E3%83%97%E3%83%81%E3%83%A3%E3%81%A8%E7%BD%AE%E6%8F%9B)
+  - [文字列の部位とマッチング](#%E6%96%87%E5%AD%97%E5%88%97%E3%81%AE%E9%83%A8%E4%BD%8D%E3%81%A8%E3%83%9E%E3%83%83%E3%83%81%E3%83%B3%E3%82%B0)
+  - [キャプチャ](#%E3%82%AD%E3%83%A3%E3%83%97%E3%83%81%E3%83%A3)
+    - [事例 1 順番キャプチャ: bashと正規表現を用いてファイルをrenameする](#%E4%BA%8B%E4%BE%8B-1-%E9%A0%86%E7%95%AA%E3%82%AD%E3%83%A3%E3%83%97%E3%83%81%E3%83%A3-bash%E3%81%A8%E6%AD%A3%E8%A6%8F%E8%A1%A8%E7%8F%BE%E3%82%92%E7%94%A8%E3%81%84%E3%81%A6%E3%83%95%E3%82%A1%E3%82%A4%E3%83%AB%E3%82%92rename%E3%81%99%E3%82%8B)
+    - [事例 2 名前付きキャプチャ: Pythonと正規表現を用いて日付表現を日本語に直す](#%E4%BA%8B%E4%BE%8B-2-%E5%90%8D%E5%89%8D%E4%BB%98%E3%81%8D%E3%82%AD%E3%83%A3%E3%83%97%E3%83%81%E3%83%A3-python%E3%81%A8%E6%AD%A3%E8%A6%8F%E8%A1%A8%E7%8F%BE%E3%82%92%E7%94%A8%E3%81%84%E3%81%A6%E6%97%A5%E4%BB%98%E8%A1%A8%E7%8F%BE%E3%82%92%E6%97%A5%E6%9C%AC%E8%AA%9E%E3%81%AB%E7%9B%B4%E3%81%99)
+    - [事例 3 順番キャプチャ: 2015年国勢調査shpファイルをcurlコマンドで一括downloadする](#%E4%BA%8B%E4%BE%8B-3-%E9%A0%86%E7%95%AA%E3%82%AD%E3%83%A3%E3%83%97%E3%83%81%E3%83%A3-2015%E5%B9%B4%E5%9B%BD%E5%8B%A2%E8%AA%BF%E6%9F%BBshp%E3%83%95%E3%82%A1%E3%82%A4%E3%83%AB%E3%82%92curl%E3%82%B3%E3%83%9E%E3%83%B3%E3%83%89%E3%81%A7%E4%B8%80%E6%8B%ACdownload%E3%81%99%E3%82%8B)
+
+<!-- END doctoc generated TOC please keep comment here to allow auto update -->
 
 ## 1. 正規表現の基本
 ### 正規表現とは
