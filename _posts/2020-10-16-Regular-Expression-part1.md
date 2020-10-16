@@ -3,7 +3,7 @@ layout: post
 title: "正規表現入門 part 1"
 subtitle: "正規表現は何か？"
 author: "Ryo"
-header-img: "img/post-git-github-logo.jpg"
+header-img: "img/post-regular-expression.jpg"
 header-mask: 0.4
 catelog: true
 purpose: 目的：正規表現の構文の基礎を理解する

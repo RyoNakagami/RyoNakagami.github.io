@@ -132,15 +132,15 @@ $ ls ./_posts/
 2020-10-08-How-Programm-Works.md  2020-10-13-Blog-development.md
 ```
 
-一方、`master`ブランチの状態は
+`master`ブランチの状態は
 
 ```
 $ git checkout master
 $ ls ./_posts/
-2020-10-08-How-Programm-Works.md
+2020-10-08-How-Programm-Works.md  2020-10-13-Blog-development.md
 ```
 
-となっています。先ほど追加したpostが反映されていないことがわかります。
+となっています。
 
 ### ローカルテスト
 
@@ -244,6 +244,8 @@ Deleted branch test (was 64fee80).
 ```
 $ git branch -D <branch name>
 ```
+
+その後編集記録を消したい場合は、`git checkout .`で編集記録が消えます。ファイルを消したい場合は`rm`コマンドを使って消していきましょう。
 
 ### 本番環境GitHub Pagesの更新
 
