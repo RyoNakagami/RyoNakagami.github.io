@@ -6,7 +6,7 @@ author: "Ryo"
 header-img: "img/post-git-github-logo.jpg"
 header-mask: 0.4
 purpose: 目的 git branchを活用したRyo's Tech blogの更新手順のメモ
-goal: Goal git branchを用いたファイルバージョン管理やブログレイアウト管理を実現すること
+goal: 成果物 git branchを用いたファイルバージョン管理やブログレイアウト管理を実現
 catelog: true
 tags:
   - git
@@ -179,7 +179,7 @@ Switched to branch 'master'
 Your branch is up to date with 'origin/master'.
 ```
 
-`test` ブランチをマージします。ブランチからマージしたことを明確に歴史に残すためにマージコミットをoption `--no--ff`を用いて実行します。
+`test` ブランチをマージします。ブランチからマージしたことを明確に歴史に残すためにマージコミットをoption `--no-ff`を用いて実行します。
 
 ```
 $ git merge --no-ff test
