@@ -214,6 +214,7 @@ import re
 
 stand_object = re.compile(r'(foo)??')
 regex_match_1 = stand_object.search('foofoofoo')
+print('出力結果')
 print(regex_match_1.group())
 
 stand_object_2 = re.compile(r'(foo)?')
@@ -232,6 +233,7 @@ print(regex_match_4.group())
 実行結果は
 
 ```
+出力結果
 
 foo
 foofoo
