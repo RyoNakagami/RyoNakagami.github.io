@@ -18,6 +18,7 @@ tags:
 |---|---|
 |目的|Pythonの`re` モジュールを用いた文字列操作を紹介する|
 |参考|[退屈なことはPythonにやらせよう――ノンプログラマーにもできる自動化処理プログラミング](https://www.oreilly.co.jp/books/9784873117782/)|
+|前回記事|[正規表現入門 part 1](https://ryonakagami.github.io/2020/10/16/Regular-Expression-part1/)|
 
 <!-- START doctoc generated TOC please keep comment here to allow auto update -->
 <!-- DON'T EDIT THIS SECTION, INSTEAD RE-RUN doctoc TO UPDATE -->
