@@ -142,7 +142,7 @@ Wall time: 971 µs
 
 <div class="math display" style="overflow: auto">
 $$
-Prob(Y \leq y | X = x) = p \cdot Prob(Y \leq y - 1| X = \min(x + 1, 15)) + (1-p) \cdot Prob(Y \leq y - 1| X = x-1)
+\textrm{Pr}(Y \leq y | X = x) = p \cdot\textrm{Pr}(Y \leq y - 1| X = \min(x + 1, 15)) + (1-p) \cdot\textrm{Pr}(Y \leq y - 1| X = x-1)
 $$
 </div>
 
@@ -151,9 +151,9 @@ $$
 <div class="math display" style="overflow: auto">
 $$
 \begin{aligned}
-Prob(Y \leq y| X = x) =& p \cdot Prob(Y \leq y - 1| X = \min(x + 1, 15)) + (1-p) \cdot Prob(Y \leq y - 1| X = \max(x-1, 0 ))\\
-= & p^2 \cdot Prob(Y \leq y - 2| X = \min(x + 2, 15)) + p(1-p) \cdot Prob(Y \leq y - 2| X = x)\\
-& + p(1-p) \cdot Prob(Y \leq y - 2| X = x) + p(1-p) \cdot Prob(Y \leq y - 2| X = \max(x - 2, 0))\\
+\textrm{Pr}(Y \leq y| X = x) =& p \cdot \textrm{Pr}(Y \leq y - 1| X = \min(x + 1, 15)) + (1-p) \cdot\textrm{Pr}(Y \leq y - 1| X = \max(x-1, 0 ))\\
+= & p^2 \cdot\textrm{Pr}(Y \leq y - 2| X = \min(x + 2, 15)) + p(1-p) \cdot\textrm{Pr}(Y \leq y - 2| X = x)\\
+& + p(1-p) \cdot\textrm{Pr}(Y \leq y - 2| X = x) + p(1-p) \cdot\textrm{Pr}(Y \leq y - 2| X = \max(x - 2, 0))\\
 =&  \cdots
 \end{aligned}
 $$
