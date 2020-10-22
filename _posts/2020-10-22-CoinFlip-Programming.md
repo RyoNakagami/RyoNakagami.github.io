@@ -140,12 +140,15 @@ Wall time: 971 µs
 
 を説明します。コイン保有枚数 `x > 0` 枚保有している状態で `y > x` 日後までに死ぬ確率は、表が出る確率を `p`, $Y$ を残り寿命, $X$ を残りコイン保有枚数 とした場合
 
+<div class="math display" style="overflow: auto">
 $$
 Prob(Y \leq y | X = x) = p \cdot Prob(Y \leq y - 1| X = \min(x + 1, 15)) + (1-p) \cdot Prob(Y \leq y - 1| X = x-1)
 $$
+</div>
 
 と表現できます。これをさらに展開すると、
 
+<div class="math display" style="overflow: auto">
 $$
 \begin{aligned}
 Prob(Y \leq y| X = x) =& p \cdot Prob(Y \leq y - 1| X = \min(x + 1, 15)) + (1-p) \cdot Prob(Y \leq y - 1| X = \max(x-1, 0 ))\\
@@ -154,6 +157,7 @@ Prob(Y \leq y| X = x) =& p \cdot Prob(Y \leq y - 1| X = \min(x + 1, 15)) + (1-p)
 =&  \cdots
 \end{aligned}
 $$
+</div>
 
 となります。これは $X = x$ から遷移できる state は $X = x+1$ または $X = x-1$ にそれぞれ確率 $p$, $1 - p$で遷移することを意味してます。(詳しくは[こちら](https://python-advanced.quantecon.org/discrete_dp.html))
 
