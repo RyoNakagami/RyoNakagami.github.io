@@ -38,9 +38,9 @@ tags:
 |---|---|
 |デバイス|HP ENVY TE01-0xxx|
 |OS|ubuntu 20.04 LTS Focal Fossa|
-|CPU| Intel COre i7-9700 CPU 3.00 GHz|
+|CPU| Intel Core i7-9700 CPU 3.00 GHz|
 |RAM|32.0 GB|
-|GPU|NVIDIA GeForce FTX 2060 SUPER|
+|GPU|NVIDIA GeForce RTX 2060 SUPER|
 |起動ディスク作成ソフト|Rufus|
 
 ## 2. Requirements
@@ -49,7 +49,7 @@ tags:
 2. 4 GiB RAM (system memory)
 3. 25 GB of hard-drive space (or USB stick, memory card or external drive)
 4. グラフィックカードと1024×768モニター
-5. インストーラーメディア用のCD/DVD drive または a USB portへのアクセス
+5. インストーラーメディア用のCD/DVD drive または USB portへのアクセス
 
 ## 3. 作業手順概要
 
