@@ -45,6 +45,7 @@ tags:
 |CPU| Intel Core i7-9700 CPU 3.00 GHz|
 |RAM|32.0 GB|
 |GPU|NVIDIA GeForce RTX 2060 SUPER|
+|キーボード|Microsoft Ergonomic Desktop US配列|
 |起動ディスク作成ソフト|Rufus|
 
 ## 2. 今回の環境構築のスコープ
