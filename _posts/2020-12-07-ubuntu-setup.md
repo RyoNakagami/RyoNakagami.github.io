@@ -33,6 +33,7 @@ tags:
 - [6. HP BIOSの設定](#6-hp-bios%E3%81%AE%E8%A8%AD%E5%AE%9A)
 - [7. Ubuntu初期設定](#7-ubuntu%E5%88%9D%E6%9C%9F%E8%A8%AD%E5%AE%9A)
   - [インストールタイプ、アップデートのダウンロード、サードパーティソフトウェアのインストール設定](#%E3%82%A4%E3%83%B3%E3%82%B9%E3%83%88%E3%83%BC%E3%83%AB%E3%82%BF%E3%82%A4%E3%83%97%E3%82%A2%E3%83%83%E3%83%97%E3%83%87%E3%83%BC%E3%83%88%E3%81%AE%E3%83%80%E3%82%A6%E3%83%B3%E3%83%AD%E3%83%BC%E3%83%89%E3%82%B5%E3%83%BC%E3%83%89%E3%83%91%E3%83%BC%E3%83%86%E3%82%A3%E3%82%BD%E3%83%95%E3%83%88%E3%82%A6%E3%82%A7%E3%82%A2%E3%81%AE%E3%82%A4%E3%83%B3%E3%82%B9%E3%83%88%E3%83%BC%E3%83%AB%E8%A8%AD%E5%AE%9A)
+- [Appendix: To-Do List](#appendix-to-do-list)
 
 <!-- END doctoc generated TOC please keep comment here to allow auto update -->
 
@@ -46,6 +47,7 @@ tags:
 |RAM|32.0 GB|
 |GPU|NVIDIA GeForce RTX 2060 SUPER|
 |キーボード|Microsoft Ergonomic Desktop US配列|
+|マウス|Logicool M570|
 |起動ディスク作成ソフト|Rufus|
 
 ## 2. 今回の環境構築のスコープ
@@ -127,4 +129,13 @@ tags:
 - `Download updaytes while installing Ubuntu`は、インターネットにつながっているならデフォルトでチェックが入ります。インストール中にアップデートがダウンロードされ、セキュリティホールやバグが解消された状態で使い始めることができます。
 - `Install third-party software`をチェックすれば、商用のドライバやデコーダーなどがインストールされます。
 
+## Appendix: To-Do List
 
+|Roadmap|記事|
+|---|---|
+|日本語環境整備|[Ubuntu Desktop 環境構築 Part 2](https://ryonakagami.github.io/2020/12/09/ubuntu-language-settings/)|
+|マルチディスプレイ設定 & 表示設定（時計とDock）|TBA|
+|セキュリティ対策|TBA|
+|zsh setup|TBA|
+|git setup|TBA|
+|VScode setup||
