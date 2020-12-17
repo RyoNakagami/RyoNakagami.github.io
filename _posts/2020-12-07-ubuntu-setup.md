@@ -33,7 +33,7 @@ tags:
 - [6. HP BIOSの設定](#6-hp-bios%E3%81%AE%E8%A8%AD%E5%AE%9A)
 - [7. Ubuntu初期設定](#7-ubuntu%E5%88%9D%E6%9C%9F%E8%A8%AD%E5%AE%9A)
   - [インストールタイプ、アップデートのダウンロード、サードパーティソフトウェアのインストール設定](#%E3%82%A4%E3%83%B3%E3%82%B9%E3%83%88%E3%83%BC%E3%83%AB%E3%82%BF%E3%82%A4%E3%83%97%E3%82%A2%E3%83%83%E3%83%97%E3%83%87%E3%83%BC%E3%83%88%E3%81%AE%E3%83%80%E3%82%A6%E3%83%B3%E3%83%AD%E3%83%BC%E3%83%89%E3%82%B5%E3%83%BC%E3%83%89%E3%83%91%E3%83%BC%E3%83%86%E3%82%A3%E3%82%BD%E3%83%95%E3%83%88%E3%82%A6%E3%82%A7%E3%82%A2%E3%81%AE%E3%82%A4%E3%83%B3%E3%82%B9%E3%83%88%E3%83%BC%E3%83%AB%E8%A8%AD%E5%AE%9A)
-- [Appendix: To-Do List](#appendix-to-do-list)
+- [Appendix: 導入アプリケーション・ソフト・プログラミング言語](#appendix-%E5%B0%8E%E5%85%A5%E3%82%A2%E3%83%97%E3%83%AA%E3%82%B1%E3%83%BC%E3%82%B7%E3%83%A7%E3%83%B3%E3%83%BB%E3%82%BD%E3%83%95%E3%83%88%E3%83%BB%E3%83%97%E3%83%AD%E3%82%B0%E3%83%A9%E3%83%9F%E3%83%B3%E3%82%B0%E8%A8%80%E8%AA%9E)
 
 <!-- END doctoc generated TOC please keep comment here to allow auto update -->
 
@@ -69,9 +69,17 @@ tags:
 
 ### 今後の予定
 
-1. Security設定（ファイアウォール設定、Security update設定 etc）
-2. GPU活用&機械学習環境構築のため` Nvidia driver, Cuda, cuDNN, TensorFlow, Keras & PyTorch`のインストール
-3. 必要アプリケーション(VScodeなど)のインストール
+|Roadmap|記事|
+|---|---|
+|Ubuntu 20.04 LTS (Focal Fossa)をインストール(今回！)|[Ubuntu Desktop環境構築 Part 1](https://ryonakagami.github.io/2020/12/07/ubuntu-setup/)|
+|日本語環境整備|[Ubuntu Desktop 環境構築 Part 2](https://ryonakagami.github.io/2020/12/09/ubuntu-language-settings/)|
+|マルチディスプレイ設定 & 表示設定（時計とDock）|[Ubuntu Desktop 環境構築 Part 3](https://ryonakagami.github.io/2020/12/11/ubuntu-display/)|
+|セキュリティ対策: ファイヤウォールの設定|[Ubuntu Desktop 環境構築 Part 4](https://ryonakagami.github.io/2020/12/16/ubuntu-security/)|
+|リモートアクセス設定：VPN設定とWoL設定とssh|[Ubuntu Desktop 環境構築 Part 5](https://ryonakagami.github.io/2020/12/17/ubuntu-network-setting/)|
+|セキュリティ対策: システム診断設定・ウイルス対策|[Ubuntu Desktop 環境構築 Part 6](https://ryonakagami.github.io/2020/12/18/ubuntu-security-part2/)|
+|zsh setup|TBA|
+|git setup|TBA|
+|VScode setup||
 
 以上を予定しています。
 
@@ -130,19 +138,31 @@ tags:
 - `Download updaytes while installing Ubuntu`は、インターネットにつながっているならデフォルトでチェックが入ります。インストール中にアップデートがダウンロードされ、セキュリティホールやバグが解消された状態で使い始めることができます。
 - `Install third-party software`をチェックすれば、商用のドライバやデコーダーなどがインストールされます。
 
-## Appendix 1: To-Do List
+## Appendix: 導入アプリケーション・ソフト・プログラミング言語
 
-|Roadmap|記事|
-|---|---|
-|日本語環境整備|[Ubuntu Desktop 環境構築 Part 2](https://ryonakagami.github.io/2020/12/09/ubuntu-language-settings/)|
-|マルチディスプレイ設定 & 表示設定（時計とDock）|[Ubuntu Desktop 環境構築 Part 3](https://ryonakagami.github.io/2020/12/11/ubuntu-display/)|
-|セキュリティ対策: ファイヤウォールの設定|[Ubuntu Desktop 環境構築 Part 4](https://ryonakagami.github.io/2020/12/16/ubuntu-security/)|
-|リモートアクセス設定：OpenVPN設定とWoL設定とssh|[TBA]()|
-|zsh setup|TBA|
-|git setup|TBA|
-|VScode setup||
+|項目|詳細|関連記事|
+|---|---|---|
+|main shell|zsh||
+|shell script用shell|bash||
+|Web Browser main|Firefox||
+|Web Browser sub|Google Chrome||
+|ファイル共有ソフト|google drive ocamlfuse||
+|カレンダー|Google Calender||
+|ToDo管理|Google Keep||
+|Web会議サービス|Zoom||
+|ビジネス用チャットツール|Slack||
+|Text editor main|Visual Studio Code||
+|Text editor sub|nano||
+|分散型バージョン管理システム|Git||
+|データベースサーバー|PostgreSQL||
+|統計・機械学習用プログラミング言語|Python||
+|統計解析用プログラミング言語|R||
+|数値計算用プログラミング言語|Julia||
+|競技プログラミング用|C, C++||
+|記述統計用分析環境|JupyterLab||
+|R言語用開発環境|RStudio||
+|コンテナ|Docker||
+|静的サイトジェネレーター|Jekyll||
+|Markdown 目次作成パッケージ|doctoc||
 
-## Appendix 2: 導入アプリケーション
 
-|項目|詳細|
-|---|---|
