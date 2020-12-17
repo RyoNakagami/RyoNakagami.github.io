@@ -13,7 +13,7 @@ tags:
 - Ubuntu 20.04 LTS
 ---
 
-|概要||
+||概要|
 |---|---|
 |目的|Windows 10 Proをアンインストールして、代わりにUbuntu 20.04 LTSをインストールする<br> Ubuntu install後の設定は別の記事で解説|
 |参考|[Ubuntu Desktopインストールチュートリアル](https://ubuntu.com/tutorials/install-ubuntu-desktop#1-overview)<br>[Ubuntu Tutorials](https://ubuntu.com/tutorials?topic=desktop)<br>[Ubuntu Desktop image](http://jp.releases.ubuntu.com/focal/)|
@@ -48,6 +48,7 @@ tags:
 |GPU|NVIDIA GeForce RTX 2060 SUPER|
 |キーボード|Microsoft Ergonomic Desktop US配列|
 |マウス|Logicool M570|
+|スピーカー|Creative T30 Wireless|
 |起動ディスク作成ソフト|Rufus|
 
 ## 2. 今回の環境構築のスコープ
@@ -129,13 +130,19 @@ tags:
 - `Download updaytes while installing Ubuntu`は、インターネットにつながっているならデフォルトでチェックが入ります。インストール中にアップデートがダウンロードされ、セキュリティホールやバグが解消された状態で使い始めることができます。
 - `Install third-party software`をチェックすれば、商用のドライバやデコーダーなどがインストールされます。
 
-## Appendix: To-Do List
+## Appendix 1: To-Do List
 
 |Roadmap|記事|
 |---|---|
 |日本語環境整備|[Ubuntu Desktop 環境構築 Part 2](https://ryonakagami.github.io/2020/12/09/ubuntu-language-settings/)|
-|マルチディスプレイ設定 & 表示設定（時計とDock）|TBA|
-|セキュリティ対策|TBA|
+|マルチディスプレイ設定 & 表示設定（時計とDock）|[Ubuntu Desktop 環境構築 Part 3](https://ryonakagami.github.io/2020/12/11/ubuntu-display/)|
+|セキュリティ対策: ファイヤウォールの設定|[Ubuntu Desktop 環境構築 Part 4](https://ryonakagami.github.io/2020/12/16/ubuntu-security/)|
+|リモートアクセス設定：OpenVPN設定とWoL設定とssh|[TBA]()|
 |zsh setup|TBA|
 |git setup|TBA|
 |VScode setup||
+
+## Appendix 2: 導入アプリケーション
+
+|項目|詳細|
+|---|---|

@@ -13,10 +13,10 @@ tags:
 - Ubuntu 20.04 LTS
 ---
 
-|概要||
+||概要|
 |---|---|
 |目的|ファイヤウォールの設定: ufw と Gufw|
-|参考|[UbuntuでGufwを用いてファイヤウォールの設定(https://www.kkaneko.jp/tools/server/gufw_ubuntu.html)|
+|参考|[UbuntuでGufwを用いてファイヤウォールの設定](https://www.kkaneko.jp/tools/server/gufw_ubuntu.html)|
 
 <!-- START doctoc generated TOC please keep comment here to allow auto update -->
 <!-- DON'T EDIT THIS SECTION, INSTEAD RE-RUN doctoc TO UPDATE -->
