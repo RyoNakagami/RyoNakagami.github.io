@@ -79,7 +79,7 @@ tags:
 |セキュリティ対策: システム診断設定・ウイルス対策|[Ubuntu Desktop 環境構築 Part 6](https://ryonakagami.github.io/2020/12/18/ubuntu-security-part2/)|
 |zsh setup|TBA|
 |git setup|TBA|
-|VScode setup||
+|VScode setup|TBA|
 
 以上を予定しています。
 
@@ -144,9 +144,10 @@ tags:
 |---|---|---|
 |main shell|zsh||
 |shell script用shell|bash||
+|Terminalソフト|Terminator||
 |Web Browser main|Firefox||
 |Web Browser sub|Google Chrome||
-|ファイル共有ソフト|google drive ocamlfuse||
+|ファイル共有ソフト|google drive ocamlfuse|[Ubuntu Desktop環境構築 Part 7](https://ryonakagami.github.io/2020/12/19/ubuntu-google-drive-setup/)|
 |カレンダー|Google Calender||
 |ToDo管理|Google Keep||
 |Web会議サービス|Zoom||
@@ -164,5 +165,6 @@ tags:
 |コンテナ|Docker||
 |静的サイトジェネレーター|Jekyll||
 |Markdown 目次作成パッケージ|doctoc||
+|web page raeding lsit管理|pocket||
 
 
