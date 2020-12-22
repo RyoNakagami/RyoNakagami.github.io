@@ -165,6 +165,6 @@ tags:
 |コンテナ|Docker||
 |静的サイトジェネレーター|Jekyll||
 |Markdown 目次作成パッケージ|doctoc||
-|web page raeding lsit管理|pocket||
+|web page raeding list管理|pocket||
 
 
