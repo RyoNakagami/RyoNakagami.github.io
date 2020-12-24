@@ -122,7 +122,7 @@ $ chmod 700 google-drive-ocamlfuse-start.sh
 
 次にスタートメニューから`Startup Applications Preferences`を起動します。そして先程のスクリプトを登録しておきます。
 
-<img src="https://raw.githubusercontent.com/RyoNakagami/omorikaizuka/master/linux/google_drive/StartupApplicationsPreferences_20201222.png">
+<img src="https://raw.githubusercontent.com//ryonakimageserver/omorikaizuka//master/linux/google_drive/StartupApplicationsPreferences_20201222.png">
 
 
 ## Appendix: シンボリックリンクとハードリンク

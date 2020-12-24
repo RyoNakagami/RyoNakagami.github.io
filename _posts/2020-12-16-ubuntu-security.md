@@ -49,7 +49,7 @@ Linuxカーネルには、Netfilterというパケットフィルタリング機
 
 パケットフィルタリングの仕組みは以下の図参照：
 
-<img src="https://github.com/RyoNakagami/omorikaizuka/blob/master/linux/installer/20201216_ubuntu_packetfiltering.jpg?raw=true">
+<img src="https://github.com/ryonakimageserver/omorikaizuka/blob/master/linux/installer/20201216_ubuntu_packetfiltering.jpg?raw=true">
 
 今回は`ufw`とそのGUI実装版の`Gufw`を用いたファイヤウォール設定を紹介します。
 

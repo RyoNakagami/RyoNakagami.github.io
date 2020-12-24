@@ -83,7 +83,7 @@ Unattended-Upgrade::Mail "user@example.com";
 
 IPSは侵入の試みを検知して積極的に防御してくれます。`fail2ban` はログファイルをスキャンし、悪意のあるアクセスや攻撃の全長を捉えてアクセス元のIPアドレスをbanします。
 
-<img src = "https://github.com/RyoNakagami/omorikaizuka/blob/master/linux/security/20201217_ubuntu_fail2ban.jpg?raw=true">
+<img src = "https://github.com/ryonakimageserver/omorikaizuka/blob/master/linux/security/20201217_ubuntu_fail2ban.jpg?raw=true">
 
 ### fail2banのインストール
 

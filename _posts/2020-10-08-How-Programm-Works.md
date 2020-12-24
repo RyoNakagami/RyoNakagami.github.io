@@ -176,7 +176,7 @@ tags:
 
 マシン語命令の主な種類と機能は
 
-<img src = "https://github.com/RyoNakagami/omorikaizuka/blob/master/linux/CPUimage001-1024x205.png?raw=true">
+<img src = "https://github.com/ryonakimageserver/omorikaizuka/blob/master/linux/CPUimage001-1024x205.png?raw=true">
 
 
 ### パソコンの構成要素（物理）
@@ -194,11 +194,11 @@ tags:
 |出力デバイス|演算結果のデータをユーザに対して出力する装置。Display、Screenやスピーカーなど|
 |入力デバイス|ユーザからの入力を受ける装置。キーボード, マウスなど|
 
-<img src = "https://github.com/RyoNakagami/omorikaizuka/blob/master/linux/cpu_map.jpg?raw=true">
+<img src = "https://github.com/ryonakimageserver/omorikaizuka/blob/master/linux/cpu_map.jpg?raw=true">
 
 より抽象化すると
 
-<img src = "https://github.com/RyoNakagami/omorikaizuka/blob/master/IT101/computer_bus_hardware.jpg?raw=true">
+<img src = "https://github.com/ryonakimageserver/omorikaizuka/blob/master/IT101/computer_bus_hardware.jpg?raw=true">
 
 ### CPUとはどんな働きをする装置か？
 
@@ -313,7 +313,7 @@ mov dword ptr [ebp-4], eax   ; eaxの値（加算結果）をメモリーに格�
 プログラム・カウンタの役割は命令を読み出すために，次の命令が格納されたアドレスを保持することである。
 CPUの制御装置は、プログラム・カウンタの値を参照して、メモリーから命令を読み出して解釈・実行している。一例は以下：
 
-<img src = "https://github.com/RyoNakagami/omorikaizuka/blob/master/linux/program_001-1024x841.jpg?raw=true">
+<img src = "https://github.com/ryonakimageserver/omorikaizuka/blob/master/linux/program_001-1024x841.jpg?raw=true">
 
 #### フェッチ・デコード・実行のサイクル
 
@@ -343,7 +343,7 @@ CPUの制御装置は、プログラム・カウンタの値を参照して、�
 - オーバーフロー：演算結果の桁数sがレジスタのサイズを超えたこと
 - パリティチェック：演算結果の値が偶数か奇数のどちらかであるかをチェック
 
-<img src = "https://github.com/RyoNakagami/omorikaizuka/blob/master/linux/cpu_jump.jpg?raw=true">
+<img src = "https://github.com/ryonakimageserver/omorikaizuka/blob/master/linux/cpu_jump.jpg?raw=true">
 
 ### 関数を呼び出すときの仕組み:コール命令とリターン命令
 
@@ -354,7 +354,7 @@ CPUの制御装置は、プログラム・カウンタの値を参照して、�
 |コール命令|関数の入り口のアドレスをプログラム・カウンタに設定する前に、関数の呼び出しの次に実行すべき命令のアドレスをスタックというメインメモリー上の領域に保存します。関数処理が終了したら、関数の最後（関数の出口）でリターン命令を実行します。|
 |リターン命令|スタックに保存されたアドレスをプログラム・カウンタに設定する機能を持っています。下図の場合、Myfunc関数が呼び出される前にアドレス0154という値がスタックに保存されます。Myfunc関数が処理を終了すると、スタックから0154という値が読み出され、プログラム・カウンタに設定されます。|
 
-<img src = "https://github.com/RyoNakagami/omorikaizuka/blob/master/linux/kannsuu_001-1024x752.jpg?raw=true">
+<img src = "https://github.com/ryonakimageserver/omorikaizuka/blob/master/linux/kannsuu_001-1024x752.jpg?raw=true">
 
 - 正しいアドレスに戻ることができるのは「コール命令」と「リターン命令」のおかげで、これら命令が機能するのは「スタック」のおかげ。
 - スタックはメモリの中の特定の領域を占め、「スタックポインタ」というレジスタを通じてアクセスされる。
@@ -442,7 +442,7 @@ CPUとRAMの間にキャッシュと呼ばれる高速メモリーを置いて�
 
 ### コンピュータが情報を二進数で扱う理由
 
-<img src = "https://github.com/RyoNakagami/omorikaizuka/blob/master/linux/IC-2digit.png?raw=true">
+<img src = "https://github.com/ryonakimageserver/omorikaizuka/blob/master/linux/IC-2digit.png?raw=true">
 
 コンピュータは集積回路(IC)と呼ばれる電子部品で構成されている。CPUも集積回路(IC)の一種。ICはムカデみたいな形状をしており、ムカデの足（ピン）は直流電圧+5V, 0Vのいずれかの状態になっている。つまり一本のピンでは二つの状態しか表せない。このような特性から、コンピューターは必然的に情報を二進数で扱っている。なのでプログラム上で10進数や文字列として表現されている情報もコンパイル時には、二進数の情報として扱われる。
 
@@ -560,7 +560,7 @@ void main() {
 
 浮動小数点では、小数点を「符号」「仮数」「基数」「指数」という四つに分けて表現する。
 
-<img src = "https://github.com/RyoNakagami/omorikaizuka/blob/master/linux/スクリーンショット%202019-11-24%2014.17.54.jpg?raw=true">
+<img src = "https://github.com/ryonakimageserver/omorikaizuka/blob/master/linux/スクリーンショット%202019-11-24%2014.17.54.jpg?raw=true">
 
 - 基数部分は基本的には2
 - 仮数部は「小数点以上の値を1に固定する正規表現」が使用されている。 さらに、１桁目の`1`を実際のデータの中には格納しないという工夫をしている
@@ -569,11 +569,11 @@ void main() {
 特定のルールに従って、データを整理して表すことを「正規表現」と呼ぶ。一例は文字列の正規表現など。イクセス表現とは指数部で表せる範囲の中央をゼロとする表現方法のこと。8 bitを例にすると最大値11111111の半分01111111を0としている。
 
 
-<img src = "https://github.com/RyoNakagami/omorikaizuka/blob/master/linux/float_quiz.jpg?raw=true">
+<img src = "https://github.com/ryonakimageserver/omorikaizuka/blob/master/linux/float_quiz.jpg?raw=true">
 
 このとき、`0.25 = 0.5 * 2^{-1}`なので、指数部が２の補数を採用しているので、`0-1111-10000000000`となる。
 
-<img src = "https://github.com/RyoNakagami/omorikaizuka/blob/master/linux/float_quiz.jpg?raw=true">
+<img src = "https://github.com/ryonakimageserver/omorikaizuka/blob/master/linux/float_quiz.jpg?raw=true">
 
 演算対象の2つの16進数を符号・指数部・仮数部に分け、浮動小数点表示にすると次のようになります。
 
@@ -620,9 +620,9 @@ void main() {
 
 #### floatとdouble
 
-<img src ="https://github.com/RyoNakagami/omorikaizuka/blob/master/linux/float.png?raw=true">
+<img src ="https://github.com/ryonakimageserver/omorikaizuka/blob/master/linux/float.png?raw=true">
 
-<img src ="https://github.com/RyoNakagami/omorikaizuka/blob/master/linux/double.png?raw=true">
+<img src ="https://github.com/ryonakimageserver/omorikaizuka/blob/master/linux/double.png?raw=true">
 
 #### IEEE 754
 
@@ -678,7 +678,7 @@ void main() {
 
 ### 2進数と16進数
 
-<img src = "https://github.com/RyoNakagami/omorikaizuka/blob/master/linux/binary_to_16.png?raw=true">
+<img src = "https://github.com/ryonakimageserver/omorikaizuka/blob/master/linux/binary_to_16.png?raw=true">
 
 - C言語のプログラムでは、数値の先頭に`0x`をつけることで16進数を表す
 - 小数点で表された2進数を16進数で表す場合でも、小数点以下の2進数の４桁が16進数の１桁に相当する。４桁に見たない場合は、2進数の下位桁に0をおく(`1011.011`は`1011.0110`として処理)
@@ -772,7 +772,7 @@ DRAMと比べて記憶容量あたりの単価が高いため、高速な情報�
 
 メモリーICはDRAM, SRAM, ROMなど様々な種類があるが基本的な仕組みは同じ。メモリICには、電源、アドレス信号、データ信号、制御信号を入出力するためのピンがあり、アドレスを指定して、データを読み書きするようになっている。メモリICのピン配置の一例は以下：
 
-<img src = "https://github.com/RyoNakagami/omorikaizuka/blob/master/linux/memory_str.jpg?raw=true">
+<img src = "https://github.com/ryonakimageserver/omorikaizuka/blob/master/linux/memory_str.jpg?raw=true">
 
 - VCC, GND: 電源
 - A0~A9: アドレス信号
@@ -869,7 +869,7 @@ float   f       0x7fff5c4578f0
 double  d       0x7fff5c4578e8
 ```
 
-<img src ="https://github.com/RyoNakagami/omorikaizuka/blob/master/linux/addressAndPointer.png?raw=true">
+<img src ="https://github.com/ryonakimageserver/omorikaizuka/blob/master/linux/addressAndPointer.png?raw=true">
 
 プログラムのバグが発生する理由は多々あり、例として(1)起こりうる場合への対応を忘れること, (2) 論理式が間違っている (3)間違った式を利用するなどがあるが、それに加えて、(4) 間違ったメモリのアドレスにアクセス, (5) プログラムに割り当てられた範囲外のメモリへのアクセスも十分考えられる。
 
@@ -1139,7 +1139,7 @@ C言語では、スタックを使って関数の引数を渡している。32 b
 
 このスタックのクリーンアップ処理を何度も呼びされる関数の側で行うようにすれば、呼び出す側で行う場合よりもプログラム全体のサイズを小さくできます。その際に使用するのが`_stdcall`というキーワード。関数の前に`_stdcall`を置くことで、スタックのクリーンアップ処理を、呼び出された関数の側で行うように変更できる。
 
-<img src = "https://github.com/RyoNakagami/omorikaizuka/blob/master/linux/stack_cleanup.jpg?raw=true">
+<img src = "https://github.com/ryonakimageserver/omorikaizuka/blob/master/linux/stack_cleanup.jpg?raw=true">
 
 ## 6: データの圧縮
 
@@ -1426,7 +1426,7 @@ LHAはハフマン法を基礎にしている。半角英数字記号の1文字�
 
 #### Quiz: ハフマン符号
 
-<img src = "https://github.com/RyoNakagami/omorikaizuka/blob/master/linux/quiz_huffman.jpg?raw=true">
+<img src = "https://github.com/ryonakimageserver/omorikaizuka/blob/master/linux/quiz_huffman.jpg?raw=true">
 
 (以下解答)
 最小ビットで圧縮できる方式を考える前に、各方式が符号化された文字列から元の文字列を一意に復号可能かを検証し、条件を満たす方式についてだけビット数を計算します。
@@ -1449,7 +1449,7 @@ LHAはハフマン法を基礎にしている。半角英数字記号の1文字�
 
 ハフマンツリーのイメージ図は以下：
 
-<img src = "https://github.com/RyoNakagami/omorikaizuka/blob/master/linux/HuffmanTreeFrom12Letters.png?raw=true">
+<img src = "https://github.com/ryonakimageserver/omorikaizuka/blob/master/linux/HuffmanTreeFrom12Letters.png?raw=true">
 
 #### 手順
 1. データと出現頻度を並べ、出現頻度でsortする
@@ -1494,7 +1494,7 @@ B C A D E
 2. 出現回数が少ない方から二つの文字をpick upして、joinし一つのノードを作る。その結果生成されるノードに対して、joinさせた文字の出現回数の合計を割り当て、残りの文字から構成される辞書形式のデータに追加する
 3. 処理2をノードが一個になるまで実施する
 
-<img src = "https://github.com/RyoNakagami/omorikaizuka/blob/master/linux/1*8piPTzegcnfnqN3MMAQ9ow.png?raw=true">
+<img src = "https://github.com/ryonakimageserver/omorikaizuka/blob/master/linux/1*8piPTzegcnfnqN3MMAQ9ow.png?raw=true">
 
 
 #### Coding in Practice

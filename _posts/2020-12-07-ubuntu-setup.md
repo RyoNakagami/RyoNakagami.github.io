@@ -101,7 +101,7 @@ tags:
 
 この画面が出てくればもう安心。
 
-<img src = "https://github.com/RyoNakagami/omorikaizuka/blob/master/linux/installer/20201207_ubuntu_installer.jpg?raw=true">
+<img src = "https://github.com/ryonakimageserver/omorikaizuka/blob/master/linux/installer/20201207_ubuntu_installer.jpg?raw=true">
 
 ## 5. Rufus: USB Installerの作成方法
 
@@ -109,14 +109,14 @@ tags:
 2. [こちら](https://rufus.ie/)からRufus実行ファイルをダウンロードする。
 3. Rufus（`rufus-3.13.exe`）を起動する。特に理由はないが、最初の自動確認機能は無効にする。
 
-<img src = "https://github.com/RyoNakagami/omorikaizuka/blob/master/linux/installer/20201207_rufus_01.jpg?raw=true">
+<img src = "https://github.com/ryonakimageserver/omorikaizuka/blob/master/linux/installer/20201207_rufus_01.jpg?raw=true">
 
 4. ブートの種類の「選択」ボタンをクリックしてダウンロードしたUbuntuのインストールイメージファイルを選択
 5. Ubuntuのインストールイメージファイルを選択するとその他の設定値が自動で決まるので設定値はそのままで「スタート」ボタンをクリック
 6. ダウンロードが必要なものはダウンロードする
 7. ハイブリッドISOイメージの検出のダイアログが表示されますので「ISOイメージモードで書き込む」を選択し、「OK」ボタンをクリック
 
-<img src = "https://github.com/RyoNakagami/omorikaizuka/blob/master/linux/installer/20201207_rufus_02.jpg?raw=true">
+<img src = "https://github.com/ryonakimageserver/omorikaizuka/blob/master/linux/installer/20201207_rufus_02.jpg?raw=true">
 
 ## 6. HP BIOSの設定
 
@@ -132,7 +132,7 @@ tags:
 
 ### インストールタイプ、アップデートのダウンロード、サードパーティソフトウェアのインストール設定
 
-<img src = "https://github.com/RyoNakagami/omorikaizuka/blob/master/linux/installer/20201208_ubuntu_installer_02.jpg?raw=true">
+<img src = "https://github.com/ryonakimageserver/omorikaizuka/blob/master/linux/installer/20201208_ubuntu_installer_02.jpg?raw=true">
 
 - `Normal installation`を選ぶと、LibreOffice、Thunderbird、ビデオ（Totem）、写真管理（Shotwell）、バックアップ（Déjà Dup）などのデフォルトアプリがインストールされます。通常はこちらを選択します。
 - `Download updaytes while installing Ubuntu`は、インターネットにつながっているならデフォルトでチェックが入ります。インストール中にアップデートがダウンロードされ、セキュリティホールやバグが解消された状態で使い始めることができます。
@@ -145,6 +145,7 @@ tags:
 |main shell|zsh||
 |shell script用shell|bash||
 |Terminalソフト|Terminator||
+|キャッシュ削除ツール|bleachbit|[Ubuntu Desktop環境構築 Part 8](https://ryonakagami.github.io/2020/12/21/ubuntu-bleachbit/)|
 |Web Browser main|Firefox||
 |Web Browser sub|Google Chrome||
 |ファイル共有ソフト|google drive ocamlfuse|[Ubuntu Desktop環境構築 Part 7](https://ryonakagami.github.io/2020/12/19/ubuntu-google-drive-setup/)|

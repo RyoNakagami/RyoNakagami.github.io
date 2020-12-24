@@ -43,7 +43,7 @@ Linuxではパッケージという単位でソフトウェアを管理してい
 
 
 Fig 1:パッケージの概念
-<img src = "https://raw.githubusercontent.com/RyoNakagami/omorikaizuka/master/linux/packages/20201222_deb_packages.jpeg">
+<img src = "https://raw.githubusercontent.com//ryonakimageserver/omorikaizuka//master/linux/packages/20201222_deb_packages.jpeg">
 
 Debian形式のパッケージを管理するには`dpkg`コマンドを使いますが、パッケージには相互に依存関係があります。手動で管理するのは大変ですがそこのところをうまい具合に対応した上でパッケージを管理してくれるソフトウェアがAPTです。
 
@@ -51,7 +51,7 @@ Debian形式のパッケージを管理するには`dpkg`コマンドを使い�
 
 APT(Advanced Packaging Tool)はDevian系ディストリビューションで使われているパッケージ管理システムです。依存関係を自動的に調整しながら、パッケージのインストールやアップデート、削除を行います。APTでは、あらかじめ設定されたリポジトリからパッケージとパッケージの情報を取得します。リポジトリとは、ファイルやデータを集積している場所、及びその情報を管理しているデータベースを意味します。APTを使うには、まず、利用可能なパッケージリストを更新する必要があります。インストールやアップデートに必要なファイルは、インターネット上のリポジトリから自動的にダウンロードされますが、その最新情報を取得する必要があるからです。
 
-<img src="https://raw.githubusercontent.com/RyoNakagami/omorikaizuka/master/linux/packages/20201222_apt_packages_system.png">
+<img src="https://raw.githubusercontent.com//ryonakimageserver/omorikaizuka//master/linux/packages/20201222_apt_packages_system.png">
 
 ### Syntax
 
