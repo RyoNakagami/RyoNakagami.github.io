@@ -72,7 +72,7 @@ $ cp ~/.config/monitors.xml /var/lib/gdm3/.config/monitors.xml
 
 方針はトップバー中央に位置している時計表示をトップバー右寄せで表示させることです。イメージは以下、
 
-<img src="https://github.com/RyoNakagami/omorikaizuka/blob/master/linux/installer/20201211_ubuntu_time.jpg?raw=true">
+<img src="https://github.com/ryonakimageserver/omorikaizuka/blob/master/linux/installer/20201211_ubuntu_time.jpg?raw=true">
 
 Desktopの表示をいじりたい場合はGNOMEという「デスクトップ作業を行うのに必要なソフトウェアのセット」の設定を編集することになります。今回の時計表示変更はGNOMEの拡張機能である`Frippery Move Clock`を用います。
 
@@ -93,7 +93,7 @@ $ reboot
 
 次にFirefoxを立ち上げる。するとツールバーの右上に足跡マーク見たいのがあるのでそれをクリック。
 
-<img src="https://github.com/RyoNakagami/omorikaizuka/blob/master/linux/installer/20201211_how-to-install-gnome-shell-extensions-on-ubuntu-20-04-focal-fossa-linux-desktop.png?raw=true">
+<img src="https://github.com/ryonakimageserver/omorikaizuka/blob/master/linux/installer/20201211_how-to-install-gnome-shell-extensions-on-ubuntu-20-04-focal-fossa-linux-desktop.png?raw=true">
 
 そして、`Frippery Move Clock`を検索してFrippery Move Clockをクリック。`OFF`となっているものを`ON`とすれば完了。
 
@@ -102,7 +102,7 @@ $ reboot
 
 アイコンをクリックすると、マウントしているデバイスやパーティション一覧が表示されます。リストからデバイス名の選択でファイルマネージャで開く、矢印アイコンをクリックでアンマウントできます。
 
-<img src="https://github.com/RyoNakagami/omorikaizuka/blob/master/linux/installer/20201211_removable_drive_menu.png?raw=true">
+<img src="https://github.com/ryonakimageserver/omorikaizuka/blob/master/linux/installer/20201211_removable_drive_menu.png?raw=true">
 
 ## 5. Dockの設定
 

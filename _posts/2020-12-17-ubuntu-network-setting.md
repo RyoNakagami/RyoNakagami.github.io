@@ -93,15 +93,15 @@ tags:
 
 IPアドレス確認例
 
-<img src = "https://github.com/RyoNakagami/omorikaizuka/blob/master/linux/VPN/20201216_check_global_ip.jpg?raw=true">
+<img src = "https://github.com/ryonakimageserver/omorikaizuka/blob/master/linux/VPN/20201216_check_global_ip.jpg?raw=true">
 
 VPN接続ユーザー登録
 
-<img src="https://github.com/RyoNakagami/omorikaizuka/blob/master/linux/VPN/20201216_setting2_01.jpg?raw=true">
+<img src="https://github.com/ryonakimageserver/omorikaizuka/blob/master/linux/VPN/20201216_setting2_01.jpg?raw=true">
 
 設定完了画面
 
-<img src="https://github.com/RyoNakagami/omorikaizuka/blob/master/linux/VPN/20201212_setup_done.jpg?raw=true">
+<img src="https://github.com/ryonakimageserver/omorikaizuka/blob/master/linux/VPN/20201212_setup_done.jpg?raw=true">
 
 ### macOSでL2TP/IPsec接続する
 

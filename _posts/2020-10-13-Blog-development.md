@@ -63,7 +63,7 @@ current working directory
 ### ブランチの構成
 ブログ用レポジトリのネットワークは以下：
 
-<img src = "https://github.com/RyoNakagami/omorikaizuka/blob/master/ブログ用/2020-10-13-ブログ更新手引きノート/post-branch-str.jpg?raw=true">
+<img src = "https://github.com/ryonakimageserver/omorikaizuka/blob/master/ブログ用/2020-10-13-ブログ更新手引きノート/post-branch-str.jpg?raw=true">
 
 |branch|説明|
 |---|---|

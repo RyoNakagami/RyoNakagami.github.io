@@ -89,15 +89,15 @@ USキーボードの使用に関係無く、入力ソースを Mozc 1つにし�
 
 USキーボード設定をしている場合、`Settings`の`Region&Language`は以下のようになっています。
 
-<img src="https://github.com/RyoNakagami/omorikaizuka/blob/master/linux/installer/20201209_ubuntu_japanese_01.png?raw=true">
+<img src="https://github.com/ryonakimageserver/omorikaizuka/blob/master/linux/installer/20201209_ubuntu_japanese_01.png?raw=true">
 
 USキーボードの使用に関係無く、入力ソースを Mozc 1つにします。
 
-<img src="https://github.com/RyoNakagami/omorikaizuka/blob/master/linux/installer/20201209_ubuntu_japanese_02.png?raw=true">
+<img src="https://github.com/ryonakimageserver/omorikaizuka/blob/master/linux/installer/20201209_ubuntu_japanese_02.png?raw=true">
 
 次に、画面右上の入力モードをクリックし、`Tools`の`Properties`を開きます。そして、`Keymap`を編集します。
 
-<img src="https://github.com/RyoNakagami/omorikaizuka/blob/master/linux/installer/20201209_ubuntu_japanese_03.png?raw=true">
+<img src="https://github.com/ryonakimageserver/omorikaizuka/blob/master/linux/installer/20201209_ubuntu_japanese_03.png?raw=true">
 
 `Hankaku/Zenkaku`入力キーが各モードの4箇所で割り当てられていますが、これらを全て希望するショートカットキーに変更すれば良いです。また`Hiragana`キーを削除しておきます。ショートカットキー変更のやり方としては、各モードの「入力キー」項目の所で3回クリックし、希望するショートカットを打ち込むだけで変更することができます。
 
