@@ -144,7 +144,7 @@ tags:
 |---|---|---|
 |main shell|zsh||
 |shell script用shell|bash||
-|Terminalソフト|Terminator||
+|Terminalソフト|Terminator|[Ubuntu Desktop環境構築 Part 9](https://ryonakagami.github.io/2020/12/22/ubuntu-terminator/)|
 |キャッシュ削除ツール|bleachbit|[Ubuntu Desktop環境構築 Part 8](https://ryonakagami.github.io/2020/12/21/ubuntu-bleachbit/)|
 |Web Browser main|Firefox||
 |Web Browser sub|Google Chrome||
