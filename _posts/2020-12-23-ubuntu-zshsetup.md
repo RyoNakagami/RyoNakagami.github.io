@@ -38,17 +38,18 @@ tags:
     - [各Startup Fileの棲み分け](#%E5%90%84startup-file%E3%81%AE%E6%A3%B2%E3%81%BF%E5%88%86%E3%81%91)
 - [3. zshのインストール](#3-zsh%E3%81%AE%E3%82%A4%E3%83%B3%E3%82%B9%E3%83%88%E3%83%BC%E3%83%AB)
 - [4. Interactive shellのカスタマイズ](#4-interactive-shell%E3%81%AE%E3%82%AB%E3%82%B9%E3%82%BF%E3%83%9E%E3%82%A4%E3%82%BA)
-  - [Zshのgit command補完を有効にする](#zsh%E3%81%AEgit-command%E8%A3%9C%E5%AE%8C%E3%82%92%E6%9C%89%E5%8A%B9%E3%81%AB%E3%81%99%E3%82%8B)
-  - [Interactive shellにgit branchをシンプルに表示](#interactive-shell%E3%81%ABgit-branch%E3%82%92%E3%82%B7%E3%83%B3%E3%83%97%E3%83%AB%E3%81%AB%E8%A1%A8%E7%A4%BA)
+  - [Oh My Zshを用いない理由](#oh-my-zsh%E3%82%92%E7%94%A8%E3%81%84%E3%81%AA%E3%81%84%E7%90%86%E7%94%B1)
+  - [設定ディレクトリ構成](#%E8%A8%AD%E5%AE%9A%E3%83%87%E3%82%A3%E3%83%AC%E3%82%AF%E3%83%88%E3%83%AA%E6%A7%8B%E6%88%90)
+  - [(1) ヒストリーサイズの再設定](#1-%E3%83%92%E3%82%B9%E3%83%88%E3%83%AA%E3%83%BC%E3%82%B5%E3%82%A4%E3%82%BA%E3%81%AE%E5%86%8D%E8%A8%AD%E5%AE%9A)
+  - [(2) Zshのgit command補完を有効にする](#2-zsh%E3%81%AEgit-command%E8%A3%9C%E5%AE%8C%E3%82%92%E6%9C%89%E5%8A%B9%E3%81%AB%E3%81%99%E3%82%8B)
+  - [(3) Interactive shellにgit branchをシンプルに表示](#3-interactive-shell%E3%81%ABgit-branch%E3%82%92%E3%82%B7%E3%83%B3%E3%83%97%E3%83%AB%E3%81%AB%E8%A1%A8%E7%A4%BA)
     - [Requirement](#requirement)
     - [`~/.zshrc`での書き方](#zshrc%E3%81%A7%E3%81%AE%E6%9B%B8%E3%81%8D%E6%96%B9)
     - [VS Code上のターミナルでの文字化け防止](#vs-code%E4%B8%8A%E3%81%AE%E3%82%BF%E3%83%BC%E3%83%9F%E3%83%8A%E3%83%AB%E3%81%A7%E3%81%AE%E6%96%87%E5%AD%97%E5%8C%96%E3%81%91%E9%98%B2%E6%AD%A2)
-  - [lsやgrepコマンドを実行した結果で表示される項目のうち、ディレクトリやシンボリックリンクファイルの場合、色や記号が付与されるようにする](#ls%E3%82%84grep%E3%82%B3%E3%83%9E%E3%83%B3%E3%83%89%E3%82%92%E5%AE%9F%E8%A1%8C%E3%81%97%E3%81%9F%E7%B5%90%E6%9E%9C%E3%81%A7%E8%A1%A8%E7%A4%BA%E3%81%95%E3%82%8C%E3%82%8B%E9%A0%85%E7%9B%AE%E3%81%AE%E3%81%86%E3%81%A1%E3%83%87%E3%82%A3%E3%83%AC%E3%82%AF%E3%83%88%E3%83%AA%E3%82%84%E3%82%B7%E3%83%B3%E3%83%9C%E3%83%AA%E3%83%83%E3%82%AF%E3%83%AA%E3%83%B3%E3%82%AF%E3%83%95%E3%82%A1%E3%82%A4%E3%83%AB%E3%81%AE%E5%A0%B4%E5%90%88%E8%89%B2%E3%82%84%E8%A8%98%E5%8F%B7%E3%81%8C%E4%BB%98%E4%B8%8E%E3%81%95%E3%82%8C%E3%82%8B%E3%82%88%E3%81%86%E3%81%AB%E3%81%99%E3%82%8B)
-  - [zshでコメントアウトを有効にする](#zsh%E3%81%A7%E3%82%B3%E3%83%A1%E3%83%B3%E3%83%88%E3%82%A2%E3%82%A6%E3%83%88%E3%82%92%E6%9C%89%E5%8A%B9%E3%81%AB%E3%81%99%E3%82%8B)
+  - [(4) lsやgrepコマンドを実行した結果で表示される項目のうち、ディレクトリやシンボリックリンクファイルの場合、色や記号が付与されるようにする](#4-ls%E3%82%84grep%E3%82%B3%E3%83%9E%E3%83%B3%E3%83%89%E3%82%92%E5%AE%9F%E8%A1%8C%E3%81%97%E3%81%9F%E7%B5%90%E6%9E%9C%E3%81%A7%E8%A1%A8%E7%A4%BA%E3%81%95%E3%82%8C%E3%82%8B%E9%A0%85%E7%9B%AE%E3%81%AE%E3%81%86%E3%81%A1%E3%83%87%E3%82%A3%E3%83%AC%E3%82%AF%E3%83%88%E3%83%AA%E3%82%84%E3%82%B7%E3%83%B3%E3%83%9C%E3%83%AA%E3%83%83%E3%82%AF%E3%83%AA%E3%83%B3%E3%82%AF%E3%83%95%E3%82%A1%E3%82%A4%E3%83%AB%E3%81%AE%E5%A0%B4%E5%90%88%E8%89%B2%E3%82%84%E8%A8%98%E5%8F%B7%E3%81%8C%E4%BB%98%E4%B8%8E%E3%81%95%E3%82%8C%E3%82%8B%E3%82%88%E3%81%86%E3%81%AB%E3%81%99%E3%82%8B)
+  - [(5) zshでコメントアウトを有効にする](#5-zsh%E3%81%A7%E3%82%B3%E3%83%A1%E3%83%B3%E3%83%88%E3%82%A2%E3%82%A6%E3%83%88%E3%82%92%E6%9C%89%E5%8A%B9%E3%81%AB%E3%81%99%E3%82%8B)
   - [`~.zshrc`での設定のまとめ](#zshrc%E3%81%A7%E3%81%AE%E8%A8%AD%E5%AE%9A%E3%81%AE%E3%81%BE%E3%81%A8%E3%82%81)
 - [Appendix: /procディレクトリのファイル](#appendix-proc%E3%83%87%E3%82%A3%E3%83%AC%E3%82%AF%E3%83%88%E3%83%AA%E3%81%AE%E3%83%95%E3%82%A1%E3%82%A4%E3%83%AB)
-- [Appendix:bashとの違い](#appendixbash%E3%81%A8%E3%81%AE%E9%81%95%E3%81%84)
-  - [配列のIndex](#%E9%85%8D%E5%88%97%E3%81%AEindex)
 
 <!-- END doctoc generated TOC please keep comment here to allow auto update -->
 
@@ -150,7 +151,7 @@ fi
 
 ### zshの機能
 
-- Command-lineでの補完機能
+- Command-lineでの強力な補完機能
 - 実行履歴をすべてのシェルで共有できる
 - ユーザーフレンドリーな変数と配列操作
 - named directoryを扱うことができる
@@ -181,7 +182,7 @@ startup fileは`/etc/`と`~/`の２つのクラスがあります。`/etc/`ク�
 |`/etc/zlogin`|Run for login shells.|
 |`~/.zlogin`|Run for login shells. |
 |`/etc/zlogout`|Run for login shells.(ログアウト時に読み取る)|
-|`~/zlogout`|Run for login shells.(ログアウト時に読み取る)|
+|`~/.zlogout`|Run for login shells.(ログアウト時に読み取る)|
 
 
 `~/.zprofile`と`~/.zlogin`に違いは読まれるタイミングです。Login shellで読まれる順番は以下のとおりです：
@@ -234,16 +235,51 @@ chsh -s $(which zsh)
 
 ## 4. Interactive shellのカスタマイズ
 
-今回僕が実現したいことは以下の４つです：
+今回僕が実現したいことは以下の5つです：
 
+- ヒストリーサイズの再設定
 - Zshのgit command補完を有効にする
 - Interactive shellにgit branchをシンプルに表示
 - lsやgrepコマンドを実行した結果で表示される項目のうち、ディレクトリやシンボリックリンクファイルの場合、色や記号が付与されるようにする
 - zshでコメントアウトを有効にする
 
+### Oh My Zshを用いない理由
+
 ZshのInteractive shellの拡張として有名なものに[oh my zsh](https://ohmyz.sh/)があり、インストールと簡単な設定だけで僕が求めている機能を実装することができますが、(1) バージョン管理をしなくてはならないパッケージが増える, (2) あまり使わなさそうなショートカットコマンドがたくさん入ってきて、コマンド管理がややこしくなりそう, (3) zshコマンドの実行速度が落ちそうという不安, (4) 自分が選択したOh-my-Zshのテーマがいつまでメンテナンスされるかわからない、(5) Zinitといった他の有力な拡張ツールもありどれがいいのかわからない、(6) 僕が求めている機能は自分でも簡単に設定できる、(7)必要な拡張機能はVS CodeのExtensionsに求めるべきでは？、といった理由から今回の導入を見送りました。
 
-### Zshのgit command補完を有効にする
+### 設定ディレクトリ構成
+
+プラグインやパッケージ管理の観点から以下のような構成にします。
+
+```
+~
+├── .zshrc                    # シェルを起動する毎に読み込まれる。
+├── .zshenv                   # ログイン時に一度だけ読み込まれる。
+└── .zsh.d                    # zsh関連のファイル置き場。
+       ├── config             # 標準機能以外の設定を置くディレクトリ。
+       │    └── packages.zsh # 追加パッケージの設定をするファイル。
+       ├── zshrc              # おすすめ~/.zshrc設定。
+       ├── zshenv             # おすすめ~/.zshenv設定。
+       ├── package.zsh        # パッケージ管理システム。
+       └── packages           # パッケージをインストールするディレクトリ。
+```
+
+### (1) ヒストリーサイズの再設定
+
+ヒストリーサイズが小さいと振り返しがしづらくなるので変更する。
+
+```zsh
+# Keep 1000 lines of history within the shell and save it to ~/.zsh_history:
+HISTSIZE=10000000
+SAVEHIST=$HISTSIZE 
+HISTFILE=~/.zsh_history
+setopt extended_history ## ヒストリファイルにコマンドラインだけではなく実行時刻と実行時間も保存する。
+setopt hist_ignore_space ## スペースで始まるコマンドラインはヒストリに追加しない。
+setopt inc_append_history ## すぐにヒストリファイルに追記する。
+setopt share_history ## zshプロセス間でヒストリを共有する。
+```
+
+### (2) Zshのgit command補完を有効にする
 
 Zshには、Git用のタブ補完ライブラリも同梱されています。`.zshrc`に`autoload -Uz compinit && compinit`という行を追加するだけで、使えるようになります。使用感は以下のような感じです。
 
@@ -257,7 +293,7 @@ cherry            -- find commits not merged upstream
 cherry-pick       -- apply changes introduced by some existing commits
 ```
 
-### Interactive shellにgit branchをシンプルに表示
+### (3) Interactive shellにgit branchをシンプルに表示
 
 目指したい形はTerminal上に以下の表示をさせることです
 
@@ -338,7 +374,7 @@ VS Codeが許容している文字クラスを用いないとバグります。�
 "terminal.integrated.fontFamily": "Ubuntu mono, PowerlineSymbols"
 ```
 
-### lsやgrepコマンドを実行した結果で表示される項目のうち、ディレクトリやシンボリックリンクファイルの場合、色や記号が付与されるようにする
+### (4) lsやgrepコマンドを実行した結果で表示される項目のうち、ディレクトリやシンボリックリンクファイルの場合、色や記号が付与されるようにする
 
 基本的にはoptionの`--color=auto`と`ls -F`を参考に設定するだけです。`-F` オプションもつけておくことで実行ファイルにはファイル名末尾に`*`, ディレクトリなら`/`, シンボリックリンクなら`@`がつくようになります。
 
@@ -348,7 +384,7 @@ alias ls='ls -F --color=auto'
 alias grep='grep --color=auto'
 ```
 
-### zshでコメントアウトを有効にする
+### (5) zshでコメントアウトを有効にする
 
 コメントアウトできるようになると実行履歴検索(`Ctrl+R`)が用意になるので設定しときます。以下の行を`~/.zshrc`に書き加えるだけですみます。
 
@@ -364,6 +400,15 @@ setopt interactivecomments #20201225追加
 # 20201225 update
 ## enable comment-out
 setopt interactivecomments
+
+# Keep 1000 lines of history within the shell and save it to ~/.zsh_history:
+HISTSIZE=10000000
+SAVEHIST=$HISTSIZE 
+HISTFILE=~/.zsh_history
+setopt extended_history ## ヒストリファイルにコマンドラインだけではなく実行時刻と実行時間も保存する。
+setopt hist_ignore_space ## スペースで始まるコマンドラインはヒストリに追加しない。
+setopt inc_append_history ## すぐにヒストリファイルに追記する。
+setopt share_history ## zshプロセス間でヒストリを共有する。
 
 ## Git autocompleteion libaray
 autoload -Uz compinit && compinit
@@ -449,37 +494,3 @@ dr-xr-xr-x   9 root             root                           0 Dec 25 11:23 12
 ```
 
 `/proc`ディレクトリにあるファイルは、システムをコントロールするために使われます。そのため、システムのさまざまな情報がここに格納されています。意味もわからずに/procの内容を変更するとシステムが壊れるので直接編集は基本的にだめです。たとえば`/proc/sys/`ディレクトリのファイルには、カーネルの諸設定をオン／オフが記載されており、ここのファイルの内容を書き換えることによって、さまざまなカーネル設定を有効化／無効化することができます。もし編集したい場合は`/etc/sysctl.conf`というファイルが用意されているのでこちらを編集します。
-
-## Appendix:bashとの違い
-### 配列のIndex
-
-bashの配列は0から始まるが、zsh の配列は 0 ではなく 1 から始まります。
-
-zshtest.shを以下のように書きます。
-```
-#!/bin/bash
-
-array=(apple orange peach)
-for i in `seq 0 3`; do
-    echo "array[$i] = ${array[$i]}"
-done;
-```
-
-Then,
-```
-$ zshtest.sh
-array[0] = apple
-array[1] = orange
-array[2] = peach
-array[3] = 
-```
-
-一方、`#!/bin/zsh`とzshtest.shを書き換えて実行すると
-
-```
-% zshtest.sh
-array[0] = 
-array[1] = apple
-array[2] = orange
-array[3] = peach
-```
