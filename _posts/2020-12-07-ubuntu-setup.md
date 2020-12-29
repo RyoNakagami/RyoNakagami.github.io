@@ -77,7 +77,7 @@ tags:
 |セキュリティ対策: ファイヤウォールの設定|[Ubuntu Desktop 環境構築 Part 4](https://ryonakagami.github.io/2020/12/16/ubuntu-security/)|
 |リモートアクセス設定：VPN設定とWoL設定とssh|[Ubuntu Desktop 環境構築 Part 5](https://ryonakagami.github.io/2020/12/17/ubuntu-network-setting/)|
 |セキュリティ対策: システム診断設定・ウイルス対策|[Ubuntu Desktop 環境構築 Part 6](https://ryonakagami.github.io/2020/12/18/ubuntu-security-part2/)|
-|zsh setup|TBA|
+|zsh setup|[Ubuntu Desktop環境構築 Part 10](https://ryonakagami.github.io/2020/12/23/ubuntu-zshsetup/)|
 |git setup|TBA|
 |VScode setup|TBA|
 
@@ -142,7 +142,7 @@ tags:
 
 |項目|詳細|関連記事|
 |---|---|---|
-|main shell|zsh||
+|main shell|zsh|[Ubuntu Desktop環境構築 Part 10](https://ryonakagami.github.io/2020/12/23/ubuntu-zshsetup/)|
 |shell script用shell|bash||
 |Terminalソフト|Terminator|[Ubuntu Desktop環境構築 Part 9](https://ryonakagami.github.io/2020/12/22/ubuntu-terminator/)|
 |キャッシュ削除ツール|bleachbit|[Ubuntu Desktop環境構築 Part 8](https://ryonakagami.github.io/2020/12/21/ubuntu-bleachbit/)|
