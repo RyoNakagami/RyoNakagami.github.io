@@ -18,7 +18,7 @@ tags:
 ||概要|
 |---|---|
 |目的|zshの設定とinteractive shellのカスタマイズ|
-|参考|- [Zsh公式ページ](https://www.zsh.org/)<br>- [Terminator Document](https://terminator-gtk3.readthedocs.io/en/latest/)<br>- [bashとzshの違い](https://mac-ra.com/catalina-zsh/#toc_id_2)<br>- [bash の初期化ファイル .profile, .bashrc, .bash_profile の使い分けと管理方針](https://blog1.mammb.com/entry/2019/12/01/090000)<br>- [ZshでGit用のタブ補完ライブラリを使う](https://git-scm.com/book/ja/v2/Appendix-A%3A-%E3%81%9D%E3%81%AE%E4%BB%96%E3%81%AE%E7%92%B0%E5%A2%83%E3%81%A7%E3%81%AEGit-Zsh%E3%81%A7Git%E3%82%92%E4%BD%BF%E3%81%86)<br>- [とみぃ研究所:zshのプロンプトをカッコよくしてGitのブランチを表示させる](https://tomiylab.com/2020/03/prompt/)<br> [備忘録(zsh)](https://www-tap.scphys.kyoto-u.ac.jp/~shima/zsh.php)|
+|参考|- [Zsh公式ページ](https://www.zsh.org/)<br>- [Terminator Document](https://terminator-gtk3.readthedocs.io/en/latest/)<br>- [bashとzshの違い](https://mac-ra.com/catalina-zsh/#toc_id_2)<br>- [bash の初期化ファイル .profile, .bashrc, .bash_profile の使い分けと管理方針](https://blog1.mammb.com/entry/2019/12/01/090000)<br>- [ZshでGit用のタブ補完ライブラリを使う](https://git-scm.com/book/ja/v2/Appendix-A%3A-%E3%81%9D%E3%81%AE%E4%BB%96%E3%81%AE%E7%92%B0%E5%A2%83%E3%81%A7%E3%81%AEGit-Zsh%E3%81%A7Git%E3%82%92%E4%BD%BF%E3%81%86)<br>- [とみぃ研究所:zshのプロンプトをカッコよくしてGitのブランチを表示させる](https://tomiylab.com/2020/03/prompt/)<br>- [備忘録(zsh)](https://www-tap.scphys.kyoto-u.ac.jp/~shima/zsh.php)|
 
 <!-- START doctoc generated TOC please keep comment here to allow auto update -->
 <!-- DON'T EDIT THIS SECTION, INSTEAD RE-RUN doctoc TO UPDATE -->
