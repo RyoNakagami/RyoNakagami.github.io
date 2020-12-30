@@ -18,7 +18,7 @@ tags:
 ||概要|
 |---|---|
 |目的|zshの設定とinteractive shellのカスタマイズ|
-|参考|[Zsh公式ページ](https://www.zsh.org/)<br>[Terminator Document](https://terminator-gtk3.readthedocs.io/en/latest/)<br>[bashとzshの違い](https://mac-ra.com/catalina-zsh/#toc_id_2)<br>[bash の初期化ファイル .profile, .bashrc, .bash_profile の使い分けと管理方針](https://blog1.mammb.com/entry/2019/12/01/090000)<br>[ZshでGit用のタブ補完ライブラリを使う](https://git-scm.com/book/ja/v2/Appendix-A%3A-%E3%81%9D%E3%81%AE%E4%BB%96%E3%81%AE%E7%92%B0%E5%A2%83%E3%81%A7%E3%81%AEGit-Zsh%E3%81%A7Git%E3%82%92%E4%BD%BF%E3%81%86)<br>[とみぃ研究所:zshのプロンプトをカッコよくしてGitのブランチを表示させる](https://tomiylab.com/2020/03/prompt/)|
+|参考|- [Zsh公式ページ](https://www.zsh.org/)<br>- [Terminator Document](https://terminator-gtk3.readthedocs.io/en/latest/)<br>- [bashとzshの違い](https://mac-ra.com/catalina-zsh/#toc_id_2)<br>- [bash の初期化ファイル .profile, .bashrc, .bash_profile の使い分けと管理方針](https://blog1.mammb.com/entry/2019/12/01/090000)<br>- [ZshでGit用のタブ補完ライブラリを使う](https://git-scm.com/book/ja/v2/Appendix-A%3A-%E3%81%9D%E3%81%AE%E4%BB%96%E3%81%AE%E7%92%B0%E5%A2%83%E3%81%A7%E3%81%AEGit-Zsh%E3%81%A7Git%E3%82%92%E4%BD%BF%E3%81%86)<br>- [とみぃ研究所:zshのプロンプトをカッコよくしてGitのブランチを表示させる](https://tomiylab.com/2020/03/prompt/)<br> [備忘録(zsh)](https://www-tap.scphys.kyoto-u.ac.jp/~shima/zsh.php)|
 
 <!-- START doctoc generated TOC please keep comment here to allow auto update -->
 <!-- DON'T EDIT THIS SECTION, INSTEAD RE-RUN doctoc TO UPDATE -->
@@ -47,7 +47,8 @@ tags:
     - [`~/.zshrc`での書き方](#zshrc%E3%81%A7%E3%81%AE%E6%9B%B8%E3%81%8D%E6%96%B9)
     - [VS Code上のターミナルでの文字化け防止](#vs-code%E4%B8%8A%E3%81%AE%E3%82%BF%E3%83%BC%E3%83%9F%E3%83%8A%E3%83%AB%E3%81%A7%E3%81%AE%E6%96%87%E5%AD%97%E5%8C%96%E3%81%91%E9%98%B2%E6%AD%A2)
   - [(4) lsやgrepコマンドを実行した結果で表示される項目のうち、ディレクトリやシンボリックリンクファイルの場合、色や記号が付与されるようにする](#4-ls%E3%82%84grep%E3%82%B3%E3%83%9E%E3%83%B3%E3%83%89%E3%82%92%E5%AE%9F%E8%A1%8C%E3%81%97%E3%81%9F%E7%B5%90%E6%9E%9C%E3%81%A7%E8%A1%A8%E7%A4%BA%E3%81%95%E3%82%8C%E3%82%8B%E9%A0%85%E7%9B%AE%E3%81%AE%E3%81%86%E3%81%A1%E3%83%87%E3%82%A3%E3%83%AC%E3%82%AF%E3%83%88%E3%83%AA%E3%82%84%E3%82%B7%E3%83%B3%E3%83%9C%E3%83%AA%E3%83%83%E3%82%AF%E3%83%AA%E3%83%B3%E3%82%AF%E3%83%95%E3%82%A1%E3%82%A4%E3%83%AB%E3%81%AE%E5%A0%B4%E5%90%88%E8%89%B2%E3%82%84%E8%A8%98%E5%8F%B7%E3%81%8C%E4%BB%98%E4%B8%8E%E3%81%95%E3%82%8C%E3%82%8B%E3%82%88%E3%81%86%E3%81%AB%E3%81%99%E3%82%8B)
-  - [(5) zshでコメントアウトを有効にする](#5-zsh%E3%81%A7%E3%82%B3%E3%83%A1%E3%83%B3%E3%83%88%E3%82%A2%E3%82%A6%E3%83%88%E3%82%92%E6%9C%89%E5%8A%B9%E3%81%AB%E3%81%99%E3%82%8B)
+  - [(5) `cd`コマンドを実行した際に、ファイル一覧が確認できるようにする](#5-cd%E3%82%B3%E3%83%9E%E3%83%B3%E3%83%89%E3%82%92%E5%AE%9F%E8%A1%8C%E3%81%97%E3%81%9F%E9%9A%9B%E3%81%AB%E3%83%95%E3%82%A1%E3%82%A4%E3%83%AB%E4%B8%80%E8%A6%A7%E3%81%8C%E7%A2%BA%E8%AA%8D%E3%81%A7%E3%81%8D%E3%82%8B%E3%82%88%E3%81%86%E3%81%AB%E3%81%99%E3%82%8B)
+  - [(6) zshでコメントアウトを有効にする](#6-zsh%E3%81%A7%E3%82%B3%E3%83%A1%E3%83%B3%E3%83%88%E3%82%A2%E3%82%A6%E3%83%88%E3%82%92%E6%9C%89%E5%8A%B9%E3%81%AB%E3%81%99%E3%82%8B)
   - [`~.zshrc`での設定のまとめ](#zshrc%E3%81%A7%E3%81%AE%E8%A8%AD%E5%AE%9A%E3%81%AE%E3%81%BE%E3%81%A8%E3%82%81)
 - [Appendix: /procディレクトリのファイル](#appendix-proc%E3%83%87%E3%82%A3%E3%83%AC%E3%82%AF%E3%83%88%E3%83%AA%E3%81%AE%E3%83%95%E3%82%A1%E3%82%A4%E3%83%AB)
 
@@ -237,11 +238,12 @@ chsh -s $(which zsh)
 
 今回僕が実現したいことは以下の5つです：
 
-- ヒストリーサイズの再設定
-- Zshのgit command補完を有効にする
-- Interactive shellにgit branchをシンプルに表示
-- lsやgrepコマンドを実行した結果で表示される項目のうち、ディレクトリやシンボリックリンクファイルの場合、色や記号が付与されるようにする
-- zshでコメントアウトを有効にする
+1. ヒストリーサイズの再設定
+2. Zshのgit command補完を有効にする
+3. Interactive shellにgit branchをシンプルに表示
+4. `ls`や`grep`コマンドを実行した結果で表示される項目のうち、ディレクトリやシンボリックリンクファイルの場合、色や記号が付与されるようにする
+5. `cd`コマンドを実行した際に、ファイル一覧が確認できるようにする
+6. zshでコメントアウトを有効にする
 
 ### Oh My Zshを用いない理由
 
@@ -384,7 +386,51 @@ alias ls='ls -F --color=auto'
 alias grep='grep --color=auto'
 ```
 
-### (5) zshでコメントアウトを有効にする
+### (5) `cd`コマンドを実行した際に、ファイル一覧が確認できるようにする
+
+```zsh
+# ファイル数が多い時には省略表示
+# (参考: https://qiita.com/yuyuchu3333/items/b10542db482c3ac8b059)
+# chpwd(カレントディレクトリが変更したとき)にls_abbrevを実行
+ls_abbrev() {
+  if [[ ! -r $PWD ]]; then
+    return
+  fi
+  # -C : Force multi-column output.
+  # -F : ファイルタイプを表示
+  local cmd_ls='ls'
+  local -a opt_lsls
+  opt_ls=('-CF' '--color=always')
+  case ${OSTYPE} in
+    freebsd*|darwin*)
+      if (( $+commands[gls] )); then
+        cmd_ls='gls'
+      else
+        # -G : Enable colorized output.
+        opt_ls=('-aCFG')
+      fi
+      ;;
+  esac
+
+  local ls_result
+  ls_result=$(CLICOLOR_FORCE=1 COLUMNS=$COLUMNS command $cmd_ls ${opt_ls[@]}| sed $'/^\e\[[0-9;]*m$/d')
+
+  local ls_lines=$(echo "$ls_result"| wc -l| tr -d ' ')
+  if [[ ls_lines -gt 10 ]]; then
+    echo "$ls_result"| head -n 5
+    echo '...'
+    echo "$ls_result"| tail -n 5
+    echo "$(command ls -1 -A| wc -l| tr -d ' ') files exist"
+  else
+    echo "$ls_result"
+  fi
+}
+autoload -Uz add-zsh-hook
+add-zsh-hook chpwd ls_abbrev
+```
+
+
+### (6) zshでコメントアウトを有効にする
 
 コメントアウトできるようになると実行履歴検索(`Ctrl+R`)が用意になるので設定しときます。以下の行を`~/.zshrc`に書き加えるだけですみます。
 
@@ -412,6 +458,48 @@ setopt share_history ## zshプロセス間でヒストリを共有する。
 
 ## Git autocompleteion libaray
 autoload -Uz compinit && compinit
+
+# --
+# functions
+# --
+# ファイル数が多い時には省略表示
+# (参考: https://qiita.com/yuyuchu3333/items/b10542db482c3ac8b059)
+# chpwd(カレントディレクトリが変更したとき)にls_abbrevを実行
+ls_abbrev() {
+  if [[ ! -r $PWD ]]; then
+    return
+  fi
+  # -C : Force multi-column output.
+  # -F : ファイルタイプを表示
+  local cmd_ls='ls'
+  local -a opt_lsls
+  opt_ls=('-CF' '--color=always')
+  case ${OSTYPE} in
+    freebsd*|darwin*)
+      if (( $+commands[gls] )); then
+        cmd_ls='gls'
+      else
+        # -G : Enable colorized output.
+        opt_ls=('-aCFG')
+      fi
+      ;;
+  esac
+
+  local ls_result
+  ls_result=$(CLICOLOR_FORCE=1 COLUMNS=$COLUMNS command $cmd_ls ${opt_ls[@]}| sed $'/^\e\[[0-9;]*m$/d')
+
+  local ls_lines=$(echo "$ls_result"| wc -l| tr -d ' ')
+  if [[ ls_lines -gt 10 ]]; then
+    echo "$ls_result"| head -n 5
+    echo '...'
+    echo "$ls_result"| tail -n 5
+    echo "$(command ls -1 -A| wc -l| tr -d ' ') files exist"
+  else
+    echo "$ls_result"
+  fi
+}
+autoload -Uz add-zsh-hook
+add-zsh-hook chpwd ls_abbrev
 
 ## visualize git brach
 function rprompt-git-current-branch {
@@ -461,7 +549,9 @@ setopt prompt_subst
 # プロンプトの右側にメソッドの結果を表示させる
 RPROMPT='`rprompt-git-current-branch`'
 
-## alias with color
+# --
+# Alias
+# --
 alias ls='ls -F --color=auto'
 alias grep='grep --color=auto'
 ```

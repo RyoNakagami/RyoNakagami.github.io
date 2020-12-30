@@ -48,7 +48,6 @@ tags:
 |---|---|
 |Data Science at the Command Lineの練習環境の作成"|今回の記事|
 
-
 ### このノートのスコープ
 
 - Data Science at the Command Lineって本を年末年始勉強したいので、その練習環境を作成する
