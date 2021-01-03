@@ -49,6 +49,10 @@ tags:
   - [(4) lsやgrepコマンドを実行した結果で表示される項目のうち、ディレクトリやシンボリックリンクファイルの場合、色や記号が付与されるようにする](#4-ls%E3%82%84grep%E3%82%B3%E3%83%9E%E3%83%B3%E3%83%89%E3%82%92%E5%AE%9F%E8%A1%8C%E3%81%97%E3%81%9F%E7%B5%90%E6%9E%9C%E3%81%A7%E8%A1%A8%E7%A4%BA%E3%81%95%E3%82%8C%E3%82%8B%E9%A0%85%E7%9B%AE%E3%81%AE%E3%81%86%E3%81%A1%E3%83%87%E3%82%A3%E3%83%AC%E3%82%AF%E3%83%88%E3%83%AA%E3%82%84%E3%82%B7%E3%83%B3%E3%83%9C%E3%83%AA%E3%83%83%E3%82%AF%E3%83%AA%E3%83%B3%E3%82%AF%E3%83%95%E3%82%A1%E3%82%A4%E3%83%AB%E3%81%AE%E5%A0%B4%E5%90%88%E8%89%B2%E3%82%84%E8%A8%98%E5%8F%B7%E3%81%8C%E4%BB%98%E4%B8%8E%E3%81%95%E3%82%8C%E3%82%8B%E3%82%88%E3%81%86%E3%81%AB%E3%81%99%E3%82%8B)
   - [(5) `cd`コマンドを実行した際に、ファイル一覧が確認できるようにする](#5-cd%E3%82%B3%E3%83%9E%E3%83%B3%E3%83%89%E3%82%92%E5%AE%9F%E8%A1%8C%E3%81%97%E3%81%9F%E9%9A%9B%E3%81%AB%E3%83%95%E3%82%A1%E3%82%A4%E3%83%AB%E4%B8%80%E8%A6%A7%E3%81%8C%E7%A2%BA%E8%AA%8D%E3%81%A7%E3%81%8D%E3%82%8B%E3%82%88%E3%81%86%E3%81%AB%E3%81%99%E3%82%8B)
   - [(6) zshでコメントアウトを有効にする](#6-zsh%E3%81%A7%E3%82%B3%E3%83%A1%E3%83%B3%E3%83%88%E3%82%A2%E3%82%A6%E3%83%88%E3%82%92%E6%9C%89%E5%8A%B9%E3%81%AB%E3%81%99%E3%82%8B)
+  - [(7) 自作関数：ファイル解凍コマンド`unpack`の設定](#7-%E8%87%AA%E4%BD%9C%E9%96%A2%E6%95%B0%E3%83%95%E3%82%A1%E3%82%A4%E3%83%AB%E8%A7%A3%E5%87%8D%E3%82%B3%E3%83%9E%E3%83%B3%E3%83%89unpack%E3%81%AE%E8%A8%AD%E5%AE%9A)
+    - [`unpack`関数を定義したシェルスクリプトを作成](#unpack%E9%96%A2%E6%95%B0%E3%82%92%E5%AE%9A%E7%BE%A9%E3%81%97%E3%81%9F%E3%82%B7%E3%82%A7%E3%83%AB%E3%82%B9%E3%82%AF%E3%83%AA%E3%83%97%E3%83%88%E3%82%92%E4%BD%9C%E6%88%90)
+    - [シェルスクリプトのPermissonを変更する](#%E3%82%B7%E3%82%A7%E3%83%AB%E3%82%B9%E3%82%AF%E3%83%AA%E3%83%97%E3%83%88%E3%81%AEpermisson%E3%82%92%E5%A4%89%E6%9B%B4%E3%81%99%E3%82%8B)
+    - [`.zshrc`ファイルを編集してPATHを通す](#zshrc%E3%83%95%E3%82%A1%E3%82%A4%E3%83%AB%E3%82%92%E7%B7%A8%E9%9B%86%E3%81%97%E3%81%A6path%E3%82%92%E9%80%9A%E3%81%99)
   - [`~.zshrc`での設定のまとめ](#zshrc%E3%81%A7%E3%81%AE%E8%A8%AD%E5%AE%9A%E3%81%AE%E3%81%BE%E3%81%A8%E3%82%81)
 - [Appendix: /procディレクトリのファイル](#appendix-proc%E3%83%87%E3%82%A3%E3%83%AC%E3%82%AF%E3%83%88%E3%83%AA%E3%81%AE%E3%83%95%E3%82%A1%E3%82%A4%E3%83%AB)
 
@@ -236,7 +240,7 @@ chsh -s $(which zsh)
 
 ## 4. Interactive shellのカスタマイズ
 
-今回僕が実現したいことは以下の5つです：
+今回僕が実現したいことは以下の7つです：
 
 1. ヒストリーサイズの再設定
 2. Zshのgit command補完を有効にする
@@ -244,6 +248,7 @@ chsh -s $(which zsh)
 4. `ls`や`grep`コマンドを実行した結果で表示される項目のうち、ディレクトリやシンボリックリンクファイルの場合、色や記号が付与されるようにする
 5. `cd`コマンドを実行した際に、ファイル一覧が確認できるようにする
 6. zshでコメントアウトを有効にする
+7. 自作関数：ファイル解凍コマンド`unpack`の設定
 
 ### Oh My Zshを用いない理由
 
@@ -438,6 +443,86 @@ add-zsh-hook chpwd ls_abbrev
 setopt interactivecomments #20201225追加
 ```
 
+### (7) 自作関数：ファイル解凍コマンド`unpack`の設定
+
+圧縮されたファイルやディレクトリを解凍する場合、保存形式に合わせてunzip, gunzipなどのコマンドを用いる必要があります。それがめんどくさいので開くだけならどのファイル形式にも対応してくれる`unpack`という関数を自作して、コマンドラインから実行できるように設定します。方針は以下です：
+
+1. `unpack`関数を定義したシェルスクリプトを作成
+2. シェルスクリプトのPermissonを変更する
+3. `.zshrc`ファイルを編集してPATHを通す
+
+なお、`unpack`は7-Zipファイルにも対応しているので、事前にapt package manager fileの`p7zip-full`をインストールしてください。「7-Zip（セブンジップ）」とは、2000年頃イーゴリ・パヴロフ 氏により開発が始まったオープンソースのファイルアーカイバです。写真やデザイン、またパソコン上で使用したあらゆるデータなどを外部に配信する際に内容量を圧縮し、また解凍を行うことができます。主にMicrosoft WindowsやLinuxで使用できます。
+
+```
+% sudo apt install p7zip-full
+```
+
+#### `unpack`関数を定義したシェルスクリプトを作成
+
+`unpack`という名前のファイルを作成する。
+
+```bash
+#!/usr/bin/bash
+# unpack: Extract common file formats
+ 
+# Dependencies: unrar, unzip, p7zip-full
+
+# Author: Patrick Brisbin
+# From: http://linuxtidbits.wordpress.com/2009/08/04/week-of-bash-scripts-extract/
+
+# Display usage if no parameters given
+if [[ -z "$@" ]]; then
+	echo " ${0##*/} <archive> - extract common file formats)"
+	exit
+fi
+ 
+# Required program(s)
+req_progs=(7z unrar unzip)
+for p in ${req_progs[@]}; do
+	hash "$p" 2>&- || \
+	{ echo >&2 " Required program \"$p\" not installed."; exit 1; }
+done
+ 
+# Test if file exists
+if [ ! -f "$@" ]; then
+	echo "File "$@" doesn't exist"
+	exit
+fi
+ 
+# Extract file by using extension as reference
+case "$@" in
+	*.7z ) 7z x "$@" ;;
+	*.tar.bz2 ) tar xvjf "$@" ;;
+	*.bz2 ) bunzip2 "$@" ;;
+	*.deb ) ar vx "$@" ;;
+	*.tar.gz ) tar xvf "$@" ;;
+	*.gz ) gunzip "$@" ;;
+	*.tar ) tar xvf "$@" ;;
+	*.tbz2 ) tar xvjf "$@" ;;
+	*.tar.xz ) tar xvf "$@" ;;
+	*.tgz ) tar xvzf "$@" ;;
+	*.rar ) unrar x "$@" ;;
+	*.zip ) unzip "$@" ;;
+	*.Z ) uncompress "$@" ;;
+	* ) echo " Unsupported file format" ;;
+esac
+```
+
+#### シェルスクリプトのPermissonを変更する
+
+```zsh
+% chmod 755 unpack
+```
+
+#### `.zshrc`ファイルを編集してPATHを通す
+
+Home Directoryの下に`.bin.d`というディレクトリを作り、その下に`unpack`ファイルが存在しています。
+
+```zsh
+## unpackコマンド追加
+export PATH="$HOME/.bin.d:$PATH"
+```
+
 ### `~.zshrc`での設定のまとめ
 
 １つ１つ説明していきましたが、まとめると下のような設定になります。これを`~/.zshrc`に書き加えれば終了です。
@@ -455,6 +540,9 @@ setopt extended_history ## ヒストリファイルにコマンドラインだ�
 setopt hist_ignore_space ## スペースで始まるコマンドラインはヒストリに追加しない。
 setopt inc_append_history ## すぐにヒストリファイルに追記する。
 setopt share_history ## zshプロセス間でヒストリを共有する。
+
+## unpackコマンド追加
+export PATH="$HOME/.bin.d:$PATH"
 
 ## Git autocompleteion libaray
 autoload -Uz compinit && compinit
@@ -556,7 +644,6 @@ alias ls='ls -F --color=auto'
 alias grep='grep --color=auto'
 ```
 
-
 ## Appendix: /procディレクトリのファイル
 
 /procディレクトリは、普通のファイルシステムと違い、ハードディスクやSSDなどのストレージ上ではなく、メモリの中に作られるファイルシステムです。mountコマンドで確認してみると、/procディレクトリが他と異なる場所にあります。
@@ -584,3 +671,4 @@ dr-xr-xr-x   9 root             root                           0 Dec 25 11:23 12
 ```
 
 `/proc`ディレクトリにあるファイルは、システムをコントロールするために使われます。そのため、システムのさまざまな情報がここに格納されています。意味もわからずに/procの内容を変更するとシステムが壊れるので直接編集は基本的にだめです。たとえば`/proc/sys/`ディレクトリのファイルには、カーネルの諸設定をオン／オフが記載されており、ここのファイルの内容を書き換えることによって、さまざまなカーネル設定を有効化／無効化することができます。もし編集したい場合は`/etc/sysctl.conf`というファイルが用意されているのでこちらを編集します。
+
