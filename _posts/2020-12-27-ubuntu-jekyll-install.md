@@ -27,7 +27,7 @@ tags:
   - [やりたいこと](#%E3%82%84%E3%82%8A%E3%81%9F%E3%81%84%E3%81%93%E3%81%A8)
   - [Jekyllは何に使うのか？](#jekyll%E3%81%AF%E4%BD%95%E3%81%AB%E4%BD%BF%E3%81%86%E3%81%AE%E3%81%8B)
   - [Requirements](#requirements)
-- [2.Jekyllのインストール](#2jekyll%E3%81%AE%E3%82%A4%E3%83%B3%E3%82%B9%E3%83%88%E3%83%BC%E3%83%AB)
+- [2. Jekyllのインストール](#2-jekyll%E3%81%AE%E3%82%A4%E3%83%B3%E3%82%B9%E3%83%88%E3%83%BC%E3%83%AB)
 - [3. GitHub Pages作成環境の構築](#3-github-pages%E4%BD%9C%E6%88%90%E7%92%B0%E5%A2%83%E3%81%AE%E6%A7%8B%E7%AF%89)
 
 <!-- END doctoc generated TOC please keep comment here to allow auto update -->
@@ -47,7 +47,7 @@ GitHub Pagesの[個人ブログ](https://ryonakagami.github.io/)の制作環境�
 - RubyGems
 - GCC and Make
 
-## 2.Jekyllのインストール
+## 2. Jekyllのインストール
 
 まず必要なパッケージをインストールします
 
