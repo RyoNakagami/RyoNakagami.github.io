@@ -25,11 +25,17 @@ tags:
 - [1. 今回のスコープ](#1-%E4%BB%8A%E5%9B%9E%E3%81%AE%E3%82%B9%E3%82%B3%E3%83%BC%E3%83%97)
   - [やりたいこと](#%E3%82%84%E3%82%8A%E3%81%9F%E3%81%84%E3%81%93%E3%81%A8)
   - [方針](#%E6%96%B9%E9%87%9D)
-- [2. Bleachbitとは？](#2-bleachbit%E3%81%A8%E3%81%AF)
-  - [Use case](#use-case)
-- [3. Bleachbitのインストール](#3-bleachbit%E3%81%AE%E3%82%A4%E3%83%B3%E3%82%B9%E3%83%88%E3%83%BC%E3%83%AB)
-- [4. Bleachbit使用方針](#4-bleachbit%E4%BD%BF%E7%94%A8%E6%96%B9%E9%87%9D)
-  - [DOM Storageとは](#dom-storage%E3%81%A8%E3%81%AF)
+- [2. Terminatorとは](#2-terminator%E3%81%A8%E3%81%AF)
+  - [Features](#features)
+  - [デメリット](#%E3%83%87%E3%83%A1%E3%83%AA%E3%83%83%E3%83%88)
+  - [立ち上がり時間の比較](#%E7%AB%8B%E3%81%A1%E4%B8%8A%E3%81%8C%E3%82%8A%E6%99%82%E9%96%93%E3%81%AE%E6%AF%94%E8%BC%83)
+  - [Cold start時のたちあがり時間の比較](#cold-start%E6%99%82%E3%81%AE%E3%81%9F%E3%81%A1%E3%81%82%E3%81%8C%E3%82%8A%E6%99%82%E9%96%93%E3%81%AE%E6%AF%94%E8%BC%83)
+  - [Memory useの比較](#memory-use%E3%81%AE%E6%AF%94%E8%BC%83)
+- [3. Terminatorのインストール](#3-terminator%E3%81%AE%E3%82%A4%E3%83%B3%E3%82%B9%E3%83%88%E3%83%BC%E3%83%AB)
+- [4. Layoutの設定](#4-layout%E3%81%AE%E8%A8%AD%E5%AE%9A)
+  - [手順](#%E6%89%8B%E9%A0%86)
+- [5. Short cuts](#5-short-cuts)
+- [Appendix: Cold startとは？](#appendix-cold-start%E3%81%A8%E3%81%AF)
 
 <!-- END doctoc generated TOC please keep comment here to allow auto update -->
 
