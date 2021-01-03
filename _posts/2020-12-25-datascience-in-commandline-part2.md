@@ -50,7 +50,7 @@ tags:
   - [curl出力結果をファイルに保存する](#curl%E5%87%BA%E5%8A%9B%E7%B5%90%E6%9E%9C%E3%82%92%E3%83%95%E3%82%A1%E3%82%A4%E3%83%AB%E3%81%AB%E4%BF%9D%E5%AD%98%E3%81%99%E3%82%8B)
   - [curlコマンドを用いたレクチャーノートのインストール](#curl%E3%82%B3%E3%83%9E%E3%83%B3%E3%83%89%E3%82%92%E7%94%A8%E3%81%84%E3%81%9F%E3%83%AC%E3%82%AF%E3%83%81%E3%83%A3%E3%83%BC%E3%83%8E%E3%83%BC%E3%83%88%E3%81%AE%E3%82%A4%E3%83%B3%E3%82%B9%E3%83%88%E3%83%BC%E3%83%AB)
 - [APPENDIX: パイプ](#appendix-%E3%83%91%E3%82%A4%E3%83%97)
-  - [APPENDIX: リダイレクト](#appendix-%E3%83%AA%E3%83%80%E3%82%A4%E3%83%AC%E3%82%AF%E3%83%88)
+- [APPENDIX: リダイレクト](#appendix-%E3%83%AA%E3%83%80%E3%82%A4%E3%83%AC%E3%82%AF%E3%83%88)
 
 <!-- END doctoc generated TOC please keep comment here to allow auto update -->
 
