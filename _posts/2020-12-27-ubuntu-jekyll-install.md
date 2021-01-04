@@ -11,8 +11,8 @@ purpose:
 tags:
 
 - Ubuntu 20.04 LTS
-- doctoc
-- Markdown
+- Jekyll
+- GitHub Pages
 ---
 
 ||概要|
