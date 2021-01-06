@@ -163,9 +163,10 @@ tags:
 |記述統計用分析環境|JupyterLab||
 |R言語用開発環境|RStudio||
 |コンテナ|Docker||
-|静的サイトジェネレーター|Jekyll||
-|Markdown 目次作成パッケージ|doctoc||
+|静的サイトジェネレーター|Jekyll|[Ubuntu Desktop環境構築 Part 12](https://ryonakagami.github.io/2020/12/27/ubuntu-jekyll-install/)|
+|Markdown 目次作成パッケージ|doctoc|[Ubuntu Desktop環境構築 Part 11](https://ryonakagami.github.io/2020/12/26/ubuntu-doctoc/)|
 |web page raeding list管理|pocket||
 |ファイル圧縮ソフト|7-zip|[Ubuntu Desktop環境構築 Part 10](https://ryonakagami.github.io/2020/12/23/ubuntu-zshsetup/)|
+|C/C++コンパイラ|GCC||
 
 
