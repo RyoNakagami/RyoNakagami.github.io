@@ -53,6 +53,10 @@ kramdown:
     block:
       line_numbers: true
       start_line: 1
+  # do not replace newlines by <br>s 20210109 変更
+  hard_wrap: false
+  # parse markdown inside block-level HTML tag
+  parse_block_html: true
 
 
 
