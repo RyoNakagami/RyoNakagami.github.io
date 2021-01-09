@@ -1343,7 +1343,7 @@ def decoder(string):
 ```
 
 #### C言語でrunlength法のencode
-```C
+```c
 // C言語でrunlength法
 #include <stdio.h> 
 #include <stdlib.h> 
