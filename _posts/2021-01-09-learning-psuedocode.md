@@ -174,7 +174,7 @@ ENDWHILE
 
 #### CASEの例
 
-```
+```raw
 CASE expression OF
 
     condition 1 : sequence 1
