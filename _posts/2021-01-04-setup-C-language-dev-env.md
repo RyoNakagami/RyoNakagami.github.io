@@ -31,6 +31,8 @@ tags:
   - [Build halloworld.c](#build-halloworldc)
     - [`tasks.json`の設定項目](#tasksjson%E3%81%AE%E8%A8%AD%E5%AE%9A%E9%A0%85%E7%9B%AE)
   - [Debug helloworld.c](#debug-helloworldc)
+  - [Code Runnerの設定](#code-runner%E3%81%AE%E8%A8%AD%E5%AE%9A)
+    - [Configuration](#configuration)
 
 <!-- END doctoc generated TOC please keep comment here to allow auto update -->
 
@@ -108,7 +110,8 @@ This is C program%
 |開発環境|VS Code|
 |C compiler|gcc|
 |debugger|GDB|
-|VS Code Extension|C++ extension for VS Code|
+|VS Code Extension: Intelisense, Debugger|C++ extension for VS Code|
+|VS Code Extension: Running code|Code Runner|
 
 ### VS Code workspaceを活用する
 
@@ -225,9 +228,35 @@ GDB debuggerをローンチするために必要な`launch.json`ファイルを�
 }
 ```
 
-`program`はdebug対象となりファイルを指定します。デフォルトでは、C 拡張機能はソースコードにブレークポイントを追加せず、stopAtEntry の値は false に設定されています。stopAtEntry の値を true に変更すると、デバッグを開始するときにdebuggerがmain methodで停止します。Debugを実行したい場合はソースコードを開いた状態で`F5` クリックします。
+`program`はdebug対象となるファイルを指定します。デフォルトでは、C 拡張機能はソースコードにブレークポイントを追加せず、stopAtEntry の値は false に設定されています。stopAtEntry の値を true に変更すると、デバッグを開始するときにdebuggerがmain methodで停止します。Debugを実行したい場合はソースコードを開いた状態で`F5` クリックします。
 
 
+### Code Runnerの設定
 
+VS Codeで編集したC言語のソースコードをショートカット入力だけでTerminal上で実行したいのでVS Code ExtensionのCode Runnerをインストールします。ソースコードを開いた状態で`Ctrl+Alt+N`を入力するとTerminal上でコンパイルと実行を同時にすることができます。
 
+#### Configuration
+
+VS Code setting jsonでPATHを設定します。PATHを設定するにあたってのルールは以下を参照してください。
+
+```raw
+$workspaceRoot: The path of the folder opened in VS Code
+$dir: The directory of the code file being run
+$dirWithoutTrailingSlash: The directory of the code file being run without a trailing slash
+$fullFileName: The full name of the code file being run
+$fileName: The base name of the code file being run, that is the file without the directory
+$fileNameWithoutExt: The base name of the code file being run without its extension
+$driveLetter: The drive letter of the code file being run (Windows only)
+$pythonPath: The path of Python interpreter (set by Python: Select Interpreter command)
+```
+
+これを参考にして、Workspace上に存在する`.vscode/`フォルダの下に`settings.json`をつくります。Globalで定義されている`settings.json`をベースに以下の行を追加します。
+
+```raw
+    "code-runner.clearPreviousOutput": true,
+    "code-runner.runInTerminal": true,
+    "code-runner.executorMap": {
+        "c": "gcc $workspaceRoot/src/$fileName -o $workspaceRoot/build/$fileNameWithoutExt && $workspaceRoot/build/$fileNameWithoutExt"
+    }
+```
 
