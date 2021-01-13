@@ -1,7 +1,7 @@
 ---
 layout: post
 title: "Vandermondeの行列式"
-subtitle: 
+subtitle: ""
 author: "Ryo"
 header-img: "img/post-bg-miui6.jpg"
 header-mask: 0.4
