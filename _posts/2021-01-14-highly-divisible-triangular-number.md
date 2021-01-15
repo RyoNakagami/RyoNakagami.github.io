@@ -35,6 +35,7 @@ tags:
   - [(2) 約数の数が入力された自然数より多い最小の三角数を返す関数](#2-%E7%B4%84%E6%95%B0%E3%81%AE%E6%95%B0%E3%81%8C%E5%85%A5%E5%8A%9B%E3%81%95%E3%82%8C%E3%81%9F%E8%87%AA%E7%84%B6%E6%95%B0%E3%82%88%E3%82%8A%E5%A4%9A%E3%81%84%E6%9C%80%E5%B0%8F%E3%81%AE%E4%B8%89%E8%A7%92%E6%95%B0%E3%82%92%E8%BF%94%E3%81%99%E9%96%A2%E6%95%B0)
     - [疑似コード](#%E7%96%91%E4%BC%BC%E3%82%B3%E3%83%BC%E3%83%89-1)
 - [4. Pythonでの実行コード](#4-python%E3%81%A7%E3%81%AE%E5%AE%9F%E8%A1%8C%E3%82%B3%E3%83%BC%E3%83%89)
+- [5. C言語でのソースコード](#5-c%E8%A8%80%E8%AA%9E%E3%81%A7%E3%81%AE%E3%82%BD%E3%83%BC%E3%82%B9%E3%82%B3%E3%83%BC%E3%83%89)
 
 <!-- END doctoc generated TOC please keep comment here to allow auto update -->
 
@@ -136,7 +137,7 @@ P(T(3)) = P(3) × P(4/2)
 (以下略)
 ```
 
-なので、n thの三角数の約数の個数を計算するとき、その計算式の第一項がn-1 thの三角数の約数の個数の四季の第二項と対応することがわかるので、これを使います。
+なので、n thの三角数の約数の個数を計算するとき、その計算式の第一項がn-1 thの三角数の約数の個数の式の第二項と対応することがわかるので、これを使います。
 
 #### 疑似コード
 
@@ -209,4 +210,59 @@ def main():
 
 if __name__ == "__main__":
     main()
+```
+
+## 5. C言語でのソースコード
+
+```c
+#include <stdio.h>
+#include <math.h>
+
+int find_factors(int N)
+{
+    int max_integer = 0;
+    int result = 0;
+    int factor_candidate = 1;
+
+    max_integer = (int)sqrt(N);
+
+    for (; factor_candidate <= max_integer; factor_candidate++)
+    {
+        if (N % factor_candidate == 0)
+            result += 2;
+    }
+
+    if (N == max_integer*max_integer)
+        result -= 1;
+    
+    return result;
+}
+
+int find_factors_triangular_number(int N)
+{
+    int result = 0;
+    int first_term = 1;
+    int second_term = 0;
+    int i = 0;
+
+    while (result < N)
+    {
+        i++;
+
+        if ((i+1) % 2 ==0)
+            second_term = find_factors(((i + 1)/2));
+        else
+            second_term = find_factors((i +1));
+        
+        result = first_term * second_term;
+        first_term = second_term;
+    }
+    return i*(i+1)/2;
+}
+
+
+void main(void)
+{
+    printf("%d", find_factors_triangular_number(500));
+}
 ```
