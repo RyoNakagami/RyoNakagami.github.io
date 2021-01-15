@@ -42,6 +42,7 @@ tags:
 3. 行列Aのある行を非ゼロ定数$\beta$倍するとき、$\text{det}(A)$は$\alpha$倍となる
 
 ### 命題
+<div class="math display" style="overflow: auto">
 
 $$
 \text{det}\left(
@@ -55,20 +56,23 @@ $$
 \right)= (-1)^{n(n-1)/2}{\displaystyle\prod_{1\leq i<j\leq n}}(a_i - a_j)
 $$
 
+</div>
 
 ### 証明 
 
 証明は帰納法を用います。(1) $n = 1$のときは両辺が1で成立。念の為、(2) $n = 2$のときを見てみると、
-
+<div class="math display" style="overflow: auto">
 $$
 \text{det}\left(\begin{array}{cc}1 & a_1\\1&a_2\end{array}\right) = (a_2 - a_1)
 $$
+</div>
 
 で成立します。
 
 (3) $n=k$ の場合：
 
 $n=k-1$で成立することを仮定します。このとき、$n=k$でみてみます。なお簡略化のため
+<div class="math display" style="overflow: auto">
 
 $$
 A \equiv \left(
@@ -80,11 +84,13 @@ A \equiv \left(
 1 & a_k & \cdots & a_k^{k-2} & a_k^{k-1}
 \end{array} \right) 
 $$
+</div>
 
 と表記します。
 
 まず、(k-1)列目を$a_1$倍して、k列目から引きます。
 
+<div class="math display" style="overflow: auto">
 $$
 \text(det)(A) = \text(det)\left(
 \begin{array}{ccccc}
@@ -95,9 +101,11 @@ $$
 1 & a_k & \cdots & a_k^{k-2} & a_k^{k-2}(a_k - a_1)
 \end{array} \right) 
 $$
+</div>
 
 次に(k-2)列目を$a_1$倍して、(k-1)列目から引きます。
 
+<div class="math display" style="overflow: auto">
 $$
 \text{det}(A) = \text(det)\left(
 \begin{array}{ccccc}
@@ -120,7 +128,11 @@ $$
 \end{array} \right) 
 $$
 
+</div>
+
 これを繰り返していき
+
+<div class="math display" style="overflow: auto">
 
 $$
 \begin{aligned}
@@ -144,8 +156,11 @@ $$
 \end{aligned}
 $$
 
+</div>
+
 を得ます。余因子展開からわかるように
 
+<div class="math display" style="overflow: auto">
 $$
 \text{det}\left(
 \begin{array}{ccccc}
@@ -167,8 +182,11 @@ a_k-a_1 & \cdots & a_k^{k-3}(a_k-a_1) & a_k^{k-2}(a_k - a_1)
 \end{array} \right)
 $$
 
+</div>
+
 前提ルール3より
 
+<div class="math display" style="overflow: auto">
 $$
 \begin{aligned}
 \text{det}\left(
@@ -196,6 +214,8 @@ a_k-a_1 & \cdots & a_k^{k-3}(a_k-a_1) & a_k^{k-2}(a_k - a_1)
 
 \end{aligned}
 $$
+
+</div>
 
 証明終了。
 
