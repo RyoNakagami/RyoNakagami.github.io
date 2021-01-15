@@ -195,14 +195,14 @@ def find_factors_triangular_number(N):
     while res < N:
         index_num+=1
         if (index_num+1) % 2 ==0:
-            next_fac = find_factors(int((index_num+1)/2))
+            next_fac = find_factors(int((index_num + 1) / 2))
         else:
-            next_fac = find_factors((index_num+1))
+            next_fac = find_factors((index_num + 1))
         
         res = current_fac * next_fac
         current_fac = next_fac
 
-    return int(index_num*(index_num+1)/2)
+    return int(index_num*(index_num + 1) / 2)
 
 def main():
     i = 500
@@ -249,10 +249,10 @@ int find_factors_triangular_number(int N)
     {
         i++;
 
-        if ((i+1) % 2 ==0)
-            second_term = find_factors(((i + 1)/2));
+        if ((i+1) % 2 == 0)
+            second_term = find_factors(((i + 1) / 2));
         else
-            second_term = find_factors((i +1));
+            second_term = find_factors((i + 1));
         
         result = first_term * second_term;
         first_term = second_term;
