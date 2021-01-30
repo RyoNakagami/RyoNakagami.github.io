@@ -93,10 +93,10 @@ def value_func_prob(x, y):
         return 0
     elif x < 1:
         return 1
-    elif y < 1:
-        return 0
+    #elif y < 1:
+    #    return 0
 
-    return p*value_func_prob(min(x+1, 15), new_y) + (1-p)*value_func_prob(x-1, new_y)
+    return p*value_func_prob(min(x+1, 15), y-1) + (1-p)*value_func_prob(x-1, y-1)
 
 def main():
     print(1 - value_func_prob(x = 5, y = 30))
@@ -123,14 +123,13 @@ Wall time: 971 µs
         return 0
     elif x < 1:
         return 1
-    elif y < 0:
-        return 0
+    #elif y < 0:
+    #    return 0
 ```
 
 - `x == y`のときは、y 回連続して T が出ないと死ねません。なので裏が出る確率を $1-p$ とすると $(1-p)^y$ と死ぬ確率が計算できます。
 - `x > y`のときは、残り日数よりコイン保有枚数が多いので死ねません。なので `Return` は `0` になります。
 - `x < 1` は死んだ人は生き返らないので、つまり確率 1 で死ぬので `1`を返します。
-- `y < 0` は 過去に死ぬことはできないので `0` を返します
 
 次に、
 
@@ -153,7 +152,7 @@ $$
 \begin{aligned}
 \textrm{Pr}(Y \leq y| X = x) =& p \cdot \textrm{Pr}(Y \leq y - 1| X = \min(x + 1, 15)) + (1-p) \cdot\textrm{Pr}(Y \leq y - 1| X = \max(x-1, 0 ))\\
 = & p^2 \cdot\textrm{Pr}(Y \leq y - 2| X = \min(x + 2, 15)) + p(1-p) \cdot\textrm{Pr}(Y \leq y - 2| X = x)\\
-& + p(1-p) \cdot\textrm{Pr}(Y \leq y - 2| X = x) + p(1-p) \cdot\textrm{Pr}(Y \leq y - 2| X = \max(x - 2, 0))\\
+& + p(1-p) \cdot\textrm{Pr}(Y \leq y - 2| X = x) + (1-p)^2 \cdot\textrm{Pr}(Y \leq y - 2| X = \max(x - 2, 0))\\
 =&  \cdots
 \end{aligned}
 $$
@@ -199,15 +198,18 @@ def main():
     for d in range(att):
         a = s[d%2]
         b = s[(d+1)%2]
+
+        # リストの初期化
         for i in range(ub+1):
           b[i] = 0
-        b[0] += a[0]
+        b[0] += a[0] # +=を用いているのは参照する値のデータアドレスを変えるため
+
         for i in range(1, ub):
             b[i-1] += a[i]*(1-p)
             b[i+1] += a[i]*p
         b[ub-1] += a[ub]*(1-p)
         b[ub] += a[ub]*p
-    print(1 - b[0]/sum(b))
+    print(1 - b[0])
 ```
 
 実行結果は`0.6384049290791154`となります。実行時間は
