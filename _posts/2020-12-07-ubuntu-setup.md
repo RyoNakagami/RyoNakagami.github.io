@@ -154,19 +154,19 @@ tags:
 |ビジネス用チャットツール|Slack||
 |Text editor main|Visual Studio Code||
 |Text editor sub|nano||
-|分散型バージョン管理システム|Git||
+|分散型バージョン管理システム|Git|[Ubuntu Desktop環境構築 Part 13](https://ryonakagami.github.io/2020/12/28/ubuntu-git-and-github-setup/)|
 |データベースサーバー|PostgreSQL||
 |統計・機械学習用プログラミング言語|Python||
 |統計解析用プログラミング言語|R||
 |数値計算用プログラミング言語|Julia||
-|競技プログラミング用|C, C++||
+|競技プログラミング用|C, C++|[C言語練習環境の作成](https://ryonakagami.github.io/2021/01/04/setup-C-language-dev-env/)|
 |記述統計用分析環境|JupyterLab||
 |R言語用開発環境|RStudio||
-|コンテナ|Docker||
+|コンテナ|Docker|[Ubuntu Desktop環境構築 Part 14](https://ryonakagami.github.io/2021/01/27/ubuntu-docker-setup/)|
 |静的サイトジェネレーター|Jekyll|[Ubuntu Desktop環境構築 Part 12](https://ryonakagami.github.io/2020/12/27/ubuntu-jekyll-install/)|
 |Markdown 目次作成パッケージ|doctoc|[Ubuntu Desktop環境構築 Part 11](https://ryonakagami.github.io/2020/12/26/ubuntu-doctoc/)|
 |web page raeding list管理|pocket||
 |ファイル圧縮ソフト|7-zip|[Ubuntu Desktop環境構築 Part 10](https://ryonakagami.github.io/2020/12/23/ubuntu-zshsetup/)|
-|C/C++コンパイラ|GCC||
+|C/C++コンパイラ|GCC|[C言語練習環境の作成](https://ryonakagami.github.io/2021/01/04/setup-C-language-dev-env/)|
 
 
