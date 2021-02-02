@@ -152,6 +152,7 @@ tags:
 |ToDo管理|Google Keep||
 |Web会議サービス|Zoom||
 |ビジネス用チャットツール|Slack||
+|チャットツール|Discord||
 |Text editor main|Visual Studio Code||
 |Text editor sub|nano||
 |分散型バージョン管理システム|Git|[Ubuntu Desktop環境構築 Part 13](https://ryonakagami.github.io/2020/12/28/ubuntu-git-and-github-setup/)|
