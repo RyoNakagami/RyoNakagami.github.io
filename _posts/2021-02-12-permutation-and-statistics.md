@@ -452,28 +452,28 @@ $$
 $$
 \begin{aligned}
 \Gamma(x+1) & = \int^\infty_0t^{x+1-1}\exp(-t)dt\\
-& =  \int^\infty_0t^{x}\exp(-t)dt\\
-& = \[-t^{x}\exp(-t)\]^{\infty}_0 - (-x\int^\infty_0t^{x-1}\exp(-t)dt) \text{ 部分積分より}\\
+& = \int^\infty_0t^{x}\exp(-t)dt\\
+& = [-t^{x}\exp(-t)]^{\infty}_0 - (-x\int^\infty_0t^{x-1}\exp(-t)dt) \text{ 部分積分より }\\
 & = x\Gamma(x)
 \end{aligned}
 $$
 
-$ \[-t^{x}\exp(-t)\]^{\infty}_0$はロピタルの定理より$\lim_{t\to\infty}t^{x}\exp(-t)=0$を用いている。
+$$[-t^x\exp(-t)]_0^{\infty}$$ はロピタルの定理より$$\lim_{t\to\infty}t^{x}\exp(-t)=0$$を用いている。
 
 
-$\Gamma(1) = 1$は$x=1$を直接計算すれば良いので
+$$\Gamma(1) = 1$$は$$x=1$$を直接計算すれば良いので
 
 $$
-\Gamma(1) & = \int^\infty_0t^{0}\exp(-t)dt = \int^\infty_0\exp(-t)dt = \[-\exp(-t)\]^{\infty}_0 = 1
+\Gamma(1)  = \int^\infty_0t^{0}\exp(-t)dt = \int^\infty_0\exp(-t)dt = [-\exp(-t)]^{\infty}_0 = 1
 $$
 
-$\Gamma(1/2) & = \sqrt{\pi}$については、まず$\Gamma(1/2)$を次のように変形する。
+$$\Gamma(1/2)  = \sqrt{\pi}$$については、まず$$\Gamma(1/2)$$を次のように変形する。
 
 $$
 \Gamma(1/2) = \int^\infty_0t^{1/2-1}\exp(-t)dt
 $$
 
-ここで、$t = y^2/2$と変形すると、$y = \sqrt{2t}$, $t:0\to\infty$のｔき$y:0\to\infty$, $dt = ydy$なので
+ここで、$$t = y^2/2$$と変形すると、$$y = \sqrt{2t}$$, $$t:0\to\infty$$のｔき$$y:0\to\infty$$, $$dt = ydy$$なので
 
 $$
 \begin{aligned}
