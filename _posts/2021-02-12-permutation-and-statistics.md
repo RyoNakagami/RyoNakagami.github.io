@@ -44,6 +44,9 @@ tags:
     - [解答](#%E8%A7%A3%E7%AD%94-2)
   - [問題：写像の個数その２](#%E5%95%8F%E9%A1%8C%E5%86%99%E5%83%8F%E3%81%AE%E5%80%8B%E6%95%B0%E3%81%9D%E3%81%AE%EF%BC%92)
     - [解答](#%E8%A7%A3%E7%AD%94-3)
+- [Appendix: ガンマ関数](#appendix-%E3%82%AC%E3%83%B3%E3%83%9E%E9%96%A2%E6%95%B0)
+  - [ガンマ関数の性質](#%E3%82%AC%E3%83%B3%E3%83%9E%E9%96%A2%E6%95%B0%E3%81%AE%E6%80%A7%E8%B3%AA)
+    - [証明](#%E8%A8%BC%E6%98%8E)
 
 <!-- END doctoc generated TOC please keep comment here to allow auto update -->
 
@@ -412,10 +415,76 @@ $A = \{1, 2, ..., r\}$, $B = \{1, 2, ..., n\}$, $C = \{1, 2, ..., n+r-1\}$のと
 
 Fが狭義単調増加のとき、fは広義単調増加となる。一方、fが広義単調増加のときFは狭義単調増加となる。よって、$_nH_r = _{n+r-1}C_r$。
 
+## Appendix: ガンマ関数
+
+ガンマ関数を次のように定義する。
+
+$$
+\Gamma(x) = \int^\infty_0t^{x-1}\exp(-t)dt (x>0)\tag{1}
+$$
 
 
+(1)式の右辺において、$t=as(a>0)$と変換すると、$s = t/a$, $t:0\to\infty$のｔき$s:0\to\infty$, $dt = ads$なので
+
+$$
+\Gamma(x)= \int^\infty_0t^{x-1}\exp(-t)dt = \int^\infty_0(as)^{x-1}\exp(-as)a ds = a^x\int^\infty_0(s)^{x-1}\exp(-as) ds\tag{2}
+$$
+
+を得る。よって
+
+$$
+\frac{\Gamma(x)}{a^x} = \int^\infty_0(s)^{x-1}\exp(-as) ds
+$$
+
+### ガンマ関数の性質
+
+$$
+\begin{aligned}
+\Gamma(x+1) & = x\Gamma(x)\\
+\Gamma(1) & = 1\\
+\Gamma(n) & = (n-1)! \text{ ただしnは自然数}\\
+\Gamma(1/2) & = \sqrt{\pi}
+\end{aligned}
+$$
+
+#### 証明
+
+$$
+\begin{aligned}
+\Gamma(x+1) & = \int^\infty_0t^{x+1-1}\exp(-t)dt\\
+& =  \int^\infty_0t^{x}\exp(-t)dt\\
+& = \[-t^{x}\exp(-t)\]^{\infty}_0 - (-x\int^\infty_0t^{x-1}\exp(-t)dt) \text{ 部分積分より}\\
+& = x\Gamma(x)
+\end{aligned}
+$$
+
+$ \[-t^{x}\exp(-t)\]^{\infty}_0$はロピタルの定理より$\lim_{t\to\infty}t^{x}\exp(-t)=0$を用いている。
 
 
+$\Gamma(1) = 1$は$x=1$を直接計算すれば良いので
+
+$$
+\Gamma(1) & = \int^\infty_0t^{0}\exp(-t)dt = \int^\infty_0\exp(-t)dt = \[-\exp(-t)\]^{\infty}_0 = 1
+$$
+
+$\Gamma(1/2) & = \sqrt{\pi}$については、まず$\Gamma(1/2)$を次のように変形する。
+
+$$
+\Gamma(1/2) = \int^\infty_0t^{1/2-1}\exp(-t)dt
+$$
+
+ここで、$t = y^2/2$と変形すると、$y = \sqrt{2t}$, $t:0\to\infty$のｔき$y:0\to\infty$, $dt = ydy$なので
+
+$$
+\begin{aligned}
+\Gamma(1/2) &= \int^{\infty}_0\left(\frac{y^2}{2}\right)^{-1/2}\exp(-y^2/2)ydy = \sqrt{2}\int^{\infty}_0\exp(-y^2/2)ydy\\
+&=\frac{\sqrt{2}}{2}\int^{\infty}_{-\infty}\exp(-y^2/2)ydy\\
+&=\pi\int^{\infty}_{-\infty}\frac{1}{\sqrt{2\pi}}\exp(-y^2/2)ydy\\
+&=\pi
+\end{aligned}
+$$
+
+最後の積分は標準正規分布$N(0, 1)$の確率密度関数を全範囲で積分しているので1になる。
 
 
 
