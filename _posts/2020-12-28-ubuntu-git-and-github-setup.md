@@ -19,7 +19,7 @@ tags:
 |---|---|
 |目的|GitとGitHubの設定|
 |関連記事|- [Git in Zshの設定](https://ryonakagami.github.io/2020/12/23/ubuntu-zshsetup/)|
-|参考|- [Git Getting Started](https://git-scm.com/book/en/v2/Getting-Started-First-Time-Git-Setup)<br> - [Conventional Commits](https://www.conventionalcommits.org/en/v1.0.0/)|
+|参考|- [Git Getting Started](https://git-scm.com/book/en/v2/Getting-Started-First-Time-Git-Setup)<br> - [Conventional Commits](https://www.conventionalcommits.org/en/v1.0.0/)<br> - [Gitの内側 - Gitオブジェクト](https://git-scm.com/book/ja/v2/Git%E3%81%AE%E5%86%85%E5%81%B4-Git%E3%82%AA%E3%83%96%E3%82%B8%E3%82%A7%E3%82%AF%E3%83%88)|
 
 <!-- START doctoc generated TOC please keep comment here to allow auto update -->
 <!-- DON'T EDIT THIS SECTION, INSTEAD RE-RUN doctoc TO UPDATE -->
@@ -28,8 +28,10 @@ tags:
   - [やりたいこと](#%E3%82%84%E3%82%8A%E3%81%9F%E3%81%84%E3%81%93%E3%81%A8)
   - [Requirements](#requirements)
 - [2. Gitとはなにか？](#2-git%E3%81%A8%E3%81%AF%E3%81%AA%E3%81%AB%E3%81%8B)
-  - [分散型とは？](#%E5%88%86%E6%95%A3%E5%9E%8B%E3%81%A8%E3%81%AF)
+  - [Version管理の方法：分散型とは？](#version%E7%AE%A1%E7%90%86%E3%81%AE%E6%96%B9%E6%B3%95%E5%88%86%E6%95%A3%E5%9E%8B%E3%81%A8%E3%81%AF)
   - [Gitのバージョン管理の仕組み](#git%E3%81%AE%E3%83%90%E3%83%BC%E3%82%B8%E3%83%A7%E3%83%B3%E7%AE%A1%E7%90%86%E3%81%AE%E4%BB%95%E7%B5%84%E3%81%BF)
+  - [Gitはどこにバージョン管理のDBをもっているのか？](#git%E3%81%AF%E3%81%A9%E3%81%93%E3%81%AB%E3%83%90%E3%83%BC%E3%82%B8%E3%83%A7%E3%83%B3%E7%AE%A1%E7%90%86%E3%81%AEdb%E3%82%92%E3%82%82%E3%81%A3%E3%81%A6%E3%81%84%E3%82%8B%E3%81%AE%E3%81%8B)
+  - [Gitはどのように履歴データを取り出しているのか？](#git%E3%81%AF%E3%81%A9%E3%81%AE%E3%82%88%E3%81%86%E3%81%AB%E5%B1%A5%E6%AD%B4%E3%83%87%E3%83%BC%E3%82%BF%E3%82%92%E5%8F%96%E3%82%8A%E5%87%BA%E3%81%97%E3%81%A6%E3%81%84%E3%82%8B%E3%81%AE%E3%81%8B)
 - [3. GitのInstallと初期設定](#3-git%E3%81%AEinstall%E3%81%A8%E5%88%9D%E6%9C%9F%E8%A8%AD%E5%AE%9A)
   - [初期設定](#%E5%88%9D%E6%9C%9F%E8%A8%AD%E5%AE%9A)
     - [`~/.gitconfig`の設定](#gitconfig%E3%81%AE%E8%A8%AD%E5%AE%9A)
@@ -54,7 +56,12 @@ tags:
 
 ## 2. Gitとはなにか？
 
-Gitとは分散型バージョン管理システムです。Version管理とは、変更履歴を管理することで, ソースコードを書き足したり、変更したりする過程を記録したり、特定の段階に戻ったり、ファイルを復活させたりすることができるようになります。
+Gitとは分散型バージョン管理システムです。Version管理とは、変更履歴を管理することで, ソースコードを書き足したり、変更したりする過程を記録したり、特定の段階に戻ったり、ファイルを復活させたり、メタデータからの状態の検索することができるようになります。Gitを活用することで以下のような課題を解決することができます：
+
+- あのとき動いたが、今は動かない。一回動いていた状態に戻したい
+- このコードを加えた人とタイミングを知りたい
+
+### Version管理の方法：分散型とは？
 
 Version管理の方法として、Gitは差分(Differences)でなくSnapshotsでデータを管理しています。Git は基本的に、すべてのファイルが各時点でどのように見えるかをSnapshotで記録し、そのSnapshotへの参照を保存します。効率化のため、ファイルが変更されていない場合は、Git はファイルを再び保存せず、すでに保存されている以前の同じファイルへのリンクだけを保存します。
 
@@ -63,8 +70,6 @@ Snapshots vs Differencesのイメージは以下のFiguresとなります。
 <img src="https://github.com/ryonakimageserver/omorikaizuka/blob/master/git/GitHub_pages_Posts/20210104_GIt_snapshots.png?raw=true">
 
 <img src="https://github.com/ryonakimageserver/omorikaizuka/blob/master/git/GitHub_pages_Posts/20210104_git_snapshots_02.png?raw=true">
-
-### 分散型とは？
 
 Version管理システムは分散型と集中型の２つに大別することができます。集中型とは変更履歴などのデータを一つの中央サーバーに集めて管理する種類のことです。分散型とは、各クライアントがレポジトリーをミラーし終わったあとは、変更履歴の参照などのVersion管理アクションは各々のクライアント内部で閉じている種類のことを指します。
 
@@ -87,6 +92,50 @@ Gitはディレクトリ単位でVersion管理します。管理されるディ�
 |`committed`|ローカルレポジトリにファイル変更履歴が記録されていることを示します|
 
 <img src="https://github.com/ryonakimageserver/omorikaizuka/blob/master/git/GitHub_pages_Posts/20210104_Git_Three_states.png?raw=true">
+
+### Gitはどこにバージョン管理のDBをもっているのか？
+
+`git init`によってGit管理に指定したディレクトリには`.git`というディレクトリが作成されます。Git が保管したり操作したりする対象の、ほとんどすべてがここに格納されます。 リポジトリのバックアップやクローンをしたい場合、このディレクトリをどこかへコピーするだけで、ほぼ事足ります。
+
+`.git` ディレクトリの中は以下のようになっています。
+
+```raw
+HEAD
+config*
+description
+hooks/
+info/
+objects/
+refs/
+```
+
+重要なのは4項目です。具体的には、 HEAD ファイル、 index ファイル（まだ作成されていない）、 objects ディレクトリ、 refs ディレクトリです。 これらがGitの中核部分になります。 objects ディレクトリにはデータベースのすべてのコンテンツが保管されます。refs ディレクトリには、それらコンテンツ内のコミットオブジェクトを指すポインタ（ブランチ）が保管されます。HEAD ファイルは、現在チェックアウトしているブランチを指します。index ファイルには、Git がステージングエリアの情報を保管します。
+
+### Gitはどのように履歴データを取り出しているのか？
+
+Gitはシンプルなキー・バリュー型データストアです。どんな種類のコンテンツでも格納でき、それに対応するキーが返されます。キーを使えば格納したコンテンツをいつでも取り出せます。ここでのコンテンツのことを「コミットオブジェクト」といいます。「コミットオブジェクト」はコミットによって生成されたデータのことです。Gitはコミットオブジェクトに対して40文字のIDを発行します。これがコミットハッシュ値でキー・バリューのキーに相当します。
+
+コミットオブジェクトの中身を確認したい場合は、`git cat-file -p`で任意のコミットのコミットオブジェクトを見ることができます。
+
+```zsh
+% git cat-file -p 757cd618f38d574238bae4768ff1a1aedfafdb7a
+tree 05520e3bd0354e823cacf96b244987f235b3c240
+parent 2476c4c7bcbf98e444b6851d67036077334502d2
+author DQNEO <dqneo@example.com> 1454588308 +0900
+committer DQNEO <dqneo@example.com> 1454588308 +0900
+second commit
+```
+
+- `tree`というのはtreeオブジェクトのことで、これはディレクトリツリーに対して割り振られるIDです。(もうちょっと厳密に言うと、treeオブジェクトは1つ以上のtreeオブジェクトまたはblobオブジェクトを持つツリー構造のデータです)
+- `parent`というのは親コミットすなわち１個前のコミットのハッシュ値です。Gitのコミットオブジェクトは必ず1つ以上の親コミットを持っており、親を順番にたどっていくことで履歴をさかのぼることができます。
+- authorとcommiterは普通同じ人になるのですが、cherry-pickしたりrebaseしたりすると異なる名前になることがあります。
+- 1行空行をはさんでそこから下がコミットメッセージです。
+
+なお、コミットオブジェクトに対応するハッシュ値の計算式は以下のようになります
+
+```raw
+hash = sha1("commit<半角スペース><コミットオブジェクトのバイト数>\0<コミットオブジェクトの中身>")
+```
 
 ## 3. GitのInstallと初期設定
 

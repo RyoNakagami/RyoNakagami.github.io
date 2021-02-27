@@ -1,9 +1,9 @@
 ---
 layout: post
 title: "Ubuntu Desktop環境構築 Part 14"
-subtitle: "Dockerのインストール"
+subtitle: "Dockerによる環境構築 Part 1: Dockerのインストール"
 author: "Ryo"
-header-img: "img/post-bg-miui6.jpg"
+header-img: "img/about-bg.jpg"
 header-mask: 0.4
 catelog: true
 mathjax: true
@@ -17,8 +17,8 @@ tags:
 
 ||概要|
 |---|---|
-|目的|Dockerのインストール|
-|参考|- [初心者のためのコンテナ入門教室:連載第二回](https://thinkit.co.jp/article/17301)<br>- [開発環境、テスト環境、ステージング環境、本番環境について ](https://note.com/gunj/n/nf139710d0e4a)<br>- [Docker 概要](https://matsuand.github.io/docs.docker.jp.onthefly/get-started/overview/)<br>- [Dockerインストール](https://docs.docker.com/engine/install/ubuntu/)<br>- [Issue with WARNING: No blkio weight support](https://forums.docker.com/t/issues-with-sudo-systemctl-status-docker/98564)|
+|目的|Dockerによる環境構築 Part 1: Dockerのインストール|
+|参考|- [初心者のためのコンテナ入門教室:連載第二回](https://thinkit.co.jp/article/17301)<br>- [開発環境、テスト環境、ステージング環境、本番環境について ](https://note.com/gunj/n/nf139710d0e4a)<br>- [Docker 概要](https://matsuand.github.io/docs.docker.jp.onthefly/get-started/overview/)<br>- [Dockerインストール](https://docs.docker.com/engine/install/ubuntu/)<br>- [Issue with WARNING: No blkio weight support](https://forums.docker.com/t/issues-with-sudo-systemctl-status-docker/98564)<br>- [Docker Tutorial Video](https://www.youtube.com/watch?v=iqqDU2crIEQ&feature=emb_logo)|
 
 <!-- START doctoc generated TOC please keep comment here to allow auto update -->
 <!-- DON'T EDIT THIS SECTION, INSTEAD RE-RUN doctoc TO UPDATE -->
@@ -26,6 +26,7 @@ tags:
 - [1. 今回のスコープ](#1-%E4%BB%8A%E5%9B%9E%E3%81%AE%E3%82%B9%E3%82%B3%E3%83%BC%E3%83%97)
   - [実行環境](#%E5%AE%9F%E8%A1%8C%E7%92%B0%E5%A2%83)
 - [2. コンテナとは？](#2-%E3%82%B3%E3%83%B3%E3%83%86%E3%83%8A%E3%81%A8%E3%81%AF)
+  - [コンテナの概要](#%E3%82%B3%E3%83%B3%E3%83%86%E3%83%8A%E3%81%AE%E6%A6%82%E8%A6%81)
   - [なぜコンテナを使うのか・どのようなメリットがあるのか？](#%E3%81%AA%E3%81%9C%E3%82%B3%E3%83%B3%E3%83%86%E3%83%8A%E3%82%92%E4%BD%BF%E3%81%86%E3%81%AE%E3%81%8B%E3%83%BB%E3%81%A9%E3%81%AE%E3%82%88%E3%81%86%E3%81%AA%E3%83%A1%E3%83%AA%E3%83%83%E3%83%88%E3%81%8C%E3%81%82%E3%82%8B%E3%81%AE%E3%81%8B)
     - [開発者目線：アプリケーションの可搬性をたかめる](#%E9%96%8B%E7%99%BA%E8%80%85%E7%9B%AE%E7%B7%9A%E3%82%A2%E3%83%97%E3%83%AA%E3%82%B1%E3%83%BC%E3%82%B7%E3%83%A7%E3%83%B3%E3%81%AE%E5%8F%AF%E6%90%AC%E6%80%A7%E3%82%92%E3%81%9F%E3%81%8B%E3%82%81%E3%82%8B)
     - [計算科学目線：分析結果の再現可能性を高める](#%E8%A8%88%E7%AE%97%E7%A7%91%E5%AD%A6%E7%9B%AE%E7%B7%9A%E5%88%86%E6%9E%90%E7%B5%90%E6%9E%9C%E3%81%AE%E5%86%8D%E7%8F%BE%E5%8F%AF%E8%83%BD%E6%80%A7%E3%82%92%E9%AB%98%E3%82%81%E3%82%8B)
@@ -34,10 +35,11 @@ tags:
   - [コンテナの基本構成](#%E3%82%B3%E3%83%B3%E3%83%86%E3%83%8A%E3%81%AE%E5%9F%BA%E6%9C%AC%E6%A7%8B%E6%88%90)
     - [MacとWindowsにおけるDocker](#mac%E3%81%A8windows%E3%81%AB%E3%81%8A%E3%81%91%E3%82%8Bdocker)
   - [コンテナのプロセス](#%E3%82%B3%E3%83%B3%E3%83%86%E3%83%8A%E3%81%AE%E3%83%97%E3%83%AD%E3%82%BB%E3%82%B9)
-    - [namespcae](#namespcae)
+    - [namespace](#namespace)
     - [cgroups](#cgroups)
   - [コンテナのネットワーク](#%E3%82%B3%E3%83%B3%E3%83%86%E3%83%8A%E3%81%AE%E3%83%8D%E3%83%83%E3%83%88%E3%83%AF%E3%83%BC%E3%82%AF)
 - [4. Dockerとは？](#4-docker%E3%81%A8%E3%81%AF)
+  - [Dockerの３つのフェーズ](#docker%E3%81%AE%EF%BC%93%E3%81%A4%E3%81%AE%E3%83%95%E3%82%A7%E3%83%BC%E3%82%BA)
   - [Dockerアーキテクチャ](#docker%E3%82%A2%E3%83%BC%E3%82%AD%E3%83%86%E3%82%AF%E3%83%81%E3%83%A3)
   - [Dockerイメージとは？](#docker%E3%82%A4%E3%83%A1%E3%83%BC%E3%82%B8%E3%81%A8%E3%81%AF)
 - [5. UbuntuへのDockerのインストール](#5-ubuntu%E3%81%B8%E3%81%AEdocker%E3%81%AE%E3%82%A4%E3%83%B3%E3%82%B9%E3%83%88%E3%83%BC%E3%83%AB)
@@ -50,8 +52,12 @@ tags:
   - [Dockerのバージョン確認](#docker%E3%81%AE%E3%83%90%E3%83%BC%E3%82%B8%E3%83%A7%E3%83%B3%E7%A2%BA%E8%AA%8D)
   - [Dockerの実行環境確認](#docker%E3%81%AE%E5%AE%9F%E8%A1%8C%E7%92%B0%E5%A2%83%E7%A2%BA%E8%AA%8D)
   - [Docker imageの確認](#docker-image%E3%81%AE%E7%A2%BA%E8%AA%8D)
+  - [Dockerのディスク利用状況: `docker system df`](#docker%E3%81%AE%E3%83%87%E3%82%A3%E3%82%B9%E3%82%AF%E5%88%A9%E7%94%A8%E7%8A%B6%E6%B3%81-docker-system-df)
 - [6. インストール後の設定](#6-%E3%82%A4%E3%83%B3%E3%82%B9%E3%83%88%E3%83%BC%E3%83%AB%E5%BE%8C%E3%81%AE%E8%A8%AD%E5%AE%9A)
   - [Manage Docker as a non-root user](#manage-docker-as-a-non-root-user)
+- [7. Docker Fileの作成からDocker ImageのBuildまでのチュートリアル](#7-docker-file%E3%81%AE%E4%BD%9C%E6%88%90%E3%81%8B%E3%82%89docker-image%E3%81%AEbuild%E3%81%BE%E3%81%A7%E3%81%AE%E3%83%81%E3%83%A5%E3%83%BC%E3%83%88%E3%83%AA%E3%82%A2%E3%83%AB)
+  - [Dockerfileの構文](#dockerfile%E3%81%AE%E6%A7%8B%E6%96%87)
+  - [Docker buildの例](#docker-build%E3%81%AE%E4%BE%8B)
 - [Appendix: サーバ仮想化技術](#appendix-%E3%82%B5%E3%83%BC%E3%83%90%E4%BB%AE%E6%83%B3%E5%8C%96%E6%8A%80%E8%A1%93)
   - [ホスト型サーバー仮想化](#%E3%83%9B%E3%82%B9%E3%83%88%E5%9E%8B%E3%82%B5%E3%83%BC%E3%83%90%E3%83%BC%E4%BB%AE%E6%83%B3%E5%8C%96)
   - [ハイパーバイザー型サーバー仮想化](#%E3%83%8F%E3%82%A4%E3%83%91%E3%83%BC%E3%83%90%E3%82%A4%E3%82%B6%E3%83%BC%E5%9E%8B%E3%82%B5%E3%83%BC%E3%83%90%E3%83%BC%E4%BB%AE%E6%83%B3%E5%8C%96)
@@ -79,9 +85,10 @@ tags:
 
 ## 2. コンテナとは？
 
-Dockerとは、アプリケーションの実行に必要な環境(ミドルウェアやライブラリやOS/ネットワークといったインフラ環境)を１つのコンテナ(Dockerコンテナ)にまとめ、そのコンテナを用いて、さまざまな環境でアプリケーション実行環境を構築/運用するためのプラットフォームのことです。Docker を使えば、アプリケーションをインフラストラクチャーから切り離すことができるため、ソフトウエアをすばやく提供することができます。 Docker であれば、アプリケーションを管理する手法をそのまま、インフラストラクチャーの管理にも適用できます。 Docker が採用する方法を最大限利用して、アプリケーションの導入、テスト、コードデプロイをすばやく行うことは、つまりコーディングと実稼動の合間を大きく削減できることを意味します。Dockerの仕組みを理解するためにはまずコンテナの仕組みを理解する必要があります。
+Dockerとは、アプリケーションの実行に必要な環境(ミドルウェアやライブラリやOS/ネットワークといったインフラ環境)を１つのコンテナ(Dockerコンテナ)にまとめ、そのコンテナを用いて、さまざまな環境でアプリケーション実行環境を構築/運用するためのプラットフォームのことです。Docker を使えば、アプリケーションをインフラストラクチャーから切り離すことができるため、ソフトウエアをすばやく提供することができます。 Docker であれば、アプリケーションを管理する手法をそのまま、インフラストラクチャーの管理にも適用できます。 Docker が採用する方法を最大限利用して、アプリケーションの導入、テスト、コードデプロイをすばやく行うことは、つまりコーディングと実稼動の合間を大きく削減できることを意味します。
+### コンテナの概要
 
-コンテナとは、ホストOS上に論理的な区画(コンテナ)を作り、アプリケーションを動作させるのに必要なライブラリやミドルウェアといったdependenciesを一つのコンテナにパッケージ化し、ホストOS上の独立したアプリケーション実行環境を作成できるようにしたものです。そのため、あたかも個別のサーバーが存在するように動くので、コンテナ技術を使うことで、同じホストOSの上で、バージョンの異なるPythonを同時に動かすこともできます。Virtual BoxやVMwareといった仮想環境構築ソフトと似た働きをしますが、あくまでコンテナはコンテナエンジンというプロセスを通して、ホストOSの「カーネル」を共有することでCPUやメモリなどのリソースを隔離し、仮想的な空間を作り出しています（コンテナ型仮想化）。
+コンテナとは、ホストOS上に論理的な区画(コンテナ)を作り、アプリケーションを動作させるのに必要なライブラリやミドルウェアといったdependenciesを一つのコンテナにパッケージ化し、ホストOS上の独立したアプリケーション実行環境を作成できるようにしたものです。そのため、あたかも個別のサーバーが存在するように動くので、コンテナ技術を使うことで、同じホストOSの上で、バージョンの異なるPythonを同時に動かすこともできます。Virtual BoxやVMwareといった仮想環境構築ソフトと似た働きをしますが、あくまでコンテナはコンテナエンジンというプロセスを通して、ホストOSの「カーネル」を共有することでCPUやメモリなどのリソースを隔離し、仮想的な空間を作り出しています（コンテナ型仮想化といいます）。
 
 <img src="https://github.com/ryonakimageserver/omorikaizuka/blob/master/%E3%83%96%E3%83%AD%E3%82%B0%E7%94%A8/20210127_ubuntu_docker_container.jpg?raw=true">
 
@@ -92,13 +99,11 @@ Dockerとは、アプリケーションの実行に必要な環境(ミドルウ�
 
 - アプリケーションの実行ファイル
 - ミドルウェアやライブラリ
-- OS/ネットワーク/ハードウェアといったインフラ環境
+- OS/ネットワーク/ハードウェア/security patchesといったインフラ環境
 
-アプリケーション開発は開発環境・テスト環境・ステージング環境・プロダクション環境とさまざまな環境がありますが、よく直面する問題として「開発環境ではプログラムは動作したが、ステージング/プロダクション環境では動作しない」ことが挙げられます。この問題の要因の一つとして、それぞれの環境においてミドルウェア/ライブラリを含むインフラ環境の構成が開発環境と異なるケースが多いです。コンテナ（特にDocker）は、開発したアプリケーションの実行に必要なインフラ構成要素(dependencies)を一つのコンテナ(Dockerイメージ)にまとめることで、どの環境でも同じコンテナをインストール・稼働させれば、アプリケーションが同じように動作することを可能にしてくれます。
+アプリケーション開発は開発環境・テスト環境・ステージング環境・プロダクション環境とさまざまな環境がありますが、よく直面する問題として「開発環境ではプログラムは動作したが、ステージング/プロダクション環境では動作しない」ことが挙げられます。この問題の要因の一つとして、それぞれの環境においてミドルウェア/ライブラリを含むインフラ環境の構成が開発環境と異なるケースが多いです。コンテナ（特にDocker）は、開発したアプリケーションの実行に必要なインフラ構成要素(dependencies)を一つのコンテナ(Dockerイメージ)にまとめることで、どの環境でも同じコンテナをインストール・稼働させれば、アプリケーションが同じように動作することを可能にしてくれます。一度作ってしまえばどこでも動くソフトウェアの特性のことを可搬性（ポータビリティ）といいます。コンテナを利用すること開発した成果物のポータビリティを高めることができます。
 
-一度作ってしまえばどこでも動くソフトウェアの特性のことを可搬性（ポータビリティ）といいます。コンテナを利用すること開発した成果物のポータビリティを高めることができます。
-
-また、いままでそれぞれの環境で別々にインフラエンジニアがこつこつと行っていた環境構築作業の多くを、コンテナの作成とインストールと稼働によって代替することができるので、開発のスピードを改善することもできます。
+より具体的には、複数のサーバーから構成されるE-commerceサイトのメンテナンスを担当するケースを考えます。E-commerceサイトを運用するとき100台のサーバーを同時に管理しなければならない場面は度々あります。100台のサーバーをメンテナンスするということは100個のOSをそれぞれメンテナンスするということです。セキュリティ対策の一環として、とあるSecurity patchをupgradeしなてはならない場合を考えます。このとき、対象のsecurity patchのdependenciesに注意を払いながらupgradeをする必要がありますが、ただでさえアプリケーションに配慮した上でのOSのメンテナンスは大変ですが100個のサーバーで個別に実施するとなると人員も時間も取られます。OSアップデートとアプリケーションの実行環境をコンテナによって分離できれば、security patch upgrade対応も少し楽になります。
 
 #### 計算科学目線：分析結果の再現可能性を高める
 
@@ -145,7 +150,7 @@ DockerはLinuxカーネル機能を使うため、通常はLinuxディストリ�
 
 Linux は命令を実行する際に、そのプログラムのソースファイルに書かれた内容を読み込み、メモリ上に展開し、そのメモリに乗ったプログラムを実行していますが、この実行されたプログラムをプロセスと呼びます。コンテナ型仮想化におけるコンテナは、ホストOS上からは1つのプロセスとして扱われるという大きな特徴があります。この仕組みを理解するためにはLinuxカーネル機能のNamespace、Cgroupsを理解する必要があります。
 
-#### namespcae
+#### namespace
 
 何回も繰り返し説明しているように、コンテナとはホストOS上に論理的な区画(コンテナ)を作り、独立したアプリケーション実行環境を作成できるようにしたものです。このコンテナを区画化する技術はLinuxカーネルのnamespaceという機能で実現されています。namespaceは、まとまったデータに名前をつけて分割することで衝突の可能性を減らし、参照を容易に行う機能です。名前に結び付けられた実体は、その名前がどの名前空間に属するかで一意に定まります。名前空間が異なれば、同じ名前でも別の実体に対応付けることができます。
 
@@ -190,7 +195,16 @@ NAPTとは、１つのIPアドレスを複数のコンピューターで共有�
 
 - Docker HubはDockerイメージの移動や管理、Dockerイメージを共有する場としての役割を果たします(いわゆるリポジトリ)。Docker Hubの「Automated Build」の機能でGitHubと連携させれば、自動でDockerイメージを作成することもできます。DockerイメージをプライベートレジストリやDockerHubなどへアップロードすることをプッシュといい、逆にダウンロードすることをプルといいます。
 
+### Dockerの３つのフェーズ
+
 <img src="https://github.com/ryonakimageserver/omorikaizuka/blob/master/%E3%83%96%E3%83%AD%E3%82%B0%E7%94%A8/20210127_docker_works.jpeg?raw=true">
+
+
+|DockerのPhase|説明|
+|---|---|
+|`Build Image`|アプリケーションが必要とするdependenciesをconsistentlyにパッケージ化するフェーズ|
+|`Ship Image`|Build Phaseで作成されたイメージを実行環境に移植するフェーズ|
+|`Run Image`|Imageを実行して、アプリケーション実行環境を作成するフェーズ|
 
 ### Dockerアーキテクチャ
 
@@ -207,7 +221,7 @@ Docker はクライアントサーバー型のアーキテクチャーを採用�
 
 ### Dockerイメージとは？
 
-Dockerイメージとは、Dockerコンテナーを作成する命令が入った読み込み専用のテンプレートです。 イメージは作ろうと思えば作ることができ、他の方が作ってレジストリに公開されているイメージを使うということもできます。 イメージを自分で作る場合は Dockerfile というファイルを生成します。このファイルの文法は単純なものであり、そこにはイメージを生成して実行するまでの手順が定義されます。アプリケーションが動作する土台となるインフラ環境を構築するコマンドや手順などを所定の書き方でDockerfileに記載すれば、その作業は全部Dockerが自動でやってくれます。 Dockerfileからベースイメージを使用してDockerイメージを作成することをビルドといいます。また、既に起動されたDockerコンテナからイメージを作成することをコミットと呼びます。
+Dockerイメージとは、Dockerコンテナーを作成する命令が入った読み込み専用のテンプレートです。 イメージは作ろうと思えば作ることができ、他の方が作ってレジストリに公開されているイメージを使うということもできます。 イメージを自分で作る場合は Dockerfile というファイルを生成します。DockerfileはDocker Imageにブループリントみたいなものです。このファイルの文法は単純なものであり、そこにはイメージを生成して実行するまでの手順が定義されます。アプリケーションが動作する土台となるインフラ環境を構築するコマンドや手順などを所定の書き方でDockerfileに記載すれば、その作業は全部Dockerが自動でやってくれます。 Dockerfileからベースイメージを使用してDockerイメージを作成することをビルドといいます。また、既に起動されたDockerコンテナからイメージを作成することをコミットと呼びます。
 
 DockerイメージはUFS(Union File System)という、複数のファイルやディレクトリをレイヤ(層)として積み重ねて、仮想的に1つのファイルシステムとして扱う技術を用いています。Dockerfile 内の個々の命令ごとに、イメージ内にはレイヤーというものが生成されます。 Dockerfile の内容を書き換えたことでイメージが再構築されるときには、変更がかかったレイヤーのみが再生成されます。これをコピーオンライトと呼びます。 他の仮想化技術に比べて Dockerイメージというものが軽量、小さい、早いを実現できているのも、そういった部分があるからです。
 
@@ -430,7 +444,7 @@ Server:
 
 ### Docker imageの確認
 
-`docker image ls`でイメージの確認が実施できます。
+`docker image ls`(または`docker images`)でイメージの確認が実施できます。
 
 ```
 % docker image ls
@@ -438,6 +452,21 @@ REPOSITORY   TAG       IMAGE ID       CREATED         SIZE
 example      latest    2345asdasd22   5 days ago      2.5GB
 (略)
 ```
+
+### Dockerのディスク利用状況: `docker system df`
+
+`docker system df`コマンドはDockerが使用しているディスクの利用状況が表示されます。
+
+```zsh
+% docker system df
+TYPE            TOTAL     ACTIVE    SIZE      RECLAIMABLE
+Images          10        2         6.757GB   5.487GB (81%)
+Containers      5         0         70.29MB   70.29MB (100%)
+Local Volumes   1         0         258.6MB   258.6MB (100%)
+Build Cache     0         0         0B        0B
+```
+
+詳細を表示したい場合は`-v` optionを追加します。
 
 ## 6. インストール後の設定
 ### Manage Docker as a non-root user
@@ -488,6 +517,59 @@ Share images, automate workflows, and more with a free Docker ID:
 For more examples and ideas, visit:
  https://docs.docker.com/get-started/
 
+```
+
+## 7. Docker Fileの作成からDocker ImageのBuildまでのチュートリアル
+
+こちらの[記事](https://docs.docker.com/develop/develop-images/dockerfile_best-practices/)を参考にしています。
+
+### Dockerfileの構文
+
+Dockerfileに記載された指示にしたがってDockerはコンテナを作ります。
+
+```Dockerfile
+FROM ubuntu:18.04
+COPY . /app
+RUN make /app
+CMD python /app/app.py
+```
+
+|指示|説明|
+|---|---|
+|`FROM`|ベースレイヤーを定義しています。今回は`ubuntu:18.04`|
+|`COPY`|`COPY` 命令は `<src>` からファイルやディレクトリを新たにコピーして、コンテナ内のファイルシステムのパス `<dest>` に追加します。今回はDocker Client側のカレントディレクトリすべてのファイルを`/app`に追加しています。|
+|`RUN`|`RUN` 命令は、現在のイメージの最上位の最新レイヤーにおいて、あらゆるコマンドを実行します。|
+|`CMD`|`CMD`命令はコンテナイメージを実行する時、自動的に実行するコマンドを指定しています。|
+
+### Docker buildの例
+
+tagで`helloapp:v1`と名付けたイメージを作成します。なお、`Docker build -h`で確認するとTagオプションの使用方法は以下。
+
+```raw
+ -t, --tag list                Name and optionally a tag in the 'name:tag' format
+```
+
+Docker fileの作成とbuildを実行します。
+
+```zsh
+mkdir myproject && cd myproject
+echo "hello" > hello
+echo -e "FROM busybox\nCOPY /hello /\nRUN cat /hello" > Dockerfile
+docker build -t helloapp:v1 .
+```
+
+実行後、作成されたDocker imageを確認します。
+
+```zsh
+% docker images
+REPOSITORY                                                        TAG       IMAGE ID       CREATED          SIZE
+helloapp                                                          v1        eab00ecb1bfb   11 seconds ago   1.23MB
+```
+
+次にこのDOcker imageを削除します。基本的には`docker rmi <image ID>`となります。
+
+```zsh
+% docker rmi eab00ecb1bfb
 ```
 
 ## Appendix: サーバ仮想化技術
