@@ -107,13 +107,13 @@ $$
 メッセージ$$x$$をおくるとき、まずRSA公開鍵暗号で暗号化します。
 
 $$
-m \equiv x^13 (\:\mathrm{mod}\:33)
+m \equiv x^{13} (\:\mathrm{mod}\:33)
 $$
 
 これを復号化するとき
 
 $$
-m^17 \equiv (x^13)^17 \equiv x^{20\times 11 + 1} \equiv x^{11\times \phi(33) + 1} \equiv x (\:\mathrm{mod}\:33)
+m^{17} \equiv (x^{13})^{17} \equiv x^{20\times 11 + 1} \equiv x^{11\times \phi(33) + 1} \equiv x (\:\mathrm{mod}\:33)
 $$
 
 
