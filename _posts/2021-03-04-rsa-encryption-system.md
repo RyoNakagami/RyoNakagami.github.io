@@ -28,8 +28,9 @@ tags:
   - [RSAの仕組み](#rsa%E3%81%AE%E4%BB%95%E7%B5%84%E3%81%BF)
   - [AさんからBさんに秘密のメッセージを送る方法](#a%E3%81%95%E3%82%93%E3%81%8B%E3%82%89b%E3%81%95%E3%82%93%E3%81%AB%E7%A7%98%E5%AF%86%E3%81%AE%E3%83%A1%E3%83%83%E3%82%BB%E3%83%BC%E3%82%B8%E3%82%92%E9%80%81%E3%82%8B%E6%96%B9%E6%B3%95)
 - [2. Euler's Totient Function: オイラーのトーシェント関数](#2-eulers-totient-function-%E3%82%AA%E3%82%A4%E3%83%A9%E3%83%BC%E3%81%AE%E3%83%88%E3%83%BC%E3%82%B7%E3%82%A7%E3%83%B3%E3%83%88%E9%96%A2%E6%95%B0)
-  - [Properties](#properties)
-    - [Implementation](#implementation)
+  - [Proof of sketch: Chinese Remainder Theorem](#proof-of-sketch-chinese-remainder-theorem)
+  - [Proof of sketch: 試験突破イメージ](#proof-of-sketch-%E8%A9%A6%E9%A8%93%E7%AA%81%E7%A0%B4%E3%82%A4%E3%83%A1%E3%83%BC%E3%82%B8)
+  - [Implementation](#implementation)
 - [3. Euler's Theorem: オイラーの定理](#3-eulers-theorem-%E3%82%AA%E3%82%A4%E3%83%A9%E3%83%BC%E3%81%AE%E5%AE%9A%E7%90%86)
   - [フェルマーの小定理](#%E3%83%95%E3%82%A7%E3%83%AB%E3%83%9E%E3%83%BC%E3%81%AE%E5%B0%8F%E5%AE%9A%E7%90%86)
     - [証明](#%E8%A8%BC%E6%98%8E)
@@ -52,11 +53,11 @@ tags:
 
 ## 1. コンピューターがインターネットを介して機密情報の通信を行うとは？
 
-Amazon.comで何かしらの商品を注文したいとします。このとき、商品をカートに入れたあとに決済というプロセスをしなくてはいけませんが、このときクレジットカード情報のやり取りをOver the Internetで自分のラップトップとAmazonのサーバーの間で実施する必要があります。Over the Internetでやり取りすると、ルーターと呼ばれる無数のコンピューターを経由して、自分のラップトップからAmazonのサーバーに情報が送られるため、ルーターにアクセスできるあらゆる人が情報を覗く（ときには改変する）ことができてしまいます。例えるなら、クレジットカード情報を封のされていない葉書でやり取りするようなものです。葉書を２つの住所間で郵送するとき、複数の配達人を経由して送られるので、葉書に書かれた内容は郵便配達員に見られてしまうリスクがあります。
+Amazon.comで何かしらの商品を注文したいとします。このとき、商品をカートに入れたあとに決済というプロセスをしなくてはいけませんが、クレジットカード情報のやり取りをOver the Internetで自分のラップトップとAmazonのサーバーの間で実施する必要があります。Over the Internetでやり取りすると、ルーターと呼ばれる無数のコンピューターを経由して、自分のラップトップからAmazonのサーバーに情報が送られるため、ルーターにアクセスできるあらゆる人が情報を覗く（ときには改変する）ことができてしまいます。例えるなら、クレジットカード情報を封のされていない葉書でやり取りするようなものです。葉書を２つの住所間で郵送するとき、複数の配達人を経由して送られるので、葉書に書かれた内容は郵便配達員に見られてしまうリスクがあります。
 
-この問題の一つの解決方法として、予めAmazonサーバーと自分のラップトップの間で他の人には秘密の符牒（二人だけに共有された秘密）を使ってメッセージを暗号化してOver the Internetでやり取りをしたり、VPNを張ってやり取りをするという手法がありますが、(1) 一番最初に秘密の符牒をどのように共有するのか, (2) 他の人にバレないようにVPNの設定をどのように実施すればよいのかという問題が生まれてしまいます。
+この問題の一つの解決方法として、予めAmazonサーバーと自分のラップトップの間で他の人には秘密の符牒（二人だけに共有された秘密）を使ってメッセージを暗号化してOver the Internetでやり取りをしたり、VPNを張ってやり取りをするという手法が考えられます。しかし、(1) 一番最初に秘密の符牒をどのように共有するのか, (2) 他の人にバレないようにVPNの設定をどのように実施すればよいのかという問題が生まれてしまいます。
 
-結局、見知らぬ人同士の間でオープンな場で最初にどのように「共有された秘密」を確立するのか？が問題になります。この一つの解決方法がRSA公開鍵暗号方式です。
+結局、見知らぬ人同士の間でオープンな場でどのように「共有された秘密」を確立するのか？が問題になります。この一つの解決方法がRSA公開鍵暗号方式です。
 
 ### RSA公開鍵暗号方式の概要
 
@@ -98,6 +99,7 @@ $$
 
 任意の自然数$$n$$について、Euler's Totient Function $$\phi(n)$$はn以下の自然数についてnと互いに素となる自然数(1を含む)の個数となります。
 
+<div class="math display" style="overflow: auto">
 $$
 \begin{array}{|c|c|c|c|c|c|c|c|c|c|c|c|c|c|c|c|c|c|c|c|c|c|}
 \hline
@@ -105,14 +107,17 @@ n & 1 & 2 & 3 & 4 & 5 & 6 & 7 & 8 & 9 & 10 & 11 & 12 & 13 & 14 & 15 & 16 & 17 & 
 \phi(n) & 1 & 1 & 2 & 2 & 4 & 2 & 6 & 4 & 6 & 4 & 10 & 4 & 12 & 6 & 8 & 8 & 16 & 6 & 18 & 8 & 12 \\ \hline
 \end{array}
 $$
+</div>
 
 Euler's Totient Functionは以下のような性質を持ちます。
 
+<div class="math display" style="overflow: auto">
 $$
-\phi(n) = n \Pi_{p\in S}\left(1 - \frac{1}{p}\right) \text{ where } S = \{s| s \text{ is prime factors of } n\}
+\phi(n) = n \displaystyle \prod_{p\in S}\left(1 - \frac{1}{p}\right) \text{ where } S = \{s| s \text{ is prime factors of } n\}
 $$
+</div>
 
-### Properties
+### Proof of sketch: Chinese Remainder Theorem
 
 まず素数$$p$$についてのEuler's Totient Functionを計算します。$$gcd(p, q) = 1$$ for all $$1 \leq q < p$$より
 
@@ -144,7 +149,9 @@ x&\equiv c_2 (\:\mathrm{mod}\:b)
 \end{aligned}
 $$
 
-を満たす整数$$x$$が0以上$$ab$$未満にただ一つ存在する、という定理です。Euler's Totient Function $$\phi(n)$$はn以下の自然数についてnと互いに素となる自然数(1を含む)の個数なので、
+を満たす整数$$x$$が0以上$$ab$$未満にただ一つ存在する、という定理です。
+
+厳密な証明は今後に回しますが、直感的な理解として、$$a, b$$がそれぞれ素数の場合、Euler's Totient Function $$\phi(n)$$はn以下の自然数についてnと互いに素となる自然数(1を含む)の個数なので、
 
 $$ 
 \{(c_1, c_2); 1\leq c_1 \leq a-1, 1\leq c_2 \leq b-1\}
@@ -153,6 +160,8 @@ $$
 の要素数と等しくなります。よって、$$\phi(ab) = \phi(a)\phi(b)$$となります。
 
 これらを踏まえると、$$n = {p_1}^{a_1} \cdot {p_2}^{a_2} \cdots {p_k}^{a_k}$$について
+
+<div class="math display" style="overflow: auto">
 
 $$
 \begin{aligned}
@@ -163,7 +172,43 @@ $$
 \end{aligned}
 $$
 
-#### Implementation
+</div>
+
+### Proof of sketch: 試験突破イメージ
+
+$$n = {p_1}^{a_1} \cdot {p_2}^{a_2} \cdots {p_k}^{a_k}$$とします。まず$$p_1$$と素のになる個数をカウントすると、
+
+$$
+\begin{aligned}
+\phi_{p_1}(n) & = n - \frac{n}{p_1} = n\left(1-\frac{1}{p_1}\right)
+\end{aligned}
+$$
+
+つぎに$$p_2$$と互いに素となる数のカウントも加味するとなると、
+
+$$
+\phi_{p_2}(n)  = n - \frac{n}{p_2}
+$$
+
+を引きたいところですが、$$p_1p_2$$というlcmを考慮する必要があるので
+
+$$
+\begin{aligned}
+\phi_{p_1, p_2}(n) & = n - \frac{n}{p_1} - (n - \frac{n}{p_2}) + (n - \frac{n}{p_1p_2})\\
+&= n\left(1-\frac{1}{p_1}\right)\left(1-\frac{1}{p_2}\right)
+\end{aligned}
+$$
+
+以下同様の工程を繰り返すことで
+
+
+$$
+\phi(n) = n \displaystyle \prod_{p|n}\left(1 - \frac{1}{p}\right) 
+$$
+
+
+
+### Implementation
 
 ```c
 int phi(int n) {
@@ -252,9 +297,13 @@ $$
 
 これに対してp乗すると
 
+<div class="math display" style="overflow: auto">
+
 $$
 a^{(p-1)p^n} = 1 + p\cdotp^nk + \sum_{j=2}^p\:_pC_j (p^nk)^j \equiv 1\:\mathrm{mod}\: p^{n+1}
 $$
+
+</div>
 
 以上から数学的帰納法よりすべてのnについて成立する。
 
