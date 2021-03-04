@@ -88,7 +88,7 @@ $$
 
 $$
 \begin{aligned}
-m =\equiv c^{d_B} \text{ mod } n_B
+m \equiv c^{d_B} \text{ mod } n_B
 \end{aligned}
 $$
 
@@ -121,7 +121,7 @@ $$
 $$
 
 
-つぎに、素数$$p$$、$$k \geq 1$$となる自然数$$p^k$$について考える。$$1 \leq n \geq p^k$$の$$n$$について$$p$$で割り切れる数の個数は$$p^k/p = p^{k-1}$$個となる。よって、
+つぎに、素数$$p$$、$$k \geq 1$$となる自然数$$p^k$$について考える。$$1 \leq n \leq p^k$$の$$n$$について$$p$$で割り切れる数の個数は$$p^k/p = p^{k-1}$$個となる。よって、
 
 $$
 \phi(p^k) = p^k - p^{k-1}
