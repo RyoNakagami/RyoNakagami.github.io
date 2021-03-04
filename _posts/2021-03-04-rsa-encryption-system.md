@@ -27,6 +27,7 @@ tags:
   - [RSA公開鍵暗号方式の概要](#rsa%E5%85%AC%E9%96%8B%E9%8D%B5%E6%9A%97%E5%8F%B7%E6%96%B9%E5%BC%8F%E3%81%AE%E6%A6%82%E8%A6%81)
   - [RSAの仕組み](#rsa%E3%81%AE%E4%BB%95%E7%B5%84%E3%81%BF)
   - [AさんからBさんに秘密のメッセージを送る方法](#a%E3%81%95%E3%82%93%E3%81%8B%E3%82%89b%E3%81%95%E3%82%93%E3%81%AB%E7%A7%98%E5%AF%86%E3%81%AE%E3%83%A1%E3%83%83%E3%82%BB%E3%83%BC%E3%82%B8%E3%82%92%E9%80%81%E3%82%8B%E6%96%B9%E6%B3%95)
+  - [RSA暗号の数値例](#rsa%E6%9A%97%E5%8F%B7%E3%81%AE%E6%95%B0%E5%80%A4%E4%BE%8B)
 - [2. Euler's Totient Function: オイラーのトーシェント関数](#2-eulers-totient-function-%E3%82%AA%E3%82%A4%E3%83%A9%E3%83%BC%E3%81%AE%E3%83%88%E3%83%BC%E3%82%B7%E3%82%A7%E3%83%B3%E3%83%88%E9%96%A2%E6%95%B0)
   - [Proof of sketch: Chinese Remainder Theorem](#proof-of-sketch-chinese-remainder-theorem)
   - [Proof of sketch: 試験突破イメージ](#proof-of-sketch-%E8%A9%A6%E9%A8%93%E7%AA%81%E7%A0%B4%E3%82%A4%E3%83%A1%E3%83%BC%E3%82%B8)
@@ -94,6 +95,27 @@ m \equiv c^{d_B} \text{ mod } n_B
 $$
 
 以上がRSA公開鍵暗号方式を用いたやりとりです。しかし、$$e_u$$, $$n_u$$, $$d_u$$をどのように選ぶのかが疑問として残ります。任意の数ではここで紹介したやり取りは成立しません。これら数の選び方を理解するためには、Euler's Totient Functionとオイラーの定理を理解する必要があります。
+
+### RSA暗号の数値例 
+
+$$(e, n, d) = (13, 33, 17)$$とします。このとき、
+
+$$
+\phi(33) = 20
+$$
+
+メッセージ$$x$$をおくるとき、まずRSA公開鍵暗号で暗号化します。
+
+$$
+m \equiv x^13 (\:\mathrm{mod}\:33)
+$$
+
+これを復号化するとき
+
+$$
+m^17 \equiv (x^13)^17 \equiv x^{20\times 11 + 1} \equiv x^{11\times \phi(33) + 1} \equiv x (\:\mathrm{mod}\:33)
+$$
+
 
 ## 2. Euler's Totient Function: オイラーのトーシェント関数
 
