@@ -261,12 +261,12 @@ $$
 
 ### オイラーの定理の証明
 
-$$n$$を素因数分解して$$n = {p_1}^{b_1} \cdot {p_2}^{b_2} \cdots {p_k}^{b_k}$$とします。$$gcd(a, n)=1$$よりfor all $p_j \in \{p_1, ..., p_k\}, gcd(a, p_j)=1$$
+$$n$$を素因数分解して$$n = {p_1}^{b_1} \cdot {p_2}^{b_2} \cdots {p_k}^{b_k}$$とします。$$gcd(a, n)=1$$よりfor all $$p_j \in \{p_1, ..., p_k\}, gcd(a, p_j)=1$$
 
 フェルマーの小定理の補題より
 
 $$
-a^{p_i^{b_j}-p_i^{b_j-1}} = a^{\phi(p_i^{b_j})} \equiv 1 \:\mathrm{mod}\: p_i^{b_j}
+a^{p_j^{b_j}-p_j^{b_j-1}} = a^{\phi(p_j^{b_j})} \equiv 1 \:\mathrm{mod}\: p_j^{b_j}
 $$
 
 オイラーのトーシェント関数の性質より、$$\phi(n)$$は$$\phi(p_j^{b_j})$$の倍数で、各$$j$$について上の合同式は成立するので、
