@@ -45,7 +45,7 @@ tags:
 ## 2. キーボードショートカット一覧
 ### ナビゲーション
 
-|コマンド|FireFoxショートカット|Google Chromeショートカット|
+|コマンド|FireFox|Google Chrome|
 |---|---|---|
 |戻る|`Ctrl`+`[`<br>`Alt`+`←`|`Alt`+`←`|
 |進む|`Ctrl`+`]`<br>`Alt`+`→`|`Alt`+`→`|
@@ -55,7 +55,7 @@ tags:
 
 ### 現在のページ
 
-|コマンド|FireFoxショートカット|Google Chromeショートカット|
+|コマンド|FireFox|Google Chrome|
 |---|---|---|
 |次のリンクや入力フィールドへ移動 |`Tab`|`Tab`|
 |前のリンクや入力フィールドへ移動 |`Shift`+`Tab`|`Shift`+`Tab`|
@@ -70,7 +70,7 @@ tags:
 
 ### 検索
 
-|コマンド|FireFoxショートカット|Google Chromeショートカット|
+|コマンド|FireFox|Google Chrome|
 |---|---|---|
 |ページを検索| 	`Ctrl` + `F`|`Ctrl` + `F`|
 |次を検索|`Ctrl`+`G`|`Ctrl`+`G`|
@@ -81,7 +81,7 @@ tags:
 
 ### ウィンドウ とタブ
 
-|コマンド|FireFoxショートカット|Google Chromeショートカット|
+|コマンド|FireFox|Google Chrome|
 |---|---|---|
 |タブを閉じる| 	`Ctrl` + `W`|`Ctrl` + `W`|
 |ウィンドウ を閉じる |`Ctrl` + `Shift` +`W`|`Ctrl` + `Shift` +`W`|
