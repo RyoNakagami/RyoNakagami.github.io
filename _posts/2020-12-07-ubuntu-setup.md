@@ -158,6 +158,7 @@ tags:
 |分散型バージョン管理システム|Git|[Ubuntu Desktop環境構築 Part 13](https://ryonakagami.github.io/2020/12/28/ubuntu-git-and-github-setup/)|
 |データベースサーバー|PostgreSQL||
 |統計・機械学習用プログラミング言語|Python||
+|ジェネラティブアート|Processing||
 |統計解析用プログラミング言語|R||
 |数値計算用プログラミング言語|Julia||
 |競技プログラミング用|C, C++|[C言語練習環境の作成](https://ryonakagami.github.io/2021/01/04/setup-C-language-dev-env/)|
