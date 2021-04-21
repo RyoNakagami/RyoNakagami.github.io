@@ -18,7 +18,7 @@ tags:
 ||概要|
 |---|---|
 |目的|RSA公開鍵暗号方式の仕組み|
-|参考|- [【図解】初心者も分かる”公開鍵/秘密鍵”の仕組み～公開鍵暗号方式の身近で具体的な利用例やメリット〜](https://milestone-of-se.nesuke.com/sv-advanced/digicert/public-private-key/)<br>- [wolfram.com: TotientFunction](https://mathworld.wolfram.com/TotientFunction.html)<br>-[高校数学の美しい物語: フェルマーの小定理の証明と例題](https://mathtrain.jp/fermat_petit)<br>-[ucdenver lecture note](http://www-math.ucdenver.edu/~wcherowi/courses/m5410/ctcrsa.html)<br>-[RSA暗号のpython実装](https://banboooo.hatenablog.com/entry/2018/07/12/162800)|
+|参考|- [【図解】初心者も分かる”公開鍵/秘密鍵”の仕組み～公開鍵暗号方式の身近で具体的な利用例やメリット〜](https://milestone-of-se.nesuke.com/sv-advanced/digicert/public-private-key/)<br>- [wolfram.com: TotientFunction](https://mathworld.wolfram.com/TotientFunction.html)<br>- [高校数学の美しい物語: フェルマーの小定理の証明と例題](https://mathtrain.jp/fermat_petit)<br>- [ucdenver lecture note](http://www-math.ucdenver.edu/~wcherowi/courses/m5410/ctcrsa.html)<br>- [RSA暗号のpython実装](https://banboooo.hatenablog.com/entry/2018/07/12/162800)|
 
 <!-- START doctoc generated TOC please keep comment here to allow auto update -->
 <!-- DON'T EDIT THIS SECTION, INSTEAD RE-RUN doctoc TO UPDATE -->
@@ -29,16 +29,19 @@ tags:
   - [AさんからBさんに秘密のメッセージを送る方法](#a%E3%81%95%E3%82%93%E3%81%8B%E3%82%89b%E3%81%95%E3%82%93%E3%81%AB%E7%A7%98%E5%AF%86%E3%81%AE%E3%83%A1%E3%83%83%E3%82%BB%E3%83%BC%E3%82%B8%E3%82%92%E9%80%81%E3%82%8B%E6%96%B9%E6%B3%95)
   - [RSA暗号の数値例](#rsa%E6%9A%97%E5%8F%B7%E3%81%AE%E6%95%B0%E5%80%A4%E4%BE%8B)
 - [2. Euler's Totient Function: オイラーのトーシェント関数](#2-eulers-totient-function-%E3%82%AA%E3%82%A4%E3%83%A9%E3%83%BC%E3%81%AE%E3%83%88%E3%83%BC%E3%82%B7%E3%82%A7%E3%83%B3%E3%83%88%E9%96%A2%E6%95%B0)
-  - [Proof of sketch: Chinese Remainder Theorem](#proof-of-sketch-chinese-remainder-theorem)
+  - [証明](#%E8%A8%BC%E6%98%8E)
   - [Proof of sketch: 因数のふるいのイメージ](#proof-of-sketch-%E5%9B%A0%E6%95%B0%E3%81%AE%E3%81%B5%E3%82%8B%E3%81%84%E3%81%AE%E3%82%A4%E3%83%A1%E3%83%BC%E3%82%B8)
   - [Implementation](#implementation)
 - [3. Euler's Theorem: オイラーの定理](#3-eulers-theorem-%E3%82%AA%E3%82%A4%E3%83%A9%E3%83%BC%E3%81%AE%E5%AE%9A%E7%90%86)
-  - [フェルマーの小定理](#%E3%83%95%E3%82%A7%E3%83%AB%E3%83%9E%E3%83%BC%E3%81%AE%E5%B0%8F%E5%AE%9A%E7%90%86)
-    - [証明](#%E8%A8%BC%E6%98%8E)
-  - [フェルマーの小定理の補題](#%E3%83%95%E3%82%A7%E3%83%AB%E3%83%9E%E3%83%BC%E3%81%AE%E5%B0%8F%E5%AE%9A%E7%90%86%E3%81%AE%E8%A3%9C%E9%A1%8C)
+  - [定理：フェルマーの小定理](#%E5%AE%9A%E7%90%86%E3%83%95%E3%82%A7%E3%83%AB%E3%83%9E%E3%83%BC%E3%81%AE%E5%B0%8F%E5%AE%9A%E7%90%86)
     - [証明](#%E8%A8%BC%E6%98%8E-1)
+  - [系２：フェルマーの小定理](#%E7%B3%BB%EF%BC%92%E3%83%95%E3%82%A7%E3%83%AB%E3%83%9E%E3%83%BC%E3%81%AE%E5%B0%8F%E5%AE%9A%E7%90%86)
+    - [証明：数学的帰納法](#%E8%A8%BC%E6%98%8E%E6%95%B0%E5%AD%A6%E7%9A%84%E5%B8%B0%E7%B4%8D%E6%B3%95)
+    - [証明：フェルマーの小定理より](#%E8%A8%BC%E6%98%8E%E3%83%95%E3%82%A7%E3%83%AB%E3%83%9E%E3%83%BC%E3%81%AE%E5%B0%8F%E5%AE%9A%E7%90%86%E3%82%88%E3%82%8A)
+  - [系３：フェルマーの小定理の補題](#%E7%B3%BB%EF%BC%93%E3%83%95%E3%82%A7%E3%83%AB%E3%83%9E%E3%83%BC%E3%81%AE%E5%B0%8F%E5%AE%9A%E7%90%86%E3%81%AE%E8%A3%9C%E9%A1%8C)
+    - [証明](#%E8%A8%BC%E6%98%8E-2)
   - [オイラーの定理の証明](#%E3%82%AA%E3%82%A4%E3%83%A9%E3%83%BC%E3%81%AE%E5%AE%9A%E7%90%86%E3%81%AE%E8%A8%BC%E6%98%8E)
-  - [オイラーの定理から得られる系](#%E3%82%AA%E3%82%A4%E3%83%A9%E3%83%BC%E3%81%AE%E5%AE%9A%E7%90%86%E3%81%8B%E3%82%89%E5%BE%97%E3%82%89%E3%82%8C%E3%82%8B%E7%B3%BB)
+  - [まとめ：オイラーの定理から得られる系](#%E3%81%BE%E3%81%A8%E3%82%81%E3%82%AA%E3%82%A4%E3%83%A9%E3%83%BC%E3%81%AE%E5%AE%9A%E7%90%86%E3%81%8B%E3%82%89%E5%BE%97%E3%82%89%E3%82%8C%E3%82%8B%E7%B3%BB)
 - [4. RSAの仕組み：数式編](#4-rsa%E3%81%AE%E4%BB%95%E7%B5%84%E3%81%BF%E6%95%B0%E5%BC%8F%E7%B7%A8)
   - [public number $n_U$の選び方](#public-number-n_u%E3%81%AE%E9%81%B8%E3%81%B3%E6%96%B9)
   - [public number $e_U$の選び方](#public-number-e_u%E3%81%AE%E9%81%B8%E3%81%B3%E6%96%B9)
@@ -73,9 +76,9 @@ RSAの仕組み自体はシンプルです。ここでは二人のユーザー(A
 
 |数|説明|
 |---|---|
-|$$e_u$$|public, uはユーザーindexを示す。|
-|$$n_u$$|public|
-|$$d_u$$|private|
+|$$e_u$$|public, uはユーザーindexを示す, 正の整数|
+|$$n_u$$|public, 正の整数|
+|$$d_u$$|private, 正の整数|
 
 ### AさんからBさんに秘密のメッセージを送る方法
 
@@ -140,49 +143,62 @@ $$
 $$
 </div>
 
-### Proof of sketch: Chinese Remainder Theorem
+### 証明
 
-まず素数$$p$$についてのEuler's Totient Functionを計算します。$$gcd(p, q) = 1$$ for all $$1 \leq q < p$$より
+(i) 素数$$p$$についてのEuler's Totient Functionを計算します。
+
+$$gcd(p, q) = 1$$ for all $$1 \leq q < p$$より
 
 $$
 \phi(p) = p - 1
 $$
 
 
-つぎに、素数$$p$$、$$k \geq 1$$となる自然数$$p^k$$について考える。$$1 \leq n \leq p^k$$の$$n$$について$$p$$で割り切れる数の個数は$$p^k/p = p^{k-1}$$個となる。よって、
+(ii) 素数$$p$$、$$k \geq 1$$となる自然数$$p^k$$について考えます。
+
+$$p$$で割り切れる数の個数は$$p^k/p = p^{k-1}$$個となる。よって、
 
 $$
 \phi(p^k) = p^k - p^{k-1}
 $$
 
-最後に、互いに素な$$a, b$$(ただし$$a < b$$)について以下の式が成り立つ。
+(iii) 異なる素数$$a, b$$についてEuler Totient関数の乗法性を示します
 
 $$
-\phi(ab) = \phi(a)\phi(b)
+\phi(a^xb^y) = \phi(a^x)\phi(b^y)\: \text{ ただし SSx, ySS は正の整数}
 $$
 
-これはChinese remainder theoremによって示すことができます。Chinese remainder theoremとは
-
-$$a$$ と $$b$$を互いに素な正の整数とする。このとき
+一般性を失うことなく、$$a< b$$とする。$$a^xb^y$$以下の正の整数を小さい方から、１行にa個づつならべます:
 
 $$
-\begin{aligned}
-x&\equiv c_1 (\:\mathrm{mod}\:a)\\
-x&\equiv c_2 (\:\mathrm{mod}\:b)
-\end{aligned}
+\begin{array}{ccccc}
+1 & 2 &\cdots & a^x-1 & a\\
+1 + a & 2 + a & \cdots & 2a-1 & 2a\\
+\vdots &\vdots &\vdots &\vdots &\vdots \\
+1 + (b-1)a & 2+ (b-1)a& \cdots & ab- 1 & ab\\
+\vdots &\vdots &\vdots &\vdots &\vdots \\
+1 + (a^{x-1}b^y-1)a & 2+ (a^{x-1}b^y-1)a& \cdots & a^xb^y- 1 & a^xb^y
+\end{array}
 $$
 
-を満たす整数$$x$$が0以上$$ab$$未満にただ一つ存在する、という定理です。
+$$ab$$までの各行で$$a$$と互いに素ではない整数の個数は1つのみ存在します。同様に$$ab$$までの各列について$$b$$と互いに素ではない整数の個数は1つのみ存在します。一方、$$ab$$以下の整数につき、$$a$$と$$b$$両方と素ではない正の整数は1個のみとなります。よって、$$ab$$以下の整数について、$$a^xb^y$$と互いに素な整数の個数は
 
-厳密な証明は今後に回しますが、直感的な理解として、$$a, b$$がそれぞれ素数の場合、Euler's Totient Function $$\phi(n)$$はn以下の自然数についてnと互いに素となる自然数(1を含む)の個数なので、
-
-$$ 
-\{(c_1, c_2); 1\leq c_1 \leq a-1, 1\leq c_2 \leq b-1\}
+$$
+ab - a - b + 1 = (a-1)(b-1)=\phi(a)\phi(b)
 $$
 
-の要素数と等しくなります。よって、$$\phi(ab) = \phi(a)\phi(b)$$となります。
+となります。$$ab+1$$から$$2ab$$に関しても同様に$$\phi(a)\phi(b)$$個の$$a^xb^y$$と互いに素な整数が存在します。よって、$$a^xb^y$$以下の正の整数について、$$a^xb^y$$と互いに素な整数の個数は
 
-これらを踏まえると、$$n = {p_1}^{a_1} \cdot {p_2}^{a_2} \cdots {p_k}^{a_k}$$について
+<div class="math display" style="overflow: auto">
+$$
+\phi(a^xb^y) = a^{x-1}b^{y-1}\phi(a)\phi(b) = (a^x - a^{x-1})(b^y - b^{y-1}) = \phi(a^x)\phi(b^y)
+$$
+</div>
+
+となることがわかります。
+
+
+(i), (ii), (iii)を踏まえると、$$n = {p_1}^{a_1} \cdot {p_2}^{a_2} \cdots {p_k}^{a_k}$$について
 
 <div class="math display" style="overflow: auto">
 
@@ -196,6 +212,13 @@ $$
 $$
 
 </div>
+
+<div style="text-align: right;">
+■
+</div>
+
+
+
 
 ### Proof of sketch: 因数のふるいのイメージ
 
@@ -257,9 +280,47 @@ $$
 a^{\phi(n)}\equiv 1 \:\mathrm{mod}\:n
 $$
 
-これを証明する前にまずフェルマーの小定理の確認をする。
+これを証明する前にまずフェルマーの小定理の確認します。
 
-### フェルマーの小定理
+### 定理：フェルマーの小定理
+
+$$p$$ が素数で，自然数$$a$$ が $$p$$ と互いに素な自然数のとき
+
+$$
+a^{p-1}\equiv 1\:\mathrm{mod}\:p
+$$
+
+#### 証明
+
+$$a, 2a, ..., (p-1)a$$を取ると、これらはいずれも$$p$$を法として合同にならない。なぜなら、もしも$$p-1$$以下の相異なる自然数$$r, s$$に対して
+
+$$
+ra \equiv sa\:\mathrm{mod}\:p
+$$
+
+となったとすると
+
+$$
+(r-s)a \equiv 0\:\mathrm{mod}\:p \Rightarrow p\mid(r-s)a
+$$
+
+$$p$$と$$a$$は互いに素なので $$p\mid(r-s)$$ とならなけらばならない。しかし、$$r,s$$は$$p-1$$なのでこれは矛盾。したがって、$$a, 2a, ..., (p-1)a$$はいずれも$$p$$を法として合同にならない、つまり、pで割ったときのあまりはすべて異なるとわかる。よって
+
+$$
+a^{p-1}(p-1)!\equiv (p-1)!\:\mathrm{mod}\:p
+$$
+
+素数$$p, (p-1)!$$は互いに素なので、両辺を$$(p-1)!$$で割ると、
+
+$$
+a^{p-1}\equiv 1\:\mathrm{mod}\:p
+$$
+
+<div style="text-align: right;">
+■
+</div>
+
+### 系２：フェルマーの小定理
 
 $$p$$ が素数，$$a$$ が任意の自然数のとき
 
@@ -267,13 +328,7 @@ $$
 a^{p}\equiv a \:\mathrm{mod}\:p
 $$
 
-特に $$p$$ が素数で，$$a$$ が $$p$$ と互いに素な自然数のとき
-
-$$
-a^{p-1}\equiv 1\:\mathrm{mod}\:p
-$$
-
-#### 証明
+#### 証明：数学的帰納法
 
 $$a=1$$のときは明らかに$$a^p\equiv a\:\mathrm{mod}\:p$$
 つぎに$$a = m$$のとき、命題が成立するとする。このとき、
@@ -288,24 +343,29 @@ $$
 a^{p}\equiv a \:\mathrm{mod}\:p
 $$
 
-つぎに$$p$$ が素数で，$$a$$ が $$p$$ と互いに素な自然数のとき、$$a,2a,3a, \cdots (p−1)a$$ は全て p の倍数かつpで割ったときのあまりがすべて異なるので，
+<div style="text-align: right;">
+■
+</div>
+
+#### 証明：フェルマーの小定理より
+
+$$\text{gcd}(p, a) = p$$ならば自明。$$\text{gcd}(p, a) = 1$$ならばフェルマーの小定理より
 
 $$
-a\cdot 2a\cdot 3a\cdot\cdots\cdot (p-1)a\equiv (p-1)!\:\mathrm{mod}\:p
+a^{p-1} \equiv 1 \:\mathrm{mod}\:p
 $$
 
-$$gcd((p-1)!, p)=1$$より、両辺を$$(p-1)!$$で割って、
-
+両辺に$$a$$をかけると
 
 $$
-a^{p-1}\equiv 1\:\mathrm{mod}\:p
+a^p \equiv a \:\mathrm{mod}\:p
 $$
 
-を得る。
+<div style="text-align: right;">
+■
+</div>
 
-
-
-### フェルマーの小定理の補題
+### 系３：フェルマーの小定理の補題
 
 $$p$$を素数とし，$$a$$を$$p$$と互いに素な整数とすると，任意の自然数$$n$$に対して
 
@@ -334,6 +394,9 @@ $$
 
 以上から数学的帰納法よりすべてのnについて成立する。
 
+<div style="text-align: right;">
+■
+</div>
 
 ### オイラーの定理の証明
 
@@ -351,7 +414,11 @@ $$
 a^{\phi(n)}\equiv 1 \:\mathrm{mod}\:n
 $$
 
-### オイラーの定理から得られる系
+<div style="text-align: right;">
+■
+</div>
+
+### まとめ：オイラーの定理から得られる系
 
 (1) 合同式のべき乗の性質
 
@@ -385,6 +452,13 @@ $$
 
 と設定します。
 
+以下、単純化のため
+
+$$
+n_u = pq \:　p, q\text{は素数}
+$$
+
+とします。
 ### public number $e_U$の選び方
 
 オイラーのトーシェント関数の性質より$$\phi(n_U)=(p-1)(q-1)$$です。
@@ -401,6 +475,14 @@ $$
 $$
 e_U\cdot d_U \equiv 1 \:\mathrm{mod}\:\phi(n_U)
 $$
+
+この問題は
+
+$$
+e_Ud_u + v\phi(n_u) = 1
+$$
+
+を満たす$$(d_U, v)$$の組を見つける問題に変換することができます。今回、$$$(e_U, \phi(n_U))$は互いの素なので[拡張ユークリッド互除法](https://ryonakagami.github.io/2021/04/08/Euclidean-Algorithm/#2-%E6%8B%A1%E5%BC%B5%E3%83%A6%E3%83%BC%E3%82%AF%E3%83%AA%E3%83%83%E3%83%89%E4%BA%92%E9%99%A4%E6%B3%95)を用いることで候補を見つけることができます。
 
 ### RSA公開鍵暗号方式のdecode: 公開鍵で暗号化
 
