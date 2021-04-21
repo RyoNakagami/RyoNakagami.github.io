@@ -31,7 +31,7 @@ tags:
   - [不定方程式の定理](#%E4%B8%8D%E5%AE%9A%E6%96%B9%E7%A8%8B%E5%BC%8F%E3%81%AE%E5%AE%9A%E7%90%86)
     - [証明](#%E8%A8%BC%E6%98%8E)
   - [ユークリッド互除法の一次不定方程式への応用](#%E3%83%A6%E3%83%BC%E3%82%AF%E3%83%AA%E3%83%83%E3%83%89%E4%BA%92%E9%99%A4%E6%B3%95%E3%81%AE%E4%B8%80%E6%AC%A1%E4%B8%8D%E5%AE%9A%E6%96%B9%E7%A8%8B%E5%BC%8F%E3%81%B8%E3%81%AE%E5%BF%9C%E7%94%A8)
-- [3. ユークリッド互除法の可視化](#3-%E3%83%A6%E3%83%BC%E3%82%AF%E3%83%AA%E3%83%83%E3%83%89%E4%BA%92%E9%99%A4%E6%B3%95%E3%81%AE%E5%8F%AF%E8%A6%96%E5%8C%96)
+- [3. Processingを用いたユークリッド互除法の可視化](#3-processing%E3%82%92%E7%94%A8%E3%81%84%E3%81%9F%E3%83%A6%E3%83%BC%E3%82%AF%E3%83%AA%E3%83%83%E3%83%89%E4%BA%92%E9%99%A4%E6%B3%95%E3%81%AE%E5%8F%AF%E8%A6%96%E5%8C%96)
   - [ユークリッド互除法を用いた長方形の分割](#%E3%83%A6%E3%83%BC%E3%82%AF%E3%83%AA%E3%83%83%E3%83%89%E4%BA%92%E9%99%A4%E6%B3%95%E3%82%92%E7%94%A8%E3%81%84%E3%81%9F%E9%95%B7%E6%96%B9%E5%BD%A2%E3%81%AE%E5%88%86%E5%89%B2)
     - [色をつける場合](#%E8%89%B2%E3%82%92%E3%81%A4%E3%81%91%E3%82%8B%E5%A0%B4%E5%90%88)
   - [長方形による正方形の分割](#%E9%95%B7%E6%96%B9%E5%BD%A2%E3%81%AB%E3%82%88%E3%82%8B%E6%AD%A3%E6%96%B9%E5%BD%A2%E3%81%AE%E5%88%86%E5%89%B2)
@@ -40,6 +40,10 @@ tags:
   - [長方形を正方形に分割して再度長方形に分割する](#%E9%95%B7%E6%96%B9%E5%BD%A2%E3%82%92%E6%AD%A3%E6%96%B9%E5%BD%A2%E3%81%AB%E5%88%86%E5%89%B2%E3%81%97%E3%81%A6%E5%86%8D%E5%BA%A6%E9%95%B7%E6%96%B9%E5%BD%A2%E3%81%AB%E5%88%86%E5%89%B2%E3%81%99%E3%82%8B)
   - [正方形の再帰的分割](#%E6%AD%A3%E6%96%B9%E5%BD%A2%E3%81%AE%E5%86%8D%E5%B8%B0%E7%9A%84%E5%88%86%E5%89%B2)
   - [GUIでパラメーター調整](#gui%E3%81%A7%E3%83%91%E3%83%A9%E3%83%A1%E3%83%BC%E3%82%BF%E3%83%BC%E8%AA%BF%E6%95%B4)
+  - [分割時のx軸に基づいた色相分類](#%E5%88%86%E5%89%B2%E6%99%82%E3%81%AEx%E8%BB%B8%E3%81%AB%E5%9F%BA%E3%81%A5%E3%81%84%E3%81%9F%E8%89%B2%E7%9B%B8%E5%88%86%E9%A1%9E)
+- [Appendix: Processingによる色の指定](#appendix-processing%E3%81%AB%E3%82%88%E3%82%8B%E8%89%B2%E3%81%AE%E6%8C%87%E5%AE%9A)
+  - [HSB色空間](#hsb%E8%89%B2%E7%A9%BA%E9%96%93)
+  - [Processing における色の指定](#processing-%E3%81%AB%E3%81%8A%E3%81%91%E3%82%8B%E8%89%B2%E3%81%AE%E6%8C%87%E5%AE%9A)
 
 <!-- END doctoc generated TOC please keep comment here to allow auto update -->
 
@@ -226,7 +230,7 @@ $$
 (x, y) = (11m - 4, 3 - 8m)
 $$
 
-## 3. ユークリッド互除法の可視化
+## 3. Processingを用いたユークリッド互除法の可視化
 
 ユークリッド互除法の図形的意味をまず考えます。以下の条件の長方形を考えます
 
@@ -727,7 +731,7 @@ void divSquare(float x_pos, float y_pos, float wd){ //正方形の分割
     while (wd > thr){
         itr++;
         if (itr %2 == 1){
-            while (x_pos + wd*ratio <= x_end_pos){ //奇数回目はx軸方向に正方形を増やす
+            while (x_pos + wd*ratio <= x_end_pos){ //奇数回目はx軸方向に長方形を増やす
                 fill(color(random(1), 1, 1));
                 rect(x_pos + 5.0, y_pos + 5.0, wd*ratio, wd); //作画位置の調整
                 div_rect(x_pos, y_pos, wd*ratio, wd); //正方形の分割
@@ -736,7 +740,7 @@ void divSquare(float x_pos, float y_pos, float wd){ //正方形の分割
             wd = x_end_pos - x_pos;
         }
         else {
-            while (y_pos + wd/ratio <= y_end_pos){ //偶数回目はy軸方向に正方形を増やす
+            while (y_pos + wd/ratio <= y_end_pos){ //偶数回目はy軸方向に長方形を増やす
                 fill(color(random(1), 1, 1));
                 rect(x_pos + 5.0, y_pos + 5.0, wd, wd/ratio);
                 div_rect(x_pos, y_pos, wd, wd/ratio); //正方形の分割
@@ -778,3 +782,126 @@ void div_rect(float x_pos, float y_pos, float x_wd, float y_wd){
     }
 }
 ```
+
+### 分割時のx軸に基づいた色相分類
+
+```c++
+float num_A = 10;
+float num_B = 6;
+float ratio = (float) num_B/num_A;
+
+
+// Parameters
+float x_pos = 0;
+float y_pos = 0;
+int itr = 0;
+float thr = 10;
+
+void setup(){//いわゆるmain関数
+    //描画
+    size(410, 410); //windowサイズ
+    colorMode(HSB, 1);
+    float wd = width - 10;
+
+    divSquare(x_pos, y_pos, wd); //正方形の分割
+    
+    save("Euclidean_recursive_rectangular_3_with_color.png");
+}
+
+void divSquare(float x_pos, float y_pos, float wd){ //正方形の分割    
+    float x_end_pos = x_pos + wd;
+    float y_end_pos = y_pos + wd;
+    while (wd > thr){
+        itr++;
+        if (itr %2 == 1){
+            while (x_pos + wd*ratio <= x_end_pos){ //奇数回目はx軸方向に長方形を増やす
+                fill(color(1-x_pos/(width+x_pos), 1, 1));
+                rect(x_pos + 5.0, y_pos + 5.0, wd*ratio, wd); //作画位置の調整
+                div_rect(x_pos, y_pos, wd*ratio, wd); //正方形の分割
+                x_pos += wd*ratio;
+            }
+            wd = x_end_pos - x_pos;
+        }
+        else {
+            while (y_pos + wd/ratio <= y_end_pos){ //偶数回目はy軸方向に長方形を増やす
+                fill(color(1-x_pos/(width+x_pos), 1, 1));
+                rect(x_pos + 5.0, y_pos + 5.0, wd, wd/ratio);
+                div_rect(x_pos, y_pos, wd, wd/ratio); //正方形の分割
+                y_pos += wd/ratio;
+            }
+            wd = y_end_pos - y_pos;
+        }
+    }
+}
+
+
+void div_rect(float x_pos, float y_pos, float x_wd, float y_wd){
+    int itr = 0;
+    float x_pos_sq = 0;
+    float y_pos_sq = 0;
+    float x_end = x_wd;
+    float y_end = y_wd;
+    float wd_sq = y_wd;
+
+    //正方形の分割
+    while (wd_sq > thr){
+        itr++;
+        if (itr %2 == 1){
+            while ((x_pos_sq + wd_sq <= x_end)){ //奇数回目はx軸方向に正方形を増やす
+                rect(x_pos_sq+ x_pos+5.0, y_pos_sq + y_pos+5.0, wd_sq, wd_sq); //作画位置の調整
+                divSquare(x_pos_sq+ x_pos, y_pos_sq + y_pos, wd_sq);
+                x_pos_sq += wd_sq;
+            }
+            wd_sq = x_end - x_pos_sq;
+        }
+        else {
+            while ((y_pos_sq + wd_sq <= y_end)){ //偶数回目はy軸方向に正方形を増やす
+                rect(x_pos_sq + x_pos + 5.0, y_pos_sq + y_pos + 5.0, wd_sq, wd_sq);
+                divSquare(x_pos_sq+ x_pos, y_pos_sq + y_pos, wd_sq);
+                y_pos_sq += wd_sq;
+            }
+            wd_sq = y_end - y_pos_sq;
+        }
+    }
+}
+```
+
+実行結果は以下、
+
+<img src="https://github.com/ryonakimageserver/omorikaizuka/blob/master/processing/Euclidean_recursive_rectangular_3_with_color.png?raw=true">
+
+## Appendix: Processingによる色の指定
+### HSB色空間
+
+色の三属性である色相(Hue)，彩度(Saturation・Chroma)，明度(Brightness・Value)で色を指定する色空間で，HSV色空間とも呼ばれます．RGB 表現が色の科学的な現象を元に指定するものであることに比べ，色の種類（色相）と鮮やかさと明るさという人間の感覚的な指標で指定ができるため，デザイナには好まれて使われます．
+
+HSB 色空間における色相は，0°～360° の値を持ち，0 は赤，120 が緑，240 が青と定められています．HSV 色空間に限らず，色相を円状に配置したものを色相環と呼びますが，HSB色空間における色相環は次のようになります．
+
+<img src="https://github.com/ryonakimageserver/omorikaizuka/blob/master/processing/hsb.jpg?raw=true">
+
+HSB色空間における明度は 0～100% で色の明るさを表し，各色相においてもっとも明るい色で 100% の値をとります．彩度も 0～100% の値をとり，この値が小さくなるほど色が褪せていきます．明度が小さい場合，彩度を変化させても色はあまり変わりません．色相が 0° のときの彩度と明度の組み合わせを表した図を下に示します．横軸が彩度で左端が 0% で右端が 100%，縦軸が明度で上端が 0% で下端が 100% です．
+
+<img src="https://github.com/ryonakimageserver/omorikaizuka/blob/master/processing/hsb_sb.jpg?raw=true">
+
+### Processing における色の指定
+
+Processing では，RGB 色空間と HSB 色空間を利用することができます．RGB 色空間を使いたい場合は RGB を，HSB 色空間を使いたい場合は HSB をパラメータとして colorMode メソッドを呼び出します．
+
+```c++
+colorMode( RGB );
+colorMode( HSB );
+```
+
+また，RGB においては赤，緑，青の度合，HSB においては色相，彩度，明度を，どのような範囲の数値で指定するかを設定することもできます．
+
+```c++
+colorMode(HSB, 1);
+```
+
+とすれば、HSBのそれぞれの度合を 0～1 の値で設定できます．
+
+```c++
+colorMode( HSB, 100, 10, 10 );
+```
+
+とすれば，実際は0～359°の色相を 0～99，0～100%の彩度と明度を 0～10 で設定できるようになります．
