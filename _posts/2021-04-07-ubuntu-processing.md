@@ -1,6 +1,6 @@
 ---
 layout: post
-title: "Ubuntu Desktop環境構築 Part 16"
+title: "Ubuntu Desktop環境構築 Part 17"
 subtitle: "Processing 3.5.4の導入"
 author: "Ryo"
 header-img: "img/about-bg.jpg"

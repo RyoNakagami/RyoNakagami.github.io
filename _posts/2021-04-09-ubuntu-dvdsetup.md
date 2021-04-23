@@ -1,6 +1,6 @@
 ---
 layout: post
-title: "Ubuntu Desktop環境構築 Part 17"
+title: "Ubuntu Desktop環境構築 Part 18"
 subtitle: "Ubuntu 20.04 で DVD を視聴"
 author: "Ryo"
 header-img: "img/about-bg.jpg"
