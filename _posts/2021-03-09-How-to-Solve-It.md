@@ -130,7 +130,7 @@ tags:
 
 **経済学における例**
 
-詳しくは[こちら]((https://github.com/ryonakimageserver/lecturenotes/blob/main/others/How-to-Write-a-Research-Paper-in-Economics.pdf))参照
+詳しくは[こちら](https://github.com/ryonakimageserver/lecturenotes/blob/main/others/How-to-Write-a-Research-Paper-in-Economics.pdf)参照
 
 - 預金金利が5%上昇した場合、個人はマンスリーベースでどのくらい貯蓄するようになるのか？
 - ゼリーの価格が上昇したとき、ピーナッツバターの価格はどれくらい上昇するのか？
@@ -193,7 +193,7 @@ $$
 \begin{aligned}
 &3x + 2y + z = 10\\
 &x + y + z = 6\\
-2y + z = 4\\
+&2y + z = 4\\
 \end{aligned}
 $$
 
