@@ -98,3 +98,8 @@ tags:
 |履歴サイドバー |	`Ctrl` + `H`|	`Ctrl` + `H`|
 |現在のウィンドウを最小化・最大化する| 	`Alt`+`Space` の後、選択|	`Alt`+`Space` の後、選択|
 
+## 3. Tips
+
+|動作|コマンド|
+|---|---|
+|YoutubeでAd skipをしたいとき|`Tab` then `Enter`|
