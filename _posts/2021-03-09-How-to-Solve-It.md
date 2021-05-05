@@ -17,7 +17,7 @@ tags:
 ||概要|
 |---|---|
 |目的|問題を解くときの方法論の紹介|
-|参考|- [いかにして問題を解くか ISBN13:978-4-621-04593-0](https://www.maruzen-publishing.co.jp/item/b302341.html)<br>- [イシューからはじめよ ISBN13:　978-4-86276-085-2](http://www.eijipress.co.jp/book/book.php?epcode=2085)<br>- [問題を解く](http://aozoragakuen.sakura.ne.jp/houhou/houhou00/node4.html)<br>- [How-to-Write-a-Research-Paper-in-Economics](https://github.com/ryonakimageserver/lecturenotes/blob/main/others/How-to-Write-a-Research-Paper-in-Economics.pdf)<br>- [Some tips for robustness checks and empirical analysis in general](http://deryugina.com/some-tips-for-robustness-checks-and-empirical-analysis-in-general/)<br>- [Robustness Tests: What, Why, and How](https://www.nickchk.com/robustness.html)<br>- [有名問題・定理から学ぶ数学](https://wkmath.org/diff-seq-f.html)|
+|参考|- [いかにして問題を解くか ISBN13:978-4-621-04593-0](https://www.maruzen-publishing.co.jp/item/b302341.html)<br>- [イシューからはじめよ ISBN13:978-4-86276-085-2](http://www.eijipress.co.jp/book/book.php?epcode=2085)<br>- [問題を解く](http://aozoragakuen.sakura.ne.jp/houhou/houhou00/node4.html)<br>- [How-to-Write-a-Research-Paper-in-Economics](https://github.com/ryonakimageserver/lecturenotes/blob/main/others/How-to-Write-a-Research-Paper-in-Economics.pdf)<br>- [Some tips for robustness checks and empirical analysis in general](http://deryugina.com/some-tips-for-robustness-checks-and-empirical-analysis-in-general/)<br>- [Robustness Tests: What, Why, and How](https://www.nickchk.com/robustness.html)<br>- [有名問題・定理から学ぶ数学](https://wkmath.org/diff-seq-f.html)|
 
 <!-- START doctoc generated TOC please keep comment here to allow auto update -->
 <!-- DON'T EDIT THIS SECTION, INSTEAD RE-RUN doctoc TO UPDATE -->
