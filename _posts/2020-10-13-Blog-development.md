@@ -14,6 +14,16 @@ tags:
   - ブログ作業マニュアル
 ---
 
+<!-- Global site tag (gtag.js) - Google Analytics -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-LVL413SV09"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'G-LVL413SV09');
+</script>
+
 |概要||
 |---|---|
 |目的|`git branch`を活用した[Ryo's Tech blog](https://ryonakagami.github.io)の更新手順のメモ|
@@ -50,6 +60,7 @@ tags:
 |ウェブホスティングサービス|GitHub Pages|
 |静的サイトジェネレーター|jekyll|
 |editor|Visual Studio Code|
+|Analytics|Google Analytics 4|
 
 ### 作業ディレクトリ構成
 
@@ -255,3 +266,51 @@ remote repositoryにpushして終了。コマンドは以下、
 $ git push --set-upstream origin master
 ```
 
+## 3. Google Analyticsの設定
+
+方針は
+
+1. GA Propetyの作成
+2. Measurement IDを各ページに逐次埋め込む
+
+### Google Analyticsの利用登録
+
+利用登録手順は以下です：
+
+1. [Google Analytics](https://analytics.google.com/analytics/web/)にアクセスします。
+2. Account設定をします（基本的には自分のGoogle Accountを入力）
+3. Adminをクリックします。
+4. Create Propertyという項目があるのでクリックします
+5. Property setupをします
+6. 最後に[利用規約](https://docs.google.com/document/d/1ArTraHJGbPKdO3gXDpKh4F1vLDPS19nR2U9EVvRJXuI/edit?usp=sharing)に同意したらGoogle Analyticsのダッシュボードが開く
+
+<img src="https://github.com/ryonakimageserver/omorikaizuka/blob/master/%E3%83%96%E3%83%AD%E3%82%B0%E7%94%A8/2020-10-13-GA-settings.png?raw=true">
+
+**GAは無料で使えるのか？**
+
+プロパティのサービス料金は、1 つのプロパティに紐づけられているすべての（該当する）プロファイルのヒット数を集計して算出されます。「ヒット」とは、最終的にデータとして本サービスに送信されて処理される、操作の集合を指します。例えば、ページビューや e コマースのヒットなどがあります。他にも、さまざまなライブラリによる本サービスの呼び出しがヒットにあたる場合がありますが、このような場合に限定されるわけではありません。GAは 1 アカウントにつき 1 か月あたり 1,000 万ヒットを上限としてお客様に無料で提供されます。
+
+### 記事ページへの埋め込み
+
+測定対象を指定します：
+
+1. Adminをクリック
+2. `Data Streams`をクリック
+3. `Add stream`をクリック
+4. 測定対象URLを指定する
+5. Global site tag (gtag.js)が発行されます
+6. gtag.jsタグをHTMLの<head>セクションにコピーします。また、ウェブサイトビルダー（WordPress、Shopifyなど）をお使いの場合は、グローバルサイトタグをウェブサイトビルダーのカスタムHTMLフィールドにコピーしてください。
+
+**例**
+
+```
+<!-- Global site tag (gtag.js) - Google Analytics -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-12345"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'G-12345');
+</script>
+```
