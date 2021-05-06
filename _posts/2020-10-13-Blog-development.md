@@ -34,7 +34,6 @@ tags:
 <!-- START doctoc generated TOC please keep comment here to allow auto update -->
 <!-- DON'T EDIT THIS SECTION, INSTEAD RE-RUN doctoc TO UPDATE -->
 
-
 - [1. ブログ更新環境](#1-%E3%83%96%E3%83%AD%E3%82%B0%E6%9B%B4%E6%96%B0%E7%92%B0%E5%A2%83)
   - [技術スタック](#%E6%8A%80%E8%A1%93%E3%82%B9%E3%82%BF%E3%83%83%E3%82%AF)
   - [作業ディレクトリ構成](#%E4%BD%9C%E6%A5%AD%E3%83%87%E3%82%A3%E3%83%AC%E3%82%AF%E3%83%88%E3%83%AA%E6%A7%8B%E6%88%90)
@@ -49,6 +48,9 @@ tags:
   - [ブランチマージを視覚的に確認する](#%E3%83%96%E3%83%A9%E3%83%B3%E3%83%81%E3%83%9E%E3%83%BC%E3%82%B8%E3%82%92%E8%A6%96%E8%A6%9A%E7%9A%84%E3%81%AB%E7%A2%BA%E8%AA%8D%E3%81%99%E3%82%8B)
   - [branchの消去](#branch%E3%81%AE%E6%B6%88%E5%8E%BB)
   - [本番環境GitHub Pagesの更新](#%E6%9C%AC%E7%95%AA%E7%92%B0%E5%A2%83github-pages%E3%81%AE%E6%9B%B4%E6%96%B0)
+- [3. Google Analyticsの設定](#3-google-analytics%E3%81%AE%E8%A8%AD%E5%AE%9A)
+  - [Google Analyticsの利用登録](#google-analytics%E3%81%AE%E5%88%A9%E7%94%A8%E7%99%BB%E9%8C%B2)
+  - [記事ページへの埋め込み](#%E8%A8%98%E4%BA%8B%E3%83%9A%E3%83%BC%E3%82%B8%E3%81%B8%E3%81%AE%E5%9F%8B%E3%82%81%E8%BE%BC%E3%81%BF)
 
 <!-- END doctoc generated TOC please keep comment here to allow auto update -->
 
