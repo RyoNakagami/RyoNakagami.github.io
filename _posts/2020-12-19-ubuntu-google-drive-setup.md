@@ -14,6 +14,17 @@ tags:
 - shell script
 ---
 
+<!-- Global site tag (gtag.js) - Google Analytics -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-LVL413SV09"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'G-LVL413SV09');
+</script>
+
+
 ||概要|
 |---|---|
 |目的|google-drive-ocamlfuseのインストール|
