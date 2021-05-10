@@ -12,6 +12,7 @@ tags:
 
 - RSA
 - 公開鍵暗号方式
+- 素数
 ---
 
 <!-- Global site tag (gtag.js) - Google Analytics -->
