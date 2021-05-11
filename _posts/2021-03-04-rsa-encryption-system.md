@@ -393,7 +393,14 @@ $$
 
 ### RSA公開鍵暗号方式のdecode: 公開鍵で暗号化
 
-上で見たようにBさんのRSA公開鍵を用いてAさんがメッセージ$$m$$をBさんに送ることを考えます。(1)合同式の性質, (2) private number $d_U$の選び方より
+上で見たようにBさんのRSA公開鍵を用いてAさんがメッセージ$$m$$をBさんに送ることを考えます。
+まず公開鍵を用いてメッセージを暗号化します。
+
+$$
+c = m^{e_B}\:\mathrm{mod}\:n_B
+$$
+
+復号は、(1)合同式の性質, (2) private number $d_U$の選び方より
 
 $$
 \begin{aligned}
@@ -413,7 +420,7 @@ $$
 
 $$
 \begin{aligned}
-y^{e_B} &\equiv (x^{d_B})^{e_B}\equiv x^{d_Be_B} \equiv x^{1+z\phi(n_B)} \equiv x \:\mathrm{mod}\:n_B
+y^{e_B} &\equiv (x^{d_B})^{e_B}\equiv x^{d_Be_B} \equiv x^{1+r\phi(n_B)} \equiv x \:\mathrm{mod}\:n_B
 \end{aligned}
 $$
 
