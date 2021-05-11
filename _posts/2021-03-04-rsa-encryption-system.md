@@ -172,7 +172,7 @@ $$
 (iii) 異なる素数$$a, b$$についてEuler Totient関数の乗法性を示します
 
 $$
-\phi(a^xb^y) = \phi(a^x)\phi(b^y)\: \text{ ただし $$x, y$$ は正の整数}
+\phi(a^xb^y) = \phi(a^x)\phi(b^y)\: \text{ ただし} x, y \text{ は正の整数}
 $$
 
 一般性を失うことなく、$$a< b$$とする。$$a^xb^y$$以下の正の整数を小さい方から、１行にa個づつならべます:
