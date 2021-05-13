@@ -1,7 +1,7 @@
 ---
 layout: post
 title: "調和級数からみるオイラーの世界"
-subtitle: "調和級数, オイラーの定理, バーゼル級数, ゼータ関数"
+subtitle: "調和級数, オイラーの定理,ゼータ関数"
 author: "Ryo"
 header-img: "img/tag-bg.jpg"
 header-mask: 0.4
@@ -26,7 +26,7 @@ tags:
 
 ||概要|
 |---|---|
-|目的|調和級数, オイラーの定理, バーゼル級数, ゼータ関数のメモ|
+|目的|調和級数, オイラーの定理, ゼータ関数のメモ|
 |参考|- [素数物語 アイディアの饗宴 （岩波科学ライブラリー）](https://honto.jp/netstore/pd-book_29515231.html)<br>- [高校数学の美しい物語 > 調和級数が発散することの３通りの証明](https://manabitimes.jp/math/627)|
 
 <!-- START doctoc generated TOC please keep comment here to allow auto update -->

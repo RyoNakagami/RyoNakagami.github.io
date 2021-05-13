@@ -411,28 +411,28 @@ $$
 つぎの値を計算せよ：
 
 $$
-\begin{algined}
-&\sum_{k=0}^n _nC_k\\
-&\sum_{k=0}^n (-1)^k _nC_k
+\begin{aligned}
+&\sum_{k=0}^n \:_nC_k\\
+&\sum_{k=0}^n (-1)^k \:_nC_k
 \end{aligned}
 $$
 
 #### 解答
 
 $$
-(x+1)^n = \sum_{k=0}^n _nC_k x^k
+(x+1)^n = \sum_{k=0}^n\: _nC_k x^k
 $$
 
 より, $$x = 1$$を代入すると
 
 $$
-(1+1)^n = \sum_{k=0}^n _nC_k 1^k = \sum_{k=0}^n _nC_k = 2^n
+(1+1)^n = \sum_{k=0}^n \:_nC_k 1^k = \sum_{k=0}^n \:_nC_k = 2^n
 $$
 
 同様に、
 
 $$
-(-1+1)^n = \sum_{k=0}^n _nC_k (-1)^k = 0
+(-1+1)^n = \sum_{k=0}^n \:_nC_k (-1)^k = 0
 $$
 
 ### 例題5
@@ -440,22 +440,22 @@ $$
 $$(1+x)^{m+n} = (1+x)^m(1+x)^n$$の両辺の$$x^k$$の係数を比較することにより以下の公式を証明せよ
 
 $$
-\sum_{i=0}^k _mC_i _nC_{k-i} = _{m+n}C_k
+\sum_{i=0}^k \:_mC_i \:_nC_{k-i} = \:_{m+n}C_k
 $$
 
 #### 解答
 
 $$
 \begin{aligned}
-(1+x)^{n+m} &= \sum^{m+n}_{i=0} _{m+n}C_i x^i\\
-(1+x)^{m}(1+x)^{n} &= \sum^{m}_{i=0} _{m}C_i x^i\sum^{n}_{i=0} _{n}C_i x^i
+(1+x)^{n+m} &= \sum^{m+n}_{i=0} \:_{m+n}C_i x^i\\
+(1+x)^{m}(1+x)^{n} &= \sum^{m}_{i=0} \:_{m}C_i x^i\sum^{n}_{i=0} \:_{n}C_i x^i
 \end{aligned}
 $$
 
 よってそれぞれの$$x^k$$の係数は
 
 $$
-\sum_{i=0}^k _mC_i _nC_{k-i} = _{m+n}C_k
+\sum_{i=0}^k \:_mC_i \:_nC_{k-i} =\: _{m+n}C_k
 $$
 
 ## 4. 写像の個数と重複組合せ
@@ -486,7 +486,7 @@ Fが狭義単調増加のとき、fは広義単調増加となる。一方、f�
 確率変数$$X$$は$$X \sim B(n, P)$$に従うとする。
 
 ### 期待値の計算
-
+<div class="math display" style="overflow: auto">
 $$
 \begin{aligned}
 E(X) &= \sum_{x=0}^n x _nC_x P^x(1-P)^{n-x}\\
@@ -498,10 +498,13 @@ E(X) &= \sum_{x=0}^n x _nC_x P^x(1-P)^{n-x}\\
 \end{aligned}
 $$
 
+</div>
 
 ### 分散の計算
 
 $$V(X) = E(X^2) - E(X)^2$$より$$E(X^2)$$を計算すれば分散は計算できます。
+
+<div class="math display" style="overflow: auto">
 
 $$
 \begin{aligned}
@@ -515,6 +518,8 @@ E(X^2) &= \sum_{x=0}^n x^2 _nC_x P^x(1-P)^{n-x}\\
 & = nP(1 - P) + n^2P^2
 \end{aligned}
 $$
+
+</div>
 
 よって
 
@@ -582,6 +587,8 @@ $$
 
 ここで、$$t = y^2/2$$と変形すると、$$y = \sqrt{2t}$$, $$t:0\to\infty$$のｔき$$y:0\to\infty$$, $$dt = ydy$$なので
 
+<div class="math display" style="overflow: auto">
+
 $$
 \begin{aligned}
 \Gamma(1/2) &= \int^{\infty}_0\left(\frac{y^2}{2}\right)^{-1/2}\exp(-y^2/2)ydy = \sqrt{2}\int^{\infty}_0\exp(-y^2/2)ydy\\
@@ -590,6 +597,8 @@ $$
 &=\pi
 \end{aligned}
 $$
+
+</div>
 
 最後の積分は標準正規分布$N(0, 1)$の確率密度関数を全範囲で積分しているので1になる。
 
