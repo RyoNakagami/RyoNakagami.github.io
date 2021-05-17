@@ -50,6 +50,9 @@ tags:
   - [新しい SSH キーを生成して ssh-agent に追加する](#%E6%96%B0%E3%81%97%E3%81%84-ssh-%E3%82%AD%E3%83%BC%E3%82%92%E7%94%9F%E6%88%90%E3%81%97%E3%81%A6-ssh-agent-%E3%81%AB%E8%BF%BD%E5%8A%A0%E3%81%99%E3%82%8B)
   - [GitHub アカウントへの新しい SSH キーの追加](#github-%E3%82%A2%E3%82%AB%E3%82%A6%E3%83%B3%E3%83%88%E3%81%B8%E3%81%AE%E6%96%B0%E3%81%97%E3%81%84-ssh-%E3%82%AD%E3%83%BC%E3%81%AE%E8%BF%BD%E5%8A%A0)
   - [SSH 接続をテストする](#ssh-%E6%8E%A5%E7%B6%9A%E3%82%92%E3%83%86%E3%82%B9%E3%83%88%E3%81%99%E3%82%8B)
+- [5. VSCodeとGitの連携](#5-vscode%E3%81%A8git%E3%81%AE%E9%80%A3%E6%90%BA)
+  - [アルファベットの意味](#%E3%82%A2%E3%83%AB%E3%83%95%E3%82%A1%E3%83%99%E3%83%83%E3%83%88%E3%81%AE%E6%84%8F%E5%91%B3)
+  - [diff画面で変更を確認する](#diff%E7%94%BB%E9%9D%A2%E3%81%A7%E5%A4%89%E6%9B%B4%E3%82%92%E7%A2%BA%E8%AA%8D%E3%81%99%E3%82%8B)
 
 <!-- END doctoc generated TOC please keep comment here to allow auto update -->
 
@@ -343,4 +346,35 @@ SSH 公開鍵をGitHubに登録するところまでを目指します。その�
 > provide shell access
 ```
 
+## 5. VSCodeとGitの連携
 
+VSCodeでは, Gitリポジトリとなっているフォルダをワークスペースとして開くだけで、「ソースコントロールビュー」を使ってGitに関する操作が可能になります.
+
+<img src="https://github.com/ryonakimageserver/omorikaizuka/blob/master/%E3%83%96%E3%83%AD%E3%82%B0%E7%94%A8/20201228-Git-VsCode.png?raw=true">
+
+ソースコントロールビューには、まだコミットされていない変更のあるファイルが「変更」と「ステージング済みの変更」に分かれてリスト化されています.ファイルの右側のアイコンをクリックすることで`git add`や`git reset`といった操作をGUIで実行することができます.
+
+上の例におけるアイコンは、左から
+
+- ファイルをエディターで開く
+- 変更を元に戻す
+- `+`: 変更をステージングに追加する（ここが`-`の場合は`git reset`と同じ）
+
+### アルファベットの意味
+
+|アルファベット|説明|
+|---|---|
+|`U`|git管理下にないファイル（untracked）|
+|`A`|added|
+|`M`|modified|
+|`D`|deleted|
+|`R`|renamed|
+|`C`|conflictしたファイル|
+
+### diff画面で変更を確認する
+
+ステージング前に変更点を確認したい場合は`Open Changes`やファイルをクリックすることで、直前のcommit時のファイルの状態との比較をハイライト付きで確認することができます。
+
+<img src= "https://github.com/ryonakimageserver/omorikaizuka/blob/master/%E3%83%96%E3%83%AD%E3%82%B0%E7%94%A8/20201228-Git-VsCode-diff.png?raw=true">
+
+コンフリクト発生時における、該当箇所の確認も同様の方法で実施することができます.
