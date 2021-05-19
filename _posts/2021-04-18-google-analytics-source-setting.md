@@ -3,7 +3,7 @@ layout: post
 title: "ブログ編集手引きノート: GA4編"
 subtitle: "GA4 Source/Medium 設定"
 author: "Ryo"
-header-img: "img/post-git-github-logo.jpg"
+header-img: "img/tag-bg.jpg"
 header-mask: 0.4
 catelog: true
 tags:
