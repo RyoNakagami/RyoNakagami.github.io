@@ -35,6 +35,7 @@ tags:
   - [3つの必須パラメータ](#3%E3%81%A4%E3%81%AE%E5%BF%85%E9%A0%88%E3%83%91%E3%83%A9%E3%83%A1%E3%83%BC%E3%82%BF)
   - [ルール](#%E3%83%AB%E3%83%BC%E3%83%AB)
   - [URL作成方法](#url%E4%BD%9C%E6%88%90%E6%96%B9%E6%B3%95)
+  - [稼働テスト：データ収集の状況を確認する](#%E7%A8%BC%E5%83%8D%E3%83%86%E3%82%B9%E3%83%88%E3%83%87%E3%83%BC%E3%82%BF%E5%8F%8E%E9%9B%86%E3%81%AE%E7%8A%B6%E6%B3%81%E3%82%92%E7%A2%BA%E8%AA%8D%E3%81%99%E3%82%8B)
 
 <!-- END doctoc generated TOC please keep comment here to allow auto update -->
 
@@ -86,4 +87,16 @@ Googleアナリティクスは、例えばFacebook広告（facebook/display）�
 ### URL作成方法
 
 URL は手作業で作成することも、URL 生成ツールを使用して作成することもできます。生成ツールは 3 つあります。[ウェブサイト](https://ga-dev-tools.appspot.com/campaign-url-builder/)、[Google Play ストア](https://developers.google.com/analytics/devguides/collection/android/v4/campaigns#google-play-url-builder)、[Apple App Store](https://developers.google.com/analytics/devguides/collection/ios/v3/campaigns#url-builder) の URL はそれぞれ少しずつ異なるため、正しい URL 生成ツールを使用してください。
+
+### 稼働テスト：データ収集の状況を確認する
+
+アプリに SDK を実装（iOS | Android）するか、ウェブサイトにアナリティクス タグを追加した後、データの送信状況を確認する必要があります. 
+
+- 通常は 10～15 分以内にプロパティへのデータ送信が開始されます
+- Analyticsから`Realtime`をクリックし、データ送信状況を確認
+- 測定コードが適切に設定されている場合は、`現在のユーザー数` カードのユーザー数が約 15 秒ごとに更新されます
+- 他のレポートでは、データの処理に 24〜48 時間かかります
+
+
+
 
