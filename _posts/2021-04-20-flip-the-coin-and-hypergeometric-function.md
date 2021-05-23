@@ -151,7 +151,7 @@ $$
 \begin{aligned}
 \sum_{k=0}^n Pr(X_A = k, X_B = k) &= \sum_{k=0}^nPr(X_A = k)^2\\
 &= \sum_{k=0}^n \:_nC_k \:_nC_{n-k} p^{2k}(1-p)^{2n-2k}\\
-&= (1 - p)^(2 n) \:_2F_1\left(-n, -n, 1, \frac{p^2}{(p - 1)^2}\right)
+&= (1 - p)^{2 n} \:_2F_1\left(-n, -n, 1, \frac{p^2}{(p - 1)^2}\right)
 \end{aligned}
 $$
 
