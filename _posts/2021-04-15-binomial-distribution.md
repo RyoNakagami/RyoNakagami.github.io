@@ -27,7 +27,7 @@ tags:
 ||概要|
 |---|---|
 |目的|二項分布の紹介:条件付き期待値の計算|
-|参考|- [Wolfram alpha: 二項分布の累積分布関数の近似式](https://www.wolframalpha.com/input/?i=%5Csum_%7Bk%3D0%7D%5Em+C%28n%2C+k%29p%5Ek%281-p%29%5E%7Bn-k%7D+)<br>- [scipy.special.hyp2f1: Gauss hypergeometric function 2F1(a, b; c; z)](https://docs.scipy.org/doc/scipy/reference/generated/scipy.special.hyp2f1.html)<br>- [高校数学の美しい物語 > 二項分布の平均と分散の二通りの証明](https://manabitimes.jp/math/913)|
+|参考|- [高校数学の美しい物語 > 二項分布の平均と分散の二通りの証明](https://manabitimes.jp/math/913)|
 
 <!-- START doctoc generated TOC please keep comment here to allow auto update -->
 <!-- DON'T EDIT THIS SECTION, INSTEAD RE-RUN doctoc TO UPDATE -->
