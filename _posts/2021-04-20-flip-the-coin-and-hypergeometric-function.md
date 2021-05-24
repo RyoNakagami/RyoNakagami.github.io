@@ -49,20 +49,24 @@ tags:
 
 プレイヤーをA, Bと表現する時、プレイヤー $$i \in \{A, B\}$$ が表を出す回数を $$X_i$$という確率変数で表すと $$X_i$$は独立に二項分布 $$\mathrm{B}(n, 0.5)$$に従います. 従って、
 
+<div class="math display" style="overflow: auto">
 $$
 Pr(X_i = k) = \:_nC_k \left(\frac{1}{2}\right)^{k}\left(\frac{1}{2}\right)^{n-k} = \:_nC_k \left(\frac{1}{2}\right)^{n}
 $$
+</div>
 
 従って、求めるべき確率は
 
+<div class="math display" style="overflow: auto">
 $$
 \begin{aligned}
 \sum_{k=0}^n Pr(X_A = k, X_B = k) &= \sum_{k=0}^n Pr(X_A = k)^2\\
 &= \sum_{k=0}^n \:_nC_k \:_nC_k \left(\frac{1}{2}\right)^{2n}\\
 &= \sum_{k=0}^n \:_nC_k \:_nC_{n-k} \left(\frac{1}{2}\right)^{2n}\\
-&= _{2n}C_n\left(\frac{1}{2}\right)^{2n}
+&= \:_{2n}C_n\left(\frac{1}{2}\right)^{2n}
 \end{aligned}
 $$
+</div>
 
 <div style="text-align: right;">
 ■
@@ -147,6 +151,7 @@ $$
 
 より
 
+<div class="math display" style="overflow: auto">
 $$
 \begin{aligned}
 \sum_{k=0}^n Pr(X_A = k, X_B = k) &= \sum_{k=0}^nPr(X_A = k)^2\\
@@ -154,6 +159,7 @@ $$
 &= (1 - p)^{2 n} \:_2F_1\left(-n, -n, 1, \frac{p^2}{(p - 1)^2}\right)
 \end{aligned}
 $$
+</div>
 
 なお、$$_2F_1(a, b; c; x)$$は the gauss hypergeometric functionです.
 
