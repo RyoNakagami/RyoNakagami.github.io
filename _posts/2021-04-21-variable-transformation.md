@@ -40,12 +40,12 @@ tags:
 <!-- END doctoc generated TOC please keep comment here to allow auto update -->
 
 ## 変数変換
-> 定理(1)
+> 定理 1
 
 確率変数 $$X$$ の確率密度関数を$$f_X(x)$$とし、 $$Y = g(X)$$とする. $$g(\cdot)$$が単調増加もしくは単調減少な関数とし、$$g^{-1}(y)$$が微分可能であるとき、
 
 $$
-f_Y(y) = f_X(g^{-1}(y))\left|\frac{d}{dy}g^{-1}(y)\right| = f_X(g^{-1}(y))\left|\frac{1}{g'(g^{-1}(y)})\right|
+f_Y(y) = f_X(g^{-1}(y))\left|\frac{d}{dy}g^{-1}(y)\right| = f_X(g^{-1}(y))\left|\frac{1}{g'(g^{-1}(y))}\right|
 $$
 
 <div style="text-align: right;">
@@ -56,13 +56,13 @@ $$
 
 - 確率変数 $$X$$
 - 関数 $$g(\cdot)$$
-- $$Y = g(X)$$
+- $Y = g(X)$
 
 このとき、$$Y$$ の分布を導きたいとします.分布関数$$F_Y(y)$$は
 
 $$
 \begin{aligned}
-F_Y(y) &= P(g(X)\leq y)\\
+F_Y(y) &= P(g(X)\leq y)\\[8pt]
 &= P(X\in \{x\mid g(x)\leq y\})
 \end{aligned}
 $$
