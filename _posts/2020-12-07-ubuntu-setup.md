@@ -57,6 +57,7 @@ tags:
 |GPU|NVIDIA GeForce RTX 2060 SUPER|
 |キーボード|Microsoft Ergonomic Desktop US配列|
 |マウス|Logicool M570|
+|カメラ|Logicool C920n HD Pro ウェブカメラ|
 |スピーカー|Creative T30 Wireless|
 |起動ディスク作成ソフト|Rufus|
 
@@ -87,10 +88,7 @@ tags:
 |リモートアクセス設定：VPN設定とWoL設定とssh|[Ubuntu Desktop 環境構築 Part 5](https://ryonakagami.github.io/2020/12/17/ubuntu-network-setting/)|
 |セキュリティ対策: システム診断設定・ウイルス対策|[Ubuntu Desktop 環境構築 Part 6](https://ryonakagami.github.io/2020/12/18/ubuntu-security-part2/)|
 |zsh setup|[Ubuntu Desktop環境構築 Part 10](https://ryonakagami.github.io/2020/12/23/ubuntu-zshsetup/)|
-|git setup|TBA|
-|VScode setup|TBA|
 
-以上を予定しています。
 
 ## 3. Requirements
 
@@ -162,13 +160,13 @@ tags:
 |ToDo管理|Google Keep||
 |Web会議サービス|Zoom||
 |ビジネス用チャットツール|Slack||
-|チャットツール|Discord||
+|チャットツール|Discord|[Ubuntu Desktop環境構築 Part 15 Discordのインストールと使い方](https://ryonakagami.github.io/2021/02/02/ubuntu-discord-setup/)|
 |Text editor main|Visual Studio Code||
 |Text editor sub|nano||
 |分散型バージョン管理システム|Git|[Ubuntu Desktop環境構築 Part 13](https://ryonakagami.github.io/2020/12/28/ubuntu-git-and-github-setup/)|
 |データベースサーバー|PostgreSQL||
 |統計・機械学習用プログラミング言語|Python||
-|ジェネラティブアート|Processing||
+|ジェネラティブアート|Processing|[Ubuntu Desktop環境構築 Part 17 Processing 3.5.4の導入](https://ryonakagami.github.io/2021/04/07/ubuntu-processing/)|
 |統計解析用プログラミング言語|R||
 |数値計算用プログラミング言語|Julia||
 |競技プログラミング用|C, C++|[C言語練習環境の作成](https://ryonakagami.github.io/2021/01/04/setup-C-language-dev-env/)|
@@ -180,5 +178,6 @@ tags:
 |web page raeding list管理|pocket||
 |ファイル圧縮ソフト|7-zip|[Ubuntu Desktop環境構築 Part 10](https://ryonakagami.github.io/2020/12/23/ubuntu-zshsetup/)|
 |C/C++コンパイラ|GCC|[C言語練習環境の作成](https://ryonakagami.github.io/2021/01/04/setup-C-language-dev-env/)|
+|DVD再生ソフト|VLC media player|[Ubuntu 20.04 LTS vlc Ubuntu Desktop環境構築 Part 18](https://ryonakagami.github.io/2021/04/09/ubuntu-dvdsetup/)|
 
 

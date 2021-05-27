@@ -225,5 +225,5 @@ embrosyn-ubuntu-cinnamon-focal.list	     slack.list
 $ ppa-purge {リポジトリ}
 ```
 
-`ppa-purge`コマンドは、デフォルトではインストールされていないので、`apt install ppa-purge`を実行する必要があります。なお、リポジトリを削除しても、そのリポジトリからインストールされたパッケージは削除されないので`sudo apt sutoremove`を実行することをおすすめします。
+`ppa-purge`コマンドは、デフォルトではインストールされていないので、`apt install ppa-purge`を実行する必要があります。なお、リポジトリを削除しても、そのリポジトリからインストールされたパッケージは削除されないので`sudo apt autoremove`を実行することをおすすめします。
 

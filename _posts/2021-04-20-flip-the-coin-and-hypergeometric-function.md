@@ -146,7 +146,7 @@ plt.title("Compare the theory-based and sample probability", fontsize = 20);
 上で考えた問題を一般化し、表が出る確率が $$p$$ となるコインの場合を考えてみます.このとき、2人の表の回数が一致する確率は
 
 $$
-Pr(X_i = k) = _nC_k p^{k}(1-p)^{n-k}
+Pr(X_i = k) = \:_nC_k p^{k}(1-p)^{n-k}
 $$
 
 より
