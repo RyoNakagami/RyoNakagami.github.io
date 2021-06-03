@@ -121,8 +121,8 @@ Bluetoothのコーデックとは、スマホや音楽再生プレイヤーな�
 
 |コーデック|特徴|遅延|ビットレート|サンプリングレート| 
 |---|---|---|---|---|
-|SBC|Sub Band Codec, Bluetooth標準コーデック<br>音質と遅延に難有り|220m/s|328kbps|48kHz/16bit|
-|AAC|iPhoneでメインに採用されるコーデック<br>音質は良いが規格的には大遅延|120m/s［CBR］<br>800m/［VBR］|128Kbps<br>可変256kbps| 48kHz/16bit|
+|SBC|Sub Band Codec, Bluetooth標準コーデック<br>音質と遅延に難有り|220m/s|64-328kbps|48kHz/16bit|
+|AAC|iPhoneでメインに採用されるコーデック<br>音質は良いが規格的には大遅延|120m/s［CBR］<br>800m/［VBR］|128Kbps<br>可変256kbps<br>320kbps| 48kHz/16bit|
 |aptX|実質的にAndroidの標準コーデック<br>比較的良い音質で低遅延|70m/s|384kbps|48kHz/16bit|
 |aptX HD|ハイレゾ対応コーデック<br>高音質で遅延も少なめ|130m/s|576kbps|48kHz/24bit|
 |aptX Adaptive|可変ビットレートであらゆる環境に対応したコーデック<br>接続環境に合わせて高音質重視～低遅延重視まで自動で判断<br>ハイレゾ対応|50-80m/s|276~420kbps|48kHz/24bit|

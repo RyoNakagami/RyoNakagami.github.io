@@ -44,6 +44,7 @@ tags:
 - [公平な巴戦の検討](#%E5%85%AC%E5%B9%B3%E3%81%AA%E5%B7%B4%E6%88%A6%E3%81%AE%E6%A4%9C%E8%A8%8E)
   - [問題設定](#%E5%95%8F%E9%A1%8C%E8%A8%AD%E5%AE%9A)
   - [$$x$$ の導出](#x-%E3%81%AE%E5%B0%8E%E5%87%BA)
+- [4人の巴戦](#4%E4%BA%BA%E3%81%AE%E5%B7%B4%E6%88%A6)
 
 <!-- END doctoc generated TOC please keep comment here to allow auto update -->
 
@@ -480,3 +481,110 @@ $$
 <div style="text-align: right;">
 ■
 </div>
+
+## 4人の巴戦
+> 問題
+
+$$n \:(n = 4)$$人が巴戦を行う時、それぞれの優勝する確率を求めよ. $$n$$ 人が一列に並んでいて、先頭の二人が勝負をして勝った方が先頭に残る．負けた方は列の最後につく．これを繰り返して $$n - 1$$ 連勝したとき優勝するとします.
+
+> 解
+
+$$k$$ 連勝している人が先頭にいるときの $$m$$ 番目にいる人の優勝する確率を $$P_{k;m}とおきます． $$P_{0; 1},P_{0; 2}, \cdots, P_{0; 4}$$を求めることが最終目標です
+
+$$k=3$$ のときは先頭の人がすでに3連勝しているので
+
+$$
+\begin{aligned}
+P_{3; 1} &= 1\\
+P_{3; 2} &= P_{3; 3} = P_{3; 4} = 0
+\end{aligned}
+$$
+
+また、先頭の2人は実力が拮抗しており、試合チャンスも同じなので、$$P_{0, 1} = P_{0, 2}$$. 
+
+$$k \: (0\leq k\leq 2)$$ 連勝しているとき、先頭の2人は
+
+$$
+\begin{aligned}
+P_{k; 1} &= \frac{1}{2}(P_{k+1; 1} + P_{1; n})\\[8pt]
+P_{k; 2} &= \frac{1}{2}(P_{1; 1} + P_{k+1; n})
+\end{aligned}
+$$
+
+3番目以降の人は
+
+$$
+P_{k; m} = \frac{1}{2}(P_{k+1; m-1} + P_{1; m-1})
+$$
+
+漸化式を整理すると、
+
+$$
+\begin{aligned}
+P_{k;1} &=  2P_{k-1;1} - P_{1; n}\\[8pt]
+P_{k;m} &= 2P_{k-1; m+1} - P_{1;m} \: (2 \leq m \leq n-1)\\[8pt]
+P_{k;n} &=  2P_{k-1;2} - P_{1; 1}
+\end{aligned}
+$$
+
+今回は $$n=4$$ なので上の漸化式を利用すると
+
+$$
+\begin{aligned}
+P_{1;1} &=  \frac{3}{4}P_{1;4} + \frac{1}{4}\\
+P_{1;2} &= \frac{1}{2}(P_{1;1} + P_{1;3})\\
+P_{1;3} &=  \frac{1}{2}P_{1;2} + \frac{1}{4}P_{1;1}\\
+P_{1;4} &=  \frac{1}{2}P_{1;3} + \frac{1}{4}P_{1;2}
+\end{aligned}
+$$
+
+この[連立方程式](https://ja.wolframalpha.com/input/?i=a+%3D+%5Cfrac%7B3%7D%7B4%7Dd+%2B+%5Cfrac%7B1%7D%7B4%7D%2C+b+%3D+%5Cfrac%7B1%7D%7B2%7Da+%2B+%5Cfrac%7B1%7D%7B4%7Dc%2C+c+%3D+%5Cfrac%7B1%7D%7B2%7Db+%2B+%5Cfrac%7B1%7D%7B4%7Da%2C+d+%3D+%5Cfrac%7B1%7D%7B2%7Dc+%2B+%5Cfrac%7B1%7D%7B4%7Db)を解くと
+
+$$
+\begin{aligned}
+P_{1;1} &=  \frac{56}{149}\\
+P_{1;2} &= \frac{36}{149}\\
+P_{1;3} &=  \frac{32}{149}\\
+P_{1;4} &=  \frac{25}{149}
+\end{aligned}
+$$
+
+従って、
+
+$$
+\begin{aligned}
+P_{0;1} &= P_{0;2} =  \frac{81}{298}\\
+P_{0;3} &=  \frac{36}{149}\\
+P_{0;4} &=  \frac{32}{149}\
+\end{aligned}
+$$
+
+<div style="text-align: right;">
+■
+</div>
+
+> PythonでのSimulation
+
+<img src="https://github.com/ryonakimageserver/omorikaizuka/blob/master/%E3%83%96%E3%83%AD%E3%82%B0%E7%94%A8/20210414_tomoesen_four_player_python.png?raw=true">
+
+> 一般解
+
+$$n \: (n\geq 3) $$ 人で巴戦を実施する場合の各プレイヤーの優勝確率は
+
+$$
+\begin{aligned}
+P_{0, 1} &= P_{0, 2}\\[8pt]
+P_{0, m} &= \frac{2^{(n-1)(m-2)}(2^{n-1}+1)^{n-m}}{2(2^{n-2}+1)(2^{n-1}+1)^{n-2} - 2^{(n-1)^2}}\: \text{ where }\: (2 \leq m \leq n)\\[8pt]
+\sum_{i=1}^n P_{0, i} &= 1
+\end{aligned}
+$$
+
+となります. 考え方は上で紹介した確率漸化式を解くのですが、余因子行列をコネコネする必要があるので解説は後日とします.
+
+また優勝がきまるまでの試合数 $$T$$ の期待値は
+
+$$
+\mathbf E[T] = 2^{n-1} - 1
+$$
+
+となります.
