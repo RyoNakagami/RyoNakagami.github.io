@@ -79,7 +79,7 @@ git version 2.31.1
 更に別ファイルを追加したい場合は
 
 ```zsh
-% cho add-sub-directory >> .git/info/sparse-checkout
+% echo add-sub-directory >> .git/info/sparse-checkout
 # ツリー情報を更新する
 % git read-tree -m -u HEAD
 ```
