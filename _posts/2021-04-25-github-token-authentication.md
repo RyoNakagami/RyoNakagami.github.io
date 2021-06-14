@@ -43,6 +43,9 @@ tags:
 - [対応方針](#%E5%AF%BE%E5%BF%9C%E6%96%B9%E9%87%9D)
   - [トークンの作成](#%E3%83%88%E3%83%BC%E3%82%AF%E3%83%B3%E3%81%AE%E4%BD%9C%E6%88%90)
   - [トークン使用のテスト](#%E3%83%88%E3%83%BC%E3%82%AF%E3%83%B3%E4%BD%BF%E7%94%A8%E3%81%AE%E3%83%86%E3%82%B9%E3%83%88)
+- [Appendix: リモートリポジトリについて](#appendix-%E3%83%AA%E3%83%A2%E3%83%BC%E3%83%88%E3%83%AA%E3%83%9D%E3%82%B8%E3%83%88%E3%83%AA%E3%81%AB%E3%81%A4%E3%81%84%E3%81%A6)
+  - [リモートレポジトリの作成](#%E3%83%AA%E3%83%A2%E3%83%BC%E3%83%88%E3%83%AC%E3%83%9D%E3%82%B8%E3%83%88%E3%83%AA%E3%81%AE%E4%BD%9C%E6%88%90)
+  - [HTTPS URLによるクローンのメリット](#https-url%E3%81%AB%E3%82%88%E3%82%8B%E3%82%AF%E3%83%AD%E3%83%BC%E3%83%B3%E3%81%AE%E3%83%A1%E3%83%AA%E3%83%83%E3%83%88)
 
 <!-- END doctoc generated TOC please keep comment here to allow auto update -->
 
@@ -161,3 +164,35 @@ From https://github.com/RyoNakagami/sample_size
 % cd -
 % rm -rf ./test
 ```
+
+## Appendix: リモートリポジトリについて
+
+インターネット上あるいはその他ネットワーク上のどこかに存在するファイルやディレクトリの履歴を管理する場所のことです.プッシュできるのは、2 種類の URL アドレスに対してのみです:
+
+- `https://github.com/user/repo.git` のような HTTPS URL
+- `git@github.com:user/repo.git` のような SSH URL
+
+Git はリモート URL に名前を関連付けます. デフォルトのリモートは通常 `origin` と呼ばれます. 
+
+
+### リモートレポジトリの作成
+
+git remote add コマンドを使用してリモート URL に名前を関連付けることができます。 たとえば、コマンドラインに以下のように入力できます:
+
+```
+git remote add origin  <REMOTE_URL> 
+```
+
+設定状況を確認したい場合は
+
+```
+git remote -v
+```
+
+これで `origin` という名前が `REMOTE_URL` に関連付けられます。 `git remote set-url` を使えば、リモートの URL を変更できます。
+
+
+### HTTPS URLによるクローンのメリット
+
+`https://` は、可視性に関係なく、すべてのリポジトリで使用できます。 `https://` のクローン URL は、ファイアウォールまたはプロキシの内側にいる場合でも機能します。コマンドラインで、HTTPS URL を使用してリモートリポジトリに `git clone`、`git fetch`、`git pull` または `git push` を行った場合、GitHub のユーザ名とパスワードの入力を求められます。 Gitがパスワードを求めてきたときは、代わりに個人アクセストークン（PAT）を入力します. 
+

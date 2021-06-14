@@ -50,6 +50,7 @@ tags:
   - [新しい SSH キーを生成して ssh-agent に追加する](#%E6%96%B0%E3%81%97%E3%81%84-ssh-%E3%82%AD%E3%83%BC%E3%82%92%E7%94%9F%E6%88%90%E3%81%97%E3%81%A6-ssh-agent-%E3%81%AB%E8%BF%BD%E5%8A%A0%E3%81%99%E3%82%8B)
   - [GitHub アカウントへの新しい SSH キーの追加](#github-%E3%82%A2%E3%82%AB%E3%82%A6%E3%83%B3%E3%83%88%E3%81%B8%E3%81%AE%E6%96%B0%E3%81%97%E3%81%84-ssh-%E3%82%AD%E3%83%BC%E3%81%AE%E8%BF%BD%E5%8A%A0)
   - [SSH 接続をテストする](#ssh-%E6%8E%A5%E7%B6%9A%E3%82%92%E3%83%86%E3%82%B9%E3%83%88%E3%81%99%E3%82%8B)
+  - [ssh接続を使ったgit clone](#ssh%E6%8E%A5%E7%B6%9A%E3%82%92%E4%BD%BF%E3%81%A3%E3%81%9Fgit-clone)
 - [5. VSCodeとGitの連携](#5-vscode%E3%81%A8git%E3%81%AE%E9%80%A3%E6%90%BA)
   - [アルファベットの意味](#%E3%82%A2%E3%83%AB%E3%83%95%E3%82%A1%E3%83%99%E3%83%83%E3%83%88%E3%81%AE%E6%84%8F%E5%91%B3)
   - [diff画面で変更を確認する](#diff%E7%94%BB%E9%9D%A2%E3%81%A7%E5%A4%89%E6%9B%B4%E3%82%92%E7%A2%BA%E8%AA%8D%E3%81%99%E3%82%8B)
@@ -345,6 +346,22 @@ SSH 公開鍵をGitHubに登録するところまでを目指します。その�
 > Hi username! You've successfully authenticated, but GitHub does not
 > provide shell access
 ```
+
+### ssh接続を使ったgit clone
+
+ssh接続のユースケースの一つとして、private repositoryのgit cloneです.
+
+```
+% git clone git@github.com:RyoNakagami/sample_size.git
+Cloning into 'sample_size'...
+remote: Enumerating objects: 8, done.
+remote: Counting objects: 100% (8/8), done.
+remote: Compressing objects: 100% (6/6), done.
+remote: Total 8 (delta 0), reused 8 (delta 0), pack-reused 0
+Receiving objects: 100% (8/8), done.
+```
+
+ただし、GitHubとしてはSSH接続ではなくHTTPS接続による方法が推奨されています。プロジェクトなどで特段の制限や方針がなければHTTPSを使うことを検討してください.
 
 ## 5. VSCodeとGitの連携
 

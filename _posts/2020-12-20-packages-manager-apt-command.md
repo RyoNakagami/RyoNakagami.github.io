@@ -27,8 +27,8 @@ tags:
 
 ||概要|
 |---|---|
-|目的|APTによるパッケージ管理の解説|
-|参考|[APT公式ウェブサイト](https://tracker.debian.org/pkg/apt)<br>[Debianパッケージ管理](https://www.debian.org/doc/manuals/debian-reference/ch02.ja.html)|
+|目的|APTパッケージ管理の基礎知識の整理|
+|参考|[APT公式ウェブサイト](https://tracker.debian.org/pkg/apt)<br>[Debianパッケージ管理](https://www.debian.org/doc/manuals/debian-reference/ch02.ja.html)<br> [Launchpad](https://launchpad.net/)|
 
 <!-- START doctoc generated TOC please keep comment here to allow auto update -->
 <!-- DON'T EDIT THIS SECTION, INSTEAD RE-RUN doctoc TO UPDATE -->
@@ -43,6 +43,7 @@ tags:
   - [パッケージの一覧](#%E3%83%91%E3%83%83%E3%82%B1%E3%83%BC%E3%82%B8%E3%81%AE%E4%B8%80%E8%A6%A7)
 - [4. パッケージの情報の取得](#4-%E3%83%91%E3%83%83%E3%82%B1%E3%83%BC%E3%82%B8%E3%81%AE%E6%83%85%E5%A0%B1%E3%81%AE%E5%8F%96%E5%BE%97)
 - [5. リポジトリの追加](#5-%E3%83%AA%E3%83%9D%E3%82%B8%E3%83%88%E3%83%AA%E3%81%AE%E8%BF%BD%E5%8A%A0)
+  - [なぜPPAを使うのか？](#%E3%81%AA%E3%81%9Cppa%E3%82%92%E4%BD%BF%E3%81%86%E3%81%AE%E3%81%8B)
   - [Syntax](#syntax-2)
   - [リポジトリの削除](#%E3%83%AA%E3%83%9D%E3%82%B8%E3%83%88%E3%83%AA%E3%81%AE%E5%89%8A%E9%99%A4)
 
@@ -67,7 +68,7 @@ APT(Advanced Packaging Tool)はDevian系ディストリビューションで使�
 ### Syntax
 
 ```
-$ apt [option] subcommand
+% apt [option] subcommand
 ```
 
 aptコマンドの主なオプション
@@ -104,7 +105,7 @@ aptコマンドの主なサブコマンド
 postfixパッケージを再インストールする場合：
 
 ```
-$ sudo apt install --reinstall postfix
+% sudo apt install --reinstall postfix
 ```
 
 ## 3. リポジトリの設定
@@ -153,7 +154,7 @@ apt listコマンドを使うと、パッケージ一覧を表示します。パ
 パッケージの情報は`show`サブコマンドで表示できます、リポジトリにあるパッケージであれば、インストールされているかどうかにかかわらず表示できます。VScodeのパッケージ情報を表示してみます。
 
 ```
-$ apt apt show code
+% apt show code
 ackage: code
 Version: 1.52.1-1608136922
 Priority: optional
@@ -178,7 +179,7 @@ Description: Code editing. Redefined.
 依存関係だけ確認したい場合は`apt depends`コマンドを用います。
 
 ```
-$ apt depends code
+% apt depends code
 code
   Depends: libnss3 (>= 2:3.26)
   Depends: gnupg
@@ -193,26 +194,40 @@ code
     code
 ```
 
+なお部分一致でリポジトリ上のパッケージを調べたい場合は
+
+```
+% sudo apt search {パッケージ名}
+```
+
 ## 5. リポジトリの追加
 
 リポジトリは、Ubuntu公式が運用しているものばかりではなく、サードパーティのリポジトリもあります。サードパーティ性のソフトウェアをインストールする際は、そのリポジトリをあらかじめ追加しておくとaptコマンドが使えるので便利です。リポジトリの追加には`add-apt-repository`を使います。PPAを登録すると、`apt upgrade`でアップグレードの対象となるため、システム全体で一括してアップグレードをかけることができる便利さがあります。一方、安易に導入するとシステムの安定性やセキュリティを損なうことも考えられるので慎重さが必要です。
 
+
+### なぜPPAを使うのか？
+
+- オフィシャルリポジトリにパッケージがない場合
+- パッケージはあるもののバージョンが古い場合
+
+がPPAを使ったインストールを検討する代表的な例となります. なお、PPAとは、「Personal Package Archive」の略です. Ubuntuディストリビューション公式に承認されたものではないのでインストールするかどうかは自己責任となります.
+
 ### Syntax
 
 ```
-$ add-apt-repository <respository name>
+% add-apt-repository <respository name>
 ```
 
 リポジトリは`ppa:{ユーザー名}/ppa`で指定します。一例として、google-drive-ocamlfuseのレポジトリを追加したい場合は
 
 ```
-$ sudo add-apt-repository ppa:alessandro-strada/ppa
+% sudo add-apt-repository ppa:alessandro-strada/ppa
 ```
 
 追加されたリポジトリの情報は、`/etc/apt/sources.list.d`ディレクトリ以下に格納されます。
 
 ```
-$ ls /etc/apt/sources.list.d
+% ls /etc/apt/sources.list.d
 alessandro-strada-ubuntu-ppa-focal.list  embrosyn-ubuntu-cinnamon-focal.list.save  vscode.list
 cisofy-lynis.list			                   google-chrome.list			                   vscode.list.save
 cisofy-lynis.list.save			             google-chrome.list.save
@@ -222,8 +237,14 @@ embrosyn-ubuntu-cinnamon-focal.list	     slack.list
 ### リポジトリの削除
 
 ```
-$ ppa-purge {リポジトリ}
+% ppa-purge {リポジトリ}
 ```
 
 `ppa-purge`コマンドは、デフォルトではインストールされていないので、`apt install ppa-purge`を実行する必要があります。なお、リポジトリを削除しても、そのリポジトリからインストールされたパッケージは削除されないので`sudo apt autoremove`を実行することをおすすめします。
+
+削除の一例として
+
+```zsh
+% sudo ppa-purge ppa:openjdk-r/ppa
+```
 
