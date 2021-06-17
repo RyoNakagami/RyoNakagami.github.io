@@ -162,7 +162,7 @@ tags:
 |ビジネス用チャットツール|Slack||
 |チャットツール|Discord|[Ubuntu Desktop環境構築 Part 15 Discordのインストールと使い方](https://ryonakagami.github.io/2021/02/02/ubuntu-discord-setup/)|
 |Text editor main|Visual Studio Code||
-|Text editor sub|vim|[Ubuntu Desktop環境構築 Part 21]()|
+|Text editor sub|vim|[Ubuntu Desktop環境構築 Part 21](https://ryonakagami.github.io/2021/04/27/ubuntu-vim-tutorial/)|
 |分散型バージョン管理システム|Git|[Ubuntu Desktop環境構築 Part 13](https://ryonakagami.github.io/2020/12/28/ubuntu-git-and-github-setup/)|
 |データベースサーバー|PostgreSQL||
 |統計・機械学習用プログラミング言語|Python||
