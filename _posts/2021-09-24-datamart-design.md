@@ -26,13 +26,14 @@ tags:
 ||概要|
 |---|---|
 |目的|データ設計のいろは|
-|参考|- [外部キー関係の作成と管理](https://cloud.google.com/spanner/docs/foreign-keys/how-to)|
+|参考|- [外部キー関係の作成と管理](https://cloud.google.com/spanner/docs/foreign-keys/how-to)<br> -[DWHアーキテクチャ作成ツール](https://app.diagrams.net/?splash=0&libs=gcp)|
 
 <!-- START doctoc generated TOC please keep comment here to allow auto update -->
 <!-- DON'T EDIT THIS SECTION, INSTEAD RE-RUN doctoc TO UPDATE -->
 
 - [データ設計の基本](#%E3%83%87%E3%83%BC%E3%82%BF%E8%A8%AD%E8%A8%88%E3%81%AE%E5%9F%BA%E6%9C%AC)
   - [データライフサイクル](#%E3%83%87%E3%83%BC%E3%82%BF%E3%83%A9%E3%82%A4%E3%83%95%E3%82%B5%E3%82%A4%E3%82%AF%E3%83%AB)
+    - [CREATE, REFERENCE, UPUDATEの一般的な流れ](#create-reference-upudate%E3%81%AE%E4%B8%80%E8%88%AC%E7%9A%84%E3%81%AA%E6%B5%81%E3%82%8C)
   - [キー設計](#%E3%82%AD%E3%83%BC%E8%A8%AD%E8%A8%88)
     - [ID派 vs コード派](#id%E6%B4%BE-vs-%E3%82%B3%E3%83%BC%E3%83%89%E6%B4%BE)
   - [正規化の手順](#%E6%AD%A3%E8%A6%8F%E5%8C%96%E3%81%AE%E6%89%8B%E9%A0%86)
@@ -73,6 +74,20 @@ C|CREATE, データが誕生する状態
 R|REFERENCE, データが参照される状態（BI dashboard作成時など）
 U|UPDATE, データに変化が加わる状態
 D|DROP, データを保持する必要がなくなった状態
+
+#### CREATE, REFERENCE, UPUDATEの一般的な流れ
+
+実務において多く見られるものに、次のような構成があります:
+
+1. AWSのS3からデータをGCS(= Datalake)に日付のバッチ処理で転送する(= EXTRACT phase)
+2. GCSからBigQueryへデータをロードする. このとき、raw_data用dataset(例: `raw`)にプールする(= LOAD phase)
+3. BigQuery内で中間テーブルを作成する. このとき、中間テーブルは中間テーブル用dataset(例: `typed`)に格納する( =  TRANSFORM phase)
+4. 分析用datamartを作成する. このようなELTを終え整備されたデータは、それ専用のdataset(例: `warehouse`)に格納する
+5. これらワークフローのオーケストレーションをCloud Composerに実行させる(= 自動化 and UPDATE phase)
+6. 加工されたデータを分析及び予測分類モデル構築に用い、それをマーケター等が事業活動に活用する
+
+<img src="https://github.com/ryonakimageserver/omorikaizuka/blob/master/%E3%83%96%E3%83%AD%E3%82%B0%E7%94%A8/20210924-blog-gcp-architecture.png?raw=true">
+
 
 ### キー設計
 

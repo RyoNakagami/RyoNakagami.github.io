@@ -51,9 +51,14 @@ tags:
   - [サブクエリ](#%E3%82%B5%E3%83%96%E3%82%AF%E3%82%A8%E3%83%AA)
     - [サブクエリ句ではなくCTEs(Common Table Expressions = WITH句)を用いる](#%E3%82%B5%E3%83%96%E3%82%AF%E3%82%A8%E3%83%AA%E5%8F%A5%E3%81%A7%E3%81%AF%E3%81%AA%E3%81%8Fctescommon-table-expressions--with%E5%8F%A5%E3%82%92%E7%94%A8%E3%81%84%E3%82%8B)
 - [BigQuery Best Practices](#bigquery-best-practices)
+  - [必要なカラムのみクエリする](#%E5%BF%85%E8%A6%81%E3%81%AA%E3%82%AB%E3%83%A9%E3%83%A0%E3%81%AE%E3%81%BF%E3%82%AF%E3%82%A8%E3%83%AA%E3%81%99%E3%82%8B)
   - [`LIMIT`ではなく`_PARTITIONDATE`などのPARTITIONを用いる](#limit%E3%81%A7%E3%81%AF%E3%81%AA%E3%81%8F_partitiondate%E3%81%AA%E3%81%A9%E3%81%AEpartition%E3%82%92%E7%94%A8%E3%81%84%E3%82%8B)
+    - [PARTITIONの指定可能対象](#partition%E3%81%AE%E6%8C%87%E5%AE%9A%E5%8F%AF%E8%83%BD%E5%AF%BE%E8%B1%A1)
+  - [Shared Table vs PARTITIONED TABLE](#shared-table-vs-partitioned-table)
   - [`JOIN`句で結合する前にテーブルサイズを小さくする](#join%E5%8F%A5%E3%81%A7%E7%B5%90%E5%90%88%E3%81%99%E3%82%8B%E5%89%8D%E3%81%AB%E3%83%86%E3%83%BC%E3%83%96%E3%83%AB%E3%82%B5%E3%82%A4%E3%82%BA%E3%82%92%E5%B0%8F%E3%81%95%E3%81%8F%E3%81%99%E3%82%8B)
   - [`JOIN`句のテーブルの順番](#join%E5%8F%A5%E3%81%AE%E3%83%86%E3%83%BC%E3%83%96%E3%83%AB%E3%81%AE%E9%A0%86%E7%95%AA)
+  - [クラスタリング](#%E3%82%AF%E3%83%A9%E3%82%B9%E3%82%BF%E3%83%AA%E3%83%B3%E3%82%B0)
+  - [中間テーブルの生成依存関係をCloud Composerで管理する](#%E4%B8%AD%E9%96%93%E3%83%86%E3%83%BC%E3%83%96%E3%83%AB%E3%81%AE%E7%94%9F%E6%88%90%E4%BE%9D%E5%AD%98%E9%96%A2%E4%BF%82%E3%82%92cloud-composer%E3%81%A7%E7%AE%A1%E7%90%86%E3%81%99%E3%82%8B)
 
 <!-- END doctoc generated TOC please keep comment here to allow auto update -->
 
@@ -411,6 +416,19 @@ ON cat_dim.cat_id = apc2.cat_id;
 ```
 
 ## BigQuery Best Practices
+### 必要なカラムのみクエリする
+
+> DO
+
+- 分析に必要なカラムのみクエリする
+
+BigQueryはカラム指向ストレージであるため、指定されたカラムは上から下までフルスキャンされます. そのため、指定されたカラムが多いほどスキャンのデータ量が増えます. スキャンデータ量が多いほど処理に時間がかかりパフォーマンスが下がり、また料金コストも上昇するというデメリットがあります.
+
+**カラム指向ストレージとは？**
+
+- カラム指向ストレージとは、列単位でデータを格納する仕組みのこと(多くの他のRDBはレコード単位でデータを格納)
+- 列単位ではデータタイプが同一なので、データの圧縮効率が高くなる(=ストレージコストが安くなる)というメリットがあります
+
 ### `LIMIT`ではなく`_PARTITIONDATE`などのPARTITIONを用いる
 
 - `LIMIT`句はデータのスキャン量には影響を与えません. なのでQuery Performanceの観点からもクエリコスト管理の観点からも推奨されません 
@@ -428,9 +446,95 @@ WHERE
     _PARTITIONDATE BETWEEN TIMESTAMP("2016-01-01") AND TIMESTAMP("2016-01-31")
 ```
 
+#### PARTITIONの指定可能対象
+
+> 設定可能対象
+
+- データ読み込み時の日付部分
+- TIMESTAMP列
+- DATE列
+- DATETIME列
+- INTEGER列
+
+> EXAMPLE
+
+```sql
+--- DATE列をPARTITION列として指定
+CREATE TABLE
+  mydataset.newtable (transaction_id INT64, transaction_date DATE)
+PARTITION BY
+  transaction_date
+OPTIONS(
+  require_partition_filter=false
+);
+
+CREATE TABLE
+  mydataset.newtable (transaction_id INT64, transaction_date DATE)
+PARTITION BY
+  transaction_date
+AS SELECT transaction_id, transaction_date FROM mydataset.mytable;
+
+
+--- DATE列をMonthlyにトランクして、PARTITION列として指定
+CREATE TABLE
+  mydataset.newtable (transaction_id INT64, transaction_date DATE)
+PARTITION BY
+  DATE_TRUNC(transaction_date, MONTH)
+OPTIONS(
+  require_partition_filter=false
+);
+
+
+--- TIMESTAMP列をDailyにトランクして、PARTITION列として指定
+CREATE TABLE
+  mydataset.newtable (transaction_id INT64, transaction_ts TIMESTAMP)
+PARTITION BY
+  TIMESTAMP_TRUNC(transaction_ts, DAY)
+OPTIONS(
+  require_partition_filter=false
+);
+
+
+--- データ取り込み日をPARTITION列として指定
+CREATE TABLE
+  mydataset.newtable (transaction_id INT64)
+PARTITION BY
+  _PARTITIONDATE
+;
+
+
+--- INTERGER列をPARTITION列として指定
+CREATE TABLE mydataset.newtable (customer_id INT64, date1 DATE)
+PARTITION BY
+  RANGE_BUCKET(customer_id, GENERATE_ARRAY(0, 100, 10))
+OPTIONS(
+  require_partition_filter=false
+)
+```
+
+### Shared Table vs PARTITIONED TABLE
+
+> DO
+
+- 日付ごとにテーブル(`PREFIX_YYYYMMDD`)を作るのではなく、パーティション分割テーブルを利用する
+
+> WHY
+
+日付ごとにテーブルを作るアプローチは、以下のオーバーヘッドがあります:
+
+- 個別のテーブルごとにメタデータを保持する
+- クエリ実行時に個別のテーブルごとに権限を確認する必要がある
+
+> 例外
+
+日毎にrawデータ形式が異なる場合は、日付ごとに異なるスキーマを適用できるシャーディングテーブルを活用する(活用例：データソースでカラムが増減した場合でもそのまま取り込める)
+
+
 ### `JOIN`句で結合する前にテーブルサイズを小さくする
 
-BigQueryでは`JOIN`句を用いてテーブルを結合する際、まずBigQueryは両方のテーブルデータをシャッフルして、結合条件の演算を実施します. このシャッフルはスロットをオーバーロードするリスクがあります. ですので、事前にテーブルサイズを小さくできるならば、小さくしてから結合することが推奨されます
+BigQueryでは`JOIN`句を用いてテーブルを結合する際、まずBigQueryは両方のテーブルデータをシャッフルして、結合条件の演算を実施します. このシャッフルはスロットをオーバーロードするリスクがあります. ですので、事前にテーブルサイズを小さくできるならば、小さくしてから結合することが推奨されます.
+
+- BigQueryはストレージコストは大きくないので、データは非正規化したほうがよいとされています(=`JOIN`句を避けるようなテーブル設計)
 
 ### `JOIN`句のテーブルの順番
 
@@ -439,3 +543,53 @@ BigQueryでは`JOIN`句を用いてテーブルを結合する際、まずBigQue
 - 可能であるならば、`JOIN`句で指定するテーブルはデータサイズが大きいテーブル（行数が大きいテーブル）から呼んだほうがよい
 
 大きなテーブルをJOINの左側に、小さなテーブルをJOINの右側に配置すると、`broadcast join` が作成されます. `broadcast join`は、小さい方のテーブルのすべてのデータを、大きい方のテーブルを処理する各スロットに送ります. 具体的には、内部表側のデータがブロードキャストされる一方、外部表側のデータはそのままで移動されないことを指しています. 
+
+### クラスタリング
+
+> DO
+
+- 連続性の高いフィールドをクラスタキーとして設定
+
+> 効果
+
+- クラスタキーでスキャンしたブロックのみ費用が発生する(=費用削減)
+- データはパーティション内でソートされて保持されているので、`WHERE`句でクラスタキーとなるフィールドでフィルターを指定した場合、不要なデータのスキャンを省略してくれる
+- RDBのINDEXのイメージが近い
+
+> 設定可能対象
+
+- DATE
+- BOOL
+- GEOGRAPHY
+- INT64
+- NUMERIC
+- BIGNUMERIC
+- STRING
+- TIMESTAMP
+- DATETIME
+
+> LIMITATIONS
+
+- クラスタキーは４つまで設定可能
+- STRINGをキーに設定した場合、最初の1,024 charactersのみソートに用いられる
+
+> EXAMPLE
+
+```sql
+CREATE TABLE
+    `mydataset.ClusteredSalesData`
+PARTITION BY
+    DATE(timestamp)
+CLUSTER BY
+    customer_id,
+    product_id,
+    order_id AS
+SELECT
+    *
+FROM
+    `mydataset.SalesData`
+```
+
+### 中間テーブルの生成依存関係をCloud Composerで管理する
+
+- Cloud ComposerはApache Airflowベースのマネージド・サービス
