@@ -7,9 +7,8 @@ header-img: "img/post-git-github-logo.jpg"
 header-mask: 0.4
 catelog: true
 tags:
-  - zsh
   - 前処理
-  - xsv
+  - Shell
   - Docker
 ---
 

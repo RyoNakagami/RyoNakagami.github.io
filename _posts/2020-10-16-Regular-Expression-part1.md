@@ -12,7 +12,6 @@ goal: 成果物：文字列のキャプチャと置換ができるようにな�
 tags:
 
 - 正規表現
-- チートシート
 ---
 
 <!-- Global site tag (gtag.js) - Google Analytics -->

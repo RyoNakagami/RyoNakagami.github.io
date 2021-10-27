@@ -11,7 +11,7 @@ purpose:
 tags:
 
 - Ubuntu 20.04 LTS
-- Terminal
+- Shell
 ---
 
 <!-- Global site tag (gtag.js) - Google Analytics -->

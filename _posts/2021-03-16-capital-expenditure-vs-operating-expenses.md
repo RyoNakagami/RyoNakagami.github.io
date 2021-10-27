@@ -10,7 +10,7 @@ mathjax: true
 purpose: 
 tags:
 
-- 会計
+- 会計分析
 ---
 
 <!-- Global site tag (gtag.js) - Google Analytics -->

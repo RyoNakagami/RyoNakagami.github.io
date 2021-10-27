@@ -9,8 +9,7 @@ catelog: true
 purpose: 目的 プログラムが動作する根本的な仕組みを理解する
 goal: Goal プログラム実行時間がどのような要因に基づくのかのイメージできるようになる
 tags:
-  - IT全般
-  - コンピューターアーキテクチャー
+  - CS101
 ---
 
 <!-- Global site tag (gtag.js) - Google Analytics -->

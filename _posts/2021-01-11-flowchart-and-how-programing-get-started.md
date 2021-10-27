@@ -11,7 +11,7 @@ purpose:
 tags:
 
 - flow chart
-- IT全般
+- CS101
 - 料理
 ---
 

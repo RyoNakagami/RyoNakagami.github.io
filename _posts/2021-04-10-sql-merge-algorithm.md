@@ -9,7 +9,7 @@ mathjax: true
 purpose: 
 tags:
 
-- sql
+- SQL
 ---
 
 <!-- Global site tag (gtag.js) - Google Analytics -->
