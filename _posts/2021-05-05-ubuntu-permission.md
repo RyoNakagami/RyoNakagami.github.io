@@ -11,8 +11,7 @@ purpose:
 tags:
 
 - Ubuntu 20.04 LTS
-- permission
-- unmask
+- Shell
 ---
 
 <!-- Global site tag (gtag.js) - Google Analytics -->
