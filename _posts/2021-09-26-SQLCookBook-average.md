@@ -188,6 +188,26 @@ FROM
     agg_data
 ```
 
+> `fohoffa.x.meadianの挙動`
+
+```sql
+SELECT 
+    fhoffa.x.median([1,2,3]) median_1,
+    fhoffa.x.median([1,2,3,4]) median_2,
+    fhoffa.x.median([-10,2,3,4]) median_3,
+    fhoffa.x.median([-10,2,3,1000]) median_4
+```
+
+THEN
+
+```sql
+median_1	median_2	median_3	median_4
+2.0	2.5	2.5	2.5
+```
+
+
+
+
 ## 問題3: Moving Weighted Averageの計算方法
 
 問題２を少し改良して、分析データに新たにW(0~9のランダムのINT64)というカラムを追加します. このWの値をweightとして用いて、YについてのMoving averageを計算します.
