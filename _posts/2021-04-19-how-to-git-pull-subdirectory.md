@@ -7,7 +7,7 @@ header-mask: 0.4
 catelog: true
 tags:
   - git
-  - ブログ作業マニュアル
+  - GitHub
 ---
 
 <!-- Global site tag (gtag.js) - Google Analytics -->
