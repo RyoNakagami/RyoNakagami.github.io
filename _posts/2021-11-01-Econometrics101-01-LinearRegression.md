@@ -378,7 +378,7 @@ sns.heatmap(np.cov(observed_data, rowvar=False), annot=True, fmt='g');
 sns.heatmap(np.cov(data, rowvar=False), annot=True, fmt='g');
 ```
 
-> The true error term and regressors covariance matrix
+> The OLS residual term and regressors covariance matrix
 
 <img src='https://github.com/ryonakimageserver/omorikaizuka/blob/master/%E3%83%96%E3%83%AD%E3%82%B0%E7%94%A8/output.png?raw=true'>
 
