@@ -672,7 +672,7 @@ $$
 \begin{aligned}
 &y_i = \beta x_i + z_i'\gamma + u_i \: \text{ where } i = 1, \cdots 10000 \\
 &(x_i, z_i) \sim N\left(\left(\begin{array}{c}0\\0\\0\\0 \end{array}\right), \left(\begin{array}{cccc}1 & -1 & 2 & 0 \\-1 & 4 & -1 & 1\\2& -1 & 6 &-2 \\ 0 & 1 & -2 & 4 \end{array}\right)\right)\\
-&u_i \sim N(0, 1)\\
+&u_i \sim N(0, 1)
 
 \end{aligned}
 $$
