@@ -25,7 +25,7 @@ tags:
 
 ||概要|
 |---|---|
-|目的|Econometrics101 - Linear Regression|
+|目的|OLSの復習 1/N|
 
 **Table of Contents**
 <!-- START doctoc generated TOC please keep comment here to allow auto update -->
@@ -41,6 +41,8 @@ tags:
   - [Demeaned Regressors](#demeaned-regressors)
   - [Projection Matrix](#projection-matrix)
   - [Residual Regression: FWL theorem](#residual-regression-fwl-theorem)
+  - [Leverage Values](#leverage-values)
+    - [the leverageの３つの性質](#the-leverage%E3%81%AE%EF%BC%93%E3%81%A4%E3%81%AE%E6%80%A7%E8%B3%AA)
 
 <!-- END doctoc generated TOC please keep comment here to allow auto update -->
 
@@ -792,3 +794,357 @@ Kurtosis:                       2.980   Cond. No.                         1.00
 ==============================================================================
 
 ```
+
+- Degree of Freedomがモデルによって異なるので$\hat\beta_1$の値が一致してもstandard errorが異なる
+- R-squaredも $1 - \text{RSS}/\text{TSS} = \text{ESS}/\text{TSS}$という定義より、値が異なってくる
+
+
+> 練習問題: Partially Linear Model, Robinson Estomator 1988
+
+$$
+\begin{align*}
+y &= E[y|\mathbf x, \mathbf z] + u\tag{26}\\
+E[y|\mathbf x, \mathbf z] &= g(\mathbf x) + \mathbf z\beta\tag{27}\\
+E[u|\mathbf x, \mathbf z] & = 0\tag{28}
+\end{align*}
+$$
+
+- $g(\cdot)$: a general function of $\mathbf x$
+- $\beta$: $ 1 \times M$ vector
+
+というモデルを考えます. このとき、以下を証明せよ
+
+$$
+E[\tilde y|\tilde{\mathbf z}] = \tilde{\mathbf z}\beta
+$$
+
+- $\tilde y \equiv y - E[y\|\mathbf x]$
+- $\tilde y \equiv \mathbf z - E[\mathbf z\|\mathbf x]$
+
+> 証明
+
+$E[y\|\mathbf x]$についてまず考えます. (28)より$E[u\|\mathbf x] = E[E[y\|\mathbf x, \mathbf z]\|\mathbf x] =0$. 従って、
+
+$$
+E[y\|\mathbf x] = g(\mathbf x) + E[\mathbf z\|\mathbf x]\beta \tag{29}
+$$
+
+(26) - (29)より
+
+$$
+y - E[y\|\mathbf x] = (\mathbf z - E[\mathbf z\|\mathbf x])\beta\tag{30}
+$$
+
+この推定量は$E[y\|\mathbf x], E[\mathbf z\|\mathbf x]$をnonparametricに推定し、それを用いて$y, \athbf z$のresidualをそれぞれ計算. そのresidualsを用いてOLS regressionをするという形で計算します. この推定量から得られる$\hat\beta$は$\sqrt N$-consistent, asymptotically normalであることが知られています.
+
+<div style="text-align: right;">
+■
+</div>
+
+> Python simulation
+
+```python
+mport numpy as np
+import seaborn as sns
+import pandas as pd
+import matplotlib.pyplot as plt
+from scipy import stats
+import statsmodels.api as sm
+import statsmodels.formula.api as smf
+from statsmodels.sandbox.regression.predstd import wls_prediction_std
+
+import warnings
+warnings.filterwarnings('ignore')
+
+from matplotlib import style
+style.use("fivethirtyeight")
+
+## set seed
+np.random.seed(42)
+
+## parameter
+N = 1000
+mean = [0, 0]
+cov = [[1, -1], [-1, 3]]
+beta = 1.5
+gamma = np.array([[0.25, 0.75]]).T
+lottery = np.random.uniform(0, 1, N)
+
+## data generation
+Z = np.random.multivariate_normal(mean, cov, N)/2
+z_1, z_2 = np.hsplit(Z, [1,])
+D_hat = np.exp(Z @ gamma)/ (1 + np.exp(Z @ gamma))
+D = np.int64(lottery < D_hat.flatten()).reshape(N, 1)
+e = np.random.normal(0, 1, N).reshape(N, 1)
+y = D * beta + np.exp(z_1)**2 + np.sin(z_1 * np.pi) - z_1 **3 + np.cos(z_2 * np.pi)**2 + e
+
+## DataFrame
+df = pd.DataFrame(np.concatenate([y, D_hat, D, z_1, z_2], axis = 1), columns = ['y', 'D_hat', 'D', 'z_1', 'z_2'])
+```
+
+次に２グループの平均単純比較をします
+
+```python
+## Naive estimator
+naive = df.groupby('D')['y'].mean().values
+naive = np.insert(naive, 2, naive[1] - naive[0])
+res = pd.DataFrame([naive])
+res.columns = ['control mean', 'treated mean', 'mean diff']
+print(res)
+```
+
+Then
+
+```raw
+   control mean  treated mean  mean diff
+0      2.159487      3.543704   1.384217
+```
+
+OLS estimatesは
+
+```python
+model_naive = smf.ols('y ~ D + z_1 + z_2', data=df).fit()
+model_naive.summary()
+```
+
+Then
+
+```
+ OLS Regression Results                            
+==============================================================================
+Dep. Variable:                      y   R-squared:                       0.567
+Model:                            OLS   Adj. R-squared:                  0.566
+Method:                 Least Squares   F-statistic:                     434.8
+Date:                Wed, 10 Nov 2021   Prob (F-statistic):          1.71e-180
+Time:                        23:45:28   Log-Likelihood:                -1945.3
+No. Observations:                1000   AIC:                             3899.
+Df Residuals:                     996   BIC:                             3918.
+Df Model:                           3                                         
+Covariance Type:            nonrobust                                         
+==============================================================================
+                 coef    std err          t      P>|t|      [0.025      0.975]
+------------------------------------------------------------------------------
+Intercept      1.9697      0.078     25.165      0.000       1.816       2.123
+D              1.6919      0.112     15.043      0.000       1.471       1.913
+z_1            3.7839      0.133     28.550      0.000       3.524       4.044
+z_2            0.0196      0.080      0.247      0.805      -0.137       0.176
+==============================================================================
+Omnibus:                     1068.783   Durbin-Watson:                   2.014
+Prob(Omnibus):                  0.000   Jarque-Bera (JB):           160419.020
+Skew:                           4.761   Prob(JB):                         0.00
+Kurtosis:                      64.314   Cond. No.                         3.14
+==============================================================================
+```
+
+最後にRobinson estimatorを実施します（簡易版）
+
+```python
+## Robinson Estimator
+#--- kernel density estimator object
+kernel_D = stats.gaussian_kde(np.vstack([D.ravel(), z_1.ravel(),z_2.ravel()]), bw_method='silverman')
+kernel_Y = stats.gaussian_kde(np.vstack([y.ravel(), z_1.ravel(),z_2.ravel()]), bw_method='silverman')
+
+#--- input data for kernel desity estimation
+input_array = df.loc[:, ['z_1', 'z_2']].values
+D_input_array_0 = np.hstack([np.zeros(N).reshape(N, 1), input_array])
+D_input_array_1 = np.hstack([np.ones(N).reshape(N, 1), input_array])
+y_range = np.linspace(np.round(min(y), 2)-0.01, np.round(max(y)+0.01, 2), 3000)
+y_sample = len(y_range)
+y_kernel_hat = []
+
+#--- density estimation
+for row in input_array:
+    covariate_row_reshaped = np.tile(row, y_sample).reshape(y_sample, 2)
+    input_array_y = np.hstack([y_range.reshape(-1, 1), covariate_row_reshaped]).T
+    
+    prob_array = kernel_Y(np.array(input_array_y.tolist()))
+    conditional_mean = np.sum(y_range.ravel() * prob_array)/np.sum(prob_array)
+    
+    y_kernel_hat.append(conditional_mean)
+
+df_fix = df.copy()
+df_fix['y_kernel_hat'] = np.array(y_kernel_hat)
+df_fix['d_kernel_hat'] = kernel_D(D_input_array_1.T)/(kernel_D(D_input_array_0.T) + kernel_D(D_input_array_1.T))
+y_residual = df_fix['y'] - df_fix['y_kernel_hat']
+d_residual = df_fix['D'] - df_fix['d_kernel_hat']
+
+reg_robinson = sm.OLS(y_residual,d_residual)
+results = reg_robinson.fit(use_t = True, cov_type='HC2')
+print(results.summary())
+```
+
+Then,
+
+```raw
+                                OLS Regression Results                                
+=======================================================================================
+Dep. Variable:                      y   R-squared (uncentered):                   0.328
+Model:                            OLS   Adj. R-squared (uncentered):              0.327
+Method:                 Least Squares   F-statistic:                              505.5
+Date:                Wed, 10 Nov 2021   Prob (F-statistic):                    6.58e-91
+Time:                        23:41:23   Log-Likelihood:                         -1477.6
+No. Observations:                1000   AIC:                                      2957.
+Df Residuals:                     999   BIC:                                      2962.
+Df Model:                           1                                                  
+Covariance Type:                  HC2                                                  
+==============================================================================
+                 coef    std err          t      P>|t|      [0.025      0.975]
+------------------------------------------------------------------------------
+x1             1.5968      0.071     22.483      0.000       1.457       1.736
+==============================================================================
+Omnibus:                        0.490   Durbin-Watson:                   2.031
+Prob(Omnibus):                  0.783   Jarque-Bera (JB):                0.540
+Skew:                           0.051   Prob(JB):                        0.763
+Kurtosis:                       2.950   Cond. No.                         1.00
+==============================================================================
+```
+
+- もともとのthe error termの分散によってkernel density estimationの精度が大きく変わってしまう点に留意
+
+<div style="text-align: right;">
+■
+</div>
+
+### Leverage Values
+
+$$
+Y = X\beta + \epsilon
+$$
+
+- $X: n\times k$ matrix
+- $E[\epsilon\|X] = 0$
+- $\text{rank}(X) = k$
+
+というモデルを考えます. 射影行列の議論より、
+
+$$
+\hat Y = X(X'X)^{-1}X'Y\tag{31}
+$$
+
+(31)の射影行列はthe hat matrixともいい、
+
+$$
+\begin{align*}
+H &= X(X'X)^{-1}X' \tag{32}\\
+H& = (h_{ii}) \tag{33}
+\end{align*}
+$$
+
+(31)と(33)を比較すると、
+
+$$
+\hat{y}_i=h_{i1}y_1+h_{i2}y_2+...+h_{ii}y_i+ ... + h_{in}y_n  \;\;\;\;\; \text{ for } i=1, ..., n \tag{34}
+$$
+
+つまり、$h_{ij}$はthe observed outcomeが予測値に与える影響を数値化したものといえるため、$h_{ii}$のことをthe leverageといいます.
+
+> REMARKS
+
+- $h_{ij}$はデータポイントのx値とn個のデータポイントすべてのx値の平均との間の距離を表す指標と考えることもできます
+- Outlier detectionで活用されることもあります
+
+> Python: The leverageとcovariateの関係
+
+「$h_{ij}$はデータポイントのx値とn個のデータポイントすべてのx値の平均との間の距離を表す指標」であることをPythonを用いて確認したいと思います.
+
+```python
+import numpy as np
+import seaborn as sns
+import pandas as pd
+import matplotlib.pyplot as plt
+import statsmodels.api as sm
+import statsmodels.formula.api as smf
+
+## generating data
+data = [
+        [1, 0.1, -0.0716],
+        [2, 0.45401, 4.1673],
+        [3, 1.09765,	6.5703],
+        [4, 1.27936, 13.815],
+        [5, 2.20611, 11.4501],
+        [6, 2.50064, 12.9554],
+        [7, 3.0403, 20.1575],
+        [8, 3.23583, 17.5633],
+        [9, 4.45308, 26.0317],
+        [10, 4.1699, 22.7573],
+        [11, 5.28474, 26.303],
+        [12, 5.59238, 30.6885],
+        [13, 5.92091, 33.9402],
+        [14, 6.66066, 30.9228],
+        [15, 6.79953, 34.11],
+        [16, 7.97943, 44.4536],
+        [17, 8.41536, 46.5022],
+        [18, 8.71607, 50.0568],
+        [19, 8.70156, 46.5475],
+        [20, 9.16463, 45.7762],
+        [21, 4, 40]
+        ]
+df = pd.DataFrame(data, columns = ['row', 'x', 'y'])
+df['const'] = 1
+
+## compute the Hat matrix
+X = df.loc[:, ['const', 'x']].values.reshape(-1, 2)
+H_matrix = X @ np.linalg.inv(X.T @ X) @ X.T
+df['h_leverage'] = np.diag(H_matrix)
+
+## the leverageとx valueの関係
+ns.scatterplot(x='x', y='h_leverage', data=df)
+plt.axvline(np.mean(df['x']), color='k', linestyle='dashed', linewidth=1)
+min_ylim, max_ylim = plt.ylim()
+plt.text(np.mean(df['x'])*1.1, max_ylim*0.9, 'x Mean: {:.2f}'.format(np.mean(df['x'])));
+```
+
+Then,
+
+<img src="https://github.com/ryonakimageserver/omorikaizuka/blob/master/%E3%83%96%E3%83%AD%E3%82%B0%E7%94%A8/20211101_H_hat_matrix.png?raw=true">
+
+#### the leverageの３つの性質
+
+> Theorem
+
+1. $\sum_{i}^N h_{11} = k$
+2. $0 \leq h_{11} \leq 1$
+3. $h_{ii} \geq 1/n$ if an intercept is included
+
+> Proof (1)
+
+$$
+\begin{aligned}
+\sum_{i}^N h_{11} &= tr(X(X'X)^{-1}X')\\
+&= tr((X'X)^{-1}X'X)\\
+&= k 
+\end{aligned}
+$$
+
+<div style="text-align: right;">
+■
+</div>
+
+> Proof (2)
+
+$H$は $H = HH$という性質を持っているので
+
+$$
+h_{ii} = \sum_{i=1}^N h_i**2
+$$
+
+従って、$h_{ii} \geq 0$. また、(1)より $\sum h_{ii} = k \leq n$なので$h_{ii}\leq 1$
+
+<div style="text-align: right;">
+■
+</div>
+
+> Proof (3)
+
+$X = [1, \hat X_i]$の場合を考えます. 
+
+$$
+\begin{aligned}
+h_{ii} &= (1, \hat X_i')\left(\begin{array}{cc}n&0\\0&\hat X_i'\hat X_i\end{array}\right)^{-1}\left(\begin{array}{c}1\\ \hat X_i\end{array}\right)\\
+&= \frac{1}{n} + \hat X_i'(\hat X_i'\hat X_i)^{-1}\hat X_i \geq \frac{1}{n}
+\end{aligned}
+$$
+
+<div style="text-align: right;">
+■
+</div>
