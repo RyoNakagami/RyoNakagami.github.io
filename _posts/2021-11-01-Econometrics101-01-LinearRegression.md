@@ -689,7 +689,7 @@ $$
 <div class="math display" style="overflow: auto">
 $$
 \begin{aligned}
-(X_1'M_{2k}'M_2{2k}X_1)^{-1}X_1'M_{2k}'M_{2k}Y &= \hat\beta_1 + (X_1'M_{2k}'M_2{2k}X_1)^{-1}X_1'M_{2k}'M_{2k}\hat e_i\\
+(X_1'M_{2k}'M_{2k}X_1)^{-1}X_1'M_{2k}'M_{2k}Y &= \hat\beta_1 + (X_1'M_{2k}'M_2{2k}X_1)^{-1}X_1'M_{2k}'M_{2k}\hat e_i\\
 &= \hat\beta_1 + \hat e_i
 \end{aligned}
 $$
