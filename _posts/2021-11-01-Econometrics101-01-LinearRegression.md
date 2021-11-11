@@ -446,7 +446,8 @@ $$
 <div class="math display" style="overflow: auto">
 $$
 \begin{align*}
-\hat\beta &= \left(\sum_{i=1}X_i\left(X_i - \bar X\right)'\right)^{-1}\left(\sum_{i=1}X_i\left(Y_i - \bar Y\right)\right)\\
+&\hat\beta \\
+&= \left(\sum_{i=1}X_i\left(X_i - \bar X\right)'\right)^{-1}\left(\sum_{i=1}X_i\left(Y_i - \bar Y\right)\right)\\
 &= \left(\sum_{i=1}\left(X_i - \bar X\right)\left(X_i - \bar X\right)'\right)^{-1}\left(\sum_{i=1}\left(X_i - \bar X\right)\left(Y_i - \bar Y\right)\right) \tag{14}
 \end{align*}
 $$
@@ -676,7 +677,8 @@ $$
 <div class="math display" style="overflow: auto">
 $$
 \begin{align*}
-(\hat V'\hat V)^{-1}\hat V'Y  &= (X_1'M_{2k}X_1)^{-1}X_1'M_{2k}Y\\
+&(\hat V'\hat V)^{-1}\hat V'Y  \\
+&= (X_1'M_{2k}X_1)^{-1}X_1'M_{2k}Y\\
 &= (X_1'M_{2k}'M_2{2k}X_1)^{-1}X_1'M_{2k}'M_{2k}Y\tag{25}
 \end{align*}
 $$
