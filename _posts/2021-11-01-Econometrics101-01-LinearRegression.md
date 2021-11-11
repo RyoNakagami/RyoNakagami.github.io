@@ -1,7 +1,7 @@
 ---
 layout: post
 title: "Econometrics101 - 復習"
-subtitle: "Linear Regression"
+subtitle: "Linear Regression: OLS finite sample and larger sample property"
 author: "Ryo"
 header-img: "img/about-bg.jpg"
 header-mask: 0.4
@@ -25,7 +25,9 @@ tags:
 
 ||概要|
 |---|---|
-|目的|OLSの復習 1/N|
+|目的|Linear Regression: OLS finite sample and larger sample property|
+|参考|- [PennState STAT 501](https://online.stat.psu.edu/stat501/lesson/11/11.2)|
+|関連記事||
 
 **Table of Contents**
 <!-- START doctoc generated TOC please keep comment here to allow auto update -->
@@ -68,9 +70,11 @@ $$
 
 (1) のFOCをとると
 
+<div class="math display" style="overflow: auto">
 $$
 E[X_i(Y_i - X_i'b)] = 0 \Rightarrow \beta = E[X_iX_i']^{-1}E[X_iY_i] \tag{2}
 $$
+</div>
 
 この$\beta$の解釈をまず解説します.
 
@@ -132,6 +136,7 @@ $$
 
 > Proof
 
+<div class="math display" style="overflow: auto">
 $$
 \begin{aligned}
 E[(Y_i - m(X_i))^2] &= E[(Y_i - E[Y_i|X_i] + E[Y_i|X_i] - m(X_i))^2]\\
@@ -139,6 +144,7 @@ E[(Y_i - m(X_i))^2] &= E[(Y_i - E[Y_i|X_i] + E[Y_i|X_i] - m(X_i))^2]\\
 &= E[(E[Y_i|X_i] - m(X_i))^2]
 \end{aligned}
 $$
+</div>
 
 <div style="text-align: right;">
 ■
@@ -153,12 +159,14 @@ the CEFがLinearのとき、$$X_i'\beta$$はthe CEFそのものである.
 
 $E[Y_i\|X_i] = X_i'\beta^*$と仮定します. このとき、定理1-1より
 
+<div class="math display" style="overflow: auto">
 $$
 \begin{aligned}
 &E[X_i(Y_i - E[Y_i|X_i])] = 0\\
 &\Rightarrow E[X_i(Y_i - X_i'\beta^*)] = E[X_iY_i] - E[X_iX_i']\beta^* = 0
 \end{aligned}
 $$
+</div>
 
 よって
 $$
@@ -184,6 +192,7 @@ $$
 
 > Proof
 
+<div class="math display" style="overflow: auto">
 $$
 \begin{aligned}
 E\{(E[Y_i|X_i] - X_i'b)^2\} &= E\{(Y - E[Y_i|X_i])^2 + 2(Y - E[Y_i|X_i])(Y - X_i'b) +(Y - X_i'b)^2 \} \\
@@ -191,12 +200,15 @@ E\{(E[Y_i|X_i] - X_i'b)^2\} &= E\{(Y - E[Y_i|X_i])^2 + 2(Y - E[Y_i|X_i])(Y - X_i
 &= \text{ constant } + E[(Y - X_i'b)^2]
 \end{aligned}
 $$
+</div>
 
 従って、
 
+<div class="math display" style="overflow: auto">
 $$
 \arg\min_{b} E\{(E[Y_i|X_i] - X_i'b)^2\} = \arg\min_{b} E[(Y - X_i'b)^2]
 $$
+</div>
 
 <div style="text-align: right;">
 ■
@@ -204,17 +216,21 @@ $$
 
 なお$\beta$がThe BEST MMSE linear approximationであることは以下の式からもわかります
 
+<div class="math display" style="overflow: auto">
 $$
 \beta = E[X_iX_i']^{-1}E[X_iY_i] = E[X_iX_i']^{-1}E[X_iE(Y_i|X_i)]
 $$
+</div>
 
 > Approxiamtionはsupportに依存する
 
 $\text{Supp}(X)$をrandom vector $X$のサポートと定義します. このとき
 
+<div class="math display" style="overflow: auto">
 $$
 E\{(E[Y_i|X_i] - X_i'b)^2\} = \int_{x\in \text{Supp}(X)} (E[Y|X = x] - x'b)^2f_X(x)dx
 $$
+</div>
 
 よって、
 
@@ -263,9 +279,11 @@ $$
 
 よって、
 
+<div class="math display" style="overflow: auto">
 $$
 E[Y_i|D_i = 1] - E[Y_i|D_i = 1] = \beta + E[\eta_i|D_i = 1] - E[\eta_i|D_i = 0] \tag{3}
 $$
+</div>
 
 とATE + selection biasの関係性が見えてきます. 仮に $E[\eta_i \perp D_i]$が成立している場合、(3)のselection biasの項が消えるので、単回帰モデルでATEが推定できることがわかります.
 
@@ -279,6 +297,7 @@ $$
 
 このとき、treatment statusに応じたグループ間の差分はATT + selection biasで表現できます.
 
+<div class="math display" style="overflow: auto">
 $$
 \begin{aligned}
 E[y|s=1] - E[y|s=0] &= E[E[y|\mathbf x, s = 1]|s=1] - E[E[y|\mathbf x, s = 0]|s=0]\\
@@ -286,6 +305,7 @@ E[y|s=1] - E[y|s=0] &= E[E[y|\mathbf x, s = 1]|s=1] - E[E[y|\mathbf x, s = 0]|s=
 &= \underbrace{\left(E[\mu_1(\mathbf x)|s=1] - E[\mu_0(\mathbf x)|s=1] \right)}_{\text{ATT}} + \underbrace{\left(E[\mu_0(\mathbf x)|s=1] - E[\mu_0(\mathbf x)|s=0]\right)}_{\text{selection bias}}
 \end{aligned}
 $$
+</div>
 
 次に、$\mu_s(\mathbf x) = \mathbf x\beta_s$とします.
 
@@ -423,12 +443,14 @@ $$
 
 これを$\hat\beta$について解くと
 
+<div class="math display" style="overflow: auto">
 $$
 \begin{align*}
 \hat\beta &= \left(\sum_{i=1}X_i\left(X_i - \bar X\right)'\right)^{-1}\left(\sum_{i=1}X_i\left(Y_i - \bar Y\right)\right)\\
 &= \left(\sum_{i=1}\left(X_i - \bar X\right)\left(X_i - \bar X\right)'\right)^{-1}\left(\sum_{i=1}\left(X_i - \bar X\right)\left(Y_i - \bar Y\right)\right) \tag{14}
 \end{align*}
 $$
+</div>
 
 > REMARKS
 
@@ -564,12 +586,14 @@ $$
 
 表記の簡略化のため
 
+<div class="math display" style="overflow: auto">
 $$
 \begin{align*}
 \left(\begin{array}{cc}X_1'X_1 & X_1'X_2\\X_2'X_1 & X_2'X_2\end{array}\right)^{-1}&\equiv \left(\begin{array}{cc}Q_{11} & Q_{12}\\Q_{21} & Q_{22}\end{array}\right)^{-1}\\
 &= \left(\begin{array}{cc}Q_{11\cdot 2}^{-1} & -Q_{11\cdot 2}^{-1}Q_{12}Q_{21}^{-1}\\-Q_{22\cdot 1}^{-1}Q_{21}Q_{11}^{-1} & Q_{22\cdot 1}^{-1}\end{array}\right)\tag{18}
 \end{align*}
 $$
+</div>
 
 このとき
 
@@ -582,6 +606,7 @@ $$
 
 よって,
 
+<div class="math display" style="overflow: auto">
 $$
 \begin{align*}
 \left(\begin{array}{cc}X_1'X_1 & X_1'X_2\\X_2'X_1 & X_2'X_2\end{array}\right)^{-1}\left[\begin{array}{c}X_1'\\X_2'\end{array}\right]X_1
@@ -591,6 +616,7 @@ $$
 &= \left(\begin{array}{c}1\\ 0 \end{array}\right)\tag{19}
 \end{align*}
 $$
+</div>
 
 (19)の結果を用いると
 
@@ -616,7 +642,7 @@ $$
 
 $$
 \begin{align*}
-X_1 &= X_2\hat\alpha_2 + \cdots + X_K\hat\alpha_K + \hat V
+X_1 &= X_2\hat\alpha_2 + \cdots + X_K\hat\alpha_K + \hat V\\
 &= \hat X_1 + \hat V \tag{21}
 \end{align*}
 $$
@@ -646,24 +672,27 @@ $$
 
 (23)に(24)を代入すると
 
+<div class="math display" style="overflow: auto">
 $$
 \begin{align*}
 (\hat V'\hat V)^{-1}\hat V'Y  &= (X_1'M_{2k}X_1)^{-1}X_1'M_{2k}Y\\
 &= (X_1'M_{2k}'M_2{2k}X_1)^{-1}X_1'M_{2k}'M_{2k}Y\tag{25}
 \end{align*}
 $$
+</div>
 
 (25)から$Y$を$(X_2, \cdots, X_K)$に回帰した残差を$X_1$を$(X_2, \cdots, X_K)$に回帰した残差すると$\hat\beta_1$が得られることがわかります. また、(25)の結果得られる残差と$\hat e$も一致します.
 
-> 証明
+> Proof
 
+<div class="math display" style="overflow: auto">
 $$
 \begin{aligned}
 (X_1'M_{2k}'M_2{2k}X_1)^{-1}X_1'M_{2k}'M_{2k}Y &= \hat\beta_1 + (X_1'M_{2k}'M_2{2k}X_1)^{-1}X_1'M_{2k}'M_{2k}\hat e_i\\
 &= \hat\beta_1 + \hat e_i
 \end{aligned}
 $$
-
+</div>
 <div style="text-align: right;">
 ■
 </div>
@@ -801,6 +830,7 @@ Kurtosis:                       2.980   Cond. No.                         1.00
 
 > 練習問題: Partially Linear Model, Robinson Estomator 1988
 
+<div class="math display" style="overflow: auto">
 $$
 \begin{align*}
 y &= E[y|\mathbf x, \mathbf z] + u\tag{26}\\
@@ -808,6 +838,7 @@ E[y|\mathbf x, \mathbf z] &= g(\mathbf x) + \mathbf z\beta\tag{27}\\
 E[u|\mathbf x, \mathbf z] & = 0\tag{28}
 \end{align*}
 $$
+</div>
 
 - $g(\cdot)$: a general function of $\mathbf x$
 - $\beta$: $ 1 \times M$ vector
@@ -835,7 +866,7 @@ $$
 y - E[y\|\mathbf x] = (\mathbf z - E[\mathbf z\|\mathbf x])\beta\tag{30}
 $$
 
-この推定量は$E[y\|\mathbf x], E[\mathbf z\|\mathbf x]$をnonparametricに推定し、それを用いて$y, \athbf z$のresidualをそれぞれ計算. そのresidualsを用いてOLS regressionをするという形で計算します. この推定量から得られる$\hat\beta$は$\sqrt N$-consistent, asymptotically normalであることが知られています.
+この推定量は$E[y\|\mathbf x], E[\mathbf z\|\mathbf x]$をnonparametricに推定し、それを用いて$y, \mathbf z$のresidualをそれぞれ計算. そのresidualsを用いてOLS regressionをするという形で計算します. この推定量から得られる$\hat\beta$は$\sqrt N$-consistent, asymptotically normalであることが知られています.
 
 <div style="text-align: right;">
 ■
@@ -1032,9 +1063,11 @@ $$
 
 (31)と(33)を比較すると、
 
+<div class="math display" style="overflow: auto">
 $$
 \hat{y}_i=h_{i1}y_1+h_{i2}y_2+...+h_{ii}y_i+ ... + h_{in}y_n  \;\;\;\;\; \text{ for } i=1, ..., n \tag{34}
 $$
+</div>
 
 つまり、$h_{ij}$はthe observed outcomeが予測値に与える影響を数値化したものといえるため、$h_{ii}$のことをthe leverageといいます.
 
@@ -1125,7 +1158,7 @@ $$
 $H$は $H = HH$という性質を持っているので
 
 $$
-h_{ii} = \sum_{i=1}^N h_i**2
+h_{ii} = \sum_{i=1}^N h_i^2
 $$
 
 従って、$h_{ii} \geq 0$. また、(1)より $\sum h_{ii} = k \leq n$なので$h_{ii}\leq 1$
