@@ -589,7 +589,8 @@ $$
 <div class="math display" style="overflow: auto">
 $$
 \begin{align*}
-\left(\begin{array}{cc}X_1'X_1 & X_1'X_2\\X_2'X_1 & X_2'X_2\end{array}\right)^{-1}&\equiv \left(\begin{array}{cc}Q_{11} & Q_{12}\\Q_{21} & Q_{22}\end{array}\right)^{-1}\\
+&\left(\begin{array}{cc}X_1'X_1 & X_1'X_2\\X_2'X_1 & X_2'X_2\end{array}\right)^{-1}\\
+&\equiv \left(\begin{array}{cc}Q_{11} & Q_{12}\\Q_{21} & Q_{22}\end{array}\right)^{-1}\\
 &= \left(\begin{array}{cc}Q_{11\cdot 2}^{-1} & -Q_{11\cdot 2}^{-1}Q_{12}Q_{21}^{-1}\\-Q_{22\cdot 1}^{-1}Q_{21}Q_{11}^{-1} & Q_{22\cdot 1}^{-1}\end{array}\right)\tag{18}
 \end{align*}
 $$
