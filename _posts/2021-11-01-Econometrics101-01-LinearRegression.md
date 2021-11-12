@@ -448,7 +448,7 @@ $$
 \begin{align*}
 &\hat\beta \\
 &= \left(\sum_{i=1}X_i\left(X_i - \bar X\right)'\right)^{-1}\left(\sum_{i=1}X_i\left(Y_i - \bar Y\right)\right)\\
-&= \left(\sum_{i=1}\left(X_i - \bar X\right)\left(X_i - \bar X\right)'\right)^{-1}\left(\sum_{i=1}\left(X_i - \bar X\right)\left(Y_i - \bar Y\right)\right) \tag{14}
+&= \left(\sum_{i=1}\left(X_i - \bar X\right)\left(X_i - \bar X\right)'\right)^{-1}\left(\sum_{i=1}\left(X_i - \bar X\right)\left(Y_i - \bar Y\right)\right)\quad\quad  \tag{14}
 \end{align*}
 $$
 </div>
