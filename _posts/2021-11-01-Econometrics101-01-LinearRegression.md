@@ -679,7 +679,7 @@ $$
 \begin{align*}
 &(\hat V'\hat V)^{-1}\hat V'Y  \\
 &= (X_1'M_{2k}X_1)^{-1}X_1'M_{2k}Y\\
-&= (X_1'M_{2k}'M_2{2k}X_1)^{-1}X_1'M_{2k}'M_{2k}Y\tag{25}
+&= (X_1'M_{2k}'M_{2k}X_1)^{-1}X_1'M_{2k}'M_{2k}Y\tag{25}
 \end{align*}
 $$
 </div>
