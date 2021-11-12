@@ -496,7 +496,7 @@ Then, The resutls are
 Dep. Variable:                 income   R-squared:                       0.525
 Model:                            OLS   Adj. R-squared:                  0.514
 Method:                 Least Squares   F-statistic:                     47.51
-Date:                Mon, 08 Nov 2021   Prob (F-statistic):           1.84e-08
+Date:                xxx, dd mmm yyyy   Prob (F-statistic):           1.84e-08
 Time:                        01:43:38   Log-Likelihood:                -190.42
 No. Observations:                  45   AIC:                             384.8
 Df Residuals:                      43   BIC:                             388.5
@@ -522,7 +522,7 @@ Notes:
 Dep. Variable:                 income   R-squared (uncentered):                   0.525
 Model:                            OLS   Adj. R-squared (uncentered):              0.514
 Method:                 Least Squares   F-statistic:                              48.62
-Date:                Mon, 08 Nov 2021   Prob (F-statistic):                    1.25e-08
+Date:                xxx, dd mmm yyyy   Prob (F-statistic):                    1.25e-08
 Time:                        01:43:17   Log-Likelihood:                         -190.42
 No. Observations:                  45   AIC:                                      382.8
 Df Residuals:                      44   BIC:                                      384.6
@@ -756,7 +756,7 @@ Then,
 Dep. Variable:                      y   R-squared (uncentered):                   0.990
 Model:                            OLS   Adj. R-squared (uncentered):              0.990
 Method:                 Least Squares   F-statistic:                          2.466e+05
-Date:                Tue, 09 Nov 2021   Prob (F-statistic):                        0.00
+Date:                xxx, dd mmm yyyy   Prob (F-statistic):                        0.00
 Time:                        03:49:15   Log-Likelihood:                         -14191.
 No. Observations:               10000   AIC:                                  2.839e+04
 Df Residuals:                    9996   BIC:                                  2.842e+04
@@ -770,22 +770,13 @@ x2             1.9852      0.014    139.290      0.000       1.957       2.013
 x3             3.0339      0.023    129.403      0.000       2.988       3.080
 x4             4.0271      0.016    253.591      0.000       3.996       4.058
 ==============================================================================
-Omnibus:                        3.630   Durbin-Watson:                   1.985
-Prob(Omnibus):                  0.163   Jarque-Bera (JB):                3.654
-Skew:                          -0.046   Prob(JB):                        0.161
-Kurtosis:                       2.980   Cond. No.                         19.7
-==============================================================================
-
-Notes:
-[1] R² is computed without centering (uncentered) since the model does not contain a constant.
-[2] Standard Errors assume that the covariance matrix of the errors is correctly specified.
 
                                  Residual Regression Part 1 Results                                
 =======================================================================================
 Dep. Variable:                      y   R-squared (uncentered):                   0.000
 Model:                            OLS   Adj. R-squared (uncentered):              0.000
 Method:                 Least Squares   F-statistic:                              2.315
-Date:                Tue, 09 Nov 2021   Prob (F-statistic):                       0.128
+Date:                xxx, dd mmm yyyy   Prob (F-statistic):                       0.128
 Time:                        03:49:21   Log-Likelihood:                         -37200.
 No. Observations:               10000   AIC:                                  7.440e+04
 Df Residuals:                    9999   BIC:                                  7.441e+04
@@ -796,11 +787,6 @@ Covariance Type:            nonrobust
 ------------------------------------------------------------------------------
 x1             0.9261      0.609      1.521      0.128      -0.267       2.119
 ==============================================================================
-Omnibus:                        1.557   Durbin-Watson:                   1.999
-Prob(Omnibus):                  0.459   Jarque-Bera (JB):                1.588
-Skew:                          -0.026   Prob(JB):                        0.452
-Kurtosis:                       2.967   Cond. No.                         1.00
-==============================================================================
 
 
                               Residual Regression Part 2 Results                                
@@ -808,7 +794,7 @@ Kurtosis:                       2.967   Cond. No.                         1.00
 Dep. Variable:                      y   R-squared (uncentered):                   0.023
 Model:                            OLS   Adj. R-squared (uncentered):              0.022
 Method:                 Least Squares   F-statistic:                              230.7
-Date:                Tue, 09 Nov 2021   Prob (F-statistic):                    1.57e-51
+Date:                xxx, dd mmm yyyy   Prob (F-statistic):                    1.57e-51
 Time:                        03:49:29   Log-Likelihood:                         -14191.
 No. Observations:               10000   AIC:                                  2.838e+04
 Df Residuals:                    9999   BIC:                                  2.839e+04
@@ -818,11 +804,6 @@ Covariance Type:            nonrobust
                  coef    std err          t      P>|t|      [0.025      0.975]
 ------------------------------------------------------------------------------
 x1             0.9261      0.061     15.189      0.000       0.807       1.046
-==============================================================================
-Omnibus:                        3.630   Durbin-Watson:                   1.985
-Prob(Omnibus):                  0.163   Jarque-Bera (JB):                3.654
-Skew:                          -0.046   Prob(JB):                        0.161
-Kurtosis:                       2.980   Cond. No.                         1.00
 ==============================================================================
 
 ```
@@ -860,13 +841,13 @@ $$
 $E[y\|\mathbf x]$についてまず考えます. (28)より$E[u\|\mathbf x] = E[E[y\|\mathbf x, \mathbf z]\|\mathbf x] =0$. 従って、
 
 $$
-E[y\|\mathbf x] = g(\mathbf x) + E[\mathbf z\|\mathbf x]\beta \tag{29}
+E[y|\mathbf x] = g(\mathbf x) + E[\mathbf z|\mathbf x]\beta \tag{29}
 $$
 
 (26) - (29)より
 
 $$
-y - E[y\|\mathbf x] = (\mathbf z - E[\mathbf z\|\mathbf x])\beta\tag{30}
+y - E[y|\mathbf x] = (\mathbf z - E[\mathbf z|\mathbf x])\beta\tag{30}
 $$
 
 この推定量は$E[y\|\mathbf x], E[\mathbf z\|\mathbf x]$をnonparametricに推定し、それを用いて$y, \mathbf z$のresidualをそれぞれ計算. そのresidualsを用いてOLS regressionをするという形で計算します. この推定量から得られる$\hat\beta$は$\sqrt N$-consistent, asymptotically normalであることが知られています.
@@ -949,7 +930,7 @@ Then
 Dep. Variable:                      y   R-squared:                       0.567
 Model:                            OLS   Adj. R-squared:                  0.566
 Method:                 Least Squares   F-statistic:                     434.8
-Date:                Wed, 10 Nov 2021   Prob (F-statistic):          1.71e-180
+Date:                xxx, dd mmm yyyy   Prob (F-statistic):          1.71e-180
 Time:                        23:45:28   Log-Likelihood:                -1945.3
 No. Observations:                1000   AIC:                             3899.
 Df Residuals:                     996   BIC:                             3918.
@@ -962,11 +943,6 @@ Intercept      1.9697      0.078     25.165      0.000       1.816       2.123
 D              1.6919      0.112     15.043      0.000       1.471       1.913
 z_1            3.7839      0.133     28.550      0.000       3.524       4.044
 z_2            0.0196      0.080      0.247      0.805      -0.137       0.176
-==============================================================================
-Omnibus:                     1068.783   Durbin-Watson:                   2.014
-Prob(Omnibus):                  0.000   Jarque-Bera (JB):           160419.020
-Skew:                           4.761   Prob(JB):                         0.00
-Kurtosis:                      64.314   Cond. No.                         3.14
 ==============================================================================
 ```
 
@@ -1015,7 +991,7 @@ Then,
 Dep. Variable:                      y   R-squared (uncentered):                   0.328
 Model:                            OLS   Adj. R-squared (uncentered):              0.327
 Method:                 Least Squares   F-statistic:                              505.5
-Date:                Wed, 10 Nov 2021   Prob (F-statistic):                    6.58e-91
+Date:                xxx, dd mmm yyyy   Prob (F-statistic):                    6.58e-91
 Time:                        23:41:23   Log-Likelihood:                         -1477.6
 No. Observations:                1000   AIC:                                      2957.
 Df Residuals:                     999   BIC:                                      2962.
@@ -1025,11 +1001,6 @@ Covariance Type:                  HC2
                  coef    std err          t      P>|t|      [0.025      0.975]
 ------------------------------------------------------------------------------
 x1             1.5968      0.071     22.483      0.000       1.457       1.736
-==============================================================================
-Omnibus:                        0.490   Durbin-Watson:                   2.031
-Prob(Omnibus):                  0.783   Jarque-Bera (JB):                0.540
-Skew:                           0.051   Prob(JB):                        0.763
-Kurtosis:                       2.950   Cond. No.                         1.00
 ==============================================================================
 ```
 
@@ -1064,6 +1035,7 @@ H& = (h_{ii}) \tag{33}
 \end{align*}
 $$
 
+
 (31)と(33)を比較すると、
 
 <div class="math display" style="overflow: auto">
@@ -1072,16 +1044,25 @@ $$
 $$
 </div>
 
-つまり、$h_{ij}$はthe observed outcomeが予測値に与える影響を数値化したものといえるため、$h_{ii}$のことをthe leverageといいます.
+つまり、$h_{ii}$はthe observed outcome, $\hat y_i$ が予測値に与える影響を数値化したものといえるため、$h_{ii}$ のことをthe leverageといいます.
+
 
 > REMARKS
 
-- $h_{ij}$はデータポイントのx値とn個のデータポイントすべてのx値の平均との間の距離を表す指標と考えることもできます
+- $h_{ii}$はデータポイントのx値とn個のデータポイントすべてのx値の平均との間の距離を表す指標と考えることもできます
 - Outlier detectionで活用されることもあります
+- $h_{ii}$ について簡単な計算をすると以下のことが示せます:
+
+$$
+h_{ii} = X_i'(X'X)^{-1}X_i\tag{35}
+$$
+
 
 > Python: The leverageとcovariateの関係
 
 「$h_{ij}$はデータポイントのx値とn個のデータポイントすべてのx値の平均との間の距離を表す指標」であることをPythonを用いて確認したいと思います.
+
+
 
 ```python
 import numpy as np
@@ -1138,15 +1119,15 @@ Then,
 
 > Theorem
 
-1. $\sum_{i}^N h_{11} = k$
-2. $0 \leq h_{11} \leq 1$
+1. $\sum_{i}^N h_{ii} = k$
+2. $0 \leq h_{ii} \leq 1$
 3. $h_{ii} \geq 1/n$ if an intercept is included
 
 > Proof (1)
 
 $$
 \begin{aligned}
-\sum_{i}^N h_{11} &= tr(X(X'X)^{-1}X')\\
+\sum_{i}^N h_{ii} &= tr(X(X'X)^{-1}X')\\
 &= tr((X'X)^{-1}X'X)\\
 &= k 
 \end{aligned}
@@ -1184,3 +1165,95 @@ $$
 <div style="text-align: right;">
 ■
 </div>
+
+#### Leave-One-Out Regression
+
+$$
+Y = X\beta + \epsilon
+$$
+
+- $X_i$: k vector for ith observation
+- $E[\epsilon\|X] = 0$
+
+というモデルを考えます. これをLeave-One-Out Regression(LOO)という手法で推定します. LOOとは、自分自身のobservationを除外したsub-sampleを用いてパラメータを推定し、そのパラメータを用いて自分自身のoutcomeを予測するという手法です.
+
+<div class="math display" style="overflow: auto">
+$$
+\begin{align*}
+\tilde \beta_{-i} & = \left(\sum_{j\neq i}X_jX_j'\right)^{-1}\sum_{j\neq i}X_jY_j\\
+&= (X'X - X_i'X_i)^{-1}(X'Y - X_iY_i)\\
+&= (X_{-i}'X_{-i})^{-1}X_{-i}Y_{-i}\tag{36}
+\end{align*}
+$$
+</div>
+
+> $\hat\beta$と$\tilde\beta_{-i}$の関係
+
+- $\tilde e_i$: LOOを用いて得られたresidual
+- $\hat e_i$: OLSで得られたresidual
+- $h_{i}$: the hat matrixのi-th diagonal element
+
+このとき、いかが成り立ちます:
+
+<div class="math display" style="overflow: auto">
+$$
+\begin{align*}
+\tilde\beta_{-i} - \hat\beta & = \left(\frac{\hat e_i}{1-h_i}\right)(X'X)^{-1}X_{-i} \tag{37}\\
+& = (X'X)^{-1}X_{-i}\tilde e_{i} \tag{38}
+\end{align*}
+$$
+</div>
+
+> (37)の証明
+
+まず以下の定理を所与とします：
+
+- A: non-singular matrix
+- b: a vector
+- $\lambda$: a scalar
+
+If
+
+$$
+\begin{align*}
+ \lambda&\neq -\frac{1}{b'A^{-1}b}
+ \end{align*}
+$$
+
+Then, 
+
+<div class="math display" style="overflow: auto">
+$$
+\begin{align*}
+(A+\lambda bb')^{-1}&=A^{-1}-\left(\frac{\lambda}{1+\lambda b'A^{-1}b}\right)A^{-1}bb'A^{-1}\quad\quad   \textrm{(A)
+}\end{align*}
+$$
+</div>
+
+次に、(36)で確認した$\tilde\beta_{-i}$計算の各項を見ていきます.
+
+<div class="math display" style="overflow: auto">
+$$
+\begin{align*}
+(X_{-i}'X_{-i})^{-1} &= X'X-X_iX_i')^{-1}\\
+&=(X'X)^{-1}+\frac{(X'X)^{-1}X_iX_i'(X'X)^{-1}}{1-X_i(X'X)^{-1}X_i'} \tag{39}
+\end{align*}
+$$
+</div>
+
+
+
+
+> (38)の証明
+
+
+
+
+
+
+
+
+
+
+
+

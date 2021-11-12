@@ -29,7 +29,6 @@ tags:
 |目的|`git branch`を活用した[Ryo's Tech blog](https://ryonakagami.github.io)の更新手順のメモ|
 |Goal|`git branch`を用いたファイルバージョン管理やブログレイアウト管理ができるようになる|
 |参考|[サル先生のGit入門](https://backlog.com/ja/git-tutorial/stepup/01/)|
-|key word|ローカルテスト, git branch|
 
 <!-- START doctoc generated TOC please keep comment here to allow auto update -->
 <!-- DON'T EDIT THIS SECTION, INSTEAD RE-RUN doctoc TO UPDATE -->
@@ -51,6 +50,7 @@ tags:
 - [3. Google Analyticsの設定](#3-google-analytics%E3%81%AE%E8%A8%AD%E5%AE%9A)
   - [Google Analyticsの利用登録](#google-analytics%E3%81%AE%E5%88%A9%E7%94%A8%E7%99%BB%E9%8C%B2)
   - [記事ページへの埋め込み](#%E8%A8%98%E4%BA%8B%E3%83%9A%E3%83%BC%E3%82%B8%E3%81%B8%E3%81%AE%E5%9F%8B%E3%82%81%E8%BE%BC%E3%81%BF)
+- [4. 自作スニペット for Markdown Writing](#4-%E8%87%AA%E4%BD%9C%E3%82%B9%E3%83%8B%E3%83%9A%E3%83%83%E3%83%88-for-markdown-writing)
 
 <!-- END doctoc generated TOC please keep comment here to allow auto update -->
 
@@ -315,4 +315,59 @@ $ git push --set-upstream origin master
 
   gtag('config', 'G-12345');
 </script>
+```
+
+## 4. 自作スニペット for Markdown Writing
+
+> 工程
+
+1. `Ctrl` + `P` Then `>`から `Preferences: Configure User Snippets`を選択する
+2. `markdown.json`をクリック（存在しない場合はmarkdownをクリック）
+3. 自作スニペットを定義して保存する
+
+> 自作スニペット例
+
+```json
+{
+	/// General
+	"Table of Contents": {
+		"prefix": "doctoc",
+		"body":[
+		  "**Table of Contents**"
+		  "<!-- START doctoc -->"
+		  "<!-- END doctoc -->"
+		],
+		"description": "markdownにて、doctocに従ったTable of Contentsを表示させる箇所に入力する"
+	  },
+	
+	/// LaTex related setting
+	"begin align*": {
+		"prefix": "begin",
+		"body":[
+			"\\begin{align*}",
+			"\\end{align*}"
+		],
+		"description": "markdown 数式モードでbegin{align*}end{align*}を入力"
+
+	},
+	"overflow setting for Latex code": {
+		"prefix": "tex",
+		"body":[
+			"<div class=\"math display\" style=\"overflow: auto\">",
+			"$$",
+			"$$",
+			"</div>"
+		],
+		"description": "markdown 数式モードでoverflowエリアをスクロールで表示させるコマンドを入力する。"
+	},
+	"quod erat demonstrandum": {
+		"prefix": "qed",
+		"body":[
+		  "<div style=\"text-align: right;\">",
+		  "■",
+		  "</div>"
+		],
+		"description": "markdown 数式モードにて、証明/解答が終了したことを示すマークを加える。証明/解答が完了した次の行で入力する。"
+	  }
+}
 ```
