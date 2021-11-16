@@ -1236,7 +1236,7 @@ $$
 $$
 \begin{align*}
 (X_{-i}'X_{-i})^{-1} &= (X'X-X_iX_i')^{-1}\\
-&=(X'X)^{-1}+\frac{(X'X)^{-1}X_iX_i'(X'X)^{-1}}{1-X_i'(X'X)^{-1}X_i} \tag{39}
+&=(X'X)^{-1}+\frac{(X'X)^{-1}X_iX_i'(X'X)^{-1}}{1-X_i'(X'X)^{-1}X_i} \quad\quad \tag{39}
 \end{align*}
 $$
 </div>
@@ -1367,7 +1367,7 @@ $$
 </div>
 
 - (45)は射影行列はpositive semi definiteより
-- the feasible estimator $\hat \simga^2$は数値的に理想的なestimatorよりも小さいことがわかる
+- the feasible estimator $\hat \sigma^2$は数値的に理想的なestimatorよりも小さいことがわかる
 
 **Analysis of Variance**
 
