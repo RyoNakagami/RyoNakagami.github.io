@@ -1187,7 +1187,7 @@ $$
 $$
 </div>
 
-> $\hat\beta$と$\tilde\beta_{-i}$の関係
+**$\hat\beta$と$\tilde\beta_{-i}$の関係**
 
 - $\tilde e_i$: LOOを用いて得られたresidual
 - $\hat e_i$: OLSで得られたresidual
@@ -1204,7 +1204,7 @@ $$
 $$
 </div>
 
-> (37)の証明
+> (38)の証明
 
 まず以下の定理を所与とします：
 
@@ -1235,18 +1235,141 @@ $$
 <div class="math display" style="overflow: auto">
 $$
 \begin{align*}
-(X_{-i}'X_{-i})^{-1} &= X'X-X_iX_i')^{-1}\\
-&=(X'X)^{-1}+\frac{(X'X)^{-1}X_iX_i'(X'X)^{-1}}{1-X_i(X'X)^{-1}X_i'} \tag{39}
+(X_{-i}'X_{-i})^{-1} &= (X'X-X_iX_i')^{-1}\\
+&=(X'X)^{-1}+\frac{(X'X)^{-1}X_iX_i'(X'X)^{-1}}{1-X_i'(X'X)^{-1}X_i} \tag{39}
 \end{align*}
 $$
 </div>
 
+(39)の両辺に右から$X_{i}$を掛けると
+
+<div class="math display" style="overflow: auto">
+$$
+\begin{align*}
+(X_{-i}'X_{-i})^{-1}X_i&=(X'X)^{-1}X_i+(X'X)^{-1}X_i\left(\frac{X_i'(X'X)^{-1}X_i}{1-X_i'(X'X)^{-1}X_i}\right)\\
+&=\left(\frac{1}{1-h_{ii}}\right)(X'X)^{-1}X_i\quad\quad \tag{40}
+\end{align*}
+$$
+</div>
+
+$\hat\beta$の関係式より
+
+$$
+(X'X)^{-1}\hat\beta = X'Y
+$$
+
+より
+
+<div class="math display" style="overflow: auto">
+$$
+\begin{align*}
+&(X_{-i}'X_{-i} + X_iX_i')^{-1}\hat\beta = (X_{-i}'Y_{-i} + X_iY_i)\\
+&\Rightarrow (I_k + (X_{-i}X_{-i}')^{-1}X_iX_i')\hat\beta = \tilde\beta_{-i} + (X_{-i}X_{-i}')^{-1}X_i(X_i'\hat\beta + \hat e_i)\\
+&\Rightarrow \hat\beta = \tilde\beta_{-i}+(X_{-i}'X_{-i})^{-1}X_i\hat e_i \quad\quad \tag{41}
+\end{align*}
+$$
+</div>
+
+<div style="text-align: right;">
+■
+</div>
 
 
+> (37)の証明
 
-> (38)の証明
+(40), (41)より
 
+<div class="math display" style="overflow: auto">
+$$
+\begin{align*}
+\hat\beta - \tilde\beta_{-i} &= (X_{-i}'X_{-i})^{-1}X_i\hat e_i\\
+&= \left(\frac{\hat e_i}{1-h_{ii}}\right)(X'X)^{-1}X_i
+\end{align*}
+$$
+</div>
 
+<div style="text-align: right;">
+■
+</div>
+
+**$\hat e_i$と$\tilde e_{i}$の関係**
+
+(38)より
+
+<div class="math display" style="overflow: auto">
+$$
+\begin{align*}
+Y_i - X_i'\hat\beta &= Y_i - X_i'(\tilde\beta_{-i} + (X'X_)^{-1}X_{i}\tilde e_i) \\
+&= \tilde e_i - h_{ii}\tilde e_i\\
+&= (1 - h_{ii})\tilde e_i\\
+&= \hat e_i
+\end{align*}
+$$
+</div>
+
+これを踏まえるとLOOのprediction errorとOLS MSEの関係性は以下のように書けます.
+
+<div class="math display" style="overflow: auto">
+$$
+\tilde \sigma^2 = \frac{1}{n}\sum \tilde e_i^2 = \frac{1}{n}\sum  (1 - h_{ii})^{-2}\hat e_i^2 \tag{42}
+$$
+</div>
+
+(42)の解釈としては
+
+- the prediction standard errorはすべてのサンプルを用いで学習するOLS standard error(ある種のtraining error)よりも大きい
+
+> REMARKS
+
+- OLS estimatorはinfluencial observationの影響を強く受ける推定量なので、training dataのoutlier detectionを実施する際に用いられることがある
+- ただし、outlierを除外することは常に良いとは限らない（例：outlierが真のモデルに従っている場合など）
+
+### Goodness of fit measure
+
+**Estimation of Error Variance**
+
+$$
+\begin{align*}
+y_i &= x_i'\beta + e_i\\
+E[e_i^2] &= \sigma^2
+\end{align*}
+$$
+
+というモデルに従ってデータが生成されたとします. このとき仮に$e_i$が観測されるならば, $\sigma^2$の推定量として
+
+$$
+\begin{align*}
+\tilde\sigma^2 &= \frac{1}{n}\sum_i e_i^2
+&= n^{-1}e'e\tag{43}
+\end{align*}
+$$
+
+次に、$e_i$が観測されない場合は OLS residual $\hat e_i$を用いて以下のように推定します
+
+$$
+\begin{align*}
+\hat\sigma^2 &= \sum \hat e_i^2\\
+&= n^{-1}\hat e'\hat e\\
+&= n^{-1} e'M'Me\\
+&= n^{-1} e'Me \tag{44}
+\end{align*}
+$$
+
+(43), (44)を比較すると
+
+<div class="math display" style="overflow: auto">
+$$
+\begin{align*}
+\tilde\sigma^2 - \hat\sigma^2  &= n^{-1}(e'e - e'Me)\\
+& = n^{-1} ePe \geq 0 \tag{45}
+\end{align*}
+$$
+</div>
+
+- (45)は射影行列はpositive semi definiteより
+- the feasible estimator $\hat \simga^2$は数値的に理想的なestimatorよりも小さいことがわかる
+
+**Analysis of Variance**
 
 
 
