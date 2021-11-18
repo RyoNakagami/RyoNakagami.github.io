@@ -45,6 +45,9 @@ tags:
   - [Residual Regression: FWL theorem](#residual-regression-fwl-theorem)
   - [Leverage Values](#leverage-values)
     - [the leverageの３つの性質](#the-leverage%E3%81%AE%EF%BC%93%E3%81%A4%E3%81%AE%E6%80%A7%E8%B3%AA)
+    - [Leave-One-Out Regression](#leave-one-out-regression)
+  - [Goodness of fit measure](#goodness-of-fit-measure)
+    - [RegressorとR-squaredの関係](#regressor%E3%81%A8r-squared%E3%81%AE%E9%96%A2%E4%BF%82)
 
 <!-- END doctoc generated TOC please keep comment here to allow auto update -->
 
@@ -446,8 +449,7 @@ $$
 <div class="math display" style="overflow: auto">
 $$
 \begin{align*}
-&\hat\beta \\
-&= \left(\sum_{i=1}X_i\left(X_i - \bar X\right)'\right)^{-1}\left(\sum_{i=1}X_i\left(Y_i - \bar Y\right)\right)\\
+\hat\beta &= \left(\sum_{i=1}X_i\left(X_i - \bar X\right)'\right)^{-1}\left(\sum_{i=1}X_i\left(Y_i - \bar Y\right)\right)\\
 &= \left(\sum_{i=1}\left(X_i - \bar X\right)\left(X_i - \bar X\right)'\right)^{-1}\left(\sum_{i=1}\left(X_i - \bar X\right)\left(Y_i - \bar Y\right)\right)\quad\quad  \tag{14}
 \end{align*}
 $$
@@ -1371,12 +1373,122 @@ $$
 
 **Analysis of Variance**
 
+$$
+y_i = x_i'\beta + u_i
+$$
 
+というregression modelを考えます. $(x_i, u_i)$はuncorrelatedの場合
 
+$$
+\text{Var}(y_i) = \text{Var}(x_i'\beta)+\text{Var}(u_i) > 0\quad\quad\tag{46}
+$$
 
+(46)を変形すると
 
+<div class="math display" style="overflow: auto">
+$$
+\begin{align*}
+\frac{\text{Var}(x_i'\beta)}{\text{Var}(y_i)}+\frac{\text{Var}(u_i)}{\text{Var}(y_i)}=1 \quad\quad\tag{47}
+\end{align*}
+$$
+</div>
 
+- $y_i$の変動は$x_i'\beta$で説明できる割合と$u_i$で説明できる割合に分けて考えることができることを(47)は示しています
+- 特に, $\text{Var}(x_i'\beta)/\text{Var}(y_i)$をGoodness of fit, $\mathbf R^2$ として一般的には用います
 
+次にこれをOLS estimatorの観点から考えてみます.
 
+$$
+Y = PY + MY = \hat Y + \hat e \quad\quad\tag{48}
+$$
 
+(48)から $\mathbf 1_n \bar Y$を引くと
+
+$$
+Y - \mathbf 1_n \bar Y = \hat Y - \mathbf 1_n \bar Y + \hat e \quad\quad\tag{49}
+$$
+
+Then,
+
+<div class="math display" style="overflow: auto">
+$$
+\begin{align*}
+(Y - \mathbf 1_n \bar Y )'(Y - \mathbf 1_n \bar Y ) &= (Y - \mathbf 1_n \bar Y )'(\hat Y - \mathbf 1_n \bar Y) + (Y - \mathbf 1_n \bar Y )'\hat e\\
+&= (\hat Y - \mathbf 1_n \bar Y )'(\hat Y - \mathbf 1_n \bar Y) + \hat e'\hat e \quad\quad\tag{50}
+\end{align*}
+$$
+</div>
+
+よって、
+
+$$
+\mathbf R^2 = \frac{\sum (\hat Y_i - \bar Y)^2}{\sum (Y_i - \bar Y)^2} = 1 - \frac{\sum e_i^2}{\sum (Y_i - \bar Y)^2} \quad\quad\tag{51}
+$$
+
+**$R^2$の解釈の留意点**
+
+- Econometricsにおける分析の主眼点はtreament effectのパラメーターをconsistentに推定することであって、$R^2$の数値の高さ自体はあくまでa secondary importance
+- $R^2$の数値はregressorを加えれば加えるほど高くなる性質があり、regressorsの選択がtrue modelに基づいているか否かの情報は提供してくれない
+
+二点目の性質に対処したスコアとしてAdjusted R-squaredという評価スコアがあります
+
+$$
+\text{Adj-}R^2 = 1 - \frac{(N - K)^{-1}\sum \hat u_i^2}{(N - 1)^{-1} \sum (Y_i - \bar Y)^2}
+$$
+
+- K: the number of regressors including the constant term
+
+#### RegressorとR-squaredの関係
+
+$R^2$の数値はregressorを加えれば加えるほど高くなることを確認します.
+
+<div class="math display" style="overflow: auto">
+$$
+\begin{align*}
+Y &= X\beta + u \quad\quad\tag{52} \\
+Y &= X\beta_0 + X_1\beta_1 + v \quad\quad\tag{53}
+\end{align*}
+$$
+</div>
+
+という２つのOLS regression modelを考えます. (52), (53)を合わせると
+
+$$
+X\beta + u = X\beta_0 + X_1\beta_1 + v
+$$
+
+OLS regresionのresidualの性質より
+
+$$
+\begin{align*}
+u'u &= u'X_1\beta_1 + u'v \quad\quad\tag{54}\\
+v'u &= v'v \quad\quad\tag{55}
+\end{align*}
+$$
+
+(54), (55)から次式を得ます
+
+<div class="math display" style="overflow: auto">
+$$
+\begin{align*}
+v'v &= (y - X\beta_0 - X_1\beta_1)'(y - X\beta_0 - X_1\beta_1)\\
+&= (X\beta + u - X\beta_0 - X_1\beta_1)'(X\beta + u - X\beta_0 - X_1\beta_1)\\
+&= (u+ X(\beta - \beta_0) - X_1\beta_1)'(u+ X(\beta - \beta_0) - X_1\beta_1)\\
+&= (X(\beta - \beta_0) - X_1\beta_1)'(X(\beta - \beta_0) - X_1\beta_1) + u'u - 2u'X_1\beta_1\\
+&= (X(\beta - \beta_0) - X_1\beta_1)'(X(\beta - \beta_0) - X_1\beta_1) + u'u - 2(u'u - v'v)\\
+&= (X(\beta - \beta_0) - X_1\beta_1)'(X(\beta - \beta_0) - X_1\beta_1) + 2v'v - u'u\\
+&\Rightarrow u'u = (X(\beta - \beta_0) - X_1\beta_1)'(X(\beta - \beta_0) - X_1\beta_1) + v'v \quad\quad\tag{56}
+\end{align*}
+$$
+</div>
+
+(56)における$(X(\beta - \beta_0) - X_1\beta_1)'(X(\beta - \beta_0) - X_1\beta_1) \geq 0$より
+
+$$
+u'u \geq v'v
+$$
+
+<div style="text-align: right;">
+■
+</div>
 
