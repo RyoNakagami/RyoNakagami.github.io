@@ -28,10 +28,12 @@ tags:
 |---|---|
 |目的|データ設計のいろは|
 |参考|- [外部キー関係の作成と管理](https://cloud.google.com/spanner/docs/foreign-keys/how-to)<br> -[DWHアーキテクチャ作成ツール](https://app.diagrams.net/?splash=0&libs=gcp)|
+|関連||
 
 <!-- START doctoc generated TOC please keep comment here to allow auto update -->
 <!-- DON'T EDIT THIS SECTION, INSTEAD RE-RUN doctoc TO UPDATE -->
 
+- [はじめに](#%E3%81%AF%E3%81%98%E3%82%81%E3%81%AB)
 - [データモデリングの基本](#%E3%83%87%E3%83%BC%E3%82%BF%E3%83%A2%E3%83%87%E3%83%AA%E3%83%B3%E3%82%B0%E3%81%AE%E5%9F%BA%E6%9C%AC)
   - [データライフサイクル](#%E3%83%87%E3%83%BC%E3%82%BF%E3%83%A9%E3%82%A4%E3%83%95%E3%82%B5%E3%82%A4%E3%82%AF%E3%83%AB)
   - [データモデリングのフェーズ](#%E3%83%87%E3%83%BC%E3%82%BF%E3%83%A2%E3%83%87%E3%83%AA%E3%83%B3%E3%82%B0%E3%81%AE%E3%83%95%E3%82%A7%E3%83%BC%E3%82%BA)
@@ -53,6 +55,9 @@ tags:
 
 <!-- END doctoc generated TOC please keep comment here to allow auto update -->
 
+## はじめに
+
+「作れるものを使うな、使えるものを作れ」を基本哲学に、データ分析基盤設計における手戻りの少ない(＝効率的な)テーブル設計の作業フローを具体例を交えて以下紹介します.
 
 ## データモデリングの基本
 

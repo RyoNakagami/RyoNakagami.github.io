@@ -33,12 +33,12 @@ tags:
 <!-- START doctoc generated TOC please keep comment here to allow auto update -->
 <!-- DON'T EDIT THIS SECTION, INSTEAD RE-RUN doctoc TO UPDATE -->
 
-- [Linear Regressionの解釈](#linear-regression%E3%81%AE%E8%A7%A3%E9%87%88)
+- [1. Linear Regressionの解釈](#1-linear-regression%E3%81%AE%E8%A7%A3%E9%87%88)
   - [解釈 1: Linear Conditional Expectations](#%E8%A7%A3%E9%87%88-1-linear-conditional-expectations)
   - [解釈 2: The CEFの"Best"線形近似](#%E8%A7%A3%E9%87%88-2-the-cef%E3%81%AEbest%E7%B7%9A%E5%BD%A2%E8%BF%91%E4%BC%BC)
   - [解釈 3: Causal Model](#%E8%A7%A3%E9%87%88-3-causal-model)
     - [ATT and selection bias](#att-and-selection-bias)
-- [Ordinary Least Squares Estimator](#ordinary-least-squares-estimator)
+- [2. Ordinary Least Squares Estimator](#2-ordinary-least-squares-estimator)
   - [The residualとThe error termの違い](#the-residual%E3%81%A8the-error-term%E3%81%AE%E9%81%95%E3%81%84)
   - [Demeaned Regressors](#demeaned-regressors)
   - [Projection Matrix](#projection-matrix)
@@ -48,10 +48,16 @@ tags:
     - [Leave-One-Out Regression](#leave-one-out-regression)
   - [Goodness of fit measure](#goodness-of-fit-measure)
     - [RegressorとR-squaredの関係](#regressor%E3%81%A8r-squared%E3%81%AE%E9%96%A2%E4%BF%82)
+- [3. Property of OLS Estimator](#3-property-of-ols-estimator)
+  - [Assumptions](#assumptions)
+  - [Unbiasedness](#unbiasedness)
+  - [Conditional Variance of OLS estimator](#conditional-variance-of-ols-estimator)
+  - [Gauss-Markov Theorem](#gauss-markov-theorem)
+- [4. Asymptotic Property of OLS Estimator](#4-asymptotic-property-of-ols-estimator)
 
 <!-- END doctoc generated TOC please keep comment here to allow auto update -->
 
-## Linear Regressionの解釈
+## 1. Linear Regressionの解釈
 
 $(Y_i, X_i, U_i)$をrandom vectorで、$Y_i, U_i \in \mathbf R$, $X_i \in \mathbf R^{k+1}$とします. $X$の最初の要素は定数1とします、つまり、
 
@@ -68,14 +74,14 @@ $$
 この$\beta$は以下の推定量を解くことで得られます.
 
 $$
-\beta = \arg\min_{b} E[(Y_i - X_i'b)] \tag{1}
+\beta = \arg\min_{b} E[(Y_i - X_i'b)] \tag{1-1}
 $$
 
-(1) のFOCをとると
+(1-1) のFOCをとると
 
 <div class="math display" style="overflow: auto">
 $$
-E[X_i(Y_i - X_i'b)] = 0 \Rightarrow \beta = E[X_iX_i']^{-1}E[X_iY_i] \tag{2}
+E[X_i(Y_i - X_i'b)] = 0 \Rightarrow \beta = E[X_iX_i']^{-1}E[X_iY_i] \tag{1-2}
 $$
 </div>
 
@@ -284,11 +290,11 @@ $$
 
 <div class="math display" style="overflow: auto">
 $$
-E[Y_i|D_i = 1] - E[Y_i|D_i = 1] = \beta + E[\eta_i|D_i = 1] - E[\eta_i|D_i = 0] \tag{3}
+E[Y_i|D_i = 1] - E[Y_i|D_i = 1] = \beta + E[\eta_i|D_i = 1] - E[\eta_i|D_i = 0] \quad\quad\tag{1-3}
 $$
 </div>
 
-とATE + selection biasの関係性が見えてきます. 仮に $E[\eta_i \perp D_i]$が成立している場合、(3)のselection biasの項が消えるので、単回帰モデルでATEが推定できることがわかります.
+とATE + selection biasの関係性が見えてきます. 仮に $\eta_i \perp D_i$が成立している場合、(1-3)のselection biasの項が消えるので、単回帰モデルでATEが推定できることがわかります.
 
 #### ATT and selection bias
 
@@ -317,52 +323,52 @@ E[y|s=1] - E[y|s=0] = E[\mathbf x|s=1](\beta_1 - \beta_0) + \left(E[\mathbf x|s=
 $$
 
 
-## Ordinary Least Squares Estimator
+## 2. Ordinary Least Squares Estimator
 
 The CEFが$E[Y_i\|X_i] = X_i'\beta$だと仮定します. このときの$\beta$を推定するためには
 
 $$
-\beta = \arg\min_b E[(Y_i - X_i'b)^2] \tag{4}
+\beta = \arg\min_b E[(Y_i - X_i'b)^2] \tag{2-1}
 $$
 
 を解けばよいこととなります. しかし、the joint distribution $(Y_i, X_i)$は事前には知られていないので、我々はこのthe sample analogで$\beta$を推定します.
 
 $$
-\hat\beta = \arg\min_b \frac{1}{N}\sum_{i=1}^N(Y_i - X_i'b)^2 \tag{5}
+\hat\beta = \arg\min_b \frac{1}{N}\sum_{i=1}^N(Y_i - X_i'b)^2 \tag{2-2}
 $$
 
-$\mathbf Y = (Y_1, \cdots, Y_N)', \mathbf X = (X_1, \cdots, X_N)'$とすると、(5)は次のような最小化問題に書き換えられます
+$\mathbf Y = (Y_1, \cdots, Y_N)', \mathbf X = (X_1, \cdots, X_N)'$とすると、(2-2)は次のような最小化問題に書き換えられます
 
 $$
-(\mathbf Y - \mathbf X b)'(\mathbf Y - \mathbf X b) \tag{6}
+(\mathbf Y - \mathbf X b)'(\mathbf Y - \mathbf X b) \tag{2-3}
 $$
 
-(6)について、$b$のFOCをとると
+(2-3)について、$b$のFOCをとると
 
 $$
--\mathbf X'(\mathbf Y - \mathbf X \hat\beta) = 0 \tag{7}
+-\mathbf X'(\mathbf Y - \mathbf X \hat\beta) = 0 \tag{2-4}
 $$
 
 $\mathbf X$がfull rankであるならば$\mathbf X'\mathbf X$の逆行列がとれるので
 
 $$
-\hat\beta = (\mathbf X'\mathbf X)^{-1}\mathbf X\mathbf Y\tag{7}
+\hat\beta = (\mathbf X'\mathbf X)^{-1}\mathbf X\mathbf Y\tag{2-5}
 $$
 
-残差を $e_i \equiv Y - X_i' \hat\beta$と定義したとき、(7)より
+残差を $e_i \equiv Y - X_i' \hat\beta$と定義したとき、(2-5)より
 
 $$
-\sum_{i=1}^N X_i e_i = \mathbf X'\mathbf e = 0 \tag{8}
+\sum_{i=1}^N X_i e_i = \mathbf X'\mathbf e = 0 \tag{2-6}
 $$
 
-(8)が意味することは
+(2-6)が意味することは
 
 - $\mathbf X, \mathbf e$は直交
 - $\mathbf X, \mathbf e$は無相関
 
 ### The residualとThe error termの違い
 
-上記(8)の内容を深堀したいと思います. 
+上記(2-6)の内容を深堀したいと思います. 
 
 $$
 \begin{aligned}
@@ -403,13 +409,7 @@ sns.heatmap(np.cov(observed_data, rowvar=False), annot=True, fmt='g');
 sns.heatmap(np.cov(data, rowvar=False), annot=True, fmt='g');
 ```
 
-> The OLS residual term and regressors covariance matrix
-
-<img src='https://github.com/ryonakimageserver/omorikaizuka/blob/master/%E3%83%96%E3%83%AD%E3%82%B0%E7%94%A8/output.png?raw=true'>
-
-> The true error term and regressors covariance matrix
-
-<img src='https://github.com/ryonakimageserver/omorikaizuka/blob/master/%E3%83%96%E3%83%AD%E3%82%B0%E7%94%A8/output1.png?raw=true'>
+<img src="https://github.com/ryonakimageserver/omorikaizuka/blob/master/%E3%83%96%E3%83%AD%E3%82%B0%E7%94%A8/20211101_OLSresidual_and_true_error_covariancematrix.png?raw=true">
 
 ### Demeaned Regressors
 
@@ -420,29 +420,25 @@ $$
 というモデルをOLSで推定したいときの結果を以下のように表すとします:
 
 $$
-Y_i = \hat\alpha + X_i'\hat\beta + e_i \tag{9}
+Y_i = \hat\alpha + X_i'\hat\beta + e_i \tag{2-7}
 $$
 
 残差とFOCの性質より、
 
 $$
 \begin{align*}
-\sum_{i=1}^N e_i &= 0\tag{10}\\
-\sum X_i(Y_i- \hat\alpha + X_i'\hat\beta)&=0\tag{11}
+\sum_{i=1}^N e_i &= 0\tag{2-8}\\
+\sum X_i(Y_i- \hat\alpha + X_i'\hat\beta)&=0\tag{2-9}
 \end{align*}
 $$
 
-(10)の式より
+(2-8)の式より
 
 $$
-\hat\alpha = \bar Y - \bar X'\hat\beta \tag{12}
+\hat\alpha = \bar Y - \bar X'\hat\beta \tag{2-10}
 $$
 
-(12)を(11)の式に代入すると
-
-$$
-\sum X_i(Y_i- \bar Y + (X_i' - \bar X)\hat\beta)=0 \tag{13}
-$$
+(2-10)を(2-9)の式に代入すると$\sum X_i(Y_i- \bar Y + (X_i' - \bar X)\hat\beta)=0$を得る.
 
 これを$\hat\beta$について解くと
 
@@ -450,18 +446,16 @@ $$
 $$
 \begin{align*}
 \hat\beta &= \left(\sum_{i=1}X_i\left(X_i - \bar X\right)'\right)^{-1}\left(\sum_{i=1}X_i\left(Y_i - \bar Y\right)\right)\\
-&= \left(\sum_{i=1}\left(X_i - \bar X\right)\left(X_i - \bar X\right)'\right)^{-1}\left(\sum_{i=1}\left(X_i - \bar X\right)\left(Y_i - \bar Y\right)\right)\quad\quad  \tag{14}
+&= \left(\sum_{i=1}\left(X_i - \bar X\right)\left(X_i - \bar X\right)'\right)^{-1}\left(\sum_{i=1}\left(X_i - \bar X\right)\left(Y_i - \bar Y\right)\right)
 \end{align*}
 $$
 </div>
 
-> REMARKS
-
+- この推定量をthe demeaned formula for the least squares estimatorといいます
 - OLS regressionで得られる推定量はdemeaned dataについてinterceptなしでOLS regressionを実行した場合に得られる推定量と一致します
-- (14)のことをthe demeaned formula for the least squares estimatorといいます
 - sample analogではstandard errorの数値が自由度の関係から微妙に異なってしまう
 
-> Finite sampleにおけるstandard errorの比較: OLS estimator vs demeaned OLS estimator
+> standard errorの比較: OLS estimator vs demeaned OLS estimator
 
 ```python
 import statsmodels.api as sm
@@ -490,9 +484,9 @@ print(results.summary())
 print(results_demeaned.summary())
 ```
 
-Then, The resutls are
+Then, The results are
 
-```raw
+```
                             OLS Regression Results                            
 ==============================================================================
 Dep. Variable:                 income   R-squared:                       0.525
@@ -516,8 +510,7 @@ Skew:                           0.776   Prob(JB):                      0.00497
 Kurtosis:                       4.802   Cond. No.                         123.
 ==============================================================================
 
-Notes:
-[1] Standard Errors assume that the covariance matrix of the errors is correctly specified.
+
 
                               Demeaned OLS Regression Results                                
 =======================================================================================
@@ -541,9 +534,6 @@ Skew:                           0.776   Prob(JB):                      0.00497
 Kurtosis:                       4.802   Cond. No.                         1.00
 ==============================================================================
 
-Notes:
-[1] R² is computed without centering (uncentered) since the model does not contain a constant.
-[2] Standard Errors assume that the covariance matrix of the errors is correctly specified.
 ```
 
 ### Projection Matrix
@@ -553,19 +543,19 @@ Notes:
 このとき、$\mathbf X$で張られるfieldへの射影を実行する射影行列(projection matrix) $\mathbf P$を以下のように定義します:
 
 $$
-\mathbf P \equiv \mathbf X(\mathbf X'\mathbf X)^{-1}\mathbf X' \tag{15}
+\mathbf P \equiv \mathbf X(\mathbf X'\mathbf X)^{-1}\mathbf X'
 $$
 
 また残差行列 $M$を次のように定義します
 
 $$
-M \equiv (I - P) \tag{16}
+M \equiv (I - P)
 $$
 
 
 **射影行列の性質**
 
->(1) $\mathbf X$を$\mathbf P$で射影すると自分自身になる
+>1: $\mathbf X$を$\mathbf P$で射影すると自分自身になる
 
 $$
 \mathbf P \mathbf X = \mathbf X(\mathbf X'\mathbf X)^{-1}\mathbf X' \mathbf X = \mathbf X
@@ -575,7 +565,7 @@ $$
 ■
 </div>
 
->(2) $\mathbf X = [X_1, X_2]$としたときをsubvector $X_1$を$\mathbf P$で射影すると自分自身になる
+>2: $\mathbf X = [X_1, X_2]$としたときをsubvector $X_1$を$\mathbf P$で射影すると自分自身になる
 
 射影行列$P$について
 
@@ -583,7 +573,7 @@ $$
 \begin{align*}
 P & = \mathbf X(\mathbf X'\mathbf X)^{-1}\mathbf X'\\
 &= [X_1 X_2]\left(\left[\begin{array}{c}X_1'\\X_2'\end{array}\right][X_1, X_2]\right)^{-1}\left[\begin{array}{c}X_1'\\X_2'\end{array}\right]\\
-&=[X_1 X_2]\left(\begin{array}{cc}X_1'X_1 & X_1'X_2\\X_2'X_1 & X_2'X_2\end{array}\right)^{-1}\left[\begin{array}{c}X_1'\\X_2'\end{array}\right]  \tag{17}
+&=[X_1 X_2]\left(\begin{array}{cc}X_1'X_1 & X_1'X_2\\X_2'X_1 & X_2'X_2\end{array}\right)^{-1}\left[\begin{array}{c}X_1'\\X_2'\end{array}\right]  \tag{2-11}
 \end{align*}
 $$
 
@@ -594,7 +584,7 @@ $$
 \begin{align*}
 &\left(\begin{array}{cc}X_1'X_1 & X_1'X_2\\X_2'X_1 & X_2'X_2\end{array}\right)^{-1}\\
 &\equiv \left(\begin{array}{cc}Q_{11} & Q_{12}\\Q_{21} & Q_{22}\end{array}\right)^{-1}\\
-&= \left(\begin{array}{cc}Q_{11\cdot 2}^{-1} & -Q_{11\cdot 2}^{-1}Q_{12}Q_{21}^{-1}\\-Q_{22\cdot 1}^{-1}Q_{21}Q_{11}^{-1} & Q_{22\cdot 1}^{-1}\end{array}\right)\tag{18}
+&= \left(\begin{array}{cc}Q_{11\cdot 2}^{-1} & -Q_{11\cdot 2}^{-1}Q_{12}Q_{21}^{-1}\\-Q_{22\cdot 1}^{-1}Q_{21}Q_{11}^{-1} & Q_{22\cdot 1}^{-1}\end{array}\right)\tag{2-12}
 \end{align*}
 $$
 </div>
@@ -617,12 +607,12 @@ $$
 &=\left(\begin{array}{cc}(X_1'M_2X_1)^{-1} & -(X_1'M_2X_1)^{-1}X_1'X_2(X_2'X_2)^{-1}\\
 -(X_2'M_1X_2)^{-1}X_2'X_1(X_1'X_1)^{-1} & (X_2'M_1X_2)^{-1}\end{array}\right)\left[\begin{array}{c}X_1'X_1 \\X_2'X_1\end{array}\right]\\
 &= \left(\begin{array}{c}(X_1'M_2X_1)^{-1}(X_1'M_2X_1)\\ (X_1'M_2X_1)^{-1}X_2'X_1 - (X_1'M_2X_1)^{-1}(X_2'P_1X_1) \end{array}\right)\\
-&= \left(\begin{array}{c}1\\ 0 \end{array}\right)\tag{19}
+&= \left(\begin{array}{c}1\\ 0 \end{array}\right)\tag{2-13}
 \end{align*}
 $$
 </div>
 
-(19)の結果を用いると
+(2-13)の結果を用いると
 
 $$
 \begin{aligned}
@@ -639,7 +629,7 @@ $$
 ### Residual Regression: FWL theorem
 
 $$
-Y = X_1\hat\beta_1 + \cdots + X_K\hat\beta_K + \hat e \tag{20}
+Y = X_1\hat\beta_1 + \cdots + X_K\hat\beta_K + \hat e \tag{2-14}
 $$
 
 というOLS estimatorを考えます. ここで$X_1$を$(X_2, \cdots X_K)$に回帰します.
@@ -647,53 +637,51 @@ $$
 $$
 \begin{align*}
 X_1 &= X_2\hat\alpha_2 + \cdots + X_K\hat\alpha_K + \hat V\\
-&= \hat X_1 + \hat V \tag{21}
+&= \hat X_1 + \hat V \tag{2-15}
 \end{align*}
 $$
 
-(20)の両辺に $\hat V'$を左から掛けます:
+(2-14)の両辺に $\hat V'$を左から掛けます:
 
 $$
 \begin{align*}
 \hat V'Y &= \hat V'(X_1\hat\beta_1 + \cdots + X_K\hat\beta_K + \hat e)\\
 &= \hat V'X_1\hat\beta_1\\
 &= \hat V'(\hat X_1 + \hat V)\hat\beta_1\\
-&= \hat V'\hat V\beta_1 \tag{22}
+&= \hat V'\hat V\beta_1 \tag{2-16}
 \end{align*}
 $$
 
 よって $\hat V'\hat V$の逆行列が存在する時
 
 $$
-(\hat V'\hat V)^{-1}\hat V'Y = \hat\beta_1 \tag{23}
+(\hat V'\hat V)^{-1}\hat V'Y = \hat\beta_1 \tag{2-17}
 $$
 
 このような残差回帰で$\hat\beta$のsubvectorを推定できる性質のことをFWL定理といいます. なお、射影行列を用いると$\hat V$は以下のように表現できます
 
 $$
-\hat V = (I - P_{2K})X_1 = M_{2k}X_1 \tag{24}
+\hat V = (I - P_{2K})X_1 = M_{2k}X_1 \tag{2-18}
 $$
 
-(23)に(24)を代入すると
+(2-17)に(2-18)を代入すると
 
 <div class="math display" style="overflow: auto">
 $$
 \begin{align*}
 &(\hat V'\hat V)^{-1}\hat V'Y  \\
 &= (X_1'M_{2k}X_1)^{-1}X_1'M_{2k}Y\\
-&= (X_1'M_{2k}'M_{2k}X_1)^{-1}X_1'M_{2k}'M_{2k}Y\tag{25}
+&= (X_1'M_{2k}'M_{2k}X_1)^{-1}X_1'M_{2k}'M_{2k}Y\tag{2-19}
 \end{align*}
 $$
 </div>
 
-(25)から$Y$を$(X_2, \cdots, X_K)$に回帰した残差を$X_1$を$(X_2, \cdots, X_K)$に回帰した残差すると$\hat\beta_1$が得られることがわかります. また、(25)の結果得られる残差と$\hat e$も一致します.
-
-> Proof
+(2-19)から$Y$を$(X_2, \cdots, X_K)$に回帰した残差を$X_1$を$(X_2, \cdots, X_K)$に回帰した残差すると$\hat\beta_1$が得られることがわかります. また、(25)の結果得られる残差と$\hat e$も一致します.
 
 <div class="math display" style="overflow: auto">
 $$
 \begin{aligned}
-(X_1'M_{2k}'M_{2k}X_1)^{-1}X_1'M_{2k}'M_{2k}Y &= \hat\beta_1 + (X_1'M_{2k}'M_2{2k}X_1)^{-1}X_1'M_{2k}'M_{2k}\hat e_i\\
+(X_1'M_{2k}'M_{2k}X_1)^{-1}X_1'M_{2k}'M_{2k}Y &= \hat\beta_1 + (X_1'M_{2k}'M_{2k}X_1)^{-1}X_1'M_{2k}'M_{2k}\hat e_i\\
 &= \hat\beta_1 + \hat e_i
 \end{aligned}
 $$
@@ -752,7 +740,7 @@ results_resid_2 = reg_resid_2.fit()
 
 Then,
 
-```raw
+```
                                  OLS Regression Results                                
 =======================================================================================
 Dep. Variable:                      y   R-squared (uncentered):                   0.990
@@ -1429,6 +1417,8 @@ $$
 
 - Econometricsにおける分析の主眼点はtreament effectのパラメーターをconsistentに推定することであって、$R^2$の数値の高さ自体はあくまでa secondary importance
 - $R^2$の数値はregressorを加えれば加えるほど高くなる性質があり、regressorsの選択がtrue modelに基づいているか否かの情報は提供してくれない
+- regressorを加えれば加えるほど、the residualの推定の自由度が下がるため、$R^2$の数値の数値のぶれが大きくなる
+- causal modelの評価には有用ではない
 
 二点目の性質に対処したスコアとしてAdjusted R-squaredという評価スコアがあります
 
@@ -1437,6 +1427,7 @@ $$
 $$
 
 - K: the number of regressors including the constant term
+- TSSとSSRをそれぞれの自由度で除したものを計算し、それらの比率をもってGoodness of fitを計算しようというモチベーション
 
 #### RegressorとR-squaredの関係
 
@@ -1491,4 +1482,202 @@ $$
 <div style="text-align: right;">
 ■
 </div>
+
+## 3. Property of OLS Estimator
+### Assumptions
+
+> Assumption 1: mutually independent and identical distribution
+
+The random variable $\{(Y_1, X_1), \cdots, (Y_i, X_i), \cdots, (Y_N, X_N)\}$ are i.i.d
+
+- $i\neq j$のとき、$(Y_i, X_i)$は$(Y_j, X_j)$とは独立だが、同じ分布に従っているという意味
+- iさんの意思決定がjさんのoutcomeに影響しない (and conversely)との解釈できる
+
+> Assumption 2: Linear Regression Model
+
+The variable $(Y_i, X_i)$は以下のLinear Regression Modelを満たす
+
+<div class="math display" style="overflow: auto">
+$$
+\begin{align*}
+\mathbf Y &= \mathbf X\beta + \epsilon\\
+E[\epsilon|\mathbf X] &= 0
+\end{align*}
+$$
+</div>
+
+> Assumption 3: The finite second moments
+
+<div class="math display" style="overflow: auto">
+$$
+\begin{align*}
+E[Y_i^2] &< \infty\\
+E[\|X_i^2\|] &< \infty
+\end{align*}
+$$
+</div>
+
+> Assumption 4-1: The full rank
+
+$X_i \in \mathbf R^k$としたとき、
+
+<div class="math display" style="overflow: auto">
+$$
+\text{rank}(X_i) = k 
+$$
+</div>
+
+- Perfect Multicollinearityが存在しない
+- $\mathbf X'\mathbf X$がinvertibleと同値
+
+> Assumption 4-2: The invertible assumption
+
+<div class="math display" style="overflow: auto">
+$$
+\begin{align*}
+Q_{XX} = E[\mathbf X'\mathbf X] > 0
+\end{align*}
+$$
+</div>
+
+としたとき、$Q_{XX}^{-1}$が存在する.
+
+> Assumption 5: Homoskedasticity and nonautocorrelation:
+
+<div class="math display" style="overflow: auto">
+$$
+E[\epsilon\epsilon'|\mathbf X] = \sigma^2 \mathbf I_N
+$$
+</div>
+
+### Unbiasedness
+
+> Proof (1)
+
+<div class="math display" style="overflow: auto">
+$$
+\begin{align*}
+E[\hat\beta|\mathbf X] &= E[(X'X)^{-1}X'Y|X]\\
+&= \left(X'X\right)^{-1}E[X'Y|X]\\
+&= \left(\sum X_iX_i'\right)^{-1}E[\sum X_i Y_i|X]\\
+&= \left(\sum X_iX_i'\right)^{-1}(\sum X_i E[Y_i|X])\\
+&= \left(\sum X_iX_i'\right)^{-1}(\sum X_i X_i'\beta)\\
+&= \beta
+\end{align*}
+$$
+</div>
+
+<div style="text-align: right;">
+■
+</div>
+
+> Proof (2)
+
+<div class="math display" style="overflow: auto">
+$$
+\begin{align*}
+E[\hat\beta - \beta|X]&= E[(X'X)^{-1}(X'(X\beta + \epsilon) - \beta|X]\\
+&= E[\beta + (X'X)^{-1}(X'\epsilon) - \beta|X]\\
+&= E[(X'X)^{-1}(X'\epsilon)|X]\\
+&= (X'X)^{-1}(X'E[\epsilon|X])\\
+&= 0
+\end{align*}
+$$
+</div>
+
+<div style="text-align: right;">
+■
+</div>
+
+### Conditional Variance of OLS estimator
+
+<div class="math display" style="overflow: auto">
+$$
+\begin{align*}
+Var(\hat\beta|X)& = E[(X'X)^{-1}X'\epsilon\epsilon'X(X'X)^{-1}|X]\\
+&= (X'X)^{-1}X'E[\epsilon\epsilon'|X]X(X'X)^{-1}\\
+&= \sigma^2(X'X)^{-1}
+\end{align*}
+$$
+</div>
+
+<div style="text-align: right;">
+■
+</div>
+
+> Unconditional Variance 
+
+<div class="math display" style="overflow: auto">
+$$
+\begin{align*}
+Var(\hat\beta) &= E[Var(\hat\beta|X)] + Var(E[\hat\beta|X])\\
+&= E[\sigma^2(X'X)^{-1}] + Var(\beta)\\
+&= \sigma^2E[(X'X)^{-1}]
+\end{align*}
+$$
+</div>
+
+<div style="text-align: right;">
+■
+</div>
+
+### Gauss-Markov Theorem
+
+Assumption (1) ~ (4-2)のもとで
+
+<div class="math display" style="overflow: auto">
+$$
+\begin{align*}
+\tilde \beta &= C'Y \quad\quad\tag{3-1}\\
+E[\tilde \beta|X] = \beta \quad\quad\tag{3-2}
+\end{align*}
+$$
+</div>
+
+というLinear estimator classを考えます. このとき、
+
+<div class="math display" style="overflow: auto">
+$$
+Var(\tilde \beta|X) \geq \sigma^2(X'X)^{-1}\quad\quad\tag{3-3}
+$$
+</div>
+
+が成立します。この定理のことをGauss-Markov Theoremといいます.
+
+> Proof
+
+$Var(\tilde \beta\|X) = \sigma^2C'C$より $C'C - (X'X)^{-1} \geq 0$が示せれば十分です.
+
+(3-2)より $C'X = I_k$が得られるので、
+
+<div class="math display" style="overflow: auto">
+$$
+\begin{align*}
+D&\equiv C - X(X'X)^{-1} \quad\quad\tag{3-4}\\
+D'X& = 0 \quad\quad\tag{3-5}
+\end{align*}
+$$
+</div>
+
+<div class="math display" style="overflow: auto">
+$$
+\begin{align*}
+C'C - (X'X)^{-1} &= (D + X(X'X)^{-1})'(D + X(X'X)^{-1}) - (X'X)^{-1}\\
+&= D'D + (X'X)^{-1}X'X(X'X)^{-1}- (X'X)^{-1}\\
+&= D'D
+\end{align*}
+$$
+</div>
+
+$D'D$は$d = Da$とすると、任意の0でないベクトル$a$について、$d'd \geq 0$が成立するので、$D'D \geq 0$
+
+<div style="text-align: right;">
+■
+</div>
+
+## 4. Asymptotic Property of OLS Estimator
+
+
+
+
 
