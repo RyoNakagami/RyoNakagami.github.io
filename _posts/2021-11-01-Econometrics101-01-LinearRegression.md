@@ -1486,65 +1486,58 @@ $$
 ## 3. Property of OLS Estimator
 ### Assumptions
 
-> Assumption 1: mutually independent and identical distribution
+<div class="math display" style="overflow: auto">
+
+**Assumption 1: mutually independent and identical distribution**
 
 The random variable $\{(Y_1, X_1), \cdots, (Y_i, X_i), \cdots, (Y_N, X_N)\}$ are i.i.d
 
 - $i\neq j$のとき、$(Y_i, X_i)$は$(Y_j, X_j)$とは独立だが、同じ分布に従っているという意味
 - iさんの意思決定がjさんのoutcomeに影響しない (and conversely)との解釈できる
 
-> Assumption 2: Linear Regression Model
+**Assumption 2: Linear Regression Model**
 
 The variable $(Y_i, X_i)$は以下のLinear Regression Modelを満たす
 
-<div class="math display" style="overflow: auto">
 $$
 \begin{align*}
 \mathbf Y &= \mathbf X\beta + \epsilon\\
 E[\epsilon|\mathbf X] &= 0
 \end{align*}
 $$
-</div>
 
-> Assumption 3: The finite second moments
+**Assumption 3: The finite second moments**
 
-<div class="math display" style="overflow: auto">
 $$
 \begin{align*}
 E[Y_i^2] &< \infty\\
 E[\|X_i^2\|] &< \infty
 \end{align*}
 $$
-</div>
 
-> Assumption 4-1: The full rank
+**Assumption 4-1: The full rank**
 
 $X_i \in \mathbf R^k$としたとき、
 
-<div class="math display" style="overflow: auto">
 $$
 \text{rank}(X_i) = k 
 $$
-</div>
 
 - Perfect Multicollinearityが存在しない
 - $\mathbf X'\mathbf X$がinvertibleと同値
 
-> Assumption 4-2: The invertible assumption
+**Assumption 4-2: The invertible assumption**
 
-<div class="math display" style="overflow: auto">
 $$
 \begin{align*}
 Q_{XX} = E[\mathbf X'\mathbf X] > 0
 \end{align*}
 $$
-</div>
 
 としたとき、$Q_{XX}^{-1}$が存在する.
 
-> Assumption 5: Homoskedasticity and nonautocorrelation:
+**Assumption 5: Homoskedasticity and nonautocorrelation**
 
-<div class="math display" style="overflow: auto">
 $$
 E[\epsilon\epsilon'|\mathbf X] = \sigma^2 \mathbf I_N
 $$
@@ -1588,10 +1581,10 @@ $$
 <div style="text-align: right;">
 ■
 </div>
+<div class="math display" style="overflow: auto">
 
 ### Conditional Variance of OLS estimator
 
-<div class="math display" style="overflow: auto">
 $$
 \begin{align*}
 Var(\hat\beta|X)& = E[(X'X)^{-1}X'\epsilon\epsilon'X(X'X)^{-1}|X]\\
@@ -1599,15 +1592,9 @@ Var(\hat\beta|X)& = E[(X'X)^{-1}X'\epsilon\epsilon'X(X'X)^{-1}|X]\\
 &= \sigma^2(X'X)^{-1}
 \end{align*}
 $$
-</div>
-
-<div style="text-align: right;">
-■
-</div>
 
 > Unconditional Variance 
 
-<div class="math display" style="overflow: auto">
 $$
 \begin{align*}
 Var(\hat\beta) &= E[Var(\hat\beta|X)] + Var(E[\hat\beta|X])\\
@@ -1615,32 +1602,23 @@ Var(\hat\beta) &= E[Var(\hat\beta|X)] + Var(E[\hat\beta|X])\\
 &= \sigma^2E[(X'X)^{-1}]
 \end{align*}
 $$
-</div>
-
-<div style="text-align: right;">
-■
-</div>
 
 ### Gauss-Markov Theorem
 
-Assumption (1) ~ (4-2)のもとで
+Assumption (1) ~ (5)のもとで
 
-<div class="math display" style="overflow: auto">
 $$
 \begin{align*}
 \tilde \beta &= C'Y \quad\quad\tag{3-1}\\
-E[\tilde \beta|X] = \beta \quad\quad\tag{3-2}
+E[\tilde \beta|X] &= \beta \quad\quad\tag{3-2}
 \end{align*}
 $$
-</div>
 
 というLinear estimator classを考えます. このとき、
 
-<div class="math display" style="overflow: auto">
 $$
 Var(\tilde \beta|X) \geq \sigma^2(X'X)^{-1}\quad\quad\tag{3-3}
 $$
-</div>
 
 が成立します。この定理のことをGauss-Markov Theoremといいます.
 
@@ -1650,16 +1628,13 @@ $Var(\tilde \beta\|X) = \sigma^2C'C$より $C'C - (X'X)^{-1} \geq 0$が示せれ
 
 (3-2)より $C'X = I_k$が得られるので、
 
-<div class="math display" style="overflow: auto">
 $$
 \begin{align*}
 D&\equiv C - X(X'X)^{-1} \quad\quad\tag{3-4}\\
 D'X& = 0 \quad\quad\tag{3-5}
 \end{align*}
 $$
-</div>
 
-<div class="math display" style="overflow: auto">
 $$
 \begin{align*}
 C'C - (X'X)^{-1} &= (D + X(X'X)^{-1})'(D + X(X'X)^{-1}) - (X'X)^{-1}\\
