@@ -11,7 +11,6 @@ purpose:
 tags:
 
 - Ubuntu 20.04 LTS
-- doctoc
 - Markdown
 ---
 
@@ -40,13 +39,18 @@ tags:
 - [2.`doctoc`のインストール](#2doctoc%E3%81%AE%E3%82%A4%E3%83%B3%E3%82%B9%E3%83%88%E3%83%BC%E3%83%AB)
 - [3. `doctoc`の使用例の紹介](#3-doctoc%E3%81%AE%E4%BD%BF%E7%94%A8%E4%BE%8B%E3%81%AE%E7%B4%B9%E4%BB%8B)
   - [オプション](#%E3%82%AA%E3%83%97%E3%82%B7%E3%83%A7%E3%83%B3)
+- [4. sort-markdown-tablesの’インストール](#4-sort-markdown-tables%E3%81%AE%E3%82%A4%E3%83%B3%E3%82%B9%E3%83%88%E3%83%BC%E3%83%AB)
+  - [何ができるようになるか？](#%E4%BD%95%E3%81%8C%E3%81%A7%E3%81%8D%E3%82%8B%E3%82%88%E3%81%86%E3%81%AB%E3%81%AA%E3%82%8B%E3%81%8B)
+  - [インストール](#%E3%82%A4%E3%83%B3%E3%82%B9%E3%83%88%E3%83%BC%E3%83%AB)
+  - [使い方](#%E4%BD%BF%E3%81%84%E6%96%B9)
 
 <!-- END doctoc generated TOC please keep comment here to allow auto update -->
 
 ## 1. 今回のスコープ
 ### やりたいこと
 
-Markdown目次作成ツール doctocのインストール
+- Markdown目次作成ツール `doctoc`のインストール
+- Markdown table sort用の `sort-markdown-tables`のインストール
 
 ### 方針
 
@@ -131,3 +135,25 @@ v10.19.0
 --gitlab    gitlab.com
 --ghost     ghost.org
 ```
+
+## 4. sort-markdown-tablesの’インストール
+### 何ができるようになるか？
+
+- Markdown tableを最初のカラムに基づいてsortすることができるようになる
+- [公式レポジトリ](https://github.com/fmma/sort-markdown-tables#readme)
+
+### インストール
+
+```zsh
+% sudo npm install -g @fmma-npm/sort-markdown-tables
+```
+
+### 使い方
+
+1. sortの対象としたいテーブルの直前に`<!-- sort-table -->`タグをつける
+2. `sort-markdown-tables -i Readme.md`とコンソールで実行する
+
+
+
+
+
