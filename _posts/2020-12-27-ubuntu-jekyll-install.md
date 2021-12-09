@@ -39,6 +39,10 @@ tags:
   - [Requirements](#requirements)
 - [2. Jekyllのインストール](#2-jekyll%E3%81%AE%E3%82%A4%E3%83%B3%E3%82%B9%E3%83%88%E3%83%BC%E3%83%AB)
 - [3. GitHub Pages作成環境の構築](#3-github-pages%E4%BD%9C%E6%88%90%E7%92%B0%E5%A2%83%E3%81%AE%E6%A7%8B%E7%AF%89)
+- [4. Github-Pagesのフォントの変更](#4-github-pages%E3%81%AE%E3%83%95%E3%82%A9%E3%83%B3%E3%83%88%E3%81%AE%E5%A4%89%E6%9B%B4)
+  - [解決したい症状](#%E8%A7%A3%E6%B1%BA%E3%81%97%E3%81%9F%E3%81%84%E7%97%87%E7%8A%B6)
+  - [症状の発生原因](#%E7%97%87%E7%8A%B6%E3%81%AE%E7%99%BA%E7%94%9F%E5%8E%9F%E5%9B%A0)
+  - [対策実施](#%E5%AF%BE%E7%AD%96%E5%AE%9F%E6%96%BD)
 
 <!-- END doctoc generated TOC please keep comment here to allow auto update -->
 
@@ -117,4 +121,46 @@ Configuration file: /home/dst/RyoNakagami.github.io/_config.yml
     Server address: http://127.0.0.1:4000/
   Server running... press ctrl-c to stop.
 ```
+
+
+
+## 4. Github-Pagesのフォントの変更
+### 解決したい症状
+
+Defaultの設定のままだと、日本語フォントが違和感のある形で出力される
+
+### 症状の発生原因
+
+- 中華フォント現象は 中国語を日本語よりも優先指定している場合 に起こります(例：糸偏の漢字を出力する時など)
+- cssのfont-familyに日本語フォントが設定されているか？そこでの優先順番はどのようになっているかを確認する
+
+### 対策実施
+
+1. `css/hux-blog.css`を開きます
+2. `body`のfont-familyを確認し、自分の好みのフォントと順番に設定する
+3. 保存 & git push
+
+**例**
+
+css設定ファイルを開き`font-family`の設定を確認したところ、以下：
+
+```css
+body {
+  font-family: -apple-system, BlinkMacSystemFont, "Helvetica Neue", "Arial", "PingFang SC", "Hiragino Sans GB", "STHeiti", "Microsoft YaHei", "Microsoft JhengHei", "Source Han Sans SC", "Noto Sans CJK SC", "Source Han Sans CN", "Noto Sans SC", "Source Han Sans TC", "Noto Sans CJK TC", "WenQuanYi Micro Hei", SimSun, sans-serif;
+  ...
+}
+```
+
+`"PingFang SC", "Hiragino Sans GB"`といった中華フォントが上位に設定されている一方、日本語フォントが設定されていないことがわかります. 
+ですので、個々の設定で日本語フォントを上位に置く形で修正します.
+
+```css
+body {
+  /*font-family: -apple-system, BlinkMacSystemFont, "Helvetica Neue", "Arial", "PingFang SC", "Hiragino Sans GB", "STHeiti", "Microsoft YaHei", "Microsoft JhengHei", "Source Han Sans SC", "Noto Sans CJK SC", "Source Han Sans CN", "Noto Sans SC", "Source Han Sans TC", "Noto Sans CJK TC", "WenQuanYi Micro Hei", SimSun, sans-serif;
+  */
+  font-family: -apple-system, 'Helvetica Neue', 'Hiragino Kaku Gothic ProN', 'ヒラギノ角ゴ ProN W3', Meiryo, メイリオ, Osaka, 'MS PGothic', arial, helvetica, sans-serif;
+  ...
+}
+```
+
 
