@@ -160,6 +160,7 @@ Defaultでは`/sys/module/hid_apple/parameters/fnmode`は2と設定されてい�
 |`alt` + `F10`|Windowの最大化|Default|
 |`Super` + `Shift` + `←/→`|現在のウィンドウを一つ左/右のモニターに移動|Default|
 |`Super` + `移動キー`|Windowの最大化(↑/↓)、右寄せ左寄せ(←/→)を設定|Default|
+|`Super` + `数字キー`|番号が対応しているFavaroite上のアプリを起動する|Default|
 
 
 **Ubuntu Termianl**
@@ -175,7 +176,10 @@ Defaultでは`/sys/module/hid_apple/parameters/fnmode`は2と設定されてい�
 |`home`|行頭へカーソルを移動|
 |`end`|文末へカーソルを移動|
 |`Shift` + `Ctrl`+`W`|termial tabを閉じる|
-|`Ctrl`+`D`|termialを閉じる|
+|`Ctrl`+`D`|terminalを閉じる|
+|`Ctrl`+`U`|terminalの入力行をすべて削除する|
+|`Ctrl`+`backspace`|terminalの入力行についてカーソルの左側すべてを削除する|
+|`Ctrl`+`del`|terminalの入力行についてカーソルの右側すべてを削除する|
 
 ### Browser
 **Firefox**
@@ -217,9 +221,11 @@ Defaultでは`/sys/module/hid_apple/parameters/fnmode`は2と設定されてい�
 
 |Shortcut|動作|
 |---|---|
+|`Ctrl` + `	|Terminalを開く、Editorから開いてあるTerminalへ移動する|
 |`Ctrl` + `Shift` + `5`	|Terminalを分割する|
 |`Ctrl` + `D`	|Terminalを閉じる|
-
+|`Ctrl` + `1/2`	|TerminalからEditorへ移動する（1なら左、２なら右）|
+|`Ctrl` + `pageup/pagedown`	|Split terminalの間をスイッチする|
 
 **Navigation**
 
@@ -347,5 +353,23 @@ Defaultではモニター設定のキーが割り当てられているのでそ�
       "key": "ctrl+meta+]",
       "command": "workbench.action.splitEditorToNextGroup",
       "when": "editorTextFocus"
+    }
+```
+
+#### VSCodeでsplit terminal tab間の移動
+
+> 設定例
+
+
+```json
+    {
+        "key": "ctrl+pageup",
+        "command": "workbench.action.terminal.focusNextPane",
+        "when": "terminalFocus"
+    },
+    {
+        "key": "ctrl+pagedown",
+        "command": "workbench.action.terminal.focusPreviousPane",
+        "when": "terminalFocus"
     }
 ```
