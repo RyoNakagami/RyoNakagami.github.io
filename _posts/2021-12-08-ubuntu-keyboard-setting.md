@@ -212,7 +212,6 @@ Defaultでは`/sys/module/hid_apple/parameters/fnmode`は2と設定されてい�
 |`Ctrl` + `↑/↓`|ページ先端/終端へ移動|
 |`Ctrl` + `F`|ページ検索|
 |`Esc`|ページ検索バーを閉じる|
-|`Ctrl` + `tab`|Tabの移動|
 |`Ctrl` + `D`|ブックマークへの追加/解除|
 |`Ctrl` + `B`|ブックマークへの一覧の表示|
 |`Ctrl` + `I`|ページ情報の表示|
