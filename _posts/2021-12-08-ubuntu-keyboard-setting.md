@@ -1,0 +1,338 @@
+---
+layout: post
+title: "Ubuntu Desktop環境構築 Part 24"
+subtitle: "Keychron K6 Wireless Mechanical Keyboardとショートカットの整理"
+author: "Ryo"
+header-img: "img/about-bg.jpg"
+header-mask: 0.4
+catelog: true
+mathjax: true
+purpose: 
+tags:
+
+- Ubuntu 20.04 LTS
+- Keyboard
+---
+
+<!-- Global site tag (gtag.js) - Google Analytics -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-LVL413SV09"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'G-LVL413SV09');
+</script>
+
+||概要|
+|---|---|
+|目的|Keychron K6 Wireless Mechanical Keyboardとショートカットの整理|
+|参考|1. [Archlinux: Function keys do not work](https://wiki.archlinux.org/title/Apple_Keyboard#Function_keys_do_not_work)<br>2. [How to disable global Super-p shortcut?](https://askubuntu.com/questions/68463/how-to-disable-global-super-p-shortcut)|
+
+<!-- START doctoc generated TOC please keep comment here to allow auto update -->
+<!-- DON'T EDIT THIS SECTION, INSTEAD RE-RUN doctoc TO UPDATE -->
+
+- [1. 技術スペック](#1-%E6%8A%80%E8%A1%93%E3%82%B9%E3%83%9A%E3%83%83%E3%82%AF)
+  - [実行環境](#%E5%AE%9F%E8%A1%8C%E7%92%B0%E5%A2%83)
+  - [Keyboardスペック](#keyboard%E3%82%B9%E3%83%9A%E3%83%83%E3%82%AF)
+  - [ソフトウェア](#%E3%82%BD%E3%83%95%E3%83%88%E3%82%A6%E3%82%A7%E3%82%A2)
+- [2. Keychron K6初期設定](#2-keychron-k6%E5%88%9D%E6%9C%9F%E8%A8%AD%E5%AE%9A)
+- [3. Keyboard cheatsheet](#3-keyboard-cheatsheet)
+  - [Ubuntu](#ubuntu)
+  - [Browser](#browser)
+  - [VSCode](#vscode)
+- [4. UbuntuKeyboardショートカット変更](#4-ubuntukeyboard%E3%82%B7%E3%83%A7%E3%83%BC%E3%83%88%E3%82%AB%E3%83%83%E3%83%88%E5%A4%89%E6%9B%B4)
+  - [Ubuntu Keyboard Shortcutの変更](#ubuntu-keyboard-shortcut%E3%81%AE%E5%A4%89%E6%9B%B4)
+    - [`Super` + `P` ショートカットの解除とscreenshotコマンドの設定](#super--p-%E3%82%B7%E3%83%A7%E3%83%BC%E3%83%88%E3%82%AB%E3%83%83%E3%83%88%E3%81%AE%E8%A7%A3%E9%99%A4%E3%81%A8screenshot%E3%82%B3%E3%83%9E%E3%83%B3%E3%83%89%E3%81%AE%E8%A8%AD%E5%AE%9A)
+  - [VSCode Keyboard Shortcutの変更](#vscode-keyboard-shortcut%E3%81%AE%E5%A4%89%E6%9B%B4)
+    - [VSCodeで分割先にActive Editorを移動するショートカットの設定](#vscode%E3%81%A7%E5%88%86%E5%89%B2%E5%85%88%E3%81%ABactive-editor%E3%82%92%E7%A7%BB%E5%8B%95%E3%81%99%E3%82%8B%E3%82%B7%E3%83%A7%E3%83%BC%E3%83%88%E3%82%AB%E3%83%83%E3%83%88%E3%81%AE%E8%A8%AD%E5%AE%9A)
+
+<!-- END doctoc generated TOC please keep comment here to allow auto update -->
+
+## 1. 技術スペック
+
+### 実行環境
+
+|項目||
+|---|---| 	 
+|マシン| HP ENVY TE01-0xxx|
+|OS |	ubuntu 20.04 LTS Focal Fossa|
+|CPU| Intel Core i7-9700 CPU 3.00 GHz|
+|RAM| 32.0 GB|
+|GPU| NVIDIA GeForce RTX 2060 SUPER|
+
+### Keyboardスペック
+
+---|---
+機種|[Keychron K6 Wireless Mechanical Keyboard](https://www.keychron.com/products/keychron-k6-wireless-mechanical-keyboard)
+接続方法|有線接続(UBS 3.1 Gen 1)
+mode|Windows
+
+### ソフトウェア
+
+> Ubuntu
+
+|ソフトウェア名|説明|インストール|
+|---|---|---|
+|dcof-editor|Ubuntuの設定管理ツール|`sudo apt install dconf-editor`|
+|gnome-tweaks|Gnome設定を調整する<br>Ubuntuアプリケーション|`sudo add-apt-repository universe`<br>`sudo apt update`<br>`sudo apt install gnome-tweak-tool`|
+
+> VSCode
+
+|Extension名|説明|
+|---|---|
+|FontSize Shortcuts|Editor画面のZoom in/outのショートカット|
+
+
+
+## 2. Keychron K6初期設定
+
+**問題**
+
+- Defaultでは `f1-f12`ファンクションキー(`fn2` + 数字)が認識されない
+- Windows modeで使用していても、function keyはApple keyboardの設定を参照していると思われる
+- `/sys/module/hid_apple/parameters/fnmode`のApple keyboardのfuction keyの設定を変更する
+
+
+**解決方針**
+
+- カーネルモジュールの設定を変更する
+
+> Step 1
+
+```zsh
+% sudo nano /etc/systemd/system/keychron.service
+```
+
+> Step 2: カーネルモジュールの設定を変更する
+
+keychron.serviceを以下のように設定し、保存する
+
+```zsh
+[Unit]
+Description=The command to make the Keychron K2 work
+
+[Service]
+Type=oneshot
+ExecStart=/bin/bash -c "echo 0 > /sys/module/hid_apple/parameters/fnmode"
+
+[Install]
+WantedBy=multi-user.target
+```
+
+> Step 3: 
+
+```zsh
+% systemctl enable keychron
+```
+
+> Step 4: reboot
+
+```zsh
+% reboot
+```
+
+**解説**
+
+Defaultでは`/sys/module/hid_apple/parameters/fnmode`は2と設定されているためspecial key扱いとなってしまっている
+
+- 0 = disabled : Disable the 'fn' key. Pressing 'fn'+'F8' will behave like you only press 'F8'
+- 1 = fkeyslast : Function keys are used as last key. Pressing 'F8' key will act as a special key. Pressing 'fn'+'F8' will behave like a F8.
+- 2 = fkeysfirst : Function keys are used as first key. Pressing 'F8' key will behave like a F8. Pressing 'fn'+'F8' will act as special key 
+
+
+## 3. Keyboard cheatsheet
+### Ubuntu 
+**General**
+
+|Shortcut|動作|独自設定|
+|---|---|---|
+|`Ctrl` + `Alt` + `T`|Terminalを立ち上げる|Default|
+|`Ctrl` +`Space`|入力言語の切り替え|Default|
+|`Super` then `Ctrl` + `L`|任意のアプリケーションの立ち上げ, <br>`Super`はWindowsキーのこと|Default|
+|`Super` + `A`|アプリケーション一覧を開く|Default|
+|`Ctrl`+`P`|選択したエリアのスクリーンショットを取る & Clipboardへ保存|新規設定|
+|`Ctrl`+ `Shift` + `P`|選択したエリアのスクリーンショットを取る & Picturesへ保存|新規設定|
+|`alt` + `F4`|ウィンドウを閉じる|Default|
+|`Super` + `F/G`|Launch the Firefox/Google Chrome|新規設定|
+|`Super` + `S`|Search|Default|
+|`alt` + `F10`|Windowの最大化|Default|
+|`Super` + `Shift` + `←/→`|現在のウィンドウを一つ左/右のモニターに移動|Default|
+|`Super` + `移動キー`|Windowの最大化(↑/↓)、右寄せ左寄せ(←/→)を設定|Default|
+
+
+**Ubuntu Termianl**
+
+|Shortcut|動作|
+|---|---|
+|`Ctrl` + `L`|clear console|
+| `Ctrl` + `Shift` + `C`| Copy|
+| `Ctrl` + `Shift` + `V`| Paste|
+|`esc` + `.`|直前の実行引数を出力|
+|`Alt`+`F`|move forward|
+|`Alt`+`B`|move backward|
+|`home`|行頭へカーソルを移動|
+|`end`|文末へカーソルを移動|
+|`Shift` + `Ctrl`+`W`|termial tabを閉じる|
+|`Ctrl`+`D`|termialを閉じる|
+
+### Browser
+**Firefox**
+
+|Shortcut|動作|
+|---|---|
+|`Super` + `F`|Firefoxの起動|
+|`Alt` + `←`/`→`|戻る, 進む|
+|`Ctrl` + `tab` ( + `Shift`)|tabを切り替える(逆向き)|
+|`Ctrl` + `Shift` + `R`|再読み込み (キャッシュ上書き) |
+|`Ctrl` + `↑/↓`|ページ先端/終端へ移動|
+|`Ctrl` + `F`|ページ検索|
+|`Esc`|ページ検索バーを閉じる|
+|`Ctrl` + `tab`|Tabの移動|
+|`Ctrl` + `D`|ブックマークへの追加/解除|
+|`Ctrl` + `B`|ブックマークへの一覧の表示|
+|`Ctrl` + `I`|ページ情報の表示|
+|`Ctrl` + `alt` + `G`|PDF viwer時にページ番号の入力|
+|`/`|Youtube/GitHubなどで検索ボックスへ移動|Default|
+
+
+
+
+### VSCode
+**General**
+
+|Shortcut|動作|
+|---|---|
+|`Ctrl` + `Shift` + `P`	|コマンドパレットを表示|
+|`Ctrl` + `Shift` + `N`	|新しいウィンドウを開く|
+|`Ctrl` + `Shift` + `T`	|直前閉じたtabを再び開く|
+|`Super` + `K`	|ショートカット一覧を開く|
+|`Ctrl` + `page up/page down`	|tab移動|
+|`Ctrl` + `K` `Z`|禅モード|
+|`Ctrl` + `\`|Editorを分割する|
+|`Ctrl` + `Super` + `[`|Active Editorを左に移動する|
+|`Ctrl` + `Super` + `]`|Active Editorを右に移動する|
+|`Ctrl` + `O`|Fileを開く|
+|`Ctrl` + `+/-`|Editor画面のzoom in/out|
+
+**Terminal**
+
+|Shortcut|動作|
+|---|---|
+|`Ctrl` + `Shift` + `5`	|Terminalを分割する|
+|`Ctrl` + `D`	|Terminalを閉じる|
+
+
+**Navigation**
+
+|Shortcut|動作|
+|---|---|
+|`Ctrl` + `page up/page down`	|tab移動|
+|`Ctrl` + `tab`	|tab移動(選択式)|
+|`Ctrl` + `G`	|指定した行への移動|
+|`page up/page down`	/画面上の先頭/最後の行|
+|`Ctrl` + `Shift` + `O`	|指定したindexへ移動|
+|`Ctrl` + `U`	|直前にいたカーソルまで移動|
+|`home/end`	|行頭/行末まで移動|
+|`Ctrl` + `home/end`	|文頭/文末まで移動|
+
+**Basic editing**
+
+|Shortcut|動作|
+|---|---|
+|`Ctrl` + `Enter`	|下に行追加|
+|`Ctrl` + `Shift` + `Enter`	|上に行追加|
+|`Ctrl` + `Shift` + `\`	|次の対応する括弧に移動|
+|`Ctrl` + `/`	|コメントアウト(Toggle)|
+|`Ctrl` + `Shift` + `A`	|ブロックコメントアウト(Toggle)|
+|`Ctrl` + `]/[`	|インデントの追加/削除 Toggle|
+|`Ctrl` + `Shift` + `]/[`	|ブロック単位の展開/折りたたみ Toggle|
+|`Ctrl` + `backspace`	|単語の部分削除（カーソル位置より左側）|
+|`Ctrl` + `delete`	|単語の部分削除（カーソル位置より右側）|
+|`alt` + `↑/↓`|カーソル行／選択行を移動(複数行対応)|
+|`Ctrl` + `I`	|単語補完(前方検索)|
+|`Ctrl` + `C`	|行コピー（選択なしの状態）|
+|`Ctrl` + `L`	|現在の行を選択|
+|`Ctrl` + `Shift` +`alt` + `↑/↓`|行を上方/下方に複製|
+
+
+**マルチカーソルと検索/置換**
+
+|Shortcut|動作|
+|---|---|
+|`alt` + `Shift` + `↑/↓`|マルチカーソルを展開|
+|`Ctrl` + `Shift` + `L`	|選択箇所にマッチする箇所全てにカーソルを展開|
+|`Ctrl` + `H`|置換|
+|`alt` + `R`|置換モードで正規表現利用のtoggle|
+|`alt` + `l`|置換モードで予め選択した範囲内のみを対象とする|
+|`Ctrl` + `alt` + `Enter`|一括置換|
+
+
+## 4. UbuntuKeyboardショートカット変更
+### Ubuntu Keyboard Shortcutの変更
+
+#### `Super` + `P` ショートカットの解除とscreenshotコマンドの設定
+
+Defaultではモニター設定のキーが割り当てられているのでそれを解除する。 
+
+
+> 方針
+
+1. Defaultで設定されている`Super` + `P` ショートカットを解除する
+2. Screenshotへ`Super` + `P` ショートカットを割り当てる
+
+> 実行 1. Defaultで設定されている`Super` + `P` ショートカットを解除する
+
+まずdconf-editorを開く. Terminalで
+
+```zsh
+% dconf-editor
+```
+
+を実行. 次に、
+
+1. `/org/gnome/mutter/keybindings/switch-monitor`まで移動
+2. "Custom value" field に `['<Super>p', 'XF86Display']`と設定してあることを確認する
+3. Disable "Use default value"
+4. "Custom value" fieldを `[]`と設定する
+5. `/org/gnome/settings-daemon/plugins/media-keys/video-out`に移動する
+6. 工程(3), (4)を実行する
+7. 解除完了
+
+> 2. 実行 2. Screenshotへ`Super` + `P` ショートカットを割り当てる
+
+1. Settingを開く
+2. Keyboard shortcutsを開く
+3. Screenshotsのグループまで行く
+4. ショートカットキーを入力し設定完了
+
+<img src="https://github.com/ryonakimageserver/omorikaizuka/blob/master/%E3%83%96%E3%83%AD%E3%82%B0%E7%94%A8/20211208_keyboardshortcuts_screenshots.png?raw=true">
+
+なお、同じ方法でDefault Web browserのショートカットキーの設定をすることができます.
+
+### VSCode Keyboard Shortcutの変更
+
+#### VSCodeで分割先にActive Editorを移動するショートカットの設定
+
+> 方針
+
+- `keybindings.json`ファイルに新たなキーボートショートカットを追記する
+- commandはshortcuts一覧から変更したいコマンドを探し、それに対してkeyを設定する
+
+
+> 設定例
+
+- `meta`とは`Super`のこと
+
+```json
+    {
+      "key": "ctrl+meta+[",
+      "command": "workbench.action.splitEditorToPreviousGroup",
+      "when": "editorTextFocus"
+    },
+    {
+      "key": "ctrl+meta+]",
+      "command": "workbench.action.splitEditorToNextGroup",
+      "when": "editorTextFocus"
+    }
+```
