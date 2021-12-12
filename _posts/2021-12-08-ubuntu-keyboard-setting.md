@@ -37,6 +37,8 @@ tags:
   - [Keyboardスペック](#keyboard%E3%82%B9%E3%83%9A%E3%83%83%E3%82%AF)
   - [ソフトウェア](#%E3%82%BD%E3%83%95%E3%83%88%E3%82%A6%E3%82%A7%E3%82%A2)
 - [2. Keychron K6初期設定](#2-keychron-k6%E5%88%9D%E6%9C%9F%E8%A8%AD%E5%AE%9A)
+  - [Function keyの設定](#function-key%E3%81%AE%E8%A8%AD%E5%AE%9A)
+  - [Keyboard Backlightの設定](#keyboard-backlight%E3%81%AE%E8%A8%AD%E5%AE%9A)
 - [3. Keyboard cheatsheet](#3-keyboard-cheatsheet)
   - [Ubuntu](#ubuntu)
   - [Browser](#browser)
@@ -88,7 +90,7 @@ mode|Windows
 
 
 ## 2. Keychron K6初期設定
-
+### Function keyの設定
 **問題**
 
 - Defaultでは `f1-f12`ファンクションキー(`fn2` + 数字)が認識されない
@@ -142,6 +144,13 @@ Defaultでは`/sys/module/hid_apple/parameters/fnmode`は2と設定されてい�
 - 1 = fkeyslast : Function keys are used as last key. Pressing 'F8' key will act as a special key. Pressing 'fn'+'F8' will behave like a F8.
 - 2 = fkeysfirst : Function keys are used as first key. Pressing 'F8' key will behave like a F8. Pressing 'fn'+'F8' will act as special key 
 
+
+### Keyboard Backlightの設定
+
+|動作|コマンド|
+|---|---|
+|backlightのOn/Offの設定|`fn1` + `電球ボタン`|
+|backlight設定の固定|`fn1` + `L` + `電球ボタン`(４秒以上長押し, キーボードが点滅したら設定完了)|
 
 ## 3. Keyboard cheatsheet
 ### Ubuntu 
