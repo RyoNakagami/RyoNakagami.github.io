@@ -47,6 +47,7 @@ tags:
     - [Caps Lock キーを無効化する](#caps-lock-%E3%82%AD%E3%83%BC%E3%82%92%E7%84%A1%E5%8A%B9%E5%8C%96%E3%81%99%E3%82%8B)
   - [VSCode Keyboard Shortcutの変更](#vscode-keyboard-shortcut%E3%81%AE%E5%A4%89%E6%9B%B4)
     - [VSCodeで分割先にActive Editorを移動するショートカットの設定](#vscode%E3%81%A7%E5%88%86%E5%89%B2%E5%85%88%E3%81%ABactive-editor%E3%82%92%E7%A7%BB%E5%8B%95%E3%81%99%E3%82%8B%E3%82%B7%E3%83%A7%E3%83%BC%E3%83%88%E3%82%AB%E3%83%83%E3%83%88%E3%81%AE%E8%A8%AD%E5%AE%9A)
+    - [VSCodeでsplit terminal tab間の移動](#vscode%E3%81%A7split-terminal-tab%E9%96%93%E3%81%AE%E7%A7%BB%E5%8B%95)
 
 <!-- END doctoc generated TOC please keep comment here to allow auto update -->
 
@@ -155,7 +156,7 @@ Defaultでは`/sys/module/hid_apple/parameters/fnmode`は2と設定されてい�
 |`Ctrl`+`P`|選択したエリアのスクリーンショットを取る & Clipboardへ保存|新規設定|
 |`Ctrl`+ `Shift` + `P`|選択したエリアのスクリーンショットを取る & Picturesへ保存|新規設定|
 |`alt` + `F4`|ウィンドウを閉じる|Default|
-|`Super` + `F/G`|Launch the Firefox/Google Chrome|新規設定|
+|`Super` + `F`|Launch the Firefox(the deflaut web browser)|新規設定|
 |`Super` + `S`|Search|Default|
 |`alt` + `F10`|Windowの最大化|Default|
 |`Super` + `Shift` + `←/→`|現在のウィンドウを一つ左/右のモニターに移動|Default|
