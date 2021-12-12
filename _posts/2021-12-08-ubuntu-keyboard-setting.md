@@ -27,7 +27,7 @@ tags:
 ||概要|
 |---|---|
 |目的|Keychron K6 Wireless Mechanical Keyboardとショートカットの整理|
-|参考|1. [Archlinux: Function keys do not work](https://wiki.archlinux.org/title/Apple_Keyboard#Function_keys_do_not_work)<br>2. [How to disable global Super-p shortcut?](https://askubuntu.com/questions/68463/how-to-disable-global-super-p-shortcut)|
+|参考|1. [Archlinux: Function keys do not work](https://wiki.archlinux.org/title/Apple_Keyboard#Function_keys_do_not_work)<br>2. [How to disable global Super-p shortcut?](https://askubuntu.com/questions/68463/how-to-disable-global-super-p-shortcut)<br>3. [stackoverflow:How to switch between terminals in Visual Studio Code](https://stackoverflow.com/questions/48440673/how-to-switch-between-terminals-in-visual-studio-code/60224585)|
 
 <!-- START doctoc generated TOC please keep comment here to allow auto update -->
 <!-- DON'T EDIT THIS SECTION, INSTEAD RE-RUN doctoc TO UPDATE -->
