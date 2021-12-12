@@ -39,6 +39,7 @@ tags:
 - [2. Keychron K6初期設定](#2-keychron-k6%E5%88%9D%E6%9C%9F%E8%A8%AD%E5%AE%9A)
   - [Function keyの設定](#function-key%E3%81%AE%E8%A8%AD%E5%AE%9A)
   - [Keyboard Backlightの設定](#keyboard-backlight%E3%81%AE%E8%A8%AD%E5%AE%9A)
+  - [Keyboard 配列の設定](#keyboard-%E9%85%8D%E5%88%97%E3%81%AE%E8%A8%AD%E5%AE%9A)
 - [3. Keyboard cheatsheet](#3-keyboard-cheatsheet)
   - [Ubuntu](#ubuntu)
   - [Browser](#browser)
@@ -151,6 +152,13 @@ Defaultでは`/sys/module/hid_apple/parameters/fnmode`は2と設定されてい�
 |---|---|
 |backlightのOn/Offの設定|`fn1` + `電球ボタン`|
 |backlight設定の固定|`fn1` + `L` + `電球ボタン`(４秒以上長押し, キーボードが点滅したら設定完了)|
+
+### Keyboard 配列の設定
+
+> 右Controlと右Altキーを入れ替える
+
+- `fn1` + `K` + `R`を４秒以上長押し, キーボードが点滅したら設定完了
+
 
 ## 3. Keyboard cheatsheet
 ### Ubuntu 
