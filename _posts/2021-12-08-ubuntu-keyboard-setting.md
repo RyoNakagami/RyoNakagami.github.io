@@ -195,9 +195,6 @@ Defaultでは`/sys/module/hid_apple/parameters/fnmode`は2と設定されてい�
 |`Ctrl` + `alt` + `G`|PDF viwer時にページ番号の入力|
 |`/`|Youtube/GitHubなどで検索ボックスへ移動|
 
-
-
-
 ### VSCode
 **General**
 
@@ -309,6 +306,21 @@ Defaultではモニター設定のキーが割り当てられているのでそ�
 <img src="https://github.com/ryonakimageserver/omorikaizuka/blob/master/%E3%83%96%E3%83%AD%E3%82%B0%E7%94%A8/20211208_keyboardshortcuts_screenshots.png?raw=true">
 
 なお、同じ方法でDefault Web browserのショートカットキーの設定をすることができます.
+
+#### Caps Lock キーを無効化する
+
+> 目的
+
+- 現時点ではCaps Lockの恩恵はゼロ & むしろ押し間違いによる不利益しかない
+
+> 実行
+
+1. GNOME Tweaks を起動する．
+2. Keyboard & Mouseをクリック
+3. Additional Layout Optionsをクリック
+4. Caps Lock behavior > Caps Lock is disabledを選択
+5. Reboot
+
 
 ### VSCode Keyboard Shortcutの変更
 
