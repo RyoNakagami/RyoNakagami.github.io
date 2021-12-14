@@ -81,6 +81,7 @@ mode|Windows
 |---|---|---|
 |dcof-editor|Ubuntuの設定管理ツール|`sudo apt install dconf-editor`|
 |gnome-tweaks|Gnome設定を調整する<br>Ubuntuアプリケーション|`sudo add-apt-repository universe`<br>`sudo apt update`<br>`sudo apt install gnome-tweak-tool`|
+|SimpleScreenRecorder|画面録画アプリ|`sudo apt install simplescreenrecorder`|
 
 > VSCode
 
@@ -179,6 +180,7 @@ Defaultでは`/sys/module/hid_apple/parameters/fnmode`は2と設定されてい�
 |`Super` + `Shift` + `←/→`|現在のウィンドウを一つ左/右のモニターに移動|Default|
 |`Super` + `移動キー`|Windowの最大化(↑/↓)、右寄せ左寄せ(←/→)を設定|Default|
 |`Super` + `数字キー`|番号が対応しているFavaroite上のアプリを起動する|Default|
+|`Ctrl`+ `Shift` + `alt` + `R`|SimpleScreenRecorderを起動した状態で画面録画の開始と停止|新規設定|
 
 
 **Ubuntu Termianl**

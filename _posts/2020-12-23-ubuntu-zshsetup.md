@@ -537,28 +537,136 @@ export PATH="$HOME/.bin.d:$PATH"
 １つ１つ説明していきましたが、まとめると下のような設定になります。これを`~/.zshrc`に書き加えれば終了です。
 
 ```zsh
-# 20201225 update
-## enable comment-out
-setopt interactivecomments
+# -----------------------------
+# General
+# -----------------------------
+## Set up the prompt
 
-# Keep 1000 lines of history within the shell and save it to ~/.zsh_history:
-HISTSIZE=10000000
-SAVEHIST=$HISTSIZE 
+autoload -Uz promptinit
+promptinit
+prompt adam1
+
+setopt histignorealldups #sharehistory
+setopt interactivecomments #20201225追加
+
+## Use emacs keybindings even if our EDITOR is set to vi
+# bindkey -e
+
+
+## Permission初期値調整
+umask u=rwx,g=rw,o=r #umask 022と同じ. 実行結果はumask -Sで確認
+
+
+# -----------------------------
+# History
+# -----------------------------
+## Keep 1000 lines of history within the shell and save it to ~/.zsh_history:
+HISTSIZE=10000
+SAVEHIST=1000000 
 HISTFILE=~/.zsh_history
 setopt extended_history ## ヒストリファイルにコマンドラインだけではなく実行時刻と実行時間も保存する。
 setopt hist_ignore_space ## スペースで始まるコマンドラインはヒストリに追加しない。
 setopt inc_append_history ## すぐにヒストリファイルに追記する。
 setopt share_history ## zshプロセス間でヒストリを共有する。
 
-## unpackコマンド追加
-export PATH="$HOME/.bin.d:$PATH"
+# -----------------------------
+# PATH
+# -----------------------------
+# 重複パスを登録しない
+typeset -U path PATH
+
+
+# Install Ruby Gems to ~/gems
+export GEM_HOME="$HOME/gems"
+export PATH="$HOME/gems/bin:$PATH"
+
+# PATH on xsv 20201229 update
+export PATH="$HOME/.xsv.d:$PATH"
+
+# PATH on unpack 20210101 update
+export PATH="$HOME/bin:$PATH"
+
+
+
+#-------------------------------------
+# GitHub
+#-------------------------------------
+## set access token for Ubuntu_Akatsuki
+## 例:git clone https://RyoNakagami:${GIT_TOKEN}@github.com/repositoryowner/repositoryname
+export GIT_TOKEN=<hogehoge> ## WARNING -- PRIVACY
+
+
+#-------------------------------------
+# python
+#-------------------------------------
+## pyenv setup
+export PYENV_ROOT="$HOME/.pyenv"
+export PATH="$PYENV_ROOT/bin:$PATH"
+if command -v pyenv 1>/dev/null 2>&1; then
+  eval "$(pyenv init --path)"
+fi
+
+## pyenv virtualenv setup
+eval "$(pyenv virtualenv-init -)"
+
+## Jupyter
+export PATH="$HOME/.nodebrew/current/bin:$PATH"
+#export PATH="$HOME/.local/bin:$PATH"
+
+
+# rbenv setup
+export RBENV_ROOT="$HOME/.rbenv"
+export PATH="$RBENV_ROOT/bin:$PATH"
+
+#-------------------------------------
+# R
+#-------------------------------------
+
+
+
+# -----------------------------
+# Completion
+# -----------------------------
+## Use modern completion system
+autoload -Uz compinit # -Uは関数の内部でaliasを展開しないようにするオプション
+compinit
+
+zstyle ':completion:*' auto-description 'specify: %d'
+zstyle ':completion:*' completer _expand _complete _correct _approximate
+zstyle ':completion:*' format 'Completing %d'
+zstyle ':completion:*' group-name ''
+zstyle ':completion:*' menu select=2
+eval "$(dircolors -b)"
+zstyle ':completion:*:default' list-colors ${(s.:.)LS_COLORS}
+zstyle ':completion:*' list-colors ''
+zstyle ':completion:*' list-prompt %SAt %p: Hit TAB for more, or the character to insert%s
+zstyle ':completion:*' matcher-list '' 'm:{a-z}={A-Z}' 'm:{a-zA-Z}={A-Za-z}' 'r:|[._-]=* r:|=* l:|=*'
+zstyle ':completion:*' menu select=long
+zstyle ':completion:*' select-prompt %SScrolling active: current selection at %p%s
+zstyle ':completion:*' use-compctl false
+zstyle ':completion:*' verbose true
+
+zstyle ':completion:*:*:kill:*:processes' list-colors '=(#b) #([0-9]#)*=0=01;31'
+zstyle ':completion:*:kill:*' command 'ps -u $USER -o pid,%cpu,tty,cputime,cmd'
+
+setopt complete_in_word ## カーソル位置で補完する。(
+
 
 ## Git autocompleteion libaray
 autoload -Uz compinit && compinit
 
-# --
+
+
+#-------------------------------------
+# Alias settings
+#-------------------------------------
+## alias with color
+alias ls='ls -F --color=auto'
+alias grep='grep --color=auto'
+
+#-------------------------------------
 # functions
-# --
+#-------------------------------------
 # ファイル数が多い時には省略表示
 # (参考: https://qiita.com/yuyuchu3333/items/b10542db482c3ac8b059)
 # chpwd(カレントディレクトリが変更したとき)にls_abbrevを実行
@@ -646,11 +754,6 @@ setopt prompt_subst
 # プロンプトの右側にメソッドの結果を表示させる
 RPROMPT='`rprompt-git-current-branch`'
 
-# --
-# Alias
-# --
-alias ls='ls -F --color=auto'
-alias grep='grep --color=auto'
 ```
 
 ## Appendix: /procディレクトリのファイル
@@ -680,4 +783,3 @@ dr-xr-xr-x   9 root             root                           0 Dec 25 11:23 12
 ```
 
 `/proc`ディレクトリにあるファイルは、システムをコントロールするために使われます。そのため、システムのさまざまな情報がここに格納されています。意味もわからずに/procの内容を変更するとシステムが壊れるので直接編集は基本的にだめです。たとえば`/proc/sys/`ディレクトリのファイルには、カーネルの諸設定をオン／オフが記載されており、ここのファイルの内容を書き換えることによって、さまざまなカーネル設定を有効化／無効化することができます。もし編集したい場合は`/etc/sysctl.conf`というファイルが用意されているのでこちらを編集します。
-
