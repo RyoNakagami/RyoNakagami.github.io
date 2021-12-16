@@ -10,8 +10,8 @@ mathjax: true
 purpose: 
 tags:
 
-- Ubuntu 20.04 LTS
-- shell
+- 統計
+- Bayesian
 ---
 
 <!-- Global site tag (gtag.js) - Google Analytics -->
