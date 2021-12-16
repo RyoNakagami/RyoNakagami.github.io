@@ -126,40 +126,48 @@ $$
 
 ベータ分布のpdfは
 
+<div class="math display" style="overflow: auto">
 $$
 \begin{aligned}
 P(\theta) &= \frac{1}{B(\alpha, \beta)}\theta^{\alpha - 1}(1-\theta)^{\beta - 1}\\
 \text{where }& B(\alpha, \beta) = \int^1_0\theta^{\alpha - 1}(1-\theta)^{\beta - 1}d\theta
 \end{aligned}
 $$
+</div>
 
 かつ、$(\alpha, \beta) = (1, 1)$のときそれは一様分布になります.
 
 今回求めたいのは $P(\theta\|D)$なので、ベイズルールより
 
+<div class="math display" style="overflow: auto">
 $$
 \begin{aligned}
 P(\theta|D) &= \frac{P(D|\theta)P(\theta)}{P(D)}
 \end{aligned}
 $$
+</div>
 
 h, t をそれぞれ、コインを投げたときの表と裏の出現回数だとすると
 
+<div class="math display" style="overflow: auto">
 $$
 \begin{aligned}
 P(D) &= \int^1_0 \frac{_{h+t}C_h}{B(\alpha, \beta)} \theta^h(1-\theta)^t\theta^{\alpha - 1}(1-\theta)^{\beta - 1}d\theta\\
 &=\int^1_0 \frac{_{h+t}C_h}{B(\alpha, \beta)} \theta^{\alpha+h-1}(1-\theta)^{\beta + t - 1}d\theta
 \end{aligned}
 $$
+</div>
 
 今回は、事前分布を一様分布, i.e., $(\alpha, \beta) = (1, 1)$なので
 
+<div class="math display" style="overflow: auto">
 $$
 \begin{aligned}
 P(D) &= \int^1_0 {_{h+t}} C_h\theta^{h}(1-\theta)^{t} d\theta\\
 &= {_{h+t}} C_h B(h+1, t+1)
 \end{aligned}
 $$
+</div>
 
 従って、
 
@@ -236,12 +244,14 @@ $$
 
 なので、
 
+<div class="math display" style="overflow: auto">
 $$
 \begin{aligned}
 Pr(S_T = H|D) &= \frac{_{N} C_H}{B(h+1, t+1)} \int^1_0 \theta^{H+h}(1-\theta)^{N-H+t}d\theta\\
 &= {}_{N} C_H\frac{B(H+h+1, N-H+t+1)}{B(h+1, t+1)}
 \end{aligned}
 $$
+</div>
 
 ```python
 def plot_extrapolate(N_trials, heads, tails, alpha=1, beta=1, ax = None):
