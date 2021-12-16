@@ -280,8 +280,45 @@ summary_stats(x, y)
 
 > 観測Dataを変更してシミュレーション(alpha = 1, beta = 1)
 
+```python
+flips = [(2, 0), (20, 16), (50, 47), (75, 73), (400, 399)]
+fig, axes = plt.subplots(len(flips), 2, figsize = (20, 14))
+
+for i, flip in enumerate(flips):
+    plot_posterior(heads=flip[0], tails=flip[1], alpha=1, beta=1, ax=axes[i,0])
+    axes[i,0].set_yticks([])
+    plot_extrapolate(N_trials = 50, heads = flip[0], tails = flip[1], ax = axes[i,1])
+
+fig.subplots_adjust(hspace=0.8)
+for ax in axes:
+    ax[0].set_yticks([])
+    ax[1].set_yticks([])
+    ax[0].set_xlabel("")
+    ax[1].set_xlabel("")
+axes[4,0].set_xticks([0.5]);
+```
+
+
 <img src="https://github.com/ryonakimageserver/omorikaizuka/blob/master/%E3%83%96%E3%83%AD%E3%82%B0%E7%94%A8/2021121706-12-06.png?raw=true">
 
 > alpha = 2, beta = 2の場合のシミュレーション
+
+```python
+flips = [(2, 0), (20, 16), (50, 47), (75, 73), (400, 399)]
+fig, axes = plt.subplots(len(flips), 2, figsize = (20, 14))
+
+for i, flip in enumerate(flips):
+    plot_posterior(heads=flip[0], tails=flip[1], alpha=2, beta=2, ax=axes[i,0])
+    axes[i,0].set_yticks([])
+    plot_extrapolate(N_trials = 50, heads = flip[0], tails = flip[1], alpha=2, beta=2, ax = axes[i,1])
+
+fig.subplots_adjust(hspace=0.8)
+for ax in axes:
+    ax[0].set_yticks([])
+    ax[1].set_yticks([])
+    ax[0].set_xlabel("")
+    ax[1].set_xlabel("")
+axes[4,0].set_xticks([0.5]);
+```
 
 <img src="https://github.com/ryonakimageserver/omorikaizuka/blob/master/%E3%83%96%E3%83%AD%E3%82%B0%E7%94%A8/2021121706-12-13.png?raw=true">
