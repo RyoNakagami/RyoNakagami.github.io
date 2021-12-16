@@ -27,6 +27,7 @@ tags:
 ||概要|
 |---|---|
 |目的|ベイズ統計入門<br>がんばってBayesian Econometricsをマスターする|
+|参考|1. [ベータ関数の積分公式](https://manabitimes.jp/math/608) <br>2. [MA40189: Topics in Bayesian statistics](https://people.bath.ac.uk/masss/ma40189/notes.pdf)<br>3. [決定理論 と ベイズ法:渡辺澄夫](http://watanabe-www.math.dis.titech.ac.jp/users/swatanab/decisiontheory.pdf)|
 
 <!-- START doctoc generated TOC please keep comment here to allow auto update -->
 <!-- DON'T EDIT THIS SECTION, INSTEAD RE-RUN doctoc TO UPDATE -->
