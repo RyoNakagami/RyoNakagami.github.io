@@ -176,6 +176,13 @@ $$
 P(\theta|D) = \frac{1}{B(h+1, t+1)}\theta^{h}(1-\theta)^{t}
 $$
 
+なお、分散の計算は定義どおり
+
+$$
+V(X) = \sum (x - E[X])^2f(x)
+$$
+
+
 > Python simulation
 
 ```python
