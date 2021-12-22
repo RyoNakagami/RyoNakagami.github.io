@@ -69,7 +69,7 @@ classes: wide
 
 
                 <hr/>
-                <h3>Comments<br>(注意：GitHub Accountが必要となります）</h3>
+                <b><font size="5">Leave a Comment</font><br>(注意：GitHub Accountが必要となります）</b>
                 
                 <script src="https://utteranc.es/client.js"
                     repo="RyoNakagami/RyoNakagami.github.io"
@@ -85,22 +85,22 @@ classes: wide
             </div>  
 
     <!-- Side Catalog Container -->
-        <!-- {% unless page.no-catalog %} -->
-            <!-- <div class=" -->
-                <!-- col-lg-1 col-lg-offset-0 -->
-                <!-- visible-lg-block -->
-                <!-- sidebar-container -->
-                <!-- catalog-container"> -->
-                <!-- <div class="side-catalog"> -->
-                    <!-- <hr class="hidden-sm hidden-xs"> -->
-                    <!-- <h5> -->
-                        <!-- <a class="catalog-toggle" href="#">Table of Contents</a> -->
-                    <!-- </h5> -->
-                    <!-- <ul class="catalog-body"></ul> -->
-                <!-- </div> -->
-            <!-- </div> -->
-        <!-- {% endunless %} -->
-
+        {% unless page.no-catalog %}
+            <div class="
+                col-lg-1 col-lg-offset-0
+                visible-lg-block
+                sidebar-container
+                catalog-container">
+                <div class="side-catalog">
+                    <hr class="hidden-sm hidden-xs">
+                    <h5>
+                        <a class="catalog-toggle" href="#">CONTENTS</a>
+                    </h5>
+                    <ul class="catalog-body"></ul>
+                </div>
+            </div>
+        {% endunless %}
+<!--  -->
     <!-- Sidebar Container -->
             <div class="
                 col-lg-10 col-lg-offset-1

@@ -70,12 +70,12 @@
 }
 .side-catalog .catalog-toggle::before {
   content: "−";
-  position: relative;
+  position: sticky;
   margin-right: 5px;
   bottom: 1px;
 }
 .side-catalog .catalog-body {
-  position: relative;
+  position: sticky;
   list-style: none;
   height: auto;
   overflow: hidden;
@@ -84,7 +84,7 @@
   text-indent: 0;
 }
 .side-catalog .catalog-body li {
-  position: relative;
+  position: sticky;
   list-style: none;
 }
 .side-catalog .catalog-body li a {
