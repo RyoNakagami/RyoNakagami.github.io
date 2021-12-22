@@ -1,5 +1,6 @@
 ---
 layout: default
+classes: wide
 ---
 
 <!-- Image to hack wechat -->
@@ -16,7 +17,8 @@ layout: default
 
     <!-- Post Container -->
             <div class="
-                col-lg-8 col-lg-offset-2
+                col-xl-12 col-xl-offset-1
+                col-lg-10 col-lg-offset-1
                 col-md-10 col-md-offset-1
                 post-container">
 
@@ -28,61 +30,80 @@ layout: default
 				{{ content }}
 
                 <hr style="visibility: hidden;">
-                <ul class="pager">
-                    {% if page.previous.url %}
-                    <li class="previous">
-                        <a href="{{ page.previous.url | prepend: site.baseurl | replace: '//', '/' }}" data-toggle="tooltip" data-placement="top" title="{{page.previous.title}}">
-                        Previous<br>
-                        <span>{{page.previous.title}}</span>
-                        </a>
-                    </li>
-                    {% endif %}
-                    {% if page.next.url %}
-                    <li class="next">
-                        <a href="{{ page.next.url | prepend: site.baseurl | replace: '//', '/' }}" data-toggle="tooltip" data-placement="top" title="{{page.next.title}}">
-                        Next<br>
-                        <span>{{page.next.title}}</span>
-                        </a>
-                    </li>
-                    {% endif %}
-                </ul>
-                <hr style="visibility: hidden;">
+                <!-- <h3>前後の記事</h3> -->
+                <!-- <ul class="pager"> -->
+                    <!-- {% if page.previous.url %} -->
+                    <!-- <li class="previous"> -->
+                        <!-- <a href="{{ page.previous.url | prepend: site.baseurl | replace: '//', '/' }}" data-toggle="tooltip" data-placement="top" title="{{page.previous.title}}"> -->
+                        <!-- Previous<br> -->
+                        <!-- <span>{{page.previous.title}}</span> -->
+                        <!-- </a> -->
+                    <!-- </li> -->
+                    <!-- {% endif %} -->
+                    <!-- {% if page.next.url %} -->
+                    <!-- <li class="next"> -->
+                        <!-- <a href="{{ page.next.url | prepend: site.baseurl | replace: '//', '/' }}" data-toggle="tooltip" data-placement="top" title="{{page.next.title}}"> -->
+                        <!-- Next<br> -->
+                        <!-- <span>{{page.next.title}}</span> -->
+                        <!-- </a> -->
+                    <!-- </li> -->
+                    <!-- {% endif %} -->
+                <!-- </ul> -->
 
-                {% if site.disqus_username %}
+
+
+                <!-- <hr style="visibility: hidden;"> -->
+                <!-- {% if site.disqus_username %} -->
                 <!-- disqus 评论框 start -->
-                <div class="comment">
-                    <div id="disqus_thread" class="disqus-thread"></div>
-                </div>
+                <!-- <div class="comment"> -->
+                    <!-- <div id="disqus_thread" class="disqus-thread"></div> -->
+                <!-- </div> -->
                 <!-- disqus 评论框 end -->
-                {% endif %}
+                <!-- {% endif %} -->
 
-                {% if site.netease_comment %}
+                <!-- {% if site.netease_comment %} -->
                 <!-- 网易云跟帖 评论框 start -->
-                <div id="cloud-tie-wrapper" class="cloud-tie-wrapper"></div>
+                <!-- <div id="cloud-tie-wrapper" class="cloud-tie-wrapper"></div> -->
                 <!-- 网易云跟帖 评论框 end -->
-                {% endif %}
+                <!-- {% endif %} -->
+
+
+                <hr/>
+                <h3>Comments<br>(注意：GitHub Accountが必要となります）</h3>
+                
+                <script src="https://utteranc.es/client.js"
+                    repo="RyoNakagami/RyoNakagami.github.io"
+                    issue-term="url"
+                    theme="github-light"
+                    crossorigin="anonymous"
+                    async>
+                
+                </script>
+
+
+
             </div>  
 
     <!-- Side Catalog Container -->
-        {% unless page.no-catalog %}
-            <div class="
-                col-lg-2 col-lg-offset-0
-                visible-lg-block
-                sidebar-container
-                catalog-container">
-                <div class="side-catalog">
-                    <hr class="hidden-sm hidden-xs">
-                    <h5>
-                        <a class="catalog-toggle" href="#">CATALOG</a>
-                    </h5>
-                    <ul class="catalog-body"></ul>
-                </div>
-            </div>
-        {% endunless %}
+        <!-- {% unless page.no-catalog %} -->
+            <!-- <div class=" -->
+                <!-- col-lg-1 col-lg-offset-0 -->
+                <!-- visible-lg-block -->
+                <!-- sidebar-container -->
+                <!-- catalog-container"> -->
+                <!-- <div class="side-catalog"> -->
+                    <!-- <hr class="hidden-sm hidden-xs"> -->
+                    <!-- <h5> -->
+                        <!-- <a class="catalog-toggle" href="#">Table of Contents</a> -->
+                    <!-- </h5> -->
+                    <!-- <ul class="catalog-body"></ul> -->
+                <!-- </div> -->
+            <!-- </div> -->
+        <!-- {% endunless %} -->
 
     <!-- Sidebar Container -->
             <div class="
-                col-lg-8 col-lg-offset-2
+                col-lg-10 col-lg-offset-1
                 col-md-10 col-md-offset-1
                 sidebar-container">
 
