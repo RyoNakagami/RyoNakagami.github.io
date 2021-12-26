@@ -1651,8 +1651,3 @@ $D'D$は$d = Da$とすると、任意の0でないベクトル$a$について、
 </div>
 
 ## 4. Asymptotic Property of OLS Estimator
-
-
-
-
-

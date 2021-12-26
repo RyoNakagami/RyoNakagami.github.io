@@ -21,10 +21,9 @@ tags:
   function gtag(){dataLayer.push(arguments);}
   gtag('js', new Date());
 
-  gtag('config', 'G-LVL413SV09' {
-  'user_id': 'USER_ID'
-});
+  gtag('config', 'G-LVL413SV09');
 </script>
+
 
 ||概要|
 |---|---|

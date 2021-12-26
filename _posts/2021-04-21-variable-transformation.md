@@ -21,11 +21,9 @@ tags:
   function gtag(){dataLayer.push(arguments);}
   gtag('js', new Date());
 
-  gtag('config', 'G-LVL413SV09' {
-  'user_id': 'USER_ID'
-});
-
+  gtag('config', 'G-LVL413SV09');
 </script>
+
 
 ||概要|
 |---|---|
@@ -34,11 +32,18 @@ tags:
 <!-- START doctoc generated TOC please keep comment here to allow auto update -->
 <!-- DON'T EDIT THIS SECTION, INSTEAD RE-RUN doctoc TO UPDATE -->
 
-- [変数変換](#%E5%A4%89%E6%95%B0%E5%A4%89%E6%8F%9B)
-  - [例題](#%E4%BE%8B%E9%A1%8C)
-  - [累積分布関数と一様分布](#%E7%B4%AF%E7%A9%8D%E5%88%86%E5%B8%83%E9%96%A2%E6%95%B0%E3%81%A8%E4%B8%80%E6%A7%98%E5%88%86%E5%B8%83)
-  - [確率変数の線形変換](#%E7%A2%BA%E7%8E%87%E5%A4%89%E6%95%B0%E3%81%AE%E7%B7%9A%E5%BD%A2%E5%A4%89%E6%8F%9B)
-  - [平方変換](#%E5%B9%B3%E6%96%B9%E5%A4%89%E6%8F%9B)
+- [1: １次元変数変換](#1-%EF%BC%91%E6%AC%A1%E5%85%83%E5%A4%89%E6%95%B0%E5%A4%89%E6%8F%9B)
+  - [定理：変数変換と確率密度関数](#%E5%AE%9A%E7%90%86%E5%A4%89%E6%95%B0%E5%A4%89%E6%8F%9B%E3%81%A8%E7%A2%BA%E7%8E%87%E5%AF%86%E5%BA%A6%E9%96%A2%E6%95%B0)
+  - [命題：累積分布関数と一様分布](#%E5%91%BD%E9%A1%8C%E7%B4%AF%E7%A9%8D%E5%88%86%E5%B8%83%E9%96%A2%E6%95%B0%E3%81%A8%E4%B8%80%E6%A7%98%E5%88%86%E5%B8%83)
+  - [定理：確率変数の線形変換](#%E5%AE%9A%E7%90%86%E7%A2%BA%E7%8E%87%E5%A4%89%E6%95%B0%E3%81%AE%E7%B7%9A%E5%BD%A2%E5%A4%89%E6%8F%9B)
+  - [練習問題](#%E7%B7%B4%E7%BF%92%E5%95%8F%E9%A1%8C)
+    - [(1) 平方変換](#1-%E5%B9%B3%E6%96%B9%E5%A4%89%E6%8F%9B)
+    - [(2) 平方変換と絶対値を用いた確率密度関数](#2-%E5%B9%B3%E6%96%B9%E5%A4%89%E6%8F%9B%E3%81%A8%E7%B5%B6%E5%AF%BE%E5%80%A4%E3%82%92%E7%94%A8%E3%81%84%E3%81%9F%E7%A2%BA%E7%8E%87%E5%AF%86%E5%BA%A6%E9%96%A2%E6%95%B0)
+    - [(3) Truncated Distribution](#3-truncated-distribution)
+    - [(4) 標準正規分布に従う確率変数の指数変換](#4-%E6%A8%99%E6%BA%96%E6%AD%A3%E8%A6%8F%E5%88%86%E5%B8%83%E3%81%AB%E5%BE%93%E3%81%86%E7%A2%BA%E7%8E%87%E5%A4%89%E6%95%B0%E3%81%AE%E6%8C%87%E6%95%B0%E5%A4%89%E6%8F%9B)
+- [2: 2次元変数変換](#2-2%E6%AC%A1%E5%85%83%E5%A4%89%E6%95%B0%E5%A4%89%E6%8F%9B)
+  - [変数変換の公式](#%E5%A4%89%E6%95%B0%E5%A4%89%E6%8F%9B%E3%81%AE%E5%85%AC%E5%BC%8F)
+- [References](#references)
 
 <!-- END doctoc generated TOC please keep comment here to allow auto update -->
 
@@ -452,17 +457,17 @@ def y_density(y):
 
 #### (4) 標準正規分布に従う確率変数の指数変換
 
-$$X \sim N(0, 1)$$のとき, $$Y= \exp(X)$$の確率密度関数を求めよ
+$X \sim N(0, 1)$のとき, $Y= \exp(X)$の確率密度関数を求めよ
 
 > 解答
 
-$$\exp(\cdot)$$は連続な単調増加関数で逆関数 $$X = \log (Y)$$をもつ. 従って、
+$\exp(\cdot)$は連続な単調増加関数で逆関数 $X = \log (Y)$をもつ. 従って、
 
 $$
 F_Y(y) = F_X(\log (y))
 $$
 
-両辺を$$y$$で微分すると
+両辺を$y$で微分すると
 
 $$
 \begin{aligned}
@@ -496,3 +501,213 @@ print(np.mean(x**2))
 
 ## 2: 2次元変数変換
 ### 変数変換の公式
+
+$(X, Y)$を確率変数とし、$S = g_1(X, Y), T = g_2(X, Y)$ なる変数変換を考えます. $\mathbf R^2$上の集合Dに対して、
+
+$$
+C = \{(x, y)| (g_1(x, y), g_2(x, y))\in D\}
+$$
+
+とするとき
+
+$$
+P((S, T)\in D) = P((X, Y)\in C)\tag{2.1}
+$$
+
+を考えることができます. 
+
+> 離散型確率変数の場合
+
+$C_{u, v} = \{(x, y)\| g_1(x, y) = u, g_2(x, y)= v\}$とおくと、$(S, T)$の同時確率関数は
+
+$$
+f_{S, T}(u, v) = P((X, Y)\in C_{u,v}) = \sum_{(x, y)\in C_{u,v}}f_{X, Y}(x, y)\tag{2.2}
+$$
+
+> 連続型確率変数の場合
+
+基本方針は(2.2)と同じ形となります. 特に$(X, Y)$と$(S, T)$の対応が1対1対応の場合,$(S, T)$の確率密度関数を陽に表現することができます.
+まず最初に$(X, Y)$と$(S, T)$の対応が以下のように表現されるとします.
+
+$$
+\begin{aligned}
+X &= h_1(S, T)\\
+Y &= h_2(S, T)
+\end{aligned}
+$$
+
+次にヤコビアンを定義します.
+
+<div class="math display" style="overflow: auto">
+$$
+\begin{aligned}
+J(s, t) &= J((s, t)\to(x, y))\\
+&= \text{det}\left(\begin{array}{cc}
+\frac{\partial h_1(s, t)}{\partial s} & \frac{\partial h_1(s, t)}{\partial t}\\
+\frac{\partial h_2(s, t)}{\partial s} & \frac{\partial h_2(s, t)}{\partial t}
+\end{array}\right)
+\end{aligned}
+$$
+</div>
+
+このとき、重積分の変数変換公式より
+
+<div class="math display" style="overflow: auto">
+$$
+\int\int_{(x, y)\in C}f_{X, Y}(x, y)dxdy = \int\int_{(S, T)\in D}f_{X, Y}(h_1(s, t), h_2(s, t))|J(s, t)|dsdt
+$$
+</div>
+
+また、ヤコビアン $J((s, t)\to(x, y))$は以下の関係も有する：
+
+$$
+J((s, t)\to(x, y)) = \frac{1}{J((x, y)\to(s, t))}
+$$
+
+### 練習問題
+#### (1) 指数分布と変数変換: 2019年11月統計検定１級より
+
+> 問題
+
+確率変数 $X_1, X_2$は互いに独立に指数分布に従うとします
+
+$$
+f(x) = \lambda \exp(-\lambda x) \ \ \text{ s.t } x > 0,\lambda > 0
+$$
+
+それらの和を $S = X_1 + X_2$, 標本平均を $\bar X = S/2$とします. このとき、以下の設問を答えよ.
+
+1. $E[S]$をもとめよ
+2. $S$ の確率密度関数 $g(s)$ をもよめよ
+3. $E[1/S]$をもとめよ
+4. $\alpha$ を正の定数とし、パラメーター $\theta \equiv 1/\lambda$を $\alpha \bar X$で推定します. その時の損失関数を
+
+$$
+\begin{aligned}
+L(\alpha \bar X, \theta)= \frac{\alpha \bar X}{\theta} + \frac{\theta}{\alpha \bar X}-2
+\end{aligned}
+$$
+
+として期待値 $R(\alpha, \theta) \equiv E[L(\alpha \bar X, \theta)]$を導出せよ. また、左の期待値が最小となる $\alpha$ の値も求めよ.
+
+
+> 解答 (1)
+
+確率変数 $X_1, X_2$は互いに独立に指数分布に従うので
+
+$$
+E[S] = E[X_1 + X_2] = E[X_1] + E[X_2]
+$$
+
+$$
+\begin{aligned}
+E[X_1] &= \int_0^\infty x\lambda \exp(-\lambda x)dx\\
+&= [-x\exp(-\lambda x)]^\infty_0 + \int_0^\infty \exp(-\lambda x)dx\\
+&= \frac{1}{\lambda}
+\end{aligned}
+$$
+
+従って, $E[S] = 2/\lambda$
+
+> 解答 (2): 畳み込み, convultion
+
+$(X_1, X_2)\to(S, T)$への変数変換を以下のように考えます
+
+$$
+\begin{aligned}
+S &= X_1 + X_2\\
+T &= X_1
+\end{aligned}
+$$
+
+逆変換は
+
+$$
+\begin{aligned}
+X_1 &= T\\
+X_2 &= S - T 
+\end{aligned}
+$$
+
+これにより、(S, T)の同時確率密度関数は $t > 0, s - t > 0$ に注意して
+
+$$
+g(s, t) = f(t)f(s - t)|J| = \lambda^2 \exp(-\lambda s)
+$$
+
+よって, $s - t$を $(0, s)$区間で積分すれば $g(s)$が得られるので
+
+$$
+g(s) = \int_0^{s}\lambda^2 \exp(-\lambda s)dt = \lambda^2 s \exp(-\lambda s) 
+$$
+
+
+> 解答 (3)
+
+$$
+\begin{aligned}
+E[1/S] &= \int_0^\infty \frac{1}{s}\lambda^2 s \exp(-\lambda s) ds\\
+&= \lambda
+\end{aligned}
+$$
+
+> 解答(4)
+
+(1)と(3)より
+
+$$
+\begin{aligned}
+R(\alpha, \theta) &= E\left[\frac{\alpha \bar X}{\theta} + \frac{\theta}{\alpha \bar X}-2\right]\\
+&= \frac{\alpha}{\theta}E[\bar X] + \frac{\theta}{\alpha}E[1/\bar X] - 2\\
+&= \alpha  + \frac{1}{\alpha} - 2
+\end{aligned}
+$$
+
+「$\alpha$ を正の定数」という条件より、$\alpha$の定義域において、これは連続関数なので$\alpha$で微分して0となる数値が局地となります.
+また、二階条件が正となれば、その局地は最小値をとるので
+
+$$
+\begin{aligned}
+R'(\alpha) &= 1 - 2/\alpha^2\\
+R''(\alpha) &= 4/\alpha^3 > 0
+\end{aligned}
+$$
+
+従って、$\alpha = \sqrt {2}$で$R(\alpha)$は最小値を取る.
+
+
+
+## Appendix
+### 陰関数と陽関数
+
+$x$ の値を決めたら $y$ の値が1つに決まるとき，$y$ は $x$ の関数であるという。その中でも，
+
+- 陽関数とは，$y=f(x)$ という「いつもの形」で表された関数のこと。
+- 陰関数とは，$F(x,y)=0$ という形で表された関数のこと。
+
+### 変数変換を用いた定積分の計算
+
+$$x = g(t)$$ (ただし $$g(t)$$は積分区間で単調な関数)と変換する. $$x$$ が $$a$$ から $$b$$ へと動くとき, $$t$$ は$$\alpha = g^{-1}(a)$$から $$\beta = g^{-1}(b)$$ へと動くとする. 
+
+$$
+\begin{aligned}
+\int^b_a f(x) dx &= \int^{\beta}_{\alpha}f(g(t))\frac{dx}{dt}dt\\
+&= \int^{\beta}_{\alpha}f(g(t))g'(t)dt
+\end{aligned}
+$$
+
+> 例
+
+$$
+\begin{aligned}
+\int^1_0x\exp(x^2)dx &= \int^1_0 \sqrt{t}\exp(t)\frac{1}{2\sqrt{t}}dt \: (x^2 = t)\\
+&= \frac{1}{2}\int^1_0\exp(t)dt\\
+&= \frac{1}{2}(e - 1)
+\end{aligned}
+$$
+
+
+
+## References
+
+- [高校数学の美しい物語:陰関数と陽関数の意味と違いについて](https://manabitimes.jp/math/1070)

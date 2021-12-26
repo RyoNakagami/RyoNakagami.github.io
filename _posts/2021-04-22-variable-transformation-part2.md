@@ -477,28 +477,3 @@ $$
 <div style="text-align: right;">
 ■
 </div>
-
-## Appendix
-### 変数変換を用いた定積分の計算
-
-$$x = g(t)$$ (ただし $$g(t)$$は積分区間で単調な関数)と変換する. $$x$$ が $$a$$ から $$b$$ へと動くとき, $$t$$ は$$\alpha = g^{-1}(a)$$から $$\beta = g^{-1}(b)$$ へと動くとする. 
-
-$$
-\begin{aligned}
-\int^b_a f(x) dx &= \int^{\beta}_{\alpha}f(g(t))\frac{dx}{dt}dt\\
-&= \int^{\beta}_{\alpha}f(g(t))g'(t)dt
-\end{aligned}
-$$
-
-> 例
-
-$$
-\begin{aligned}
-\int^1_0x\exp(x^2)dx &= \int^1_0 \sqrt{t}\exp(t)\frac{1}{2\sqrt{t}}dt \: (x^2 = t)\\
-&= \frac{1}{2}\int^1_0\exp(t)dt\\
-&= \frac{1}{2}(e - 1)
-\end{aligned}
-$$
-
-
-
