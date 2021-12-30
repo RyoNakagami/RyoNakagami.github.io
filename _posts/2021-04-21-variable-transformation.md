@@ -43,6 +43,12 @@ tags:
     - [(4) 標準正規分布に従う確率変数の指数変換](#4-%E6%A8%99%E6%BA%96%E6%AD%A3%E8%A6%8F%E5%88%86%E5%B8%83%E3%81%AB%E5%BE%93%E3%81%86%E7%A2%BA%E7%8E%87%E5%A4%89%E6%95%B0%E3%81%AE%E6%8C%87%E6%95%B0%E5%A4%89%E6%8F%9B)
 - [2: 2次元変数変換](#2-2%E6%AC%A1%E5%85%83%E5%A4%89%E6%95%B0%E5%A4%89%E6%8F%9B)
   - [変数変換の公式](#%E5%A4%89%E6%95%B0%E5%A4%89%E6%8F%9B%E3%81%AE%E5%85%AC%E5%BC%8F)
+  - [練習問題](#%E7%B7%B4%E7%BF%92%E5%95%8F%E9%A1%8C-1)
+    - [(1) 指数分布と変数変換: 2019年11月統計検定１級より](#1-%E6%8C%87%E6%95%B0%E5%88%86%E5%B8%83%E3%81%A8%E5%A4%89%E6%95%B0%E5%A4%89%E6%8F%9B-2019%E5%B9%B411%E6%9C%88%E7%B5%B1%E8%A8%88%E6%A4%9C%E5%AE%9A%EF%BC%91%E7%B4%9A%E3%82%88%E3%82%8A)
+    - [(2) 標準正規分布と極座標変換](#2-%E6%A8%99%E6%BA%96%E6%AD%A3%E8%A6%8F%E5%88%86%E5%B8%83%E3%81%A8%E6%A5%B5%E5%BA%A7%E6%A8%99%E5%A4%89%E6%8F%9B)
+- [Appendix](#appendix)
+  - [陰関数と陽関数](#%E9%99%B0%E9%96%A2%E6%95%B0%E3%81%A8%E9%99%BD%E9%96%A2%E6%95%B0)
+  - [変数変換を用いた定積分の計算](#%E5%A4%89%E6%95%B0%E5%A4%89%E6%8F%9B%E3%82%92%E7%94%A8%E3%81%84%E3%81%9F%E5%AE%9A%E7%A9%8D%E5%88%86%E3%81%AE%E8%A8%88%E7%AE%97)
 - [References](#references)
 
 <!-- END doctoc generated TOC please keep comment here to allow auto update -->
@@ -609,7 +615,7 @@ $$
 
 従って, $E[S] = 2/\lambda$
 
-> 解答 (2): 畳み込み, convultion
+> 解答 (2): 畳み込み, convolution
 
 $(X_1, X_2)\to(S, T)$への変数変換を以下のように考えます
 
@@ -675,7 +681,122 @@ $$
 
 従って、$\alpha = \sqrt {2}$で$R(\alpha)$は最小値を取る.
 
+#### (2) 標準正規分布と極座標変換
 
+$X, Y$が独立に標準正規分布に従うとします. このとき以下の変数変換を考えます.
+
+<div class="math display" style="overflow: auto">
+$$
+\begin{align*}
+X & = r\cos\theta\\
+Y & = r\sin\theta
+\end{align*}
+$$
+</div>
+
+$(r, \theta)$の同時確率密度関数及び、それぞれの確率密度関数をもとめよ.
+
+> 解答: $(r, \theta)$の同時確率密度関数
+
+$(r, \theta)\to (X, Y)$のヤコビアンは
+
+<div class="math display" style="overflow: auto">
+$$
+J((r, \theta)\to (X, Y)) = \left|\text{det}\left(\begin{array}{cc}
+\cos\theta & -r\sin\theta\\
+\sin\theta & r\cos\theta
+\end{array}\right)\right| = r
+$$
+</div>
+
+従って, $r\in (0, \infty), \theta\in(0, 2\pi)$に注意して
+
+<div class="math display" style="overflow: auto">
+$$
+\begin{align*}
+f_{r, \theta}(r, \theta)&= f_{X, Y}(r\cos\theta, r\sin\theta)r\\
+&= f_{X}(r\cos\theta)f_Y(r\sin\theta)r\\
+&= \frac{1}{2\pi}r\exp(-r^2/2)
+\end{align*}
+$$
+</div>
+
+> 解答: $(r, \theta)$のそれぞれの確率密度関数
+
+$\int_0^\infty r\exp(-r^2/2)dr = 1$であることに留意すると、$(r, \theta)$は独立に分布し、
+
+<div class="math display" style="overflow: auto">
+$$
+\begin{align*}
+r&\sim r\exp(-r^2/2)\\
+\theta&\sim U(0, s\pi)
+\end{align*}
+$$
+</div>
+
+> Python: $r, \theta$の理論分布と変数変換結果のqq-plot比較
+
+まず、$r, \theta$を陽に表すと
+
+<div class="math display" style="overflow: auto">
+$$
+\begin{align*}
+r & = \sqrt(X^2 + Y^2)\\
+\theta &= 2(\arctan((- \sqrt(X^2 + Y^2) - X)/Y) + \pi/2)
+\end{align*}
+$$
+</div>
+
+従って、
+
+```python
+## Data generation
+N = 10000
+np.random.seed(42)
+X, Y = np.random.normal(0, 1, N),np.random.normal(0, 1, N)
+
+r = np.sqrt(X**2 + Y**2)
+theta = 2*(np.arctan((- np.sqrt(X**2 + Y**2) - X)/Y) + np.pi/2)
+
+## 理論分布に基づくsampling
+def inverse_cdf_r(prob):
+    return np.sqrt(-2 * np.log(1 - prob))
+
+prob_range = np.random.uniform(0, 1, N)
+r_true = inverse_cdf_r(prob_range)
+theta_true = np.random.uniform(0, 2*np.pi, N)
+
+## qqplot
+qqplot(r, r_true, 
+        title = 'QQ-plot between r and true r',
+        xlabel = r'$r$ from transformation',
+        ylabel = 'sampling from pdf $r\exp(-r^2/2)$',
+        ax = None)
+
+qqplot(theta, theta_true, 
+        title = r'QQ-plot between $\theta$ and true $\theta$',
+        xlabel = r'$\theta$ from transformation',
+        ylabel = 'Uniform Distribution $(0, 2\pi)$',
+        ax = None)
+```
+
+<img src="https://github.com/ryonakimageserver/omorikaizuka/blob/master/%E3%83%96%E3%83%AD%E3%82%B0%E7%94%A8/20210421_22_1.png?raw=true">
+<img src="https://github.com/ryonakimageserver/omorikaizuka/blob/master/%E3%83%96%E3%83%AD%E3%82%B0%E7%94%A8/20210421_22_2.png?raw=true">
+
+理論分布とかけ離れていないことがqq plot及びKS testの結果から確認することができます.
+
+> Box-Muller法
+
+$U_1, U_2$をそれぞれ$(0, 1)$上の一様分布からの独立確率変数とした時、
+
+$$
+\begin{align*}
+r &= \sqrt{-2\log U_1}\\
+\theta &= 2\pi U_2
+\end{align*}
+$$
+
+とおきます. このとき, $X = r\cos\theta, Y = r\sin\theta$と変換すると、$X, Y$はそれぞれ独立に標準正規分布に従います.
 
 ## Appendix
 ### 陰関数と陽関数
