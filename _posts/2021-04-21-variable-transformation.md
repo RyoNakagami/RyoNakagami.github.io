@@ -46,6 +46,7 @@ tags:
   - [練習問題](#%E7%B7%B4%E7%BF%92%E5%95%8F%E9%A1%8C-1)
     - [(1) 指数分布と変数変換: 2019年11月統計検定１級より](#1-%E6%8C%87%E6%95%B0%E5%88%86%E5%B8%83%E3%81%A8%E5%A4%89%E6%95%B0%E5%A4%89%E6%8F%9B-2019%E5%B9%B411%E6%9C%88%E7%B5%B1%E8%A8%88%E6%A4%9C%E5%AE%9A%EF%BC%91%E7%B4%9A%E3%82%88%E3%82%8A)
     - [(2) 標準正規分布と極座標変換](#2-%E6%A8%99%E6%BA%96%E6%AD%A3%E8%A6%8F%E5%88%86%E5%B8%83%E3%81%A8%E6%A5%B5%E5%BA%A7%E6%A8%99%E5%A4%89%E6%8F%9B)
+    - [(3) 正規分布の条件付き周辺分布関数： 2018年11月計検定１級より](#3-%E6%AD%A3%E8%A6%8F%E5%88%86%E5%B8%83%E3%81%AE%E6%9D%A1%E4%BB%B6%E4%BB%98%E3%81%8D%E5%91%A8%E8%BE%BA%E5%88%86%E5%B8%83%E9%96%A2%E6%95%B0-2018%E5%B9%B411%E6%9C%88%E8%A8%88%E6%A4%9C%E5%AE%9A%EF%BC%91%E7%B4%9A%E3%82%88%E3%82%8A)
 - [Appendix](#appendix)
   - [陰関数と陽関数](#%E9%99%B0%E9%96%A2%E6%95%B0%E3%81%A8%E9%99%BD%E9%96%A2%E6%95%B0)
   - [変数変換を用いた定積分の計算](#%E5%A4%89%E6%95%B0%E5%A4%89%E6%8F%9B%E3%82%92%E7%94%A8%E3%81%84%E3%81%9F%E5%AE%9A%E7%A9%8D%E5%88%86%E3%81%AE%E8%A8%88%E7%AE%97)
@@ -797,6 +798,56 @@ r &= \sqrt{-2\log U_1}\\
 $$
 
 とおきます. このとき, $X = r\cos\theta, Y = r\sin\theta$と変換すると、$X, Y$はそれぞれ独立に標準正規分布に従います.
+
+#### (3) 正規分布の条件付き周辺分布関数： 2018年11月計検定１級より
+
+$$
+X\sim N(\mu, \sigma^2), f(x) = \frac{1}{\sqrt{2\pi}\sigma}\exp\left[-\frac{(x - \mu)^2}{2\sigma^2}\right]
+$$
+
+2次元確率ベクトル$(X, Y)$において、$X\sim N(0, 1)$に従い、$X = x$があたえられたとき、$Y\sim N(\rho x, 1 - \rho^2)$とする（ただし、$\rho \in (0, 1)$の既知の値とする）. このとき、Yの周辺分布を求めよ
+
+> 解答
+
+<div class="math display" style="overflow: auto">
+$$
+\begin{align*}
+g(y) &= \int^\infty_{-\infty}g(y|x)f(x)dx\\
+&= \int\frac{1}{\sqrt{2\pi(1 - \rho^2)}} \exp\left[-\frac{(y - \rho x)^2}{2(1-\rho^2)}\right] \frac{1}{\sqrt{2\pi}}\exp\left[-\frac{x^2}{2}\right]dx\\
+&=\frac{1}{\sqrt{2\pi}} \exp\left[-\frac{y^2}{2}\right]\int \frac{1}{\sqrt{2\pi(1 - \rho^2)}}\exp\left[-\frac{(x - \rho y)^2}{2(1-\rho^2)}\right] dx\\
+&= \frac{1}{\sqrt{2\pi}} \exp\left[-\frac{y^2}{2}\right]
+\end{align*}
+$$
+</div>
+
+従って、Yの分布は標準正規分布となる.
+
+
+> Python
+
+```python
+## Data Generation
+N = 10000
+rho = 0.5
+
+X = np.random.normal(0, 1, N)
+error = np.random.normal(0, np.sqrt((1 - rho**2)), N)
+Y = rho*X + error 
+
+
+## 記述統計
+print(np.cov(X, Y))
+>>> array([[1.00693675, 0.49602772],
+>>>        [0.49602772, 0.99580968]])
+
+## regression
+import statsmodels.api as sm
+model = sm.OLS(Y, X)
+results = model.fit()
+print(np.cov(results.resid))
+>> array(0.75146116)
+```
+
 
 ## Appendix
 ### 陰関数と陽関数

@@ -11,7 +11,7 @@ purpose:
 tags:
 
 - Ubuntu 20.04 LTS
-- shell
+- Shell
 ---
 
 <!-- Global site tag (gtag.js) - Google Analytics -->
@@ -28,7 +28,6 @@ tags:
 ||概要|
 |---|---|
 |目的|awkコマンドの基本の勉強<br>awkコマンドを用いた前処理の紹介|
-|参考|1. [とほほのAWK入門](https://www.tohoho-web.com/ex/awk.html)<br>2. [スタンドパラメータ - 甚平 - ジョジョの奇妙な冒険](http://jinbei.s58.xrea.com/data_ability.htm)
 
 
 <!-- START doctoc generated TOC please keep comment here to allow auto update -->
@@ -276,6 +275,7 @@ ID,stand_name,user_name,power,speed,range,duration,agility,growth
 |RS| The input record separator<br>defaultは改行|
 |OFS| The output field separator<br>print出力時のfieldの区切り文字を指定|
 |ORS| The output record separator<br>print出力時のrecordの区切り文字|
+|FPAT| The input field pattern<br>どのようなパターンをフィールドとして認識するかを定義することができる|
 
 
 > 例題 (1) 各レコードのfieldの数を出力する
@@ -289,7 +289,7 @@ ID,stand_name,user_name,power,speed,range,duration,agility,growth
 9 004,ハイエロファントグリーン,花京院典明,C,B,A,B,C,D
 ```
 
-> ファイルの行数を出力する
+> 例題 (2) ファイルの行数を出力する
 
 ```zsh
 % awk 'END {print NR}' example.csv
@@ -587,3 +587,72 @@ ID,stand_name,user_name,power,speed,range,duration,agility,growth
 % diff -u sorted_merged.csv sorted_merged_2.csv | awk 'NR>3  && /+/{print NR}' | wc -l
 61
 ```
+
+### 特定のフィールドの部分文字列を抽出したい場合：`substr()`
+
+特定のフィールドの部分文字列を抽出したいとします. 
+
+```zsh
+% echo "2021/09/01 09:00:00 UTC,10,200,3000"
+```
+
+上記の文字列から日付部分のみ, `2021/09/01`を抽出したい場合、`substr()`関数を用いることで
+文字列の頭n文字目からm文字を抜き出して表示することができます.
+
+```zsh
+% echo "2021/09/01 09:00:00 UTC,10,200,3000"|awk -F, 'BEGIN{OFS=","}{print substr($1, 1, 10),$2,$3,$4}'
+2021/09/01,10,200,3000
+```
+
+> 末尾から文字を抜き出したい場合
+
+`123456789, abcdefghijklmn`というレコードが与えられた時、カンマセパレートでそれぞれのフィールドから後ろから数えて５文字を抽出したいとします.
+`substr(field, start, length)`のうちlengthを省略すると、startから文末までを抽出してくれる機能を利用します.
+
+```zsh
+% echo "123456789, abcdefghijklmn"|awk -F, '{print substr($1, length($1)-4), substr($2, length($2)-4)}'
+56789 jklmn
+```
+
+## FPATを用いたフィールド内にカンマへの対応
+
+CSVファイルには「フィールド内にカンマを含む場合にはフィールドをダブルクォートで括る」というルールがあります. 文字列内に`,`が含まれるケースや、売上金額などの数値データで初期設定の関係で3桁カンマ区切りのデータが含まれるCSVファイルを扱うとき、単純に `awk -F","`と指定してしまうと、自分では想定していない形でフィールドが定義される可能性があります.
+
+> 例：文字列内にカンマを含むケース
+
+```zsh
+% echo '"¥10,000",¥100,"¥99,000"' |awk -F"," '{print $2}'
+000"
+```
+
+`¥100`が期待される出力結果ですが、`"¥10,000"`の`000"`が出力されてしまいます.
+
+### 組込変数FPATの導入
+
+いままではフィールドセパレーターを定義して`awk`コマンドを用いていましたが、
+フィールド内にカンマが含まれる場合はフィールドのパターンを定義することで対応することができます. 例として、
+
+```zsh
+% echo '"¥10,000",¥100,"¥99,000"' |awk -v FPAT='([^,]+)|(\"[^\"]+\")' '{print $2}'     
+¥100
+```
+
+上記の例では`([^,]+)|(\"[^\"]+\")`という正規表現をFPATに指定することで「カンマを含まない、またはダブルクォートで囲まれていて、その中にダブルクォートを含まない文字列」というフィールドパターンを定義しています.
+
+|正規表現|意味|
+|---|---|
+|`[^...]`|角括弧に含まれる文字以外にマッチ|
+|`+`|直前の文字が １回以上 繰り返す場合にマッチ<br>最長一致, 条件に合う最長の部分に一致|
+|`|`|OR条件|
+
+> REMARKS
+
+- `FPAT`を渡す場合は、`-F` のセパレーター指定してはいけない
+- 二重クォートでエスケープされたレコードは`FPAT='([^,]+)|(\"[^\"]+\")'`で対応することができません
+
+## Reference
+
+- [とほほのAWK入門](https://www.tohoho-web.com/ex/awk.html)
+- [「シェル芸」に効く AWK処方箋　第3回](https://codezine.jp/article/detail/7852)
+- [CSVと親しくなるAWK術](https://future-architect.github.io/articles/20210330/)
+- [スタンドパラメータ - 甚平 - ジョジョの奇妙な冒険](http://jinbei.s58.xrea.com/data_ability.htm)
