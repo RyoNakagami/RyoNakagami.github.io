@@ -2,8 +2,28 @@ Ryo's Tech Blog User Manual
 ====================
 
 **Table of Contents**
-<!-- START doctoc -->
-<!-- END doctoc -->
+<!-- START doctoc generated TOC please keep comment here to allow auto update -->
+<!-- DON'T EDIT THIS SECTION, INSTEAD RE-RUN doctoc TO UPDATE -->
+
+  - [Getting Started](#getting-started)
+  - [Development](#development)
+  - [Configs](#configs)
+  - [Posts](#posts)
+  - [MathJax設定: LaTex数式のレンダリング用](#mathjax%E8%A8%AD%E5%AE%9A-latex%E6%95%B0%E5%BC%8F%E3%81%AE%E3%83%AC%E3%83%B3%E3%83%80%E3%83%AA%E3%83%B3%E3%82%B0%E7%94%A8)
+  - [SideBar](#sidebar)
+    - [LATEST COMMIT](#latest-commit)
+  - [Mini About Me](#mini-about-me)
+  - [Featured Tags](#featured-tags)
+  - [Friends](#friends)
+  - [Keynote Layout](#keynote-layout)
+  - [Share Buttons](#share-buttons)
+  - [Comment: utterrances](#comment-utterrances)
+  - [Analytics](#analytics)
+  - [SEO Title](#seo-title)
+  - [Reference](#reference)
+- [Releases](#releases)
+
+<!-- END doctoc generated TOC please keep comment here to allow auto update -->
 
 ### Getting Started
 
