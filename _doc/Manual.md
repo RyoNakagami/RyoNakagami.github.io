@@ -7,15 +7,15 @@ Ryo's Tech Blog User Manual
 
 ### Getting Started
 
-1. You will need [Ruby](https://www.ruby-lang.org/en/) and [Bundler](https://bundler.io/) to use [Jekyll](https://jekyllrb.com/). Following [Using Jekyll with Bundler](https://jekyllrb.com/tutorials/using-jekyll-with-bundler/) to fullfill the enviromental requirement.
+1. [Jekyll](https://jekyllrb.com/)ベースで構築しているため[Ruby](https://www.ruby-lang.org/en/) と [Bundler](https://bundler.io/)をinstallする必要があります. [Using Jekyll with Bundler](https://jekyllrb.com/tutorials/using-jekyll-with-bundler/)に従って環境構築推奨.
 
-2. Installed dependencies in the `Gemfile`:
+2. `Gemfile`の記述に従ってDependencyをinstall:
 
 ```sh
 $ bundle install 
 ```
 
-3. Serve the website (`localhost:4000` by default):
+3. ローカルでウェブサイトをServeします (`localhost:4000` by default):
 
 ```sh
 $ bundle exec jekyll serve  # alternatively, npm start
@@ -34,24 +34,22 @@ This theme uses the default code syntax highlighter of jekyll, [Rouge](http://ro
 
 ### Configs
 
-You can easily customize the blog by modifying `_config.yml`:
+ブログをカスタマイズする場合は`_config.yml`を修正します:
 
 ```yml
 # Site settings
-title: Hux Blog             # title of your website
-SEOTitle: Hux Blog          # check out docs for more detail
+title: Ryo's Tech Blog             # title of your website
+SEOTitle: Ryo's Tech Blog          # check out docs for more detail
 description: "Cool Blog"    # ...
 
 # SNS settings      
-github_username: huxpro     # modify this account to yours
-weibo_username: huxpro      # the footer woule be auto-updated.
+github_username:  RyoNakagami    # modify this account to yours
 
 # Build settings
 paginate: 10                # nums of posts in one page
 ```
 
-For more options, please check out [Jekyll - Official Site](http://jekyllrb.com/). 
-Most of them are very descriptive so feel brave to dive into code directly as well. 
+For more options, see [Jekyll - Official Site](http://jekyllrb.com/). 
 
 
 ### Posts
@@ -59,20 +57,23 @@ Most of them are very descriptive so feel brave to dive into code directly as we
 Posts are simply just Markdown files in the `_posts/`. 
 Metadata of posts are listed in a YAML style _front-matter_.
 
-For instance, [Hello 2015])(https://huangxuan.me/2015/01/29/hello-2015/) has the front-matter of this:
+一例として, [ブログ編集手引きノート](https://ryonakagami.github.io/2020/10/13/Blog-development/)ではthe front-matterを以下のように設定しています:
 
 ```yml
 ---
-layout:     post
-title:      "Hello 2015"
-subtitle:   " \"Hello World, Hello Blog\""
-date:       2015-01-29 12:00:00
-author:     "Hux"
-header-img: "img/post-bg-2015.jpg"
-catalog: true
+layout: post
+title: "ブログ編集手引きノート"
+subtitle: "Git branchを用いたブログ更新テストのメモ"
+author: "Ryo"
+header-img: "img/post-git-github-logo.jpg"
+header-mask: 0.4
+purpose: 目的 git branchを活用したRyo's Tech blogの更新手順のメモ
+goal: 成果物 git branchを用いたファイルバージョン管理やブログレイアウト管理を実現
+catelog: true
 tags:
-    - Life
-    - Meta
+  - git
+  - git branch
+  - ブログ作業マニュアル
 ---
 ```
 
@@ -81,12 +82,12 @@ tags:
 After [Rake](https://github.com/ruby/rake) is introduced, we can use the command below to simplify the post creation:
 
 ```
-rake post title="Hello 2015" subtitle="Hello World, Hello Blog"
+rake post title="ブログ編集手引きノート" subtitle="Git branchを用いたブログ更新テストのメモ"
 ```
 
-This command will automatially generate a sample post similar as above under the `_posts/` folder.
+このコマンドを実行すると、上記のようなサンプル投稿が `_posts/` フォルダに自動的に生成されます.
 
-There are a bunch of _advanced_ configs:
+> _advanced_ config設定例の紹介
 
 1. a _text style_ header like [this](https://huangxuan.me/2019/09/08/spacemacs-workflow/) with
 
@@ -106,8 +107,10 @@ mathjax: true
 header-mask: 0.3
 ```
 
-Etc.
+### MathJax設定: LaTex数式のレンダリング用
 
+- `_includes/mathjax_support.html`にて、MathJax の読み込みとオプション設定を記述してあります.
+- 詳細は右を参照：[Github Pages で数式を ～ MathJax v3 設定のポイント](https://qiita.com/memakura/items/e4d2de379f98ad7be498)
 
 ### SideBar
 
@@ -124,6 +127,22 @@ sidebar-avatar: /img/avatar-hux.jpg     # use absolute URL.
 
 Modules *[Featured Tags](#featured-tags)*, *[Mini About Me](#mini-about-me)* and *[Friends](#friends)* are turned on by default and you can add your own. The sidebar is naturally responsive, i.e. be pushed to bottom in a smaller screen (`<= 992px`, according to [Bootstarp Grid System](http://getbootstrap.com/css/#grid))  
 
+
+#### LATEST COMMIT
+
+Shields.ioというサービスを使用してGitHubの最新コミット日をバッジで表示しています.
+
+```html
+<!-- GitHub Last Commit -->
+                <h5>LATEST COMMIT</a></h5>
+                <a href='https://github.com/RyoNakagami/RyoNakagami.github.io'><img src='https://img.shields.io/github/last-commit/RyoNakagami/RyoNakagami.github.io.svg' alt=''/>
+```
+
+と`page.html`に記述することですることで
+
+<img src='https://img.shields.io/github/last-commit/RyoNakagami/RyoNakagami.github.io.svg' alt=''/>
+
+を表示することができます. For more info, see [Shields.io: Quality metadata badges for open source projects](https://shields.io/category/platform-support).
 
 ### Mini About Me
 
@@ -185,25 +204,23 @@ The `iframe` element will be automatically resized to adapt different form facto
 Because most of the keynote framework prevent the browser default scroll behavior. A bottom-padding is set to help user and imply user that more content could be presented below.
 
 
-### Comment
+### Share Buttons
 
-> Help Wanted: Moving to a Github-based solution.
 
-Currently, [Disqus](http://disqus.com) <del> and [Duoshuo](http://duoshuo.com)</del> are supported as third party discussion system.
 
-First of all, you need to sign up and get your own account. **Repeat, DO NOT use mine!** (I have set Trusted Domains) It is deathly simple to sign up and you will get the full power of management system. Please give it a try!
 
-Second, from V1.5, you can easily complete your comment configuration by just adding your **short name** into `_config.yml`:
+### Comment: utterrances
 
-```yml
-duoshuo_username: _your_duoshuo_short_name_
-# OR
-disqus_username: _your_disqus_short_name_
-```
+[utterances](https://utteranc.es/)というコメントサービスを用いています. utterancesはGitHubのIssueを作ってコメントを生成しているため、utterancesがGitHubのIssueを作れるようにするためGitHubと連動する権限を許可する必要があります. 
 
-**To the old version user**, it's better that you pull the new version, otherwise you have to replace code in `post.html`, `keynote.html` and `about.html` on your own.
+> 設定方法
 
-<del>Furthermore, Duoshuo support Sharing. if you only wanna use Duoshuo comment without sharing, you can set `duoshuo_share: false`. </del>
+[Jekyllブログにコメント機能](https://dev-yakuza.posstree.com/jekyll/utterances/)を参照することを推奨します.
+
+1. [GitHub App:utterances](https://github.com/apps/utterances)へアクセスし、Configureボタンをクリックする
+2. utterancesがGitHubのIssueを作る権限を許可するアカウントを選択
+3. utterancesがアクセス可能なリポジトリ(Repository)を選択
+4. スクリプト生成を生成し、`_layouts/post.html`に記述する
 
 
 ### Analytics
@@ -232,21 +249,15 @@ It's possible that you want the two things different. For me, my site-title is *
 So, the SEO Title is introduced to solve this problem, you can set `SEOTitle` different from `title`, and it would be only used to generate HTML `<title>` and setting DuoShuo Sharing.
 
 
-FAQ
----
-
-#### cannot load such file -- jekyll-paginate
-
-This blog started in Jekyll 2 time when `jekyll-paginate` is standard. With Jekyll 3, it's a plugin we included in `_config.yml`.
-
-Make sure you installed it via plain `gem` CLI or Bundler.
-
-
 ### Reference
 
 - [Hux Blog](http://huangxuan.me/)
+- [フリー素材>cyberpunk](https://pixabay.com/ja/images/search/cyberpunk/)
 - [Shields.ioを使ってGitHubの情報をバッジで表示してみる](https://yoshinorin.net/2016/11/23/shieldsio-github-badges/)
 - [Shields.io: Quality metadata badges for open source projects](https://shields.io/category/platform-support)
+- [Github Pages で数式を ～ MathJax v3 設定のポイント](https://qiita.com/memakura/items/e4d2de379f98ad7be498)
+- [utterances](https://utteranc.es/)
+- [Jekyllブログにコメント機能](https://dev-yakuza.posstree.com/jekyll/utterances/)
 
 Releases
 --------
