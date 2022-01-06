@@ -59,11 +59,6 @@ kramdown:
   parse_block_html: true
   
 
-
-
-# Disqus settings
-#disqus_username: Rio
-
 # Netease settings
 netease_comment: false
 
