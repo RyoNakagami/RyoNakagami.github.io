@@ -23,23 +23,6 @@ tags:
   gtag('config', 'G-LVL413SV09');
 </script>
 
-<style>
-    .column-left{
-      float: left;
-      width: 47.5%;
-      text-align: left;
-    }
-    .column-right{
-      float: right;
-      width: 47.5%;
-      text-align: left;
-    }
-    .column-one{
-      float: left;
-      width: 100%;
-      text-align: left;
-    }
-</style>
 
 ||概要|
 |---|---|
@@ -276,7 +259,7 @@ FOR empno = 1 to listsize (ok)
 ```
 
 ### 良いPseudo Codeの例
-<div class="column-left">
+
 
 #### Adequate
 
@@ -292,8 +275,8 @@ FOR X = 1 to 10
     END FOR
 END FOR
 ```
-</div>
-<div class="column-right">
+
+
 
 #### Better
 ```raw
@@ -308,11 +291,9 @@ FOR each row on the board
 END FOR
 ```
 
-</div>
 
-<div class="column-one">
-</div>
-<div class="column-left">
+
+
 
 #### Not So Good
 
@@ -327,8 +308,8 @@ Do it again for numbers before the decimal
 ```
 
 
-</div>
-<div class="column-right">
+
+
 
 #### Better
 ```raw
@@ -353,14 +334,14 @@ IF Carry = 1 THEN
 END IF
 ```
 
-</div>
+
 
 <div class="column-one">
 
 ### 良いPseudo codeとソースコードの関係の例
 
-</div>
-<div class="column-left">
+
+
 
 #### Pseudo code
 
@@ -378,8 +359,8 @@ public boolean moveRobot (Robot aRobot)
 ```
 
 
-</div>
-<div class="column-right">
+
+
 
 #### Java source code
 ```raw
@@ -401,7 +382,7 @@ public boolean moveRobot (Robot aRobot)
 }
 ```
 
-</div>
+
 <div class="column-one">
 
 ## 3. Pseudo-code Examples
@@ -411,8 +392,8 @@ public boolean moveRobot (Robot aRobot)
 ### Bubble sort アルゴリズム
 
 バブルソートは、「配列の後ろから先頭に向かってスキャンしていき、もし隣り合う２つの要素の大小関係がぎゃくであったら入れ替える」という作業を繰り返して配列をソートするアルゴリズムです。
-</div>
-<div class="column-left">
+
+
 
 #### C implementation
 
@@ -435,8 +416,8 @@ void bubble_sort(int array[], int size)
 ```
 
 
-</div>
-<div class="column-right">
+
+
 
 #### Pseudo codeでの表現
 
@@ -457,10 +438,3 @@ procedure bubble_sort
 
 end procedure
 ```
-</div>
-
-
-
-
-
-

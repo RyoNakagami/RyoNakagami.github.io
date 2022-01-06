@@ -3,8 +3,8 @@ title: Ryo's Tech Blog
 SEOTitle: Ryo's Tech Blog
 header-img: img/home-bg.jpg
 email: nakagamiryo0901@gmail.com
-description: "Football, Arsenal, Gooner | IT，PL，Data scientist，Business Analyst | TOYOTA 86GT"
-keyword: "Python, C, C++, Bash, WSL2, Computer Architect, PL"
+description: "元経済学徒, 現在どっかでデータサイエンティストもどきやってる人間の勉強日記"
+keyword: "Statistics, Economics, Econometrics, Python, C, Shell, Linux, Data scientist"
 url: "https://ryonakagami.github.io"              # your host, for absolute URL
 baseurl: ""                             # for example, '/blog' if your blog hosted on 'host/blog'
 

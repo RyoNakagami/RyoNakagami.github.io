@@ -1,24 +1,9 @@
-Hux Blog User Manual
+Ryo's Tech Blog User Manual
 ====================
 
-* Basics
-	* [Getting Started](#getting-started)
-	* [Development](#development)
-	* [Config](#configs)
-	* [Posts](#posts)
-* Components
-	* [SideBar](#sidebar)
-	* [Mini About Me](#mini-about-me)
-	* [Featured Tags](#featured-tags)
-	* [Friends](#friends)
-	* [Keynote Layout](#keynote-layout)
-* Misc
-	* [Comment](#comment)
-	* [Analytics](#analytics)
-	* [SEO Title](#seo-title)
-* [FAQ](#faq)
-* [Releases](#releases) 
-
+**Table of Contents**
+<!-- START doctoc -->
+<!-- END doctoc -->
 
 ### Getting Started
 
@@ -257,86 +242,11 @@ This blog started in Jekyll 2 time when `jekyll-paginate` is standard. With Jeky
 Make sure you installed it via plain `gem` CLI or Bundler.
 
 
+### Reference
+
+- [Hux Blog](http://huangxuan.me/)
+- [Shields.ioを使ってGitHubの情報をバッジで表示してみる](https://yoshinorin.net/2016/11/23/shieldsio-github-badges/)
+- [Shields.io: Quality metadata badges for open source projects](https://shields.io/category/platform-support)
+
 Releases
 --------
-
-#### V1.8.2
-
-- Merged #333, #336 from @JinsYin.
-- Add `Gemfile` due to increasing Bundler using.
-- TODO: `multilingual` could be more automative via configurations and convention.
-- Drop the entire `portfolio` page until a big rewrite of a better `project` page.
-
-#### V1.8.1
-
-- Improve multi-lingual implementation, see `about.html` or `_posts/2017-07-12-upgrading-eleme-to-pwa.markdown` for a example of uses.
-
-#### V1.8
-
-- Brand new [Archive](https://huangxuan.me/archive/) page! It combines previous Archive and Tag page and it's backward-cmpatible.
-Shout out to [@kitian616/jekyll-TeXt-theme](https://github.com/kitian616/jekyll-TeXt-theme) of bringing this idea. 
-- Improve engineering by extracting duplicated liquid templates into reuseable includes. This was proposed in #74 by @Kaijun but postponed for entirely 2.5 years! I wasn't able to merge his PR directly because of long-time divegence but the credit is belonging to @Kaijun.
-- Improved code block. Long-wanted line number are supported out of the box (thanks for @SmilingParadise's help from Sina Weibo), the default theme is updated to Atom One Dark as well (checkout FQA for how to change to your farovite theme)
-- MathJax support by @Voleking in #80. I choose to use the SVG renderer though. See [Mathjax, kramdown and Octopress](https://www.lucypark.kr/blog/2013/02/25/mathjax-kramdown-and-octopress/) for writing and escaping details.
-- Open Graph Protocol support by @Android-KitKat in #253
-- `header-img-credit` and `header-img-credit-href`
-- `nav-style: invert` and `header-style: text`
-
-#### V1.7
-
-- PWA / Service Worker support.
-
-#### v1.6
-
-- Change cdn to cdnjs for better HTTPS support
-
-#### V1.5.2
-
-- Feeling annoyed to delete my blog post after clone or pull? Try **Boilerplate (Beta)** to help you get started quickly and easily merge update.
-- `-apple-system` is added in font rule, which display beautiful new font **San Francisco** in iOS 9 by default.
-- Fixed [issue#15](https://github.com/Huxpro/huxpro.github.io/issues/15) about code wrap.
-
-#### V1.5.1
-
-- **[Comment](#comment)** support [**Disqus**](http://disqus.com) officially, thanks to @rpsh.
-
-#### V1.5
-
-- **[Comment](#comment)** and **[Analytics](#analytics)** is configurable now! We also add **Google Analytics support** and drop tencents. Both documents is updated.
-
-#### V1.4
-
-- **[Featured Tags](#featured-tags)** is now independent of [SideBar](#sidebar). Both documents is updated.
-- New **[SEO Title](#seo-title)** for SEO usage which is differ from the site title
-
-#### V1.3.1
-
-- Support **PingFang (苹方)**, the new Chinese font presented by [OS X El Capitan](http://www.apple.com/cn/osx/whats-new/)
-
-
-#### V1.3
-
-- Big Improvement to the **Navigation Menu** *(especially in Android)*:  Dropping the old, stuttering, low-performance [Bootstrap collapse.js](http://getbootstrap.com/javascript/#collapse),  replaced with an own wrote, [jank free](http://jankfree.org/) navbar menu in a pretty high-performance implementation of [Google Material Design](https://www.google.com/design/spec/material-design/introduction.html).
-
-<img src="http://huangxuan.me/img/blog-md-navbar.gif" width="320" />
-
-
-#### V1.2
-
-- Brand new **[Keynote Layout](#keynote-layout)** is provided for easily posting beautiful HTML presentations you have created with this blog
-
-
-#### V1.1
-
-- We now support a clean and gorgeous **[SideBar](#sidebar)** for displaying more info
-- **[Friends](#friends)** is also added as a common feature of blog help you do SEO
-
-#### V1.0
-
-- Full-feature **Tag** support
-- **Mobile first** user experience optimization
-- **Typographic optimization** for Chinese Fonts
-- **Network optimizaition** for China, dropping Google webfont, using local CDN
-- Using [Github Flavored Markdown](https://help.github.com/articles/github-flavored-markdown/)
-- Using Baidu, Tencent/QQ analytics
-- Using [DuoShuo](http://duoshuo.com/) as the Disqus-like third party discussion system
