@@ -18,8 +18,10 @@ Ryo's Tech Blog User Manual
   - [Keynote Layout](#keynote-layout)
   - [Share Buttons](#share-buttons)
   - [Comment: utterrances](#comment-utterrances)
-  - [Analytics](#analytics)
-  - [SEO Title](#seo-title)
+  - [Google Analytics 4](#google-analytics-4)
+  - [SEO対策: Google Search Console](#seo%E5%AF%BE%E7%AD%96-google-search-console)
+    - [サイトマップの登録](#%E3%82%B5%E3%82%A4%E3%83%88%E3%83%9E%E3%83%83%E3%83%97%E3%81%AE%E7%99%BB%E9%8C%B2)
+    - [Google Search Consoleへの登録](#google-search-console%E3%81%B8%E3%81%AE%E7%99%BB%E9%8C%B2)
   - [Reference](#reference)
 - [Releases](#releases)
 
@@ -243,22 +245,9 @@ Because most of the keynote framework prevent the browser default scroll behavio
 4. スクリプト生成を生成し、`_layouts/post.html`に記述する
 
 
-### Analytics
+### Google Analytics 4
 
-From V1.5, Google Analytics and Baidu Tongji are supported with a simple config away:
 
-```yml
-# Baidu Analytics
-ba_track_id: 4cc1f2d8f3067386cc5cdb626a202900
-
-# Google Analytics
-ga_track_id: 'UA-xxxxxx-xx'            # Format: UA-xxxxxx-xx
-ga_domain: huangxuan.me
-```
-
-Just checkout the code offered by Google/Baidu, and copy paste here, all the rest is already done for you.
-
-(Google might ask for meta tag `google-site-verification`)
 
 
 ### SEO対策: Google Search Console
@@ -290,6 +279,11 @@ Google Search Console は、Google 検索結果でのサイトの掲載順位を
     <meta name="theme-color" content="{{ site.chrome-tab-theme-color }}">
 ....
 ```
+
+> Google Search Consoleにサイトマップ登録をする
+
+- 
+
 
 
 ### Reference
