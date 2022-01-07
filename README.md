@@ -1,9 +1,9 @@
 [Ryo Blog](https://ryonakagami.github.io)
 ================================
 
-> I never expected this becomes popular.
+> がんばる
 
-![](http://huangxuan.me/img/blog-desktop.jpg)
+![](img/ryos-tech-blog-example.png)
 
 
 [User Manual 👉](_doc/Manual.md)
@@ -11,15 +11,15 @@
 
 ### Getting Started
 
-1. You will need [Ruby](https://www.ruby-lang.org/en/) and [Bundler](https://bundler.io/) to use [Jekyll](https://jekyllrb.com/). Following [Using Jekyll with Bundler](https://jekyllrb.com/tutorials/using-jekyll-with-bundler/) to fullfill the enviromental requirement.
+1. [Jekyll](https://jekyllrb.com/)ベースで構築しているため[Ruby](https://www.ruby-lang.org/en/) と [Bundler](https://bundler.io/)をinstallする必要があります. [Using Jekyll with Bundler](https://jekyllrb.com/tutorials/using-jekyll-with-bundler/)に従って環境構築推奨.
 
-2. Installed dependencies in the `Gemfile`:
+2. `Gemfile`の記述に従ってDependencyをinstall:
 
 ```sh
 $ bundle install 
 ```
 
-3. Serve the website (`localhost:4000` by default):
+3. ローカルでウェブサイトをServeします (`localhost:4000` by default):
 
 ```sh
 $ bundle exec jekyll serve  # alternatively, npm start
@@ -51,5 +51,3 @@ Other Resources
 Ports
 - [**Hexo**](https://github.com/Kaijun/hexo-theme-huxblog) by @kaijun
 - [**React-SSR**](https://github.com/LucasIcarus/huxpro.github.io/tree/ssr) by @LucasIcarus
-
-
