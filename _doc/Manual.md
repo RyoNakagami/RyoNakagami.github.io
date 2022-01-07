@@ -138,7 +138,7 @@ header-mask: 0.3
 
 ### SideBar
 
-![](http://huangxuan.me/img/blog-sidebar.jpg)
+![](img/ryos-tech-blog-sidebars.png)
 
 **SideBar** provides possible modules to show off more personal information.
 
