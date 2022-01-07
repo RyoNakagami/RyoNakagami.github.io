@@ -99,7 +99,7 @@ tags:
 
 > Note: `tags` section can also be written as `tags: [Life, Meta]`.
 
-After [Rake](https://github.com/ruby/rake) is introduced, we can use the command below to simplify the post creation:
+[Rake](https://github.com/ruby/rake)を導入後, postは以下のコマンドでも作成可能となります:
 
 ```
 rake post title="ブログ編集手引きノート" subtitle="Git branchを用いたブログ更新テストのメモ"
@@ -142,7 +142,7 @@ header-mask: 0.3
 # Sidebar settings
 sidebar: true   # default true
 sidebar-about-description: "your description here"
-sidebar-avatar: /img/avatar-hux.jpg     # use absolute URL.
+sidebar-avatar: /img/avatar-ryo.jpg     # use absolute URL.
 ```
 
 Modules *[Featured Tags](#featured-tags)*, *[Mini About Me](#mini-about-me)* and *[Friends](#friends)* are turned on by default and you can add your own. The sidebar is naturally responsive, i.e. be pushed to bottom in a smaller screen (`<= 992px`, according to [Bootstarp Grid System](http://getbootstrap.com/css/#grid))  
@@ -252,7 +252,7 @@ From V1.5, Google Analytics and Baidu Tongji are supported with a simple config 
 ba_track_id: 4cc1f2d8f3067386cc5cdb626a202900
 
 # Google Analytics
-ga_track_id: 'UA-49627206-1'            # Format: UA-xxxxxx-xx
+ga_track_id: 'UA-xxxxxx-xx'            # Format: UA-xxxxxx-xx
 ga_domain: huangxuan.me
 ```
 
@@ -264,7 +264,7 @@ Just checkout the code offered by Google/Baidu, and copy paste here, all the res
 ### SEO Title
 
 Before V1.4, site setting `title` is not only used for displayed in Home Page and Navbar, but also used to generate the `<title>` in HTML.
-It's possible that you want the two things different. For me, my site-title is **“Hux Blog”** but I want the title shows in search engine is **“黄玄的博客 | Hux Blog”** which is multi-language.
+It's possible that you want the two things different. For me, my site-title is **“Ryo's Tech Blog”** but I want the title shows in search engine is **“徒然日記 | Ryo's Tech Blog”** which is multi-language.
 
 So, the SEO Title is introduced to solve this problem, you can set `SEOTitle` different from `title`, and it would be only used to generate HTML `<title>` and setting DuoShuo Sharing.
 
@@ -278,6 +278,7 @@ So, the SEO Title is introduced to solve this problem, you can set `SEOTitle` di
 - [Github Pages で数式を ～ MathJax v3 設定のポイント](https://qiita.com/memakura/items/e4d2de379f98ad7be498)
 - [utterances](https://utteranc.es/)
 - [Jekyllブログにコメント機能](https://dev-yakuza.posstree.com/jekyll/utterances/)
+- [GitHub Pagesで作ったブログをGoogle検索にヒットさせる](https://www.bedroomcomputing.com/2020/04/2020-0408-googleconsole/)
 
 Releases
 --------
