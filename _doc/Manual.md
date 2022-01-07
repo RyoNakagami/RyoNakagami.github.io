@@ -261,7 +261,7 @@ Just checkout the code offered by Google/Baidu, and copy paste here, all the res
 (Google might ask for meta tag `google-site-verification`)
 
 
-### SEO Title
+### SEO対策: Google Search Console
 
 Before V1.4, site setting `title` is not only used for displayed in Home Page and Navbar, but also used to generate the `<title>` in HTML.
 It's possible that you want the two things different. For me, my site-title is **“Ryo's Tech Blog”** but I want the title shows in search engine is **“徒然日記 | Ryo's Tech Blog”** which is multi-language.
