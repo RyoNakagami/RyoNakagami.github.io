@@ -7,7 +7,8 @@ header-img: "img/post-bg-rwd.jpg"
 header-mask: 0.4
 catelog: true
 mathjax: true
-purpose: 
+uu_cnt: 200
+session_cnt: 1000
 tags:
 
 - Ubuntu 20.04 LTS
@@ -117,6 +118,3 @@ $ reboot
 ## 5. Dockの設定
 
 Settings > Appearanceで設定可能。
-
-
-

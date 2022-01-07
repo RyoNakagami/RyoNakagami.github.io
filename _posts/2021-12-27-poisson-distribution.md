@@ -7,7 +7,8 @@ header-img: "img/tag-bg.jpg"
 header-mask: 0.4
 catelog: true
 mathjax: true
-purpose: 
+uu_cnt: 100
+session_cnt: 100 
 tags:
 
 - 統計
