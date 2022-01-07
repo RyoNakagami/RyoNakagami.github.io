@@ -1,4 +1,4 @@
-[Ryo Blog](https://ryonakagami.github.io)
+[Ryo' Tech Blog](https://ryonakagami.github.io)
 ================================
 
 > がんばる
