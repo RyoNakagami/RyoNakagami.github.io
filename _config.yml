@@ -58,6 +58,8 @@ kramdown:
   # parse markdown inside block-level HTML tag
   parse_block_html: true
 
+# Google Search Console sitemap settings
+
 
 # Netease settings
 netease_comment: false
