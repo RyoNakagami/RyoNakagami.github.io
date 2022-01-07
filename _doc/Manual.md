@@ -262,11 +262,34 @@ Just checkout the code offered by Google/Baidu, and copy paste here, all the res
 
 
 ### SEO対策: Google Search Console
+#### サイトマップの登録
 
-Before V1.4, site setting `title` is not only used for displayed in Home Page and Navbar, but also used to generate the `<title>` in HTML.
-It's possible that you want the two things different. For me, my site-title is **“Ryo's Tech Blog”** but I want the title shows in search engine is **“徒然日記 | Ryo's Tech Blog”** which is multi-language.
+- `_config.yml`でサイトマップgeneratorのjekyll-sitemapを指定しており、buildのタイミングで自動的にsitemapが作成されます
+- `https://ryonakagami.github.io/sitemap.xml`で確認することができます
 
-So, the SEO Title is introduced to solve this problem, you can set `SEOTitle` different from `title`, and it would be only used to generate HTML `<title>` and setting DuoShuo Sharing.
+#### Google Search Consoleへの登録
+
+Google Search Console は、Google 検索結果でのサイトの掲載順位を監視、管理、改善するのに役立つ Google の無料サービスです. Search Console に登録しなくても Google 検索結果にサイトが表示されるようにすることはできますが、Search Console に登録することで、Google のサイトに対する認識を理解し、改善できるようになります.
+
+> Propertyの追加
+
+<img src="https://github.com/ryonakimageserver/omorikaizuka/blob/master/%E3%83%96%E3%83%AD%E3%82%B0%E7%94%A8/setting/google-search-console-setting-property.png?raw=true">
+
+- URL プレフィックスに自分のGitHub pages URL, `https://ryonakagami.github.io/`,を入力し、Continueボタンをクリック
+- Verificationではいろいろな手法が選べるが、HTML tagをページに埋め込む手法を自分の場合は選択
+- 埋め込む用のHTML tagが出力されるのでそれを`_includes/head.html`にうめこむ
+
+```html
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="google-site-verification" content="gSMaswRY9iRfG4QaQrx6aj481bgr503qEZh-QPsMYNU" /> <!-- GSC認証用tag -->
+    <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+    <meta name="description" content="{{ site.description }}">
+    <meta name="keywords"  content="{{ site.keyword }}">
+    <meta name="theme-color" content="{{ site.chrome-tab-theme-color }}">
+....
+```
 
 
 ### Reference
