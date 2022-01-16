@@ -12,7 +12,9 @@ session_cnt: 100
 tags:
 
 - 統計
-- Python
+- 統計検定
+- Data visualization
+- ポワソン分布
 ---
 <!-- Global site tag (gtag.js) - Google Analytics -->
 <script async src="https://www.googletagmanager.com/gtag/js?id=G-LVL413SV09"></script>
@@ -31,15 +33,21 @@ tags:
 - [1. ポワソン分布の性質](#1-%E3%83%9D%E3%83%AF%E3%82%BD%E3%83%B3%E5%88%86%E5%B8%83%E3%81%AE%E6%80%A7%E8%B3%AA)
   - [ポアソン分布が確率分布であることの確認](#%E3%83%9D%E3%82%A2%E3%82%BD%E3%83%B3%E5%88%86%E5%B8%83%E3%81%8C%E7%A2%BA%E7%8E%87%E5%88%86%E5%B8%83%E3%81%A7%E3%81%82%E3%82%8B%E3%81%93%E3%81%A8%E3%81%AE%E7%A2%BA%E8%AA%8D)
   - [ポアソン分布の平均と分散の導出](#%E3%83%9D%E3%82%A2%E3%82%BD%E3%83%B3%E5%88%86%E5%B8%83%E3%81%AE%E5%B9%B3%E5%9D%87%E3%81%A8%E5%88%86%E6%95%A3%E3%81%AE%E5%B0%8E%E5%87%BA)
-    - [ポアソン分布の平均](#%E3%83%9D%E3%82%A2%E3%82%BD%E3%83%B3%E5%88%86%E5%B8%83%E3%81%AE%E5%B9%B3%E5%9D%87)
-    - [ポアソン分布の分散](#%E3%83%9D%E3%82%A2%E3%82%BD%E3%83%B3%E5%88%86%E5%B8%83%E3%81%AE%E5%88%86%E6%95%A3)
+    - [モーメント母関数からの期待値と分散の導出](#%E3%83%A2%E3%83%BC%E3%83%A1%E3%83%B3%E3%83%88%E6%AF%8D%E9%96%A2%E6%95%B0%E3%81%8B%E3%82%89%E3%81%AE%E6%9C%9F%E5%BE%85%E5%80%A4%E3%81%A8%E5%88%86%E6%95%A3%E3%81%AE%E5%B0%8E%E5%87%BA)
   - [ポワソンパラメーター $\lambda$の推定](#%E3%83%9D%E3%83%AF%E3%82%BD%E3%83%B3%E3%83%91%E3%83%A9%E3%83%A1%E3%83%BC%E3%82%BF%E3%83%BC-%5Clambda%E3%81%AE%E6%8E%A8%E5%AE%9A)
-- [2. 条件付きポワソン分布：2019年統計検定準１級試験](#2-%E6%9D%A1%E4%BB%B6%E4%BB%98%E3%81%8D%E3%83%9D%E3%83%AF%E3%82%BD%E3%83%B3%E5%88%86%E5%B8%832019%E5%B9%B4%E7%B5%B1%E8%A8%88%E6%A4%9C%E5%AE%9A%E6%BA%96%EF%BC%91%E7%B4%9A%E8%A9%A6%E9%A8%93)
-  - [解答(1)](#%E8%A7%A3%E7%AD%941)
-  - [解答(2): 条件付き分布と二項分布](#%E8%A7%A3%E7%AD%942-%E6%9D%A1%E4%BB%B6%E4%BB%98%E3%81%8D%E5%88%86%E5%B8%83%E3%81%A8%E4%BA%8C%E9%A0%85%E5%88%86%E5%B8%83)
+  - [ポワソン分布の最頻値の導出](#%E3%83%9D%E3%83%AF%E3%82%BD%E3%83%B3%E5%88%86%E5%B8%83%E3%81%AE%E6%9C%80%E9%A0%BB%E5%80%A4%E3%81%AE%E5%B0%8E%E5%87%BA)
+- [2. 条件付きポワソン分布](#2-%E6%9D%A1%E4%BB%B6%E4%BB%98%E3%81%8D%E3%83%9D%E3%83%AF%E3%82%BD%E3%83%B3%E5%88%86%E5%B8%83)
+  - [2016年統計検定１級試験統計応用（理工学）問４改題](#2016%E5%B9%B4%E7%B5%B1%E8%A8%88%E6%A4%9C%E5%AE%9A%EF%BC%91%E7%B4%9A%E8%A9%A6%E9%A8%93%E7%B5%B1%E8%A8%88%E5%BF%9C%E7%94%A8%E7%90%86%E5%B7%A5%E5%AD%A6%E5%95%8F%EF%BC%94%E6%94%B9%E9%A1%8C)
+    - [解答 (1)：モーメント母関数と条件付き期待値](#%E8%A7%A3%E7%AD%94-1%E3%83%A2%E3%83%BC%E3%83%A1%E3%83%B3%E3%83%88%E6%AF%8D%E9%96%A2%E6%95%B0%E3%81%A8%E6%9D%A1%E4%BB%B6%E4%BB%98%E3%81%8D%E6%9C%9F%E5%BE%85%E5%80%A4)
+    - [解答(2): 数値解を二分探索法で計算する](#%E8%A7%A3%E7%AD%942-%E6%95%B0%E5%80%A4%E8%A7%A3%E3%82%92%E4%BA%8C%E5%88%86%E6%8E%A2%E7%B4%A2%E6%B3%95%E3%81%A7%E8%A8%88%E7%AE%97%E3%81%99%E3%82%8B)
+    - [解答(3): MLEを用いたパラメーターの数値計算推定](#%E8%A7%A3%E7%AD%943-mle%E3%82%92%E7%94%A8%E3%81%84%E3%81%9F%E3%83%91%E3%83%A9%E3%83%A1%E3%83%BC%E3%82%BF%E3%83%BC%E3%81%AE%E6%95%B0%E5%80%A4%E8%A8%88%E7%AE%97%E6%8E%A8%E5%AE%9A)
+  - [2019年統計検定準１級試験](#2019%E5%B9%B4%E7%B5%B1%E8%A8%88%E6%A4%9C%E5%AE%9A%E6%BA%96%EF%BC%91%E7%B4%9A%E8%A9%A6%E9%A8%93)
+    - [解答(1)：ポワソン分布の部分和](#%E8%A7%A3%E7%AD%941%E3%83%9D%E3%83%AF%E3%82%BD%E3%83%B3%E5%88%86%E5%B8%83%E3%81%AE%E9%83%A8%E5%88%86%E5%92%8C)
+    - [解答(2): 条件付き分布と二項分布](#%E8%A7%A3%E7%AD%942-%E6%9D%A1%E4%BB%B6%E4%BB%98%E3%81%8D%E5%88%86%E5%B8%83%E3%81%A8%E4%BA%8C%E9%A0%85%E5%88%86%E5%B8%83)
 - [3. ポワソン分布の適合度検定](#3-%E3%83%9D%E3%83%AF%E3%82%BD%E3%83%B3%E5%88%86%E5%B8%83%E3%81%AE%E9%81%A9%E5%90%88%E5%BA%A6%E6%A4%9C%E5%AE%9A)
   - [カイ二乗適合度検定](#%E3%82%AB%E3%82%A4%E4%BA%8C%E4%B9%97%E9%81%A9%E5%90%88%E5%BA%A6%E6%A4%9C%E5%AE%9A)
-  - [練習問題：2019年統計検定準１級試験改題](#%E7%B7%B4%E7%BF%92%E5%95%8F%E9%A1%8C2019%E5%B9%B4%E7%B5%B1%E8%A8%88%E6%A4%9C%E5%AE%9A%E6%BA%96%EF%BC%91%E7%B4%9A%E8%A9%A6%E9%A8%93%E6%94%B9%E9%A1%8C)
+  - [練習問題：2019年統計検定１級試験改題](#%E7%B7%B4%E7%BF%92%E5%95%8F%E9%A1%8C2019%E5%B9%B4%E7%B5%B1%E8%A8%88%E6%A4%9C%E5%AE%9A%EF%BC%91%E7%B4%9A%E8%A9%A6%E9%A8%93%E6%94%B9%E9%A1%8C)
+- [4. Zero-inflated Poisson Model](#4-zero-inflated-poisson-model)
 - [Reference](#reference)
 
 <!-- END doctoc generated TOC please keep comment here to allow auto update -->
@@ -48,7 +56,7 @@ tags:
 ### ポアソン分布が確率分布であることの確認
 
 $$
-p_x(x) = \exp(-\lambda_x)\frac{\lambda_x^x}{x!}
+p_x(x) = \exp(-\lambda_x)\frac{\lambda_x^x}{x!}, \ \ x = 0, 1, 2, 3,\cdots 
 $$
 
 という形でポワソン分布に従う確率変数の密度関数を表現することができます. ここで $\sum_{x=0}^\infty p_x(x)=1$を確認します.
@@ -66,7 +74,8 @@ $$
 </div>
 
 ### ポアソン分布の平均と分散の導出
-#### ポアソン分布の平均
+
+> ポアソン分布の平均
 
 <div class="math display" style="overflow: auto">
 $$
@@ -80,7 +89,7 @@ $$
 $$
 </div>
 
-#### ポアソン分布の分散
+> ポアソン分布の分散
 
 <div class="math display" style="overflow: auto">
 $$
@@ -99,6 +108,41 @@ $$
 $$
 E[X^2] - E[X]^2 = \lambda^2 + \lambda - \lambda^2 = \lambda
 $$
+
+#### モーメント母関数からの期待値と分散の導出
+
+> モーメント母関数の導出
+
+モーメント母関数は（存在するならば）、$M_X(t) = \mathbf E[\exp(tX)]$と定義されます. 従って、
+
+$$
+\begin{align*}
+M_X(t) &= \sum_{x=0}^\infty \exp(tx)\exp(-\lambda)\frac{\lambda^x}{x!}\\
+&= \exp(-\lambda) \sum \frac{(\exp(t)\lambda)^x}{x!}\\
+&= \exp(-\lambda)\exp(\exp(t)\lambda)\\
+&= \exp(\lambda(\exp(t) - 1))
+\end{align*}
+$$
+
+従って、期待値と分散は
+
+$$
+\begin{align*}
+E[X] &= M_X'(0)\\
+&= \lambda\exp(t)[\exp(\lambda(\exp(t)-1))]|_{t=0}\\
+&= \lambda
+\end{align*}
+$$
+
+$$
+\begin{align*}
+E[X^2] &= M_X^{''}(0)\\
+&= \{\lambda\exp(t)[\exp(\lambda(\exp(t)-1))] + (\lambda\exp(t))^2[\exp(\lambda(\exp(t)-1))]\}|_{t=0}\\
+&= \lambda + \lambda^2
+\end{align*}
+$$
+
+従って、$V(X) = E[X^2] - E[X]^2 = \lambda$
 
 ### ポワソンパラメーター $\lambda$の推定
 
@@ -132,7 +176,262 @@ $$
 
 よって、標本平均によって、$\lambda$が推定できることがわかる.
 
-## 2. 条件付きポワソン分布：2019年統計検定準１級試験
+### ポワソン分布の最頻値の導出
+
+$$
+\begin{align*}
+\frac{p(x+1)}{p(x)} &= \frac{\exp(-\lambda)\lambda^{x+1}/(x+1)!}{\exp(-\lambda)\lambda^{x}/x!}\\
+&= \frac{\lambda}{x+1} \tag{A}
+\end{align*}
+$$
+
+(A)は$x$について単調減少関数なので 
+
+$$
+\begin{align*}
+&\frac{\lambda}{x+1} \leq 1\\
+&\Rightarrow x \geq \lambda - 1
+\end{align*}
+$$
+
+を満たす$x$の最小値が最頻値となる. ただし、$\lambda$が整数値を取る場合は $x = \lambda-1$, $x= \lambda$が最頻値となる.
+
+> Python
+
+```python
+def select_most_frequent_point(lambda_mu):
+    """ 
+    Description
+        return the tuple of the most frequent datapoint and lambda_mu
+        
+        Note:
+          When the most frequent datapoint are more than one datapoint, it returns the smaller integer datapoint
+      
+    INPUT
+        lambda_mu:
+            poisson lambda
+    
+    Returns:
+        x: integer
+            the most frequent datapoint based on the poisson distribution with the input lambda.
+
+        x_theory: integer
+           the analytical solution of the most frequent datapoint
+
+        x_hacked: integer
+           the datapoint which is caucluated by an easy way
+           max(np.int64(np.ceil(lambda_mu - eps)) - 1, 0)
+
+        lambda: float
+            the poisson parameter.
+            
+    """
+    eps = 1e-18
+
+    x_range = np.arange(0, 100)
+    x_index = np.argmax(np.around(poisson.pmf(x_range, lambda_mu), decimals=8)) ##HACK: 有効桁は小数点以下8桁
+    x_theory = np.min(x_range[x_range >= lambda_mu - 1])
+    x_tips = max(np.int64(np.ceil(lambda_mu - eps)) - 1, 0)
+
+    return x_range[x_index], x_theory, x_tips, lambda_mu
+
+### simulation lambda_range
+lambda_range = np.linspace(0, 50, 201)
+
+### create the object which can calculate the most frequent datapoint and compute vectorization
+vectorized_select_most_frequent_point = np.vectorize(select_most_frequent_point)
+
+### caculate the simulation
+x_simulated, x_theory, x_hacked, lambda_param = vectorized_select_most_frequent_point(lambda_range)
+
+### compare x_simulated with x_theory
+print(np.array_equal(x_simulated, x_theory, equal_nan=True))
+
+### compare x_theory with x_hacked
+print(np.array_equal(x_theory, x_hacked, equal_nan=True))
+```
+
+## 2. 条件付きポワソン分布
+
+### 2016年統計検定１級試験統計応用（理工学）問４改題
+
+ある会社のCS部門では業務の一つとして、お客様からの商品に関するクレーム対応をしています. 一日に発生したクレーム件数は長年の経験によりポワソン分布に従っていると事前に知られていたとします.
+一日に発生したクレーム件数を確率変数$X$として、過去のクレーム件数のデータをCS部門へのヒアリングによって収集したところ以下の結果となりました.
+
+|1日単位のクレーム発生件数|頻度(観測された日数)|
+|---|---|
+|0件|不明|
+|1件|15日|
+|2件|12日|
+|3件|10日|
+|4件|3日|
+|5件|2日|
+|6件以上|なし|
+
+クレーム件数が０件の日にちはCS部門で把握しておらず、また過去何日の調査なのかも現在わかっていないため上記のデータとなったとCS部門から説明がありました. 
+このデータを用いて、一日あたりのクレーム発生件数のポワソンパラメータを識別したいとします.
+
+#### 解答 (1)：モーメント母関数と条件付き期待値
+
+$Y\sim \{X|X\geq 1\}$とします. この時、確率変数$Y$の確率密度関数$f(y)$は
+
+$$
+f(y) = \frac{1}{1 - \exp(-\lambda)}\frac{\lambda^y\exp(-\lambda)}{y!}
+$$
+
+このとき、$Y$についてのモーメント母関数は
+
+<div class="math display" style="overflow: auto">
+$$
+\begin{align*}
+M_t(Y) &= E[\exp(tY)]\\
+&= \sum_{y=1}^\infty \frac{1}{1 - \exp(-\lambda)}\frac{\lambda^y\exp(-\lambda)}{y!} \exp(ty)\\
+&= \frac{\exp(-\lambda)}{1 - \exp(-\lambda)}\sum \frac{(\exp(t)\lambda)^y}{y!}\\
+&= \frac{\exp(-\lambda)}{1 - \exp(-\lambda)}(\exp[\exp(t)\lambda]-1)
+\end{align*}
+$$
+</div>
+
+モーメント母関数が表現できると期待値を解析的に表現することができます.
+
+$$
+\begin{align*}
+E[Y] &= M_y'(0)\\
+&= \frac{\exp(-\lambda)}{1 - \exp(-\lambda)} \exp[\exp(0)\lambda]\exp(0)\lambda\\
+&= \frac{\lambda}{1 - \exp(-\lambda)}
+\end{align*}
+$$
+
+従って、これの標本対応を考えると
+
+$$
+\bar Y = \frac{\hat\lambda}{1 - \exp(-\hat\lambda)}
+$$
+
+RHSは$\hat\lambda$について（定義域内ならば）狭義増加関数なので$\hat\lambda = F(\bar Y)$となるような逆関数が存在します. ランベルトのW関数を用いると
+
+$$
+\hat\lambda = W\left(- \frac{\bar Y}{\exp(\bar Y)} \right) + \bar Y
+$$
+
+Pythonで計算すると
+
+```Python
+from scipy.special import lambertw
+
+## Generating Data
+y = np.array([1, 2, 3, 4, 5])
+freq = np.array([15, 12, 10, 3, 2])
+
+## Estimation
+lambert_w = np.average(y, weights = freq)
+estimated_lambda = lambertw(-lambert_w/np.exp(lambert_w)) + lambert_w
+print(estimated_lambda)
+>>> 1.813224064133259 + 0j
+```
+
+従って $\lambda \simeq 1.813$
+
+#### 解答(2): 数値解を二分探索法で計算する
+
+ランベルトのW関数を用いずにナイーブに二分探索法で数値計算してみます.
+二分探索法を用いる根拠としては、今回の関数
+
+$$
+\frac{\hat\lambda}{1 - \exp(-\hat\lambda)}
+$$
+
+が$\hat\lambda$について定義域を上手く定めれば、連続かつ単調増加関数である性質に準拠しています（see 中間値の定理）.
+
+
+```python
+def binary_search(func, y_min, y_max, value, eps):
+    left = y_min             # left seach area
+    right = y_max            # right seach area
+    while left <= right:
+        mid = (left + right) / 2            # calculate the mid
+        if abs(func(mid) - value) < eps:
+            # return the numerical solution
+            return mid
+        elif func(mid) < value:
+            # set the left at the mid beacuse the objective function is a strictly increasing function
+            left = mid
+        else:
+            # set the right at the mid
+            right = mid 
+    return None            # cannot compute
+
+def objective_function(x):
+    return x/(1 - np.exp(-x))
+
+y = np.array([1, 2, 3, 4, 5])
+freq = np.array([15, 12, 10, 3, 2])
+bar_y = np.average(y, weights = freq)
+
+print(binary_search(func=objective_function, y_min=0, y_max =6, value = bar_y, eps = 1e-8))
+>>> 1.8132240548729897
+```
+
+ランベルトのW関数を用いた計算結果と近しい結果を得ることができます. 
+
+#### 解答(3): MLEを用いたパラメーターの数値計算推定
+
+基本に忠実にMaximum Likelihood Estimationでパラメーター$\lambda$を推定します.
+
+```python
+from scipy.optimize import minimize
+import math
+import numpy as np
+
+class ConditionalPoissonRegression:
+
+    def __init__(self, data):
+        self.data = data
+
+    @staticmethod
+    def conditiona_poisson_pmf(x, theta):
+        vec_factorial = np.vectorize(math.factorial)
+        return (theta**x * np.exp(-theta) / vec_factorial(x)) / (1 - np.exp(-theta))
+    
+    def neg_loglike(self, theta, _data):
+        return np.sum(np.log(self.conditiona_poisson_pmf(x = _data, theta = theta)))
+
+    def fit(self):
+        observed_mean = np.mean(self.data)
+        f = lambda theta: -self.neg_loglike(theta = theta, _data = self.data)
+        return minimize(f, observed_mean, method = 'Nelder-Mead', options={'disp': True})
+## Generating Data
+y = np.array([1, 2, 3, 4, 5])
+freq = np.array([15, 12, 10, 3, 2])
+data = np.repeat(y, freq, axis=0)
+
+poisson_mle = ConditionalPoissonRegression(data=data)
+
+poisson_mle.fit()
+```
+
+Then,
+
+```raw
+Optimization terminated successfully.
+         Current function value: 59.865722
+         Iterations: 15
+         Function evaluations: 30
+ final_simplex: (array([[1.81320801],
+       [1.8132609 ]]), array([59.86572216, 59.86572217]))
+           fun: 59.86572215563589
+       message: 'Optimization terminated successfully.'
+          nfev: 30
+           nit: 15
+        status: 0
+       success: True
+             x: array([1.81320801])
+```
+
+MLEでも`1.813`とランベルトのW関数を用いた計算方法と近似の値が計算することができます.
+
+
+### 2019年統計検定準１級試験
 
 ２つの確率変数 $X, Y$を考える. それぞれで独立に $\lambda = 3, 2$のポワソン分布に従うものとする.
 
@@ -143,7 +442,7 @@ $$
 1. $X +Y$の従う分布を求めよ
 2. $X + Y = 4$という条件のもと$X$が従う分布を求めよ
 
-### 解答(1)
+#### 解答(1)：ポワソン分布の部分和
 
 叩き込みによって$X+Y$が$\lambda = 5$のポワソン分布に従うことを示す.
 
@@ -284,7 +583,7 @@ qq-plot及びKS testによると、$X+Y$は$\lambda = 5$のポワソン分布と
 
 - KS test: the two-sample Kolmogorov-Smirnov test 
 
-### 解答(2): 条件付き分布と二項分布
+#### 解答(2): 条件付き分布と二項分布
 
 <div class="math display" style="overflow: auto">
 $$
@@ -444,9 +743,13 @@ chisquare(x, f_exp=theoretical_x)
 
 このようば場合には、ゼロ過剰ポアソン分布(Zero-inflated Poisson Model, ZIP)を用いて対処することが考えられます. 
 
+(作成中)
+
+
 ## Reference
 
 - [高校数学の美しい物語>ポアソン分布の意味と平均・分散](https://manabitimes.jp/math/924)
 - [scipy.stats.ks_2samp](https://docs.scipy.org/doc/scipy/reference/generated/scipy.stats.ks_2samp.html)
 - [scipy.stats.chisquare](https://docs.scipy.org/doc/scipy/reference/generated/scipy.stats.chisquare.html)
 - [UCLA Statistical Methods and Data Analysis > Zero-inflated Poisson Regression](https://stats.oarc.ucla.edu/stata/dae/zero-inflated-poisson-regression/)
+- [Wikipedia > ランベルトのW関数](https://ja.wikipedia.org/wiki/%E3%83%A9%E3%83%B3%E3%83%99%E3%83%AB%E3%83%88%E3%81%AEW%E9%96%A2%E6%95%B0)
