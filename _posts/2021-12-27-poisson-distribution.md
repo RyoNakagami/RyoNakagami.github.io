@@ -273,7 +273,7 @@ print(np.array_equal(x_theory, x_hacked, equal_nan=True))
 
 #### 解答 (1)：モーメント母関数と条件付き期待値
 
-$Y\sim \{X|X\geq 1\}$とします. この時、確率変数$Y$の確率密度関数$f(y)$は
+$Y\sim \{X\|X\geq 1\}$とします. この時、確率変数$Y$の確率密度関数$f(y)$は
 
 $$
 f(y) = \frac{1}{1 - \exp(-\lambda)}\frac{\lambda^y\exp(-\lambda)}{y!}
@@ -316,7 +316,7 @@ $$
 
 Pythonで計算すると
 
-```Python
+```python
 from scipy.special import lambertw
 
 ## Generating Data
