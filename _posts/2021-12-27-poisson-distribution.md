@@ -305,16 +305,44 @@ $$
 従って、これの標本対応を考えると
 
 $$
-\bar Y = \frac{\hat\lambda}{1 - \exp(-\hat\lambda)}
+\bar Y = \frac{\hat\lambda}{1 - \exp(-\hat\lambda)} \tag{2.1}
 $$
 
-RHSは$\hat\lambda$について（定義域内ならば）狭義増加関数なので$\hat\lambda = F(\bar Y)$となるような逆関数が存在します. ランベルトのW関数を用いると
+RHSは$\hat\lambda$について（定義域内ならば）狭義増加関数なので$\hat\lambda = F(\bar Y)$となるような逆関数が存在します. 
+
+$\hat\lambda > 0, \bar Y > 0$を満たすことは自明なので、
+
+<div class="math display" style="overflow: auto">
+$$
+\begin{align*}
+&\frac{1}{\bar Y} = \frac{1 - \exp(-\hat\lambda)}{\hat\lambda}\\ 
+&\Rightarrow \hat\lambda = (1 - \exp(-\hat\lambda))\bar Y\\
+&\Rightarrow \hat\lambda\exp(\hat\lambda) = \frac{\exp(\hat\lambda) - 1}{1/\bar Y}\\
+&\Rightarrow (\hat\lambda - \bar Y)\exp(\hat\lambda) = -\bar Y\\
+&\Rightarrow (\hat\lambda - \bar Y)\exp(\hat\lambda)\exp(\bar Y) = -\bar Y\exp(-\bar Y)\\
+&\Rightarrow (\hat\lambda - \bar Y)\exp(\hat\lambda - \bar Y) = -\bar Y\exp(-\bar Y)\tag{2.2}
+\end{align*}
+$$
+</div>
+
+(2.2)の両辺にランベルトのW_0関数(i.e., $y = x\exp(x)$の逆関数)を適用したいとします.
+
+- $-\bar Y < -1$であること
+- $\hat\lambda - \bar Y = \hat\lambda(1 - 1/(1 - \exp(-\hat\lambda))) > -1$ s.t. $\hat\lambda > 0$
+
+以上に注意すると、
 
 $$
-\hat\lambda = W\left(- \frac{\bar Y}{\exp(\bar Y)} \right) + \bar Y
+(\hat\lambda - \bar Y) = W_0\left(-\bar Y\exp(-\bar Y)\right)
 $$
 
-Pythonで計算すると
+従って、
+
+$$
+\hat\lambda = W_0\left(- \frac{\bar Y}{\exp(\bar Y)} \right) + \bar Y
+$$
+
+> Pythonでパラメータを計算
 
 ```python
 from scipy.special import lambertw
@@ -330,7 +358,7 @@ print(estimated_lambda)
 >>> 1.813224064133259 + 0j
 ```
 
-従って $\lambda \simeq 1.813$
+従って $\lambda \simeq 1.813$.
 
 #### 解答(2): 数値解を二分探索法で計算する
 
@@ -580,8 +608,6 @@ def qqplot(x, y, title = None, xlabel = None, ylabel = None, plot = False, ax = 
 <img src="https://github.com/ryonakimageserver/omorikaizuka/blob/master/%E3%83%96%E3%83%AD%E3%82%B0%E7%94%A8/20211227-03.png?raw=true">
 
 qq-plot及びKS testによると、$X+Y$は$\lambda = 5$のポワソン分布と異なっていると帰結することが難しいことがわかります (あくまで、帰無仮説は棄却できなかった).
-
-- KS test: the two-sample Kolmogorov-Smirnov test 
 
 #### 解答(2): 条件付き分布と二項分布
 
