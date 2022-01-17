@@ -485,8 +485,8 @@ $$
 
 $$
 \begin{align*}
-P(A, B) &= p_x(B)p_y(A+B)\\
-&= \exp(-\lambda_x)\frac{\lambda_x^B}{B!}\exp(-\lambda_y)\frac{\lambda_y^{A+B}}{(A+B)!}
+P(A, B) &= p_x(B)p_y(A-B)\\
+&= \exp(-\lambda_x)\frac{\lambda_x^B}{B!}\exp(-\lambda_y)\frac{\lambda_y^{A-B}}{(A-B)!}\\
 &= \exp(-\lambda_x-\lambda_y)\frac{\lambda_x^B\lambda_y^{A+B}}{B!(A-B)!}
 \end{align*}
 $$
@@ -496,9 +496,9 @@ $$
 <div class="math display" style="overflow: auto">
 $$
 \begin{align*}
-P(A) &= \sum_{b\in B}p_x(B)p_y(A+B)\\
-&= \exp(-\lambda_x-\lambda_y)\sum_{b=0}^a\frac{\lambda_x^b\lambda_y^{A+b}}{b!(A-b)!}\\
-&= \exp(-\lambda_x-\lambda_y)\left(\frac{\lambda_y^A}{A!} + \frac{\lambda_y^{A-1}\lambda_x}{(A-1)!}+\cdots + + \frac{\lambda_x^{A}}{A!}\right)\\
+P(A) &= \sum_{b\in B}p_x(B)p_y(A-B)\\
+&= \exp(-\lambda_x-\lambda_y)\sum_{b=0}^a\frac{\lambda_x^b\lambda_y^{A-b}}{b!(A-b)!}\\
+&= \exp(-\lambda_x-\lambda_y)\left(\frac{\lambda_y^A}{A!} + \frac{\lambda_y^{A-1}\lambda_x}{(A-1)!}+ \frac{\lambda_y^{A-2}\lambda_x^2}{2!(A-2)!}\cdots +  \frac{\lambda_x^{A}}{A!}\right)\\
 &= \exp(-\lambda_x-\lambda_y)\frac{(\lambda_x+\lambda_y)^A}{A!} \because \text{二項定理}\\
 &= \exp(-5)\frac{5^A}{A!}
 \end{align*}
