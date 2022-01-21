@@ -1070,8 +1070,8 @@ class ZeroInflatedPoissonRegression:
 #
 #print(res_mle, res_em, res_mom)
 
-N = 25
-w = 0.3
+N = 100
+w = 0.2
 poisson_lambda = 2.5
 iter_num = 0
 
@@ -1099,23 +1099,27 @@ while iter_num < 1000:
 
     iter_num += 1
 
-plt.style.use('seaborn')
-fig, ax = plt.subplots(1, 3, sharex=True, figsize=(21, 9))
 
-ax[0].hist(np.array(mom)[:,0], bins=np.arange(0.5, 4.5, 0.1),
+fig, ax = plt.subplots(1, 3, sharex=True, figsize=(21, 9))
+index = 0
+bin_width = 0.1
+
+_bin = np.arange(min(np.array(mom)[:,index])*0.7, max(np.array(mom)[:,index])*1.2, bin_width)
+
+ax[0].hist(np.array(mom)[:,index], bins=_bin,
              color='r',
              alpha=0.5)
-ax[0].set_title('Method of Moment: Mean = {:.2f}, Var= {:.2f}'.format(np.mean(np.array(mom)[:,0]),np.var(np.array(mom)[:,0])))
+ax[0].set_title('Method of Moment: Mean = {:.2f}, Var= {:.2f}'.format(np.mean(np.array(mom)[:,index]),np.var(np.array(mom)[:,index])))
 
-ax[1].hist(np.array(mle)[:,0], bins=np.arange(0.5, 4.5, 0.1),
+ax[1].hist(np.array(mle)[:,index], bins=_bin,
              color='g',
              alpha=0.5)
-ax[1].set_title('MLE: Mean = {:.2f}, Var= {:.2f}'.format(np.mean(np.array(mle)[:,0]),np.var(np.array(mle)[:,0])))
+ax[1].set_title('MLE: Mean = {:.2f}, Var= {:.2f}'.format(np.mean(np.array(mle)[:,index]),np.var(np.array(mle)[:,index])))
 
-ax[2].hist(np.array(mle_em)[:,0], bins=np.arange(0.5, 4.5, 0.1),
+ax[2].hist(np.array(mle_em)[:,index], bins=_bin,
              color='b',
              alpha=0.5)
-ax[2].set_title('MLE with EM: Mean = {:.2f}, Var= {:.2f}'.format(np.mean(np.array(mle_em)[:,0]),np.var(np.array(mle_em)[:,0])));
+ax[2].set_title('MLE with EM: Mean = {:.2f}, Var= {:.2f}'.format(np.mean(np.array(mle_em)[:,index]),np.var(np.array(mle_em)[:,index])));
 ```
 
 
