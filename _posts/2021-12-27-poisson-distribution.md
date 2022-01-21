@@ -951,8 +951,8 @@ $$
 
 $$
 \begin{align*}
-\lambda &= \sum y_i/(N-m)\\
-w &= m/N
+\lambda &= \sum \frac{y_i}{N-m}\\
+w &= \frac{m}{N}
 \end{align*}
 $$
 
@@ -974,7 +974,7 @@ $$
 $$
 \begin{align*}
 m_(t+1) &= \frac{f_0 - N \exp(-\lambda_t)}{1 - \exp(-\lambda_t)}\\
-\lambda_{t+1} &= \sum y_i/(N-m_t)
+\lambda_{t+1} &= \sum \frac{y_i}{N-m_{t+1}}
 \end{align*}
 $$
 </div>
