@@ -1,7 +1,7 @@
 ---
 layout: post
 title: "統計検定：ポワソン分布と条件付き分布"
-subtitle: "２つの分布をvisualizationで比較"
+subtitle: "MLE, Method of Moment, EMアルゴリズムによるパラメータ推定"
 author: "Ryo"
 header-img: "img/tag-bg.jpg"
 header-mask: 0.4
