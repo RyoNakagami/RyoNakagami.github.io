@@ -48,6 +48,10 @@ tags:
   - [カイ二乗適合度検定](#%E3%82%AB%E3%82%A4%E4%BA%8C%E4%B9%97%E9%81%A9%E5%90%88%E5%BA%A6%E6%A4%9C%E5%AE%9A)
   - [練習問題：2019年統計検定１級試験改題](#%E7%B7%B4%E7%BF%92%E5%95%8F%E9%A1%8C2019%E5%B9%B4%E7%B5%B1%E8%A8%88%E6%A4%9C%E5%AE%9A%EF%BC%91%E7%B4%9A%E8%A9%A6%E9%A8%93%E6%94%B9%E9%A1%8C)
 - [4. Zero-inflated Poisson Model](#4-zero-inflated-poisson-model)
+  - [モーメント法による推定](#%E3%83%A2%E3%83%BC%E3%83%A1%E3%83%B3%E3%83%88%E6%B3%95%E3%81%AB%E3%82%88%E3%82%8B%E6%8E%A8%E5%AE%9A)
+  - [MLEによる推定その１](#mle%E3%81%AB%E3%82%88%E3%82%8B%E6%8E%A8%E5%AE%9A%E3%81%9D%E3%81%AE%EF%BC%91)
+  - [MLEによる推定その2: EMアルゴリズム](#mle%E3%81%AB%E3%82%88%E3%82%8B%E6%8E%A8%E5%AE%9A%E3%81%9D%E3%81%AE2-em%E3%82%A2%E3%83%AB%E3%82%B4%E3%83%AA%E3%82%BA%E3%83%A0)
+- [Appendix: MLE vs MLE with EM vs Method of Moment](#appendix-mle-vs-mle-with-em-vs-method-of-moment)
 - [Reference](#reference)
 
 <!-- END doctoc generated TOC please keep comment here to allow auto update -->
@@ -755,10 +759,11 @@ ax.set_title('compare the observed data and a theoretical distirbution')
 ```python
 from scipy.stats import chisquare
 
-theoretical_x = poisson_rv.pmf(x_range)/sum(poisson_rv.pmf(x_range))*N ##厳密な計算ではない
+chisquare_poisson_pmf = lambda x: np.where(x < 7, 1, 0) * poisson_rv.pmf(x) + (1 - np.where(x < 7, 1, 0)) * (1 - poisson_rv.cdf(x-1))
+theoretical_x = chisquare_poisson_pmf(x_range)*N
 
 chisquare(x, f_exp=theoretical_x)
->>> Power_divergenceResult(statistic=4.816678345153642, pvalue=0.6823233236771076)
+>>> Power_divergenceResult(statistic=4.873492084753685, pvalue=0.6753982780281518)
 ```
 
 カイ二乗検定統計量によると、帰無仮説は棄却されないことになります. ただし、元データの分散は2.03と計算され、平均の1.79とは大きく異なっていると思われます(ポワソン分布ならば、平均と分散は等しいはず). なのでカイ二乗検定統計量で帰無仮説が棄却されないとしても、必ずしも理論分布に従っていると結論付けることは難しいです.
@@ -769,7 +774,350 @@ chisquare(x, f_exp=theoretical_x)
 
 このようば場合には、ゼロ過剰ポアソン分布(Zero-inflated Poisson Model, ZIP)を用いて対処することが考えられます. 
 
-(作成中)
+ZIP分布の確率関数は以下です:
+
+$$
+\begin{align*}
+f(Y_i = y) = \begin{cases}Pr(Y_i = 0)&= w + (1 - w)\exp(-\lambda)\frac{\lambda^0}{0!}\\
+Pr(Y_i \geq 1)&= (1 - w)\exp(-\lambda)\frac{\lambda^y_i}{y_i!}\end{cases}
+\end{align*}
+$$
+
+これは目的変数の従う分布が確率$w$で値0をとり、確率$1-w$でポワソン分布に従うことを示しています. 実際に $\sum_{y=0}f(y) = 1$は自明です.
+
+ZIPのパラメータ $(\lambda, w)$の推定方法はモーメント法と（EMアルゴリズムをもちいた）MLEが考えられます.
+
+### モーメント法による推定
+
+- モーメント法は後述するMLEに対して、closed-formでパラメーターを表すことができるメリットがあります
+- モーメント法もMLEと比べasymptotically equallt efficientと知られています
+
+ただし、infrequent with large samples but not so infrequent with small samplesという特徴を持つデータに対してモーメント法を用いると、推定されたパラメーターがパラメータースペース外に陥るリスクがあります 
+　
+
+<div class="math display" style="overflow: auto">
+$$
+M_Y(t) = E[\exp(tY)] =  w + (1 - w)\exp(-\lambda)\exp(\exp(t)\lambda)
+$$
+</div>
+
+従って、
+
+<div class="math display" style="overflow: auto">
+$$
+\begin{align*}
+M_Y'(t) &= (1 - w)\lambda\exp(-\lambda)\exp(t)\exp(\exp(t)\lambda)\\
+M_Y^{''}(t) &= (1 - w)\lambda\exp(-\lambda)\exp(t)\exp(\exp(t)\lambda)[1 + \lambda\exp(t)]
+\end{align*}
+$$
+</div>
+
+従って、
+
+<div class="math display" style="overflow: auto">
+$$
+\begin{align*}
+M_Y'(0) &= E[Y] = (1 - w)\lambda\\
+M_Y^{''}(0) &= E[Y^2] = (1 - w)\lambda(1 + \lambda)
+\end{align*}
+$$
+
+を得ます. これを連立させると
+
+$$
+\begin{align*}
+\lambda & = \frac{E[Y^2]}{E[Y]} - 1\\
+w & = 1 - \frac{E[Y]^2}{E[Y^2] - E[Y]}
+\end{align*}
+$$
+
+よってこれを標本対応によって推定します. 上述の[練習問題：2019年統計検定１級試験改題](#%E7%B7%B4%E7%BF%92%E5%95%8F%E9%A1%8C2019%E5%B9%B4%E7%B5%B1%E8%A8%88%E6%A4%9C%E5%AE%9A%EF%BC%91%E7%B4%9A%E8%A9%A6%E9%A8%93%E6%94%B9%E9%A1%8C)を例に推定すると
+
+```python
+import numpy as np
+from scipy.optimize import minimize
+import math
+import matplotlib.pyplot as plt
+
+data = np.repeat(np.arange(0, 7), np.array([22, 23, 26, 18, 6, 4, 1]))
+sample_mean = np.mean(data)
+sample_second_moment = np.mean(data**2)
+
+theta_moment = sample_second_moment / sample_mean - 1, 1 - sample_mean **2 / (sample_second_moment - sample_mean)
+print(theta_moment)
+>> (1.910614525139665, 0.06312865497076026)
+```
+
+> REMARKS
+
+- 後述するMLE手法の推定値とは結構ズレがある(MLE手法による推定値の方がLog-lossの観点からは好ましい結果となっている)
+- おそらくN = 100というsmall sample dataを用いて推定してしまったためかと思われる
+
+### MLEによる推定その１
+
+まずLikelihood functionを定義します:
+
+<div class="math display" style="overflow: auto">
+$$
+L(\lambda, w|Y) = \prod_{y_i} \left[w + (1 - w)\exp(-\lambda)\right]^{1(y_i=0)}\left((1 - w)\exp(-\lambda)\frac{\lambda^{y_i}}{y_i!}\right)^{1 - 1(y_i=0)}\quad\quad\tag{4.1}
+$$
+</div>
+
+(4.1)にはclosed form solutionは存在しないので数値計算解をlog-lossの最小化によって計算します
+
+```python
+from scipy.optimize import minimize
+import math
+import numpy as np
+
+class ZeroInflatedPoissonRegression:
+
+    def __init__(self, data):
+        self.data = data
+        self.init_value = None
+
+    @staticmethod
+    def zip_pmf(x, theta):
+        vec_factorial = np.vectorize(math.factorial)
+        return (theta[1] + (1 - theta[1])*np.exp(-theta[0]))**np.where(x > 0, 0, 1) * ((1 - theta[1]) * np.exp(-theta[0]) * theta[0]**x / vec_factorial(x)) **np.where(x > 0, 1, 0)
+
+    def estimate_initial_value(self):
+        sample_first_moment = np.mean(self.data)
+        sample_second_moment = np.mean(self.data**2)
+
+        theta_moment = sample_second_moment / sample_first_moment - 1, 1 - sample_first_moment **2 / (sample_second_moment - sample_first_moment)
+        return theta_moment
+    
+    def neg_loglike(self, theta, _data):
+        return np.sum(np.log(self.zip_pmf(x = _data, theta = theta)))
+
+    def fit(self):
+        f = lambda theta: -self.neg_loglike(theta = theta, _data = self.data)
+        self.init_value = self.estimate_initial_value()
+
+        return minimize(fun = f, x0=self.init_value, method = 'Nelder-Mead', options={'disp': True})
+
+
+## Generating Data
+data = np.repeat(np.arange(0, 7), np.array([22, 23, 26, 18, 6, 4, 1]))
+
+## Create the instance
+poisson_mle = ZeroInflatedPoissonRegression(data=data)
+
+## fit
+poisson_mle.fit()
+```
+
+Then,
+
+```raw
+Optimization terminated successfully.
+         Current function value: 168.338102
+         Iterations: 30
+         Function evaluations: 58
+ final_simplex: (array([[1.97707489, 0.09462929],
+       [1.977147  , 0.09463945],
+       [1.97714908, 0.0946238 ]]), array([168.33810206, 168.33810208, 168.33810215]))
+           fun: 168.33810205717472
+       message: 'Optimization terminated successfully.'
+          nfev: 58
+           nit: 30
+        status: 0
+       success: True
+             x: array([1.97707489, 0.09462929])
+```
+
+### MLEによる推定その2: EMアルゴリズム
+
+sample size $N$のうち, mがゼロ過剰部分、つまり値0をとり、残りの$N-m$がポワソン分布に従うとまず仮定します. この仮定の下、Likelihood functionを定義すると
+
+<div class="math display" style="overflow: auto">
+$$
+L(\lambda, w) = w^m\prod(1-w)\exp(-\lambda)\frac{\lambda^{y_i}}{y_i!}\quad\quad\tag{4.2}
+$$
+</div>
+
+(4.2)をLog-Likelihoodへ変換すると
+
+<div class="math display" style="overflow: auto">
+$$
+\begin{align*}
+l(\lambda, w)= m\log(w) + (N-m)\log(1-w) - (N-m)\lambda + \log(\lambda)\sum y_i - \sum\log(y_i) \quad\quad\tag{4.3}
+\end{align*}
+$$
+</div>
+
+(4.3)のFOCsをとると
+
+$$
+\begin{align*}
+\lambda &= \sum y_i/(N-m)\\
+w &= m/N
+\end{align*}
+$$
+
+を得ます. $f_0$を$y_i=0$となる観測度数とすると、$y_i \neq 0$となる観測数の期待値は 
+
+$$
+N - f_0 = N - m - N(1 - w)\exp(-\lambda)
+$$
+
+この式を変形すると
+
+$$
+m = \frac{f_0 - N \exp(-\lambda)}{1 - \exp(-\lambda)} \quad\quad\tag{4.4}
+$$
+
+よって、$\lambda, m$に関して以下のupdate functionを得ます.
+
+<div class="math display" style="overflow: auto">
+$$
+\begin{align*}
+m_(t+1) &= \frac{f_0 - N \exp(-\lambda_t)}{1 - \exp(-\lambda_t)}\\
+\lambda_{t+1} &= \sum y_i/(N-m_t)
+\end{align*}
+$$
+</div>
+
+このupdate ruleに基づいたパラメーターの推定はEMアルゴリズムと言われます.
+
+> REMARKS
+
+- この問題に関しては、初期値の$\lambda_0$は条件付きポワソンで推定すれば良い
+
+## Appendix: MLE vs MLE with EM vs Method of Moment
+
+- コードだけ紹介します
+- サンプルサイズや$w,\lambda$を変化させて推定量の分布を確認することができます
+- Method of Momentは若干、推定量の分散が大きいように思われる
+
+
+```python
+from scipy.optimize import minimize
+import math
+import numpy as np
+from scipy.special import lambertw
+import matplotlib.pyplot as plt
+
+class ZeroInflatedPoissonRegression:
+
+    def __init__(self, data):
+        self.data = data
+        self.init_value = None
+
+    @staticmethod
+    def zip_pmf(x, theta):
+        vec_factorial = np.vectorize(math.factorial)
+        return (theta[1] + (1 - theta[1])*np.exp(-theta[0]))**np.where(x > 0, 0, 1) * ((1 - theta[1]) * np.exp(-theta[0]) * theta[0]**x / vec_factorial(x)) **np.where(x > 0, 1, 0)
+    
+    @staticmethod
+    def em_update(x, theta):    
+        next_theta_1 = (len(x[x < 1]) - len(x) * np.exp(-theta[0]))/ (1 - np.exp(-theta[0])) 
+        next_theta_0 = np.sum(x)/(len(x) - next_theta_1)
+
+        return [next_theta_0, next_theta_1]
+
+    def estimate_conditional_poisson(self):
+        lambert_w = np.mean(self.data[self.data > 0])
+        estimated_lambda = lambertw(-lambert_w/np.exp(lambert_w), 0) + lambert_w
+        
+        return estimated_lambda.real
+
+    def method_of_moment(self):
+        sample_mean = np.mean(self.data)
+        sample_second_moment = np.mean(self.data**2)
+
+        theta_moment = [sample_second_moment / sample_mean - 1, 1 - sample_mean **2 / (sample_second_moment - sample_mean)]
+        return theta_moment
+    
+    def neg_loglike(self, theta, _data, normalize = False):
+        if normalize:
+            theta = theta[0], theta[1]/len(_data)
+
+        return np.sum(np.log(self.zip_pmf(x = _data, theta = theta)))
+
+    def fit(self):
+        f = lambda theta: -self.neg_loglike(theta = theta, _data = self.data)
+        self.init_value = self.method_of_moment()
+
+        return minimize(fun = f, x0=self.init_value, method = 'Nelder-Mead', options={'disp': True})
+
+    def em_fit(self, eps = 1e-10):
+        lambda_t = self.estimate_conditional_poisson()
+        m_t = len(self.data[self.data < 1])
+        theta = [lambda_t, m_t]
+        next_theta = self.em_update(self.data, theta)
+
+        while abs(self.neg_loglike(theta = next_theta, _data = self.data, normalize=True) - self.neg_loglike(theta = theta, _data = self.data, normalize=True)) > eps:
+            theta = next_theta
+            next_theta = self.em_update(self.data, theta)
+        
+        next_theta[1] = next_theta[1]/len(self.data)
+
+        return next_theta
+        
+
+## Generating Data
+#data = np.repeat(np.arange(0, 7), np.array([22, 23, 26, 18, 6, 4, 1]))
+#
+## Create the instance
+#poisson_mle = ZeroInflatedPoissonRegression(data=data)
+#
+## fit
+#res_mle = poisson_mle.fit().x
+#res_em = poisson_mle.em_fit()
+#res_mom = poisson_mle.method_of_moment()
+#
+#print(res_mle, res_em, res_mom)
+
+N = 25
+w = 0.3
+poisson_lambda = 2.5
+iter_num = 0
+
+mle = []
+mle_em = []
+mom = []
+
+
+while iter_num < 1000:
+    data = poisson.rvs(poisson_lambda , size=N)
+    lottery = np.random.uniform(0, 1, N)
+    data = np.where(lottery > w, data, 0)
+
+    ## Create the instance
+    poisson_mle = ZeroInflatedPoissonRegression(data=data)
+
+    ## fit
+    res_mle = list(poisson_mle.fit().x)
+    res_em = poisson_mle.em_fit()
+    res_mom = poisson_mle.method_of_moment()
+
+    mle.append(res_mle)
+    mle_em.append(res_em)
+    mom.append(res_mom)
+
+    iter_num += 1
+
+plt.style.use('seaborn')
+fig, ax = plt.subplots(1, 3, sharex=True, figsize=(21, 9))
+
+ax[0].hist(np.array(mom)[:,0], bins=np.arange(0.5, 4.5, 0.1),
+             color='r',
+             alpha=0.5)
+ax[0].set_title('Method of Moment: Mean = {:.2f}, Var= {:.2f}'.format(np.mean(np.array(mom)[:,0]),np.var(np.array(mom)[:,0])))
+
+ax[1].hist(np.array(mle)[:,0], bins=np.arange(0.5, 4.5, 0.1),
+             color='g',
+             alpha=0.5)
+ax[1].set_title('MLE: Mean = {:.2f}, Var= {:.2f}'.format(np.mean(np.array(mle)[:,0]),np.var(np.array(mle)[:,0])))
+
+ax[2].hist(np.array(mle_em)[:,0], bins=np.arange(0.5, 4.5, 0.1),
+             color='b',
+             alpha=0.5)
+ax[2].set_title('MLE with EM: Mean = {:.2f}, Var= {:.2f}'.format(np.mean(np.array(mle_em)[:,0]),np.var(np.array(mle_em)[:,0])));
+```
+
 
 
 ## Reference
