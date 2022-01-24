@@ -10,7 +10,7 @@ mathjax: true
 purpose: 
 tags:
 
-- math
+- 統計検定
 - 統計
 - Python
 ---
@@ -24,10 +24,6 @@ tags:
   gtag('config', 'G-LVL413SV09');
 </script>
 
-
-||概要|
-|---|---|
-|目的|変数変換のルールをまとめる|
 
 <!-- START doctoc generated TOC please keep comment here to allow auto update -->
 <!-- DON'T EDIT THIS SECTION, INSTEAD RE-RUN doctoc TO UPDATE -->

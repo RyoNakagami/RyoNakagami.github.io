@@ -138,6 +138,7 @@ E[X] &= M_X'(0)\\
 \end{align*}
 $$
 
+<div class="math display" style="overflow: auto">
 $$
 \begin{align*}
 E[X^2] &= M_X^{''}(0)\\
@@ -145,6 +146,7 @@ E[X^2] &= M_X^{''}(0)\\
 &= \lambda + \lambda^2
 \end{align*}
 $$
+</div>
 
 従って、$V(X) = E[X^2] - E[X]^2 = \lambda$
 
@@ -859,7 +861,9 @@ print(theta_moment)
 
 <div class="math display" style="overflow: auto">
 $$
+\begin{align*}
 L(\lambda, w|Y) = \prod_{y_i} \left[w + (1 - w)\exp(-\lambda)\right]^{1(y_i=0)}\left((1 - w)\exp(-\lambda)\frac{\lambda^{y_i}}{y_i!}\right)^{1 - 1(y_i=0)}\quad\quad\tag{4.1}
+\end{align*}
 $$
 </div>
 

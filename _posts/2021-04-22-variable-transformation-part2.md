@@ -1,7 +1,7 @@
 ---
 layout: post
-title: "変数変換のお勉強 Part 2"
-subtitle: "練習問題編"
+title: "数理統計：変数変換 2/n"
+subtitle: "変数変換を用いて分布間のつながりを確認する"
 author: "Ryo"
 header-img: "img/tag-bg.jpg"
 header-mask: 0.4
@@ -10,10 +10,11 @@ mathjax: true
 purpose: 
 tags:
 
-- math
+- 統計検定
 - 統計
 - Python
 ---
+
 <!-- Global site tag (gtag.js) - Google Analytics -->
 <script async src="https://www.googletagmanager.com/gtag/js?id=G-LVL413SV09"></script>
 <script>
@@ -23,10 +24,6 @@ tags:
 
   gtag('config', 'G-LVL413SV09');
 </script>
-
-||概要|
-|---|---|
-|目的|変数変換のお勉強 Part 2|
 
 <!-- START doctoc generated TOC please keep comment here to allow auto update -->
 <!-- DON'T EDIT THIS SECTION, INSTEAD RE-RUN doctoc TO UPDATE -->
@@ -45,6 +42,59 @@ tags:
   - [変数変換を用いた定積分の計算](#%E5%A4%89%E6%95%B0%E5%A4%89%E6%8F%9B%E3%82%92%E7%94%A8%E3%81%84%E3%81%9F%E5%AE%9A%E7%A9%8D%E5%88%86%E3%81%AE%E8%A8%88%E7%AE%97)
 
 <!-- END doctoc generated TOC please keep comment here to allow auto update -->
+
+## 標準正規分布からの自由度１のカイ自乗分布の統計量の導出
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 ## １次元変数変換
 ### 問題その1
