@@ -230,8 +230,8 @@ $$
 
 $$
 \begin{align*}
-\sum x g(x) &= \lambda + 1\\
-\sum x^2 g(x) - (\sum x g(x))^2 = \lambda
+&\sum x g(x) = \lambda + 1\\
+&\sum x^2 g(x) - (\sum x g(x))^2 = \lambda
 \end{align*}
 $$
 
