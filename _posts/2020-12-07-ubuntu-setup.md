@@ -23,11 +23,8 @@ tags:
   gtag('config', 'G-LVL413SV09');
 </script>
 
-||概要|
-|---|---|
-|目的|Windows 10 Proをアンインストールして、代わりにUbuntu 20.04 LTSをインストールする<br> Ubuntu install後の設定は別の記事で解説|
-|参考|[Ubuntu Desktopインストールチュートリアル](https://ubuntu.com/tutorials/install-ubuntu-desktop#1-overview)<br>[Ubuntu Tutorials](https://ubuntu.com/tutorials?topic=desktop)<br>[Ubuntu Desktop image](http://jp.releases.ubuntu.com/focal/)|
 
+**Table of Contents**
 <!-- START doctoc generated TOC please keep comment here to allow auto update -->
 <!-- DON'T EDIT THIS SECTION, INSTEAD RE-RUN doctoc TO UPDATE -->
 
@@ -43,6 +40,7 @@ tags:
 - [7. Ubuntu初期設定](#7-ubuntu%E5%88%9D%E6%9C%9F%E8%A8%AD%E5%AE%9A)
   - [インストールタイプ、アップデートのダウンロード、サードパーティソフトウェアのインストール設定](#%E3%82%A4%E3%83%B3%E3%82%B9%E3%83%88%E3%83%BC%E3%83%AB%E3%82%BF%E3%82%A4%E3%83%97%E3%82%A2%E3%83%83%E3%83%97%E3%83%87%E3%83%BC%E3%83%88%E3%81%AE%E3%83%80%E3%82%A6%E3%83%B3%E3%83%AD%E3%83%BC%E3%83%89%E3%82%B5%E3%83%BC%E3%83%89%E3%83%91%E3%83%BC%E3%83%86%E3%82%A3%E3%82%BD%E3%83%95%E3%83%88%E3%82%A6%E3%82%A7%E3%82%A2%E3%81%AE%E3%82%A4%E3%83%B3%E3%82%B9%E3%83%88%E3%83%BC%E3%83%AB%E8%A8%AD%E5%AE%9A)
 - [Appendix. 導入アプリケーション・ソフト・プログラミング言語](#appendix-%E5%B0%8E%E5%85%A5%E3%82%A2%E3%83%97%E3%83%AA%E3%82%B1%E3%83%BC%E3%82%B7%E3%83%A7%E3%83%B3%E3%83%BB%E3%82%BD%E3%83%95%E3%83%88%E3%83%BB%E3%83%97%E3%83%AD%E3%82%B0%E3%83%A9%E3%83%9F%E3%83%B3%E3%82%B0%E8%A8%80%E8%AA%9E)
+- [References](#references)
 
 <!-- END doctoc generated TOC please keep comment here to allow auto update -->
 
@@ -161,9 +159,9 @@ tags:
 |Web会議サービス|Zoom||
 |ビジネス用チャットツール|Slack||
 |チャットツール|Discord|[Ubuntu Desktop環境構築 Part 15 Discordのインストールと使い方](https://ryonakagami.github.io/2021/02/02/ubuntu-discord-setup/)|
-|Text editor main|Visual Studio Code||
+|Text editor main|Visual Studio Code|[Ubuntu Desktop環境構築 Part 24](https://ryonakagami.github.io/2021/12/08/ubuntu-keyboard-setting/)|
 |Text editor sub|vim|[Ubuntu Desktop環境構築 Part 21](https://ryonakagami.github.io/2021/04/27/ubuntu-vim-tutorial/)|
-|分散型バージョン管理システム|Git|[Ubuntu Desktop環境構築 Part 13](https://ryonakagami.github.io/2020/12/28/ubuntu-git-and-github-setup/)|
+|分散型バージョン管理システム|Git|[Ubuntu Desktop環境構築 Part 13](https://ryonakagami.github.io/2020/12/28/ubuntu-git-and-github-setup/)<br>[Githubパスワード認証廃止への対応](https://ryonakagami.github.io/2021/04/25/github-token-authentication/)|
 |データベースサーバー|PostgreSQL||
 |統計・機械学習用プログラミング言語|Python||
 |ジェネラティブアート|Processing|[Ubuntu Desktop環境構築 Part 17 Processing 3.5.4の導入](https://ryonakagami.github.io/2021/04/07/ubuntu-processing/)|
@@ -175,9 +173,13 @@ tags:
 |コンテナ|Docker|[Ubuntu Desktop環境構築 Part 14](https://ryonakagami.github.io/2021/01/27/ubuntu-docker-setup/)|
 |静的サイトジェネレーター|Jekyll|[Ubuntu Desktop環境構築 Part 12](https://ryonakagami.github.io/2020/12/27/ubuntu-jekyll-install/)|
 |Markdown 目次作成パッケージ|doctoc|[Ubuntu Desktop環境構築 Part 11](https://ryonakagami.github.io/2020/12/26/ubuntu-doctoc/)|
-|web page raeding list管理|pocket||
 |ファイル圧縮ソフト|7-zip|[Ubuntu Desktop環境構築 Part 10](https://ryonakagami.github.io/2020/12/23/ubuntu-zshsetup/)|
 |C/C++コンパイラ|GCC|[C言語練習環境の作成](https://ryonakagami.github.io/2021/01/04/setup-C-language-dev-env/)|
 |DVD再生ソフト|VLC media player|[Ubuntu 20.04 LTS vlc Ubuntu Desktop環境構築 Part 18](https://ryonakagami.github.io/2021/04/09/ubuntu-dvdsetup/)|
+|PC Game|Steam||
 
+## References
 
+- [Ubuntu Desktopインストールチュートリアル](https://ubuntu.com/tutorials/install-ubuntu-desktop#1-overview)
+- [Ubuntu Tutorials](https://ubuntu.com/tutorials?topic=desktop)
+- [Ubuntu Desktop image](http://jp.releases.ubuntu.com/focal/)|
