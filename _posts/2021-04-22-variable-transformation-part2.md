@@ -1,7 +1,7 @@
 ---
 layout: post
 title: "数理統計：変数変換 2/n"
-subtitle: "標準正規分布からの自由度１のカイ自乗分布の統計量の導出"
+subtitle: "変数変換を用いて異なる分布間の関係性を考えてみる"
 author: "Ryo"
 header-img: "img/tag-bg.jpg"
 header-mask: 0.4
@@ -43,8 +43,8 @@ tags:
 
 <!-- END doctoc generated TOC please keep comment here to allow auto update -->
 
-## 標準正規分布からの自由度１のカイ自乗分布の統計量の導出
-### カイ自乗分布の定義
+## 標準正規分布からの自由度１のカイニ乗分布の統計量の導出
+### カイニ乗分布の定義
 
 
 

@@ -39,10 +39,13 @@ tags:
     - [(4) 標準正規分布に従う確率変数の指数変換](#4-%E6%A8%99%E6%BA%96%E6%AD%A3%E8%A6%8F%E5%88%86%E5%B8%83%E3%81%AB%E5%BE%93%E3%81%86%E7%A2%BA%E7%8E%87%E5%A4%89%E6%95%B0%E3%81%AE%E6%8C%87%E6%95%B0%E5%A4%89%E6%8F%9B)
 - [2: 2次元変数変換](#2-2%E6%AC%A1%E5%85%83%E5%A4%89%E6%95%B0%E5%A4%89%E6%8F%9B)
   - [変数変換の公式](#%E5%A4%89%E6%95%B0%E5%A4%89%E6%8F%9B%E3%81%AE%E5%85%AC%E5%BC%8F)
+  - [確率変数の和の分布](#%E7%A2%BA%E7%8E%87%E5%A4%89%E6%95%B0%E3%81%AE%E5%92%8C%E3%81%AE%E5%88%86%E5%B8%83)
+    - [$X, Y$が共に正規分布に従うとき](#x-y%E3%81%8C%E5%85%B1%E3%81%AB%E6%AD%A3%E8%A6%8F%E5%88%86%E5%B8%83%E3%81%AB%E5%BE%93%E3%81%86%E3%81%A8%E3%81%8D)
   - [練習問題](#%E7%B7%B4%E7%BF%92%E5%95%8F%E9%A1%8C-1)
-    - [(1) 指数分布と変数変換: 2019年11月統計検定１級より](#1-%E6%8C%87%E6%95%B0%E5%88%86%E5%B8%83%E3%81%A8%E5%A4%89%E6%95%B0%E5%A4%89%E6%8F%9B-2019%E5%B9%B411%E6%9C%88%E7%B5%B1%E8%A8%88%E6%A4%9C%E5%AE%9A%EF%BC%91%E7%B4%9A%E3%82%88%E3%82%8A)
-    - [(2) 標準正規分布と極座標変換](#2-%E6%A8%99%E6%BA%96%E6%AD%A3%E8%A6%8F%E5%88%86%E5%B8%83%E3%81%A8%E6%A5%B5%E5%BA%A7%E6%A8%99%E5%A4%89%E6%8F%9B)
-    - [(3) 正規分布の条件付き周辺分布関数： 2018年11月計検定１級より](#3-%E6%AD%A3%E8%A6%8F%E5%88%86%E5%B8%83%E3%81%AE%E6%9D%A1%E4%BB%B6%E4%BB%98%E3%81%8D%E5%91%A8%E8%BE%BA%E5%88%86%E5%B8%83%E9%96%A2%E6%95%B0-2018%E5%B9%B411%E6%9C%88%E8%A8%88%E6%A4%9C%E5%AE%9A%EF%BC%91%E7%B4%9A%E3%82%88%E3%82%8A)
+    - [(2-1) 指数分布と変数変換: 2019年11月統計検定１級より](#2-1-%E6%8C%87%E6%95%B0%E5%88%86%E5%B8%83%E3%81%A8%E5%A4%89%E6%95%B0%E5%A4%89%E6%8F%9B-2019%E5%B9%B411%E6%9C%88%E7%B5%B1%E8%A8%88%E6%A4%9C%E5%AE%9A%EF%BC%91%E7%B4%9A%E3%82%88%E3%82%8A)
+    - [(2-2) 標準正規分布と極座標変換](#2-2-%E6%A8%99%E6%BA%96%E6%AD%A3%E8%A6%8F%E5%88%86%E5%B8%83%E3%81%A8%E6%A5%B5%E5%BA%A7%E6%A8%99%E5%A4%89%E6%8F%9B)
+    - [(2-3) 正規分布の条件付き周辺分布関数： 2018年11月計検定１級より](#2-3-%E6%AD%A3%E8%A6%8F%E5%88%86%E5%B8%83%E3%81%AE%E6%9D%A1%E4%BB%B6%E4%BB%98%E3%81%8D%E5%91%A8%E8%BE%BA%E5%88%86%E5%B8%83%E9%96%A2%E6%95%B0-2018%E5%B9%B411%E6%9C%88%E8%A8%88%E6%A4%9C%E5%AE%9A%EF%BC%91%E7%B4%9A%E3%82%88%E3%82%8A)
+    - [(2-4) 独立に標準正規分布に従う２つの確率変数の合成と条件付き分布：2017年11月統計検定1級改題](#2-4-%E7%8B%AC%E7%AB%8B%E3%81%AB%E6%A8%99%E6%BA%96%E6%AD%A3%E8%A6%8F%E5%88%86%E5%B8%83%E3%81%AB%E5%BE%93%E3%81%86%EF%BC%92%E3%81%A4%E3%81%AE%E7%A2%BA%E7%8E%87%E5%A4%89%E6%95%B0%E3%81%AE%E5%90%88%E6%88%90%E3%81%A8%E6%9D%A1%E4%BB%B6%E4%BB%98%E3%81%8D%E5%88%86%E5%B8%832017%E5%B9%B411%E6%9C%88%E7%B5%B1%E8%A8%88%E6%A4%9C%E5%AE%9A1%E7%B4%9A%E6%94%B9%E9%A1%8C)
 - [Appendix](#appendix)
   - [陰関数と陽関数](#%E9%99%B0%E9%96%A2%E6%95%B0%E3%81%A8%E9%99%BD%E9%96%A2%E6%95%B0)
   - [変数変換を用いた定積分の計算](#%E5%A4%89%E6%95%B0%E5%A4%89%E6%8F%9B%E3%82%92%E7%94%A8%E3%81%84%E3%81%9F%E5%AE%9A%E7%A9%8D%E5%88%86%E3%81%AE%E8%A8%88%E7%AE%97)
@@ -237,6 +240,7 @@ $$
 import random
 import numpy as np
 import matplotlib.pyplot as plt
+from statsmodels.distributions.empirical_distribution import ECDF
 
 ## Class and methods
 class SampleGenerator:
@@ -567,8 +571,63 @@ $$
 J((s, t)\to(x, y)) = \frac{1}{J((x, y)\to(s, t))}
 $$
 
+### 確率変数の和の分布
+
+２つの確率変数 $X, Y$が独立に分布し$X\sim f_X(x)$, $Y\sim f_Y(y)$としたとき、 $Z =X+Y$の分布を求めたいとします.
+これは変数変換によって確認することができます.
+
+まず、
+
+$$
+\begin{align*}
+Z & = X+Y\\
+Y &= T
+\end{align*}
+$$
+
+という変数変換を考えます. このときの$(Z, T)$の同時確率密度関数は
+
+$$
+f_{Z,T}(z, t) =f_X(Z-t)f_y(t)\quad\quad\tag{2.3}
+$$
+
+Zの分布は(2.1)の周辺分布で与えられるので
+
+$$
+f_Z(z) = \int f_X(Z-t)f_y(t)dt \quad\quad\tag{2.4}
+$$
+
+これを$f_X$と$f_Y$の畳み込み(convolution)といいます.
+
+
+#### $X, Y$が共に正規分布に従うとき
+
+$$
+\begin{align*}
+X&\sim N(\mu_X, \sigma_X^2)\\
+Y&\sim N(\mu_Y, \sigma_Y^2)
+\end{align*}
+$$
+
+のとき、$Z = X + Y$の密度関数を導出したいとします. (2.4)より
+
+<div class="math display" style="overflow: auto">
+$$
+f_Z(z) = \frac{1}{\sqrt{2\pi(\sigma_X^2+\sigma_Y^2)}}\exp\left(\frac{z - \mu_X - \mu_Y}{2(\sigma_X^2+\sigma_Y^2)}\right) \int \frac{1}{\sqrt{2\pi (\sigma_X^2\sigma_Y^2)/(\sigma_X^2+\sigma_Y^2)}}\exp\left(-\frac{(t - (\sigma^2_Y(z - \mu_X) - \sigma^2_X\mu_Y)/(\sigma_X^2+\sigma_Y^2))^2}{2(\sigma_X^2\sigma_Y^2)/(\sigma_X^2+\sigma_Y^2)}\right)
+$$
+</div>
+
+従って、積分の中身は正規分布の密度関数の形をしているので
+
+$$
+f_Z(z) = \frac{1}{\sqrt{2\pi(\sigma_X^2+\sigma_Y^2)}}\exp\left(\frac{z - \mu_X - \mu_Y}{2(\sigma_X^2+\sigma_Y^2)}\right)
+$$
+
+従って、$Z\sim N(\mu_X+\mu_Y, \sigma_X^2+\sigma_Y^2)$
+
+
 ### 練習問題
-#### (1) 指数分布と変数変換: 2019年11月統計検定１級より
+#### (2-1) 指数分布と変数変換: 2019年11月統計検定１級より
 
 > 問題
 
@@ -678,7 +737,7 @@ $$
 
 従って、$\alpha = \sqrt {2}$で$R(\alpha)$は最小値を取る.
 
-#### (2) 標準正規分布と極座標変換
+#### (2-2) 標準正規分布と極座標変換
 
 $X, Y$が独立に標準正規分布に従うとします. このとき以下の変数変換を考えます.
 
@@ -764,6 +823,43 @@ r_true = inverse_cdf_r(prob_range)
 theta_true = np.random.uniform(0, 2*np.pi, N)
 
 ## qqplot
+def qqplot(x, y, title = None, xlabel = None, ylabel = None, plot = False, ax = None):
+    """ 
+    INPUT
+        x, y : array_like, 1-Dimensional
+            Two arrays of sample observations
+    
+    Returns:
+        statistic: float
+            KS statistic.
+        pvalue: float
+            One-tailed or two-tailed p-value.
+        Figure:
+            QQ-plot
+            x-axis and y-axis is normalized between 0 and 1
+    """
+    
+    sorted_x = sorted(x)
+    x_xdf, y_cdf = ECDF(x), ECDF(y)
+    ks_test = stats.ks_2samp(x, y)
+
+    print(ks_test)
+
+    if ax is None:
+        fig, ax = plt.subplots(1, 1,figsize=(9, 9))
+    
+    if plot:
+        ax.plot(x_xdf(sorted_x), y_cdf(sorted_x),lw=2, color='#0485d1')
+    else:
+        ax.scatter(x_xdf(sorted_x), y_cdf(sorted_x),lw=2, color='#0485d1')
+    
+    ax.axline([0, 0], [1, 1],lw=4, color='#A60628')
+    ax.set_title(title  + '  (ks-test p-value: %.3f )'%ks_test[1] , fontsize=15)
+    ax.set_xlabel(xlabel, fontsize=13)
+    ax.set_ylabel(ylabel, fontsize=13)
+    plt.legend()
+
+## qqplot
 qqplot(r, r_true, 
         title = 'QQ-plot between r and true r',
         xlabel = r'$r$ from transformation',
@@ -795,7 +891,7 @@ $$
 
 とおきます. このとき, $X = r\cos\theta, Y = r\sin\theta$と変換すると、$X, Y$はそれぞれ独立に標準正規分布に従います.
 
-#### (3) 正規分布の条件付き周辺分布関数： 2018年11月計検定１級より
+#### (2-3) 正規分布の条件付き周辺分布関数： 2018年11月計検定１級より
 
 $$
 X\sim N(\mu, \sigma^2), f(x) = \frac{1}{\sqrt{2\pi}\sigma}\exp\left[-\frac{(x - \mu)^2}{2\sigma^2}\right]
@@ -844,6 +940,190 @@ print(np.cov(results.resid))
 >> array(0.75146116)
 ```
 
+#### (2-4) 独立に標準正規分布に従う２つの確率変数の合成と条件付き分布：2017年11月統計検定1級改題
+
+以下の２つの独立した確率変数を考えます:
+
+$$
+\begin{align*}
+X&\sim N(0, 1)\\
+Y&\sim N(0, 1)\\
+\end{align*}
+$$
+
+そして、$k\neq 0$の条件の下、$X, Y$を合成して定義される確率変数$Z$を以下のように定義します：
+
+$$
+\begin{align*}
+&Z = a + kX +Y + \epsilon\\
+&\epsilon \sim N(0, 1)
+\end{align*}
+$$
+
+- $\epsilon$は$X, Y$それぞれと独立
+- $a$は定数
+
+> (1) Zの従う確率分布を求めよ
+
+期待値と分散はそれぞれ３変数が独立という条件より
+
+$$
+\begin{align*}
+&E[Z] = a + kE(X) + E(Y) + E(\epsilon) = a\\
+&V(Z) = k^2V(X) + V(Y) + V(\epsilon) = k^2 + 2
+\end{align*}
+$$
+
+また、正規分布に従う確率変数の和も正規分布に従うことから
+
+$$
+Z\sim N(a, k^2 + 2)
+$$
+
+> (2) XとZの相関係数を求めよ
+
+相関係数$\rho_{XZ}$は
+
+$$
+\rho_{XZ} = \frac{COV(X, Z)}{\sqrt{V(X)V(Z)}}
+$$
+
+なので
+
+<div class="math display" style="overflow: auto">
+$$
+\begin{align*}
+COV(X, Z) &= COV(X, a + kX +Y + \epsilon)\\
+&= kV(X) \\
+&= k
+\end{align*}
+$$
+</div>
+
+従って、
+
+$$
+\rho_{XZ} = \frac{k}{\sqrt{k^2 + 2}}
+$$
+
+> (3) $X = x$を与えたときのZの条件付き分布を求めよ
+
+$X = x$を与えたときの$Z$の確率分布は、確率変数は$(Y, \epsilon)$なので、確率変数の和の公式より
+
+$$
+Z\|X=x \sim N(a + kx, 2)
+$$
+
+> (4) $Z=z$をあたえたときの$X$の条件付き分布を求めよ
+
+$Z=z$をあたえたときの$X$の条件付き密度関数は
+
+$$
+f(x\|z) = \frac{f(z\|z)f(x)}{f(z)}
+$$
+
+分母の$f(z)$は(1)ですでに求めたので
+
+$$
+f(z) = \frac{1}{\sqrt{2\pi(k^2 + 2)}}\exp\left(-\frac{(z - a)^2}{2(k^2 + 2)}\right)
+$$
+
+分子に登場する$f(z\|z)$は(3)で求めてあるので
+
+<div class="math display" style="overflow: auto">
+$$
+\begin{align*}
+f(z|x)f(x) = \frac{1}{\sqrt{4\pi}}\exp\left(-\frac{(z - a - kx)^2}{4}\right)\times\frac{1}{\sqrt{2\pi}}\exp\left(-\frac{x^2}{2}\right)
+\end{align*}
+$$
+</div>
+
+従って
+
+<div class="math display" style="overflow: auto">
+$$
+f(x|z) = \frac{1}{\sqrt{2\pi \{2/(k^2+2)\}}}\exp\left(-\frac{1}{2\cdot 2/(k^2+2)}\right)\left\{x - \frac{k}{k^2+2}(z-a)\right\}^2
+$$
+</div>
+
+従って、
+
+$$
+X|Z\sim N\left(\frac{k}{k^2+2}(z -a), \frac{2}{k^2+2}\right)
+$$
+
+> (5) 上述(4)で導出した条件付き分布のもっともらしさをPythonで確かめる
+
+```python
+import numpy as np
+import matplotlib.pyplot as plt
+from scipy import stats
+from statsmodels.distributions.empirical_distribution import ECDF
+
+def qqplot(x, y, title = None, xlabel = None, ylabel = None, plot = False, ax = None):
+    """ 
+    INPUT
+        x, y : array_like, 1-Dimensional
+            Two arrays of sample observations
+    
+    Returns:
+        statistic: float
+            KS statistic.
+        pvalue: float
+            One-tailed or two-tailed p-value.
+        Figure:
+            QQ-plot
+            x-axis and y-axis is normalized between 0 and 1
+    """
+    
+    sorted_x = sorted(x)
+    x_xdf, y_cdf = ECDF(x), ECDF(y)
+    ks_test = stats.ks_2samp(x, y)
+
+    print(ks_test)
+
+    if ax is None:
+        fig, ax = plt.subplots(1, 1,figsize=(9, 9))
+    
+    if plot:
+        ax.plot(x_xdf(sorted_x), y_cdf(sorted_x),lw=2, color='#0485d1')
+    else:
+        ax.scatter(x_xdf(sorted_x), y_cdf(sorted_x),lw=2, color='#0485d1')
+    
+    ax.axline([0, 0], [1, 1],lw=4, color='#A60628')
+    ax.set_title(title  + '  (ks-test p-value: %.3f )'%ks_test[1] , fontsize=15)
+    ax.set_xlabel(xlabel, fontsize=13)
+    ax.set_ylabel(ylabel, fontsize=13)
+    plt.legend()
+
+## seed
+np.random.seed(42)
+
+## params
+N = 10000
+a = 2
+k = 2
+
+X = np.random.normal(0, 1, N)
+Y = np.random.normal(0, 1, N)
+e = np.random.normal(0, 1, N)
+Z = a + k*X + Y + e
+
+mu  = (k/(k**2+2)) * (Z - a)
+var = 2/(k**2 + 2)
+
+X_2 = np.random.normal(mu, np.sqrt(var), N)
+
+qqplot(X, X_2, 
+        title = r'QQ-plot between $X$ and $X_2$',
+        xlabel = r'X ~ N(0, 1) Distribution',
+        ylabel = '$X_2$ Distribution generated from f(x|z)',
+        ax = None)
+
+```
+
+<img src="https://github.com/ryonakimageserver/omorikaizuka/blob/master/%E3%83%96%E3%83%AD%E3%82%B0%E7%94%A8/20210421_10.png?raw=true">
+
 
 ## Appendix
 ### 陰関数と陽関数
@@ -879,3 +1159,4 @@ $$
 ## References
 
 - [高校数学の美しい物語:陰関数と陽関数の意味と違いについて](https://manabitimes.jp/math/1070)
+- [Wikipedia > Sum of normally distributed random variables](https://en.wikipedia.org/wiki/Sum_of_normally_distributed_random_variables)
