@@ -39,7 +39,7 @@ tags:
 - [6. HP BIOSの設定](#6-hp-bios%E3%81%AE%E8%A8%AD%E5%AE%9A)
 - [7. Ubuntu初期設定](#7-ubuntu%E5%88%9D%E6%9C%9F%E8%A8%AD%E5%AE%9A)
   - [インストールタイプ、アップデートのダウンロード、サードパーティソフトウェアのインストール設定](#%E3%82%A4%E3%83%B3%E3%82%B9%E3%83%88%E3%83%BC%E3%83%AB%E3%82%BF%E3%82%A4%E3%83%97%E3%82%A2%E3%83%83%E3%83%97%E3%83%87%E3%83%BC%E3%83%88%E3%81%AE%E3%83%80%E3%82%A6%E3%83%B3%E3%83%AD%E3%83%BC%E3%83%89%E3%82%B5%E3%83%BC%E3%83%89%E3%83%91%E3%83%BC%E3%83%86%E3%82%A3%E3%82%BD%E3%83%95%E3%83%88%E3%82%A6%E3%82%A7%E3%82%A2%E3%81%AE%E3%82%A4%E3%83%B3%E3%82%B9%E3%83%88%E3%83%BC%E3%83%AB%E8%A8%AD%E5%AE%9A)
-- [Appendix. 導入アプリケーション・ソフト・プログラミング言語](#appendix-%E5%B0%8E%E5%85%A5%E3%82%A2%E3%83%97%E3%83%AA%E3%82%B1%E3%83%BC%E3%82%B7%E3%83%A7%E3%83%B3%E3%83%BB%E3%82%BD%E3%83%95%E3%83%88%E3%83%BB%E3%83%97%E3%83%AD%E3%82%B0%E3%83%A9%E3%83%9F%E3%83%B3%E3%82%B0%E8%A8%80%E8%AA%9E)
+- [Appendix: 導入アプリケーション/ソフト/プログラミング言語](#appendix-%E5%B0%8E%E5%85%A5%E3%82%A2%E3%83%97%E3%83%AA%E3%82%B1%E3%83%BC%E3%82%B7%E3%83%A7%E3%83%B3%E3%82%BD%E3%83%95%E3%83%88%E3%83%97%E3%83%AD%E3%82%B0%E3%83%A9%E3%83%9F%E3%83%B3%E3%82%B0%E8%A8%80%E8%AA%9E)
 - [References](#references)
 
 <!-- END doctoc generated TOC please keep comment here to allow auto update -->
@@ -143,7 +143,8 @@ tags:
 - `Download updaytes while installing Ubuntu`は、インターネットにつながっているならデフォルトでチェックが入ります。インストール中にアップデートがダウンロードされ、セキュリティホールやバグが解消された状態で使い始めることができます。
 - `Install third-party software`をチェックすれば、商用のドライバやデコーダーなどがインストールされます。
 
-## Appendix. 導入アプリケーション・ソフト・プログラミング言語
+
+## Appendix: 導入アプリケーション/ソフト/プログラミング言語
 
 |項目|詳細|関連記事|
 |---|---|---|
@@ -159,6 +160,7 @@ tags:
 |Web会議サービス|Zoom||
 |ビジネス用チャットツール|Slack||
 |チャットツール|Discord|[Ubuntu Desktop環境構築 Part 15 Discordのインストールと使い方](https://ryonakagami.github.io/2021/02/02/ubuntu-discord-setup/)|
+|チャットツール|Line|[Ubuntu Desktop環境構築 Part 22:Google Chrome経由でLINEをDesktop Appのように使う](https://ryonakagami.github.io/2021/05/04/ubuntu-desktop-app-via-googlechrome/)|
 |Text editor main|Visual Studio Code|[Ubuntu Desktop環境構築 Part 24](https://ryonakagami.github.io/2021/12/08/ubuntu-keyboard-setting/)|
 |Text editor sub|vim|[Ubuntu Desktop環境構築 Part 21](https://ryonakagami.github.io/2021/04/27/ubuntu-vim-tutorial/)|
 |分散型バージョン管理システム|Git|[Ubuntu Desktop環境構築 Part 13](https://ryonakagami.github.io/2020/12/28/ubuntu-git-and-github-setup/)<br>[Githubパスワード認証廃止への対応](https://ryonakagami.github.io/2021/04/25/github-token-authentication/)|

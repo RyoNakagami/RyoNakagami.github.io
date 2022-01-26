@@ -24,15 +24,12 @@ tags:
   gtag('config', 'G-LVL413SV09');
 </script>
 
-||概要|
-|---|---|
-|目的|Google Chrome経由でLINEをDesktop Appのように使う|
-|環境|Ubuntu 20.04 LTS|
 
 <!-- START doctoc generated TOC please keep comment here to allow auto update -->
 <!-- DON'T EDIT THIS SECTION, INSTEAD RE-RUN doctoc TO UPDATE -->
 
 - [Chromeの拡張機能でLINEを追加する](#chrome%E3%81%AE%E6%8B%A1%E5%BC%B5%E6%A9%9F%E8%83%BD%E3%81%A7line%E3%82%92%E8%BF%BD%E5%8A%A0%E3%81%99%E3%82%8B)
+  - [環境](#%E7%92%B0%E5%A2%83)
   - [前提](#%E5%89%8D%E6%8F%90)
   - [LINEをDesktopアプリ化する](#line%E3%82%92desktop%E3%82%A2%E3%83%97%E3%83%AA%E5%8C%96%E3%81%99%E3%82%8B)
   - [(opt) LINEのアイコンをLINEぽく変える](#opt-line%E3%81%AE%E3%82%A2%E3%82%A4%E3%82%B3%E3%83%B3%E3%82%92line%E3%81%BD%E3%81%8F%E5%A4%89%E3%81%88%E3%82%8B)
@@ -40,6 +37,20 @@ tags:
 <!-- END doctoc generated TOC please keep comment here to allow auto update -->
 
 ## Chromeの拡張機能でLINEを追加する
+
+### 環境
+
+```
+% lsb_release -a
+No LSB modules are available.
+Distributor ID: Ubuntu
+Description:    Ubuntu 20.04.3 LTS
+Release:        20.04
+Codename:       focal
+% uname -srvmpio
+Linux 5.13.0-27-generic #29~20.04.1-Ubuntu SMP Fri Jan 14 00:32:30 UTC 2022 x86_64 x86_64 x86_64 GNU/Linux
+```
+
 ### 前提
 UbuntuにはLINE APPはないのでGoogle Chromeの拡張機能を用いて、LINEを追加することを試みます.
 
