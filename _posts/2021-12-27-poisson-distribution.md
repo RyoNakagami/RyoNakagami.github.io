@@ -277,7 +277,7 @@ print(np.array_equal(x_theory, x_hacked, equal_nan=True))
 クレーム件数が０件の日にちはCS部門で把握しておらず、また過去何日の調査なのかも現在わかっていないため上記のデータとなったとCS部門から説明がありました. 
 このデータを用いて、一日あたりのクレーム発生件数のポワソンパラメータを識別したいとします.
 
-#### 解答 (1)：モーメント母関数と条件付き期待値
+#### 解答(1)：モーメント母関数と条件付き期待値
 
 $Y\sim \{X\|X\geq 1\}$とします. この時、確率変数$Y$の確率密度関数$f(y)$は
 
@@ -290,10 +290,10 @@ $$
 <div class="math display" style="overflow: auto">
 $$
 \begin{align*}
-M_t(Y) &= E[\exp(tY)]\\
+M_y(t) &= E[\exp(tY)]\\
 &= \sum_{y=1}^\infty \frac{1}{1 - \exp(-\lambda)}\frac{\lambda^y\exp(-\lambda)}{y!} \exp(ty)\\
 &= \frac{\exp(-\lambda)}{1 - \exp(-\lambda)}\sum \frac{(\exp(t)\lambda)^y}{y!}\\
-&= \frac{\exp(-\lambda)}{1 - \exp(-\lambda)}(\exp[\exp(t)\lambda]-1)
+&= \frac{\exp(-\lambda)}{1 - \exp(-\lambda)}(\exp[\exp(t)\lambda]-1)\quad\quad\tag{2.1}
 \end{align*}
 $$
 </div>
@@ -311,7 +311,7 @@ $$
 従って、これの標本対応を考えると
 
 $$
-\bar Y = \frac{\hat\lambda}{1 - \exp(-\hat\lambda)} \tag{2.1}
+\bar Y = \frac{\hat\lambda}{1 - \exp(-\hat\lambda)} \tag{2.2}
 $$
 
 RHSは$\hat\lambda$について（定義域内ならば）狭義増加関数なので$\hat\lambda = F(\bar Y)$となるような逆関数が存在します. 
@@ -326,12 +326,12 @@ $$
 &\Rightarrow \hat\lambda\exp(\hat\lambda) = \frac{\exp(\hat\lambda) - 1}{1/\bar Y}\\
 &\Rightarrow (\hat\lambda - \bar Y)\exp(\hat\lambda) = -\bar Y\\
 &\Rightarrow (\hat\lambda - \bar Y)\exp(\hat\lambda)\exp(\bar Y) = -\bar Y\exp(-\bar Y)\\
-&\Rightarrow (\hat\lambda - \bar Y)\exp(\hat\lambda - \bar Y) = -\bar Y\exp(-\bar Y)\tag{2.2}
+&\Rightarrow (\hat\lambda - \bar Y)\exp(\hat\lambda - \bar Y) = -\bar Y\exp(-\bar Y)\tag{2.3}
 \end{align*}
 $$
 </div>
 
-(2.2)の両辺にランベルトの$W_0$関数(i.e., $y = x\exp(x)$の逆関数)を適用したいとします.
+(2.3)の両辺にランベルトの$W_0$関数(i.e., $y = x\exp(x)$の逆関数)を適用したいとします.
 
 - $-\bar Y < -1$であること
 - $\hat\lambda - \bar Y = \hat\lambda(1 - 1/(1 - \exp(-\hat\lambda))) > -1$ s.t. $\hat\lambda > 0$
@@ -463,6 +463,58 @@ Optimization terminated successfully.
 ```
 
 MLEでも`1.813`とランベルトのW関数を用いた計算方法と近似の値が計算することができます.
+
+#### 参考： モーメント法に基づく分散の導出
+
+(2.1)の内容をもとに更に計算すると
+
+<div class="math display" style="overflow: auto">
+$$
+\begin{align*}
+M_y(t)     &= \frac{\exp(-\lambda)}{1 - \exp(-\lambda)}(\exp[\exp(t)\lambda]-1)\\
+M_y'(t)    &= \frac{\exp(-\lambda)}{1 - \exp(-\lambda)} \exp[\exp(t)\lambda]\exp(t)\lambda\\
+M_y^{''}(t)&= \frac{\exp(-\lambda)}{1 - \exp(-\lambda)} \exp[\exp(t)\lambda]\exp(t)\lambda(\lambda\exp(t)+1)
+\end{align*}
+$$
+</div>
+
+従って、
+
+$$
+\begin{align*}
+M_y^{''}(0) = \frac{\lambda(\lambda+1)}{1 - \exp(-\lambda)} \quad\quad\tag{2.4}
+\end{align*}
+$$
+
+$V(X) = E[X^2] - E[X]^2$なので(2.2)と(2.4)を組み合わせると
+
+$$
+V(Y|Y>1)= \frac{\lambda - \lambda(\lambda+1)\exp(-\lambda)}{(1 - \exp(-\lambda))^2}
+$$
+
+> Python
+
+```python
+y = np.array([1, 2, 3, 4, 5])
+freq = np.array([15, 12, 10, 3, 2])
+
+## MoM var
+def calculate_conditionalvar(x):
+    denominator = (1 - np.exp(-x))**2
+    numerator = x - x*(x+1)*np.exp(-x)
+
+    return numerator/denominator
+
+theory_var = calculate_conditionalvar(x = lambert_w)
+
+## 不偏分散
+data_var = np.average((y - lambert_w)**2, weights = freq)*np.sum(freq)/(np.sum(freq) - 1)
+
+print(data_var, theory_var)
+>>> 1.3130081300813008 1.7610396317212755
+```
+
+- Poisson分布によるFitが良い訳ではなさそう
 
 
 ### 2019年統計検定準１級試験
