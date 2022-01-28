@@ -24,14 +24,19 @@ tags:
   gtag('config', 'G-LVL413SV09');
 </script>
 
-|概要||
-|---|---|
-|目的|Ubuntuのディレクトリ名をEnglishにrename & 日本語入力環境を整える|
-|参考|[ロケール: 言語、地域の設定](hhttps://memo.open-code.club/Linux/locale.html)|
-|前回記事|[Windows PCにUbuntu 20.04 LTS (Focal Fossa)をインストールする](https://ryonakagami.github.io/2020/12/07/ubuntu-setup/)|
 
-<!-- START doctoc -->
-<!-- END doctoc -->
+<!-- START doctoc generated TOC please keep comment here to allow auto update -->
+<!-- DON'T EDIT THIS SECTION, INSTEAD RE-RUN doctoc TO UPDATE -->
+
+- [1. 今回のスコープ](#1-%E4%BB%8A%E5%9B%9E%E3%81%AE%E3%82%B9%E3%82%B3%E3%83%BC%E3%83%97)
+- [2. 日本語のディレクトリ/アプリをEnglishにrenameする](#2-%E6%97%A5%E6%9C%AC%E8%AA%9E%E3%81%AE%E3%83%87%E3%82%A3%E3%83%AC%E3%82%AF%E3%83%88%E3%83%AA%E3%82%A2%E3%83%97%E3%83%AA%E3%82%92english%E3%81%ABrename%E3%81%99%E3%82%8B)
+  - [ロケールとは？](#%E3%83%AD%E3%82%B1%E3%83%BC%E3%83%AB%E3%81%A8%E3%81%AF)
+  - [`etc`などの主要なディレクトリ](#etc%E3%81%AA%E3%81%A9%E3%81%AE%E4%B8%BB%E8%A6%81%E3%81%AA%E3%83%87%E3%82%A3%E3%83%AC%E3%82%AF%E3%83%88%E3%83%AA)
+- [3. 日本語入力設定](#3-%E6%97%A5%E6%9C%AC%E8%AA%9E%E5%85%A5%E5%8A%9B%E8%A8%AD%E5%AE%9A)
+  - [入力ソースの設定](#%E5%85%A5%E5%8A%9B%E3%82%BD%E3%83%BC%E3%82%B9%E3%81%AE%E8%A8%AD%E5%AE%9A)
+- [References](#references)
+
+<!-- END doctoc generated TOC please keep comment here to allow auto update -->
 
 ## 1. 今回のスコープ
 
@@ -116,5 +121,7 @@ USキーボードの使用に関係無く、入力ソースを Mozc 1つにし�
 
 各種設定が終わったらTerminalで`reboot`と打ち込み、変更内容が反映されているか再起動後確認して終了です。
 
+## References
 
-
+- [ロケール: 言語、地域の設定](hhttps://memo.open-code.club/Linux/locale.html)|
+- [Windows PCにUbuntu 20.04 LTS (Focal Fossa)をインストールする](https://ryonakagami.github.io/2020/12/07/ubuntu-setup/)|

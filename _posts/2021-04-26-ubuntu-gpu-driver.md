@@ -1,7 +1,7 @@
 ---
 layout: post
-title: "Ubuntu Desktop環境構築 Part 20"
-subtitle: "LinuxのGPU機械学習環境構築: GPUのドライバのインストール"
+title: "LinuxのGPU機械学習環境構築: GPUのドライバのインストール"
+subtitle: "Ubuntu Desktop環境構築 Part 20"
 author: "Ryo"
 header-img: "img/about-bg.jpg"
 header-mask: 0.4
@@ -133,4 +133,3 @@ nvidia-settingsコマンドでGPUの設定画面を開くことができる
 ```zsh
 % nvidia-settings
 ```
-

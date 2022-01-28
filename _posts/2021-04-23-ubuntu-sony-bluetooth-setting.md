@@ -1,7 +1,7 @@
 ---
 layout: post
-title: "Ubuntu Desktop環境構築 Part 18"
-subtitle: "Sony WF-1000XM3 Bluetoothの設定"
+title: "Sony WF-1000XM3 Bluetoothの設定"
+subtitle: "Ubuntu Desktop環境構築 Part 18"
 author: "Ryo"
 header-img: "img/about-bg.jpg"
 header-mask: 0.4

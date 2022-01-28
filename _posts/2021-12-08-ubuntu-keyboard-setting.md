@@ -1,7 +1,7 @@
 ---
 layout: post
-title: "Ubuntu Desktop環境構築 Part 24"
-subtitle: "Keychron K6 Wireless Mechanical Keyboardとショートカットの整理"
+title: "Keychron K6 Wireless Mechanical Keyboardとショートカットの整理"
+subtitle: "Ubuntu Desktop環境構築 Part 24"
 author: "Ryo"
 header-img: "img/about-bg.jpg"
 header-mask: 0.4

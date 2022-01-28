@@ -1,7 +1,7 @@
 ---
 layout: post
-title: "Ubuntu Desktop環境構築 Part 19"
-subtitle: "メイリオフォントをUbuntuにインストール"
+title: "メイリオフォントをUbuntuにインストール"
+subtitle: "Ubuntu Desktop環境構築 Part 19"
 author: "Ryo"
 header-img: "img/about-bg.jpg"
 header-mask: 0.4
@@ -90,5 +90,3 @@ sudo fc-cache -fv
 ```
 
 最後に、Google Docsでメイリオフォントが表示されることを確認したら終了です.
-
-

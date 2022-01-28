@@ -1,7 +1,7 @@
 ---
 layout: post
-title: "Ubuntu Desktop環境構築 Part 25"
-subtitle: "Ubuntu 20.04 LTSでメタルギアソリッドVをやりたい"
+title: "Ubuntu 20.04 LTSでメタルギアソリッドVをやりたい"
+subtitle: "Ubuntu Desktop環境構築 Part 25"
 author: "Ryo"
 header-img: "img/about-bg.jpg"
 header-mask: 0.4

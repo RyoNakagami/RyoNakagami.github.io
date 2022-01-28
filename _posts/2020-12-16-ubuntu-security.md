@@ -1,7 +1,7 @@
 ---
 layout: post
-title: "Ubuntu Desktop環境構築 Part 4"
-subtitle: "ファイヤウォールの設定: ufw と Gufw"
+title: "ファイヤウォールの設定: ufw と Gufw"
+subtitle: "Ubuntu Desktop環境構築 Part 4"
 author: "Ryo"
 header-img: "img/post-bg-rwd.jpg"
 header-mask: 0.4
@@ -21,11 +21,6 @@ tags:
 
   gtag('config', 'G-LVL413SV09');
 </script>
-
-||概要|
-|---|---|
-|目的|ファイヤウォールの設定: ufw と Gufw|
-|参考|[UbuntuでGufwを用いてファイヤウォールの設定](https://www.kkaneko.jp/tools/server/gufw_ubuntu.html)|
 
 <!-- START doctoc generated TOC please keep comment here to allow auto update -->
 <!-- DON'T EDIT THIS SECTION, INSTEAD RE-RUN doctoc TO UPDATE -->
@@ -189,4 +184,6 @@ $ sudo apt -yV install gufw
 その後、`settings`よりFirewall Configを開き、上述と同じ条件をGUIでポチポチして設定する。
 
 
+## References
 
+- [UbuntuでGufwを用いてファイヤウォールの設定](https://www.kkaneko.jp/tools/server/gufw_ubuntu.html)

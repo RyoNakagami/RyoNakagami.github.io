@@ -1,7 +1,7 @@
 ---
 layout: post
-title: "Ubuntu Desktop環境構築 Part 23"
-subtitle: "SF Monoのインストールと各アプリケーションのfontFamilyの設定変更"
+title: "SF Monoのインストールと各アプリケーションのfontFamilyの設定変更"
+subtitle: "Ubuntu Desktop環境構築 Part 23"
 author: "Ryo"
 header-img: "img/about-bg.jpg"
 header-mask: 0.4

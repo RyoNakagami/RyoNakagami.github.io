@@ -1,7 +1,7 @@
 ---
 layout: post
-title: "Ubuntu Desktop環境構築 Part 1"
-subtitle: "Windows PCにUbuntu 20.04 LTS (Focal Fossa)をインストールする"
+title: "PCにUbuntu 20.04 LTS (Focal Fossa)をインストールする"
+subtitle: "Ubuntu Desktop環境構築 Part 1"
 author: "Ryo"
 header-img: "img/post-bg-rwd.jpg"
 header-mask: 0.4

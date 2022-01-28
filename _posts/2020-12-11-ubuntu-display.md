@@ -1,7 +1,7 @@
 ---
 layout: post
-title: "Ubuntu Desktop環境構築 Part 3"
-subtitle: "マルチディスプレイ設定と時計表示をはじめとする拡張機能とDockの設定"
+title: "マルチディスプレイ設定と時計表示をはじめとする拡張機能とDockの設定"
+subtitle: "Ubuntu Desktop環境構築 Part 3"
 author: "Ryo"
 header-img: "img/post-bg-rwd.jpg"
 header-mask: 0.4
