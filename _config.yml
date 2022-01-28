@@ -78,7 +78,7 @@ ga_track_id: "G-LVL413SV09"            # Format: UA-xxxxxx-xx
 
 # Sidebar settings
 sidebar: true                           # whether or not using Sidebar.
-sidebar-about-description: "修士卒元経済学徒<br>Arsenal Fan, Gooner<br>Data Scientist in Tokyo<br>フットサルやりましょう"
+sidebar-about-description: "Arsenal Fan, Gooner<br>Data Scientist in Tokyo<br>元経済学徒"
 sidebar-avatar: /img/avatar_rio_cat.jpg      # use absolute URL, seeing it's used in both `/` and `/about/`
 
 
