@@ -663,13 +663,25 @@ autoload -Uz compinit && compinit
 ## alias with color
 alias ls='ls -F --color=auto'
 alias grep='grep --color=auto'
+alias xclipimage='xclip -selection clipboard -t image/png -o > "/home/ryo_nak/Desktop/$(date +%Y-%m-%d_%T).png"' 
 
 #-------------------------------------
 # functions
 #-------------------------------------
-# ファイル数が多い時には省略表示
-# (参考: https://qiita.com/yuyuchu3333/items/b10542db482c3ac8b059)
-# chpwd(カレントディレクトリが変更したとき)にls_abbrevを実行
+## touch $1 && code $1
+## *.ipynbを開く用の関数
+
+function tcode() {
+  touch $1;
+  code $1;
+}
+
+alias tcode=tcode
+
+
+## ファイル数が多い時には省略表示
+## (参考: https://qiita.com/yuyuchu3333/items/b10542db482c3ac8b059)
+## chpwd(カレントディレクトリが変更したとき)にls_abbrevを実行
 ls_abbrev() {
   if [[ ! -r $PWD ]]; then
     return

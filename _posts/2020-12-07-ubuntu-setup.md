@@ -155,6 +155,7 @@ tags:
 |Web Browser main|Firefox||
 |Web Browser sub|Google Chrome||
 |ファイル共有ソフト|google drive ocamlfuse|[Ubuntu Desktop環境構築 Part 7](https://ryonakagami.github.io/2020/12/19/ubuntu-google-drive-setup/)|
+|画像編集ソフト|GIMP||
 |カレンダー|Google Calender||
 |ToDo管理|Google Keep||
 |Web会議サービス|Zoom||

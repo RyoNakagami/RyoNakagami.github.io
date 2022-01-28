@@ -25,14 +25,10 @@ tags:
 </script>
 
 
-||概要|
-|---|---|
-|目的|Keychron K6 Wireless Mechanical Keyboardとショートカットの整理|
-|参考|1. [Archlinux: Function keys do not work](https://wiki.archlinux.org/title/Apple_Keyboard#Function_keys_do_not_work)<br>2. [How to disable global Super-p shortcut?](https://askubuntu.com/questions/68463/how-to-disable-global-super-p-shortcut)<br>3. [stackoverflow:How to switch between terminals in Visual Studio Code](https://stackoverflow.com/questions/48440673/how-to-switch-between-terminals-in-visual-studio-code/60224585)|
-
 <!-- START doctoc generated TOC please keep comment here to allow auto update -->
 <!-- DON'T EDIT THIS SECTION, INSTEAD RE-RUN doctoc TO UPDATE -->
 
+- [やりたいこと](#%E3%82%84%E3%82%8A%E3%81%9F%E3%81%84%E3%81%93%E3%81%A8)
 - [1. 技術スペック](#1-%E6%8A%80%E8%A1%93%E3%82%B9%E3%83%9A%E3%83%83%E3%82%AF)
   - [実行環境](#%E5%AE%9F%E8%A1%8C%E7%92%B0%E5%A2%83)
   - [Keyboardスペック](#keyboard%E3%82%B9%E3%83%9A%E3%83%83%E3%82%AF)
@@ -52,8 +48,15 @@ tags:
   - [VSCode Keyboard Shortcutの変更](#vscode-keyboard-shortcut%E3%81%AE%E5%A4%89%E6%9B%B4)
     - [VSCodeで分割先にActive Editorを移動するショートカットの設定](#vscode%E3%81%A7%E5%88%86%E5%89%B2%E5%85%88%E3%81%ABactive-editor%E3%82%92%E7%A7%BB%E5%8B%95%E3%81%99%E3%82%8B%E3%82%B7%E3%83%A7%E3%83%BC%E3%83%88%E3%82%AB%E3%83%83%E3%83%88%E3%81%AE%E8%A8%AD%E5%AE%9A)
     - [VSCodeでsplit terminal tab間の移動](#vscode%E3%81%A7split-terminal-tab%E9%96%93%E3%81%AE%E7%A7%BB%E5%8B%95)
+- [References](#references)
 
 <!-- END doctoc generated TOC please keep comment here to allow auto update -->
+
+
+## やりたいこと
+
+- Keychron K6 Wireless Mechanical Keyboardの初期設定
+- VSCodeやUbuntuのショートカットの整理
 
 ## 1. 技術スペック
 
@@ -66,6 +69,17 @@ tags:
 |CPU| Intel Core i7-9700 CPU 3.00 GHz|
 |RAM| 32.0 GB|
 |GPU| NVIDIA GeForce RTX 2060 SUPER|
+
+```zsh
+% lsb_release -a
+No LSB modules are available.
+Distributor ID: Ubuntu
+Description:    Ubuntu 20.04.3 LTS
+Release:        20.04
+Codename:       focal
+% uname -srvmpio
+Linux 5.13.0-27-generic #29~20.04.1-Ubuntu SMP Fri Jan 14 00:32:30 UTC 2022 x86_64 x86_64 x86_64 GNU/Linux
+```
 
 ### Keyboardスペック
 
@@ -394,3 +408,9 @@ Defaultではモニター設定のキーが割り当てられているのでそ�
         "when": "terminalFocus"
     }
 ```
+
+## References
+
+- [Archlinux: Function keys do not work](https://wiki.archlinux.org/title/Apple_Keyboard#Function_keys_do_not_work)
+- [How to disable global Super-p shortcut?](https://askubuntu.com/questions/68463/how-to-disable-global-super-p-shortcut)
+- [stackoverflow:How to switch between terminals in Visual Studio Code](https://stackoverflow.com/questions/48440673/how-to-switch-between-terminals-in-visual-studio-code/60224585)
