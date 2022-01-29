@@ -1,7 +1,7 @@
 ---
 layout: post
-title: "数理統計：変数変換 1/n"
-subtitle: "変数変換のルールをまとめる"
+title: "変数変換のルールをまとめる"
+subtitle: "数理統計：変数変換 1/n"
 author: "Ryo"
 header-img: "img/tag-bg.jpg"
 header-mask: 0.4

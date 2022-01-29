@@ -34,13 +34,15 @@ tags:
   - [ポアソン分布が確率分布であることの確認](#%E3%83%9D%E3%82%A2%E3%82%BD%E3%83%B3%E5%88%86%E5%B8%83%E3%81%8C%E7%A2%BA%E7%8E%87%E5%88%86%E5%B8%83%E3%81%A7%E3%81%82%E3%82%8B%E3%81%93%E3%81%A8%E3%81%AE%E7%A2%BA%E8%AA%8D)
   - [ポアソン分布の平均と分散の導出](#%E3%83%9D%E3%82%A2%E3%82%BD%E3%83%B3%E5%88%86%E5%B8%83%E3%81%AE%E5%B9%B3%E5%9D%87%E3%81%A8%E5%88%86%E6%95%A3%E3%81%AE%E5%B0%8E%E5%87%BA)
     - [モーメント母関数からの期待値と分散の導出](#%E3%83%A2%E3%83%BC%E3%83%A1%E3%83%B3%E3%83%88%E6%AF%8D%E9%96%A2%E6%95%B0%E3%81%8B%E3%82%89%E3%81%AE%E6%9C%9F%E5%BE%85%E5%80%A4%E3%81%A8%E5%88%86%E6%95%A3%E3%81%AE%E5%B0%8E%E5%87%BA)
+  - [二項分布とのつながり](#%E4%BA%8C%E9%A0%85%E5%88%86%E5%B8%83%E3%81%A8%E3%81%AE%E3%81%A4%E3%81%AA%E3%81%8C%E3%82%8A)
   - [ポワソンパラメーター $\lambda$の推定](#%E3%83%9D%E3%83%AF%E3%82%BD%E3%83%B3%E3%83%91%E3%83%A9%E3%83%A1%E3%83%BC%E3%82%BF%E3%83%BC-%5Clambda%E3%81%AE%E6%8E%A8%E5%AE%9A)
   - [ポワソン分布の最頻値の導出](#%E3%83%9D%E3%83%AF%E3%82%BD%E3%83%B3%E5%88%86%E5%B8%83%E3%81%AE%E6%9C%80%E9%A0%BB%E5%80%A4%E3%81%AE%E5%B0%8E%E5%87%BA)
 - [2. 条件付きポワソン分布](#2-%E6%9D%A1%E4%BB%B6%E4%BB%98%E3%81%8D%E3%83%9D%E3%83%AF%E3%82%BD%E3%83%B3%E5%88%86%E5%B8%83)
   - [2016年統計検定１級試験統計応用（理工学）問４改題](#2016%E5%B9%B4%E7%B5%B1%E8%A8%88%E6%A4%9C%E5%AE%9A%EF%BC%91%E7%B4%9A%E8%A9%A6%E9%A8%93%E7%B5%B1%E8%A8%88%E5%BF%9C%E7%94%A8%E7%90%86%E5%B7%A5%E5%AD%A6%E5%95%8F%EF%BC%94%E6%94%B9%E9%A1%8C)
-    - [解答 (1)：モーメント母関数と条件付き期待値](#%E8%A7%A3%E7%AD%94-1%E3%83%A2%E3%83%BC%E3%83%A1%E3%83%B3%E3%83%88%E6%AF%8D%E9%96%A2%E6%95%B0%E3%81%A8%E6%9D%A1%E4%BB%B6%E4%BB%98%E3%81%8D%E6%9C%9F%E5%BE%85%E5%80%A4)
+    - [解答(1)：モーメント母関数と条件付き期待値](#%E8%A7%A3%E7%AD%941%E3%83%A2%E3%83%BC%E3%83%A1%E3%83%B3%E3%83%88%E6%AF%8D%E9%96%A2%E6%95%B0%E3%81%A8%E6%9D%A1%E4%BB%B6%E4%BB%98%E3%81%8D%E6%9C%9F%E5%BE%85%E5%80%A4)
     - [解答(2): 数値解を二分探索法で計算する](#%E8%A7%A3%E7%AD%942-%E6%95%B0%E5%80%A4%E8%A7%A3%E3%82%92%E4%BA%8C%E5%88%86%E6%8E%A2%E7%B4%A2%E6%B3%95%E3%81%A7%E8%A8%88%E7%AE%97%E3%81%99%E3%82%8B)
     - [解答(3): MLEを用いたパラメーターの数値計算推定](#%E8%A7%A3%E7%AD%943-mle%E3%82%92%E7%94%A8%E3%81%84%E3%81%9F%E3%83%91%E3%83%A9%E3%83%A1%E3%83%BC%E3%82%BF%E3%83%BC%E3%81%AE%E6%95%B0%E5%80%A4%E8%A8%88%E7%AE%97%E6%8E%A8%E5%AE%9A)
+    - [参考： モーメント法に基づく分散の導出](#%E5%8F%82%E8%80%83-%E3%83%A2%E3%83%BC%E3%83%A1%E3%83%B3%E3%83%88%E6%B3%95%E3%81%AB%E5%9F%BA%E3%81%A5%E3%81%8F%E5%88%86%E6%95%A3%E3%81%AE%E5%B0%8E%E5%87%BA)
   - [2019年統計検定準１級試験](#2019%E5%B9%B4%E7%B5%B1%E8%A8%88%E6%A4%9C%E5%AE%9A%E6%BA%96%EF%BC%91%E7%B4%9A%E8%A9%A6%E9%A8%93)
     - [解答(1)：ポワソン分布の部分和](#%E8%A7%A3%E7%AD%941%E3%83%9D%E3%83%AF%E3%82%BD%E3%83%B3%E5%88%86%E5%B8%83%E3%81%AE%E9%83%A8%E5%88%86%E5%92%8C)
     - [解答(2): 条件付き分布と二項分布](#%E8%A7%A3%E7%AD%942-%E6%9D%A1%E4%BB%B6%E4%BB%98%E3%81%8D%E5%88%86%E5%B8%83%E3%81%A8%E4%BA%8C%E9%A0%85%E5%88%86%E5%B8%83)
@@ -156,10 +158,42 @@ $$
 
 > 確率関数を用いた導出
 
+$f(\cdot)$を二項分布$Bin(n, p)$に従う確率変数の確率関数とするとき
+
+<div class="math display" style="overflow: auto">
+$$
+\begin{align*}
+f(x) &= \frac{n!}{(n-x)!x!}p^{x}(1 - p)^{n-x}\\
+&= \frac{n!}{(n-x)!x!}\left(1 - \frac{\lambda}{n}\right)^{n}\left(\frac{n}{n - \lambda}\right)^k\left(\frac{\lambda}{n}\right)^k\\
+&= \left(1 - \frac{\lambda}{n}\right)^{n}\frac{\lambda^k}{k!}\left(\frac{n}{n-\lambda}\right)\left(\frac{n-1}{n-\lambda}\right)\cdots\left(\frac{n-k+1}{n-\lambda}\right)\\
+&\to \exp(-\lambda)\frac{\lambda^k}{k!}
+\end{align*}
+$$
+</div>
+
+よってポワソン分布の確率関数が導出されます.
 
 
 > 特性関数を用いた導出
 
+二項分布$Bin(n, p)$に従う確率変数の特性関数は
+
+$$
+\phi(t) = (p\exp(it) + 1 - p)^n
+$$
+
+これを$np = \lambda$と合わせると
+
+$$
+\begin{align*}
+\phi(t) &= (p\exp(it) + 1 - p)^n\\
+&= \left(\frac{\lambda}{n}\exp(it) + 1 - \frac{\lambda}{n}\right)^n\\
+&= \left(1 - \frac{\lambda(\exp(it) - 1)}{n}\right)\\
+&\to \exp[(\exp(it)-1)\lambda]
+\end{align*}
+$$
+
+以上のように、極限値がポワソン分布の特性関数に収束することがわかります.
 
 ### ポワソンパラメーター $\lambda$の推定
 
@@ -1193,6 +1227,7 @@ ax[2].set_title('MLE with EM: Mean = {:.2f}, Var= {:.2f}'.format(np.mean(np.arra
 
 ## Reference
 
+- [統計学のための数学入門３０講](https://www.kinokuniya.co.jp/f/dsg-01-9784254116335)
 - [高校数学の美しい物語>ポアソン分布の意味と平均・分散](https://manabitimes.jp/math/924)
 - [scipy.stats.ks_2samp](https://docs.scipy.org/doc/scipy/reference/generated/scipy.stats.ks_2samp.html)
 - [scipy.stats.chisquare](https://docs.scipy.org/doc/scipy/reference/generated/scipy.stats.chisquare.html)

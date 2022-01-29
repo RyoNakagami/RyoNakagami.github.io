@@ -1,7 +1,7 @@
 ---
 layout: post
-title: "数理統計：変数変換 2/n"
-subtitle: "変数変換を用いて異なる分布間の関係性を考えてみる"
+title: "変数変換を用いて異なる分布間の関係性を理解する"
+subtitle: "数理統計：変数変換 2/n"
 author: "Ryo"
 header-img: "img/tag-bg.jpg"
 header-mask: 0.4
@@ -43,10 +43,136 @@ tags:
 
 <!-- END doctoc generated TOC please keep comment here to allow auto update -->
 
+## 1. 変数変換を用いたt分布密度関数の導出
+### t分布の定義
+
+$Z$と$U$を独立な確率変数とし、$Z\sim N(0, 1)$, $U\sim \chi^2_m$としたとき
+
+$$
+T = \frac{Z}{\sqrt{U/m}}
+$$
+
+は自由度$m$のt分布に従うといいます.
+
+**t分布の特性値**
+
+自由度$m$のt分布について以下が成立します:
+
+$$
+\begin{align*}
+f_X(x|m) &= \left(\frac{\Gamma((m+1)/2)}{\sqrt{m\pi \Gamma(m/2)}}\right)\left(1 + \frac{x^2}{m}\right)^{-(m+1)/2}\\
+&= \frac{1}{\sqrt{m}B\left(\frac{m}{2}, \frac{1}{2}\right)}\left(1 + \frac{x^2}{m}\right)^{-(m+1)/2}
+\end{align*}
+$$
+
+$$
+\begin{align*}
+E[X] &= 0\\
+V(X) &= \frac{n}{n-2}
+\end{align*}
+$$
+
+### t分布の確率密度関数の導出
+
+$$
+\int^{\infty}_0x^p\exp(-ax)dx = \frac{\Gamma(p+1)}{a^{p+1}}
+$$
+
+以上の公式を念頭にt分布の確率密度関数の導出をします. 
+
+
+まず、$X$と$Y$を独立な確率変数とし、$X\sim N(0, 1)$, $Y\sim \chi^2_n$としたとき、それぞれの密度関数は
+
+<div class="math display" style="overflow: auto">
+$$
+\begin{align*}
+f(x)&= \frac{1}{\sqrt{2\pi}}\exp \left( -\frac{x^2}{2}\right)\\
+f_n(y)&= \frac{1}{2^{n/2}\Gamma(n/2)}y^{n/2 - 1}\exp \left(-\frac{y}{2}\right)
+\end{align*}
+$$
+</div>
+
+次に変数変換を考えます(see [Ryo's Tech Blog > 変数変換のルールをまとめる](https://ryonakagami.github.io/2021/04/21/variable-transformation/)).
+
+$$
+\begin{align*}
+t&= \frac{x}{\sqrt{y/n}}\\
+u&= y
+\end{align*}
+$$
+
+以上のように変数変換を設定すると
+
+$$
+\begin{align*}
+x&= t\sqrt{u/n}\\
+y&= u
+\end{align*}
+$$
+
+このときのヤコビアンは
+
+<div class="math display" style="overflow: auto">
+$$
+\begin{align*}
+J &= \left|\begin{array}{cc}\sqrt\frac{n}{u}&\frac{t}{2\sqrt{nu}}\\0&1\end{array}\right|\\
+&= \sqrt{\frac{u}{n}}
+\end{align*}
+$$
+</div>
+
+このときの $(T, U)$の同時密度関数は
+
+<div class="math display" style="overflow: auto">
+$$
+\begin{align*}
+g(t, u)&= \frac{1}{\sqrt{2\pi}}\exp \left(-\frac{1}{2}\frac{t^2u}{n}\right)\frac{1}{2^{n/2}\Gamma(n/2)}u^{n/2 - 1}\exp \left(-\frac{u}{2}\right)\sqrt{\frac{u}{n}}\\
+&= \frac{1}{\sqrt{2\pi n}}\frac{1}{2^{n/2}\Gamma(n/2)}u^{\frac{n-2}{2}}\exp \left[-\frac{u}{2}\left(1 + \frac{t^2}{n}\right)\right]
+\end{align*}
+$$
+</div>
+
+Tの密度関数を$h(t)$とすれば
+
+<div class="math display" style="overflow: auto">
+$$
+\begin{align*}
+h(t) &= \int^\infty_0g(t, u)du\\
+&= \frac{1}{\sqrt{2\pi n}}\frac{1}{2^{n/2}\Gamma(n/2)}\int^\infty_0u^{\frac{n-2}{2}}\exp \left[-\frac{u}{2}\left(1 + \frac{t^2}{n}\right)\right]du\\
+&= \frac{1}{\sqrt{2\pi n}}\frac{1}{2^{n/2}\Gamma(n/2)} \frac{\Gamma((n+1)/2)}{\left\{\frac{1}{2}\left(1 + \frac{t^2}{n}\right)\right}^{(n+1)/2}}\\
+&= \left(\frac{\Gamma((n+1)/2)}{\sqrt{m\pi \Gamma(n/2)}}\right)\left(1 + \frac{t^2}{n}\right)^{-(n+1)/2}
+\end{align*}
+$$
+</div>
+
+従って、自由度nのt分布の密度関数が導かれる.
+
+### 標本分布とt分布
+
+$X_1, \cdots, X_n$を$N(\mu, \sigma^2)$からの無作為標本とします. このとき、以下の確率変数$T$が自由度$n-1$のt分布に従うことを示します
+
+$$
+T = \frac{\bar X - \mu}{\hat \sigma^2/n}
+$$
+
+ただし、 $\bar X$ は標本平均, $\hat\sigma^2 = \frac{1}{n-1}\sum (X_i - \bar X)^2$とします.
+
+これはヘルマート行列を用いて証明することができます.
+
+
+
+
+
+
 ## 標準正規分布からの自由度１のカイニ乗分布の統計量の導出
 ### カイニ乗分布の定義
 
 
+
+## References
+
+- [Ryo's Tech Blog > 変数変換のルールをまとめる](https://ryonakagami.github.io/2021/04/21/variable-transformation/)
+- [明解演習 数理統計, 小寺 平治著](https://www.kyoritsu-pub.co.jp/bookdetail/9784320013810)
 
 
 

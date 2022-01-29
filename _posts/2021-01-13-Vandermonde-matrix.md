@@ -123,10 +123,7 @@ $$
 \vdots&\vdots & \cdots & \vdots & \vdots\\
 1 & a_{k-1} & \cdots & a_{k-1}^{k-2} & a_{k-1}^{k-2}(a_{k-1} - a_1)\\
 1 & a_k & \cdots & a_k^{k-2} & a_k^{k-2}(a_k - a_1)
-\end{array} \right) 
-
-=
-
+\end{array} \right) = 
 \text{det}\left(
 \begin{array}{ccccc}
 1 & a_1 & \cdots & 0 & 0\\
@@ -178,11 +175,7 @@ $$
 \vdots&\vdots & \cdots & \vdots & \vdots\\
 0 & a_{k-1}-a_1 & \cdots & a_{k-1}^{k-3}(a_{k-1}-a_1) & a_{k-1}^{k-2}(a_{k-1} - a_1)\\
 0 & a_k-a_1 & \cdots & a_k^{k-3}(a_k-a_1) & a_k^{k-2}(a_k - a_1)
-\end{array} \right)
-
-=
-
-\text{det}\left(
+\end{array} \right)=\text{det}\left(
 \begin{array}{cccc}
 a_2-a_1 & \cdots & a_2^{k-3}(a_2-a_1) & a_2^{k-2}(a_2 - a_1)\\
 \vdots & \cdots & \vdots & \vdots\\
@@ -204,23 +197,15 @@ a_2-a_1 & \cdots & a_2^{k-3}(a_2-a_1) & a_2^{k-2}(a_2 - a_1)\\
 \vdots & \cdots & \vdots & \vdots\\
 a_{k-1}-a_1 & \cdots & a_{k-1}^{k-3}(a_{k-1}-a_1) & a_{k-1}^{k-2}(a_{k-1} - a_1)\\
 a_k-a_1 & \cdots & a_k^{k-3}(a_k-a_1) & a_k^{k-2}(a_k - a_1)
-\end{array} \right) 
-
-&=
-
-(a_2-a_1)\cdots(a_k-a_1)\text{det}\left(
+\end{array} \right) &=(a_2-a_1)\cdots(a_k-a_1)\text{det}\left(
 \begin{array}{cccc}
 1& \cdots & a_2^{k-3} & a_2^{k-2}\\
 \vdots & \cdots & \vdots & \vdots\\
 1 & \cdots & a_{k-1}^{k-3} & a_{k-1}^{k-2}\\
 1 & \cdots & a_k^{k-3} & a_k^{k-2}
 \end{array} \right) \\
-
-
 &= (-1)^k(a_1-a_2)\cdots(a_1-a_k)(-1)^{(k-1)(k-2)/2}{\displaystyle\prod_{2\leq i<j\leq k}}(a_i - a_j)\\
-
 &= (-1)^{k(k-1)/2}{\displaystyle\prod_{1\leq i<j\leq k}}(a_i - a_j)
-
 \end{aligned}
 $$
 
@@ -266,5 +251,3 @@ def main():
 if __name__ = 'main':
   main()
 ```
-
-
