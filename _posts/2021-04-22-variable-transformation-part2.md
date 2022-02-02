@@ -492,7 +492,7 @@ $$
 分散は平均の導出と同様に, $E[X^2] = M_Y(2)$を利用し、
 
 $$
-E[X^2] = \exp\left(2\mu  + 2\sigma^2}\right)
+E[X^2] = \exp\left(2\mu  + 2\sigma^2\right)
 $$
 
 従って
@@ -501,7 +501,7 @@ $$
 $$
 \begin{align*}
 V(X) &= E[X^2] - E[X]^2\\
-&= \exp\left(2\mu  + 2\sigma^2}\right) - \exp\left(2\mu+ \sigma^2}\right)\\
+&= \exp\left(2\mu  + 2\sigma^2}\right) - \exp\left(2\mu+ \sigma^2\right)\\
 &= \exp\left(2\mu+ \sigma^2}(\exp(\sigma^2) - 1)
 \end{align*}
 $$
