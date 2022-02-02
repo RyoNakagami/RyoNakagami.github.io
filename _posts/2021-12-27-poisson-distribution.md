@@ -3,7 +3,7 @@ layout: post
 title: "統計検定：ポワソン分布と条件付き分布"
 subtitle: "MLE, Method of Moment, EMアルゴリズムによるパラメータ推定"
 author: "Ryo"
-header-img: "img/tag-bg.jpg"
+header-img: "img/bg-statistics.png"
 header-mask: 0.4
 catelog: true
 mathjax: true

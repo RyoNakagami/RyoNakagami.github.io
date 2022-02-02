@@ -3,7 +3,7 @@ layout: post
 title: "統計検定：ポワソン分布と条件付き分布 その２"
 subtitle: "19-20シーズンのMan Utdの得点力をポワソン分布で表現してみる"
 author: "Ryo"
-header-img: "img/tag-bg.jpg"
+header-img: "img/bg-statistics.png"
 header-mask: 0.4
 catelog: true
 mathjax: true

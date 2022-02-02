@@ -3,7 +3,7 @@ layout: post
 title: "調査法におけるサンプリングバイアスの考察"
 subtitle: "来店調査における顧客年間来店回数の導出が含むバイアスの紹介"
 author: "Ryo"
-header-img: "img/tag-bg.jpg"
+header-img: "img/bg-statistics.png"
 header-mask: 0.4
 catelog: true
 mathjax: true

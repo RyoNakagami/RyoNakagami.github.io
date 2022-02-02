@@ -3,7 +3,7 @@ layout: post
 title: "ベイズ統計入門 1/N"
 subtitle: "主観的確率と意思決定 (& シミュレーション)"
 author: "Ryo"
-header-img: "img/about-bg.jpg"
+header-img: "img/bg-statistics.png"
 header-mask: 0.4
 catelog: true
 mathjax: true

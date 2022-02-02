@@ -3,7 +3,7 @@ layout: post
 title: "数理統計: 重複順列と順列"
 subtitle: "Permuation and Permutation with repetitionの実装"
 author: "Ryo"
-header-img: "img/tag-bg.jpg"
+header-img: "img/bg-statistics.png"
 header-mask: 0.4
 catelog: true
 mathjax: true
@@ -612,6 +612,3 @@ $$
 </div>
 
 最後の積分は標準正規分布$N(0, 1)$の確率密度関数を全範囲で積分しているので1になる。
-
-
-

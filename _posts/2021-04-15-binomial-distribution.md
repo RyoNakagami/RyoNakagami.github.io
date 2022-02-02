@@ -3,7 +3,7 @@ layout: post
 title: "二項分布の紹介"
 subtitle: "条件付き期待値の計算"
 author: "Ryo"
-header-img: "img/tag-bg.jpg"
+header-img: "img/bg-statistics.png"
 header-mask: 0.4
 catelog: true
 mathjax: true

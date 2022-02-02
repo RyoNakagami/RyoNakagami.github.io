@@ -3,7 +3,7 @@ layout: post
 title: "変数変換のルールをまとめる"
 subtitle: "数理統計：変数変換 1/n"
 author: "Ryo"
-header-img: "img/tag-bg.jpg"
+header-img: "img/bg-statistics.png"
 header-mask: 0.4
 catelog: true
 mathjax: true

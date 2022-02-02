@@ -3,7 +3,7 @@ layout: post
 title: "変数変換を用いて異なる分布間の関係性を理解する"
 subtitle: "数理統計：変数変換 2/n"
 author: "Ryo"
-header-img: "img/tag-bg.jpg"
+header-img: "img/bg-statistics.png"
 header-mask: 0.4
 catelog: true
 mathjax: true
