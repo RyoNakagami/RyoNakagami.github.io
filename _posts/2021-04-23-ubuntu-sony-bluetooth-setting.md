@@ -24,13 +24,11 @@ tags:
   gtag('config', 'G-LVL413SV09');
 </script>
 
-||概要|
-|---|---|
-|目的|Sony WF-1000XM3 Bluetooth接続設定|
-|参考|-[Sony WF-1000XM3](https://www.sony.jp/headphone/products/WF-1000XM3/)<br>-[pulseaudio-modules-bt](https://github.com/EHfive/pulseaudio-modules-bt/wiki/Packages#ppaberglhpulseaudio-a2dp)<br>-[Linux PCではBluetoothにLDACコーデックが使えるらしい](https://enear555.blog.fc2.com/blog-entry-201.html)|
 
+**Table of Contents**
 <!-- START doctoc generated TOC please keep comment here to allow auto update -->
 <!-- DON'T EDIT THIS SECTION, INSTEAD RE-RUN doctoc TO UPDATE -->
+## 1. 実行環境
 
 - [1. 実行環境](#1-%E5%AE%9F%E8%A1%8C%E7%92%B0%E5%A2%83)
   - [Desktop](#desktop)
@@ -46,9 +44,9 @@ tags:
 - [3. Ubuntu 20.04とWF-1000XM3の接続設定](#3-ubuntu-2004%E3%81%A8wf-1000xm3%E3%81%AE%E6%8E%A5%E7%B6%9A%E8%A8%AD%E5%AE%9A)
 - [Appendix](#appendix)
   - [ビットレートとは](#%E3%83%93%E3%83%83%E3%83%88%E3%83%AC%E3%83%BC%E3%83%88%E3%81%A8%E3%81%AF)
+- [References](#references)
 
 <!-- END doctoc generated TOC please keep comment here to allow auto update -->
-
 ## 1. 実行環境
 ### Desktop
 
@@ -60,6 +58,16 @@ tags:
 |RAM| 	32.0 GB|
 |GPU| 	NVIDIA GeForce RTX 2060 SUPER|
 
+```zsh
+% lsb_release -a
+No LSB modules are available.
+Distributor ID: Ubuntu
+Description:    Ubuntu 20.04.3 LTS
+Release:        20.04
+Codename:       focal
+% uname -srvmpio
+Linux 5.13.0-27-generic #29~20.04.1-Ubuntu SMP Fri Jan 14 00:32:30 UTC 2022 x86_64 x86_64 x86_64 GNU/Linux
+```
 ### Bluetoothヘッドホン
 
 |項目||
@@ -207,3 +215,9 @@ profiles の欄に選択可能なものが表示されます．available: no と
 ### ビットレートとは
 
 ビットレートは、動画の1秒あたりのデータ量を示す値です。 bps（bits per second）と表記され、1Mbpsに設定されている場合、1秒あたりデータ量が0.125MB（1byte＝8bit）の動画ということになります。 ビットレートが高い動画ほど、データ量が多く高画質です。
+
+## References
+
+- [Sony WF-1000XM3](https://www.sony.jp/headphone/products/WF-1000XM3/)
+- [pulseaudio-modules-bt](https://github.com/EHfive/pulseaudio-modules-bt/wiki/Packages#ppaberglhpulseaudio-a2dp)
+- [Linux PCではBluetoothにLDACコーデックが使えるらしい](https://enear555.blog.fc2.com/blog-entry-201.html)

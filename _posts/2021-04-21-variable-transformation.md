@@ -34,9 +34,11 @@ tags:
   - [定理：確率変数の線形変換](#%E5%AE%9A%E7%90%86%E7%A2%BA%E7%8E%87%E5%A4%89%E6%95%B0%E3%81%AE%E7%B7%9A%E5%BD%A2%E5%A4%89%E6%8F%9B)
   - [練習問題](#%E7%B7%B4%E7%BF%92%E5%95%8F%E9%A1%8C)
     - [(1) 平方変換](#1-%E5%B9%B3%E6%96%B9%E5%A4%89%E6%8F%9B)
-    - [(2) 平方変換と絶対値を用いた確率密度関数](#2-%E5%B9%B3%E6%96%B9%E5%A4%89%E6%8F%9B%E3%81%A8%E7%B5%B6%E5%AF%BE%E5%80%A4%E3%82%92%E7%94%A8%E3%81%84%E3%81%9F%E7%A2%BA%E7%8E%87%E5%AF%86%E5%BA%A6%E9%96%A2%E6%95%B0)
-    - [(3) Truncated Distribution](#3-truncated-distribution)
-    - [(4) 標準正規分布に従う確率変数の指数変換](#4-%E6%A8%99%E6%BA%96%E6%AD%A3%E8%A6%8F%E5%88%86%E5%B8%83%E3%81%AB%E5%BE%93%E3%81%86%E7%A2%BA%E7%8E%87%E5%A4%89%E6%95%B0%E3%81%AE%E6%8C%87%E6%95%B0%E5%A4%89%E6%8F%9B)
+    - [(2) 平方変換から平均と分散を求める](#2-%E5%B9%B3%E6%96%B9%E5%A4%89%E6%8F%9B%E3%81%8B%E3%82%89%E5%B9%B3%E5%9D%87%E3%81%A8%E5%88%86%E6%95%A3%E3%82%92%E6%B1%82%E3%82%81%E3%82%8B)
+    - [(3) 平方変換と絶対値を用いた確率密度関数](#3-%E5%B9%B3%E6%96%B9%E5%A4%89%E6%8F%9B%E3%81%A8%E7%B5%B6%E5%AF%BE%E5%80%A4%E3%82%92%E7%94%A8%E3%81%84%E3%81%9F%E7%A2%BA%E7%8E%87%E5%AF%86%E5%BA%A6%E9%96%A2%E6%95%B0)
+    - [(4) Truncated Distribution](#4-truncated-distribution)
+    - [(5) 標準正規分布に従う確率変数の指数変換](#5-%E6%A8%99%E6%BA%96%E6%AD%A3%E8%A6%8F%E5%88%86%E5%B8%83%E3%81%AB%E5%BE%93%E3%81%86%E7%A2%BA%E7%8E%87%E5%A4%89%E6%95%B0%E3%81%AE%E6%8C%87%E6%95%B0%E5%A4%89%E6%8F%9B)
+    - [(6) 区間によって単調変換ができない場合の変数変換](#6-%E5%8C%BA%E9%96%93%E3%81%AB%E3%82%88%E3%81%A3%E3%81%A6%E5%8D%98%E8%AA%BF%E5%A4%89%E6%8F%9B%E3%81%8C%E3%81%A7%E3%81%8D%E3%81%AA%E3%81%84%E5%A0%B4%E5%90%88%E3%81%AE%E5%A4%89%E6%95%B0%E5%A4%89%E6%8F%9B)
 - [2: 2次元変数変換](#2-2%E6%AC%A1%E5%85%83%E5%A4%89%E6%95%B0%E5%A4%89%E6%8F%9B)
   - [変数変換の公式](#%E5%A4%89%E6%95%B0%E5%A4%89%E6%8F%9B%E3%81%AE%E5%85%AC%E5%BC%8F)
   - [確率変数の和の分布](#%E7%A2%BA%E7%8E%87%E5%A4%89%E6%95%B0%E3%81%AE%E5%92%8C%E3%81%AE%E5%88%86%E5%B8%83)
@@ -49,6 +51,7 @@ tags:
 - [Appendix](#appendix)
   - [陰関数と陽関数](#%E9%99%B0%E9%96%A2%E6%95%B0%E3%81%A8%E9%99%BD%E9%96%A2%E6%95%B0)
   - [変数変換を用いた定積分の計算](#%E5%A4%89%E6%95%B0%E5%A4%89%E6%8F%9B%E3%82%92%E7%94%A8%E3%81%84%E3%81%9F%E5%AE%9A%E7%A9%8D%E5%88%86%E3%81%AE%E8%A8%88%E7%AE%97)
+- [関連記事](#%E9%96%A2%E9%80%A3%E8%A8%98%E4%BA%8B)
 - [References](#references)
 
 <!-- END doctoc generated TOC please keep comment here to allow auto update -->
@@ -188,13 +191,13 @@ $$
 ### 練習問題
 #### (1) 平方変換
 
-連続型確率変数 $$Z$$ の確率密度関数が $$f(z)$$で与えられているとする. 
+連続型確率変数 $Z$ の確率密度関数が $f(z)$で与えられているとする. 
 
 $$
 X = Z^2
 $$
 
-としたとき、$$X$$の確率密度関数は
+としたとき、$X$の確率密度関数は
 
 $$
 \begin{aligned}
@@ -218,8 +221,179 @@ $$
 ■
 </div>
 
+#### (2) 平方変換から平均と分散を求める
 
-#### (2) 平方変換と絶対値を用いた確率密度関数
+確率変数 $$X$$ の確率密度関数が
+
+$$
+f(x) = \frac{1 + x}{2}, \: \text{s.t. } x \in (-1, 1)
+$$
+
+で与えられているとき、変数変換 $$Y = X^2$$ の確率密度関数と平均と分散を求めたいとします.
+
+> 解答
+
+$$
+\int^{1}_{-1} \frac{1 + x}{2} dx = \left[\frac{1}{4}(1 + x)^2\right]^1_{-1} = 1
+$$
+
+より確率密度関数の条件を満たしていることがわかります. 次に(1.3)と照らし合わせると,確率密度関数は
+
+$$
+f_Y(y) = \frac{1}{2}\frac{1}{\sqrt{y}}(f_X(\sqrt{y})+f_X(-\sqrt{y})) = \frac{1}{2\sqrt{y}}
+$$
+
+次に、平均と分散を求めます
+
+$$
+\begin{align*}
+E[Y] &= \int^1_0\frac{1}{2}y\frac{1}{\sqrt{y}}dy\\
+&= \frac{1}{2}\int^1_0\sqrt{y}dy\\
+&= \frac{1}{3}\\
+E[Y^2] &= \int^1_0\frac{1}{2}y^2\frac{1}{\sqrt{y}}dy\\
+&= \frac{1}{2}\int^1_0 y^{\frac{3}{2}}dy\\
+&= \frac{1}{5}
+\end{align*}
+$$
+
+$$
+\therefore \: Var(Y) = \frac{1}{5} - \frac{1}{9} = \frac{4}{45}
+$$
+
+**Pythonで確認してみる**
+
+> 方針
+
+1. $(0, 1)$区間の一様乱数を発生させる
+2. 逆関数法を用いて、$F_X(x)$に従う乱数を生成する
+
+> Libraries
+
+```python
+import random
+import numpy as np
+import matplotlib.pyplot as plt
+```
+
+> Classと関数の定義
+
+```python
+class SampleGenerator:
+    def __init__(self, sample_size, seed = 42):
+        self.sample_size = sample_size
+        self.seed = seed
+    
+    def random_sampling(self):
+        """
+        Return random samples which follows the density function:
+          f(x) = (1 + x)/2 where x in (-1, 1) else 0
+        
+        And
+
+        Return Y = X^2
+        """
+        random.seed(self.seed)
+        self.data = [self.inv_cumulative(random.uniform(0, 1)) for i in range(self.sample_size)]
+        self.transformed_data = [i**2 for i in self.data]
+
+    def describe(self, transformed = None):
+        """
+        Reutrn the mean and variable of the data
+
+        Note
+          the variance is based on the unbiased variance
+        """
+        if transformed:
+            tmp_data = self.transformed_data
+        else:
+            tmp_data = self.data
+
+        mean, var =  np.mean(self.data), np.var(tmp_data, ddof = 1)
+        print("the mean: {}\nthe variance: {}".format(mean, var))
+
+    @staticmethod
+    def inv_cumulative(prob):
+        """
+        the density function:
+          f(x) = (1 + x)/2 where x in (-1, 1) else 0
+
+        the cumulative function
+          F(x) = (1 + x)^2/4 where x in (-1, 1)
+            if x <= -1 then 0
+            if x >= 1 then 1      
+        """
+
+        return 2 * prob ** 0.5 - 1
+
+def x_density(x):
+    """
+    the density function:
+        f(x) = (1 + x)/2 where x in (-1, 1) else 0
+    """
+
+    return (1 + x)/2
+
+def y_density(y):
+    """
+    the density function:
+        f(y) = 1/(2 * y**0.5) else 0
+    """
+
+    return 1/(2 * y**0.5)
+```
+
+> 平均と分散の確認
+
+```python
+Experiment = SampleGenerator(10000)
+Experiment.random_sampling()
+
+print("the original data")
+Experiment.describe()
+
+print("\nthe transformed data")
+Experiment.describe(transformed=1)
+```
+
+Then,
+
+```
+the original data
+the mean: 0.3346733874809254
+the variance: 0.21967269701823616
+
+the transformed data
+the mean: 0.3346733874809254
+the variance: 0.08801896143609267
+```
+
+上の計算結果とほぼ一致する結果が確認できました.
+
+> XとYの分布の確認
+
+まず確率変数 $$X$$ の分布を確認します
+
+```python
+fig, ax = plt.subplots(1, 1,figsize=(10, 10))
+
+xgrid = np.linspace(-1, 1, 200)
+
+ax.hist(Experiment.data, density = True, bins = 100, label = 'sampling')
+ax.plot(xgrid, x_density(xgrid),lw=2, color='#A60628',label = 'True density')
+ax.set_title('density function: $f(x) = (1 + x)/2$', fontsize=15)
+ax.set_xlabel('x value', fontsize=12)
+ax.set_ylabel('density', fontsize=12)
+ax.legend(fontsize=12);
+```
+
+<img src="https://github.com/ryonakimageserver/omorikaizuka/blob/master/%E3%83%96%E3%83%AD%E3%82%B0%E7%94%A8/20210422_x_density.png?raw=true">
+
+つぎに同様のコードを実行して $$Y$$の分布を確認します
+
+<img src="https://github.com/ryonakimageserver/omorikaizuka/blob/master/%E3%83%96%E3%83%AD%E3%82%B0%E7%94%A8/20210422_y_density.png?raw=true">
+
+
+#### (3) 平方変換と絶対値を用いた確率密度関数
 
 $X$を連続型確率変数で、その確率密度関数が
 
@@ -368,7 +542,7 @@ plot_simulation(data = Experiment.transformed_data,
 
 <img src="https://github.com/ryonakimageserver/omorikaizuka/blob/master/%E3%83%96%E3%83%AD%E3%82%B0%E7%94%A8/2021-12-19%2004-46-59.png?raw=true">
 
-#### (3) Truncated Distribution
+#### (4) Truncated Distribution
 
 > 問題
 
@@ -462,7 +636,7 @@ def y_density(y):
 
 
 
-#### (4) 標準正規分布に従う確率変数の指数変換
+#### (5) 標準正規分布に従う確率変数の指数変換
 
 $X \sim N(0, 1)$のとき, $Y= \exp(X)$の確率密度関数を求めよ
 
@@ -505,6 +679,74 @@ print(np.mean(x**2))
 ```
 
 と近い値が出力されることが確認できます.
+
+#### (6) 区間によって単調変換ができない場合の変数変換
+
+確率変数 $X$ の密度関数が 
+
+$$
+f_X(x) = \frac{2}{9}(x + 1) \: -1 \leq x \leq 2
+$$
+
+で与えられているとき、$Y = X^2$の密度関数を求めたいとします
+
+> 解答
+
+$0 < y < 1$$ と $$1 \leq y < 4$ に分けて考える.
+
+前者について、
+
+$$
+f_Y(y) = \frac{1}{2\sqrt{y}}(f_X(\sqrt{y}) + f_X(-\sqrt{y})) = \frac{2}{9\sqrt{y}}
+$$
+
+後者については、1 対 1 変換となることに注意すると
+
+$$
+\begin{aligned}
+F_Y(y) &= P(X^2 \leq 1) + P(1 < X^2 \leq y)\\
+&= \frac{2}{9}\int^{1}_{-1}(1 + x)dx + P(1 < X^2 \leq y)\\
+&= \frac{4}{9} + \int^{\sqrt{y}}_1\frac{2}{9}(1+x)dx\\
+&= \frac{1}{9} + \frac{1}{9}(y + 2\sqrt{y})
+\end{aligned}
+$$
+
+従って、$y$で両辺を微分すればよいので
+
+$$
+f_Y(y) = \frac{1}{9}\left(1 + \frac{1}{\sqrt{y}}\right)
+$$
+
+まとめると、
+
+$$
+f_Y(y) = 
+\begin{cases}
+\frac{2}{9\sqrt{y}} & \: 0 < y < 1\\
+\frac{1}{9}\left(1 + \frac{1}{\sqrt{y}}\right)& \:  1 \leq y < 4
+\end{cases}
+$$
+
+
+<div style="text-align: right;">
+■
+</div>
+
+> Simulation with Python
+
+今回の $X$の累積分布関数は
+
+$$
+F_X(x) = \frac{1}{9}(x + 1)^2
+$$
+
+なので
+
+$$
+F_X^{-1}(p) = 3\sqrt{p} - 1
+$$
+
+- Pythonでsimulationは[こちら](https://colab.research.google.com/drive/1CIrrIEr3bxptUKYy87u5z04JbyILLNY0?usp=sharing)
 
 ## 2: 2次元変数変換
 ### 変数変換の公式
@@ -1153,6 +1395,10 @@ $$
 &= \frac{1}{2}(e - 1)
 \end{aligned}
 $$
+
+## 関連記事
+
+- [変数変換を用いて異なる分布間の関係性を理解する](https://ryonakagami.github.io/2021/04/22/variable-transformation-part2/)
 
 
 
