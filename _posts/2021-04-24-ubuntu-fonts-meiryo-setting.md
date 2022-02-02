@@ -23,20 +23,21 @@ tags:
   gtag('config', 'G-LVL413SV09');
 </script>
 
-||概要|
-|---|---|
-|目的|メイリオフォントをUbuntuにインストール|
-|解決したい課題|Google Docsでメイリオフォントを選択できるようにしたい|
 
 <!-- START doctoc generated TOC please keep comment here to allow auto update -->
 <!-- DON'T EDIT THIS SECTION, INSTEAD RE-RUN doctoc TO UPDATE -->
 
-- [実行環境](#%E5%AE%9F%E8%A1%8C%E7%92%B0%E5%A2%83)
+
 - [解決したい問題](#%E8%A7%A3%E6%B1%BA%E3%81%97%E3%81%9F%E3%81%84%E5%95%8F%E9%A1%8C)
+- [実行環境](#%E5%AE%9F%E8%A1%8C%E7%92%B0%E5%A2%83)
 - [Googleフォントのソース](#google%E3%83%95%E3%82%A9%E3%83%B3%E3%83%88%E3%81%AE%E3%82%BD%E3%83%BC%E3%82%B9)
 - [メイリオフォントインストール手順](#%E3%83%A1%E3%82%A4%E3%83%AA%E3%82%AA%E3%83%95%E3%82%A9%E3%83%B3%E3%83%88%E3%82%A4%E3%83%B3%E3%82%B9%E3%83%88%E3%83%BC%E3%83%AB%E6%89%8B%E9%A0%86)
 
 <!-- END doctoc generated TOC please keep comment here to allow auto update -->
+
+## 解決したい問題
+
+Ubuntu 20.04上からGoogle Docsへアクセスする時、選択できるフォントに「メイリオ」が表示されない.
 
 ## 実行環境
 
@@ -48,9 +49,6 @@ tags:
 |RAM| 	32.0 GB|
 |GPU| 	NVIDIA GeForce RTX 2060 SUPER|
 
-## 解決したい問題
-
-Ubuntu 20.04上からGoogle Docsへアクセスする時、選択できるフォントに「メイリオ」が表示されない.
 
 ## Googleフォントのソース
 
