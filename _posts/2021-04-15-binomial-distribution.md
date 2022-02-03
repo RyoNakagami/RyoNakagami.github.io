@@ -52,7 +52,7 @@ tags:
 
 結果が2種類しかない試行をBernoulli experimentsといいます.
 
-- 標本空間: $S = \{\text{T}, \text{F}\}$$
+- 標本空間: $S = \{\text{T}, \text{F}\}$
 - $Pr(\text{T}) = p, Pr(\text{F}) = 1 - Pr(\text{T}) = p$
 
 ベルヌーイ確率変数$X$を、試行がTならば1, Fならば0と定義すると、確率関数は
@@ -298,13 +298,18 @@ $$
 
 従って、オーダーで抑えながら計算することに注意すると
 
+<div class="math display" style="overflow: auto">
 $$
+\begin{align*}
 \log M_Z(t)&= \frac{- tnp}{\sqrt{np(1-p)}} + n\log\left(p\left(1 + \frac{t}{\sqrt{np(1-p)}} + \frac{t^2}{np(1-p)} + o(n^{-1})\right)+1-p\right)\\
 &= \frac{- tnp}{\sqrt{np(1-p)}} + n\log\left(1 + \frac{tp}{\sqrt{np(1-p)}} + \frac{t^2}{n(1-p)} + o(n^{-1})\right)\\
-&= \frac{- tnp}{\sqrt{np(1-p)}} + \frac{tnp}{\sqrt{np(1-p)}}+ \frac{t^2}{(1-p)} -  \frac{nt^2p^2}{2n(1-p)}+o(1)\\
+&= \frac{- tnp}{\sqrt{np(1-p)}} + \frac{tnp}{\sqrt{np(1-p)}}+ \frac{t^2}{1-p} -  \frac{nt^2p^2}{2n(1-p)}+o(1)\\
 &= \frac{t^2}{(1-p)} -  \frac{t^2p^2}{2(1-p)}+o(1)\\
 &= \frac{t^2}{2} + o(1)
+\end{align*}
 $$
+</div>
+
 
 従って、$M_Z(t)\to \exp(t^2/2)$
 
