@@ -35,12 +35,18 @@ tags:
   - [t分布と正規分布](#t%E5%88%86%E5%B8%83%E3%81%A8%E6%AD%A3%E8%A6%8F%E5%88%86%E5%B8%83)
 - [2. 標準正規分布の比とコーシー分布](#2-%E6%A8%99%E6%BA%96%E6%AD%A3%E8%A6%8F%E5%88%86%E5%B8%83%E3%81%AE%E6%AF%94%E3%81%A8%E3%82%B3%E3%83%BC%E3%82%B7%E3%83%BC%E5%88%86%E5%B8%83)
   - [コーシー分布の定義](#%E3%82%B3%E3%83%BC%E3%82%B7%E3%83%BC%E5%88%86%E5%B8%83%E3%81%AE%E5%AE%9A%E7%BE%A9)
+    - [練習問題：2019年統計検定１級数理統計問４改題](#%E7%B7%B4%E7%BF%92%E5%95%8F%E9%A1%8C2019%E5%B9%B4%E7%B5%B1%E8%A8%88%E6%A4%9C%E5%AE%9A%EF%BC%91%E7%B4%9A%E6%95%B0%E7%90%86%E7%B5%B1%E8%A8%88%E5%95%8F%EF%BC%94%E6%94%B9%E9%A1%8C)
   - [一様分布とコーシー分布](#%E4%B8%80%E6%A7%98%E5%88%86%E5%B8%83%E3%81%A8%E3%82%B3%E3%83%BC%E3%82%B7%E3%83%BC%E5%88%86%E5%B8%83)
   - [標準正規分布の比とコーシー分布](#%E6%A8%99%E6%BA%96%E6%AD%A3%E8%A6%8F%E5%88%86%E5%B8%83%E3%81%AE%E6%AF%94%E3%81%A8%E3%82%B3%E3%83%BC%E3%82%B7%E3%83%BC%E5%88%86%E5%B8%83)
   - [コーシー分布に従う確率変数の逆数の分布](#%E3%82%B3%E3%83%BC%E3%82%B7%E3%83%BC%E5%88%86%E5%B8%83%E3%81%AB%E5%BE%93%E3%81%86%E7%A2%BA%E7%8E%87%E5%A4%89%E6%95%B0%E3%81%AE%E9%80%86%E6%95%B0%E3%81%AE%E5%88%86%E5%B8%83)
 - [3. 対数正規分布](#3-%E5%AF%BE%E6%95%B0%E6%AD%A3%E8%A6%8F%E5%88%86%E5%B8%83)
   - [確率密度関数の導出](#%E7%A2%BA%E7%8E%87%E5%AF%86%E5%BA%A6%E9%96%A2%E6%95%B0%E3%81%AE%E5%B0%8E%E5%87%BA)
   - [対数正規分布の特性値の導出](#%E5%AF%BE%E6%95%B0%E6%AD%A3%E8%A6%8F%E5%88%86%E5%B8%83%E3%81%AE%E7%89%B9%E6%80%A7%E5%80%A4%E3%81%AE%E5%B0%8E%E5%87%BA)
+- [Appendix: 最強力検定](#appendix-%E6%9C%80%E5%BC%B7%E5%8A%9B%E6%A4%9C%E5%AE%9A)
+  - [定義：検出力関数](#%E5%AE%9A%E7%BE%A9%E6%A4%9C%E5%87%BA%E5%8A%9B%E9%96%A2%E6%95%B0)
+  - [定義：検定のレベルとサイズ](#%E5%AE%9A%E7%BE%A9%E6%A4%9C%E5%AE%9A%E3%81%AE%E3%83%AC%E3%83%99%E3%83%AB%E3%81%A8%E3%82%B5%E3%82%A4%E3%82%BA)
+  - [定義：検出力関数がより強力](#%E5%AE%9A%E7%BE%A9%E6%A4%9C%E5%87%BA%E5%8A%9B%E9%96%A2%E6%95%B0%E3%81%8C%E3%82%88%E3%82%8A%E5%BC%B7%E5%8A%9B)
+  - [定義：一様最強力検定](#%E5%AE%9A%E7%BE%A9%E4%B8%80%E6%A7%98%E6%9C%80%E5%BC%B7%E5%8A%9B%E6%A4%9C%E5%AE%9A)
 - [References](#references)
 
 <!-- END doctoc generated TOC please keep comment here to allow auto update -->
@@ -310,6 +316,137 @@ $$
 \exp(\mu i - |x|)
 $$
 
+
+#### 練習問題：2019年統計検定１級数理統計問４改題
+
+位置パラメータ$\theta$を持つコーシー分布を考える. このときの確率密度関数は
+
+$$
+f_\theta(x) = \frac{1}{\pi(1 + (x - \theta)^2)}
+$$
+
+この分布から大きさ1の標本$X$に基づき、パラメータースペースは$\theta\in\{0, 1\}$と仮定し
+
+- $H_0$: $\theta = 0$
+- $H_0$: $\theta = 1$
+
+に基づいて検定したいとします. この検定問題に対して、棄却域を以下のように定義します:
+
+$$
+R = \{x: x\in(1, 3)\}
+$$
+
+> (1) この検定問題のType I Error $\alpha$を求めよ
+
+<div class="math display" style="overflow: auto">
+$$
+\begin{align*}
+\alpha &= P_0(1 < X < 3|\theta = 0)\\[8pt]
+&= \int_1^3 \frac{1}{\pi(1 + x^2)}dx\\
+&= \frac{1}{\pi}[\arctan (x)]^3_1\\
+&\simeq 0.148
+\end{align*}
+$$
+</div>
+
+> (2) この検定の検出力を求めよ
+
+<div class="math display" style="overflow: auto">
+$$
+\begin{align*}
+1 - \beta &= P_1(1 < X < 3|\theta = 1)\\[8pt]
+&= \int_1^3 \frac{1}{\pi(1 + (x-1)^2)}dx\\
+&= \frac{1}{\pi}[\arctan (x-1)]^3_1\\
+&= \frac{1}{\pi}(\arctan(2) - 0)\\
+&\simeq 0.352
+\end{align*}
+$$
+</div>
+
+
+> (3) 尤度比 $\lambda(x) = f_1(x)/f_0(x)$を求めよ
+
+<div class="math display" style="overflow: auto">
+$$
+\begin{align*}
+\lambda(x) &= \frac{f_1(x)}{f_0(x)}\\
+&= \frac{1+x^2}{1 + (x-1)^2}\quad\quad\tag{2.1}
+\end{align*}
+$$
+</div>
+
+> (4) 有意水準$\alpha$において、今回の検定手法が最強力検定となることを示せ
+
+(2.1)から$x = 1$と$x = 3$のとき $\lambda(1)=\lambda(3) = 2$とわかる. また$\lambda > 2$となる区間も
+
+<div class="math display" style="overflow: auto">
+$$
+\begin{align*}
+&\frac{1+x^2}{1 + (x-1)^2} > 2\\
+&\Rightarrow (x - 3)(x - 1) < 0\\[8pt]
+&\Rightarrow 1 < x < 3
+\end{align*}
+$$
+</div>
+
+よって、設問の棄却域は以下のように書き換えられる
+
+$$
+R = \{x|f_1(x) > 2 f_0(x)\}
+$$
+
+このときネイマン・ピアソンの補題を用いて今回の検定手法が最強力検定となることが示せる.
+
+まず次のような検定関数を定義する
+
+$$
+\phi(X) = \begin{cases}1 & \text{ where } X \in R\\0 & \text{ where } X \notin R\end{cases}
+$$
+
+また有意水準$\alpha$の任意の検定の検定関数を
+
+$$
+\phi'(X) = \begin{cases}1 & \text{ where } X \in R'\\0 & \text{ where } X \notin R'\end{cases}
+$$
+
+このとき、どちらもサイズ$\alpha$の検定関数のため
+
+$$
+E[\phi(X)|\theta_0]=E[\phi'(X)|\theta_0] = \alpha
+$$
+
+を満たす. 従って、
+
+$$
+\int (\phi(x) - \phi'(x))f(x|\theta_0)dx = 0
+$$
+
+また検出力の差は$E[\phi(X)\|\theta_1] = \beta$であることに留意すると
+
+<div class="math display" style="overflow: auto">
+$$
+\begin{align*}
+E[\phi(x) - \phi'(x)|\theta_1] =& \int (\phi(x) - \phi'(x))f(x|\theta_1)dx\\
+=& \int (\phi(x) - \phi'(x))(f(x|\theta_1) - 2 f(x|\theta_0))dx\\
+=& \int_{x\in R} (\phi(x) - \phi'(x))(f(x|\theta_1) - 2 f(x|\theta_0))dx\\
+& + \int_{x\in R^C} (\phi(x) - \phi'(x))(f(x|\theta_1) - 2 f(x|\theta_0))dx
+\end{align*}
+$$
+</div>
+
+- $x\in R$において、$\phi(x) - \phi'(x) \geq 0$
+- $x\in R$において、$(f(x|\theta_1) - 2 f(x|\theta_0)) > 0$
+- $x\in R^C$において、$\phi(x) - \phi'(x) \leq 0$
+- $x\in R^C$において、$(f(x|\theta_1) - 2 f(x|\theta_0)) \leq 0$
+
+以上より、
+
+$$
+E[\phi(x) - \phi'(x)|\theta_1] \geq 0
+$$
+
+以上より、今回の検定手法が最強力検定となることがわかる.
+
 ### 一様分布とコーシー分布
 
 確率変数$\theta$ｆが$(-\pi/2, \pi/2)$区間の一様分布に従う時、$x = \tan x$はコーシー分布に従います.
@@ -319,8 +456,8 @@ $$
 <div class="math display" style="overflow: auto">
 $$
 \begin{align*}
-P(X \leq x) &= P(\tan(\theta) \leq x)\\
-&=P(\theta \leq \arctan x)\\
+P(X \leq x) &= P(\tan(\theta) \leq x)\\[8pt]
+&=P(\theta \leq \arctan x)\\[8pt]
 &= \int^{\arctan x}_{-\frac{\pi}{2}}\frac{1}{\pi}dx\\
 &= \frac{1}{\pi}\frac{1}{1 + x^2}
 \end{align*}
@@ -418,6 +555,7 @@ $$
 
 また、標準正規分布の比がコーシー分布に従うことよりも導出可能です.
 
+
 ## 3. 対数正規分布
 
 確率変数$X$を変数変換した$\log X$が正規分布に従うならば、もとの$X$は対数正規分布, log-normal distributionに従うといいます.
@@ -506,6 +644,42 @@ V(X) &= E[X^2] - E[X]^2\\
 \end{align*}
 $$
 </div>
+
+## Appendix: 最強力検定
+### 定義：検出力関数
+
+$\theta$を識別したいパラメータ, $\Theta_0$を帰無仮説パラメータースペース, $R$を棄却域とした時、
+
+$$
+\beta(\theta) = P_\theta(\mathbf X \in R)
+$$
+
+を検出力関数(power function)といいます. $\theta\in\Theta_0$に対しては$\beta(\theta)$はType I Error(帰無仮説が正しいのに棄却してしまう誤り)を表し、
+$\theta\in\Theta_0^c$に対しては$1 - \beta(\theta)$がType II Error(帰無仮説が正しくないのに受容してしまう誤り)を指します.
+
+### 定義：検定のレベルとサイズ
+
+有意水準 $\alpha \in (0, 1)$に対して、 $\sup_{\theta\in\Theta_0}\beta(\theta)=\alpha$のとき、サイズ$\alpha$の検定といい、
+$\sup_{\theta\in\Theta_0}\beta(\theta)\leq\alpha$のとき、レベル$\alpha$の検定といいます.
+
+### 定義：検出力関数がより強力
+
+２つの検定手法$T_1, T_2$がありそれぞれの検出力関数を$\beta_1(\theta), \beta_2(\theta)$とします. 
+この時、次の条件を満たすとき、$T_1$は$T_2$より強力(more powerful)であるといいます.
+
+- すべての$\theta\in\Theta_0$に対して、$\beta_1(\theta)\leq \alpha, \beta_2(\theta)\leq \alpha$である
+- すべての$\theta\in\Theta_0^C$に対して、$\beta_1(\theta)\geq\beta_2(\theta)$であり、少なくとも1点で不等式が成り立つ
+
+### 定義：一様最強力検定
+
+レベル$\alpha$の検定クラスの全体を$C_\alpha$で表す. このとき、検定$T$が一様最強力検定であるとは、$T$が
+レベル$\alpha$の検定クラスに属しており、レベル$\alpha$の検定クラスの中のどんな検定よりも強力であることをいう.
+
+すなわち、
+
+- すべての$\theta\in\Theta_0$に対して、$\beta_T(\theta)\leq \alpha$である
+- 任意の検定$S\in C_\alpha$に対して、その検出力関数を$\beta_S(\theta)$とすると、すべての$\theta\in\Theta_0^C$に対して$\beta_T(\theta)\geq\beta_S(\theta)$が成り立つ
+
 
 
 ## References
