@@ -34,9 +34,12 @@ tags:
   - [ポアソン分布が確率分布であることの確認](#%E3%83%9D%E3%82%A2%E3%82%BD%E3%83%B3%E5%88%86%E5%B8%83%E3%81%8C%E7%A2%BA%E7%8E%87%E5%88%86%E5%B8%83%E3%81%A7%E3%81%82%E3%82%8B%E3%81%93%E3%81%A8%E3%81%AE%E7%A2%BA%E8%AA%8D)
   - [ポアソン分布の平均と分散の導出](#%E3%83%9D%E3%82%A2%E3%82%BD%E3%83%B3%E5%88%86%E5%B8%83%E3%81%AE%E5%B9%B3%E5%9D%87%E3%81%A8%E5%88%86%E6%95%A3%E3%81%AE%E5%B0%8E%E5%87%BA)
     - [モーメント母関数からの期待値と分散の導出](#%E3%83%A2%E3%83%BC%E3%83%A1%E3%83%B3%E3%83%88%E6%AF%8D%E9%96%A2%E6%95%B0%E3%81%8B%E3%82%89%E3%81%AE%E6%9C%9F%E5%BE%85%E5%80%A4%E3%81%A8%E5%88%86%E6%95%A3%E3%81%AE%E5%B0%8E%E5%87%BA)
-  - [二項分布とのつながり](#%E4%BA%8C%E9%A0%85%E5%88%86%E5%B8%83%E3%81%A8%E3%81%AE%E3%81%A4%E3%81%AA%E3%81%8C%E3%82%8A)
+  - [ポワソン分布の再生性](#%E3%83%9D%E3%83%AF%E3%82%BD%E3%83%B3%E5%88%86%E5%B8%83%E3%81%AE%E5%86%8D%E7%94%9F%E6%80%A7)
   - [ポワソンパラメーター $\lambda$の推定](#%E3%83%9D%E3%83%AF%E3%82%BD%E3%83%B3%E3%83%91%E3%83%A9%E3%83%A1%E3%83%BC%E3%82%BF%E3%83%BC-%5Clambda%E3%81%AE%E6%8E%A8%E5%AE%9A)
   - [ポワソン分布の最頻値の導出](#%E3%83%9D%E3%83%AF%E3%82%BD%E3%83%B3%E5%88%86%E5%B8%83%E3%81%AE%E6%9C%80%E9%A0%BB%E5%80%A4%E3%81%AE%E5%B0%8E%E5%87%BA)
+  - [他の確率変数分布との関連](#%E4%BB%96%E3%81%AE%E7%A2%BA%E7%8E%87%E5%A4%89%E6%95%B0%E5%88%86%E5%B8%83%E3%81%A8%E3%81%AE%E9%96%A2%E9%80%A3)
+    - [二項分布とのつながり](#%E4%BA%8C%E9%A0%85%E5%88%86%E5%B8%83%E3%81%A8%E3%81%AE%E3%81%A4%E3%81%AA%E3%81%8C%E3%82%8A)
+    - [標準正規分布への収束: 2017年統計検定１級統計数理３問](#%E6%A8%99%E6%BA%96%E6%AD%A3%E8%A6%8F%E5%88%86%E5%B8%83%E3%81%B8%E3%81%AE%E5%8F%8E%E6%9D%9F-2017%E5%B9%B4%E7%B5%B1%E8%A8%88%E6%A4%9C%E5%AE%9A%EF%BC%91%E7%B4%9A%E7%B5%B1%E8%A8%88%E6%95%B0%E7%90%86%EF%BC%93%E5%95%8F)
 - [2. 条件付きポワソン分布](#2-%E6%9D%A1%E4%BB%B6%E4%BB%98%E3%81%8D%E3%83%9D%E3%83%AF%E3%82%BD%E3%83%B3%E5%88%86%E5%B8%83)
   - [2016年統計検定１級試験統計応用（理工学）問４改題](#2016%E5%B9%B4%E7%B5%B1%E8%A8%88%E6%A4%9C%E5%AE%9A%EF%BC%91%E7%B4%9A%E8%A9%A6%E9%A8%93%E7%B5%B1%E8%A8%88%E5%BF%9C%E7%94%A8%E7%90%86%E5%B7%A5%E5%AD%A6%E5%95%8F%EF%BC%94%E6%94%B9%E9%A1%8C)
     - [解答(1)：モーメント母関数と条件付き期待値](#%E8%A7%A3%E7%AD%941%E3%83%A2%E3%83%BC%E3%83%A1%E3%83%B3%E3%83%88%E6%AF%8D%E9%96%A2%E6%95%B0%E3%81%A8%E6%9D%A1%E4%BB%B6%E4%BB%98%E3%81%8D%E6%9C%9F%E5%BE%85%E5%80%A4)
@@ -152,48 +155,25 @@ $$
 
 従って、$V(X) = E[X^2] - E[X]^2 = \lambda$
 
-### 二項分布とのつながり
+### ポワソン分布の再生性
 
-２項分布 $Bin(n, p)$に従う確率変数を$X_n$とし、$np = \lambda$のもとで $n\to\infty, p\to 0$とするとポワソン分布$Po(\lambda)$に収束することが知られています.
+$X, Y$がそれぞれ独立にパラメータ$\lambda_X, \lambda_Y$のポワソン分布に従っている時、$Z= X+Y$もポワソン分布に従います.
 
-> 確率関数を用いた導出
+> 証明
 
-$f(\cdot)$を二項分布$Bin(n, p)$に従う確率変数の確率関数とするとき
-
-<div class="math display" style="overflow: auto">
-$$
-\begin{align*}
-f(x) &= \frac{n!}{(n-x)!x!}p^{x}(1 - p)^{n-x}\\
-&= \frac{n!}{(n-x)!x!}\left(1 - \frac{\lambda}{n}\right)^{n}\left(\frac{n}{n - \lambda}\right)^k\left(\frac{\lambda}{n}\right)^k\\
-&= \left(1 - \frac{\lambda}{n}\right)^{n}\frac{\lambda^k}{k!}\left(\frac{n}{n-\lambda}\right)\left(\frac{n-1}{n-\lambda}\right)\cdots\left(\frac{n-k+1}{n-\lambda}\right)\\
-&\to \exp(-\lambda)\frac{\lambda^k}{k!}
-\end{align*}
-$$
-</div>
-
-よってポワソン分布の確率関数が導出されます.
-
-
-> 特性関数を用いた導出
-
-二項分布$Bin(n, p)$に従う確率変数の特性関数は
-
-$$
-\phi(t) = (p\exp(it) + 1 - p)^n
-$$
-
-これを$np = \lambda$と合わせると
+$Z$のMGFがポワソン分布のMGFであることを示せば十分です.
 
 $$
 \begin{align*}
-\phi(t) &= (p\exp(it) + 1 - p)^n\\
-&= \left(\frac{\lambda}{n}\exp(it) + 1 - \frac{\lambda}{n}\right)^n\\
-&= \left(1 - \frac{\lambda(\exp(it) - 1)}{n}\right)\\
-&\to \exp[(\exp(it)-1)\lambda]
+M_Z(t) &= E\exp(tZ)]\\
+&= E\exp(tX)\exp(tY)]\\
+&= E\exp(tX)]E\exp(tY)] \ \ \because \text{独立性より}\\
+&= \exp[\lambda_X(\exp(t) - 1)]\exp[\lambda_Y(\exp(t) - 1)]\\
+&= \exp[(\lambda_X + \lambda_Y)(\exp(t) - 1)]
 \end{align*}
 $$
 
-以上のように、極限値がポワソン分布の特性関数に収束することがわかります.
+従って, $Z$はパラメーター$\lambda_X+\lambda_Y$に従うポワソン分布であることがわかります.
 
 ### ポワソンパラメーター $\lambda$の推定
 
@@ -301,6 +281,92 @@ print(np.array_equal(x_simulated, x_theory, equal_nan=True))
 ### compare x_theory with x_hacked
 print(np.array_equal(x_theory, x_hacked, equal_nan=True))
 ```
+
+### 他の確率変数分布との関連
+#### 二項分布とのつながり
+
+２項分布 $Bin(n, p)$に従う確率変数を$X_n$とし、$np = \lambda$のもとで $n\to\infty, p\to 0$とするとポワソン分布$Po(\lambda)$に収束することが知られています.
+
+> 確率関数を用いた導出
+
+$f(\cdot)$を二項分布$Bin(n, p)$に従う確率変数の確率関数とするとき
+
+<div class="math display" style="overflow: auto">
+$$
+\begin{align*}
+f(x) &= \frac{n!}{(n-x)!x!}p^{x}(1 - p)^{n-x}\\
+&= \frac{n!}{(n-x)!x!}\left(1 - \frac{\lambda}{n}\right)^{n}\left(\frac{n}{n - \lambda}\right)^k\left(\frac{\lambda}{n}\right)^k\\
+&= \left(1 - \frac{\lambda}{n}\right)^{n}\frac{\lambda^k}{k!}\left(\frac{n}{n-\lambda}\right)\left(\frac{n-1}{n-\lambda}\right)\cdots\left(\frac{n-k+1}{n-\lambda}\right)\\
+&\to \exp(-\lambda)\frac{\lambda^k}{k!}
+\end{align*}
+$$
+</div>
+
+よってポワソン分布の確率関数が導出されます.
+
+
+> 特性関数を用いた導出
+
+二項分布$Bin(n, p)$に従う確率変数の特性関数は
+
+$$
+\phi(t) = (p\exp(it) + 1 - p)^n
+$$
+
+これを$np = \lambda$と合わせると
+
+$$
+\begin{align*}
+\phi(t) &= (p\exp(it) + 1 - p)^n\\
+&= \left(\frac{\lambda}{n}\exp(it) + 1 - \frac{\lambda}{n}\right)^n\\
+&= \left(1 - \frac{\lambda(\exp(it) - 1)}{n}\right)\\
+&\to \exp[(\exp(it)-1)\lambda]
+\end{align*}
+$$
+
+以上のように、極限値がポワソン分布の特性関数に収束することがわかります.
+
+#### 標準正規分布への収束: 2017年統計検定１級統計数理３問
+
+$X$をパラメーター$\lambda$のポワソン分布に従う確率変数のとき、以下の変数変換を考えます
+
+$$
+Z \equiv \frac{X - \lambda}{\sqrt{\lambda}}
+$$
+
+$\lambda \to \infty$に収束するとき、$Z$が標準正規分布に収束することを示します.
+
+なお証明にあたってテイラー展開$\exp(x) = 1 + x + x^2/2 + o(x^2)$を用いて良いとする
+
+> 証明
+
+$$
+\begin{align*}
+M_Z(t) &= E[\exp(tZ)]\\
+&= \exp(-t\sqrt\lambda) E\left[\exp\left(t\frac{X}{\sqrt{\lambda}}\right)\right]\\
+&= \exp(-t\sqrt\lambda) \exp(\lambda(\exp(t/\sqrt{\lambda})-1))\\
+\end{align*}
+$$
+
+ここで対数を取ると
+
+$$
+\begin{align*}
+\log M_Z(t) &= -t\sqrt\lambda + \lambda(\exp(t/\sqrt{\lambda})-1)\\[8pt]
+&= -t\sqrt\lambda + \lambda(1 + t/\sqrt{\lambda} + t^2/(2\lambda) + o(\lambda^{-1}) -1)\\[8pt]
+&= \lambda(t^2/(2\lambda) + o(\lambda^{-1}))\\
+&= \frac{t^2}{2} + o(1)\\
+&\to \frac{t^2}{2}
+\end{align*}
+$$
+
+従って、
+
+$$
+\plim_{\lambda\to\infty}M_Z(t) = \exp \left(\frac{t^2}{2}\right)
+$$
+
+これは標準正規分布のMGFと一致する.
 
 ## 2. 条件付きポワソン分布
 
