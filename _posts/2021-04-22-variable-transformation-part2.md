@@ -435,9 +435,9 @@ $$
 </div>
 
 - $x\in R$において、$\phi(x) - \phi'(x) \geq 0$
-- $x\in R$において、$(f(x|\theta_1) - 2 f(x|\theta_0)) > 0$
+- $x\in R$において、$(f(x\|\theta_1) - 2 f(x\|\theta_0)) > 0$
 - $x\in R^C$において、$\phi(x) - \phi'(x) \leq 0$
-- $x\in R^C$において、$(f(x|\theta_1) - 2 f(x|\theta_0)) \leq 0$
+- $x\in R^C$において、$(f(x\|\theta_1) - 2 f(x\|\theta_0)) \leq 0$
 
 以上より、
 
