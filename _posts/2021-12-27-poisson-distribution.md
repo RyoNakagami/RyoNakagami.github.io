@@ -106,7 +106,7 @@ $$
 \sum_{x=0}^\infty \exp(-\lambda)\frac{\lambda^x}{x!}x^2 &= \exp(-\lambda)\lambda\sum_{x=1}^\infty \frac{\lambda^{x-1}}{(x-1)!}x\\
 &= \exp(-\lambda)\lambda\sum_{x=1}^\infty \frac{\lambda^{x-1}}{(x-1)!}(x-1 + 1)\\
 &= \exp(-\lambda)\lambda \left(\lambda\sum_{x=2}^\infty \frac{\lambda^{x-2}}{(x-2)!}+\sum_{x=1}^\infty \frac{\lambda^{x-1}}{(x-1)!}\right)\\
-&= \exp(-\lambda)\lambda (\lambda \exp(\lambda) + \exp(\lambda))\\
+&= \exp(-\lambda)\lambda (\lambda \exp(\lambda) + \exp(\lambda))\\[8pt]
 &= \lambda^2 + \lambda
 \end{align*}
 $$
@@ -127,8 +127,8 @@ $$
 $$
 \begin{align*}
 M_X(t) &= \sum_{x=0}^\infty \exp(tx)\exp(-\lambda)\frac{\lambda^x}{x!}\\
-&= \exp(-\lambda) \sum \frac{(\exp(t)\lambda)^x}{x!}\\
-&= \exp(-\lambda)\exp(\exp(t)\lambda)\\
+&= \exp(-\lambda) \sum \frac{(\exp(t)\lambda)^x}{x!}\\[8pt]
+&= \exp(-\lambda)\exp(\exp(t)\lambda)\\[8pt]
 &= \exp(\lambda(\exp(t) - 1))
 \end{align*}
 $$
@@ -137,8 +137,8 @@ $$
 
 $$
 \begin{align*}
-E[X] &= M_X'(0)\\
-&= \lambda\exp(t)[\exp(\lambda(\exp(t)-1))]|_{t=0}\\
+E[X] &= M_X'(0)\\[8pt]
+&= \lambda\exp(t)[\exp(\lambda(\exp(t)-1))]|_{t=0}\\[8pt]
 &= \lambda
 \end{align*}
 $$
@@ -146,8 +146,8 @@ $$
 <div class="math display" style="overflow: auto">
 $$
 \begin{align*}
-E[X^2] &= M_X^{''}(0)\\
-&= \{\lambda\exp(t)[\exp(\lambda(\exp(t)-1))] + (\lambda\exp(t))^2[\exp(\lambda(\exp(t)-1))]\}|_{t=0}\\
+E[X^2] &= M_X^{''}(0)\\[8pt]
+&= \{\lambda\exp(t)[\exp(\lambda(\exp(t)-1))] + (\lambda\exp(t))^2[\exp(\lambda(\exp(t)-1))]\}|_{t=0}\\[8pt]
 &= \lambda + \lambda^2
 \end{align*}
 $$
@@ -165,10 +165,10 @@ $Z$のMGFがポワソン分布のMGFであることを示せば十分です.
 
 $$
 \begin{align*}
-M_Z(t) &= E\exp(tZ)]\\
-&= E\exp(tX)\exp(tY)]\\
-&= E\exp(tX)]E\exp(tY)] \ \ \because \text{独立性より}\\
-&= \exp[\lambda_X(\exp(t) - 1)]\exp[\lambda_Y(\exp(t) - 1)]\\
+M_Z(t) &= E\exp(tZ)]\\[8pt]
+&= E\exp(tX)\exp(tY)]\\[8pt]
+&= E\exp(tX)]E\exp(tY)] \ \ \because \text{独立性より}\\[8pt]
+&= \exp[\lambda_X(\exp(t) - 1)]\exp[\lambda_Y(\exp(t) - 1)]\\[8pt]
 &= \exp[(\lambda_X + \lambda_Y)(\exp(t) - 1)]
 \end{align*}
 $$
@@ -363,7 +363,7 @@ $$
 従って、
 
 $$
-\plim_{\lambda\to\infty}M_Z(t) = \exp \left(\frac{t^2}{2}\right)
+plim_{\lambda\to\infty}M_Z(t) = \exp \left(\frac{t^2}{2}\right)
 $$
 
 これは標準正規分布のMGFと一致する.

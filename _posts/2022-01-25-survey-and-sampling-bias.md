@@ -12,6 +12,7 @@ session_cnt: 100
 tags:
 
 - 統計
+- 統計検定
 - sampling bias
 ---
 <!-- Global site tag (gtag.js) - Google Analytics -->
@@ -82,7 +83,7 @@ $$
 二項分布は $X\sim B(N, p)$としたとき
 
 $$
-f(x) = \frac{\Gamma(N+1)}{\Gamma(N-x-1)\Gamma(x-1)}p^x(1-p)^{N-x}
+f(x) = \frac{\Gamma(N+1)}{\Gamma(N-x+1)\Gamma(x+1)}p^x(1-p)^{N-x}
 $$
 
 と表現されます. (1)に基づき、$g(x)$を計算するために$f(x\|X>0)$と$E[X\|X>0]$を計算する必要があります. 
@@ -108,7 +109,7 @@ E[X|X>0] &= \sum^N_{x=1} xf(x|X> 0)\\
 $$
 </div>
 
-従って、
+従って、(1)と照らし合わせて
 
 $$
 g(x) = \frac{\Gamma(N)}{\Gamma(N - x + 1)\Gamma(x)}p^{x-1}(1-p)^{N-x}
@@ -118,9 +119,9 @@ $$
 
 $$
 \begin{align*}
-\sum x g(x) &= x\frac{\Gamma(N)}{\Gamma(N - x + 1)\Gamma(x)}p^{x-1}(1-p)^{N-x}\\
-&= (x'+1)\frac{\Gamma(N)}{\Gamma(N-x')\Gamma(x')}p^{x'}(1-p)^{N-x'-1}\\
-&= (N-1)p + 1
+\sum x g(x) &= \sum x\frac{\Gamma(N)}{\Gamma(N - x + 1)\Gamma(x)}p^{x-1}(1-p)^{N-x}\\
+&= \sum (x'+1)\frac{\Gamma(N)}{\Gamma(N-x')\Gamma(x'+1)}p^{x'}(1-p)^{N-x'-1}\\
+&= \sum (N-1)p + 1
 \end{align*}
 $$
 
