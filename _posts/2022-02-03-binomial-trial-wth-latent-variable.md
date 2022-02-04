@@ -1,6 +1,6 @@
 ---
 layout: post
-title: "統計検定：Latent variableに依存したパラメーターの推定"
+title: "Latent variableに依存したパラメーターの推定"
 subtitle: "罹患率から背景のパラメーターを推定する"
 author: "Ryo"
 header-img: "img/bg-statistics.png"
@@ -14,6 +14,7 @@ tags:
 - 統計
 - 統計検定
 - 二項分布
+- delta method
 ---
 <!-- Global site tag (gtag.js) - Google Analytics -->
 <script async src="https://www.googletagmanager.com/gtag/js?id=G-LVL413SV09"></script>
@@ -311,3 +312,4 @@ ax[1].legend();
 ## References
 
 - [Ryo's Tech Blog > 二項分布に従う確率変数の正規分布近似](https://ryonakagami.github.io/2021/04/15/binomial-distribution/#%E4%BA%8C%E9%A0%85%E5%88%86%E5%B8%83%E3%81%AB%E5%BE%93%E3%81%86%E7%A2%BA%E7%8E%87%E5%A4%89%E6%95%B0%E3%81%AE%E6%AD%A3%E8%A6%8F%E5%88%86%E5%B8%83%E8%BF%91%E4%BC%BC)
+- [Problem Books in Mathematics](https://www.semanticscholar.org/paper/Problem-Books-in-Mathematics-Winkler-Barbeau/d2af4db97c160767462d8566981d89ee1a18d7e2)
