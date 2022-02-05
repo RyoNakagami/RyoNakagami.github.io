@@ -11,7 +11,7 @@ session_cnt: 100
 tags:
 
 - 積分
-- 数学
+- math
 ---
 <!-- Global site tag (gtag.js) - Google Analytics -->
 <script async src="https://www.googletagmanager.com/gtag/js?id=G-LVL413SV09"></script>
