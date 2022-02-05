@@ -13,6 +13,7 @@ tags:
 - 統計検定
 - 統計
 - Python
+- 二項分布
 ---
 <!-- Global site tag (gtag.js) - Google Analytics -->
 <script async src="https://www.googletagmanager.com/gtag/js?id=G-LVL413SV09"></script>
@@ -31,10 +32,13 @@ tags:
 - [1. 二項分布の性質](#1-%E4%BA%8C%E9%A0%85%E5%88%86%E5%B8%83%E3%81%AE%E6%80%A7%E8%B3%AA)
   - [ベルヌーイ分布](#%E3%83%99%E3%83%AB%E3%83%8C%E3%83%BC%E3%82%A4%E5%88%86%E5%B8%83)
   - [二項分布の特性値](#%E4%BA%8C%E9%A0%85%E5%88%86%E5%B8%83%E3%81%AE%E7%89%B9%E6%80%A7%E5%80%A4)
+    - [MLEによるパラメーター推定](#mle%E3%81%AB%E3%82%88%E3%82%8B%E3%83%91%E3%83%A9%E3%83%A1%E3%83%BC%E3%82%BF%E3%83%BC%E6%8E%A8%E5%AE%9A)
     - [ベルヌーイ分布の合成と二項分布](#%E3%83%99%E3%83%AB%E3%83%8C%E3%83%BC%E3%82%A4%E5%88%86%E5%B8%83%E3%81%AE%E5%90%88%E6%88%90%E3%81%A8%E4%BA%8C%E9%A0%85%E5%88%86%E5%B8%83)
     - [確率母関数, MGF, CF](#%E7%A2%BA%E7%8E%87%E6%AF%8D%E9%96%A2%E6%95%B0-mgf-cf)
     - [確率関数の総和](#%E7%A2%BA%E7%8E%87%E9%96%A2%E6%95%B0%E3%81%AE%E7%B7%8F%E5%92%8C)
     - [再生性](#%E5%86%8D%E7%94%9F%E6%80%A7)
+  - [推定量$\hat p$の分散の不偏推定量](#%E6%8E%A8%E5%AE%9A%E9%87%8F%5Chat-p%E3%81%AE%E5%88%86%E6%95%A3%E3%81%AE%E4%B8%8D%E5%81%8F%E6%8E%A8%E5%AE%9A%E9%87%8F)
+  - [推定量$\hat p$の分散の不偏推定量](#%E6%8E%A8%E5%AE%9A%E9%87%8F%5Chat-p%E3%81%AE%E5%88%86%E6%95%A3%E3%81%AE%E4%B8%8D%E5%81%8F%E6%8E%A8%E5%AE%9A%E9%87%8F-1)
   - [二項分布に従う確率変数の正規分布近似](#%E4%BA%8C%E9%A0%85%E5%88%86%E5%B8%83%E3%81%AB%E5%BE%93%E3%81%86%E7%A2%BA%E7%8E%87%E5%A4%89%E6%95%B0%E3%81%AE%E6%AD%A3%E8%A6%8F%E5%88%86%E5%B8%83%E8%BF%91%E4%BC%BC)
   - [練習問題](#%E7%B7%B4%E7%BF%92%E5%95%8F%E9%A1%8C)
     - [(1) H26 東京大学 大学院新領域創成科学研究科 情報生命科学専攻 第5問](#1-h26-%E6%9D%B1%E4%BA%AC%E5%A4%A7%E5%AD%A6-%E5%A4%A7%E5%AD%A6%E9%99%A2%E6%96%B0%E9%A0%98%E5%9F%9F%E5%89%B5%E6%88%90%E7%A7%91%E5%AD%A6%E7%A0%94%E7%A9%B6%E7%A7%91-%E6%83%85%E5%A0%B1%E7%94%9F%E5%91%BD%E7%A7%91%E5%AD%A6%E5%B0%82%E6%94%BB-%E7%AC%AC5%E5%95%8F)
@@ -65,7 +69,7 @@ $$
 
 $$
 \begin{align*}
-E[X] &= p\\
+\mathbb E[X] &= p\\
 V(X) &= p(1-p)
 \end{align*}
 $$
@@ -97,7 +101,7 @@ $$
 
 $$
 \begin{aligned}
-E[X]&= \sum_{k=0}^n k \:_nC_k p^k(1-p)^{n-k}\\
+\mathbb E[X]&= \sum_{k=0}^n k \:_nC_k p^k(1-p)^{n-k}\\
 &= np\sum_{k=1}^n \:_{n-1}C_{k-1} p^{k-1}(1-p)^{n-k}\\
 &= np\sum_{k=0}^{n-1} \:_{n-1}C_{k} p^{k}(1-p)^{n-1-k}\\
 &= np 
@@ -106,7 +110,7 @@ $$
 
 $$
 \begin{aligned}
-E[X^2]&= \sum_{k=0}^n k^2\:_nC_k p^k(1-p)^{n-k}\\
+\mathbb E[X^2]&= \sum_{k=0}^n k^2\:_nC_k p^k(1-p)^{n-k}\\
 &= \sum_{k=1}^n k(k-1)\:_nC_k p^k(1-p)^{n-k} + \sum_{k=0}^n k\:_nC_k p^k(1-p)^{n-k}\\
 &= n(n-1)p^2 \sum_{k=2}^{n-2} \:_{n-2}C_{k-2} p^{k-2}(1-p)^{n-k} + np\\
 &= n(n-1)p^2 \sum_{k=0}^{n-2} \:_{n-2}C_{k} p^{k}(1-p)^{n-2-k} + np\\
@@ -115,6 +119,40 @@ E[X^2]&= \sum_{k=0}^n k^2\:_nC_k p^k(1-p)^{n-k}\\
 $$
 
 よって， $V(X) = n(n-1)p^2 + np - n^2p^2 = np(1-p)$
+
+
+#### MLEによるパラメーター推定
+
+$n$回の試行で $x$回の成功が観測されたとき、パラメーター$p$についての尤度関数は
+
+$$
+\begin{align*}
+L(p) &= \frac{\Gamma(n+1)}{\Gamma(n-x+1)\Gamma(x+1)}p^x(1-p)^{n-x}\\
+&\Rightarrow \log L(p) = \log \frac{\Gamma(n+1)}{\Gamma(n-x+1)\Gamma(x+1)} + x\log p + (n-x) \log (1-p)
+\end{align*}
+$$
+
+対数尤度に対して、$p$についてのFOCを求めれると
+
+$$
+\frac{\partial \log L(p^*)}{\partial p} = \frac{x}{p^*} - \frac{n-x}{1 - p^*} = 0
+$$
+
+従って最尤法によるパラメーター推定量として
+
+$$
+\hat p_{MLE} = \frac{x}{n}
+$$
+
+また、以下の式展開より$\hat p_{MLE}$は不変推定量であることがわかります:
+
+$$
+\begin{align*}
+\mathbb E[\hat p] &= \frac{\mathbb E[x]}{n}\\
+&= \frac{\mathbb np}{n}\\
+&= p
+\end{align*}
+$$
 
 #### ベルヌーイ分布の合成と二項分布
 
@@ -145,7 +183,7 @@ $$
 二項分布に従う確率変数は独立なベルヌーイ確率変数の和なので
 
 $$
-E[X] = E[\sum_{i=1}^n X_i] = \sum_{i=1}^nE[X_i] = np
+\mathbb E[X] = \mathbb E[\sum_{i=1}^n X_i] = \sum_{i=1}^n\mathbb E[X_i] = np
 $$
 
 同様に
@@ -165,7 +203,7 @@ $$
 
 $$
 \begin{align*}
-M_X(t) &= E[\exp(tX)]\\[8pt]
+M_X(t) &= \mathbb E[\exp(tX)]\\[8pt]
 &= \sum \exp(tx)\:_nC_k p^x(1-p)^{n-x}\\[8pt]
 &= \sum \:_nC_k (\exp(t)p)^x(1-p)^{n-x}\\[8pt]
 &= (\exp(t)p + 1 - p)^n
@@ -252,6 +290,70 @@ $$
 <div style="text-align: right;">
 ■
 </div>
+
+### 推定量$\hat p$の分散の不偏推定量
+
+確率変数$X\sim Bin(p, N)$としたときのpの推定量は$\hat p = X/N$と表現されることから
+
+$$
+\begin{align*}
+Var(\hat p) &= Var \left(\frac{X}{n}\right)\\
+&= \frac{p(1-p)}{n}
+\end{align*}
+$$
+
+ただ、実際には$p$は分析者にはわからないので不偏推定量かつ一致推定量である$\hat p$を$p$の代わりに用いた分散推定量$\hat v_n$を考えます.
+
+$$
+\hat v_n= \frac{\hat p(1-\hat p)}{n}
+$$
+
+ただこの推定量は不偏推定量ではありません.
+
+> 証明
+
+$$
+\begin{align*}
+\mathbb E[v_n(\hat p)] &= \frac{1}{n}\mathbb E[\hat p(1-\hat p)]\\
+&= \frac{1}{n}\left(p - p^2 - \frac{p(1-p)}{n}\right)\\
+&= \frac{p(1-p)}{n}\frac{n-1}{n}\\ \quad\quad\tag{1.2}
+&\neq \frac{p(1-p)}{n} 
+\end{align*}
+$$
+
+### 推定量$\hat p$の分散の不偏推定量
+
+(1.2)より$Var(\hat p)$の不偏推定量は
+
+$$
+\begin{align*}
+\tilde v_n &= \frac{n}{n-1}\hat v_n\\[8pt]
+&= \frac{\hat p(1-\hat p)}{n-1}
+\end{align*}
+$$
+
+ということがわかります. この推定量の活用方法に一つとして、二項分布の正規分布近似に基づいた信頼区間の導出があります
+
+$$
+CI = \hat p \pm z_{\alpha/2}\sqrt {\tilde v_n }
+$$
+
+ただ、以下のように信頼区間を求める方法もあります. 詳しくは[NIST Engineering Statistics Handbbok](https://www.itl.nist.gov/div898/handbook/prc/section2/prc241.htm)を参照してください.
+
+$$
+\large
+\begin{align*}
+\mbox{U.L. } & = & \frac{\hat{p} + \frac{z^2_{1-\alpha/2}}{2n} + z_{1-\alpha/2}
+\sqrt{ \frac{\hat{p}(1-\hat{p})}{n} + \frac{z^2_{1-\alpha/2}}{4n^2} }}
+{1 + \frac{z^2_{1-\alpha/2}}{n}} \\
+ &   & \\
+ &   & \\
+\mbox{L.L. } & = & \frac{\hat{p} + \frac{z^2_{\alpha/2}}{2n} + z_{\alpha/2}
+\sqrt{ \frac{\hat{p}(1-\hat{p})}{n} + \frac{z^2_{\alpha/2}}{4n^2} }}
+{1 + \frac{z^2_{\alpha/2}}{n}} \, . 
+\end{align*}
+$$
+
 
 ### 二項分布に従う確率変数の正規分布近似
 
@@ -367,7 +469,7 @@ $$
 期待値は
 
 $$
-E[X] = \sum_{k=0}^N k\:_NC_kp^k(1-p)^{N-k} = Np
+\mathbb E[X] = \sum_{k=0}^N k\:_NC_kp^k(1-p)^{N-k} = Np
 $$
 
 
@@ -415,8 +517,8 @@ $$
 
 $$
 \begin{aligned}
-E[Y] &= E\left[\sum^n_{i=1}2^{i-1}X_i\right]\\
-&= \sum^n_{i=1}2^{i-1} E[X_i] \: \because \text{ 独立性}\\
+\mathbb E[Y] &= \mathbb E\left[\sum^n_{i=1}2^{i-1}X_i\right]\\
+&= \sum^n_{i=1}2^{i-1} \mathbb E[X_i] \: \because \text{ 独立性}\\
 &= p \sum^n_{i=1}2^{i-1}\\
 &= p \sum^{n-1}_{i=0}2^{i}\\
 &= (2^n - 1)p
@@ -580,7 +682,7 @@ $X$の条件付き期待値は
 
 $$
 \begin{aligned}
-E[X\mid X\geq 1] &= \frac{1}{1 - (1 - \theta)^n} \sum_{k = 1}^n k\:_nC_x \theta^{x}(1 - \theta)^{n-x}\\
+\mathbb E[X\mid X\geq 1] &= \frac{1}{1 - (1 - \theta)^n} \sum_{k = 1}^n k\:_nC_x \theta^{x}(1 - \theta)^{n-x}\\
 &= \frac{n\theta}{1 - (1 - \theta)^n}
 \end{aligned}
 $$
@@ -589,7 +691,7 @@ $$
 
 $$
 \begin{aligned}
-E[X^2\mid X\geq 1] &= \frac{1}{1 - (1 - \theta)^n} \sum_{k = 1}^n k^2\:_nC_x \theta^{x}(1 - \theta)^{n-x}\\
+\mathbb E[X^2\mid X\geq 1] &= \frac{1}{1 - (1 - \theta)^n} \sum_{k = 1}^n k^2\:_nC_x \theta^{x}(1 - \theta)^{n-x}\\
 &= \frac{n\theta(1 - \theta) + n^2\theta^2}{1 - (1 - \theta)^n}
 \end{aligned}
 $$
@@ -676,7 +778,7 @@ $$
 
 $$
 \begin{aligned}
-E[x_i|x_i\geq 3] &= \frac{\sum_{k=3}^n k\:_nC_k \theta^k(1 - \theta)^{n-k}}{1 - \frac{(1 - \theta)^{n-2}}{2}\{(n-1)(n-2)\theta^2 + 2\theta(n-2)+2\}}\\[8pt]
+\mathbb E[x_i|x_i\geq 3] &= \frac{\sum_{k=3}^n k\:_nC_k \theta^k(1 - \theta)^{n-k}}{1 - \frac{(1 - \theta)^{n-2}}{2}\{(n-1)(n-2)\theta^2 + 2\theta(n-2)+2\}}\\[8pt]
 &= \frac{n\theta - n\theta(1-\theta)^{n-1}-n(n-1)\theta^2(1 - \theta)^{n-2}}{1 - \frac{(1 - \theta)^{n-2}}{2}\{(n-1)(n-2)\theta^2 + 2\theta(n-2)+2\}}
 \end{aligned}
 $$
@@ -745,12 +847,10 @@ print(binary_search(func=objective_function, y_min=0, y_max =1, value = bar_y, n
 
 $\hat\theta = 0.29651909694075584$を得る. なお、上記を[Wolfram Alpha](https://ja.wolframalpha.com/input/?i=3.89%3D+%5Cfrac%7B10x+-+10x%281-x%29%5E%7B9%7D-90x%5E2%281+-+x%29%5E%7B8%7D%7D%7B1+-+%5Cfrac%7B%281+-+x%29%5E%7B8%7D%7D%7B2%7D%2872x%5E2+%2B+16x%2B2%29%7D)をもちいて解くと, $\hat\theta = 0.296243$. 
 
-
-
-
-
 ## References
 
 - [現代数理統計学の基礎, 久保川 達也著](https://www.kyoritsu-pub.co.jp/bookdetail/9784320111660)
 - [高校数学の美しい物語 > 二項分布の平均と分散の二通りの証明](https://manabitimes.jp/math/913)
+- [高校数学の美しい物語 > 多項分布の意味と平均，分散，共分散などの計算](https://manabitimes.jp/math/1282)
 - [死神とのコイントスゲーム](https://ryonakagami.github.io/2020/10/22/CoinFlip-Programming/)
+- [NIST Engineering Statistics Handbbok](https://www.itl.nist.gov/div898/handbook/prc/section2/prc241.htm)
