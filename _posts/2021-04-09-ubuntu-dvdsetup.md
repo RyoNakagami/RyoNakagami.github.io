@@ -27,9 +27,9 @@ tags:
 </script>
 
 
+**Table of Contents**
 <!-- START doctoc generated TOC please keep comment here to allow auto update -->
 <!-- DON'T EDIT THIS SECTION, INSTEAD RE-RUN doctoc TO UPDATE -->
-- INSTEAD RE-RUN doctoc TO UPDATE -->
 
 - [やりたいこと](#%E3%82%84%E3%82%8A%E3%81%9F%E3%81%84%E3%81%93%E3%81%A8)
   - [VLCとは？](#vlc%E3%81%A8%E3%81%AF)
