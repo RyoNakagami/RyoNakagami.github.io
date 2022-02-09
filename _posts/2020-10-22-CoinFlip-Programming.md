@@ -160,9 +160,9 @@ $$
 <div class="math display" style="overflow: auto">
 $$
 \begin{aligned}
-\textrm{Pr}(Y \leq y| X = x) =& p \cdot \textrm{Pr}(Y \leq y - 1| X = \min(x + 1, 15)) + (1-p) \cdot\textrm{Pr}(Y \leq y - 1| X = \max(x-1, 0 ))\\
-= & p^2 \cdot\textrm{Pr}(Y \leq y - 2| X = \min(x + 2, 15)) + p(1-p) \cdot\textrm{Pr}(Y \leq y - 2| X = x)\\
-& + p(1-p) \cdot\textrm{Pr}(Y \leq y - 2| X = x) + (1-p)^2 \cdot\textrm{Pr}(Y \leq y - 2| X = \max(x - 2, 0))\\
+\textrm{Pr}(Y \leq y| X = x) =& p \cdot \textrm{Pr}(Y \leq y - 1| X = \min(x + 1, 15)) + (1-p) \cdot\textrm{Pr}(Y \leq y - 1| X = \max(x-1, 0 ))\\[8pt]
+= & p^2 \cdot\textrm{Pr}(Y \leq y - 2| X = \min(x + 2, 15)) + p(1-p) \cdot\textrm{Pr}(Y \leq y - 2| X = x)\\[8pt]
+& + p(1-p) \cdot\textrm{Pr}(Y \leq y - 2| X = x) + (1-p)^2 \cdot\textrm{Pr}(Y \leq y - 2| X = \max(x - 2, 0))\\[8pt]
 =&  \cdots
 \end{aligned}
 $$
