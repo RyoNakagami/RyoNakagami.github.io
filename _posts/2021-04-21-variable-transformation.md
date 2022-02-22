@@ -826,7 +826,7 @@ $$
 $$
 \begin{align*}
 Z & = X+Y\\
-Y &= T
+T &= Y
 \end{align*}
 $$
 

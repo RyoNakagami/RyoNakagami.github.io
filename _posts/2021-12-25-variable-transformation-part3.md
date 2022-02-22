@@ -79,3 +79,33 @@ f(w) &= \int^1_0 u^{-1}I(u \in (0, 1))I(w/u \in (0, 1)) du\\
 &= -\log w
 \end{align*}
 $$
+
+> Pythonでplot
+
+```python
+import numpy as np
+import matplotlib.pyplot as plt
+from scipy import stats
+
+## SEED
+np.random.seed(42)
+
+## Params
+N = 10000             #sample size
+A, B = 0, 1          # uniform distribution param
+
+## generate random variables
+X = np.random.uniform(A, B, N)
+Y = np.random.uniform(A, B, N)
+W = X*Y
+
+## plot parameter
+bin_range = np.linspace(A, B, 100)
+
+fig, ax = plt.subplots(1, 1,figsize=(10, 7))
+ax.hist(W, density = True, alpha = 0.5, bins = bin_range, label = 'uniform variable ratio')
+ax.plot(bin_range[1:], -np.log(bin_range[1:]), label = 'plot $-\log(w)$')
+ax.legend();
+```
+
+<img src="https://github.com/ryonakimageserver/omorikaizuka/blob/master/%E3%83%96%E3%83%AD%E3%82%B0%E7%94%A8/20211225-python-plot.png?raw=true">
