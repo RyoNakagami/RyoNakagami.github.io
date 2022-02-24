@@ -26,6 +26,8 @@ tags:
 - [3. 一様分布と順序統計量: 統計検定１級2012年11月](#3-%E4%B8%80%E6%A7%98%E5%88%86%E5%B8%83%E3%81%A8%E9%A0%86%E5%BA%8F%E7%B5%B1%E8%A8%88%E9%87%8F-%E7%B5%B1%E8%A8%88%E6%A4%9C%E5%AE%9A%EF%BC%91%E7%B4%9A2012%E5%B9%B411%E6%9C%88)
   - [累積分布関数が標準一様分布に従う証明](#%E7%B4%AF%E7%A9%8D%E5%88%86%E5%B8%83%E9%96%A2%E6%95%B0%E3%81%8C%E6%A8%99%E6%BA%96%E4%B8%80%E6%A7%98%E5%88%86%E5%B8%83%E3%81%AB%E5%BE%93%E3%81%86%E8%A8%BC%E6%98%8E)
   - [順序統計量と特性値](#%E9%A0%86%E5%BA%8F%E7%B5%B1%E8%A8%88%E9%87%8F%E3%81%A8%E7%89%B9%E6%80%A7%E5%80%A4)
+- [関連記事](#%E9%96%A2%E9%80%A3%E8%A8%98%E4%BA%8B)
+- [References](#references)
 
 <!-- END doctoc generated TOC please keep comment here to allow auto update -->
 
@@ -267,3 +269,13 @@ $$
 $$
 \mathrm E[X_k] = \frac{k}{m+1}
 $$
+
+
+## 関連記事
+
+- [Ryo's Tech Blog > 統計検定：一様分布の性質の紹介](https://ryonakagami.github.io/2021/12/26/uniform-distirbution-tokeikentei/)
+
+
+## References
+
+- [Colorado Lecture note > Order Statistics](https://www.colorado.edu/amath/sites/default/files/attached-files/order_stats.pdf)
