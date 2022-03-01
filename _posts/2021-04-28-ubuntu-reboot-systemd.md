@@ -37,6 +37,7 @@ tags:
   - [unit: systemd によるサービス処理の単位](#unit-systemd-%E3%81%AB%E3%82%88%E3%82%8B%E3%82%B5%E3%83%BC%E3%83%93%E3%82%B9%E5%87%A6%E7%90%86%E3%81%AE%E5%8D%98%E4%BD%8D)
   - [Unit構成ファイル](#unit%E6%A7%8B%E6%88%90%E3%83%95%E3%82%A1%E3%82%A4%E3%83%AB)
   - [systemctlコマンド](#systemctl%E3%82%B3%E3%83%9E%E3%83%B3%E3%83%89)
+- [Ryo's Tech Blog 関連記事](#ryos-tech-blog-%E9%96%A2%E9%80%A3%E8%A8%98%E4%BA%8B)
 - [References](#references)
 
 <!-- END doctoc generated TOC please keep comment here to allow auto update -->
@@ -148,6 +149,11 @@ systemctl サブコマンド [Unit] [option]
 |設定ファイルの再読込| 	systemctl daemon-reload|
 |システムを再起動|systemctl reboot|
 |システムをシャットダウン|systemctl poweroff|
+
+
+## Ryo's Tech Blog 関連記事
+
+- [権限管理入門とsudoの使い方](https://ryonakagami.github.io/2021/05/05/ubuntu-permission/)
 
 
 ## References
