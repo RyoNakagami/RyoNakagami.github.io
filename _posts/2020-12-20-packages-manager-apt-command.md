@@ -11,6 +11,7 @@ purpose:
 tags:
 
 - Ubuntu 20.04 LTS
+- Linux
 - apt
 ---
 
@@ -24,28 +25,39 @@ tags:
   gtag('config', 'G-LVL413SV09');
 </script>
 
+```zsh
+% apt moo
+                 (__) 
+                 (oo) 
+           /------\/ 
+          / |    ||   
+         *  /\---/\ 
+            ~~   ~~   
+..."Have you mooed today?"...
+```
 
-||概要|
-|---|---|
-|目的|APTパッケージ管理の基礎知識の整理|
-|参考|[APT公式ウェブサイト](https://tracker.debian.org/pkg/apt)<br>[Debianパッケージ管理](https://www.debian.org/doc/manuals/debian-reference/ch02.ja.html)<br> [Launchpad](https://launchpad.net/)|
 
+**Table of Contents**
 <!-- START doctoc generated TOC please keep comment here to allow auto update -->
 <!-- DON'T EDIT THIS SECTION, INSTEAD RE-RUN doctoc TO UPDATE -->
 
 - [1. パッケージ管理とは](#1-%E3%83%91%E3%83%83%E3%82%B1%E3%83%BC%E3%82%B8%E7%AE%A1%E7%90%86%E3%81%A8%E3%81%AF)
+  - [Debian系OSのパッケージマネジャー](#debian%E7%B3%BBos%E3%81%AE%E3%83%91%E3%83%83%E3%82%B1%E3%83%BC%E3%82%B8%E3%83%9E%E3%83%8D%E3%82%B8%E3%83%A3%E3%83%BC)
 - [2. APT](#2-apt)
-  - [Syntax](#syntax)
+  - [aptコマンドのSyntax](#apt%E3%82%B3%E3%83%9E%E3%83%B3%E3%83%89%E3%81%AEsyntax)
+  - [パッケージの情報の取得](#%E3%83%91%E3%83%83%E3%82%B1%E3%83%BC%E3%82%B8%E3%81%AE%E6%83%85%E5%A0%B1%E3%81%AE%E5%8F%96%E5%BE%97)
   - [`apt install --reinstall`の使用用途](#apt-install---reinstall%E3%81%AE%E4%BD%BF%E7%94%A8%E7%94%A8%E9%80%94)
+  - [不要になったパッケージの削除](#%E4%B8%8D%E8%A6%81%E3%81%AB%E3%81%AA%E3%81%A3%E3%81%9F%E3%83%91%E3%83%83%E3%82%B1%E3%83%BC%E3%82%B8%E3%81%AE%E5%89%8A%E9%99%A4)
+  - [パッケージがインストールしたファイル群を確認する](#%E3%83%91%E3%83%83%E3%82%B1%E3%83%BC%E3%82%B8%E3%81%8C%E3%82%A4%E3%83%B3%E3%82%B9%E3%83%88%E3%83%BC%E3%83%AB%E3%81%97%E3%81%9F%E3%83%95%E3%82%A1%E3%82%A4%E3%83%AB%E7%BE%A4%E3%82%92%E7%A2%BA%E8%AA%8D%E3%81%99%E3%82%8B)
 - [3. リポジトリの設定](#3-%E3%83%AA%E3%83%9D%E3%82%B8%E3%83%88%E3%83%AA%E3%81%AE%E8%A8%AD%E5%AE%9A)
   - [`/etc/apt/sources.list`ファイル例](#etcaptsourceslist%E3%83%95%E3%82%A1%E3%82%A4%E3%83%AB%E4%BE%8B)
-  - [Syntax](#syntax-1)
+  - [Syntax](#syntax)
   - [パッケージの一覧](#%E3%83%91%E3%83%83%E3%82%B1%E3%83%BC%E3%82%B8%E3%81%AE%E4%B8%80%E8%A6%A7)
-- [4. パッケージの情報の取得](#4-%E3%83%91%E3%83%83%E3%82%B1%E3%83%BC%E3%82%B8%E3%81%AE%E6%83%85%E5%A0%B1%E3%81%AE%E5%8F%96%E5%BE%97)
-- [5. リポジトリの追加](#5-%E3%83%AA%E3%83%9D%E3%82%B8%E3%83%88%E3%83%AA%E3%81%AE%E8%BF%BD%E5%8A%A0)
+- [4. リポジトリの追加](#4-%E3%83%AA%E3%83%9D%E3%82%B8%E3%83%88%E3%83%AA%E3%81%AE%E8%BF%BD%E5%8A%A0)
   - [なぜPPAを使うのか？](#%E3%81%AA%E3%81%9Cppa%E3%82%92%E4%BD%BF%E3%81%86%E3%81%AE%E3%81%8B)
-  - [Syntax](#syntax-2)
+  - [Syntax](#syntax-1)
   - [リポジトリの削除](#%E3%83%AA%E3%83%9D%E3%82%B8%E3%83%88%E3%83%AA%E3%81%AE%E5%89%8A%E9%99%A4)
+- [References](#references)
 
 <!-- END doctoc generated TOC please keep comment here to allow auto update -->
 
@@ -55,9 +67,28 @@ Linuxではパッケージという単位でソフトウェアを管理してい
 
 
 Fig 1:パッケージの概念
-<img src = "https://raw.githubusercontent.com//ryonakimageserver/omorikaizuka//master/linux/packages/20201222_deb_packages.jpeg">
+<img src = "https://github.com/ryonakimageserver/omorikaizuka/blob/master/%E3%83%96%E3%83%AD%E3%82%B0%E7%94%A8/20201220-linux-packages-diagram.png?raw=true">
 
-Debian形式のパッケージを管理するには`dpkg`コマンドを使いますが、パッケージには相互に依存関係があります。手動で管理するのは大変ですがそこのところをうまい具合に対応した上でパッケージを管理してくれるソフトウェアがAPTです。
+> もしパッケージマネジャーがない世界だったら
+
+任意のソフトウェアを今利用している環境にインストールする場合、作業者は以下のことを実行する必要があります:
+
+- readmeを読んで、必要なコンポーネントやバイナリ, コンパイラの一覧を把握 & インストール
+- updateに伴うbug修正情報を確認する
+- configスクリプト, Makefileを読み込み、どのような手順でbuildするか実行計画を立てる
+- 環境差異問題の対処をする
+- `build`実行時にでてくるエラーに対処（原因究明など）
+
+### Debian系OSのパッケージマネジャー
+
+Debian形式のパッケージを管理するにあたって、パッケージのインストールや削除だけに限れば`dpkg`コマンドを使うだけで十分ですが、パッケージには相互に依存関係があります. 手動で管理するのは大変ですが、そこのところをうまい具合に対応した上でパッケージを管理してくれるソフトウェアがAPTです. なお、`apt install`コマンドでパッケージをインストールするとき、実際にはバックエンドでdpkgを使用してそれを実現しています. 
+
+なお、「パッケージのインストールや削除」の機能を担当するパッケージマネジャーを「低レベル」と分類し、「依存関係やメタデータ検索」の機能を担当するパッケージマネジャーを「高レベル」と分類します.
+
+---|---
+`dpkg`|低レベルパッケージマネジャー, 依存関係の問題が出てきた場合エラーメッセージの出力のみ
+`apt`|高レベルパッケージマネジャー（低レベルの機能もカバーしているが、内部で`dpkg`を利用している）
+
 
 ## 2. APT
 
@@ -65,7 +96,7 @@ APT(Advanced Packaging Tool)はDevian系ディストリビューションで使�
 
 <img src="https://raw.githubusercontent.com//ryonakimageserver/omorikaizuka//master/linux/packages/20201222_apt_packages_system.png">
 
-### Syntax
+### aptコマンドのSyntax
 
 ```
 % apt [option] subcommand
@@ -87,6 +118,7 @@ aptコマンドの主なサブコマンド
 |subcommand|説明|
 |---|---|
 |`update`|パッケージリストを更新する|
+|`search`|正規表現を使ってキーワードを設定することで、パッケージの説明文を参照しながらパッケージを探すことができます<br><br>パッケージの説明文ではなく、パッケージに含まれているファイル名で検索したい場合は`apt-file`コマンド、または`dpkg`コマンドを使用|
 |`install <package name>`|パッケージをインストールする|
 |`remove <package name>`|パッケージを削除する(設定ファイルは残る)|
 |`purge <package name>`|パッケージと設定ファイルを削除する(依存パッケージは残る)|
@@ -98,6 +130,58 @@ aptコマンドの主なサブコマンド
 |`depends <package name>`|パッケージの依存関係を表示する|
 |`autoremove`|他のパッケージが削除されたことで「必要なくなった」パッケージを削除するコマンド|
 
+
+### パッケージの情報の取得
+
+パッケージの情報は`show`サブコマンドで表示できます、リポジトリにあるパッケージであれば、インストールされているかどうかにかかわらず表示できます。VScodeのパッケージ情報を表示してみます。
+
+```zsh
+% apt show code
+ackage: code
+Version: 1.52.1-1608136922
+Priority: optional
+Section: devel
+Maintainer: Microsoft Corporation <vscode-linux@microsoft.com>
+Installed-Size: 273 MB
+Provides: visual-studio-code
+Depends: libnss3 (>= 2:3.26), gnupg, apt, libxkbfile1, libsecret-1-0, libgtk-3-0 (>= 3.10.0), libxss1, libgbm1
+Conflicts: visual-studio-code
+Replaces: visual-studio-code
+Homepage: https://code.visualstudio.com/
+Download-Size: 64.8 MB
+APT-Manual-Installed: yes
+APT-Sources: https://packages.microsoft.com/repos/code stable/main amd64 Packages
+Description: Code editing. Redefined.
+ Visual Studio Code is a new choice of tool that combines the simplicity of a code editor with what developers need for the core edit-build-debug cycle. See https://code.visualstudio.com/docs/setup/linux for installation instructions and FAQ.
+
+```
+
+なお、正常な設定として "Provides" と "Conflicts" と "Replaces" とを単一バーチャルパッケージに対し同時宣言することがあります。こうするといかなる時にも当該バーチャルパッケージを提供する実パッケージのうち確実に一つだけがインストールされます。
+
+依存関係だけ確認したい場合は`apt depends`コマンドを用います。
+
+```zsh
+% apt depends code
+code
+  Depends: libnss3 (>= 2:3.26)
+  Depends: gnupg
+  Depends: apt
+  Depends: libxkbfile1
+  Depends: libsecret-1-0
+  Depends: libgtk-3-0 (>= 3.10.0)
+  Depends: libxss1
+  Depends: libgbm1
+  Conflicts: <visual-studio-code>
+  Replaces: <visual-studio-code>
+    code
+```
+
+なお部分一致でリポジトリ上のパッケージを調べたい場合は
+
+```
+% sudo apt search {パッケージ名}
+```
+
 ### `apt install --reinstall`の使用用途
 
 パッケージをインストールしたあとで、重要な構成ファイルを削除してしまったとします。そのファイルだけを取得するために再インストールしようとしても、システム的にはすでにインストールされているので、そのままでは上書きインストールができません。このときに`apt install --reinstall`を用います。
@@ -106,6 +190,98 @@ postfixパッケージを再インストールする場合：
 
 ```
 % sudo apt install --reinstall postfix
+```
+
+### 不要になったパッケージの削除
+
+`man`コマンドで`apt`を見てみると、パッケージ削除に関して以下のような記述が確認できます.
+
+```zsh
+% man apt
+install, reinstall, remove, purge (apt-get(8))
+           Performs the requested action on one or more packages specified via
+           regex(7), glob(7) or exact match. The requested action can be overridden
+           for specific packages by appending a plus (+) to the package name to
+           install this package or a minus (-) to remove it.
+
+           A specific version of a package can be selected for installation by
+           following the package name with an equals (=) and the version of the
+           package to select. Alternatively the version from a specific release can
+           be selected by following the package name with a forward slash (/) and
+           codename (buster, bullseye, sid ...) or suite name (stable, testing,
+           unstable). This will also select versions from this release for
+           dependencies of this package if needed to satisfy the request.
+
+           Removing a package removes all packaged data, but leaves usually small
+           (modified) user configuration files behind, in case the remove was an
+           accident. Just issuing an installation request for the accidentally
+           removed package will restore its function as before in that case. On the
+           other hand you can get rid of these leftovers by calling purge even on
+           already removed packages. Note that this does not affect any data or
+           configuration stored in your home directory.
+```
+
+`apt remove <package name>`によって不要となったパッケージを削除することができますが、ユーザー設定ファイルなどの関連ファイルは残ってしまいます. 設定ファイルも含めて削除したい場合は、`apt purge <package name>`を実行します. ただし、この場合も依存関係上不要となったパッケージは残り続けます. 依存関係上参照されてなくなったパッケージを除去したい場合は`apt autoremove`コマンドを実行します. 実際にサービスとして使っているパッケージも削除されたというケースもあるので、注意が必要です.
+
+```zsh
+% man apt
+autoremove (apt-get(8))
+           autoremove is used to remove packages that were automatically installed
+           to satisfy dependencies for other packages and are now no longer needed
+           as dependencies changed or the package(s) needing them were removed in
+           the meantime.
+
+           You should check that the list does not include applications you have
+           grown to like even though they were once installed just as a dependency
+           of another package. You can mark such a package as manually installed by
+           using apt-mark(8). Packages which you have installed explicitly via
+           install are also never proposed for automatic removal.
+```
+
+> Autoremoveの実行結果を事前に確認する
+
+```zsh
+% apt autoremove --just-print    
+NOTE: This is only a simulation!
+      apt needs root privileges for real execution.
+      Keep also in mind that locking is deactivated,
+      so don't depend on the relevance to the real current situation!
+Reading package lists... Done
+Building dependency tree       
+Reading state information... Done
+The following packages will be REMOVED:
+  libevent-core-2.1-7 libevent-pthreads-2.1-7 libopts25 sntp
+0 upgraded, 0 newly installed, 4 to remove and 67 not upgraded.
+Remv sntp [1:4.2.8p12+dfsg-3ubuntu4.20.04.1]
+Remv libevent-pthreads-2.1-7 [2.1.11-stable-1]
+Remv libevent-core-2.1-7 [2.1.11-stable-1]
+Remv libopts25 [1:5.18.16-3]
+```
+
+### パッケージがインストールしたファイル群を確認する
+
+パッケージがインストールしたファイルの確認は「低レベル」パッケージマネジャーの担当領域なので、`dpkg`コマンドを用います.
+一例として、
+
+```zsh
+% dpkg -L vim   
+/.
+/usr
+/usr/bin
+/usr/bin/vim.basic
+/usr/share
+/usr/share/bug
+/usr/share/bug/vim
+/usr/share/bug/vim/presubj
+/usr/share/bug/vim/script
+/usr/share/doc
+/usr/share/doc/vim
+/usr/share/doc/vim/NEWS.Debian.gz
+/usr/share/doc/vim/changelog.Debian.gz
+/usr/share/doc/vim/copyright
+/usr/share/lintian
+/usr/share/lintian/overrides
+/usr/share/lintian/overrides/vim
 ```
 
 ## 3. リポジトリの設定
@@ -149,58 +325,7 @@ dep http://jp.archive.ubuntu.com/ubuntu/ focal main restricted
 
 apt listコマンドを使うと、パッケージ一覧を表示します。パッケージ名でソートされています。インストールされているパッケージは`[[installed]]`, 依存関係に従ってインストールされたパッケージは`[[installed,automatic]]`と表示されます。それらが表示されていないパッケージはインストールされていないパッケージです。また、ワイルドカードを使った指定も可能です。`apt list "apache2*"`と入力すると、`apache2`から始まる名前のパッケージを表示します。インストールされているパッケージだけを表示したい場合は、`apt list --installed`と入力します。
 
-## 4. パッケージの情報の取得
-
-パッケージの情報は`show`サブコマンドで表示できます、リポジトリにあるパッケージであれば、インストールされているかどうかにかかわらず表示できます。VScodeのパッケージ情報を表示してみます。
-
-```
-% apt show code
-ackage: code
-Version: 1.52.1-1608136922
-Priority: optional
-Section: devel
-Maintainer: Microsoft Corporation <vscode-linux@microsoft.com>
-Installed-Size: 273 MB
-Provides: visual-studio-code
-Depends: libnss3 (>= 2:3.26), gnupg, apt, libxkbfile1, libsecret-1-0, libgtk-3-0 (>= 3.10.0), libxss1, libgbm1
-Conflicts: visual-studio-code
-Replaces: visual-studio-code
-Homepage: https://code.visualstudio.com/
-Download-Size: 64.8 MB
-APT-Manual-Installed: yes
-APT-Sources: https://packages.microsoft.com/repos/code stable/main amd64 Packages
-Description: Code editing. Redefined.
- Visual Studio Code is a new choice of tool that combines the simplicity of a code editor with what developers need for the core edit-build-debug cycle. See https://code.visualstudio.com/docs/setup/linux for installation instructions and FAQ.
-
-```
-
-なお、正常な設定として "Provides" と "Conflicts" と "Replaces" とを単一バーチャルパッケージに対し同時宣言することがあります。こうするといかなる時にも当該バーチャルパッケージを提供する実パッケージのうち確実に一つだけがインストールされます。
-
-依存関係だけ確認したい場合は`apt depends`コマンドを用います。
-
-```
-% apt depends code
-code
-  Depends: libnss3 (>= 2:3.26)
-  Depends: gnupg
-  Depends: apt
-  Depends: libxkbfile1
-  Depends: libsecret-1-0
-  Depends: libgtk-3-0 (>= 3.10.0)
-  Depends: libxss1
-  Depends: libgbm1
-  Conflicts: <visual-studio-code>
-  Replaces: <visual-studio-code>
-    code
-```
-
-なお部分一致でリポジトリ上のパッケージを調べたい場合は
-
-```
-% sudo apt search {パッケージ名}
-```
-
-## 5. リポジトリの追加
+## 4. リポジトリの追加
 
 リポジトリは、Ubuntu公式が運用しているものばかりではなく、サードパーティのリポジトリもあります。サードパーティ性のソフトウェアをインストールする際は、そのリポジトリをあらかじめ追加しておくとaptコマンドが使えるので便利です。リポジトリの追加には`add-apt-repository`を使います。PPAを登録すると、`apt upgrade`でアップグレードの対象となるため、システム全体で一括してアップグレードをかけることができる便利さがあります。一方、安易に導入するとシステムの安定性やセキュリティを損なうことも考えられるので慎重さが必要です。
 
@@ -248,3 +373,8 @@ embrosyn-ubuntu-cinnamon-focal.list	     slack.list
 % sudo ppa-purge ppa:openjdk-r/ppa
 ```
 
+
+## References
+
+- [APT公式ウェブサイト](https://tracker.debian.org/pkg/apt)
+- [Debianパッケージ管理](https://www.debian.org/doc/manuals/debian-reference/ch02.ja.html)<br> [Launchpad](https://launchpad.net/)
