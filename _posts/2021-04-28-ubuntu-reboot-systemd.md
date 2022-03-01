@@ -11,7 +11,8 @@ purpose:
 tags:
 
 - Ubuntu 20.04 LTS
-- vim
+- reboot
+- shell
 ---
 
 <!-- Global site tag (gtag.js) - Google Analytics -->
@@ -24,15 +25,11 @@ tags:
   gtag('config', 'G-LVL413SV09');
 </script>
 
-||概要|
-|---|---|
-|目的|reboot コマンド／poweroff コマンドの仕組み|
-|参考|- [Ubuntuサーバー徹底入門 Tankobon Softcover](https://www.amazon.co.jp/Ubuntu%E3%82%B5%E3%83%BC%E3%83%90%E3%83%BC%E5%BE%B9%E5%BA%95%E5%85%A5%E9%96%80-%E4%B8%AD%E5%B3%B6-%E8%83%BD%E5%92%8C/dp/4798155764)<br>- [systemd のユニットファイルの作り方](https://tex2e.github.io/blog/linux/create-my-systemd-service)|
-
+**Table of Contents**
 <!-- START doctoc generated TOC please keep comment here to allow auto update -->
 <!-- DON'T EDIT THIS SECTION, INSTEAD RE-RUN doctoc TO UPDATE -->
 
-- [解決したい問題](#%E8%A7%A3%E6%B1%BA%E3%81%97%E3%81%9F%E3%81%84%E5%95%8F%E9%A1%8C)
+- [今回紹介すること](#%E4%BB%8A%E5%9B%9E%E7%B4%B9%E4%BB%8B%E3%81%99%E3%82%8B%E3%81%93%E3%81%A8)
 - [reboot/shutdownコマンド](#rebootshutdown%E3%82%B3%E3%83%9E%E3%83%B3%E3%83%89)
   - [rebootコマンドとpoweroffコマンドの実体](#reboot%E3%82%B3%E3%83%9E%E3%83%B3%E3%83%89%E3%81%A8poweroff%E3%82%B3%E3%83%9E%E3%83%B3%E3%83%89%E3%81%AE%E5%AE%9F%E4%BD%93)
 - [systemctlとは？Ubuntuはどのようにサービス管理をしているのか？](#systemctl%E3%81%A8%E3%81%AFubuntu%E3%81%AF%E3%81%A9%E3%81%AE%E3%82%88%E3%81%86%E3%81%AB%E3%82%B5%E3%83%BC%E3%83%93%E3%82%B9%E7%AE%A1%E7%90%86%E3%82%92%E3%81%97%E3%81%A6%E3%81%84%E3%82%8B%E3%81%AE%E3%81%8B)
@@ -40,11 +37,11 @@ tags:
   - [unit: systemd によるサービス処理の単位](#unit-systemd-%E3%81%AB%E3%82%88%E3%82%8B%E3%82%B5%E3%83%BC%E3%83%93%E3%82%B9%E5%87%A6%E7%90%86%E3%81%AE%E5%8D%98%E4%BD%8D)
   - [Unit構成ファイル](#unit%E6%A7%8B%E6%88%90%E3%83%95%E3%82%A1%E3%82%A4%E3%83%AB)
   - [systemctlコマンド](#systemctl%E3%82%B3%E3%83%9E%E3%83%B3%E3%83%89)
+- [References](#references)
 
 <!-- END doctoc generated TOC please keep comment here to allow auto update -->
 
-
-## 解決したい問題
+## 今回紹介すること
 
 - CLIからLinux OSをrebootとshutdownするコマンドの確認
 - システム起動の仕組みのまとめ
@@ -62,6 +59,10 @@ rebootコマンド／poweroffコマンドのオプションは
 |`-f` |	`--force` |	強制的に再起動または電源をオフにする|
 
 コマンドラインからLinuxを再起動したり、PCの電源をオフにしたりする場合、伝統的には　`shutdown` コマンドを使用します.しかし、shutdownコマンドは「スーパーユーザー」しか利用が許可されておらず、一般ユーザーはパスワードを入力しないと実行できません.個人用のLinux PCの場合、デスクトップのメニューから簡単に再起動や電源をオフできるように、rebootコマンドやpoweroffコマンドを使うことで、一般ユーザーでもコマンドから手軽に再起動や電源オフが実行できます.
+
+> `shutdown`コマンドになぜ管理者権限が必要?
+
+LinuxというかUnixシステムの話になりますが、Unixシステムの利用方法の基本は「UNIXがインストールされたコンピューター（ホスト）に、ネットワーク経由で複数の別のターミナルから接続して、作業を行う」です. そのため、一般ユーザーレベルに`shutdown`コマンドの利用を許してしまうと、他の人が作業しているのにいきなりホストが停止するという事態を招きかねません. そのため、`shutdown`コマンドに管理者権限が必要ということになっています.
 
 ### rebootコマンドとpoweroffコマンドの実体
 
@@ -148,3 +149,8 @@ systemctl サブコマンド [Unit] [option]
 |システムを再起動|systemctl reboot|
 |システムをシャットダウン|systemctl poweroff|
 
+
+## References
+
+- [Ubuntuサーバー徹底入門 Tankobon Softcover](https://www.amazon.co.jp/Ubuntu%E3%82%B5%E3%83%BC%E3%83%90%E3%83%BC%E5%BE%B9%E5%BA%95%E5%85%A5%E9%96%80-%E4%B8%AD%E5%B3%B6-%E8%83%BD%E5%92%8C/dp/4798155764)
+- [systemd のユニットファイルの作り方](https://tex2e.github.io/blog/linux/create-my-systemd-service)
