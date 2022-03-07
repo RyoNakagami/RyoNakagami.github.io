@@ -54,7 +54,7 @@ $$
 $$
 \begin{align*}
 y(t) &= -\frac{1}{a_2}x(t)\\
-&\Rightarrow\ddot y & = 0
+&\Rightarrow\ddot y = 0
 \end{align*}
 $$
 
