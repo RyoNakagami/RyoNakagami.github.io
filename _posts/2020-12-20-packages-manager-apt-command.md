@@ -1,6 +1,6 @@
 ---
 layout: post
-title: "Linux環境構築基礎知識：パッケージの管理"
+title: "Linux環境構築基礎知識：パッケージマネジャーの導入"
 subtitle: "APTによるパッケージ管理"
 author: "Ryo"
 header-img: "img/post-bg-rwd.jpg"
