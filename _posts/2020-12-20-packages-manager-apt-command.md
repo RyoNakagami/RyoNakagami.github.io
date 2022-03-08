@@ -59,6 +59,7 @@ tags:
   - [なぜPPAを使うのか？](#%E3%81%AA%E3%81%9Cppa%E3%82%92%E4%BD%BF%E3%81%86%E3%81%AE%E3%81%8B)
   - [Syntax](#syntax-1)
   - [リポジトリの削除](#%E3%83%AA%E3%83%9D%E3%82%B8%E3%83%88%E3%83%AA%E3%81%AE%E5%89%8A%E9%99%A4)
+- [関連記事](#%E9%96%A2%E9%80%A3%E8%A8%98%E4%BA%8B)
 - [References](#references)
 
 <!-- END doctoc generated TOC please keep comment here to allow auto update -->
@@ -442,6 +443,9 @@ embrosyn-ubuntu-cinnamon-focal.list	     slack.list
 % sudo ppa-purge ppa:openjdk-r/ppa
 ```
 
+## 関連記事
+
+- [Linux基礎知識：bash環境でのパッケージのサジェスト機能](https://ryonakagami.github.io/2022/02/06/suggest-apt-packages-function/)
 
 ## References
 
