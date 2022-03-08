@@ -54,7 +54,7 @@ $$
 $$
 \begin{align*}
 y(t) &= -\frac{1}{a_2}x(t)\\
-&\Rightarrow\ddot y = 0
+&\Rightarrow\dot y = 0
 \end{align*}
 $$
 
@@ -64,7 +64,7 @@ $$
 
 $$
 \begin{align*}
-\ddot y(t) = 0.5 y(t) - 2
+\dot y(t) = 0.5 y(t) - 2
 \end{align*}
 $$
 
@@ -72,16 +72,16 @@ $$
 
 $$
 \begin{align*}
-\ddot y(t) &= 0.5 (4 + \epsilon) - 2\\
+\dot y(t) &= 0.5 (4 + \epsilon) - 2\\
 &= 0.5\epsilon > 0
 \end{align*}
 $$
 
-したがって、ちょっとでも均衡状態からずれてしまうと$\ddot y(t) > 0$より$y^*=4$から離れ続けてしまうことがわかります. 逆に
+したがって、ちょっとでも均衡状態からずれてしまうと$\dot y(t) > 0$より$y^*=4$から離れ続けてしまうことがわかります. 逆に
 
 $$
 \begin{align*}
-\ddot y(t) = -0.5 y(t) + 2
+\dot y(t) = -0.5 y(t) + 2
 \end{align*}
 $$
 
@@ -115,7 +115,7 @@ ax.plot(t, sol[:, 0],label = 'y0 = 4')
 ax.plot(t, sol[:, 1],label = 'y0 = 4 + eps')
 ax.plot(t, sol[:, 2],label = 'y0 = 4 - eps')
 ax.legend()
-ax.set_title('不安定均衡の常微分方程式\n $\ddot y(t) = {}y(t) - {}$'.format(a, b), fontsize=16)
+ax.set_title('不安定均衡の常微分方程式\n $\dot y(t) = {}y(t) - {}$'.format(a, b), fontsize=16)
 ax.set_xlabel('t', fontsize=20)
 ax.set_ylabel('y(t)', fontsize=20)
 ```
