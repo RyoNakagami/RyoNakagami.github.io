@@ -1,6 +1,6 @@
 ---
 layout: post
-title: "Ubuntu環境構築基礎知識：パッケージの管理"
+title: "Linux環境構築基礎知識：パッケージの管理"
 subtitle: "APTによるパッケージ管理"
 author: "Ryo"
 header-img: "img/post-bg-rwd.jpg"
@@ -42,7 +42,9 @@ tags:
 <!-- DON'T EDIT THIS SECTION, INSTEAD RE-RUN doctoc TO UPDATE -->
 
 - [1. パッケージ管理とは](#1-%E3%83%91%E3%83%83%E3%82%B1%E3%83%BC%E3%82%B8%E7%AE%A1%E7%90%86%E3%81%A8%E3%81%AF)
-  - [Debian系OSのパッケージマネジャー](#debian%E7%B3%BBos%E3%81%AE%E3%83%91%E3%83%83%E3%82%B1%E3%83%BC%E3%82%B8%E3%83%9E%E3%83%8D%E3%82%B8%E3%83%A3%E3%83%BC)
+  - [バイナリパッケージの構造](#%E3%83%90%E3%82%A4%E3%83%8A%E3%83%AA%E3%83%91%E3%83%83%E3%82%B1%E3%83%BC%E3%82%B8%E3%81%AE%E6%A7%8B%E9%80%A0)
+  - [パッケージの依存関係](#%E3%83%91%E3%83%83%E3%82%B1%E3%83%BC%E3%82%B8%E3%81%AE%E4%BE%9D%E5%AD%98%E9%96%A2%E4%BF%82)
+  - [Debian系OSのパッケージマネジャー: なぜaptが便利なのか？](#debian%E7%B3%BBos%E3%81%AE%E3%83%91%E3%83%83%E3%82%B1%E3%83%BC%E3%82%B8%E3%83%9E%E3%83%8D%E3%82%B8%E3%83%A3%E3%83%BC-%E3%81%AA%E3%81%9Capt%E3%81%8C%E4%BE%BF%E5%88%A9%E3%81%AA%E3%81%AE%E3%81%8B)
 - [2. APT](#2-apt)
   - [aptコマンドのSyntax](#apt%E3%82%B3%E3%83%9E%E3%83%B3%E3%83%89%E3%81%AEsyntax)
   - [パッケージの情報の取得](#%E3%83%91%E3%83%83%E3%82%B1%E3%83%BC%E3%82%B8%E3%81%AE%E6%83%85%E5%A0%B1%E3%81%AE%E5%8F%96%E5%BE%97)
@@ -63,11 +65,89 @@ tags:
 
 ## 1. パッケージ管理とは
 
-Linuxではパッケージという単位でソフトウェアを管理しています。パッケージにはいろいろな種類があります。Debian GNU/LinuxやUbuntuではDebian形式のパッケージを採用しています。
+Linuxではパッケージという単位でソフトウェアを管理しています。パッケージにはいろいろな種類があります。Debian GNU/LinuxやUbuntuではDebian形式,`.deb`拡張子のパッケージを採用しています。
 
 
 Fig 1:パッケージの概念
 <img src = "https://github.com/ryonakimageserver/omorikaizuka/blob/master/%E3%83%96%E3%83%AD%E3%82%B0%E7%94%A8/20201220-linux-packages-diagram.png?raw=true">
+
+なお、Debian形式パッケージは`ar`, `tar`, and `xz`といった古典的UNIXコマンドしか使えない環境でも展開できるように設計されています. 
+基本的にはDebian形式パッケージの展開は`dpkg`, `apt`といったコマンドを使いますが、これらコマンドを誤って削除してしまった時でも、パッケージが展開できなくなるという事態を回避することができます.
+
+
+### バイナリパッケージの構造
+
+`.deb`パッケージの構成要素を確認してみましょう. Ubuntu用のZoomパッケージを例に確認してみます:
+
+```zsh
+% ar t zoom_amd64.deb
+debian-binary
+control.tar.xz
+data.tar.xz
+_gpgbuilder
+```
+
+これをみるとZoom Debian パッケージは4つのファイルから成り立っています
+
+---|---
+debian-binary|.debファイルパッケージフォーマットバージョンのバージョンを示すテキストファイルです
+control.tar.xz|パッケージ名やバージョンなどのメタ情報、およびパッケージのインストール前、インストール中、またはインストール後に実行するスクリプトが含まれています
+data.tar.xz|パッケージから展開されるすべてのファイルが含まれています. 実行ファイル、ライブラリ、ドキュメントなどがすべて保存されています
+_gpgbuilder|GPG Keysの生成関連ファイル
+
+### パッケージの依存関係
+
+`apt-cache show`コマンドをもちいて`gzsip`パッケージの情報を確認してみます.
+
+```zsh
+% apt-cache show gzip              
+Package: gzip
+Architecture: amd64
+Version: 1.10-0ubuntu4
+Priority: required
+Essential: yes
+Section: utils
+Origin: Ubuntu
+Maintainer: Ubuntu Developers <ubuntu-devel-discuss@lists.ubuntu.com>
+Original-Maintainer: Bdale Garbee <bdale@gag.com>
+Bugs: https://bugs.launchpad.net/ubuntu/+filebug
+Installed-Size: 245
+Pre-Depends: libc6 (>= 2.17)
+Depends: dpkg (>= 1.15.4) | install-info
+Suggests: less
+Filename: pool/main/g/gzip/gzip_1.10-0ubuntu4_amd64.deb
+...
+```
+
+依存関係について、以下の記述が確認できます.
+
+```
+Pre-Depends: libc6 (>= 2.17)
+Depends: dpkg (>= 1.15.4) | install-info
+```
+
+この情報がどのように取得しているかというと`control.tar.xz`の情報を読み込んで表示しています. `>=` という記号がありますが、これはどのversionを許容しているかを示します.
+
+- `<<`: より低いことを意味します
+- `<=`: 以下を意味します
+- `=`: 等しいことを意味します (「2.6.1」は「2.6.1-1」と等しくありません)
+- `>=`: 以上を意味します
+- `>>`: より高いことを意味します。
+
+また、`|`という記号は論理演算の OR を示しています. ANDの場合は `,` で表現されます. Pre-dependsとDependsの違いは前者のほうが後者より強い依存関係と理解するのが良いです. 通常の依存関係, `Depends`とは、依存関係が記述されたパッケージの設定前に、依存関係にあるパッケージの展開および設定を行わなければいけないことを示しています. 先行依存, `Pre-Depends`とは、先行依存関係が記述されたパッケージのインストール前スクリプトの実行前 (インストールの前) に、先行依存関係にあるパッケージの展開および設定を行わなければいけないことを規定しています.
+
+### Debian系OSのパッケージマネジャー: なぜaptが便利なのか？
+
+Debian形式のパッケージを管理するにあたって、パッケージのインストールや削除だけに限れば`dpkg`コマンドを使うだけで十分ですが、上で見たようにパッケージには相互に依存関係があります. 手動で管理するのは大変ですが、そこのところをうまい具合に対応した上でパッケージを管理してくれるソフトウェアがAPTです. なお、`apt install`コマンドでパッケージをインストールするとき、実際にはバックエンドでdpkgを使用してそれを実現しています. 
+
+なお、「パッケージのインストールや削除」の機能を担当するパッケージマネジャーを「低レベル」と分類し、「依存関係やメタデータ検索」の機能を担当するパッケージマネジャーを「高レベル」と分類します.
+
+---|---
+`dpkg`|低レベルパッケージマネジャー, 依存関係の問題が出てきた場合エラーメッセージの出力のみ
+`apt`|高レベルパッケージマネジャー（低レベルの機能もカバーしているが、内部で`dpkg`を利用している）
+
+dpkg はシステムツール (バックエンド)、apt はユーザに近いツールという感じです. 
+
 
 > もしパッケージマネジャーがない世界だったら
 
@@ -78,17 +158,6 @@ Fig 1:パッケージの概念
 - configスクリプト, Makefileを読み込み、どのような手順でbuildするか実行計画を立てる
 - 環境差異問題の対処をする
 - `build`実行時にでてくるエラーに対処（原因究明など）
-
-### Debian系OSのパッケージマネジャー
-
-Debian形式のパッケージを管理するにあたって、パッケージのインストールや削除だけに限れば`dpkg`コマンドを使うだけで十分ですが、パッケージには相互に依存関係があります. 手動で管理するのは大変ですが、そこのところをうまい具合に対応した上でパッケージを管理してくれるソフトウェアがAPTです. なお、`apt install`コマンドでパッケージをインストールするとき、実際にはバックエンドでdpkgを使用してそれを実現しています. 
-
-なお、「パッケージのインストールや削除」の機能を担当するパッケージマネジャーを「低レベル」と分類し、「依存関係やメタデータ検索」の機能を担当するパッケージマネジャーを「高レベル」と分類します.
-
----|---
-`dpkg`|低レベルパッケージマネジャー, 依存関係の問題が出てきた場合エラーメッセージの出力のみ
-`apt`|高レベルパッケージマネジャー（低レベルの機能もカバーしているが、内部で`dpkg`を利用している）
-
 
 ## 2. APT
 
@@ -377,4 +446,6 @@ embrosyn-ubuntu-cinnamon-focal.list	     slack.list
 ## References
 
 - [APT公式ウェブサイト](https://tracker.debian.org/pkg/apt)
-- [Debianパッケージ管理](https://www.debian.org/doc/manuals/debian-reference/ch02.ja.html)<br> [Launchpad](https://launchpad.net/)
+- [Debianパッケージ管理](https://www.debian.org/doc/manuals/debian-reference/ch02.ja.html)
+- [Debian 管理者ハンドブック](https://debian-handbook.info/browse/ja-JP/stable/index.html)
+- [Launchpad](https://launchpad.net/)
