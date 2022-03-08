@@ -43,7 +43,7 @@ tags:
 
 $$
 \begin{align*}
-a_1\ddot y(t) + a_2 y(t) + x(t) = 0 \  \ \text{ where } \ddot y = \frac{dy(t)}{t} \tag{1.1}
+a_1\dot y(t) + a_2 y(t) + x(t) = 0 \  \ \text{ where } \dot y = \frac{dy(t)}{t} \tag{1.1}
 \end{align*}
 $$
 

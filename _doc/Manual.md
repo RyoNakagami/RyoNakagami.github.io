@@ -298,6 +298,7 @@ Google Search Console は、Google 検索結果でのサイトの掲載順位を
 - [utterances](https://utteranc.es/)
 - [Jekyllブログにコメント機能](https://dev-yakuza.posstree.com/jekyll/utterances/)
 - [GitHub Pagesで作ったブログをGoogle検索にヒットさせる](https://www.bedroomcomputing.com/2020/04/2020-0408-googleconsole/)
+- [Jekyll Theme](https://github.com/yk-liu/yk-liu.github.io)
 
 Releases
 --------

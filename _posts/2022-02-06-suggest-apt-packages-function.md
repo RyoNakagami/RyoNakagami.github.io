@@ -248,10 +248,6 @@ if __name__ == "__main__":
 ```
 
 
-
-
-
-
 ## Ryo's Tech Blog 関連記事
 
 - [Ubuntu環境構築基礎知識：パッケージの管理](https://ryonakagami.github.io/2020/12/20/packages-manager-apt-command/)
