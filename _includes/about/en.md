@@ -1,14 +1,41 @@
-> test: 英語
+## 便利リンク集
+### 統計学/数値計算
 
-about myself
+> Blog
 
-##### [OASIS All Around The World](https://www.youtube.com/watch?v=bdT8ixdxPX4)
+- [John D. Cook, Solving hard problems](https://www.johndcook.com/blog/)
+    - 統計, 数値計算, 数学についてコンパクトにレベルの高い内容をカバー
+- [パズルの国のアリス](https://www.nikkei-science.com/page/magazine/alice/yyyymm/question.html)
 
-test test
 
 
-##### 参考
+### 経済学
 
-- [QuantEcon][1]
+> General
 
-[1]: https://python.quantecon.org 
+- [QuantEcon, Python](https://python.quantecon.org)
+    - 学部上級・大学院修士レベルの経済学のコンテンツをマクロ経済学よりにカバー
+    - Julia版の方が内容はよいかも
+
+
+> 個人ページ/Blog
+
+- [Aviv Nevo](https://web.sas.upenn.edu/anevo/60-2/)
+
+### Linux
+
+> 個人ページ/Blog
+
+- [蝶野まこ Blog](https://tex2e.github.io/blog/)
+
+
+> 環境構築
+
+- [金子邦彦研究室](https://www.kkaneko.jp/index.html)
+    - Linux, Windowsの環境構築周りを信頼できるレベルを維持しながら幅広くカバー
+- [国立成育医療研究センター データサイエンス研修](https://foxglovetree.wiki.fc2.com/wiki/Environment)
+    - 試行錯誤しながら頑張ってまとめてたんだろうなって感じのブログ
+### Visualization
+
+- [App Diagram](https://app.diagrams.net/)
+    - ER図を作画するときに使える無料ツール
