@@ -38,7 +38,9 @@ description: ""
     </h6>
     
         <!--Posted by {% if post.author %}{{ post.author }}{% else %}{{ site.title }}{% endif %} on {{ post.date | date: "%B %-d, %Y" }}  -->
-        Posted on {{ post.date| date: "%B %-d, %Y"}}{% if post.revise_date %}, Modified on {{ post.revise_date | date: "%B %-d, %Y" }}{% endif %}
+            <font color="gray" size='2'>
+            投稿日 {{ post.date| date: "%Y-%m-%d"}}{% if post.revise_date %}<br>更新日 {{ post.revise_date | date: "%Y-%m-%d" }}{% endif %}
+            </font>
 </div>
 <hr>
 {% endfor %}
