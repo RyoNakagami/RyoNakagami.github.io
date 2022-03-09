@@ -24,19 +24,22 @@ description: ""
             {{ post.subtitle }}
         </h3>
         {% endif %}
-        <div class="post-content-preview">
-            {% if post.lang == 'en' %}
-                {{ post.content | strip_html | truncate:300 }}
-            {% else %}
-                {{ post.purpose | strip_html | truncate:200 }}
-                <br>
-                {{ post.goal | strip_html | truncate:200 }}
-            {% endif %}
-        </div>
     </a>
-    <p class="post-meta">
-        Posted by {% if post.author %}{{ post.author }}{% else %}{{ site.title }}{% endif %} on {{ post.date | date: "%B %-d, %Y" }}
-    </p>
+    <h6 class="post-tags">
+        <font size="2" color="gray">Post Tags</font>
+        {% for tag in post.tags %}
+        &#9658;
+         <a class="post-tag" 
+            href="{{ site.baseurl }}/archive/?tag={{ tag | url_encode }}"
+            rel="{{ tag.size }}"
+            style="padding: 2px; margin-bottom: 6px; border: 1px dotted rgba(255, 255, 255, 0.8); border-radius: 99em; color: #0085a1;"
+            >{{ tag }}
+        </a>
+        {% endfor %}
+    </h6>
+    
+        <!--Posted by {% if post.author %}{{ post.author }}{% else %}{{ site.title }}{% endif %} on {{ post.date | date: "%B %-d, %Y" }}  -->
+        Posted on {{ post.date| date: "%B %-d, %Y"}}{% if post.revise_date %}, Modified on {{ post.revise_date | date: "%B %-d, %Y" }}{% endif %}
 </div>
 <hr>
 {% endfor %}

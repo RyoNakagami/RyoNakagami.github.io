@@ -1,18 +1,18 @@
 ---
 layout: post
-title: "微粉方程式の基礎と分析モデルの紹介"
+title: "微分方程式の基礎と分析モデルの紹介"
 subtitle: "The COVID-19 SEIR Modelの紹介"
 author: "Ryo"
 header-img: "img/bg-statistics.png"
 header-mask: 0.4
 catelog: true
 mathjax: true
-purpose: 
+revise_date: 2022-03-09 
 tags:
 
 - 微分方程式
 - COVID-19
-- python
+- Python
 ---
 
 **Table of Contents**
