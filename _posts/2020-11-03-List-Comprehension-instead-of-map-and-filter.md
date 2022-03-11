@@ -11,10 +11,7 @@ purpose:
 tags:
 
 - Python
-- Python Tips
-- List
-- map
-- filter
+- 前処理
 ---
 
 <!-- Global site tag (gtag.js) - Google Analytics -->
@@ -32,19 +29,19 @@ tags:
 |目的|List comprehensionとmapとfilterの比較|
 |プログラミング言語|Python 3.6.9 (Google Colabのデフォルト)|
 |実行環境|Google Colab|
-|参考|[Using List Comprehensions Instead of map and filter](https://www.oreilly.com/library/view/python-cookbook/0596001673/ch01s11.html)|
+
 
 
 <!-- START doctoc generated TOC please keep comment here to allow auto update -->
 <!-- DON'T EDIT THIS SECTION, INSTEAD RE-RUN doctoc TO UPDATE -->
 
-
-- [1. `map()`とは？](#1-mapとは)
-- [2. `filter()`とは？](#2-filterとは)
-- [3. List comprehensionとmapとfilterの比較](#3-list-comprehensionとmapとfilterの比較)
-  - [List comprehensionとmapの比較](#list-comprehensionとmapの比較)
-  - [List comprehensionとfilterの比較](#list-comprehensionとfilterの比較)
-  - [filterとmapとList comprehension](#filterとmapとlist-comprehension)
+- [1. `map()`とは？](#1-map%E3%81%A8%E3%81%AF)
+- [2. `filter()`とは？](#2-filter%E3%81%A8%E3%81%AF)
+- [3. List comprehensionとmapとfilterの比較](#3-list-comprehension%E3%81%A8map%E3%81%A8filter%E3%81%AE%E6%AF%94%E8%BC%83)
+  - [List comprehensionとmapの比較](#list-comprehension%E3%81%A8map%E3%81%AE%E6%AF%94%E8%BC%83)
+  - [List comprehensionとfilterの比較](#list-comprehension%E3%81%A8filter%E3%81%AE%E6%AF%94%E8%BC%83)
+  - [filterとmapとList comprehension](#filter%E3%81%A8map%E3%81%A8list-comprehension)
+- [Referenece](#referenece)
 
 <!-- END doctoc generated TOC please keep comment here to allow auto update -->
 
@@ -201,4 +198,6 @@ Wall time: 94.2 µs
 
 となります。
 
+## Referenece
 
+- [Using List Comprehensions Instead of map and filter](https://www.oreilly.com/library/view/python-cookbook/0596001673/ch01s11.html)

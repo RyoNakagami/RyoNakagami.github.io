@@ -11,6 +11,7 @@ purpose:
 tags:
 
 - Ubuntu 20.04 LTS
+- Font
 ---
 
 <!-- Global site tag (gtag.js) - Google Analytics -->

@@ -11,8 +11,8 @@ purpose:
 tags:
 
 - Ubuntu 20.04 LTS
-- reboot
-- shell
+- Linux
+- Shell
 ---
 
 <!-- Global site tag (gtag.js) - Google Analytics -->

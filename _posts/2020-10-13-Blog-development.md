@@ -10,8 +10,7 @@ goal: 成果物 git branchを用いたファイルバージョン管理やブロ
 catelog: true
 tags:
   - git
-  - git branch
-  - ブログ作業マニュアル
+  - GitHub Pages
 ---
 
 <!-- Global site tag (gtag.js) - Google Analytics -->
@@ -28,7 +27,6 @@ tags:
 |---|---|
 |目的|`git branch`を活用した[Ryo's Tech blog](https://ryonakagami.github.io)の更新手順のメモ|
 |Goal|`git branch`を用いたファイルバージョン管理やブログレイアウト管理ができるようになる|
-|参考|[サル先生のGit入門](https://backlog.com/ja/git-tutorial/stepup/01/)|
 
 <!-- START doctoc generated TOC please keep comment here to allow auto update -->
 <!-- DON'T EDIT THIS SECTION, INSTEAD RE-RUN doctoc TO UPDATE -->
@@ -51,6 +49,8 @@ tags:
   - [Google Analyticsの利用登録](#google-analytics%E3%81%AE%E5%88%A9%E7%94%A8%E7%99%BB%E9%8C%B2)
   - [記事ページへの埋め込み](#%E8%A8%98%E4%BA%8B%E3%83%9A%E3%83%BC%E3%82%B8%E3%81%B8%E3%81%AE%E5%9F%8B%E3%82%81%E8%BE%BC%E3%81%BF)
 - [4. 自作スニペット for Markdown Writing](#4-%E8%87%AA%E4%BD%9C%E3%82%B9%E3%83%8B%E3%83%9A%E3%83%83%E3%83%88-for-markdown-writing)
+- [Ryo's Tech Blog 関連記事](#ryos-tech-blog-%E9%96%A2%E9%80%A3%E8%A8%98%E4%BA%8B)
+- [References](#references)
 
 <!-- END doctoc generated TOC please keep comment here to allow auto update -->
 
@@ -371,3 +371,12 @@ $ git push --set-upstream origin master
 	  }
 }
 ```
+
+## Ryo's Tech Blog 関連記事
+
+- [ブログ編集手引きノート: GA4編](https://ryonakagami.github.io/2021/04/18/google-analytics-source-setting/)
+- [静的サイトジェネレーター Jekyllのインストール: GitHub Pages作成環境の構築](https://ryonakagami.github.io/2020/12/27/ubuntu-jekyll-install/)
+
+## References
+
+- [サル先生のGit入門](https://backlog.com/ja/git-tutorial/stepup/01/)

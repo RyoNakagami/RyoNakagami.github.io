@@ -11,8 +11,7 @@ purpose:
 tags:
 
 - Linux
-- shell
-- ls
+- Shell
 ---
 
 **Table of Contents**
