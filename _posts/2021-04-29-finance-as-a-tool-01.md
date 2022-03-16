@@ -13,15 +13,7 @@ tags:
 - finance
 ---
 
-<!-- Global site tag (gtag.js) - Google Analytics -->
-<script async src="https://www.googletagmanager.com/gtag/js?id=G-LVL413SV09"></script>
-<script>
-  window.dataLayer = window.dataLayer || [];
-  function gtag(){dataLayer.push(arguments);}
-  gtag('js', new Date());
 
-  gtag('config', 'G-LVL413SV09');
-</script>
 
 ||概要|
 |---|---|
@@ -243,4 +235,3 @@ $$
 - $$T_c$$: 実効税率(限界税率)
 
 負債コストに実効税率の調整をしている理由は、利息は税務上損金に計上され、節税効果があるためです.
-

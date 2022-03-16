@@ -14,15 +14,7 @@ tags:
 - Memoization
 ---
 
-<!-- Global site tag (gtag.js) - Google Analytics -->
-<script async src="https://www.googletagmanager.com/gtag/js?id=G-LVL413SV09"></script>
-<script>
-  window.dataLayer = window.dataLayer || [];
-  function gtag(){dataLayer.push(arguments);}
-  gtag('js', new Date());
 
-  gtag('config', 'G-LVL413SV09');
-</script>
 
 |概要||
 |---|---|
@@ -240,5 +232,3 @@ Time taken to execute the function without memoization is 0.03899407386779785
 509
 Time taken to execute the function with memoization is 0.002206802368164062
 ```
-
-

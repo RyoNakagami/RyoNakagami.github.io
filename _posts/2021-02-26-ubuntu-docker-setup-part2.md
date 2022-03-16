@@ -14,15 +14,7 @@ tags:
 - Docker
 ---
 
-<!-- Global site tag (gtag.js) - Google Analytics -->
-<script async src="https://www.googletagmanager.com/gtag/js?id=G-LVL413SV09"></script>
-<script>
-  window.dataLayer = window.dataLayer || [];
-  function gtag(){dataLayer.push(arguments);}
-  gtag('js', new Date());
 
-  gtag('config', 'G-LVL413SV09');
-</script>
 
 ||概要|
 |---|---|
@@ -219,6 +211,3 @@ $ docker pull <username>/getting-started
 ```zsh
 $ docker run -dp 3000:3000 <username>/getting-started
 ```
-
-
-

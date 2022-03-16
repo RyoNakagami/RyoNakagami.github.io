@@ -13,15 +13,7 @@ tags:
 - 会計分析
 ---
 
-<!-- Global site tag (gtag.js) - Google Analytics -->
-<script async src="https://www.googletagmanager.com/gtag/js?id=G-LVL413SV09"></script>
-<script>
-  window.dataLayer = window.dataLayer || [];
-  function gtag(){dataLayer.push(arguments);}
-  gtag('js', new Date());
 
-  gtag('config', 'G-LVL413SV09');
-</script>
 
 ||概要|
 |---|---|
@@ -171,4 +163,3 @@ CapExと異なり、OPEXは、その年に全額損金算入することがで�
 > よくあるミス
 
 ソフトウエアとして資産化すべきアイテムを、誤って委託費・制作費として処理した場合、申請の会計期の費用過大=事業利益が過少という問題が発生してしまいます。
-

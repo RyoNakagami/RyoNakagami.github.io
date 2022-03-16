@@ -14,15 +14,7 @@ tags:
 - Docker
 ---
 
-<!-- Global site tag (gtag.js) - Google Analytics -->
-<script async src="https://www.googletagmanager.com/gtag/js?id=G-LVL413SV09"></script>
-<script>
-  window.dataLayer = window.dataLayer || [];
-  function gtag(){dataLayer.push(arguments);}
-  gtag('js', new Date());
 
-  gtag('config', 'G-LVL413SV09');
-</script>
 
 ||概要|
 |---|---|
@@ -617,4 +609,3 @@ helloapp                                                          v1        eab0
 ## Appendix: GPGキー
 
 GPGキーとは「GnuPG」（GNU Privacy Guard）という暗号化ソフトで生成される公開鍵です。Linuxの場合，apt-getコマンドやyumコマンドを使ってインターネットから入手できるパッケージが正しい配布先のものかどうかのチェックなどに利用しています。
-

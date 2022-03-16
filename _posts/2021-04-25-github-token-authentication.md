@@ -15,15 +15,7 @@ tags:
 - GitHub
 ---
 
-<!-- Global site tag (gtag.js) - Google Analytics -->
-<script async src="https://www.googletagmanager.com/gtag/js?id=G-LVL413SV09"></script>
-<script>
-  window.dataLayer = window.dataLayer || [];
-  function gtag(){dataLayer.push(arguments);}
-  gtag('js', new Date());
 
-  gtag('config', 'G-LVL413SV09');
-</script>
 
 ||概要|
 |---|---|
@@ -195,4 +187,3 @@ git remote -v
 ### HTTPS URLによるクローンのメリット
 
 `https://` は、可視性に関係なく、すべてのリポジトリで使用できます。 `https://` のクローン URL は、ファイアウォールまたはプロキシの内側にいる場合でも機能します。コマンドラインで、HTTPS URL を使用してリモートリポジトリに `git clone`、`git fetch`、`git pull` または `git push` を行った場合、GitHub のユーザ名とパスワードの入力を求められます。 Gitがパスワードを求めてきたときは、代わりに個人アクセストークン（PAT）を入力します. 
-

@@ -14,15 +14,7 @@ tags:
 - Markdown
 ---
 
-<!-- Global site tag (gtag.js) - Google Analytics -->
-<script async src="https://www.googletagmanager.com/gtag/js?id=G-LVL413SV09"></script>
-<script>
-  window.dataLayer = window.dataLayer || [];
-  function gtag(){dataLayer.push(arguments);}
-  gtag('js', new Date());
 
-  gtag('config', 'G-LVL413SV09');
-</script>
 
 
 ||概要|
@@ -167,8 +159,3 @@ v10.19.0
 
 1. sortの対象としたいテーブルの直前に`<!-- sort-table -->`タグをつける
 2. `sort-markdown-tables -i Readme.md`とコンソールで実行する
-
-
-
-
-

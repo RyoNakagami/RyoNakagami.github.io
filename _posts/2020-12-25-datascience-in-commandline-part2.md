@@ -11,15 +11,7 @@ tags:
   - Shell
 ---
 
-<!-- Global site tag (gtag.js) - Google Analytics -->
-<script async src="https://www.googletagmanager.com/gtag/js?id=G-LVL413SV09"></script>
-<script>
-  window.dataLayer = window.dataLayer || [];
-  function gtag(){dataLayer.push(arguments);}
-  gtag('js', new Date());
 
-  gtag('config', 'G-LVL413SV09');
-</script>
 
 |概要||
 |---|---|
@@ -456,6 +448,3 @@ Linuxでは、パイプ, `|`を用いることで、コマンドの出力先を�
 |`コマンド > ファイル`|コマンドの実行結果をファイルに保存する|
 |`コマンド >> ファイル`|コマンドの実行結果をファイルに追記する（ファイル末尾に追加する）|
 |`コマンド &> ファイル`|コマンドの実行結果とエラー表示をファイルに保存する|
-
-
-

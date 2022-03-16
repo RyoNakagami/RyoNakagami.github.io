@@ -14,15 +14,7 @@ tags:
 - coding
 ---
 
-<!-- Global site tag (gtag.js) - Google Analytics -->
-<script async src="https://www.googletagmanager.com/gtag/js?id=G-LVL413SV09"></script>
-<script>
-  window.dataLayer = window.dataLayer || [];
-  function gtag(){dataLayer.push(arguments);}
-  gtag('js', new Date());
 
-  gtag('config', 'G-LVL413SV09');
-</script>
 
 ||概要|
 |---|---|
@@ -1907,4 +1899,3 @@ Coding Conventionは基本的には以下の項目を定めるものです:
 |`update`|更新保存する|
 |`memoize`|メモリ上に一時的に記録する|
 |`publish`|情報を外部に公開する形で保存する|
-

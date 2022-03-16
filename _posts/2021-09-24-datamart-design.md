@@ -14,15 +14,7 @@ tags:
 - テーブル設計
 ---
 
-<!-- Global site tag (gtag.js) - Google Analytics -->
-<script async src="https://www.googletagmanager.com/gtag/js?id=G-LVL413SV09"></script>
-<script>
-  window.dataLayer = window.dataLayer || [];
-  function gtag(){dataLayer.push(arguments);}
-  gtag('js', new Date());
 
-  gtag('config', 'G-LVL413SV09');
-</script>
 
 ||概要|
 |---|---|
@@ -507,5 +499,3 @@ CREATE OR REPLACE TABLE project_id.記事マスター
 論理削除は誤って削除した場合に簡単に戻せる(システムでのバグも同様)というメリットがありますが、実際にデータが削除されないため、容量の圧迫や性能低下につながり将来的な開発コストや運用コストが大きくなります. また、`is_deleted`カラムなどを用いて論理削除されたかどうか管理しなくていけなくなるため、`JOIN`して分析するとき常に`WHERE`句で`is_deleted = False`という条件を入れる必要があったり、また外部キーで参照されているときの論理削除時の挙動も複雑になります.
 
 ただし、業務システムではトランザクションデータは論理削除が選択されます. 理由は、トランザクションデータはログや履歴のデータであり、蓄積されることが前提のデータだからです.
-
-

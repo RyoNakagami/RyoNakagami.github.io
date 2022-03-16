@@ -14,15 +14,7 @@ tags:
 ---
 
 
-<!-- Global site tag (gtag.js) - Google Analytics -->
-<script async src="https://www.googletagmanager.com/gtag/js?id=G-LVL413SV09"></script>
-<script>
-  window.dataLayer = window.dataLayer || [];
-  function gtag(){dataLayer.push(arguments);}
-  gtag('js', new Date());
 
-  gtag('config', 'G-LVL413SV09');
-</script>
 
 ||概要|
 |---|---|
@@ -251,13 +243,3 @@ $ chmod 750 /etc/sudoers.d
 |-(不許可)|0|
 
 - home directoryのパーミッションWARNINGも同じ要領で修正可能
-
-
-
-
-
-
-
-
-
-
