@@ -11,7 +11,6 @@ purpose:
 tags:
 
 - math
-- プログラミング
 - 競技プログラミング
 - Python
 - Dynamic Programming

@@ -11,7 +11,7 @@ purpose:
 tags:
 
 - Ubuntu 20.04 LTS
-- LINE
+- App
 ---
 
 <!-- Global site tag (gtag.js) - Google Analytics -->

@@ -11,8 +11,7 @@ purpose:
 tags:
 
 - math
-- プログラミング
-- project euler
+- 競技プログラミング
 ---
 
 <!-- Global site tag (gtag.js) - Google Analytics -->

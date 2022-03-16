@@ -1,7 +1,7 @@
 ---
 layout: post
-title: "Ubuntu Desktop環境構築 Part 15"
-subtitle: "Discordのインストールと使い方"
+title: "Discordのインストールと使い方"
+subtitle: "Ubuntu Desktop環境構築 Part 15"
 author: "Ryo"
 header-img: "img/post-bg-miui6.jpg"
 header-mask: 0.4
@@ -11,7 +11,7 @@ purpose:
 tags:
 
 - Ubuntu 20.04 LTS
-- Discord
+- App
 ---
 
 <!-- Global site tag (gtag.js) - Google Analytics -->
