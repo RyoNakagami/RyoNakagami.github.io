@@ -11,7 +11,6 @@ uu_cnt: 100
 session_cnt: 100 
 tags:
 
-- 積分
 - math
 - 大学院入試
 ---

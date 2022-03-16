@@ -1,7 +1,7 @@
 ---
 layout: post
-title: "Ubuntu Desktop環境構築 Part 12"
-subtitle: "静的サイトジェネレーター Jekyllのインストール: GitHub Pages作成環境の構築"
+title: "静的サイトジェネレーター Jekyllのインストール: GitHub Pages作成環境の構築"
+subtitle: "Ubuntu Desktop環境構築 Part 12"
 author: "Ryo"
 header-img: "img/post-bg-rwd.jpg"
 header-mask: 0.4
@@ -11,7 +11,6 @@ purpose:
 tags:
 
 - Ubuntu 20.04 LTS
-- Jekyll
 - GitHub Pages
 ---
 
@@ -25,37 +24,35 @@ tags:
   gtag('config', 'G-LVL413SV09');
 </script>
 
-||概要|
-|---|---|
-|目的|静的サイトジェネレーター Jekyllのインストール: GitHub Pages作成環境の構築|
-|参考|- [Jekyll公式ページ](https://jekyllrb.com/docs/)|
-
+**Table of Contents**
 <!-- START doctoc generated TOC please keep comment here to allow auto update -->
 <!-- DON'T EDIT THIS SECTION, INSTEAD RE-RUN doctoc TO UPDATE -->
+## 1. 今回のスコープ
 
 - [1. 今回のスコープ](#1-%E4%BB%8A%E5%9B%9E%E3%81%AE%E3%82%B9%E3%82%B3%E3%83%BC%E3%83%97)
   - [やりたいこと](#%E3%82%84%E3%82%8A%E3%81%9F%E3%81%84%E3%81%93%E3%81%A8)
   - [Jekyllは何に使うのか？](#jekyll%E3%81%AF%E4%BD%95%E3%81%AB%E4%BD%BF%E3%81%86%E3%81%AE%E3%81%8B)
-  - [Requirements](#requirements)
+  - [Requirements for Jekyll](#requirements-for-jekyll)
 - [2. Jekyllのインストール](#2-jekyll%E3%81%AE%E3%82%A4%E3%83%B3%E3%82%B9%E3%83%88%E3%83%BC%E3%83%AB)
 - [3. GitHub Pages作成環境の構築](#3-github-pages%E4%BD%9C%E6%88%90%E7%92%B0%E5%A2%83%E3%81%AE%E6%A7%8B%E7%AF%89)
 - [4. Github-Pagesのフォントの変更](#4-github-pages%E3%81%AE%E3%83%95%E3%82%A9%E3%83%B3%E3%83%88%E3%81%AE%E5%A4%89%E6%9B%B4)
   - [解決したい症状](#%E8%A7%A3%E6%B1%BA%E3%81%97%E3%81%9F%E3%81%84%E7%97%87%E7%8A%B6)
   - [症状の発生原因](#%E7%97%87%E7%8A%B6%E3%81%AE%E7%99%BA%E7%94%9F%E5%8E%9F%E5%9B%A0)
   - [対策実施](#%E5%AF%BE%E7%AD%96%E5%AE%9F%E6%96%BD)
+- [References](#references)
 
 <!-- END doctoc generated TOC please keep comment here to allow auto update -->
-
 ## 1. 今回のスコープ
 ### やりたいこと
 
-静的サイトジェネレーター Jekyllのインストール
+- GitHub Pages作成環境の構築のための静的サイトジェネレーター Jekyllのインストール
+- GitHub Pagesの構成はすでにレポジトリーにあるとします（ない人はテンプレートのrepositoryをcloneしてください）
 
 ### Jekyllは何に使うのか？
 
 GitHub Pagesの[個人ブログ](https://ryonakagami.github.io/)の制作環境としてJekyllを用いてます。
 
-### Requirements
+### Requirements for Jekyll
 
 - Ruby version 2.4.0 or higher
 - RubyGems
@@ -164,3 +161,6 @@ body {
 ```
 
 
+## References
+
+- [Jekyll公式ページ](https://jekyllrb.com/docs/)
