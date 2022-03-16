@@ -1,6 +1,6 @@
 ---
 layout: post
-title: "Ubuntu 20.04 で DVD を視聴"
+title: "VLCを使って Ubuntu 20.04 で DVD 視聴"
 subtitle: "Ubuntu Desktop環境構築 Part 18"
 author: "Ryo"
 header-img: "img/about-bg.jpg"
@@ -11,7 +11,6 @@ purpose:
 tags:
 
 - Ubuntu 20.04 LTS
-- vlc
 ---
 
 <!-- Global site tag (gtag.js) - Google Analytics -->

@@ -1,7 +1,7 @@
 ---
 layout: post
-title: "Ubuntu Desktop環境構築 Part 8"
-subtitle: "キャッシュ削除ツール Bleachbitのインストール"
+title: "キャッシュ削除ツール Bleachbitのインストール"
+subtitle: "Ubuntu Desktop環境構築 Part 8"
 author: "Ryo"
 header-img: "img/post-bg-rwd.jpg"
 header-mask: 0.4
@@ -11,8 +11,6 @@ purpose:
 tags:
 
 - Ubuntu 20.04 LTS
-- dpkg
-- ファイルクリーナー
 ---
 
 <!-- Global site tag (gtag.js) - Google Analytics -->
@@ -26,11 +24,7 @@ tags:
 </script>
 
 
-||概要|
-|---|---|
-|目的|キャッシュ削除ツール Bleachbitのインストール|
-|参考|[Bleackbit deb packagesダウンロードサイト](https://www.bleachbit.org/download/linux)|
-
+**Table of Contents**
 <!-- START doctoc generated TOC please keep comment here to allow auto update -->
 <!-- DON'T EDIT THIS SECTION, INSTEAD RE-RUN doctoc TO UPDATE -->
 
@@ -42,13 +36,15 @@ tags:
 - [3. Bleachbitのインストール](#3-bleachbit%E3%81%AE%E3%82%A4%E3%83%B3%E3%82%B9%E3%83%88%E3%83%BC%E3%83%AB)
 - [4. Bleachbit使用方針](#4-bleachbit%E4%BD%BF%E7%94%A8%E6%96%B9%E9%87%9D)
   - [DOM Storageとは](#dom-storage%E3%81%A8%E3%81%AF)
+- [References](#references)
 
 <!-- END doctoc generated TOC please keep comment here to allow auto update -->
+
 
 ## 1. 今回のスコープ
 ### やりたいこと
 
-不要ファイル削除ツールBleachbitをインストールする
+不要ファイル/キャッシュ削除ツールBleachbitをインストールする
 
 ### 方針
 
@@ -119,3 +115,6 @@ DOM StorageはWindowオブジェクトの属性として定義されており、
 - sessionStorage - ウィンドウ（タブ）を閉じるまでデータが保持される
 - localStorage - ウィンドウ（タブ）を閉じた後もデータが保持される
 
+## References
+
+- [Bleackbit deb packagesダウンロードサイト](https://www.bleachbit.org/download/linux)
