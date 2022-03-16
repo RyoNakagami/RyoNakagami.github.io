@@ -21,12 +21,7 @@ tags:
   gtag('config', 'G-LVL413SV09');
 </script>
 
-|概要||
-|---|---|
-|目的|GA4 Source/Medium 設定手順のメモ|
-|関連記事|[ブログ編集手引きノート > Git branchを用いたブログ更新テストのメモ](https://ryonakagami.github.io/2020/10/13/Blog-development/)|
-
-
+**Table of Contents**
 <!-- START doctoc generated TOC please keep comment here to allow auto update -->
 <!-- DON'T EDIT THIS SECTION, INSTEAD RE-RUN doctoc TO UPDATE -->
 
