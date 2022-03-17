@@ -7,24 +7,22 @@ header-img: "img/about-bg.jpg"
 header-mask: 0.4
 catelog: true
 mathjax: true
-purpose: 
+revise_date: 2022-03-09
 tags:
 
 - Ubuntu 20.04 LTS
 - bluetooth
 ---
 
-
-
-
 **Table of Contents**
 <!-- START doctoc generated TOC please keep comment here to allow auto update -->
 <!-- DON'T EDIT THIS SECTION, INSTEAD RE-RUN doctoc TO UPDATE -->
-## 1. 実行環境
 
+- [今回のスコープ](#%E4%BB%8A%E5%9B%9E%E3%81%AE%E3%82%B9%E3%82%B3%E3%83%BC%E3%83%97)
 - [1. 実行環境](#1-%E5%AE%9F%E8%A1%8C%E7%92%B0%E5%A2%83)
   - [Desktop](#desktop)
   - [Bluetoothヘッドホン](#bluetooth%E3%83%98%E3%83%83%E3%83%89%E3%83%9B%E3%83%B3)
+  - [Package Requirements(今回インストールするもの)](#package-requirements%E4%BB%8A%E5%9B%9E%E3%82%A4%E3%83%B3%E3%82%B9%E3%83%88%E3%83%BC%E3%83%AB%E3%81%99%E3%82%8B%E3%82%82%E3%81%AE)
 - [2. Bluetooth技術](#2-bluetooth%E6%8A%80%E8%A1%93)
   - [Bluetoothのバージョン](#bluetooth%E3%81%AE%E3%83%90%E3%83%BC%E3%82%B8%E3%83%A7%E3%83%B3)
     - [メッシュネットワークとは？](#%E3%83%A1%E3%83%83%E3%82%B7%E3%83%A5%E3%83%8D%E3%83%83%E3%83%88%E3%83%AF%E3%83%BC%E3%82%AF%E3%81%A8%E3%81%AF)
@@ -34,11 +32,19 @@ tags:
     - [代表的な音源フォーマットのビットレート一覧](#%E4%BB%A3%E8%A1%A8%E7%9A%84%E3%81%AA%E9%9F%B3%E6%BA%90%E3%83%95%E3%82%A9%E3%83%BC%E3%83%9E%E3%83%83%E3%83%88%E3%81%AE%E3%83%93%E3%83%83%E3%83%88%E3%83%AC%E3%83%BC%E3%83%88%E4%B8%80%E8%A6%A7)
   - [Bluetoothのクラスとは？](#bluetooth%E3%81%AE%E3%82%AF%E3%83%A9%E3%82%B9%E3%81%A8%E3%81%AF)
 - [3. Ubuntu 20.04とWF-1000XM3の接続設定](#3-ubuntu-2004%E3%81%A8wf-1000xm3%E3%81%AE%E6%8E%A5%E7%B6%9A%E8%A8%AD%E5%AE%9A)
+  - [Bluetooth Managerのインストール](#bluetooth-manager%E3%81%AE%E3%82%A4%E3%83%B3%E3%82%B9%E3%83%88%E3%83%BC%E3%83%AB)
+  - [pulseaudio-modules-btの設定](#pulseaudio-modules-bt%E3%81%AE%E8%A8%AD%E5%AE%9A)
 - [Appendix](#appendix)
   - [ビットレートとは](#%E3%83%93%E3%83%83%E3%83%88%E3%83%AC%E3%83%BC%E3%83%88%E3%81%A8%E3%81%AF)
 - [References](#references)
 
 <!-- END doctoc generated TOC please keep comment here to allow auto update -->
+
+## 今回のスコープ
+
+- 脳死で接続するとHSP/HPPで接続してしまい音質が悪くなってしまう
+- Sony WF-1000XM3をA2DP AACでUbuntu 20.04と接続するまでの設定
+
 ## 1. 実行環境
 ### Desktop
 
@@ -60,6 +66,7 @@ Codename:       focal
 % uname -srvmpio
 Linux 5.13.0-27-generic #29~20.04.1-Ubuntu SMP Fri Jan 14 00:32:30 UTC 2022 x86_64 x86_64 x86_64 GNU/Linux
 ```
+
 ### Bluetoothヘッドホン
 
 |項目||
@@ -73,6 +80,17 @@ Linux 5.13.0-27-generic #29~20.04.1-Ubuntu SMP Fri Jan 14 00:32:30 UTC 2022 x86_
 |対応コーデック|SBC, AAC|
 |対応コンテンツ保護| 	SCMS-T|
 |伝送帯域(A2DP)| 	20Hz - 20,000Hz(44.1kHzサンプリング時)|
+
+
+### Package Requirements(今回インストールするもの)
+
+|Package|説明|
+|---|---|
+|libavcodec-dev|de/encoders for audio codecs|
+|libldac|Sony LDAC de/encoders|
+|pulseaudio-modules-bt|bluetooth経由で音声を流すためのLinuxのライブラリ|
+|bluez|Bluetoothドライバ|
+|bluez-tools|Bluetoothドライバ設定ライブラリ|
 
 ## 2. Bluetooth技術
 
@@ -151,16 +169,53 @@ Bluetoothのクラスとは、電波の最大出力や到達距離を規定し�
 
 ## 3. Ubuntu 20.04とWF-1000XM3の接続設定
 
+接続設定手順としては以下です：
+
+1. Bluetooth Managerのインストール
+2. pulseaudio-modules-btの設定 & GUIでprofile/codecsの設定
+
+### Bluetooth Managerのインストール
+
+```zsh
+% sudo apt update
+% apt install bluez bluez-tools
+% apt install blueman
+```
+
+Ubuntuでは問題は怒らないと思いますが、Bluetooth serviceが立ち上がっておらずBluemanが起動できないという恐れがあります.
+この場合は`systemctl`経由でbluetooth serviceはenableすれば良いとなります. この設定は
+
+```zsh
+% sudo systemctl enable bluetooth.service
+% sudo systemctl status bluetooth.service
+● bluetooth.service - Bluetooth service
+     Loaded: loaded (/lib/systemd/system/bluetooth.service; enabled; vendor preset: enabled)
+     Active: active (running) since Thu 2020-03-17 09:59:16 JST; 1h 59min ago
+       Docs: man:bluetoothd(8)
+   Main PID: 908 (bluetoothd)
+     Status: "Running"
+      Tasks: 1 (limit: 38299)
+     Memory: 2.7M
+     CGroup: /system.slice/bluetooth.service
+             └─908 /usr/lib/bluetooth/bluetoothd
+```
+
+Blueman経由でWF-1000XM3と接続するばあいはGUI経由か, Terminalに`blueman-manager`と入力して接続設定を開いて、あとはボタンをポチポチするだけです.
+
+### pulseaudio-modules-btの設定
+
 Ubuntu側でコーデック対応に必要なパッケージをインストールし、接続確認するだけです。まず必要パッケージのインストール.
 
 ```zsh
 % sudo add-apt-repository ppa:berglh/pulseaudio-a2dp
 % sudo apt update
 % sudo apt install pulseaudio-modules-bt libldac
+pulseaudio -k
+pulseaudio --start
 % reboot
 ```
 
-次に正しくインストールされているか確認します. この時、WF-1000XM3と接続しておきます.
+次に正しくインストールされているか確認します. この時、Blueman経由でWF-1000XM3と接続しておきます.
 
 ```zsh
 % pacmd list-cards
@@ -202,6 +257,7 @@ name: <bluez_card.XX_XX_XX_XX_XX_XX>
 ```
 
 profiles の欄に選択可能なものが表示されます．available: no となっているものは使えません.
+あとはBlueman(GUI)経由でprofile/codecを自分の好みにあった規格に設定するだけで完了です.
 
 ## Appendix
 ### ビットレートとは
@@ -213,3 +269,4 @@ profiles の欄に選択可能なものが表示されます．available: no と
 - [Sony WF-1000XM3](https://www.sony.jp/headphone/products/WF-1000XM3/)
 - [pulseaudio-modules-bt](https://github.com/EHfive/pulseaudio-modules-bt/wiki/Packages#ppaberglhpulseaudio-a2dp)
 - [Linux PCではBluetoothにLDACコーデックが使えるらしい](https://enear555.blog.fc2.com/blog-entry-201.html)
+- [Rubyと筋肉とギターとわたし > elementaryOSにbluetoothドライバが入ってなかったのでいれようとした](https://smot93516.hatenablog.jp/entry/2018/03/16/165420)

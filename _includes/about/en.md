@@ -46,7 +46,8 @@
 - [いろいろ備忘録日記](https://devlights.hatenablog.com/)
 - [yuki-koyama's blog](https://yuki-koyama.hatenablog.com/)
 - [Mashykom WebSite](https://www.koi.mashykom.com/index.html)
-
+- [IT Learning 実践形式でITのお勉強](https://obenkyolab.com/)
+    - VSCodeまわりの豆知識が身につく
 ### Linux
 
 > 環境構築
