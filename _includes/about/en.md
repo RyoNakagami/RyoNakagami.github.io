@@ -22,7 +22,18 @@
 
 > Lecture notes/Related contents
 
+- [An Introduction to Statistical Learning](https://www.statlearning.com/)
+- [Fundamentals of mathematical statistics](https://www.statlect.com/fundamentals-of-statistics/)
 - [Susan Athey, Machine Learning and Causal Inference](https://gsbdbi.github.io/ml_tutorial/index.html)
+- [Applied Causal Analysis (with R)](https://bookdown.org/paul/applied-causal-analysis/)
+- [Stat 305A: Linear Models](https://artowen.su.domains/courses/305a/)
+
+#### 実験計画/RCT
+
+> Blog
+
+- [はじめよう実験計画](https://www.doe-get-started.com/)
+
 
 ### 経済学
 

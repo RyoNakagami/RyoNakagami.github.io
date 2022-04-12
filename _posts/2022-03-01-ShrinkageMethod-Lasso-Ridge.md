@@ -349,7 +349,7 @@ $$
 
 ###### Pythonでの実装: Coordinate descent update rule
 
-<iframe src="https://nbviewer.org/github/RyoNakagami/Blog_Supplementary_Materials/blob/main/statistics/Lassoestimator_02.ipynb" width="100%" height="4300" frameborder="0"></iframe>
+<iframe src="https://nbviewer.org/gist/RyoNakagami/bf8533255c58214dd15b96aea15f3494" width="100%" height="5500" frameborder="0"></iframe>
 
 
 
