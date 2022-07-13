@@ -206,7 +206,7 @@ D_i \perp (Y_{i0}, Y_{i1})
 $$
 </div>
 
-この状況下では、target parameter $\theta$の推定値を$\hat\that$とすると
+この状況下では、target parameter $\theta$の推定値を$\hat\theta$とすると
 
 <div class="math display" style="overflow: auto">
 $$
