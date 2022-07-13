@@ -232,7 +232,7 @@ $$
 <div class="math display" style="overflow: auto">
 $$
 \begin{align*}
-\tau = \mathbb{E}[Y_{i1} - Y_{i0}] = \mathbb{E}[\methbb{E}[Y_{i}|D_i=1,X_i] - \methbb{E}[Y_{i}|D_i=0,X_i]]
+\tau = \mathbb{E}[Y_{i1} - Y_{i0}] = \mathbb{E}[\mathbb{E}[Y_{i}|D_i=1,X_i] - \mathbb{E}[Y_{i}|D_i=0,X_i]]
 \end{align*}
 $$
 </div>
