@@ -206,7 +206,7 @@ D_i \perp (Y_{i0}, Y_{i1})
 $$
 </div>
 
-この状況下では、target parameter $\theta$の推定値を\hat\that$とすると
+この状況下では、target parameter $\theta$の推定値を$\hat\that$とすると
 
 <div class="math display" style="overflow: auto">
 $$
@@ -232,7 +232,7 @@ $$
 <div class="math display" style="overflow: auto">
 $$
 \begin{align*}
-\tau = \methbb{E}[Y_{i1} - Y_{i0}] = \methbb{E}[\methbb{E}[Y_{i}|D_i=1,X_i] - \methbb{E}[Y_{i}|D_i=0,X_i]]
+\tau = \mathbb{E}[Y_{i1} - Y_{i0}] = \mathbb{E}[\methbb{E}[Y_{i}|D_i=1,X_i] - \methbb{E}[Y_{i}|D_i=0,X_i]]
 \end{align*}
 $$
 </div>
