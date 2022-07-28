@@ -30,8 +30,8 @@ tags:
 
 - [問題設定:](#%E5%95%8F%E9%A1%8C%E8%A8%AD%E5%AE%9A)
 - [Farm Fingerprint](#farm-fingerprint)
-  - [Farm Fingerprintはsaltさえランダムに選べば離散一様分布になるのか？その１](#farm-fingerprint%E3%81%AFsalt%E3%81%95%E3%81%88%E3%83%A9%E3%83%B3%E3%83%80%E3%83%A0%E3%81%AB%E9%81%B8%E3%81%B9%E3%81%B0%E9%9B%A2%E6%95%A3%E4%B8%80%E6%A7%98%E5%88%86%E5%B8%83%E3%81%AB%E3%81%AA%E3%82%8B%E3%81%AE%E3%81%8B%E3%81%9D%E3%81%AE%EF%BC%91)
-  - [Farm Fingerprintはsaltさえランダムに選べば離散一様分布になるのか？:簡易版](#farm-fingerprint%E3%81%AFsalt%E3%81%95%E3%81%88%E3%83%A9%E3%83%B3%E3%83%80%E3%83%A0%E3%81%AB%E9%81%B8%E3%81%B9%E3%81%B0%E9%9B%A2%E6%95%A3%E4%B8%80%E6%A7%98%E5%88%86%E5%B8%83%E3%81%AB%E3%81%AA%E3%82%8B%E3%81%AE%E3%81%8B%E7%B0%A1%E6%98%93%E7%89%88)
+  - [(1) Farm Fingerprintはsaltさえランダムに選べば離散一様分布になるのか？](#1-farm-fingerprint%E3%81%AFsalt%E3%81%95%E3%81%88%E3%83%A9%E3%83%B3%E3%83%80%E3%83%A0%E3%81%AB%E9%81%B8%E3%81%B9%E3%81%B0%E9%9B%A2%E6%95%A3%E4%B8%80%E6%A7%98%E5%88%86%E5%B8%83%E3%81%AB%E3%81%AA%E3%82%8B%E3%81%AE%E3%81%8B)
+  - [(2) Farm Fingerprintはsaltさえランダムに選べば離散一様分布になるのか？:簡易版](#2-farm-fingerprint%E3%81%AFsalt%E3%81%95%E3%81%88%E3%83%A9%E3%83%B3%E3%83%80%E3%83%A0%E3%81%AB%E9%81%B8%E3%81%B9%E3%81%B0%E9%9B%A2%E6%95%A3%E4%B8%80%E6%A7%98%E5%88%86%E5%B8%83%E3%81%AB%E3%81%AA%E3%82%8B%E3%81%AE%E3%81%8B%E7%B0%A1%E6%98%93%E7%89%88)
 - [Standard SQLで実装](#standard-sql%E3%81%A7%E5%AE%9F%E8%A3%85)
 - [参考資料](#%E5%8F%82%E8%80%83%E8%B3%87%E6%96%99)
   - [オンラインマテリアル](#%E3%82%AA%E3%83%B3%E3%83%A9%E3%82%A4%E3%83%B3%E3%83%9E%E3%83%86%E3%83%AA%E3%82%A2%E3%83%AB)
@@ -107,7 +107,7 @@ Row x	y	z	x_fingerprint	y_fingerprint	z_fingerprint	row_fingerprint
 4		false	-3919889686402291073	-7286425919675154353	3372626016653902757	-5671577889189715922
 ```
 
-### Farm Fingerprintはsaltさえランダムに選べば離散一様分布になるのか？その１
+### (1) Farm Fingerprintはsaltさえランダムに選べば離散一様分布になるのか？
 
 > 検証内容
 
@@ -120,6 +120,12 @@ Row x	y	z	x_fingerprint	y_fingerprint	z_fingerprint	row_fingerprint
 2. (1)で作成したリストに対して、ランダムに作成したsaltと合わせてFarm Fingerprint valueを計算する
 3. Farm Fingerprint valueの順序に基づいて、リストをシャッフルする
 4. リストのシャッフル結果が、離散一様分布しているかchi square testにかける
+
+> Remarks
+
+- 重複ありの場合のPermutation Indexの取得方法として[stack overflow > Finding the index of a given permutation](https://stackoverflow.com/questions/14013373/finding-the-index-of-a-given-permutation)が存在する
+- こちらベースで一部修正して計算も試みたが、メモリエラーが発生したので今回は諦めます（実行時間もそんなに変わらなかった）
+
 
 > Python code
 
@@ -247,7 +253,7 @@ Power_divergenceResult(statistic=697.7860000000001, pvalue=0.7079480282766375)
 - Permutation index結果をplotしてもトライアル回数(N=2000)が最頻値となっており、特定の順序が出やすいというわけではなさそう
 - Chi square testでも帰無仮説は棄却されていない
 
-### Farm Fingerprintはsaltさえランダムに選べば離散一様分布になるのか？:簡易版
+### (2) Farm Fingerprintはsaltさえランダムに選べば離散一様分布になるのか？:簡易版
 
 以下ではIDのpercentileとIDに対してfarm fingerprintを当てた値のpercentileの組を取得して、chi square testを実施する方法となります.
 
@@ -478,3 +484,4 @@ E	12	75758
 ### オンラインマテリアル
 
 - [Google Cloud > Hash functions](https://cloud.google.com/bigquery/docs/reference/standard-sql/hash_functions)
+- [stack overflow > Finding the index of a given permutation](https://stackoverflow.com/questions/14013373/finding-the-index-of-a-given-permutation)
