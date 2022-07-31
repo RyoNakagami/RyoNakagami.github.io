@@ -48,6 +48,10 @@
 
 - [Aviv Nevo](https://web.sas.upenn.edu/anevo/60-2/)
 
+> Econometrics
+
+- [The Mixtape: scunning](https://github.com/scunning1975/mixtape)
+
 
 ### Datascience
 
