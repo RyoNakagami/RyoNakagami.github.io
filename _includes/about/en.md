@@ -47,6 +47,7 @@
 > 個人ページ/Blog
 
 - [Aviv Nevo](https://web.sas.upenn.edu/anevo/60-2/)
+- [Richard G. Pierse: Downloads](http://rpierse.esy.es/rpierse/files/)
 
 > Econometrics
 
