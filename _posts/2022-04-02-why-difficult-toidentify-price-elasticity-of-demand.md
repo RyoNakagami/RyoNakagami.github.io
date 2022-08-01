@@ -78,7 +78,7 @@ $$
 
 また,需要関数同様に$(p)$はpについての連続関数とします.
 
-上記の設定上,価格に応じてそれぞれ需要/供給水準が定まりますが,$D(p^*) = S(p^*)$を満たす価格$p^*$が市場均衡価格となります.
+上記の設定上,価格に応じてそれぞれ需要/供給水準が定まりますが,$$D(p^*) = S(p^*)$$を満たす価格$p^*$が市場均衡価格となります.
 つまり,完全競争的な市場では,需要と供給がバランスするように市場均衡価格と市場均衡数量が定まります.
 
 需要と供給が市場均衡価格でバランスするメカニズムとして,もし任意の価格において $D(p_0) > S(p_0)$が成立するならば,超過需要の状態が発生します.
@@ -124,9 +124,9 @@ $$
 <div class="math display" style="overflow: auto">
 $$
 \begin{align*}
-D(p) &= \text{Pr}(\theta > p)I\\
-&= [1 - \text{Pr}(\theta \leq p)]I\\
-&= \left[1 - \frac{p}{\theta_{max}}\right]I\\
+D(p) &= \text{Pr}(\theta > p)I\\[8pt]
+&= [1 - \text{Pr}(\theta \leq p)]I\\[8pt]
+&= \left[1 - \frac{p}{\theta_{max}}\right]I\\[8pt]
 &= I - \frac{I}{\theta_{max}}p
 \end{align*}
 $$
@@ -171,7 +171,7 @@ $$
 $D_t = S_t = Q_t$が成立する価格のみ観測されるので,そのときの市場均衡価格は$\log(p_t)=\tilde p_t$とすると
 
 $$
-\tilde p_{t,observed} = \frac{(\alpha_d - \alpha_s) + (\epsilon_d - \epsilon_s)}{\beta_s - \beta_d}
+\tilde p_{t,ob} = \frac{(\alpha_d - \alpha_s) + (\epsilon_d - \epsilon_s)}{\beta_s - \beta_d}
 $$
 
 また,上記の式より
@@ -179,8 +179,8 @@ $$
 <div class="math display" style="overflow: auto">
 $$
 \begin{align*}
-Var(\tilde p_{t,observed}) &= \frac{\sigma^2_d + \sigma^2_s}{(\beta_s - \beta_d)^2}\\
-Cov(\tilde p_{t,observed}, \epsilon_d) &= \frac{\sigma^2_d}{\beta_s-\beta_d}
+Var(\tilde p_{t,ob}) &= \frac{\sigma^2_d + \sigma^2_s}{(\beta_s - \beta_d)^2}\\
+Cov(\tilde p_{t,ob}, \epsilon_d) &= \frac{\sigma^2_d}{\beta_s-\beta_d}
 \end{align*}
 $$
 </div>
