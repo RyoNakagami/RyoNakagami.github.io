@@ -166,6 +166,17 @@ $$
 
 すべての$t$時点において$D_t = S_t = Q_t$が成立する市場均衡価格が成立するとします.
 
+> 分析者が用いる推定式
+
+$$
+\log(Q_t) = \alpha +\beta\log(p_{t,ob}) + e_t
+$$
+
+- $Q_t$: 市場均衡数量
+- $p_{t,ob}$: 観察された市場均衡価格
+- $\alpha$: 定数項
+- $e_t$: residuals
+
 ### Endogeneity biasの導出
 
 $D_t = S_t = Q_t$が成立する価格のみ観測されるので,そのときの市場均衡価格は$\log(p_t)=\tilde p_t$とすると
@@ -190,7 +201,7 @@ $$
 <div class="math display" style="overflow: auto">
 $$
 \begin{align*}
-plim \beta^* &= \frac{Cov(\tilde D_t, \tilde p_{t,observed})}{Var(\tilde p_{t,observed})}\\
+\text{plim } \beta^* &= \frac{Cov(\tilde D_t, \tilde p_{t,observed})}{Var(\tilde p_{t,observed})}\\
 &= \frac{\sigma^2_s}{\sigma^2_d+\sigma^2_s}\beta_d+\frac{\sigma^2_d}{\sigma^2_d+\sigma^2_s}\beta_s
 \end{align*}
 $$
