@@ -12,7 +12,6 @@ purpose:
 tags:
 
 - SQL
-- Python
 ---
 
 
