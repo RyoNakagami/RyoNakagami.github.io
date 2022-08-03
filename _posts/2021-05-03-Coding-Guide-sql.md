@@ -7,7 +7,7 @@ header-img: "img/about-bg.jpg"
 header-mask: 0.4
 catelog: true
 mathjax: true
-purpose: 
+revise_date: 2022-07-25
 tags:
 
 - SQL
@@ -21,7 +21,7 @@ tags:
 |目的|SQL Style Guide|
 |参考|- [The Art of Readable Code by Dustin Boswell and Trevor Foucher. Copyright 2012 Dustin Boswell and Trevor Foucher, 978-0-596-80229-5](https://www.oreilly.co.jp/books/9784873115658/)<br> -[Coding Style Guide Part 1](https://ryonakagami.github.io/2021/05/02/Coding-Guide/)<br>- [CTEs versus Subqueries](https://www.alisa-in.tech/post/2019-10-02-ctes/)|
 
-本ドキュメントは、SQLコーディング規約についてまとめたものです. RDBMSとしてAmazon Redshift / Google Bigqueryを念頭としています. `DO`は推奨、`AVOID`は非推奨を表しています.
+本ドキュメントは,「Readable,ReusableなSQLクエリの書く」ことを目的に, SQLコーディング規約についてまとめたものです. RDBMSとしてAmazon Redshift / Google Bigqueryを念頭としています. `DO`は推奨,`AVOID`は非推奨を表しています.
 
 **Table of Contents**
 
@@ -50,7 +50,8 @@ tags:
   - [`JOIN`句で結合する前にテーブルサイズを小さくする](#join%E5%8F%A5%E3%81%A7%E7%B5%90%E5%90%88%E3%81%99%E3%82%8B%E5%89%8D%E3%81%AB%E3%83%86%E3%83%BC%E3%83%96%E3%83%AB%E3%82%B5%E3%82%A4%E3%82%BA%E3%82%92%E5%B0%8F%E3%81%95%E3%81%8F%E3%81%99%E3%82%8B)
   - [`JOIN`句のテーブルの順番](#join%E5%8F%A5%E3%81%AE%E3%83%86%E3%83%BC%E3%83%96%E3%83%AB%E3%81%AE%E9%A0%86%E7%95%AA)
   - [クラスタリング](#%E3%82%AF%E3%83%A9%E3%82%B9%E3%82%BF%E3%83%AA%E3%83%B3%E3%82%B0)
-  - [中間テーブルの生成依存関係をCloud Composerで管理する](#%E4%B8%AD%E9%96%93%E3%83%86%E3%83%BC%E3%83%96%E3%83%AB%E3%81%AE%E7%94%9F%E6%88%90%E4%BE%9D%E5%AD%98%E9%96%A2%E4%BF%82%E3%82%92cloud-composer%E3%81%A7%E7%AE%A1%E7%90%86%E3%81%99%E3%82%8B)
+- [References](#references)
+  - [Online-contents](#online-contents)
 
 <!-- END doctoc generated TOC please keep comment here to allow auto update -->
 
@@ -60,15 +61,15 @@ tags:
 > DO
 
 - Field nameは小文字を使用する
-- `id`, `name`, `type`といった文字列はなんのidentifierやnameを表しているか曖昧なので、objectをprefixとして付与すること
+- `id`, `name`, `type`といった文字列はなんのidentifierやnameを表しているか曖昧なので,objectをprefixとして付与すること
 - 名前にスペースを含めるのが自然な場合はアンダースコアを使用する。（first nameはfirst_name）
-- 30 byte以下の名前にする(日本語用いる場合、10文字目安)
+- 30 byte以下の名前にする(日本語用いる場合,10文字目安)
 
 > AVOID
 
 - CamelCase, camelBackは使わない(= snake_caseを用いる)
-- 複数形を避ける = できるだけ集合体を表す用語を使用する. たとえばemployeesの代わりにstaff、またはindividualsの代わりにpeopleを使用する（スペルミスの恐れを回避するため）
-- 略語を避ける. 略語を使う必要がある場合は、一般的に通じるものであることを確認する
+- 複数形を避ける = できるだけ集合体を表す用語を使用する. たとえばemployeesの代わりにstaff,またはindividualsの代わりにpeopleを使用する（スペルミスの恐れを回避するため）
+- 略語を避ける. 略語を使う必要がある場合は,一般的に通じるものであることを確認する
 - 予約語は変数名には用いない
 - アルファベット, 数字, アンダースコア以外の文字は使用しない
 
@@ -105,6 +106,7 @@ FROM
 |`_size`| 	ファイルサイズや衣類などのサイズ|
 |`_date`| 	何かの日付を含む列であることを表す|
 |`_at`|TIMESTAMP型のデータタイプを表す|
+|`_type`|カテゴリ変数を表す, 例: `coupon_type`|
 
 #### PREFFIX RULE
 
@@ -118,15 +120,15 @@ FROM
 
 #### なぜfield nameは30 byte以下なのか？
 
-RDBMSの種類(Oracle Database 12.1)によって、カラム文字は30 byte以下という制約があるためです. とあるデータベースでは有効だったクエリが他に移植できなくなるというリスクを回避するためにこのルールがあります.
+RDBMSの種類(Oracle Database 12.1)によって,カラム文字は30 byte以下という制約があるためです. とあるデータベースでは有効だったクエリが他に移植できなくなるというリスクを回避するためにこのルールがあります.
 
 
 ### TABLE ALIAS
 
 > DO
 
-1. アンダースコアでテーブル名をsplitし、それぞれの頭文字を結合したエイリアスを用いる
-2. 同じテーブル同士で結合する場合は、(1)のルールと出現順番の組み合わせを用いる
+1. アンダースコアでテーブル名をsplitし,それぞれの頭文字を結合したエイリアスを用いる
+2. 同じテーブル同士で結合する場合は,(1)のルールと出現順番の組み合わせを用いる
 
 > EXAMPLE
 
@@ -207,8 +209,8 @@ WITH my_data AS (
 
 > DO
 
-- インデントを活用し、同じブロックに属するkeywordsがすべて同じ位置で開始するようにコードを整列させる
-- `JOIN`句は、「ブロック」の向こう側にインデントし、必要に応じて改行でグループ化する
+- インデントを活用し,同じブロックに属するkeywordsがすべて同じ位置で開始するようにコードを整列させる
+- `JOIN`句は,「ブロック」の向こう側にインデントし,必要に応じて改行でグループ化する
 - `DISTINCT`は`SELECT`と同じ行に配置する
 
 > EXAMPLE: インデントを用いてブロックを整列する
@@ -232,7 +234,7 @@ ORDER BY
 #### UNION句とブロック
 
 > DO
-- `UNION`句を用いる場合は、`UNION`の前後を改行し１行ずつ空ける
+- `UNION`句を用いる場合は,`UNION`の前後を改行し１行ずつ空ける
 
 
 > EXAMPLE
@@ -295,8 +297,10 @@ SUM(1) OVER (
 
 - `JOIN`ではなく`LEFT OUTER JOIN`とテーブル同士の関係性を明示する
 - JOINキーの順番はテーブルの出現順番に合わせる
+- JOIN方向は`LEFT`に統一する(`RIGHT JOIN`は用いない)
+  - JOIN方向が左からと統一されていないと,集約Keyはどちらベースなのかの解釈に頭をつかってしまい,読みづらいコードとなってしまうため
 
-> EXAMPLE: JOINキーの順番
+>> EXAMPLE: JOINキーの順番
 
 ```sql
 --- Good
@@ -326,6 +330,10 @@ WHERE
 
 - サブクエリのブロックは他と区別できるように配置する
 - サブクエリ内は改行を厳密にやらなくてもいいとする
+
+> AVOID
+
+- 避けることができるならサブクエリは用いない
 
 > EXAMPLE
 
@@ -357,8 +365,8 @@ WHERE
 
 > EXAMPLE: CTEsの方がQuery Peformanceが改善するケース
 
-以下の例では、CTE statmentを用いたクエリに対して、サブクエリ句を用いたクエリのデータスキャン量は大きくなってしまいます.
-`apc1`と`apc2`が`JOIN`句で呼ばれる際、CTE statementは`avg_pet_count_over_time`を1回作成するだけで住みますが、WITH句の方ではそれぞれ独立に2回`avg_pet_count_over_time`が作られてしまうことに起因しています.
+以下の例では,CTE statmentを用いたクエリに対して,サブクエリ句を用いたクエリのデータスキャン量は大きくなってしまいます.
+`apc1`と`apc2`が`JOIN`句で呼ばれる際,CTE statementは`avg_pet_count_over_time`を1回作成するだけで住みますが,WITH句の方ではそれぞれ独立に2回`avg_pet_count_over_time`が作られてしまうことに起因しています.
 
 ```sql
 WITH 
@@ -383,7 +391,11 @@ FROM
     LEFT JOIN avg_pet_count_over_time as apc2
         ON cd.cat_id = apc2.cat_id
 ;
+```
 
+> AVOID
+
+```
 SELECT 
   cat_name,
   apc1.max_pet_date,
@@ -414,19 +426,19 @@ ON cat_dim.cat_id = apc2.cat_id;
 
 - 分析に必要なカラムのみクエリする
 
-BigQueryはカラム指向ストレージであるため、指定されたカラムは上から下までフルスキャンされます. そのため、指定されたカラムが多いほどスキャンのデータ量が増えます. スキャンデータ量が多いほど処理に時間がかかりパフォーマンスが下がり、また料金コストも上昇するというデメリットがあります.
+BigQueryはカラム指向ストレージであるため,指定されたカラムは上から下までフルスキャンされます. そのため,指定されたカラムが多いほどスキャンのデータ量が増えます. スキャンデータ量が多いほど処理に時間がかかりパフォーマンスが下がり,また料金コストも上昇するというデメリットがあります.
 
-**カラム指向ストレージとは？**
+> カラム指向スト-レジとは？
 
-- カラム指向ストレージとは、列単位でデータを格納する仕組みのこと(多くの他のRDBはレコード単位でデータを格納)
-- 列単位ではデータタイプが同一なので、データの圧縮効率が高くなる(=ストレージコストが安くなる)というメリットがあります
+- カラム指向ストレージとは,列単位でデータを格納する仕組みのこと(多くの他のRDBはレコード単位でデータを格納)
+- 列単位ではデータタイプが同一なので,データの圧縮効率が高くなる(=ストレージコストが安くなる)というメリットがあります
 
 ### `LIMIT`ではなく`_PARTITIONDATE`などのPARTITIONを用いる
 
 - `LIMIT`句はデータのスキャン量には影響を与えません. なのでQuery Performanceの観点からもクエリコスト管理の観点からも推奨されません 
-- 一部のデータだけ見たい場合は、`_PARTITIONDATE = "2017-01-01"`などのPARTITION機能を用いると、データスキャン量が減らせます
+- 一部のデータだけ見たい場合は,`_PARTITIONDATE = "2017-01-01"`などのPARTITION機能を用いると,データスキャン量が減らせます
 
-なお、一部のカラムを除いてクエリしたい場合は`EXCEPT`関数を用います.
+なお,一部のカラムを除いてクエリしたい場合は`EXCEPT`関数を用います.
 
 ```sql
 /*update_timestampカラム以外をクエリしたい場合*/
@@ -467,7 +479,7 @@ PARTITION BY
 AS SELECT transaction_id, transaction_date FROM mydataset.mytable;
 
 
---- DATE列をMonthlyにトランクして、PARTITION列として指定
+--- DATE列をMonthlyにトランクして,PARTITION列として指定
 CREATE TABLE
   mydataset.newtable (transaction_id INT64, transaction_date DATE)
 PARTITION BY
@@ -477,7 +489,7 @@ OPTIONS(
 );
 
 
---- TIMESTAMP列をDailyにトランクして、PARTITION列として指定
+--- TIMESTAMP列をDailyにトランクして,PARTITION列として指定
 CREATE TABLE
   mydataset.newtable (transaction_id INT64, transaction_ts TIMESTAMP)
 PARTITION BY
@@ -508,33 +520,33 @@ OPTIONS(
 
 > DO
 
-- 日付ごとにテーブル(`PREFIX_YYYYMMDD`)を作るのではなく、パーティション分割テーブルを利用する
+- 日付ごとにテーブル(`PREFIX_YYYYMMDD`)を作るのではなく,パーティション分割テーブルを利用する
 
 > WHY
 
-日付ごとにテーブルを作るアプローチは、以下のオーバーヘッドがあります:
+日付ごとにテーブルを作るアプローチは,以下のオーバーヘッドがあります:
 
 - 個別のテーブルごとにメタデータを保持する
 - クエリ実行時に個別のテーブルごとに権限を確認する必要がある
 
 > 例外
 
-日毎にrawデータ形式が異なる場合は、日付ごとに異なるスキーマを適用できるシャーディングテーブルを活用する(活用例：データソースでカラムが増減した場合でもそのまま取り込める)
+日毎にrawデータ形式が異なる場合は,日付ごとに異なるスキーマを適用できるシャーディングテーブルを活用する(活用例：データソースでカラムが増減した場合でもそのまま取り込める)
 
 
 ### `JOIN`句で結合する前にテーブルサイズを小さくする
 
-BigQueryでは`JOIN`句を用いてテーブルを結合する際、まずBigQueryは両方のテーブルデータをシャッフルして、結合条件の演算を実施します. このシャッフルはスロットをオーバーロードするリスクがあります. ですので、事前にテーブルサイズを小さくできるならば、小さくしてから結合することが推奨されます.
+BigQueryでは`JOIN`句を用いてテーブルを結合する際,まずBigQueryは両方のテーブルデータをシャッフルして,結合条件の演算を実施します. このシャッフルはスロットをオーバーロードするリスクがあります. ですので,事前にテーブルサイズを小さくできるならば,小さくしてから結合することが推奨されます.
 
-- BigQueryはストレージコストは大きくないので、データは非正規化したほうがよいとされています(=`JOIN`句を避けるようなテーブル設計)
+- BigQueryはストレージコストは大きくないので,データは非正規化したほうがよいとされています(=`JOIN`句を避けるようなテーブル設計)
 
 ### `JOIN`句のテーブルの順番
 
 > DO
 
-- 可能であるならば、`JOIN`句で指定するテーブルはデータサイズが大きいテーブル（行数が大きいテーブル）から呼んだほうがよい
+- 可能であるならば,`JOIN`句で指定するテーブルはデータサイズが大きいテーブル（行数が大きいテーブル）から呼んだほうがよい
 
-大きなテーブルをJOINの左側に、小さなテーブルをJOINの右側に配置すると、`broadcast join` が作成されます. `broadcast join`は、小さい方のテーブルのすべてのデータを、大きい方のテーブルを処理する各スロットに送ります. 具体的には、内部表側のデータがブロードキャストされる一方、外部表側のデータはそのままで移動されないことを指しています. 
+大きなテーブルをJOINの左側に,小さなテーブルをJOINの右側に配置すると,`broadcast join` が作成されます. `broadcast join`は,小さい方のテーブルのすべてのデータを,大きい方のテーブルを処理する各スロットに送ります. 具体的には,内部表側のデータがブロードキャストされる一方,外部表側のデータはそのままで移動されないことを指しています. 
 
 ### クラスタリング
 
@@ -545,7 +557,7 @@ BigQueryでは`JOIN`句を用いてテーブルを結合する際、まずBigQue
 > 効果
 
 - クラスタキーでスキャンしたブロックのみ費用が発生する(=費用削減)
-- データはパーティション内でソートされて保持されているので、`WHERE`句でクラスタキーとなるフィールドでフィルターを指定した場合、不要なデータのスキャンを省略してくれる
+- データはパーティション内でソートされて保持されているので,`WHERE`句でクラスタキーとなるフィールドでフィルターを指定した場合,不要なデータのスキャンを省略してくれる
 - RDBのINDEXのイメージが近い
 
 > 設定可能対象
@@ -563,7 +575,7 @@ BigQueryでは`JOIN`句を用いてテーブルを結合する際、まずBigQue
 > LIMITATIONS
 
 - クラスタキーは４つまで設定可能
-- STRINGをキーに設定した場合、最初の1,024 charactersのみソートに用いられる
+- STRINGをキーに設定した場合,最初の1,024 charactersのみソートに用いられる
 
 > EXAMPLE
 
@@ -582,6 +594,7 @@ FROM
     `mydataset.SalesData`
 ```
 
-### 中間テーブルの生成依存関係をCloud Composerで管理する
+## References
+### Online-contents
 
-- Cloud ComposerはApache Airflowベースのマネージド・サービス
+- [GitHub >  sqlfluff/sqlfluff](https://github.com/sqlfluff/sqlfluff)
