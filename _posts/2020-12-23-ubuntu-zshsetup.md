@@ -7,6 +7,7 @@ header-img: "img/post-bg-rwd.jpg"
 header-mask: 0.4
 catelog: true
 mathjax: true
+revise_date: 2022-08-03
 purpose: 
 tags:
 
@@ -538,35 +539,30 @@ autoload -Uz promptinit
 promptinit
 prompt adam1
 
-setopt histignorealldups #sharehistory
-setopt interactivecomments #20201225追加
-
-## Use emacs keybindings even if our EDITOR is set to vi
-# bindkey -e
-
+setopt histignorealldups
+setopt interactivecomments
 
 ## Permission初期値調整
-umask u=rwx,g=rw,o=r #umask 022と同じ. 実行結果はumask -Sで確認
+umask u=rwx,g=rx,o=r
 
 
 # -----------------------------
 # History
 # -----------------------------
 ## Keep 1000 lines of history within the shell and save it to ~/.zsh_history:
-HISTSIZE=10000
-SAVEHIST=1000000 
+HISTSIZE=1000
+SAVEHIST=100000
 HISTFILE=~/.zsh_history
-setopt extended_history ## ヒストリファイルにコマンドラインだけではなく実行時刻と実行時間も保存する。
-setopt hist_ignore_space ## スペースで始まるコマンドラインはヒストリに追加しない。
-setopt inc_append_history ## すぐにヒストリファイルに追記する。
-setopt share_history ## zshプロセス間でヒストリを共有する。
+setopt extended_history # 履歴ファイルにzsh の開始・終了時刻を記録する
+setopt hist_ignore_space
+setopt inc_append_history
+setopt share_history # 履歴を複数の端末で共有する
 
 # -----------------------------
 # PATH
 # -----------------------------
 # 重複パスを登録しない
 typeset -U path PATH
-
 
 # Install Ruby Gems to ~/gems
 export GEM_HOME="$HOME/gems"
@@ -583,9 +579,9 @@ export PATH="$HOME/bin:$PATH"
 #-------------------------------------
 # GitHub
 #-------------------------------------
-## set access token for Ubuntu_Akatsuki
-## 例:git clone https://RyoNakagami:${GIT_TOKEN}@github.com/repositoryowner/repositoryname
-export GIT_TOKEN=<hogehoge> ## WARNING -- PRIVACY
+## set access token
+## 例:git clone https://UserName:${GIT_TOKEN}@github.com/repositoryowner/repositoryname
+export GIT_TOKEN=<hogehoge>
 
 
 #-------------------------------------
@@ -620,8 +616,7 @@ export PATH="$RBENV_ROOT/bin:$PATH"
 # Completion
 # -----------------------------
 ## Use modern completion system
-autoload -Uz compinit # -Uは関数の内部でaliasを展開しないようにするオプション
-compinit
+autoload -Uz compinit && compinit
 
 zstyle ':completion:*' auto-description 'specify: %d'
 zstyle ':completion:*' completer _expand _complete _correct _approximate
@@ -641,13 +636,7 @@ zstyle ':completion:*' verbose true
 zstyle ':completion:*:*:kill:*:processes' list-colors '=(#b) #([0-9]#)*=0=01;31'
 zstyle ':completion:*:kill:*' command 'ps -u $USER -o pid,%cpu,tty,cputime,cmd'
 
-setopt complete_in_word ## カーソル位置で補完する。(
-
-
-## Git autocompleteion libaray
-autoload -Uz compinit && compinit
-
-
+setopt complete_in_word
 
 #-------------------------------------
 # Alias settings
@@ -655,11 +644,21 @@ autoload -Uz compinit && compinit
 ## alias with color
 alias ls='ls -F --color=auto'
 alias grep='grep --color=auto'
-alias xclipimage='xclip -selection clipboard -t image/png -o > "/home/ryo_nak/Desktop/$(date +%Y-%m-%d_%T).png"' 
+
+## 自作関数
+alias xclipimage='xclip -selection clipboard -t image/png -o > "$(date +%Y-%m-%d_%T).png"' 
+alias start_processing='~/processing-3.5.4/processing'
+alias rt='wmctrl -l| grep ryo-nak-amaterasu\\s/usr/bin/zsh$|awk -F " " "{print $1}"|xargs -i% wmctrl -i -r % -e 0,0,0,724,660'
+alias bfg='java -jar ~/tools/bfg/bfg-1.14.0.jar'
+alias ls-dir='ls -l | GREP_COLOR="1;34" grep -E "\s\S+?/$"'
 
 #-------------------------------------
 # functions
 #-------------------------------------
+## command_not_found
+#source /etc/zsh_command_not_found
+
+
 ## touch $1 && code $1
 ## *.ipynbを開く用の関数
 
@@ -670,43 +669,29 @@ function tcode() {
 
 alias tcode=tcode
 
-
 ## ファイル数が多い時には省略表示
-## (参考: https://qiita.com/yuyuchu3333/items/b10542db482c3ac8b059)
-## chpwd(カレントディレクトリが変更したとき)にls_abbrevを実行
 ls_abbrev() {
-  if [[ ! -r $PWD ]]; then
-    return
-  fi
-  # -C : Force multi-column output.
-  # -F : ファイルタイプを表示
-  local cmd_ls='ls'
-  local -a opt_lsls
-  opt_ls=('-CF' '--color=always')
-  case ${OSTYPE} in
-    freebsd*|darwin*)
-      if (( $+commands[gls] )); then
-        cmd_ls='gls'
-      else
-        # -G : Enable colorized output.
-        opt_ls=('-aCFG')
-      fi
-      ;;
-  esac
+    # -C : Force multi-column output.
+    # -F : Append indicator (one of */=>@|) to entries.
+    local cmd_ls='ls'
+    local -a opt_ls
+    opt_ls=('-CF' '--color=always')
 
-  local ls_result
-  ls_result=$(CLICOLOR_FORCE=1 COLUMNS=$COLUMNS command $cmd_ls ${opt_ls[@]}| sed $'/^\e\[[0-9;]*m$/d')
+    local ls_result
+    ls_result=$(CLICOLOR_FORCE=1 COLUMNS=$COLUMNS command $cmd_ls ${opt_ls[@]} | sed $'/^\e\[[0-9;]*m$/d')
 
-  local ls_lines=$(echo "$ls_result"| wc -l| tr -d ' ')
-  if [[ ls_lines -gt 10 ]]; then
-    echo "$ls_result"| head -n 5
-    echo '...'
-    echo "$ls_result"| tail -n 5
-    echo "$(command ls -1 -A| wc -l| tr -d ' ') files exist"
-  else
-    echo "$ls_result"
-  fi
+    local ls_lines=$(echo "$ls_result" | wc -l | tr -d ' ')
+
+    if [ $ls_lines -gt 10 ]; then
+        echo "$ls_result" | head -n 5
+        echo '...'
+        echo "$ls_result" | tail -n 5
+        echo "$(command ls -1 -A | wc -l | tr -d ' ') files exist"
+    else
+        echo "$ls_result"
+    fi
 }
+
 autoload -Uz add-zsh-hook
 add-zsh-hook chpwd ls_abbrev
 
