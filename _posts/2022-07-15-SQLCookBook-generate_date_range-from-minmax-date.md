@@ -96,6 +96,28 @@ FROM
     UNNEST(date_range) AS date_range_parsed
 ```
 
+`UNNEST`のなかでarrayを作成し,explodeするという観点から以下のクエリも実行可能です(Special Thanks to SGSKさん)
+
+```sql
+WITH 
+    raw_data AS(
+    SELECT
+        * 
+    FROM UNNEST([STRUCT<user_id INT64, min_date DATE, max_date DATE>
+                (1,'2020-09-01','2020-11-01'),
+                (2,'2020-09-01','2021-01-01'),
+                (3,'2020-10-01','2021-02-01'),
+                (4,'2020-11-01','2021-01-01')
+                ])     
+    )
+SELECT
+    user_id,
+    date_range_parsed AS observed_month
+FROM
+    raw_data,
+    UNNEST(GENERATE_DATE_ARRAY(min_date, max_date, INTERVAL 1 MONTH)) AS date_range_parsed
+```
+
 ### Python実行例の紹介
 
 > パターン1: `.apply(pd.Series).stack()`を活用
