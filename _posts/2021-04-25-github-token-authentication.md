@@ -19,11 +19,8 @@ tags:
 
 ---|---
 目的|GitHub 個人アクセストークンの設定
-|マシン| 	HP ENVY TE01-0xxx|
 OS |	ubuntu 20.04 LTS Focal Fossa
 CPU| 	Intel Core i7-9700 CPU 3.00 GHz
-RAM| 	32.0 GB
-GPU| 	NVIDIA GeForce RTX 2060 SUPER
 
 **Table of Contents**
 <!-- START doctoc generated TOC please keep comment here to allow auto update -->
