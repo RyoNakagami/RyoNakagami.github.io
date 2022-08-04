@@ -7,7 +7,7 @@ header-img: "img/about-bg.jpg"
 header-mask: 0.4
 catelog: true
 mathjax: true
-purpose: 
+revise_date: 2022-08-04
 tags:
 
 - Ubuntu 20.04 LTS
@@ -17,17 +17,18 @@ tags:
 
 
 
-||概要|
-|---|---|
-|目的|メイリオフォントをUbuntuにインストール|
-|解決したい課題|Google Docsでメイリオフォントを選択できるようにしたい|
-|参考|- [Token authentication requirements for Git operations](https://github.blog/2020-12-15-token-authentication-requirements-for-git-operations/)<br>- [個人アクセストークンを使用する](https://docs.github.com/ja/github-ae@latest/github/authenticating-to-github/keeping-your-account-and-data-secure/creating-a-personal-access-token)|
-|過去関連記事|[Ubuntu 20.04 LTS git GitHub Ubuntu Desktop環境構築 Part 13 - GitとGitHubの設定](https://ryonakagami.github.io/2020/12/28/ubuntu-git-and-github-setup/)|
+---|---
+目的|GitHub 個人アクセストークンの設定
+|マシン| 	HP ENVY TE01-0xxx|
+OS |	ubuntu 20.04 LTS Focal Fossa
+CPU| 	Intel Core i7-9700 CPU 3.00 GHz
+RAM| 	32.0 GB
+GPU| 	NVIDIA GeForce RTX 2060 SUPER
 
+**Table of Contents**
 <!-- START doctoc generated TOC please keep comment here to allow auto update -->
 <!-- DON'T EDIT THIS SECTION, INSTEAD RE-RUN doctoc TO UPDATE -->
 
-- [実行環境](#%E5%AE%9F%E8%A1%8C%E7%92%B0%E5%A2%83)
 - [解決したい症状](#%E8%A7%A3%E6%B1%BA%E3%81%97%E3%81%9F%E3%81%84%E7%97%87%E7%8A%B6)
   - [何が問題か？](#%E4%BD%95%E3%81%8C%E5%95%8F%E9%A1%8C%E3%81%8B)
   - [Background](#background)
@@ -35,21 +36,16 @@ tags:
 - [対応方針](#%E5%AF%BE%E5%BF%9C%E6%96%B9%E9%87%9D)
   - [トークンの作成](#%E3%83%88%E3%83%BC%E3%82%AF%E3%83%B3%E3%81%AE%E4%BD%9C%E6%88%90)
   - [トークン使用のテスト](#%E3%83%88%E3%83%BC%E3%82%AF%E3%83%B3%E4%BD%BF%E7%94%A8%E3%81%AE%E3%83%86%E3%82%B9%E3%83%88)
+  - [git clone用の関数構築](#git-clone%E7%94%A8%E3%81%AE%E9%96%A2%E6%95%B0%E6%A7%8B%E7%AF%89)
 - [Appendix: リモートリポジトリについて](#appendix-%E3%83%AA%E3%83%A2%E3%83%BC%E3%83%88%E3%83%AA%E3%83%9D%E3%82%B8%E3%83%88%E3%83%AA%E3%81%AB%E3%81%A4%E3%81%84%E3%81%A6)
   - [リモートレポジトリの作成](#%E3%83%AA%E3%83%A2%E3%83%BC%E3%83%88%E3%83%AC%E3%83%9D%E3%82%B8%E3%83%88%E3%83%AA%E3%81%AE%E4%BD%9C%E6%88%90)
   - [HTTPS URLによるクローンのメリット](#https-url%E3%81%AB%E3%82%88%E3%82%8B%E3%82%AF%E3%83%AD%E3%83%BC%E3%83%B3%E3%81%AE%E3%83%A1%E3%83%AA%E3%83%83%E3%83%88)
+- [References](#references)
+  - [関連記事](#%E9%96%A2%E9%80%A3%E8%A8%98%E4%BA%8B)
+  - [オンラインマテリアル](#%E3%82%AA%E3%83%B3%E3%83%A9%E3%82%A4%E3%83%B3%E3%83%9E%E3%83%86%E3%83%AA%E3%82%A2%E3%83%AB)
 
 <!-- END doctoc generated TOC please keep comment here to allow auto update -->
 
-## 実行環境
-
-|項目||
-|---|---| 	 
-|マシン| 	HP ENVY TE01-0xxx|
-|OS |	ubuntu 20.04 LTS Focal Fossa|
-|CPU| 	Intel Core i7-9700 CPU 3.00 GHz|
-|RAM| 	32.0 GB|
-|GPU| 	NVIDIA GeForce RTX 2060 SUPER|
 
 ## 解決したい症状
 
@@ -157,6 +153,41 @@ From https://github.com/RyoNakagami/sample_size
 % rm -rf ./test
 ```
 
+### git clone用の関数構築
+
+> 前提条件
+
+- `.zshrc`にアクセストークンを参照するオブジェクトを作成してください
+- ここではそれを`TEST_TOKEN`とします
+
+> やりたいこと
+
+- アクセストークン取得後,アクセス可能なprivate repositoryをcloneする際に毎回パスワードを入力するのが億劫
+- 関数を作成し, URLを引数にすればcloneしてくれる仕様にしたい
+
+> ワンライナーでprivate repositoryをcloneする場合
+
+```
+% git clone https://<USER NAME>:${TEST_TOKEN}@github.com/repositoryowner/repositoryname
+```
+
+> 関数作成
+
+適当な場所に以下の`gh_clone`というファイルをつくります.
+
+```bash
+#!/usr/bin/bash
+## GitHub private repositoryをcloneする関数
+
+prefix='https://<GitHub User Name>:';
+pass=$TEST_TOKEN
+surfix=$(echo $1 |sed -e 's/^https:\/\//@/g');
+clone_args=$prefix$pass$surfix;
+git clone $clone_args
+```
+
+Then, `sudo chmod 755 ./gh_clone`で完成.
+
 ## Appendix: リモートリポジトリについて
 
 インターネット上あるいはその他ネットワーク上のどこかに存在するファイルやディレクトリの履歴を管理する場所のことです.プッシュできるのは、2 種類の URL アドレスに対してのみです:
@@ -187,3 +218,10 @@ git remote -v
 ### HTTPS URLによるクローンのメリット
 
 `https://` は、可視性に関係なく、すべてのリポジトリで使用できます。 `https://` のクローン URL は、ファイアウォールまたはプロキシの内側にいる場合でも機能します。コマンドラインで、HTTPS URL を使用してリモートリポジトリに `git clone`、`git fetch`、`git pull` または `git push` を行った場合、GitHub のユーザ名とパスワードの入力を求められます。 Gitがパスワードを求めてきたときは、代わりに個人アクセストークン（PAT）を入力します. 
+
+## References
+### 関連記事
+- [Ubuntu 20.04 LTS git GitHub Ubuntu Desktop環境構築 Part 13 - GitとGitHubの設定](https://ryonakagami.github.io/2020/12/28/ubuntu-git-and-github-setup/)
+### オンラインマテリアル
+- [Token authentication requirements for Git operations](https://github.blog/2020-12-15-token-authentication-requirements-for-git-operations/)
+- [個人アクセストークンを使用する](https://docs.github.com/ja/github-ae@latest/github/authenticating-to-github/keeping-your-account-and-data-secure/creating-a-personal-access-token)
