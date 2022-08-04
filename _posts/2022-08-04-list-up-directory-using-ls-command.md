@@ -1,13 +1,13 @@
 ---
 layout: post
-title: "Linux基礎知識：カラー付きでディレクトリのリストアップをしたい"
+title: "Linux基礎知識：ディレクトリの身を対象にした一覧表示"
 subtitle: "du,grep,awkを活用してls likeに出力する"
 author: "Ryo"
 header-img: "img/post-bg-rwd.jpg"
 header-mask: 0.4
 catelog: true
 mathjax: true
-purpose: 
+revise_date: 2022-08-04
 tags:
 
 - Linux
