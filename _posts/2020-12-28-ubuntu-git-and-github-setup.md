@@ -450,7 +450,9 @@ Replace all passwords listed in a file (prefix lines 'regex:' or 'glob:' if requ
 ## References
 ### 関連ポスト
 
-- [2020-12-23ポスト: Git in Zshの設定](https://ryonakagami.github.io/2020/12/23/ubuntu-zshsetup/)
+- [Ryo's Tech Blog > 2021-04-25: Githubパスワード認証廃止への対応](https://ryonakagami.github.io/2021/04/25/github-token-authentication/)
+- [Ryo's Tech Blog > 2020-12-23: Git in Zshの設定](https://ryonakagami.github.io/2020/12/23/ubuntu-zshsetup/)
+
 ### オンラインマテリアル
 
 - [Git Getting Started](https://git-scm.com/book/en/v2/Getting-Started-First-Time-Git-Setup)
