@@ -15,6 +15,8 @@ tags:
 - GitLab
 ---
 
+
+
 **Table of Contents**
 <!-- START doctoc generated TOC please keep comment here to allow auto update -->
 <!-- DON'T EDIT THIS SECTION, INSTEAD RE-RUN doctoc TO UPDATE -->
@@ -134,7 +136,7 @@ ssh-keygen -t <暗号化形式> -C "ユーザー名@ホスト名" -b <ビット�
 ## Referneces
 ### 関連ポスト
 
-- [](https://ryonakagami.github.io/2020/12/28/ubuntu-git-and-github-setup/#%E6%96%B0%E3%81%97%E3%81%84-ssh-%E3%82%AD%E3%83%BC%E3%82%92%E7%94%9F%E6%88%90%E3%81%97%E3%81%A6-ssh-agent-%E3%81%AB%E8%BF%BD%E5%8A%A0%E3%81%99%E3%82%8B)
+- [Ryo's Tech Blog > GitとGitHubの設定](https://ryonakagami.github.io/2020/12/28/ubuntu-git-and-github-setup/#%E6%96%B0%E3%81%97%E3%81%84-ssh-%E3%82%AD%E3%83%BC%E3%82%92%E7%94%9F%E6%88%90%E3%81%97%E3%81%A6-ssh-agent-%E3%81%AB%E8%BF%BD%E5%8A%A0%E3%81%99%E3%82%8B)
 
 ### オンラインマテリアル
 

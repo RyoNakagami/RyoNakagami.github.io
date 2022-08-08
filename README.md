@@ -44,6 +44,12 @@ git push --set-upstream origin master
     - see [here](http://jwarby.github.io/jekyll-pygments-themes/languages/javascript.html))
     - 修正したい場合は`highlight.less`を参照
 
+### パラメータ設定
+
+---|---
+reading time|
+
+
 
 ### Interesting to know more? Checkout the [full user manual](_doc/Manual.md)!
 

@@ -1,6 +1,6 @@
 ---
 layout: post
-title: "Linux基礎知識：ディレクトリの身を対象にした一覧表示"
+title: "Linux基礎知識：カレントディレクトリ下のフォルダ一覧表示"
 subtitle: "du,grep,awkを活用してls likeに出力する"
 author: "Ryo"
 header-img: "img/post-bg-rwd.jpg"
@@ -8,11 +8,14 @@ header-mask: 0.4
 catelog: true
 mathjax: true
 revise_date: 2022-08-04
+reading_time:
 tags:
 
 - Linux
 - Shell
 ---
+
+
 
 **Table of Contents**
 <!-- START doctoc generated TOC please keep comment here to allow auto update -->
@@ -225,7 +228,8 @@ alias ls-dir=ls-dir
 
 |短いオプション|長いオプション|説明|
 |---|---|---|
-|`-s`|`--summarize`|指定したディレクトリの合計のみを表示する（サブディレクトリの行が表示されなくなる）|`-x`|`--one-file-system`|異なるファイルシステム（パーティション）にあるディレクトリをスキップする|
+|`-s`|`--summarize`|指定したディレクトリの合計のみを表示する（サブディレクトリの行が表示されなくなる）|
+|`-x`|`--one-file-system`|異なるファイルシステム（パーティション）にあるディレクトリをスキップする|
 |`-h`|`--human-readable`|サイズに応じて読みやすい単位で表示する|
 
 > 動作確認

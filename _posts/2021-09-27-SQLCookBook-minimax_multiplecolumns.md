@@ -7,12 +7,11 @@ header-img: "img/about-bg.jpg"
 header-mask: 0.4
 catelog: true
 mathjax: true
-purpose: 
 tags:
 
 - SQL
 - Python
-- pandas
+- 前処理
 ---
 
 

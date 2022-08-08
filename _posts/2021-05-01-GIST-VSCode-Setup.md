@@ -51,7 +51,7 @@ CPU| 	Intel Core i7-9700 CPU 3.00 GHz
 ### 紹介する解決策
 
 - [GitHub Gist](https://gist.github.com/)でコードの共有及びコメントのやり取りをする
-- VS Code Extension Gist(kenhowardpdx.vscode-gist)を用いて,ローカルのVS Codeから任意のファイルをGistへcreate/addできるようにする
+- VS Code Extension Gist [kenhowardpdx.vscode-gist](https://marketplace.visualstudio.com/items?itemName=kenhowardpdx.vscode-gist#review-details)を用いて,ローカルのVS Codeから任意のファイルをGistへcreate/addできるようにする
 
 <img src = "https://github.com/ryonakimageserver/omorikaizuka/blob/master/git/Git_workflow_Introduction/20210501-Gist-VSCode-Extension.png?raw=true">
 
@@ -127,6 +127,10 @@ CPU| 	Intel Core i7-9700 CPU 3.00 GHz
 - Style (形式はスタイルガイドに従っているか、統一性あるか)
 
 ## References
+### VS Code Extension
+
+- [VS Code Extension Gist, kenhowardpdx.vscode-gist](https://marketplace.visualstudio.com/items?itemName=kenhowardpdx.vscode-gist#review-details)
+
 ### オンラインマテリアル
 
 - [GitHub > gist](https://gist.github.com/)

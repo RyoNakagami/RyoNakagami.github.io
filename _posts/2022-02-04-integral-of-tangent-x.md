@@ -1,7 +1,7 @@
 ---
 layout: post
 title: "タンジェントのN乗の区間積分と数列"
-subtitile: "H31東京大学大学院工学研究科入試問1を題材に"
+subtitle: "H31東京大学大学院工学研究科入試問1を題材に"
 author: "Ryo"
 header-img: "img/bg-math.jpg"
 header-mask: 0.4

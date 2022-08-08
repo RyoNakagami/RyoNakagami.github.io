@@ -8,6 +8,7 @@ header-mask: 0.4
 purpose: 目的 git branchを活用したRyo's Tech blogの更新手順のメモ
 goal: 成果物 git branchを用いたファイルバージョン管理やブログレイアウト管理を実現
 catelog: true
+reading_time: 10
 tags:
   - git
   - GitHub Pages
@@ -19,6 +20,8 @@ tags:
 |---|---|
 |目的|`git branch`を活用した[Ryo's Tech blog](https://ryonakagami.github.io)の更新手順のメモ|
 |Goal|`git branch`を用いたファイルバージョン管理やブログレイアウト管理ができるようになる|
+|Estimated Time||
+
 
 <!-- START doctoc generated TOC please keep comment here to allow auto update -->
 <!-- DON'T EDIT THIS SECTION, INSTEAD RE-RUN doctoc TO UPDATE -->
@@ -55,6 +58,8 @@ tags:
 |静的サイトジェネレーター|jekyll|
 |editor|Visual Studio Code|
 |Analytics|Google Analytics 4|
+
+
 
 ### 作業ディレクトリ構成
 

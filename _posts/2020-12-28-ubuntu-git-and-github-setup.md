@@ -49,24 +49,38 @@ tags:
 <!-- END doctoc generated TOC please keep comment here to allow auto update -->
 
 ## 1. 今回のスコープ
-### やりたいこと
 
+> やりたいこと
+
+- Gitの概念の理解
 - Gitのインストールと初期設定
 - GitHubの個人アカウントとの連携
 
-### Requirements
+> Requirements
 
 - GitHubの個人アカウント作成済み
 - Visual Studio Codeインストール済み
 
 ## 2. Gitとはなにか？
 
-Gitとは分散型バージョン管理システムです.Version管理とは,変更履歴を管理することで, ソースコードを書き足したり,変更したりする過程を記録したり,特定の段階に戻ったり,ファイルを復活させたり,メタデータからの状態の検索することができるようになります.Gitを活用することで以下のような課題を解決することができます：
+Gitとは分散型バージョン管理システムです.Version管理とは,変更履歴を管理することで, ソースコードを書き足したり,変更したりする過程を記録したり,特定の段階に戻ったり,ファイルを復活させたり,メタデータからの状態の検索することができるようになります. Version管理システム,特にGitを活用することで以下のような課題を解決することができます：
 
 - あのとき動いたが,今は動かない.一回動いていた状態に戻したい
 - このコードを加えた人とタイミングを知りたい
+- 共同開発者が編集したファイルのせいで,自分のコードが動かなくなってしまった
 
-### Version管理の方法：分散型とは？
+>  Gitのuse case
+
+|問題|やりたいこと|関連コマンド|
+|---|----------|----------|
+|エラーを含んだ状態でプログラムを保存してしまった|動作していたときの状態に戻したい|`git reset --hard <hash>`|
+|レポートのファイルを間違って削除してしまった(staging area)|元に戻したい|`git reset <file path>`|
+|1週間ぶりに開くファイル、以前どんな編集をしたのか忘れてしまった。|何をしたのか記録しておきたい|README.mdやIssue, ToDoリストを更新|
+|二人で1つのファイルを編集してしまい、一方の人がした 編集が反映されなかった|conflictを発見かつ修正したい|(1) conflict箇所の確認:git merge後に `git status`<br>(2)コンフリクトしているファイルが分かったら、直接ファイルを開いて修正<br><br>開発チームごとにルールがあるはずなので確認|
+
+### Version管理の方法
+
+> Snapshots vs Dufferences
 
 Version管理の方法として,Gitは差分(Differences)でなくSnapshotsでデータを管理しています.Git は基本的に,すべてのファイルが各時点でどのように見えるかをSnapshotで記録し,そのSnapshotへの参照を保存します.効率化のため,ファイルが変更されていない場合は,Git はファイルを再び保存せず,すでに保存されている以前の同じファイルへのリンクだけを保存します.
 
@@ -76,19 +90,46 @@ Snapshots vs Differencesのイメージは以下のFiguresとなります.
 
 <img src="https://github.com/ryonakimageserver/omorikaizuka/blob/master/git/GitHub_pages_Posts/20210104_git_snapshots_02.png?raw=true">
 
-Version管理システムは分散型と集中型の２つに大別することができます.集中型とは変更履歴などのデータを一つの中央サーバーに集めて管理する種類のことです.分散型とは,各クライアントがレポジトリーをミラーし終わったあとは,変更履歴の参照などのVersion管理アクションは各々のクライアント内部で閉じている種類のことを指します.
+> 分散型と集中型
+
+Version管理システムは分散型と集中型の２つに大別することができます.集中型とは変更履歴などのデータを一つの中央サーバーに集めて管理する種類のことです.分散型とは,各クライアントがリポジトリをミラーし終わったあとは,変更履歴の参照などのVersion管理アクションは各々のクライアント内部で閉じている種類のことを指します.
 
 分散型は,最新のソースコードの管理が難しいというデメリットがありますが(いわゆるコンフリクト),クライアントのローカル環境内部で変更履歴の確認等の作業が完結するので,集中型Version管理システムで直面するnetwork latency overhead問題を憂慮すること少なく開発作業をすることができます.
 
-分散型 vs 集中型のイメージは以下のFiguresとなります.
+|システム|例|メリット|デメリット|
+|---|---|---|---|
+|集中型|Suversion|単一リポジトリなので管理が容易|リポジトリへのアクセスが常にネットワーク経由になる|
+|分散型|Git|ローカル上のリポジトリを更新することで,ネットワークがつながらないときでも作業可能|リポジトリが複数存在するため管理が困難(どれが最新なのか判断が難しい)|
 
 <img src="https://github.com/ryonakimageserver/omorikaizuka/blob/master/git/GitHub_pages_Posts/20210104_Git_Centralized_version_control.png?raw=true">
 
 <img src="https://github.com/ryonakimageserver/omorikaizuka/blob/master/git/GitHub_pages_Posts/20200104_Git_Distributed_version_control.png?raw=true">
 
+> Gitにおけるリポジトリの種類
+
+リポジトリとはデータを保存する場所のことです. Gitでは,このリポジトリ単位でデータを管理しており,修正履歴ログもリポジトリ内に保存されています.
+
+Gitは分散型Version管理システムであるため,リポジトリは各開発者側にミラーリングして利用します. このとき, GitHub/GitLab上のリモートサーバーに置かれたリポジトリをリモートリポジトリ, 開発者がローカルにおくリポジトリはローカルリポジトリと呼ばれます.
+
+<img src="https://github.com/ryonakimageserver/omorikaizuka/blob/master/git/Git_workflow_Introduction/20201228-Git-Workflow-total.png?raw=true">
+
+
 ### Gitのバージョン管理の仕組み
 
-Gitはディレクトリ単位でVersion管理します.管理されるディレクトリには3つのエリアが作られ,それぞれWorking Directory,Staging Area,Respositoryと呼びます.Git管理されたファイルは`modified`, `staged`, `committed`という状態が与えられ,それぞれの状態がファイルがどこのエリアにいるかを示しています.
+Gitはディレクトリ単位でVersion管理します.管理されるディレクトリには3つのエリアが作られ,それぞれWorking Directory,Staging Area,Respositoryと呼びます.
+
+- Working Directory:
+  - ドキュメントやプログラムファイルの作成などの作業を行う場所
+  - 開発者が作業するためのディレクトリ領域
+- Staging Area:
+  - 変更履歴として保存するファイルを選択し,置いておく場所
+  - `git add`で指定したファイルが行き着くところ
+- Respository:  
+  - 変更履歴を記録しておく場所
+  - Staging Areaに置かれているファイルを変更履歴をリポジトリに保存することを「Commit」といいます
+
+
+Git管理されたファイルは`modified`, `staged`, `committed`という状態が与えられ,それぞれの状態がファイルがどこのエリアにいるかを示しています.
 
 |状態|説明|
 |---|---|
