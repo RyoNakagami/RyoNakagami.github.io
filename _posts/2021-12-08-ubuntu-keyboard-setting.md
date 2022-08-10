@@ -7,20 +7,21 @@ header-img: "img/about-bg.jpg"
 header-mask: 0.4
 catelog: true
 mathjax: true
-purpose: 
+revise_date: 
+reading_time: 6
 tags:
 
 - Ubuntu 20.04 LTS
+- VS Code
 - Keyboard
 ---
 
-
-
+---|---
+やりたいこと|- Keychron K6 Wireless Mechanical Keyboardの初期設定<br>- VSCodeやUbuntuのショートカットの整理
 
 <!-- START doctoc generated TOC please keep comment here to allow auto update -->
 <!-- DON'T EDIT THIS SECTION, INSTEAD RE-RUN doctoc TO UPDATE -->
 
-- [やりたいこと](#%E3%82%84%E3%82%8A%E3%81%9F%E3%81%84%E3%81%93%E3%81%A8)
 - [1. 技術スペック](#1-%E6%8A%80%E8%A1%93%E3%82%B9%E3%83%9A%E3%83%83%E3%82%AF)
   - [実行環境](#%E5%AE%9F%E8%A1%8C%E7%92%B0%E5%A2%83)
   - [Keyboardスペック](#keyboard%E3%82%B9%E3%83%9A%E3%83%83%E3%82%AF)
@@ -45,10 +46,6 @@ tags:
 <!-- END doctoc generated TOC please keep comment here to allow auto update -->
 
 
-## やりたいこと
-
-- Keychron K6 Wireless Mechanical Keyboardの初期設定
-- VSCodeやUbuntuのショートカットの整理
 
 ## 1. 技術スペック
 

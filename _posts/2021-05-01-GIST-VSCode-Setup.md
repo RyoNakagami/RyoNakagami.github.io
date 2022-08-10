@@ -8,9 +8,10 @@ header-mask: 0.4
 catelog: true
 mathjax: true
 revise_date: 2022-08-04
+reading_time: 6
 tags:
 
-- Ubuntu 20.04 LTS
+- VS Code
 - git
 - GitHub
 ---
