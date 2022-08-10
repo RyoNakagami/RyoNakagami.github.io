@@ -20,7 +20,6 @@ tags:
 |---|---|
 |目的|`git branch`を活用した[Ryo's Tech blog](https://ryonakagami.github.io)の更新手順のメモ|
 |Goal|`git branch`を用いたファイルバージョン管理やブログレイアウト管理ができるようになる|
-|Estimated Time||
 
 
 <!-- START doctoc generated TOC please keep comment here to allow auto update -->
