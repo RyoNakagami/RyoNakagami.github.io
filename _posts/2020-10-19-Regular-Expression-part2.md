@@ -25,7 +25,6 @@ tags:
 <!-- START doctoc generated TOC please keep comment here to allow auto update -->
 <!-- DON'T EDIT THIS SECTION, INSTEAD RE-RUN doctoc TO UPDATE -->
 
-
 - [1. `re`モジュールと正規表現を用いた文字列マッチング](#1-re%E3%83%A2%E3%82%B8%E3%83%A5%E3%83%BC%E3%83%AB%E3%81%A8%E6%AD%A3%E8%A6%8F%E8%A1%A8%E7%8F%BE%E3%82%92%E7%94%A8%E3%81%84%E3%81%9F%E6%96%87%E5%AD%97%E5%88%97%E3%83%9E%E3%83%83%E3%83%81%E3%83%B3%E3%82%B0)
   - [Regexオブジェクトを生成する](#regex%E3%82%AA%E3%83%96%E3%82%B8%E3%82%A7%E3%82%AF%E3%83%88%E3%82%92%E7%94%9F%E6%88%90%E3%81%99%E3%82%8B)
   - [`search()` methodを用いてegexオブジェクトと文字列のマッチング](#search-method%E3%82%92%E7%94%A8%E3%81%84%E3%81%A6egex%E3%82%AA%E3%83%96%E3%82%B8%E3%82%A7%E3%82%AF%E3%83%88%E3%81%A8%E6%96%87%E5%AD%97%E5%88%97%E3%81%AE%E3%83%9E%E3%83%83%E3%83%81%E3%83%B3%E3%82%B0)

@@ -218,7 +218,10 @@ git remote -v
 
 ## References
 ### 関連記事
+
 - [Ubuntu 20.04 LTS git GitHub Ubuntu Desktop環境構築 Part 13 - GitとGitHubの設定](https://ryonakagami.github.io/2020/12/28/ubuntu-git-and-github-setup/)
+
 ### オンラインマテリアル
+
 - [Token authentication requirements for Git operations](https://github.blog/2020-12-15-token-authentication-requirements-for-git-operations/)
 - [個人アクセストークンを使用する](https://docs.github.com/ja/github-ae@latest/github/authenticating-to-github/keeping-your-account-and-data-secure/creating-a-personal-access-token)

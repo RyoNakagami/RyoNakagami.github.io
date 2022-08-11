@@ -28,15 +28,14 @@ tags:
 <!-- START doctoc generated TOC please keep comment here to allow auto update -->
 <!-- DON'T EDIT THIS SECTION, INSTEAD RE-RUN doctoc TO UPDATE -->
 
-
-- [1. 問題設定](#1-問題設定)
-- [2. Dynamic Programming解法](#2-dynamic-programming解法)
-  - [`value_func_prob(x, y)`の説明](#value_func_probx-yの説明)
-  - [コラム：`@functools.lru_cache()`](#コラムfunctoolslru_cache)
-- [3. 配列を用いた遷移確率列挙方式](#3-配列を用いた遷移確率列挙方式)
-  - [計算ロジック](#計算ロジック)
-  - [`float`を用いて計算するのに抵抗がある場合](#floatを用いて計算するのに抵抗がある場合)
-- [4. Naiveなsimulationによる近似解](#4-naiveなsimulationによる近似解)
+- [1. 問題設定](#1-%E5%95%8F%E9%A1%8C%E8%A8%AD%E5%AE%9A)
+- [2. Dynamic Programming解法](#2-dynamic-programming%E8%A7%A3%E6%B3%95)
+  - [`value_func_prob(x, y)`の説明](#value_func_probx-y%E3%81%AE%E8%AA%AC%E6%98%8E)
+  - [コラム：`@functools.lru_cache()`](#%E3%82%B3%E3%83%A9%E3%83%A0functoolslru_cache)
+- [3. 配列を用いた遷移確率列挙方式](#3-%E9%85%8D%E5%88%97%E3%82%92%E7%94%A8%E3%81%84%E3%81%9F%E9%81%B7%E7%A7%BB%E7%A2%BA%E7%8E%87%E5%88%97%E6%8C%99%E6%96%B9%E5%BC%8F)
+  - [計算ロジック](#%E8%A8%88%E7%AE%97%E3%83%AD%E3%82%B8%E3%83%83%E3%82%AF)
+  - [`float`を用いて計算するのに抵抗がある場合](#float%E3%82%92%E7%94%A8%E3%81%84%E3%81%A6%E8%A8%88%E7%AE%97%E3%81%99%E3%82%8B%E3%81%AE%E3%81%AB%E6%8A%B5%E6%8A%97%E3%81%8C%E3%81%82%E3%82%8B%E5%A0%B4%E5%90%88)
+- [4. Naiveなsimulationによる近似解](#4-naive%E3%81%AAsimulation%E3%81%AB%E3%82%88%E3%82%8B%E8%BF%91%E4%BC%BC%E8%A7%A3)
 
 <!-- END doctoc generated TOC please keep comment here to allow auto update -->
 

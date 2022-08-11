@@ -27,11 +27,10 @@ tags:
 <!-- START doctoc generated TOC please keep comment here to allow auto update -->
 <!-- DON'T EDIT THIS SECTION, INSTEAD RE-RUN doctoc TO UPDATE -->
 
-
-- [1. Memoizationとは？](#1-memoizationとは)
-- [2. Memoizationの実装 in Python](#2-memoizationの実装-in-python)
-  - [実行時間の比較](#実行時間の比較)
-- [3. Exercise: Ackermann関数とMemoization](#3-exercise-ackermann関数とmemoization)
+- [1. Memoizationとは？](#1-memoization%E3%81%A8%E3%81%AF)
+- [2. Memoizationの実装 in Python](#2-memoization%E3%81%AE%E5%AE%9F%E8%A3%85-in-python)
+  - [実行時間の比較](#%E5%AE%9F%E8%A1%8C%E6%99%82%E9%96%93%E3%81%AE%E6%AF%94%E8%BC%83)
+- [3. Exercise: Ackermann関数とMemoization](#3-exercise-ackermann%E9%96%A2%E6%95%B0%E3%81%A8memoization)
 
 <!-- END doctoc generated TOC please keep comment here to allow auto update -->
 
