@@ -1,6 +1,6 @@
 ---
 layout: post
-title: "Ubuntu 20.04 LTSでの古いカーネルを削除"
+title: "Ubuntu 20.04 LTSでの古いカーネルの削除"
 subtitle: ""
 author: "Ryo"
 header-img: "img/about-bg.jpg"
