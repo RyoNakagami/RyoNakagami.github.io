@@ -1,15 +1,14 @@
 ---
 layout: post
-title: "プログラムはなぜ動くのか"
-subtitle: "個人の勉強記録"
+title: "一般教養としてのComputer Science"
+subtitle: "プログラムが動作する根本的な仕組みを理解する"
 author: "Ryo"
 header-img: "img/post-bg-dreamer.jpg"
 header-mask: 0.4
 catelog: true
-purpose: 目的 プログラムが動作する根本的な仕組みを理解する
 goal: Goal プログラム実行時間がどのような要因に基づくのかのイメージできるようになる
 tags:
-  - CS101
+  - 一般教養
 ---
 
 
