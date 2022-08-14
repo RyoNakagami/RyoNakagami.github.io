@@ -7,7 +7,7 @@ header-img: "img/post-bg-rwd.jpg"
 header-mask: 0.4
 catelog: true
 mathjax: true
-revised_date:2022-08-01 
+revised_date: 2022-08-01 
 tags:
 
 - Ubuntu 20.04 LTS
