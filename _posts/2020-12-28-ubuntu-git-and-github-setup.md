@@ -38,6 +38,7 @@ tags:
   - [GPGキーの生成とGitHubへの登録](#gpg%E3%82%AD%E3%83%BC%E3%81%AE%E7%94%9F%E6%88%90%E3%81%A8github%E3%81%B8%E3%81%AE%E7%99%BB%E9%8C%B2)
   - [Git へ GPG キーを伝える](#git-%E3%81%B8-gpg-%E3%82%AD%E3%83%BC%E3%82%92%E4%BC%9D%E3%81%88%E3%82%8B)
   - [`.zshrc`への登録](#zshrc%E3%81%B8%E3%81%AE%E7%99%BB%E9%8C%B2)
+  - [コミットに署名する](#%E3%82%B3%E3%83%9F%E3%83%83%E3%83%88%E3%81%AB%E7%BD%B2%E5%90%8D%E3%81%99%E3%82%8B)
 - [6. VSCodeとGitの連携](#6-vscode%E3%81%A8git%E3%81%AE%E9%80%A3%E6%90%BA)
   - [アルファベットの意味](#%E3%82%A2%E3%83%AB%E3%83%95%E3%82%A1%E3%83%99%E3%83%83%E3%83%88%E3%81%AE%E6%84%8F%E5%91%B3)
   - [diff画面で変更を確認する](#diff%E7%94%BB%E9%9D%A2%E3%81%A7%E5%A4%89%E6%9B%B4%E3%82%92%E7%A2%BA%E8%AA%8D%E3%81%99%E3%82%8B)
@@ -516,9 +517,26 @@ GPG キー ID は 3AA5C34371567BD2の場合,
 
 ### コミットに署名する
 
+`-S` フラグを`git commit`コマンドに追加し, pushするだけで完了です.
+
+```zsh
+% git commit -S -m "your commit message"
+# Creates a signed commit
+% git push -u origin main
+# ローカルコミットをリモートリポジトリにプッシュする
+```
 
 > タグに署名する
 
+1. タグに署名するには, `git tag` コマンドに `-s` を追加します.
+2. タグを`git tag -v [tag-name]` コマンドで検証(verify)します
+
+```zsh
+% git tag -s mytag
+# 署名済みのタグを作成する
+% git tag -v mytag
+# 署名済みのタグを検証する
+```
 
 ## 6. VSCodeとGitの連携
 
