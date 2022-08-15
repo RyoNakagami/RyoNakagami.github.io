@@ -12,7 +12,7 @@ reading_time: 6
 tags:
 
 - Ubuntu 20.04 LTS
-- VS Code
+- VSCode
 - Keyboard
 ---
 

@@ -11,7 +11,7 @@ revise_date: 2022-08-04
 reading_time: 6
 tags:
 
-- VS Code
+- VSCode
 - git
 - GitHub
 ---

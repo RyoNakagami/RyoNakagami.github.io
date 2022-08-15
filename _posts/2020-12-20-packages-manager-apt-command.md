@@ -33,8 +33,10 @@ tags:
 <!-- START doctoc generated TOC please keep comment here to allow auto update -->
 <!-- DON'T EDIT THIS SECTION, INSTEAD RE-RUN doctoc TO UPDATE -->
 
-- [1. パッケージ管理とは](#1-%E3%83%91%E3%83%83%E3%82%B1%E3%83%BC%E3%82%B8%E7%AE%A1%E7%90%86%E3%81%A8%E3%81%AF)
+- [1. パッケージとは](#1-%E3%83%91%E3%83%83%E3%82%B1%E3%83%BC%E3%82%B8%E3%81%A8%E3%81%AF)
   - [バイナリパッケージの構造](#%E3%83%90%E3%82%A4%E3%83%8A%E3%83%AA%E3%83%91%E3%83%83%E3%82%B1%E3%83%BC%E3%82%B8%E3%81%AE%E6%A7%8B%E9%80%A0)
+  - [GPG Keysとは？](#gpg-keys%E3%81%A8%E3%81%AF)
+- [2. パッケージ管理とは？](#2-%E3%83%91%E3%83%83%E3%82%B1%E3%83%BC%E3%82%B8%E7%AE%A1%E7%90%86%E3%81%A8%E3%81%AF)
   - [パッケージの依存関係](#%E3%83%91%E3%83%83%E3%82%B1%E3%83%BC%E3%82%B8%E3%81%AE%E4%BE%9D%E5%AD%98%E9%96%A2%E4%BF%82)
   - [Debian系OSのパッケージマネジャー: なぜaptが便利なのか？](#debian%E7%B3%BBos%E3%81%AE%E3%83%91%E3%83%83%E3%82%B1%E3%83%BC%E3%82%B8%E3%83%9E%E3%83%8D%E3%82%B8%E3%83%A3%E3%83%BC-%E3%81%AA%E3%81%9Capt%E3%81%8C%E4%BE%BF%E5%88%A9%E3%81%AA%E3%81%AE%E3%81%8B)
 - [2. APT](#2-apt)
@@ -51,21 +53,22 @@ tags:
   - [なぜPPAを使うのか？](#%E3%81%AA%E3%81%9Cppa%E3%82%92%E4%BD%BF%E3%81%86%E3%81%AE%E3%81%8B)
   - [Syntax](#syntax-1)
   - [リポジトリの削除](#%E3%83%AA%E3%83%9D%E3%82%B8%E3%83%88%E3%83%AA%E3%81%AE%E5%89%8A%E9%99%A4)
-- [Ryo's Tech Blog 関連記事](#ryos-tech-blog-%E9%96%A2%E9%80%A3%E8%A8%98%E4%BA%8B)
 - [References](#references)
 
 <!-- END doctoc generated TOC please keep comment here to allow auto update -->
 
-## 1. パッケージ管理とは
+## 1. パッケージとは
 
-Linuxではパッケージという単位でソフトウェアを管理しています。パッケージにはいろいろな種類があります。Debian GNU/LinuxやUbuntuではDebian形式,`.deb`拡張子のパッケージを採用しています。
+
+Linuxではパッケージという単位でソフトウェアを管理しています. パッケージにはいろいろな種類がありますが, 概念としてはインストールに必要なファイルをひとまとめにしたものです.
+Debian GNU/LinuxやUbuntuではDebian形式,`.deb`拡張子のパッケージを採用しています。
 
 
 Fig 1:パッケージの概念
 <img src = "https://github.com/ryonakimageserver/omorikaizuka/blob/master/%E3%83%96%E3%83%AD%E3%82%B0%E7%94%A8/20201220-linux-packages-diagram.png?raw=true">
 
-なお、Debian形式パッケージは`ar`, `tar`, and `xz`といった古典的UNIXコマンドしか使えない環境でも展開できるように設計されています. 
-基本的にはDebian形式パッケージの展開は`dpkg`, `apt`といったコマンドを使いますが、これらコマンドを誤って削除してしまった時でも、パッケージが展開できなくなるという事態を回避することができます.
+なお, Debian形式パッケージは`ar`, `tar`, and `xz`といった古典的UNIXコマンドしか使えない環境でも展開できるように設計されています. 
+基本的にはDebian形式パッケージの展開は`dpkg`, `apt`といったコマンドを使いますが, これらコマンドを誤って削除してしまった時でも, パッケージが展開できなくなるという事態を回避することができます.
 
 
 ### バイナリパッケージの構造
@@ -83,10 +86,23 @@ _gpgbuilder
 これをみるとZoom Debian パッケージは4つのファイルから成り立っています
 
 ---|---
-debian-binary|.debファイルパッケージフォーマットバージョンのバージョンを示すテキストファイルです
-control.tar.xz|パッケージ名やバージョンなどのメタ情報、およびパッケージのインストール前、インストール中、またはインストール後に実行するスクリプトが含まれています
-data.tar.xz|パッケージから展開されるすべてのファイルが含まれています. 実行ファイル、ライブラリ、ドキュメントなどがすべて保存されています
-_gpgbuilder|GPG Keysの生成関連ファイル
+`debian-binary`|.debファイルパッケージフォーマットバージョンのバージョンを示すテキストファイルです
+`control.tar.xz`|パッケージ名やバージョンなどのメタ情報、およびパッケージのインストール前、インストール中、またはインストール後に実行するスクリプトが含まれています
+`data.tar.xz`|パッケージから展開されるすべてのファイルが含まれています. 実行ファイル、ライブラリ、ドキュメントなどがすべて保存されています
+`_gpgbuilder`|GPG Keysの生成関連ファイル
+
+### GPG Keysとは？
+
+Linux環境では, インストールしようとしているパッケージが正しい配布先のものか?本物であるか？を検証してから
+インストールします. このとき, ソフトウェアの検証に使用される仕組みがGNU Privacy Guard (GnuPG, GPG)です.
+
+
+
+
+
+
+## 2. パッケージ管理とは？
+
 
 ### パッケージの依存関係
 
@@ -435,11 +451,14 @@ embrosyn-ubuntu-cinnamon-focal.list	     slack.list
 % sudo ppa-purge ppa:openjdk-r/ppa
 ```
 
-## Ryo's Tech Blog 関連記事
-
-- [Linux基礎知識：bash環境でのパッケージのサジェスト機能](https://ryonakagami.github.io/2022/02/06/suggest-apt-packages-function/)
-- [(dpkgを用いたpackage install例)キャッシュ削除ツール Bleachbitのインストール](https://ryonakagami.github.io/2020/12/21/ubuntu-bleachbit/)
 ## References
+
+> 関連ポスト
+
+- [Ryo's Tech Blog > Linux基礎知識：bash環境でのパッケージのサジェスト機能](https://ryonakagami.github.io/2022/02/06/suggest-apt-packages-function/)
+- [Ryo's Tech Blog > (dpkgを用いたpackage install例)キャッシュ削除ツール Bleachbitのインストール](https://ryonakagami.github.io/2020/12/21/ubuntu-bleachbit/)
+
+> オンラインマテリアル
 
 - [APT公式ウェブサイト](https://tracker.debian.org/pkg/apt)
 - [Debianパッケージ管理](https://www.debian.org/doc/manuals/debian-reference/ch02.ja.html)

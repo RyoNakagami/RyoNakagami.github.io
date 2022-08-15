@@ -34,10 +34,12 @@ tags:
   - [GitHub アカウントへの新しい SSH キーの追加](#github-%E3%82%A2%E3%82%AB%E3%82%A6%E3%83%B3%E3%83%88%E3%81%B8%E3%81%AE%E6%96%B0%E3%81%97%E3%81%84-ssh-%E3%82%AD%E3%83%BC%E3%81%AE%E8%BF%BD%E5%8A%A0)
   - [SSH 接続をテストする](#ssh-%E6%8E%A5%E7%B6%9A%E3%82%92%E3%83%86%E3%82%B9%E3%83%88%E3%81%99%E3%82%8B)
   - [ssh接続を使ったgit clone](#ssh%E6%8E%A5%E7%B6%9A%E3%82%92%E4%BD%BF%E3%81%A3%E3%81%9Fgit-clone)
-- [5. VSCodeとGitの連携](#5-vscode%E3%81%A8git%E3%81%AE%E9%80%A3%E6%90%BA)
+- [5. GPGキーの登録](#5-gpg%E3%82%AD%E3%83%BC%E3%81%AE%E7%99%BB%E9%8C%B2)
+  - [GPGキーの生成](#gpg%E3%82%AD%E3%83%BC%E3%81%AE%E7%94%9F%E6%88%90)
+- [6. VSCodeとGitの連携](#6-vscode%E3%81%A8git%E3%81%AE%E9%80%A3%E6%90%BA)
   - [アルファベットの意味](#%E3%82%A2%E3%83%AB%E3%83%95%E3%82%A1%E3%83%99%E3%83%83%E3%83%88%E3%81%AE%E6%84%8F%E5%91%B3)
   - [diff画面で変更を確認する](#diff%E7%94%BB%E9%9D%A2%E3%81%A7%E5%A4%89%E6%9B%B4%E3%82%92%E7%A2%BA%E8%AA%8D%E3%81%99%E3%82%8B)
-- [6. BFG Repo-Cleanerのインストール](#6-bfg-repo-cleaner%E3%81%AE%E3%82%A4%E3%83%B3%E3%82%B9%E3%83%88%E3%83%BC%E3%83%AB)
+- [7. BFG Repo-Cleanerのインストール](#7-bfg-repo-cleaner%E3%81%AE%E3%82%A4%E3%83%B3%E3%82%B9%E3%83%88%E3%83%BC%E3%83%AB)
   - [BFG Repo-Cleanerとは？](#bfg-repo-cleaner%E3%81%A8%E3%81%AF)
   - [BFGのインストール](#bfg%E3%81%AE%E3%82%A4%E3%83%B3%E3%82%B9%E3%83%88%E3%83%BC%E3%83%AB)
 - [References](#references)
@@ -420,7 +422,76 @@ Receiving objects: 100% (8/8), done.
 
 ただし,GitHubとしてはSSH接続ではなくHTTPS接続による方法が推奨されています.プロジェクトなどで特段の制限や方針がなければHTTPSを使うことを検討してください.
 
-## 5. VSCodeとGitの連携
+## 5. GPGキーの登録
+
+Gitは, メールアドレスを使って誰がAuthorなのか,Committerであるかを判別するしています.
+しかし, メールアドレスは各自がlocalの `git config` で設定できる属性のため, 簡単になりすましができてしまうという
+問題があります. 
+
+このようななりすましの対策として, GPGキーを用いたgit commitへのデジタル署名がGitHub公式ページでは推奨されています.
+GPG公開鍵をGitHubに登録とすると, commitとtagが正常に検証されたGPGキーで署名されている場合,「Verified」としてマークがつくようになります.
+
+### GPGキーの生成
+
+GitHubでサポートされていないアルゴリズムを用いてキーを生成 & 追加しようとすると,
+エラーが生じることがあるので, サポートされているアルゴリズムをまず確認します:
+
+```
+RSA,ElGamal,DSA,ECDH,ECDSA,EdDSA
+```
+
+> GPGキー生成
+
+```zsh
+% gpg --full-generate-key
+```
+
+- キーは少なくとも 4096 ビットである必要があり
+- キー有効期間は, 無期限を示すデフォルトの選択を指定(公式の推奨)
+- ユーザID情報時に求められるメールアドレスは, GitHub アカウント用の検証済みメールアドレスを入力
+- GPGキーはホームディレクトリ以下の`.gnupg/openpgp-revocs.d`に生成されます
+
+> 生成されたGPGキーの確認
+
+生成されたGPGキーの確認は以下のコマンドでできます. GitHubでは秘密鍵のGPGキーIDの長い形式の登録が必要なので,
+` --keyid-format=long` オプションをつけて表示します.
+
+```zsh
+% gpg --list-secret-keys --keyid-format=long  
+% gpg --list-public-keys --keyid-format=long  
+```
+
+なおそれぞれ２つのIDがでてきますが, それらの意味は以下です:
+
+---|---
+sec|SECret key
+ssb|Secret SuBkey
+pub|PUBlic key
+sub|public SUBkey
+
+> GitHubに登録するGPGキーの確認
+
+まず秘密鍵のGPGキーを確認します. この例では, GPG キー ID は 3AA5C34371567BD2 です
+
+```zsh
+% gpg --list-secret-keys --keyid-format=long
+/Users/hubot/.gnupg/secring.gpg
+------------------------------------
+sec   4096R/3AA5C34371567BD2 2016-03-10 [expires: 2017-03-10]
+uid                          Hubot 
+ssb   4096R/42B317FD4BA89E7A 2016-03-10
+```
+
+次に, 秘密鍵情報をASCII形式(テキスト形式)で出力します
+
+```zsh
+% gpg --armor --export 3AA5C34371567BD2
+```
+
+-----BEGIN PGP PUBLIC KEY BLOCK----- で始まり、-----END PGP PUBLIC KEY BLOCK----- で終わる GPG キーをコピーし, それを登録します.
+
+
+## 6. VSCodeとGitの連携
 
 VSCodeでは, Gitリポジトリとなっているフォルダをワークスペースとして開くだけで,「ソースコントロールビュー」を使ってGitに関する操作が可能になります.
 
@@ -453,7 +524,7 @@ VSCodeでは, Gitリポジトリとなっているフォルダをワークスペ
 
 コンフリクト発生時における,該当箇所の確認も同様の方法で実施することができます.
 
-## 6. BFG Repo-Cleanerのインストール
+## 7. BFG Repo-Cleanerのインストール
 ### BFG Repo-Cleanerとは？
 
 BFGは,git-filter-branchと同様にGit Repository Historyから機密データ(例:パスワードや認証情報、その他のプライベートなデータ)をクレンジングしてくれるツールです.オープンソースコミュニティによって構築およびメンテナンスされています.

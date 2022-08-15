@@ -1,13 +1,13 @@
 ---
 layout: post
 title: "LinuxのGPU機械学習環境構築: GPUのドライバのインストール"
-subtitle: "Ubuntu Desktop環境構築 Part 20"
+subtitle: "Ubuntu Desktop Datascience環境構築 2/N"
 author: "Ryo"
 header-img: "img/about-bg.jpg"
 header-mask: 0.4
 catelog: true
 mathjax: true
-purpose: 
+revise_date: 
 tags:
 
 - Ubuntu 20.04 LTS
