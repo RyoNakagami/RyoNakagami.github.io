@@ -35,7 +35,9 @@ tags:
   - [SSH 接続をテストする](#ssh-%E6%8E%A5%E7%B6%9A%E3%82%92%E3%83%86%E3%82%B9%E3%83%88%E3%81%99%E3%82%8B)
   - [ssh接続を使ったgit clone](#ssh%E6%8E%A5%E7%B6%9A%E3%82%92%E4%BD%BF%E3%81%A3%E3%81%9Fgit-clone)
 - [5. GPGキーの登録](#5-gpg%E3%82%AD%E3%83%BC%E3%81%AE%E7%99%BB%E9%8C%B2)
-  - [GPGキーの生成](#gpg%E3%82%AD%E3%83%BC%E3%81%AE%E7%94%9F%E6%88%90)
+  - [GPGキーの生成とGitHubへの登録](#gpg%E3%82%AD%E3%83%BC%E3%81%AE%E7%94%9F%E6%88%90%E3%81%A8github%E3%81%B8%E3%81%AE%E7%99%BB%E9%8C%B2)
+  - [Git へ GPG キーを伝える](#git-%E3%81%B8-gpg-%E3%82%AD%E3%83%BC%E3%82%92%E4%BC%9D%E3%81%88%E3%82%8B)
+  - [`.zshrc`への登録](#zshrc%E3%81%B8%E3%81%AE%E7%99%BB%E9%8C%B2)
 - [6. VSCodeとGitの連携](#6-vscode%E3%81%A8git%E3%81%AE%E9%80%A3%E6%90%BA)
   - [アルファベットの意味](#%E3%82%A2%E3%83%AB%E3%83%95%E3%82%A1%E3%83%99%E3%83%83%E3%83%88%E3%81%AE%E6%84%8F%E5%91%B3)
   - [diff画面で変更を確認する](#diff%E7%94%BB%E9%9D%A2%E3%81%A7%E5%A4%89%E6%9B%B4%E3%82%92%E7%A2%BA%E8%AA%8D%E3%81%99%E3%82%8B)
@@ -43,8 +45,6 @@ tags:
   - [BFG Repo-Cleanerとは？](#bfg-repo-cleaner%E3%81%A8%E3%81%AF)
   - [BFGのインストール](#bfg%E3%81%AE%E3%82%A4%E3%83%B3%E3%82%B9%E3%83%88%E3%83%BC%E3%83%AB)
 - [References](#references)
-  - [関連ポスト](#%E9%96%A2%E9%80%A3%E3%83%9D%E3%82%B9%E3%83%88)
-  - [オンラインマテリアル](#%E3%82%AA%E3%83%B3%E3%83%A9%E3%82%A4%E3%83%B3%E3%83%9E%E3%83%86%E3%83%AA%E3%82%A2%E3%83%AB)
 
 <!-- END doctoc generated TOC please keep comment here to allow auto update -->
 
@@ -431,7 +431,7 @@ Gitは, メールアドレスを使って誰がAuthorなのか,Committerであ�
 このようななりすましの対策として, GPGキーを用いたgit commitへのデジタル署名がGitHub公式ページでは推奨されています.
 GPG公開鍵をGitHubに登録とすると, commitとtagが正常に検証されたGPGキーで署名されている場合,「Verified」としてマークがつくようになります.
 
-### GPGキーの生成
+### GPGキーの生成とGitHubへの登録
 
 GitHubでサポートされていないアルゴリズムを用いてキーを生成 & 追加しようとすると,
 エラーが生じることがあるので, サポートされているアルゴリズムをまず確認します:
@@ -490,6 +490,29 @@ ssb   4096R/42B317FD4BA89E7A 2016-03-10
 
 -----BEGIN PGP PUBLIC KEY BLOCK----- で始まり、-----END PGP PUBLIC KEY BLOCK----- で終わる GPG キーをコピーし, それを登録します.
 
+### Git へ GPG キーを伝える
+
+GitHubへのGPGキー登録後, GitでGPG署名キーを設定する必要があります.
+
+GPG キー ID は 3AA5C34371567BD2の場合,
+
+```zsh
+% git config --global user.signingkey 3AA5C34371567BD2
+```
+
+きちんと登録されているかどうかの確認するため, `.gitconfig`を開きます(場所は個人次第)
+
+```zsh
+% cat ~/.gitconfig
+```
+
+### `.zshrc`への登録
+
+```zsh
+% [[ -f ~/.zshrc ]] && echo 'export GPG_TTY=$(tty)' >> ~/.bashrc
+```
+
+`[[ -f ~/.zshrc ]]`は条件式で `-f` 後のファイルパスが存在するならば 1 else 0を返します.
 
 ## 6. VSCodeとGitの連携
 
@@ -563,12 +586,18 @@ Replace all passwords listed in a file (prefix lines 'regex:' or 'glob:' if requ
 % bfg --replace-text passwords.txt  my-repo.git
 ```
 ## References
-### 関連ポスト
+
+> 関連ポスト
 
 - [Ryo's Tech Blog > 2021-04-25: Githubパスワード認証廃止への対応](https://ryonakagami.github.io/2021/04/25/github-token-authentication/)
 - [Ryo's Tech Blog > 2020-12-23: Git in Zshの設定](https://ryonakagami.github.io/2020/12/23/ubuntu-zshsetup/)
 
-### オンラインマテリアル
+> 公式ドキュメント
+
+- [GitHub Docs > 新しい GPG キーを生成する](https://docs.github.com/ja/authentication/managing-commit-signature-verification/generating-a-new-gpg-key)
+- [GitHub Docs > Git へ署名キーを伝える](https://docs.github.com/ja/authentication/managing-commit-signature-verification/telling-git-about-your-signing-key)
+
+> オンラインマテリアル
 
 - [Git Getting Started](https://git-scm.com/book/en/v2/Getting-Started-First-Time-Git-Setup)
 - [Conventional Commits](https://www.conventionalcommits.org/en/v1.0.0/)
