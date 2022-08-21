@@ -18,7 +18,7 @@ tags:
 <!-- DON'T EDIT THIS SECTION, INSTEAD RE-RUN doctoc TO UPDATE -->
 
 - [はじめに](#%E3%81%AF%E3%81%98%E3%82%81%E3%81%AB)
-  - [参考: Inductive vs. Deductive Research Approach](#%E5%8F%82%E8%80%83-inductive-vs-deductive-research-approach)
+  - [リサーチデザインドキュメントの完成図イメージ](#%E3%83%AA%E3%82%B5%E3%83%BC%E3%83%81%E3%83%87%E3%82%B6%E3%82%A4%E3%83%B3%E3%83%89%E3%82%AD%E3%83%A5%E3%83%A1%E3%83%B3%E3%83%88%E3%81%AE%E5%AE%8C%E6%88%90%E5%9B%B3%E3%82%A4%E3%83%A1%E3%83%BC%E3%82%B8)
 - [リサーチの目的](#%E3%83%AA%E3%82%B5%E3%83%BC%E3%83%81%E3%81%AE%E7%9B%AE%E7%9A%84)
 - [適切な研究課題の探し方](#%E9%81%A9%E5%88%87%E3%81%AA%E7%A0%94%E7%A9%B6%E8%AA%B2%E9%A1%8C%E3%81%AE%E6%8E%A2%E3%81%97%E6%96%B9)
   - [リサーチデザインにおける理論の選択](#%E3%83%AA%E3%82%B5%E3%83%BC%E3%83%81%E3%83%87%E3%82%B6%E3%82%A4%E3%83%B3%E3%81%AB%E3%81%8A%E3%81%91%E3%82%8B%E7%90%86%E8%AB%96%E3%81%AE%E9%81%B8%E6%8A%9E)
@@ -37,6 +37,7 @@ tags:
 - [Action Plan提言への姿勢](#action-plan%E6%8F%90%E8%A8%80%E3%81%B8%E3%81%AE%E5%A7%BF%E5%8B%A2)
 - [Appendix](#appendix)
   - [識別の定義（point identification）](#%E8%AD%98%E5%88%A5%E3%81%AE%E5%AE%9A%E7%BE%A9point-identification)
+  - [参考: Inductive vs. Deductive Research Approach](#%E5%8F%82%E8%80%83-inductive-vs-deductive-research-approach)
 - [参考資料](#%E5%8F%82%E8%80%83%E8%B3%87%E6%96%99)
   - [関連Blogポスト](#%E9%96%A2%E9%80%A3blog%E3%83%9D%E3%82%B9%E3%83%88)
   - [オンラインマテリアル](#%E3%82%AA%E3%83%B3%E3%83%A9%E3%82%A4%E3%83%B3%E3%83%9E%E3%83%86%E3%83%AA%E3%82%A2%E3%83%AB)
@@ -56,51 +57,23 @@ tags:
 
 このノートでは,これら構成要素の明確化のための指針を以下まとめます.
 
-### 参考: Inductive vs. Deductive Research Approach
+### リサーチデザインドキュメントの完成図イメージ
 
-ここで紹介するリサーチデザインは主にdeductive approach(演繹的推論)に比重を置いたものを紹介しています.
+|component|説明|
+|---|---|
+|Working title|分野によって色々書き方はあるが、Compund Construction(体言止め + interogative statement)を推奨|
+|Research context and importance of the proposed research|Business Issue<br> As-Is <br> To-Be <br> Gap between As-Is and To-Be <br> researchがどのようにGapを埋めるのか <br> researchの意義|
+|Research aims|Research questionsとouput imageを書く|
+|Conceptual/Theoretical Framework| 問題の定式化、どこを解き明かしたいのかを明確化する <br>どのようにして問題を解くのかを述べる(Concept),  必要ならばTheoretical Frameworkも述べる|
+|Methodology|データ分析方法で統計学の手法を使うなら、統計学のどの分析方法を用いるのか、を説明する|
+|Data|どのようなデータが必要かを述べる|
+|Actions|作業工程の関係を述べる|
+|体制|必要ならば作業分担をどのように実施するか述べる|
+|Timetable|スケジュール概要|
 
-<img src="https://github.com/ryonakimageserver/omorikaizuka/blob/master/%E3%83%96%E3%83%AD%E3%82%B0%E7%94%A8/20220401_inductive_vs_deductive.png?raw=true">
+> REMARKS
 
-上の図のように,Inductive approach(帰納的推論)とdeductive approach(演繹的推論)の大きな違いは,前者は理論を構築することを目的とし,後者は既存の理論を検証することを目的とする点にあります.
-
-> Inductive approachの流れ
-
-1. Observation
-  - 格安航空会社の飛行機が遅れている
-  - 犬Aと犬Bにノミがいる
-  - ゾウは水に依存して生きている
-2. Observe a pattern
-  - 格安航空会社の別の20便が遅延している
-  - 観察されたすべての犬はノミを持っている
-  - 観察されたすべての動物は,水に依存している
-3. Develop a theory or general (preliminary) conclusion
-  - 格安航空会社には常に遅延がある
-  - すべての犬にはノミがいる
-  - すべての生物は,水に依存して存在する
-
-> Deductive approachの流れ
-
-1. Start with an existing theory (and create a problem statement)
-  - 格安航空会社には必ず遅延がある
-  - すべての犬にはノミがいる
-  - すべての生物は,水に依存して存在する
-2. Formulate a falsifiable hypothesis based on existing theory
-  - もし乗客が格安航空会社を利用するならば,必ず遅延が発生する。
-  - 私の住んでいるアパートのすべての犬はノミを持っている。
-  - すべての陸生哺乳類は水に依存している
-3. Collect data to test the hypothesis
-  - 格安航空会社のフライトデータを収集する
-  - マンションにいるすべての犬にノミがいるかどうか検査する
-  - すべての陸生哺乳類が水に依存しているかどうかを調査する。
-4. Analyze and test the data
-  - 格安航空会社の100便のうち5便は遅延がない。
-  - 20匹中10匹の犬にノミがいなかった。
-  - すべての陸生哺乳類は水に依存している
-5. Decide whether you can reject the null hypothesis
-  - 格安航空会社の100便のうち5便は遅延していない＝帰無仮説を棄却する
-  - 20匹中10匹の犬にはノミがいなかった = 帰無仮説を棄却する
-  - すべての陸生哺乳類の種は水に依存している = 仮説を支持する
+- リサーチデザインドキュメントは, stand alone documentとして成立しなくてはならない
 
 ## リサーチの目的
 
@@ -116,7 +89,12 @@ tags:
 > リサーチと科学的貢献
 
 アカデミアでは,既存知識に照らして新らしい知識を提供するリサーチがユニークな研究として評価されます.
-ユニークな研究をしようと思えば,既存文献の知識は必要不可欠です. その知識がなければ,手元のリサーチがユニークであるのかどうか位置づけができません. 従って,研究課題の特定後の最初のステップは戦況研究文献調査となります. なにが具体的な「ユニーク」として評価されるかは多々ありますが一例として,
+Business Issueの分析では、自分がこれからやろうとしている分析が問題解決に寄与するならば評価されます.
+
+どちらにしても,既存文献の知識は必要不可欠です. その知識がなければ,手元のリサーチがユニークであるのか/問題解決に寄与するのかどうか位置づけができません. 
+従って,研究課題の特定後の最初のステップは先行研究調査となります. 
+
+なおアカデミアの研究における「ユニーク」について, なにが具体的な「ユニーク」として評価されるかは多々ありますが一例として,
 
 - 先行研究で通説となっている重要仮説を反証する
 - 重要だが十分に掘り下げられていない仮説を体系的に明らかにする
@@ -437,7 +415,51 @@ $$
 
 なお,識別の議論では観測できる変数 $W$ の分布が既知であるという状況を考えていますが,これは，i.i.d. サンプル $\{W_i\}_{i=1}^n$ があれば，経験分布を用いて $W$ の分布を一致推定することができるからです．
 
+### 参考: Inductive vs. Deductive Research Approach
 
+ここで紹介するリサーチデザインは主にdeductive approach(演繹的推論)に比重を置いたものを紹介しています.
+
+<img src="https://github.com/ryonakimageserver/omorikaizuka/blob/master/%E3%83%96%E3%83%AD%E3%82%B0%E7%94%A8/20220401_inductive_vs_deductive.png?raw=true">
+
+上の図のように,Inductive approach(帰納的推論)とdeductive approach(演繹的推論)の大きな違いは,前者は理論を構築することを目的とし,後者は既存の理論を検証することを目的とする点にあります.
+
+> Inductive approachの流れ
+
+1. Observation
+  - 格安航空会社の飛行機が遅れている
+  - 犬Aと犬Bにノミがいる
+  - ゾウは水に依存して生きている
+2. Observe a pattern
+  - 格安航空会社の別の20便が遅延している
+  - 観察されたすべての犬はノミを持っている
+  - 観察されたすべての動物は,水に依存している
+3. Develop a theory or general (preliminary) conclusion
+  - 格安航空会社には常に遅延がある
+  - すべての犬にはノミがいる
+  - すべての生物は,水に依存して存在する
+
+> Deductive approachの流れ
+
+1. Start with an existing theory (and create a problem statement)
+  - 格安航空会社には必ず遅延がある
+  - すべての犬にはノミがいる
+  - すべての生物は,水に依存して存在する
+2. Formulate a falsifiable hypothesis based on existing theory
+  - もし乗客が格安航空会社を利用するならば,必ず遅延が発生する。
+  - 私の住んでいるアパートのすべての犬はノミを持っている。
+  - すべての陸生哺乳類は水に依存している
+3. Collect data to test the hypothesis
+  - 格安航空会社のフライトデータを収集する
+  - マンションにいるすべての犬にノミがいるかどうか検査する
+  - すべての陸生哺乳類が水に依存しているかどうかを調査する。
+4. Analyze and test the data
+  - 格安航空会社の100便のうち5便は遅延がない。
+  - 20匹中10匹の犬にノミがいなかった。
+  - すべての陸生哺乳類は水に依存している
+5. Decide whether you can reject the null hypothesis
+  - 格安航空会社の100便のうち5便は遅延していない＝帰無仮説を棄却する
+  - 20匹中10匹の犬にはノミがいなかった = 帰無仮説を棄却する
+  - すべての陸生哺乳類の種は水に依存している = 仮説を支持する
 
 ## 参考資料
 ### 関連Blogポスト

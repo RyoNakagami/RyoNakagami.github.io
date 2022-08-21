@@ -1,13 +1,13 @@
 ---
 layout: post
-title: "Ubuntu Desktop環境構築 Part 9"
-subtitle: "ターミナル環境の構築: Terminatorのインストール"
+title: "ターミナル環境の構築: Terminatorのインストール"
+subtitle: "Ubuntu Desktop環境構築 Part 9"
 author: "Ryo"
 header-img: "img/post-bg-rwd.jpg"
 header-mask: 0.4
 catelog: true
 mathjax: true
-purpose: 
+revise_date: 2022-08-22
 tags:
 
 - Ubuntu 20.04 LTS
@@ -15,12 +15,7 @@ tags:
 ---
 
 
-
-||概要|
-|---|---|
-|目的|ターミナル環境の構築: Terminatorのインストール|
-|参考|[Installing Terminator](https://github.com/gnome-terminator/terminator/blob/master/INSTALL.md)<br>[Terminator GitHub Project](https://github.com/gnome-terminator/terminator)<br>[Terminator Document](https://terminator-gtk3.readthedocs.io/en/latest/)|
-
+**Table of Contents**
 <!-- START doctoc generated TOC please keep comment here to allow auto update -->
 <!-- DON'T EDIT THIS SECTION, INSTEAD RE-RUN doctoc TO UPDATE -->
 
@@ -35,11 +30,14 @@ tags:
   - [Memory useの比較](#memory-use%E3%81%AE%E6%AF%94%E8%BC%83)
 - [3. Terminatorのインストール](#3-terminator%E3%81%AE%E3%82%A4%E3%83%B3%E3%82%B9%E3%83%88%E3%83%BC%E3%83%AB)
 - [4. Layoutの設定](#4-layout%E3%81%AE%E8%A8%AD%E5%AE%9A)
-  - [手順](#%E6%89%8B%E9%A0%86)
+  - [Background Colorの設定(GUI)](#background-color%E3%81%AE%E8%A8%AD%E5%AE%9Agui)
+  - [その他の設定](#%E3%81%9D%E3%81%AE%E4%BB%96%E3%81%AE%E8%A8%AD%E5%AE%9A)
 - [5. Short cuts](#5-short-cuts)
 - [Appendix: Cold startとは？](#appendix-cold-start%E3%81%A8%E3%81%AF)
+- [References](#references)
 
 <!-- END doctoc generated TOC please keep comment here to allow auto update -->
+
 
 ## 1. 今回のスコープ
 ### やりたいこと
@@ -185,9 +183,11 @@ terminator:
 
 ## 4. Layoutの設定
 
+### Background Colorの設定(GUI)
+
 Layoutやショートカットは`右クリック>Preferences`から設定することができます。今回はGNOME-Terminalと同じ色にする設定をします。
 
-### 手順
+> 手順
 
 1. `Preferences > Profiles > Colors`
 2. Built-in schemesをCustomに変更し、Background Colorを GNOME-Terminalと同様に`#300a24`と設定します。
@@ -195,25 +195,102 @@ Layoutやショートカットは`右クリック>Preferences`から設定する
 
 <img src="https://github.com/ryonakimageserver/omorikaizuka/blob/master/linux/terminal/20201225_terminator_backgroundcolor.png?raw=true">
 
+### その他の設定
+
+Terminatorの設定情報は`~/.config/terminator/config`に格納されています.
+
+```zsh
+% cat ~/.config/terminator/config
+[global_config]
+  geometry_hinting = True
+  sticky = True
+  inactive_color_offset = 1.0
+  enabled_plugins = LaunchpadBugURLHandler, LaunchpadCodeURLHandler, APTURLHandler, SelectAll
+  suppress_multiple_term_dialog = True
+[keybindings]
+  reset_clear = ""
+  hide_window = F12
+[profiles]
+  [[default]]
+    audible_bell = True
+    background_color = "#300a24"
+    background_darkness = 0.8
+    cursor_color = "#aaaaaa"
+    font = SF Mono 10
+    foreground_color = "#eeeeec"
+    palette = "#000000:#cc0000:#4e9a06:#c4a000:#3465a4:#75507b:#06989a:#d3d7cf:#555753:#ef2929:#8ae234:#fce94f:#729fcf:#ad7fa8:#34e2e2:#eeeeec"
+    split_to_group = True
+[layouts]
+  [[default]]
+    [[[window0]]]
+      type = Window
+      parent = ""
+      size = 1080, 1220
+    [[[child1]]]
+      type = Terminal
+      parent = window0
+[plugins]
+
+```
+
+ここでフォントやデフォルトサイズを変更したい場合は, このファイルの`size`や`font`の部分を自分好みに編集すれば対応可能です.
+
+
 ## 5. Short cuts
 
-Terminator特有以外のもの記載する。
+`Preferences > Keybindings`からも確認できますが代表的なものを紹介します.
+
+> 基本操作
 
 |Action| Default Shortcut|
 |---|---|
 |Copy|`Shift+Ctrl+C`|
 |Paste|`Shift+Ctrl+V`|
+
+> 移動
+
+|Action| Default Shortcut|
+|---|---|
+|行頭への移動|`Ctrl+A`|
+|行末に移動|`Ctrl+E`|
+|行頭まで削除|`Ctrl+U`|
+|行末まで削除|`Ctrl+K`|
+|ワード単位で行頭方向の文字列を削除|`Ctrl+W`|
+
+> Search
+
+|Action| Default Shortcut|
+|---|---|
 |文字列での実行コマンド履歴検索|`Ctrl+R`|
 |文字列での出力結果検索|`Ctrl+Shift+F`|
+
+> Terminal split/move/close
+
+|Action| Default Shortcut|
+|---|---|
 |Split terminal Horizontally|`Shift+Ctrl+E`|
 |Split terminal Vertically|`Shift+Ctrl+O`|
-|分割されたterminalの移動|`Shift+Ctrl+Tab`|
+|分割されたterminalの移動|`Ctrl+Tab`|
+|分割されたterminalの移動(前)|`Shift+Ctrl+Tab`|
 |Close window|`Shift+Ctrl+Q`|
 |Close terminal|`Shift+Ctrl+W`|
 |Terminatorの起動|`Ctrl+Alt+T`|
+
+> Toggle
+
+|Action| Default Shortcut|
+|---|---|
 |トグル|`F12`|
 |全画面表示と解除|`F11`|
 
 ## Appendix: Cold startとは？
 
 システム障害が発生したときにシステムを初期状態に戻して再開する方法で,更新前コピー又は更新後コピーの前処理を伴わないシステム開始のことです。初期プログラムロードとも呼ばれます。システム障害発生時の復旧方法には全くの初期状態（電源を切った状態）から復旧させるコールドスタート、電源を入れたまま再起動を行うウォームスタート、ログ情報を元にトランザクション更新前の状況に戻すロールバック、トランザクション更新後に戻すロールフォワードがあります。
+
+## References
+
+> オンラインマテリアル
+
+- [Installing Terminator](https://github.com/gnome-terminator/terminator/blob/master/INSTALL.md)
+- [Terminator GitHub Project](https://github.com/gnome-terminator/terminator)
+- [Terminator Document](https://terminator-gtk3.readthedocs.io/en/latest/)|

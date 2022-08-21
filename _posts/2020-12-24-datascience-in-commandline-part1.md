@@ -1,6 +1,6 @@
 ---
 layout: post
-title: "シェルスクリプトと前処理 Part 1"
+title: "Dockerを用いたシェルスクリプト練習環境の作成"
 subtitle: "Data Science at the Command Lineの練習環境の作成"
 author: "Ryo"
 header-img: "img/post-git-github-logo.jpg"
