@@ -1,6 +1,6 @@
 ---
 layout: post
-title: "Private Repository用git cloneシェルスクリプトの作成"
+title: "Private Repository用git cloneシェルスクリプトの作成(Deprecated)"
 subtitle: "アクセストークンを用いたgit clone"
 author: "Ryo"
 header-img: "img/about-bg.jpg"
@@ -21,6 +21,10 @@ tags:
 OS|ubuntu 20.04 LTS Focal Fossa
 Requirement|アクセストークン取得済み
 シェルスクリプト言語|Bash
+
+> REMARKS
+
+- 現在はGPGキーで保護した`.netrc.gpg`を用いて`git`コマンドを操作しています
 
 
 **Table of Contents**
