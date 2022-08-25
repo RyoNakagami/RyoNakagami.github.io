@@ -1,13 +1,13 @@
 ---
 layout: post
-title: "Private Repository用git cloneシェルスクリプトの作成(Deprecated)"
+title: "Private Repository用git cloneシェルスクリプトの作成(Obsolete)"
 subtitle: "アクセストークンを用いたgit clone"
 author: "Ryo"
 header-img: "img/about-bg.jpg"
 header-mask: 0.4
 catelog: true
 mathjax: true
-revise_date: 2022-08-06
+revise_date: 2022-08-25
 tags:
 
 - git
@@ -21,6 +21,7 @@ tags:
 OS|ubuntu 20.04 LTS Focal Fossa
 Requirement|アクセストークン取得済み
 シェルスクリプト言語|Bash
+使用状況|obsolete
 
 > REMARKS
 
