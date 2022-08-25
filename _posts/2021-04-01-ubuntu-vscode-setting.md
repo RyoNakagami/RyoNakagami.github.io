@@ -30,10 +30,14 @@ RAM| 32.0 GB
 - [2. 実践編](#2-%E5%AE%9F%E8%B7%B5%E7%B7%A8)
 - [3. 初期設定](#3-%E5%88%9D%E6%9C%9F%E8%A8%AD%E5%AE%9A)
   - [Telemetry 無効化](#telemetry-%E7%84%A1%E5%8A%B9%E5%8C%96)
+  - [Font family設定](#font-family%E8%A8%AD%E5%AE%9A)
+  - [行番号表示設定](#%E8%A1%8C%E7%95%AA%E5%8F%B7%E8%A1%A8%E7%A4%BA%E8%A8%AD%E5%AE%9A)
 - [4. 拡張機能設定](#4-%E6%8B%A1%E5%BC%B5%E6%A9%9F%E8%83%BD%E8%A8%AD%E5%AE%9A)
   - [一覧](#%E4%B8%80%E8%A6%A7)
-- [Appendix](#appendix)
-  - [Snapパッケージとは？](#snap%E3%83%91%E3%83%83%E3%82%B1%E3%83%BC%E3%82%B8%E3%81%A8%E3%81%AF)
+- [Appendix: Snapパッケージとは？](#appendix-snap%E3%83%91%E3%83%83%E3%82%B1%E3%83%BC%E3%82%B8%E3%81%A8%E3%81%AF)
+- [Appendix: 文字コード](#appendix-%E6%96%87%E5%AD%97%E3%82%B3%E3%83%BC%E3%83%89)
+  - [符号化方式](#%E7%AC%A6%E5%8F%B7%E5%8C%96%E6%96%B9%E5%BC%8F)
+  - [UTF-8がなぜ推奨されるのか](#utf-8%E3%81%8C%E3%81%AA%E3%81%9C%E6%8E%A8%E5%A5%A8%E3%81%95%E3%82%8C%E3%82%8B%E3%81%AE%E3%81%8B)
 - [References](#references)
 
 <!-- END doctoc generated TOC please keep comment here to allow auto update -->

@@ -1,13 +1,13 @@
 ---
 layout: post
 title: "Githubパスワード認証廃止への対応"
-subtitle: "個人アクセストークンの設定"
+subtitle: "個人アクセストークン(PAT)の設定"
 author: "Ryo"
 header-img: "img/about-bg.jpg"
 header-mask: 0.4
 catelog: true
 mathjax: true
-revise_date: 2022-08-04
+revise_date: 2022-08-25
 tags:
 
 - Ubuntu 20.04 LTS
@@ -33,10 +33,13 @@ CPU| 	Intel Core i7-9700 CPU 3.00 GHz
 - [対応方針](#%E5%AF%BE%E5%BF%9C%E6%96%B9%E9%87%9D)
   - [トークンの作成](#%E3%83%88%E3%83%BC%E3%82%AF%E3%83%B3%E3%81%AE%E4%BD%9C%E6%88%90)
   - [トークン使用のテスト](#%E3%83%88%E3%83%BC%E3%82%AF%E3%83%B3%E4%BD%BF%E7%94%A8%E3%81%AE%E3%83%86%E3%82%B9%E3%83%88)
-  - [git clone用の関数構築](#git-clone%E7%94%A8%E3%81%AE%E9%96%A2%E6%95%B0%E6%A7%8B%E7%AF%89)
+- [PATとGPG encrypted`.netrc`を用いたリモートレポジトリアクセス設定](#pat%E3%81%A8gpg-encryptednetrc%E3%82%92%E7%94%A8%E3%81%84%E3%81%9F%E3%83%AA%E3%83%A2%E3%83%BC%E3%83%88%E3%83%AC%E3%83%9D%E3%82%B8%E3%83%88%E3%83%AA%E3%82%A2%E3%82%AF%E3%82%BB%E3%82%B9%E8%A8%AD%E5%AE%9A)
+  - [作業方針](#%E4%BD%9C%E6%A5%AD%E6%96%B9%E9%87%9D)
+  - [対応作業](#%E5%AF%BE%E5%BF%9C%E4%BD%9C%E6%A5%AD)
 - [Appendix: リモートリポジトリについて](#appendix-%E3%83%AA%E3%83%A2%E3%83%BC%E3%83%88%E3%83%AA%E3%83%9D%E3%82%B8%E3%83%88%E3%83%AA%E3%81%AB%E3%81%A4%E3%81%84%E3%81%A6)
   - [リモートレポジトリの作成](#%E3%83%AA%E3%83%A2%E3%83%BC%E3%83%88%E3%83%AC%E3%83%9D%E3%82%B8%E3%83%88%E3%83%AA%E3%81%AE%E4%BD%9C%E6%88%90)
   - [HTTPS URLによるクローンのメリット](#https-url%E3%81%AB%E3%82%88%E3%82%8B%E3%82%AF%E3%83%AD%E3%83%BC%E3%83%B3%E3%81%AE%E3%83%A1%E3%83%AA%E3%83%83%E3%83%88)
+  - [過去ログ: git clone用の関数構築(2022年時点Obsolete)](#%E9%81%8E%E5%8E%BB%E3%83%AD%E3%82%B0-git-clone%E7%94%A8%E3%81%AE%E9%96%A2%E6%95%B0%E6%A7%8B%E7%AF%892022%E5%B9%B4%E6%99%82%E7%82%B9obsolete)
 - [References](#references)
   - [関連記事](#%E9%96%A2%E9%80%A3%E8%A8%98%E4%BA%8B)
   - [オンラインマテリアル](#%E3%82%AA%E3%83%B3%E3%83%A9%E3%82%A4%E3%83%B3%E3%83%9E%E3%83%86%E3%83%AA%E3%82%A2%E3%83%AB)
@@ -150,7 +153,109 @@ From https://github.com/RyoNakagami/sample_size
 % rm -rf ./test
 ```
 
-### git clone用の関数構築
+
+## PATとGPG encrypted`.netrc`を用いたリモートレポジトリアクセス設定
+### 作業方針
+
+> 問題設定
+
+- コマンドラインで、HTTPS URL を使用してリモートリポジトリに `git clone`, `git fetch`, `git pull` または `git push` を行った場合、GitHub のユーザ名とパスワードの入力を求められる. 
+- Gitがパスワードを求めてきたときは、個人アクセストークン（PAT）の入力で十分ですが, 毎回入力するのは面倒(特にGitHub 2FA accessをEnabledしている場合は, PAT入力でないとだめ)
+- どこかに平文でPATを保存するのはセキュリティ観点から望ましくない
+
+> 対応方針
+
+1. `github.com`へのアクセス情報を保存した`.netrc`ファイルを作成
+2. `.netrc`ファイルをGPG keyで暗号化し, `.netrc.gpg`ファイルを作成(`.netrc`ファイルはこの時削除)
+3. `git-credential-netrc`機能を実行可能にする
+4. `git config`設定
+
+### 対応作業
+
+> `.netrc`ファイルの作成
+
+`.netrc`ファイルは, 元々はftp のためのユーザー設定ファイルで, 自動ログインプロセスで使われる ログイン情報と初期化情報を記載します.
+
+```
+machine github.com
+login yourusername
+password <token>
+protocol https
+```
+
+> GPG暗号化
+
+こちらの作業はすでにGPGキーが発行されている前提です. 
+
+```zsh
+% gpg -e -r email@example.com ~/.netrc #~/.netrc.gpgが生成される
+% shred ~/.netrc
+% rm ~/.netrc
+```
+
+> netrc credential helperの設定
+
+git commandには, `git-credential-netrc.perl`というファイルの中にnetrcファイルを参照する機能が実装されています.
+これに対して実行可能設定をします.
+
+```zsh
+% touch ~/.local/bin/git-credential-netrc
+% cp git-credential-netrc.perl ~/.local/bin/git-credential-netrc
+% sudo chmod +x ~/.local/bin/git-credential-netrc
+```
+
+> git configの設定
+
+```zsh
+% git config --global credential.helper "netrc -d -v"
+% cat ~/.gitconfig #設定確認
+```
+
+---|---
+`-d`, `--debug`| turn on debugging (developer info)
+`-v`, `--verbose`| be more verbose (show files and information found)
+
+なお, gitconfigに以下の情報を記載する形でもOKです
+
+```
+[credential]
+    helper = /usr/share/git/credential/netrc/git-credential-netrc.perl
+```
+
+## Appendix: リモートリポジトリについて
+
+インターネット上あるいはその他ネットワーク上のどこかに存在するファイルやディレクトリの履歴を管理する場所のことです.プッシュできるのは、2 種類の URL アドレスに対してのみです:
+
+- `https://github.com/user/repo.git` のような HTTPS URL
+- `git@github.com:user/repo.git` のような SSH URL
+
+Git はリモート URL に名前を関連付けます. デフォルトのリモートは通常 `origin` と呼ばれます. 
+
+
+### リモートレポジトリの作成
+
+git remote add コマンドを使用してリモート URL に名前を関連付けることができます。 たとえば、コマンドラインに以下のように入力できます:
+
+```
+git remote add origin  <REMOTE_URL> 
+```
+
+設定状況を確認したい場合は
+
+```
+git remote -v
+```
+
+これで `origin` という名前が `REMOTE_URL` に関連付けられます。 `git remote set-url` を使えば、リモートの URL を変更できます。
+
+
+### HTTPS URLによるクローンのメリット
+
+- `https://` は、可視性に関係なく、すべてのリポジトリで使用できます. 
+- `https://` のクローン URL は、ファイアウォールまたはプロキシの内側にいる場合でも機能する.
+
+
+### 過去ログ: git clone用の関数構築(2022年時点Obsolete)
 
 > 前提条件
 
@@ -185,36 +290,7 @@ git clone $clone_args
 
 Then, `sudo chmod 755 ./gh_clone`で完成.
 
-## Appendix: リモートリポジトリについて
 
-インターネット上あるいはその他ネットワーク上のどこかに存在するファイルやディレクトリの履歴を管理する場所のことです.プッシュできるのは、2 種類の URL アドレスに対してのみです:
-
-- `https://github.com/user/repo.git` のような HTTPS URL
-- `git@github.com:user/repo.git` のような SSH URL
-
-Git はリモート URL に名前を関連付けます. デフォルトのリモートは通常 `origin` と呼ばれます. 
-
-
-### リモートレポジトリの作成
-
-git remote add コマンドを使用してリモート URL に名前を関連付けることができます。 たとえば、コマンドラインに以下のように入力できます:
-
-```
-git remote add origin  <REMOTE_URL> 
-```
-
-設定状況を確認したい場合は
-
-```
-git remote -v
-```
-
-これで `origin` という名前が `REMOTE_URL` に関連付けられます。 `git remote set-url` を使えば、リモートの URL を変更できます。
-
-
-### HTTPS URLによるクローンのメリット
-
-`https://` は、可視性に関係なく、すべてのリポジトリで使用できます。 `https://` のクローン URL は、ファイアウォールまたはプロキシの内側にいる場合でも機能します。コマンドラインで、HTTPS URL を使用してリモートリポジトリに `git clone`、`git fetch`、`git pull` または `git push` を行った場合、GitHub のユーザ名とパスワードの入力を求められます。 Gitがパスワードを求めてきたときは、代わりに個人アクセストークン（PAT）を入力します. 
 
 ## References
 ### 関連記事
