@@ -178,7 +178,12 @@ From https://github.com/RyoNakagami/sample_size
 
 ```
 machine github.com
-login yourusername
+login <username>
+password <token>
+protocol https
+
+machine gitlab.com
+login <username>
 password <token>
 protocol https
 ```

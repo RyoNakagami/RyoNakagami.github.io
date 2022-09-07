@@ -15,10 +15,12 @@ tags:
 - Shell
 ---
 
-||概要|
-|---|---|
-|目的|zshの設定とinteractive shellのカスタマイズ|
-|実行環境OS|Ubuntu 20.04 LTS|
+> 技術スペック
+
+---|---
+OS | ubuntu 20.04 LTS Focal Fossa
+CPU| Intel Core i7-9700 CPU 3.00 GHz
+
 
 **Table of Contents**
 <!-- START doctoc generated TOC please keep comment here to allow auto update -->
@@ -42,8 +44,10 @@ tags:
   - [(6) zshでコメントアウトを有効にする](#6-zsh%E3%81%A7%E3%82%B3%E3%83%A1%E3%83%B3%E3%83%88%E3%82%A2%E3%82%A6%E3%83%88%E3%82%92%E6%9C%89%E5%8A%B9%E3%81%AB%E3%81%99%E3%82%8B)
   - [(7) 自作関数：ファイル解凍コマンド`unpack`の設定](#7-%E8%87%AA%E4%BD%9C%E9%96%A2%E6%95%B0%E3%83%95%E3%82%A1%E3%82%A4%E3%83%AB%E8%A7%A3%E5%87%8D%E3%82%B3%E3%83%9E%E3%83%B3%E3%83%89unpack%E3%81%AE%E8%A8%AD%E5%AE%9A)
   - [`~.zshrc`での設定のまとめ](#zshrc%E3%81%A7%E3%81%AE%E8%A8%AD%E5%AE%9A%E3%81%AE%E3%81%BE%E3%81%A8%E3%82%81)
-- [Appendix: `/proc`ディレクトリのファイル](#appendix-proc%E3%83%87%E3%82%A3%E3%83%AC%E3%82%AF%E3%83%88%E3%83%AA%E3%81%AE%E3%83%95%E3%82%A1%E3%82%A4%E3%83%AB)
-- [Appendix: chshコマンド](#appendix-chsh%E3%82%B3%E3%83%9E%E3%83%B3%E3%83%89)
+- [Appendix](#appendix)
+  - [ドットファイル](#%E3%83%89%E3%83%83%E3%83%88%E3%83%95%E3%82%A1%E3%82%A4%E3%83%AB)
+  - [`/proc`ディレクトリのファイル](#proc%E3%83%87%E3%82%A3%E3%83%AC%E3%82%AF%E3%83%88%E3%83%AA%E3%81%AE%E3%83%95%E3%82%A1%E3%82%A4%E3%83%AB)
+  - [chshコマンド](#chsh%E3%82%B3%E3%83%9E%E3%83%B3%E3%83%89)
 - [References](#references)
   - [オンラインマテリアル](#%E3%82%AA%E3%83%B3%E3%83%A9%E3%82%A4%E3%83%B3%E3%83%9E%E3%83%86%E3%83%AA%E3%82%A2%E3%83%AB)
 
@@ -273,7 +277,6 @@ ZshのInteractive shellの拡張として有名なものに[oh my zsh](https://o
 4. 自分が選択したOh-my-Zshのテーマがいつまでメンテナンスされるかわからない
 5. Zinitといった他の有力な拡張ツールもありどれがいいのかわからない
 6. 僕が求めている機能は自分でも簡単に設定できる
-7. 必要な拡張機能はVS CodeのExtensionsに求めるべきでは？
 
 といった理由から今回の導入を見送りました.
 
@@ -600,20 +603,6 @@ export PATH="$HOME/.xsv.d:$PATH"
 export PATH="$HOME/bin:$PATH"
 
 
-
-#-------------------------------------
-# GitHub
-#-------------------------------------
-## set access token
-## 例:git clone https://UserName:${GIT_TOKEN}@github.com/repositoryowner/repositoryname
-export GIT_USER=<hogehoge>
-export GIT_TOKEN=<hogehoge>
-export GIST_TOKEN=<hogehoge>
-
-export GITLAB_SEP_USER=<hogehoge>
-export GITLAB_SEP_TOKEN=<hogehoge>
-
-
 #-------------------------------------
 # python
 #-------------------------------------
@@ -783,7 +772,15 @@ RPROMPT='`rprompt-git-current-branch`'
 
 ```
 
-## Appendix: `/proc`ディレクトリのファイル
+## Appendix
+### ドットファイル
+
+ユーザー固有のシステム管理用の環境設定は, 伝統的にドットファイル(ファイル名がドットで始まるファイル)に保存されています.
+ドットファイルが`ls`コマンドで表示されないのは, 不用意に操作してしまう危険を防ぐためです.
+
+設定ファイルが複数存在する場合や複数のソフトウェアの設定ファイルをまとめる場合はよくドットディレクトリが作成されます.
+
+### `/proc`ディレクトリのファイル
 
 `/proc` ディレクトリは普通のファイルシステムと違い,ハードディスクやSSDなどのストレージ上ではなくメモリの中に作られるファイルシステムです. mountコマンドで確認してみると `/proc` ディレクトリが他と異なる場所にあります.
 
@@ -837,7 +834,7 @@ cpuid level	: 22
 ```
 
 
-## Appendix: chshコマンド
+### chshコマンド
 
 > 機能
 

@@ -38,6 +38,7 @@ RAM| 32.0 GB
 - [Appendix: 文字コード](#appendix-%E6%96%87%E5%AD%97%E3%82%B3%E3%83%BC%E3%83%89)
   - [符号化方式](#%E7%AC%A6%E5%8F%B7%E5%8C%96%E6%96%B9%E5%BC%8F)
   - [UTF-8がなぜ推奨されるのか](#utf-8%E3%81%8C%E3%81%AA%E3%81%9C%E6%8E%A8%E5%A5%A8%E3%81%95%E3%82%8C%E3%82%8B%E3%81%AE%E3%81%8B)
+  - [ファイルの文字コードを確認する方法](#%E3%83%95%E3%82%A1%E3%82%A4%E3%83%AB%E3%81%AE%E6%96%87%E5%AD%97%E3%82%B3%E3%83%BC%E3%83%89%E3%82%92%E7%A2%BA%E8%AA%8D%E3%81%99%E3%82%8B%E6%96%B9%E6%B3%95)
 - [References](#references)
 
 <!-- END doctoc generated TOC please keep comment here to allow auto update -->
@@ -207,11 +208,34 @@ UTF-8, UTF-16, UTF-32がありますがそれぞれ文字集合の符号化方�
 
 ### UTF-8がなぜ推奨されるのか
 
+VSCodeではUTF-8がデフォルトエンコーディングとされています. UTF-8の特徴として,
+
 - 既存のASCII文字（いわゆる半角文字）しか使えない通信路やシステムなどでも、大きな変更なしにそのまま使える
 - UTF-8にはエンディアンの問題がない(UTF-16ではBig Endian/Little Endianの区別必要)
 - [Unicode standard](http://www.unicode.org/versions/Unicode5.0.0/ch02.pdf)では, BOMを加えることは非推奨
 
-なお, VSCodeではUTF-8がデフォルトエンコーディングとされています.
+### ファイルの文字コードを確認する方法
+
+`file -e encoding`とオプションを指定することでファイルの文字コードを確認することができます.
+カレントディレクトリに存在するファイルのエンコーディングを確認したい場合は, `xargs`コマンドを組合せて
+
+```zsh
+% find -maxdepth 1 -type f | xargs -n1 file -e encoding
+./test_utf8.md: UTF-8 Unicode text
+./test_utf8_bom.txt: UTF-8 Unicode (with BOM) text, with no line terminators
+./test_ascii.md: ASCII text
+./test.sh: Bourne-Again shell script executable (binary data)
+./test.pptx: Microsoft PowerPoint 2007+
+```
+
+BOM付UTF-8エンコーディングされたファイルからBOMを外したい場合は, `nkf`コマンドを用いて
+
+```zsh
+% nkf --overwrite --oc=UTF-8 test_utf8_bom.txt   
+```
+
+
+
 
 
 ## References

@@ -189,14 +189,15 @@ postal_code,PREF_NAME,CITY_NAME,S_NAME
 
 ```zsh
 % cat test.csv | sort | uniq
-% cat result_2.csv | (sed -u 1q; sort) | uniq #headerの位置をキープしたい場合
+% cat test.csv | (sed -u 1q; sort) | uniq #headerの位置をキープしたい場合
+% cat test.csv | (sed -u 1q ;sort) | uniq -c #出現回数をカウントした結果も出力したい場合
 ```
 
 でも重複レコード排除の結果を返すことはできます. 
 `1q`は, 最初の行（ヘッダ）を表示して終了する（残りの入力をソートするために残す）オプションです.
 `-u`はメモリ節約のためのオプションと認識していただけたらです.
 
-商事コマンドでは, 出力結果がsortされてしまうので個人的には`gawk`コマンドを用いた処理の方が好ましいと考えております.
+上記コマンドでは, 出力結果がsortされてしまうので個人的には`gawk`コマンドを用いた処理の方が好ましいと考えています.
 
 
 ## References
