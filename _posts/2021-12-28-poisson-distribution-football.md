@@ -7,8 +7,6 @@ header-img: "img/bg-statistics.png"
 header-mask: 0.4
 catelog: true
 mathjax: true
-uu_cnt: 100
-session_cnt: 100 
 tags:
 
 - 統計
@@ -16,27 +14,30 @@ tags:
 - スポーツ
 ---
 
+> 目的
+
+- プレミアリーグ（Man Utd）の試合結果を使って, サッカーの得点分布とポワソン分布の適合度を確認するものです
+- この分析において結果的には結構Fitしますが, たまたまだと思ってます.
+- アーセナルやシティ, 川崎Fといった攻撃的チームの得点分布はポワソンじゃ説明できない感じです
+
 
 **Table of Contents**
 <!-- START doctoc generated TOC please keep comment here to allow auto update -->
 <!-- DON'T EDIT THIS SECTION, INSTEAD RE-RUN doctoc TO UPDATE -->
 
-- [目的](#%E7%9B%AE%E7%9A%84)
 - [Dependency](#dependency)
 - [19-20シーズンのMan Utdの得点力分析](#19-20%E3%82%B7%E3%83%BC%E3%82%BA%E3%83%B3%E3%81%AEman-utd%E3%81%AE%E5%BE%97%E7%82%B9%E5%8A%9B%E5%88%86%E6%9E%90)
   - [READ Data](#read-data)
   - [前処理](#%E5%89%8D%E5%87%A6%E7%90%86)
+  - [得点分布をヒストグラムで確かめてみる](#%E5%BE%97%E7%82%B9%E5%88%86%E5%B8%83%E3%82%92%E3%83%92%E3%82%B9%E3%83%88%E3%82%B0%E3%83%A9%E3%83%A0%E3%81%A7%E7%A2%BA%E3%81%8B%E3%82%81%E3%81%A6%E3%81%BF%E3%82%8B)
   - [Poisson Fitting](#poisson-fitting)
+    - [推定量$\hat\lambda$についてのワルド型信頼区間の計算](#%E6%8E%A8%E5%AE%9A%E9%87%8F%5Chat%5Clambda%E3%81%AB%E3%81%A4%E3%81%84%E3%81%A6%E3%81%AE%E3%83%AF%E3%83%AB%E3%83%89%E5%9E%8B%E4%BF%A1%E9%A0%BC%E5%8C%BA%E9%96%93%E3%81%AE%E8%A8%88%E7%AE%97)
+  - [ZIP Fitting](#zip-fitting)
 - [Appendix: ZIP推定量のクラス](#appendix-zip%E6%8E%A8%E5%AE%9A%E9%87%8F%E3%81%AE%E3%82%AF%E3%83%A9%E3%82%B9)
 - [References](#references)
 
 <!-- END doctoc generated TOC please keep comment here to allow auto update -->
 
-## 目的
-
-- プレミアリーグ（Man Utd）の試合結果を使って、ポワソン分布で説明できる例を確認するものです
-- この分析において結果的には結構Fitしますが、アーセナルやシティ、川崎Fといった攻撃的チームの得点分布はポワソンじゃ説明できない感じです
-- 本当は「Arsenalファンです!」
 
 ## Dependency
 
@@ -147,10 +148,7 @@ df_transformed.head()
 |75% |3.00 | 1.75 |
 |max |5.00 | 3.00 |
 
-
-### Poisson Fitting
-
-> 得点分布をヒストグラムで確かめてみる
+### 得点分布をヒストグラムで確かめてみる
 
 ```python
 plt.subplots(figsize=(12, 8))
@@ -161,7 +159,19 @@ plt.ylabel('Count');
 
 <img src = "https://github.com/ryonakimageserver/omorikaizuka/blob/master/%E3%83%96%E3%83%AD%E3%82%B0%E7%94%A8/20211228-01.png?raw=true">
 
-> Poisson Fitting
+
+### Poisson Fitting
+
+確率変数$X$を一試合あたりの得点数とし, かつポワソン分布に従うとすると確率関数は以下のように書けます:
+
+$$
+\begin{align*}
+p(X=x) = \frac{\lambda^x}{x!}\exp(-\lambda)
+\end{align*}
+$$
+
+$\hat\lambda$は標本平均で推定できるのでFittingの程度を確認すると以下のようになります:
+
 
 ```python
 ## generating data
@@ -189,8 +199,40 @@ plt.legend();
 - Fittingはそんなに悪くないがscoreがゼロのところが理論頻度より実現地のほうが多くZIPモデルで回帰してもいいとかも
 - 上位チームと戦うときと下位チームで戦うときで戦型を変えてると仮定すると得点は２つ以上の分布の混合分布かもしれない
 
+#### 推定量$\hat\lambda$についてのワルド型信頼区間の計算
 
-> ZIP Fitting
+推定量$\hat\lambda$の95%信頼区間, $CI$, を簡易的に表現すると以下のようになります
+
+$$
+CI = \left(\hat\lambda - 1.96 \sqrt{\frac{\hat\lambda}{N}}, \hat\lambda + 1.96 \sqrt{\frac{\hat\lambda}{N}}\right)
+$$
+
+Intuitionとしては, 1試合ごとの得点数を表す確率変数$X_i$, (なお$i$は試合indexを示す), を考えた時, $\hat\lambda$は次のように計算されます:
+
+$$
+\hat\lambda =\frac{1}{N}\sum_{i}^N X_i
+$$
+
+このとき, $X_i$はパラメーター$\lambda$のポワソン分布に独立に従うと仮定すると
+
+<div class="math display" style="overflow: auto">
+$$
+\begin{align*}
+\mathbb E[\hat\lambda] &= \sum_{i}^N\frac{\mathbb E[X_i]}{N} = \lambda\\
+V(\hat\lambda) &= \frac{1}{N^2}\sum_{i}^N V[X_i] = \frac{\lambda}{N}
+\end{align*}
+$$
+</div>
+
+従って, $\lambda$を推定量と置き換えて,簡易的に計算すると
+
+$$
+CI = \left(\hat\lambda - 1.96 \sqrt{\frac{\hat\lambda}{N}}, \hat\lambda + 1.96 \sqrt{\frac{\hat\lambda}{N}}\right)
+$$
+
+が導出されます.
+
+### ZIP Fitting
 
 - [Appendix: ZIP推定量のクラス](#appendix-zip%E6%8E%A8%E5%AE%9A%E9%87%8F%E3%81%AE%E3%82%AF%E3%83%A9%E3%82%B9)で作ったPython Classを用いてZIP paramters $(\lambda, w)$を推定します
 
@@ -323,3 +365,7 @@ class ZeroInflatedPoissonRegression:
 
 - [Man Utd English Premier League 2019/20 fixture and results](https://fixturedownload.com/results/epl-2019/man-utd)
 - [Ryo's Tech Blog>統計検定：ポワソン分布と条件付き分布](https://ryonakagami.github.io/2021/12/27/poisson-distribution/)
+
+> 統計検定過去問
+
+- 2012年11月統計検定１級 > 応用数理(共通分野)問２
