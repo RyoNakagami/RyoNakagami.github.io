@@ -10,15 +10,10 @@ purpose:
 tags:
 
 - math
+- 素数
 ---
 
-
-||概要|
-|---|---|
-|目的|素数の分布のまとめ|
-|参考|- [青空学園: 素数の定義](http://aozoragakuen.sakura.ne.jp/suuron/node17.html)<br>- [The PrimePages: prime number research & records](https://primes.utm.edu/)<br>- [素数定理の証明](http://aozoragakuen.sakura.ne.jp/suuron/node82.html)|
-|参考記事|[Ryo's Tech Blog: 数学的帰納法の原理](https://ryonakagami.github.io/2021/04/16/mathematical-induction/)|
-
+**Table of Contents**
 <!-- START doctoc generated TOC please keep comment here to allow auto update -->
 <!-- DON'T EDIT THIS SECTION, INSTEAD RE-RUN doctoc TO UPDATE -->
 
@@ -31,6 +26,7 @@ tags:
 - [補題: 互いに素な整数の個数](#%E8%A3%9C%E9%A1%8C-%E4%BA%92%E3%81%84%E3%81%AB%E7%B4%A0%E3%81%AA%E6%95%B4%E6%95%B0%E3%81%AE%E5%80%8B%E6%95%B0)
 - [問題集](#%E5%95%8F%E9%A1%8C%E9%9B%86)
   - [京都大学 2016年](#%E4%BA%AC%E9%83%BD%E5%A4%A7%E5%AD%A6-2016%E5%B9%B4)
+- [References](#references)
 
 <!-- END doctoc generated TOC please keep comment here to allow auto update -->
 
@@ -191,10 +187,55 @@ $$
 \pi(x)\sim \dfrac{x}{\log x}
 $$
 
+という関係性が知られており, これを素数定理といいます. まず導入として, 補正対数積分関数, $Li(x)$,の説明をします.
+補正対数積分関数とは以下のような関数として表されます:
 
-> 証明
+$$
+Li(x) = \int^x_2 \frac{1}{\log(x)}dx
+$$
 
-加筆中
+そしてこの補正対数積分関数は素数濃度の近似として当てはまりが良いことが知られており, 実際に数を見てみると
+
+
+|x|$\pi(x)$|$Li(x)$|$x/\log(x)$|
+|---|---|---|---|---|
+|$10^1$|4|5.12|4.34|
+|$10^2$|25|29.08|21.71|
+|$10^3$|168|176.56|144.76|
+|$10^4$|1229|1245.09|1085.74|
+|$10^5$|9592|9628.76|8685.89|
+|$10^6$|78498|78626.50|72382.41|
+|$10^7$|664579|664917.35|620420.69|
+|$10^8$|5761455|5752208.33|5428681.02|
+
+詳しい説明は割愛しますが, $Li(x)$について以下のような関係式が知られています:
+
+$$
+Li(x) - \frac{x}{\log(x)} = O\left(\frac{x}{(\log(x))^2}\right)
+$$
+
+ですので, 補正対数積分関数は素数濃度の近似として当てはまりが良いことがわかれば上記の素数定理の直感的感覚も理解できるようになります.
+
+> 直感的説明: 自然数$N$が素数である確率
+
+十分大きな自然数 $N$ に対し, $N$ が素数である確率を考えてみる．$N$ より小さい素数を $p_1$, ..., $p_m$ としたとき, $N$ が素数であることは, $N$ が$p_1$, ..., $p_m$ のいずれでも割り切れないことと同じです. その確率をナイーブに表現すると
+
+$$
+\prod_{i=1}^m \left(1 - \frac{1}{p_i}\right) \approx \frac{1}{\log(N)}
+$$
+
+よって $N$ 以下の素数の個数 $\pi(N)$ は
+
+<div class="math display" style="overflow: auto">
+$$
+\begin{align*}
+\pi(N) &\approx \sum_{x=2}^N\frac{1}{\log(x)}\\
+&\approx Li(N)
+\end{align*}
+$$
+</div>
+
+なお, $\pi(x)$ と $Li(x)$ のずれは $\sqrt{x}\log(x)$の定数倍より小さいと予想されています. この予想は有名な Riemann 予想と同値です.
 
 
 ## 補題: 互いに素な整数の個数
@@ -290,3 +331,13 @@ $$
 <div style="text-align: right;">
 ■
 </div>
+
+## References
+
+- [青空学園: 素数の定義](http://aozoragakuen.sakura.ne.jp/suuron/node17.html)
+- [The PrimePages: prime number research & records](https://primes.utm.edu/)
+- [素数定理の証明](http://aozoragakuen.sakura.ne.jp/suuron/node82.html)
+
+> 関連ブログ記事
+
+- [Ryo's Tech Blog: 数学的帰納法の原理](https://ryonakagami.github.io/2021/04/16/mathematical-induction/)

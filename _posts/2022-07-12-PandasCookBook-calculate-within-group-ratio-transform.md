@@ -1,7 +1,7 @@
 ---
 layout: post
-title: "Standard SQL CookBook - 3/N"
-subtitle: "RCTにおけるunit of observationのsampling - Farm Fingerprint"
+title: "Pandas CookBook - 1/N"
+subtitle: "Group毎の集計値を用いたデータ処理方法の紹介"
 author: "Ryo"
 header-img: "img/about-bg.jpg"
 header-mask: 0.4
@@ -30,6 +30,7 @@ tags:
   - [解答例](#%E8%A7%A3%E7%AD%94%E4%BE%8B)
 - [応用編](#%E5%BF%9C%E7%94%A8%E7%B7%A8)
   - [ランキング値を計算したい場合](#%E3%83%A9%E3%83%B3%E3%82%AD%E3%83%B3%E3%82%B0%E5%80%A4%E3%82%92%E8%A8%88%E7%AE%97%E3%81%97%E3%81%9F%E3%81%84%E5%A0%B4%E5%90%88)
+  - [Delivery Noに対して何回目の配送なのかを計算したい場合](#delivery-no%E3%81%AB%E5%AF%BE%E3%81%97%E3%81%A6%E4%BD%95%E5%9B%9E%E7%9B%AE%E3%81%AE%E9%85%8D%E9%80%81%E3%81%AA%E3%81%AE%E3%81%8B%E3%82%92%E8%A8%88%E7%AE%97%E3%81%97%E3%81%9F%E3%81%84%E5%A0%B4%E5%90%88)
   - [zスコアを計算したい場合](#z%E3%82%B9%E3%82%B3%E3%82%A2%E3%82%92%E8%A8%88%E7%AE%97%E3%81%97%E3%81%9F%E3%81%84%E5%A0%B4%E5%90%88)
 - [References](#references)
 
@@ -86,6 +87,53 @@ df.groupby('year')['pop'].transform('rank', method='dense', pct=False)
 
 - pct : boolean, default False
     - データのパーセンテージ順位を返す
+
+
+### Delivery Noに対して何回目の配送なのかを計算したい場合
+
+> Data
+
+```python
+df.head()
+
+delivery_no,delivery_date,delivery_time,is_success,is_notice,is_booked
+74231116,20220818,1050,1,1,0
+74231112,20220818,1354,1,1,0
+74231115,20220818,1331,1,1,0
+74231010,20220818,1905,1,1,1
+74231016,20220818,1227,1,1,0
+...
+```
+
+---|---
+delivery_no|送り状No(再配達の場合同じ番号で再度レコードに記録されるので,同じ番号が出現する可能性はある)
+delivery_date|配達日, 文字列
+delivery_time|配達時間, 文字列, xx時yy分を`xxyy`で表記
+is_success|配達成功フラグ, 0の場合は後ほど再配達される
+is_notice|事前通知フラグ
+is_booked|事前予約フラグ
+
+> やりたいこと
+
+- `iter_no`という新たなカラムを作成し, そこに送り状No単位で何回目の配達なのか？を`int`で記録する（初回配達ならば1）
+- 何回目の配達かは配達時間の順番で設定する
+
+> 実行例
+
+```python
+import pandas as pd
+import numpy as np
+
+##配達時間datatimeカラムの作成
+df['delivery_datetime'] = df['delivery_date'] + ' ' + df['delivery_time']
+df['delivery_datetime'] =  pd.to_datetime(df['delivery_datetime'], format='%Y%m%d %H%M')
+
+##配達時間ランキング作成
+df['iter_no'] = np.int64(df.groupby(['delivery_no'])['delivery_datetime'].rank(ascending=True, method='dense'))
+df.sort_values(['delivery_no','iter_no'],inplace=True) ##見やすくするため
+df_fixed = df.reset_index(drop=True)
+```
+
 
 ### zスコアを計算したい場合
 

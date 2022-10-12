@@ -1,7 +1,7 @@
 ---
 layout: post
-title: "フローチャートのチュートリアル"
-subtitle: "プログラムができるまでの流れとフローチャート"
+title: "プログラムができるまでの流れとフローチャート"
+subtitle: "料理レシピをフローチャートで書いてみる"
 author: "Ryo"
 header-img: "img/post-bg-miui6.jpg"
 header-mask: 0.4
