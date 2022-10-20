@@ -11,7 +11,7 @@ revise_date: 2022-08-06
 reading_time: 6
 tags:
 
-- Ubuntu
+- Ubuntu 20.04 LTS
 - Linux
 - Shell
 ---

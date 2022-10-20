@@ -173,7 +173,7 @@ $$
 $$
 \begin{align*}
 \mathbb E[X] &= \int^\infty_0 xf_n(x)dx\\
-             &= \frac{1}{2^{\frac{n}{2}}\Gamma\left(\frac{n}{2}\right)}\int^{\infty}_0 x^{\frac{n}{2}}\exp\left(\righ-\frac{x}{2})\\
+             &= \frac{1}{2^{\frac{n}{2}}\Gamma\left(\frac{n}{2}\right)}\int^{\infty}_0 x^{\frac{n}{2}}\exp\left(-\frac{x}{2}\right)\\
              &= \frac{1}{2^{\frac{n}{2}}\Gamma\left(\frac{n}{2}\right)}\frac{\Gamma\left(\frac{n}{2}+1\right)}{\left(\frac{1}{2}\right)^{\frac{n}{2}+1}}\\
              &= \frac{1}{2^{\frac{n}{2}}\Gamma\left(\frac{n}{2}\right)}\frac{\Gamma\left(\frac{n}{2}\right)\frac{n}{2}}{\left(\frac{1}{2}\right)^{\frac{n}{2}+1}}\\
              &= n
@@ -187,7 +187,7 @@ $$
 $$
 \begin{align*}
 \mathbb E[X^2] &= \int^\infty_0 x^2f_n(x)dx\\
-             &= \frac{1}{2^{\frac{n}{2}}\Gamma\left(\frac{n}{2}\right)}\int^{\infty}_0 x^{\frac{n}{2}+1}\exp\left(\righ-\frac{x}{2})\\
+             &= \frac{1}{2^{\frac{n}{2}}\Gamma\left(\frac{n}{2}\right)}\int^{\infty}_0 x^{\frac{n}{2}+1}\exp\left(-\frac{x}{2}\right)\\
              &= \frac{1}{2^{\frac{n}{2}}\Gamma\left(\frac{n}{2}\right)}\frac{\Gamma\left(\frac{n}{2}+2\right)}{\left(\frac{1}{2}\right)^{\frac{n}{2}+2}}\\
              &= \frac{1}{2^{\frac{n}{2}}\Gamma\left(\frac{n}{2}\right)}\frac{\Gamma\left(\frac{n}{2}\right)\frac{n}{2}\left(\frac{n}{2}+1\right)}{\left(\frac{1}{2}\right)^{\frac{n}{2}+1}}\\
              &= n(n+2)

@@ -1,6 +1,7 @@
 ---
 layout: post
-title: "EDA CookBook - 生存分析とKaplanMeier 1/N"
+title: "EDA CookBook - 生存分析とKaplanMeier推定量"
+title: "生存分析 1/N"
 author: "Ryo"
 header-img: "img/about-bg.jpg"
 header-mask: 0.4
@@ -30,6 +31,10 @@ tags:
     - [Standard errors for the Nelson-Aalen estimator](#standard-errors-for-the-nelson-aalen-estimator)
   - [Medianの評価](#median%E3%81%AE%E8%A9%95%E4%BE%A1)
 - [The log-rank test](#the-log-rank-test)
+  - [問題設定](#%E5%95%8F%E9%A1%8C%E8%A8%AD%E5%AE%9A)
+  - [検定統計量の導出](#%E6%A4%9C%E5%AE%9A%E7%B5%B1%E8%A8%88%E9%87%8F%E3%81%AE%E5%B0%8E%E5%87%BA)
+  - [Multiple groupsへの拡張](#multiple-groups%E3%81%B8%E3%81%AE%E6%8B%A1%E5%BC%B5)
+  - [Pythonで検定関数を書いてみる](#python%E3%81%A7%E6%A4%9C%E5%AE%9A%E9%96%A2%E6%95%B0%E3%82%92%E6%9B%B8%E3%81%84%E3%81%A6%E3%81%BF%E3%82%8B)
 - [References](#references)
 
 <!-- END doctoc generated TOC please keep comment here to allow auto update -->
@@ -108,7 +113,6 @@ $$
 
 このとき, hazard関数の定義に注意すると
 
-<div class="math display" style="overflow: auto">
 $$
 \begin{align*}
 H(t) &= \int^t_0 h(u)du\\
@@ -116,18 +120,15 @@ H(t) &= \int^t_0 h(u)du\\
 & = \left[-\log (1 - F(u))\right]_0^t
 \end{align*}
 $$
-</div>
 
 よって, 以下の関係式を得ることができます
 
-<div class="math display" style="overflow: auto">
 $$
 \begin{align*}
 F(t) &= 1 - \exp\left(-\int^t_0h(u)du\right)\\
 f(t) &= h(t)\exp\left(-\int^t_0h(u)du\right)
 \end{align*}
 $$
-</div>
 
 - 生存時間が指数分布従う場合, hazard関数が時間に無関係の定数であることから確率密度関数, 累積分布関数の導出が可能となります
 
@@ -259,9 +260,9 @@ df_merge['CI_lower'] = np.clip(df_merge['ratio'] * np.exp(-1.96 * df_merge['std_
 df_merge['CI_upper'] = np.clip(df_merge['ratio'] * np.exp(1.96 * df_merge['std_err']), 0, 1)
 
 ## plotの再現
-plt.step(df_merge['time'].values, df_merge['ratio'].values, label='survival')
-plt.step(df_merge['time'].values, df_merge['CI_lower'].values, linestyle='dashed', label='lower 95%')
-plt.step(df_merge['time'].values, df_merge['CI_upper'].values, linestyle='dashed', label='upper 95%')
+plt.step(df_merge['time'].values, df_merge['ratio'].values,where="post", label='survival')
+plt.fill_between(df_merge['time'].values, df_merge['CI_lower'].values,df_merge['CI_upper'].values, color = 'b', alpha = 0.2, step="post")
+
 
 plt.legend();
 ```
@@ -311,16 +312,14 @@ $$
 \hat s^2(t) = \sum_{j\leq t} \frac{d_j}{n_j(n_j - d_j)}
 $$
 
-よって, CIは
+よって, Confidence Intervalは
 
-<div class="math display" style="overflow: auto">
 $$
 \begin{align*}
 CI &= \exp(\log \hat S(t) \pm 1.96 \hat s(t))\\
 &= \hat S(t)\exp(\pm 1.96 \hat s(t))
 \end{align*}
 $$
-</div>
 
 > どのような仮定下正当化されるのか？
 
@@ -346,14 +345,12 @@ $$
 
 で表せられることに着目し, 累積ハザード関数の推定量としてのネルソンアーレン推定量, $\tilde H(t)$, から生存関数を以下のように表現することができます
 
-<div class="math display" style="overflow: auto">
 $$
 \begin{align*}
 \tilde H(t) &= \sum_{j=1}^t\frac{d_j}{n_j}\\
 \tilde S(t) &=\prod_{j=1}^t\exp(-\frac{d_j}{n_j})
 \end{align*}
 $$
-</div>
 
 一般にこれは小サンプルに有効な推定量と言われていますが, KM推定量との関係性として以下が知られています:
 
@@ -401,12 +398,185 @@ $$
 一方, median は計算することができ
 
 $$
-\text{Median} t = \min(t) \text{ s.t. } \hat S(t) \leq 0.5
+\text{Median}(t) = \min(t) \text{ s.t. } \hat S(t) \leq 0.5
 $$
 
 ## The log-rank test
+### 問題設定
 
-後ほど記述
+- ２つのグループの生存時間分布に差が存在するか検定したいとする, i.e., 生存関数について$H_0: S_1 = S_2$
+- $n_{1j}, d_{1j}$: the time, $t_j$におけるグループ1の観察人数と死亡人数
+- $n_{2j}, d_{2j}$: the time, $t_j$におけるグループ2の観察人数と死亡人数
+
+### 検定統計量の導出
+
+> the time, $t_j$, におけるContingency Table
+
+||Group 1|Group 2|Total|
+|---|---|---|---|
+|Deaths|$d_{1j}$|$d_{2j}$|$d_{j}$|
+|Survivors|$n_{1j} - d_{1j}$|$n_{2j} - d_{2j}$|$n_{j} - d_{j}$|
+|Obs|$n_{1j}$|$n_{2j}$|$n_{j}$|
+
+> chi-squared distributionの導出
+
+The null hypothesis, $S_1 = S_2$の下では, 確率変数$D_{1j}$はthe hypergeometric distribution(超幾何分布)に従うので, meanとvarianceはそれぞれ
+
+$$
+\begin{align*}
+e_{1j} &= n_{1j}\frac{d_j}{n_j}\\
+v_{1j} &= \frac{d_j}{n_j}\frac{n_j - d_j}{n_j}\frac{n_{1j}n_{2j}}{n_j - 1}
+\end{align*}
+$$
+
+このとき, $w_j = d_{1j} − e_{1j}$はaprroximatelyに$N(0, v_{1j})$に従うと考えられるので, 条件付き独立の仮定の下, 
+
+$$
+W \sim N(0, V), \text{ where } W = \sum_{j=1}^T w_j, V = \sum_{j=1}^T v_j
+$$
+
+従って, 検定統計量は, 自由度1のカイ自乗分布に従うことから
+
+$$
+\frac{W^2}{V} = \frac{(\sum w_j)^2}{\sum v_j} \sim \chi^2_1
+$$
+
+- これはthe log-rank test, または the Cochran-Mantel-Haenszel testと呼ばれます
+
+### Multiple groupsへの拡張
+
+Reference Group１つ(便宜上group indexは0とする)を含む$K + 1$ groupsを考えます. このとき, 次のベクトルを考えます:
+
+$$
+\bold w_j = (w_{1j}, w_{2j}, \cdots, w_{Kj})
+$$
+
+$\bold w_j$のconditional covariance matrix, $\bold V_j$は
+
+$$
+\begin{align*}
+(V_j)_{ii} & = \frac{d_j}{n_j}\frac{n_j - d_j}{n_j}\frac{n_{1j}(n_{j}-n_{ij})}{n_j - 1}\\
+(V_j)_{ik} & = - \frac{n_{ij}n_{kj}d_j(n_j - d_j)}{n_j^2(n_j-1)}\text{ where } i \neq k
+\end{align*}
+$$
+
+Then,
+
+$$
+\bold w^T \bold V^{-1} \bold w \sim \chi^2_K
+$$
+
+### Pythonで検定関数を書いてみる
+
+- `lifelines.statistics.logrank_test`と出力結果が一致することは確認済み
+
+```python
+from scipy import stats
+import numpy as np
+import pandas as pd
+from collections import OrderedDict
+
+def survival_logrank_test(duration_array, event_array, group_array):
+    """K-sample log-rank hypothesis test of identical survival functions.
+    Compares the pooled hazard rate with each group-specific
+    hazard rate. The alternative hypothesis is that the hazard
+    rate of at least one group differs from the others at some time.
+
+    Parameters
+    ----------
+    duration_array : time of event or time of censoring array, shape = (n_samples,)
+    
+    event_array : the binary event indicator array
+                  1: event observed
+                  0: censored
+    
+    group_array : array-like, shape = (n_samples,)
+                  Group membership of each sample.
+    
+    Returns
+    -------
+    chisq : float
+        Test statistic.
+    pvalue : float
+        Two-sided p-value with respect to the null hypothesis
+        that the hazard rates across all groups are equal.
+    stats : pandas.DataFrame
+        Summary statistics for each group:  number of samples,
+        observed number of events, expected number of events,
+        and test statistic.
+        Only provided if `return_stats` is True.
+    covariance : array, shape=(n_groups, n_groups)
+        Covariance matrix of the test statistic.
+        Only provided if `return_stats` is True.
+    
+    References
+    ----------
+    .. [1] Fleming, T. R. and Harrington, D. P.
+           A Class of Hypothesis Tests for One and Two Samples of Censored Survival Data.
+           Communications In Statistics 10 (1981): 763-794.
+    """
+
+    n_samples = len(duration_array)
+    groups, group_counts = np.unique(group_array, return_counts=True)
+    n_groups = groups.shape[0]
+
+    # sort descending
+    o = np.argsort(-duration_array, kind="mergesort")
+    x = group_array[o]
+    event = event_array[o]
+    time = duration_array[o]
+
+    at_risk = np.zeros(n_groups, dtype=int)
+    observed = np.zeros(n_groups, dtype=int)
+    expected = np.zeros(n_groups, dtype=float)
+    covar = np.zeros((n_groups, n_groups), dtype=float)
+    covar_indices = np.diag_indices(n_groups)
+
+    k = 0
+    while k < n_samples:
+        ti = time[k]
+        total_events = 0
+        while k < n_samples and ti == time[k]:
+            idx = np.searchsorted(groups, x[k])
+            if event[k]:
+                observed[idx] += 1
+                total_events += 1
+            at_risk[idx] += 1
+            k += 1
+        if total_events != 0:
+            total_at_risk = k
+            expected += at_risk * (total_events / total_at_risk)
+            if total_at_risk > 1:
+                multiplier = total_events * (total_at_risk - total_events) / (total_at_risk * (total_at_risk - 1))
+                temp = at_risk * multiplier
+                covar[covar_indices] += temp
+                covar -= np.outer(temp, at_risk) / total_at_risk
+    
+    chi_df = n_groups - 1
+    numerator = observed[:chi_df] - expected[:chi_df]
+    
+    chisq = np.linalg.solve(covar[:chi_df, :chi_df], numerator) @ numerator
+    pval = stats.chi2.sf(chisq, chi_df)
+    
+    table = OrderedDict()
+    table["counts"] = group_counts
+    table["observed"] = observed
+    table["expected"] = expected
+    table["statistic"] = observed - expected
+    table = pd.DataFrame.from_dict(table)
+    table.index = pd.Index(groups, name="group", dtype=groups.dtype)
+    
+    return chisq, pval, table, covar, chi_df
+
+
+# numpy example
+G = np.array([0, 0, 0, 0, 1, 1, 1, 1, 1, 2, 2, 2])
+T = np.array([5, 3, 9, 8, 7, 4, 4, 3, 2, 5, 6, 7])
+E = np.array([1, 1, 1, 1, 1, 1, 0, 0, 1, 1, 1, 0])
+survival_logrank_test(duration_array=T, event_array=E, group_array=G)
+```
+
+
 
 ## References
 
