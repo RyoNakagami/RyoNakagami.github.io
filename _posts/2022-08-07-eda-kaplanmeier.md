@@ -1,7 +1,7 @@
 ---
 layout: post
 title: "EDA CookBook - 生存分析とKaplanMeier推定量"
-title: "生存分析 1/N"
+subtitle: "生存分析 1/N"
 author: "Ryo"
 header-img: "img/about-bg.jpg"
 header-mask: 0.4

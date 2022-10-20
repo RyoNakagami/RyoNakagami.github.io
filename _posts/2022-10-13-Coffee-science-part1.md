@@ -1,7 +1,6 @@
 ---
 layout: post
-title: "コーヒーの入れ方 1/N"
-subtitle: "焙煎の種類"
+title: "コーヒーの入れ方 1/N - 焙煎の種類"
 author: "Ryo"
 header-img: "img/tag-bg.jpg"
 header-mask: 0.4
