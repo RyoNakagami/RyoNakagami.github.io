@@ -1,7 +1,7 @@
 ---
 layout: post
-title: "コーヒーノート 1/N - 焙煎によるコーヒー豆の変化の仕組み"
-subtitle: "焙煎研究編 1/M"
+title: "焙煎によるコーヒー豆の変化の仕組み"
+subtitle: "焙煎研究編 1/N"
 author: "Ryo"
 header-img: "img/tag-bg.jpg"
 header-mask: 0.4

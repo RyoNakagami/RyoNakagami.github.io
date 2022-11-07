@@ -22,13 +22,14 @@ tags:
   - [平均値の期待値と分散の検討](#%E5%B9%B3%E5%9D%87%E5%80%A4%E3%81%AE%E6%9C%9F%E5%BE%85%E5%80%A4%E3%81%A8%E5%88%86%E6%95%A3%E3%81%AE%E6%A4%9C%E8%A8%8E)
   - [標本の不偏分散と期待値](#%E6%A8%99%E6%9C%AC%E3%81%AE%E4%B8%8D%E5%81%8F%E5%88%86%E6%95%A3%E3%81%A8%E6%9C%9F%E5%BE%85%E5%80%A4)
   - [効率的な不偏推定量](#%E5%8A%B9%E7%8E%87%E7%9A%84%E3%81%AA%E4%B8%8D%E5%81%8F%E6%8E%A8%E5%AE%9A%E9%87%8F)
+  - [例: 有限母集団のyes/no調査のCIの計算](#%E4%BE%8B-%E6%9C%89%E9%99%90%E6%AF%8D%E9%9B%86%E5%9B%A3%E3%81%AEyesno%E8%AA%BF%E6%9F%BB%E3%81%AEci%E3%81%AE%E8%A8%88%E7%AE%97)
 - [References](#references)
 
 <!-- END doctoc generated TOC please keep comment here to allow auto update -->
 
 ## 有限母集団からのRandom Samplingと平均値
 
-データサイズ $N$ の母集団から標本の大きさ $n$ の標本を無作為抽出して得られた標本 $x_1, \cdots, x_n$とします.
+データサイズ $N$ の母集団から標本の大きさ $n$ の標本を非復元無作為抽出して得られた標本 $x_1, \cdots, x_n$とします.
 母平均と母分散が $(\mu, \sigma^2)$ で表現されるときの $\mathbb E[x_i], \mathbb V(x_i), \rho(x_i, x_j)$, (ただし $i\neq j$)を求めてみます.
 
 まず, 期待値の定義より母集団から$x_i$がとある値になる確率を表現することが必要となることがわかるのでそれを考えてみます.
@@ -79,8 +80,8 @@ $$
 \begin{align*}
 \mathbb V(\bar x) &=  \mathbb V\left[\frac{1}{n}\sum^n_{i=1} x_i\right]\\
 &= \frac{1}{n^2}\mathbb V\left[\sum^n_{i=1} x_i\right]\\
-&= \frac{1}{n^2}\left{\sum_{i=1}^n\mathbb V(x_i)+\sum^n_{i=1} \sum^n_{j=1} Cov\left(x_ix_j\right)\right}\\
-&= \frac{1}{n^2}\left{n\sigma^2 - n(n-1)\frac{\sigma^2}{N-1}\right}\\
+&= \frac{1}{n^2}\left[\sum_{i=1}^n \mathbb{V}(x_i)+\sum^n_{i=1} \sum^n_{j\neq i} Cov(x_i,x_j)\right]\\
+&= \frac{1}{n^2}\left[n\sigma^2 - n(n-1)\frac{\sigma^2}{N-1}\right]\\
 &= \frac{N-n}{N-1}\frac{\sigma^2}{n}
 \end{align*}
 $$
@@ -121,17 +122,17 @@ $$
 
 $$
 \begin{align*}
-\mathbb E[s^2] &= \frac{1}{n-1}\mathbb E[\sum_{i=1}^n(x_i - \bar x)^2]\\
-&= \frac{1}{n-1}\left{E[\sum_{i=1}^nx_i^2] - n\mathbb E[\bar x^2]\right}\\
-&= \frac{1}{n-1}\left{n(\sigma^2 + \mu^2) - n\left(\frac{N-n}{N-1}\frac{\sigma^2}{n} + \mu^2\right)\right}\\
-&= \frac{1}{n-1}\left{n\sigma^2 - \frac{N-n}{N-1}\sigma^2\right}\\
+\mathbb E[s^2] &= \frac{1}{n-1}\mathbb E\left[\sum_{i=1}^n(x_i - \bar x)^2\right]\\
+&= \frac{1}{n-1}\left[E[\sum_{i=1}^nx_i^2] - n\mathbb E[\bar x^2]\right]\\
+&= \frac{1}{n-1}\left[n(\sigma^2 + \mu^2) - n\left(\frac{N-n}{N-1}\frac{\sigma^2}{n} + \mu^2\right)\right]\\
+&= \frac{1}{n-1}\left[n\sigma^2 - \frac{N-n}{N-1}\sigma^2\right]\\
 &= \frac{N}{N-1}\sigma^2
 \end{align*}
 $$
 
 ### 効率的な不偏推定量
 
-上と同じく有限データサイズ $N$ の母集団から標本の大きさ $n$ を無作為抽出して得た標本 $x_1, \cdots, x_n$とします.
+上と同じく有限データサイズ $N$ の母集団から標本の大きさ $n$ を非復元無作為抽出して得た標本 $x_1, \cdots, x_n$とします.
 
 $$
 T = \sum a_ix_i
@@ -165,8 +166,91 @@ $$
 
 が条件とわかる.
 
+### 例: 有限母集団のyes/no調査のCIの計算
+
+$N = 2000$の村を対象にyes/noアンケート調査を実施したいとします.
+測定誤差, $\epsilon$, を0.04以下にしたいと思っていますが, この場合最低何人に対してアンケートすれば良いか考えます.
+
+なお, $N_1$人がyes, $N - N_1$人がnoと答える分布と想定します.
+
+> Theorem: 有限母集団のApproximate Confidence Interval 
+
+$$
+\hat{p}\pm z_{\alpha/2}\sqrt{\dfrac{\hat{p}(1-\hat{p})}{n} \cdot \dfrac{N-n}{N-1}}
+$$
+
+有限母集団からの非復元抽出で大きさ $n$ のサンプル, $x_1, \cdots, x_n$, を抽出したとします. なお,
+
+$$
+x_ i \begin{cases}1 & \text{ if yes}\\0 \text{ otherwise} \end{cases}
+$$
 
 
+問題設定より, yesと答える割合を$p$, 上記サンプリングによるその推定値を$\hat p$とすると
 
+$$
+\begin{align*}
+p & = \frac{N_1}{N}\\
+1 - p &= \frac{N - N_1}{N}\\
+\hat p & = \frac{\sum x_i}{n}
+\end{align*}
+$$
+
+$X = \sum x_i$という確率変数を考えると, これは超幾何分布に従うので
+
+$$
+\begin{align*}
+\mathbb E(X)&=n\frac{N_1}{N}\\
+&=np\\
+Var(X)&=n{N_1\over N}\left(1-{N_1\over N}\right) \left({N-n\over N-1}\right)\\
+&=np(1-p)\left({N-n\over N-1}\right)
+\end{align*}
+$$
+
+従って,
+
+$$
+Var(\hat{p})=\frac{p(1-p)}{n}\left(\frac{N-n}{N-1}\right)
+$$
+
+またCLTより
+
+$$
+\frac{\hat{p}-p}{\sqrt{\frac{p(1-p)}{n} \left(\frac{N-n}{N-1}\right) }} \sim N(0, 1)
+$$
+
+> 測定誤差$\epsilon$を0.04以下にするために必要なサンプルサイズ
+
+$$
+0.04 \geq \epsilon \equiv |p - \hat p|
+$$
+
+が問題文が求めていることです. 確率変数$\hat p$によって$\epsilon$は定義されているので同じく確率変数, 
+つまり誤差に関しても確率的な表現を踏まえた上で考える必要があります.
+
+ここで, 95% Confidence Intervalの範囲が$\hat p \pm 0.04$に収まるという形で言い換えて良いならば, CLTからのthe sample analogue principleによって
+
+$$
+\text{CI} \ equiv \hat{p}\pm z_{\alpha/2}\sqrt{\dfrac{\hat{p}(1-\hat{p})}{n} \cdot \dfrac{N-n}{N-1}}
+$$
+
+$$
+\epsilon=z_{\alpha/2}\sqrt{\dfrac{\hat{p}(1-\hat{p})}{n}\cdot \dfrac{N-n}{N-1}}
+$$
+
+と式変形できるので, $n$について解くと
+
+$$
+\begin{align*}
+n&=\dfrac{m}{1+\dfrac{m-1}{N}}\\
+&\text{where } \ \  m=\dfrac{z^2_{\alpha/2}\hat{p}(1-\hat{p})}{\epsilon^2}
+\end{align*}
+$$
+
+今回の問題において分散が最大になる$p=0.5$と想定して解くと, $n \approx 463$くらいの規模になります.
 
 ## References
+
+> オンラインマテリアル
+
+- [PennState > STAT 415 > 6.3 - Estimating a Proportion for a Small, Finite Population](https://online.stat.psu.edu/stat415/lesson/6/6.3)

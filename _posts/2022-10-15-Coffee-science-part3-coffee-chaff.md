@@ -1,7 +1,7 @@
 ---
 layout: post
-title: "コーヒーノート 3/N - コーヒーチャフとは？"
-subtitle: "焙煎研究編 2/M"
+title: "コーヒーチャフとは？"
+subtitle: "焙煎研究編 2/N"
 author: "Ryo"
 header-img: "img/tag-bg.jpg"
 header-mask: 0.4
