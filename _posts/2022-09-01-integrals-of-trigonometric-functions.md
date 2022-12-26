@@ -37,7 +37,6 @@ tags:
 
 $n,k$をそれぞれ自然数としたとき
 
-<div class="math display" style="overflow: auto">
 $$
 \begin{align*}
 \int^{\pi}_0\sin nx \sin kx dx =\begin{cases}
@@ -46,7 +45,6 @@ $$
 \end{cases}\tag{A}
 \end{align*}
 $$
-</div>
 
 
 ### 正弦関数の積和公式
@@ -220,6 +218,7 @@ RHS &= \int^\infty_0 \frac{1}{1+t^2} dt = [\tan^{-1}t]^{\infty}_0 = \frac{\pi}{2
 \end{align*}
 $$
 
+なお, $\tan^{-1}t$の導出は $\arctan$の微分を用いています. 
 sinc関数は偶関数だから, 従って,
 
 $$
