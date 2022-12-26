@@ -1,13 +1,12 @@
 ---
 layout: post
 title: "Ubuntu 20.04 LTSでメタルギアソリッドVをやりたい"
-subtitle: "Ubuntu Desktop環境構築 Part 25"
+subtitle: "Ubuntu Desktop環境構築: Steam編 1/N"
 author: "Ryo"
 header-img: "img/about-bg.jpg"
 header-mask: 0.4
 catelog: true
 mathjax: true
-purpose: 
 tags:
 
 - Ubuntu 20.04 LTS
@@ -21,10 +20,7 @@ tags:
 <!-- DON'T EDIT THIS SECTION, INSTEAD RE-RUN doctoc TO UPDATE -->
 
 - [やりたいこと](#%E3%82%84%E3%82%8A%E3%81%9F%E3%81%84%E3%81%93%E3%81%A8)
-  - [Dependency](#dependency)
-    - [実行環境](#%E5%AE%9F%E8%A1%8C%E7%92%B0%E5%A2%83)
-    - [ハードウェア](#%E3%83%8F%E3%83%BC%E3%83%89%E3%82%A6%E3%82%A7%E3%82%A2)
-    - [その他](#%E3%81%9D%E3%81%AE%E4%BB%96)
+- [Dependency](#dependency)
 - [そもそもSteamってなに？](#%E3%81%9D%E3%82%82%E3%81%9D%E3%82%82steam%E3%81%A3%E3%81%A6%E3%81%AA%E3%81%AB)
 - [ゲーム環境構築](#%E3%82%B2%E3%83%BC%E3%83%A0%E7%92%B0%E5%A2%83%E6%A7%8B%E7%AF%89)
   - [Steamのインストール](#steam%E3%81%AE%E3%82%A4%E3%83%B3%E3%82%B9%E3%83%88%E3%83%BC%E3%83%AB)
@@ -40,9 +36,9 @@ tags:
 - WindowsじゃなくてUbuntu 20.04 LTSでMGSVをやりたい
 - Steamを導入したい
 
-### Dependency
+## Dependency
 
-#### 実行環境
+> 実行環境
 
 |項目||
 |---|---| 	 
@@ -63,20 +59,22 @@ Codename:       focal
 Linux 5.13.0-27-generic #29~20.04.1-Ubuntu SMP Fri Jan 14 00:32:30 UTC 2022 x86_64 x86_64 x86_64 GNU/Linux
 ```
 
-#### ハードウェア
+> ハードウェア
 
 |項目|製品|説明|
 |---|---|---| 	 
 |コントローラー|[Xbox ワイヤレス コントローラー - カーボン ブラック](https://www.microsoft.com/ja-jp/d/xbox-%E3%83%AF%E3%82%A4%E3%83%A4%E3%83%AC%E3%82%B9-%E3%82%B3%E3%83%B3%E3%83%88%E3%83%AD%E3%83%BC%E3%83%A9%E3%83%BC/8xn59crbsqgz)|Xinput対応コントローラーがほしかったため|
 |有線ケーブル|Type-Cケーブル USB3.1 Gen2 YouZippper|コントローラーとPCを接続用|
 
-#### その他
+> その他
 
 - [steam アカウント](https://store.steampowered.com/)
 
 ## そもそもSteamってなに？
 
-Steamは、アメリカのValve Corporationによって開発/運営がされているゲーム配信サービスです. 利用方法は、
+Steamは、アメリカのValve Corporationによって開発/運営がされているゲーム配信サービスです. 
+
+> 利用方法
 
 1. Steamアカウント登録(無料)
 2. SteamクライアントをローカルPCにインストール
@@ -86,14 +84,15 @@ Steamは、アメリカのValve Corporationによって開発/運営がされて
 
 > Steamの特徴
 
-- Windows/Mac/Linux問わずクライアント自体はどの環境でもインストールすることができる
-- PCが利用条件を満たしているならば、インターネット環境のあるどのPCからでもゲームのインストールやプレイを行うことができる
+- Windows/Mac/Linux問わずクライアント自体はどの環境でもインストールすることができます
+- PCが利用条件を満たしているならば、インターネット環境のあるどのPCからでもゲームのインストールやプレイを行うことができます
 - Windows専用ソフトも「[Proton](https://www.protondb.com/)」というSteamに組み込まれたソフトを使うことでLinux環境でもプレイできます
 
 > すべてのWindowsゲームがプレイできるのか？
 
-- この答えは残念ながらNoとなります. なにがUbuntuでプレイできるかは「[ProtonDB](https://www.protondb.com/)」へアクセスしてプレイしたいゲームソフトがプレイ可能化否かチェックすることが必要となります.
-- もしゲームソフト自体がLinuxへ対応していた場合は、ProtonDBの確認は不要です
+- この答えは残念ながらNo
+- なにがUbuntuでプレイできるかは「[ProtonDB](https://www.protondb.com/)」へアクセスしてプレイしたいゲームソフトがプレイ可能化否かチェックすることが必要
+- もしゲームソフト自体がLinuxへ対応していた場合は、ProtonDBの確認は不要
 - **Ubuntuで動作しなかった場合でもSteamは返金に応じてくれます**（→ see [サポートページ](https://help.steampowered.com/en/)）
 
 > Protonとは？
