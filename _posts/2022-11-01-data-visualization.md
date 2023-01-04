@@ -24,6 +24,7 @@ tags:
   - [`matplotlib.dates.date2num`](#matplotlibdatesdate2num)
   - [`matplotlib.dates.MonthLocator()`](#matplotlibdatesmonthlocator)
   - [`matplotlib.dates.DateFormatter`](#matplotlibdatesdateformatter)
+- [Appendix: 6 Lessons about telling stories with data](#appendix-6-lessons-about-telling-stories-with-data)
 - [References](#references)
 
 <!-- END doctoc generated TOC please keep comment here to allow auto update -->
@@ -34,7 +35,12 @@ tags:
 
 ## Python Code
 
+> 成果物
+
 <img src="https://github.com/ryonakimageserver/omorikaizuka/blob/master/2022-11-01-data-visualization-try.png?raw=true">
+
+
+> Code
 
 ```python
 ##------------------
@@ -185,6 +191,14 @@ print(matplotlib.dates.date2num(pd.to_datetime('1990-01-01')))
 `%a`|Sun, Mon, …, Sat 
 `%A`|Sunday, Monday, …, Saturday 
 
+## Appendix: 6 Lessons about telling stories with data
+
+1. Understand the context
+2. Choose an appropriate visual display
+3. Eliminate clutter
+4. Focus attention where you want it
+5. Think like a designer
+6. Tell a story
 
 
 ## References
