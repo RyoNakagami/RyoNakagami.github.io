@@ -52,6 +52,9 @@ tags:
 人数|1人
 発売日|2019年11月15日
 エンジン|Unreal Engine
+protondb status|Gold (Runs perfectly after tweaks)
+
+
 
 ## ゲーム環境設定
 ### Proton Version設定
