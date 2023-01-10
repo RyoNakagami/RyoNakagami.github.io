@@ -19,6 +19,7 @@ tags:
 <!-- DON'T EDIT THIS SECTION, INSTEAD RE-RUN doctoc TO UPDATE -->
 
 - [作成したいもの](#%E4%BD%9C%E6%88%90%E3%81%97%E3%81%9F%E3%81%84%E3%82%82%E3%81%AE)
+- [Rule：Be consistent in the time points you plot](#rulebe-consistent-in-the-time-points-you-plot)
 - [Python Code](#python-code)
 - [関数/Classの説明](#%E9%96%A2%E6%95%B0class%E3%81%AE%E8%AA%AC%E6%98%8E)
   - [`matplotlib.dates.date2num`](#matplotlibdatesdate2num)
@@ -32,6 +33,11 @@ tags:
 ## 作成したいもの
 
 <img src="https://github.com/ryonakimageserver/omorikaizuka/blob/master/2022-11-01-data-visualization-goal.png?raw=true">
+
+## Rule：Be consistent in the time points you plot
+
+- 時系列plotのx軸の粒度は統一されているべき(とある時点まで10年間隔である時点から1年間隔というものは粒度が揃っていない)
+
 
 ## Python Code
 
