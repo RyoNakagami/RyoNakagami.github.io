@@ -46,11 +46,16 @@ $$
 
 > パターン 1
 
+<div class="math display" style="overflow: auto; border-radius: 1em; border-style:solid; border-color:#D3D3D3; background-color:#F8F8F8">
+
+
 任意の $m = 1, 2, \cdots$ と $n = 1, 2, \cdots$ について
 
 $$
 \int^{2\pi}_0\cos mx \sin nx dx =0 \tag{1.2}
 $$
+
+</div>
 
 **証明**
 
@@ -68,11 +73,16 @@ $$
 
 > パターン 2
 
+<div class="math display" style="overflow: auto; border-radius: 1em; border-style:solid; border-color:#D3D3D3; background-color:#F8F8F8">
+
+
 $m \neq n$ となる任意の $m = 1, 2, \cdots$ と $n = 1, 2, \cdots$ について
 
 $$
 \int^{2\pi}_0\cos mx \cos nx dx =0 \tag{1.3}
 $$
+
+</div>
 
 **証明**
 
@@ -91,11 +101,16 @@ $$
 
 > パターン 3
 
+<div class="math display" style="overflow: auto; border-radius: 1em; border-style:solid; border-color:#D3D3D3; background-color:#F8F8F8">
+
+
 $m \neq n$ となる任意の $m = 1, 2, \cdots$ と $n = 1, 2, \cdots$ について
 
 $$
 \int^{2\pi}_0\sin mx \sin nx dx =0 \tag{1.4}
 $$
+
+</div>
 
 **証明**
 
@@ -116,11 +131,16 @@ $$
 
 > 正弦関数
 
+<div class="math display" style="overflow: auto; border-radius: 1em; border-style:solid; border-color:#D3D3D3; background-color:#F8F8F8">
+
+
 任意の $m = 1, 2, \cdots$ について
 
 $$
 \int^{2\pi}_0\sin^2 mx dx = \pi \tag{1.5}
 $$
+
+</div>
 
 **証明**
 
@@ -138,11 +158,16 @@ $$
 
 > 余弦関数
 
+<div class="math display" style="overflow: auto; border-radius: 1em; border-style:solid; border-color:#D3D3D3; background-color:#F8F8F8">
+
+
 任意の $m = 1, 2, \cdots$ について
 
 $$
 \int^{2\pi}_0\cos^2 mx dx =0 \tag{1.6}
 $$
+
+</div>
 
 **証明**
 
