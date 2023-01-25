@@ -7,14 +7,15 @@ header-img: "img/post-bg-miui6.jpg"
 header-mask: 0.4
 catelog: true
 mathjax: true
-revise_date: 2022-07-11
+revise_date: 2023-01-11
 tags:
 
 - math
 - フーリエ解析
 ---
 
-**Table of Contents**
+<div style='border-radius: 1em; border-style:solid; border-color:#D3D3D3; background-color:#F8F8F8'>
+<p class="h4">&nbsp;&nbsp;Table of Contents</p>
 <!-- START doctoc generated TOC please keep comment here to allow auto update -->
 <!-- DON'T EDIT THIS SECTION, INSTEAD RE-RUN doctoc TO UPDATE -->
 
@@ -25,6 +26,7 @@ tags:
   - [sinc関数](#sinc%E9%96%A2%E6%95%B0)
   - [sinc関数の極限値について](#sinc%E9%96%A2%E6%95%B0%E3%81%AE%E6%A5%B5%E9%99%90%E5%80%A4%E3%81%AB%E3%81%A4%E3%81%84%E3%81%A6)
   - [sinc関数の積分の極限値について](#sinc%E9%96%A2%E6%95%B0%E3%81%AE%E7%A9%8D%E5%88%86%E3%81%AE%E6%A5%B5%E9%99%90%E5%80%A4%E3%81%AB%E3%81%A4%E3%81%84%E3%81%A6)
+- [Appendix: 積和公式](#appendix-%E7%A9%8D%E5%92%8C%E5%85%AC%E5%BC%8F)
 - [Appendix:正弦関数の連続性](#appendix%E6%AD%A3%E5%BC%A6%E9%96%A2%E6%95%B0%E3%81%AE%E9%80%A3%E7%B6%9A%E6%80%A7)
   - [定義: 関数が区間 $I$ で連続](#%E5%AE%9A%E7%BE%A9-%E9%96%A2%E6%95%B0%E3%81%8C%E5%8C%BA%E9%96%93-i-%E3%81%A7%E9%80%A3%E7%B6%9A)
   - [正弦関数の和積公式](#%E6%AD%A3%E5%BC%A6%E9%96%A2%E6%95%B0%E3%81%AE%E5%92%8C%E7%A9%8D%E5%85%AC%E5%BC%8F)
@@ -32,6 +34,8 @@ tags:
 - [References](#references)
 
 <!-- END doctoc generated TOC please keep comment here to allow auto update -->
+
+</div>
 
 ## 1. 正弦関数の積の積分公式
 
@@ -76,9 +80,12 @@ $$
 \sin \alpha\sin \beta=-\frac{1}{2} \left\{\cos(\alpha+\beta)-\cos(\alpha-\beta)\right\}
 $$
 
+**(導出終了)**
+
+
 ### 正弦関数の積の積分公式の導出
 
-正弦関数の積和公式, $(B)$, を用いて $(A)$を変形すると
+正弦関数の積和公式 $(B)$ を用いて $(A)$を変形すると
 
 $$
 \begin{align*}
@@ -122,6 +129,9 @@ $$
 $$
 \int^{\pi}_0\sin nx \sin kx dx = 0
 $$
+
+
+**(証明終了)**
 
 
 ## 2. sinc関数の積分
@@ -235,6 +245,18 @@ sinc関数を$(0, x)$の範囲で積分した計算結果をy軸に表示する�
 <img src="https://github.com/ryonakimageserver/omorikaizuka/blob/master/20220901_sinc_integral_plot.png?raw=true">
 
 
+## Appendix: 積和公式
+
+<div class="math display" style="overflow: auto; border-radius: 1em; border-style:solid; border-color:#D3D3D3; background-color:#F8F8F8">
+$$
+\begin{align*}
+\cos x \cos y &= \frac{1}{2} \left\{\cos (x + y) + \cos(x - y)\right\}\\
+\sin x \sin y &= -\frac{1}{2} \left\{\cos (x + y) - \cos(x - y)\right\}\\
+\sin x \cos y &= \frac{1}{2} \left\{\sin (x + y) + \sin(x - y)\right\}\\
+\cos x \sin y &= \frac{1}{2} \left\{\sin (x + y) - \sin(x - y)\right\}
+\end{align*}
+$$
+</div>
 
 
 

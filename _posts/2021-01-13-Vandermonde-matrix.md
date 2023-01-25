@@ -13,12 +13,8 @@ tags:
 - math
 ---
 
-
-
-||概要|
-|---|---|
-|目的|Vandermondeの行列式の証明|
-
+<div style='border-radius: 1em; border-style:solid; border-color:#D3D3D3; background-color:#F8F8F8'>
+<p class="h4">&nbsp;&nbsp;Table of Contents</p>
 <!-- START doctoc generated TOC please keep comment here to allow auto update -->
 <!-- DON'T EDIT THIS SECTION, INSTEAD RE-RUN doctoc TO UPDATE -->
 
@@ -30,6 +26,8 @@ tags:
 - [3. Pythonでの計算方法](#3-python%E3%81%A7%E3%81%AE%E8%A8%88%E7%AE%97%E6%96%B9%E6%B3%95)
 
 <!-- END doctoc generated TOC please keep comment here to allow auto update -->
+
+</div>
 
 ## 1. 今回のスコープ
 

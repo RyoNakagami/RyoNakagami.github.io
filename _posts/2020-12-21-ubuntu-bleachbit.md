@@ -11,10 +11,10 @@ revise_date: 2022-07-11
 tags:
 
 - Ubuntu 20.04 LTS
-- Firefox
 ---
 
-**Table of Contents**
+<div style='border-radius: 1em; border-style:solid; border-color:#D3D3D3; background-color:#F8F8F8'>
+<p class="h4">&nbsp;&nbsp;Table of Contents</p>
 <!-- START doctoc generated TOC please keep comment here to allow auto update -->
 <!-- DON'T EDIT THIS SECTION, INSTEAD RE-RUN doctoc TO UPDATE -->
 
@@ -32,6 +32,8 @@ tags:
 - [References](#references)
 
 <!-- END doctoc generated TOC please keep comment here to allow auto update -->
+
+</div>
 
 
 ## 1. 今回のスコープ
