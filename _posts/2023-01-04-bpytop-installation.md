@@ -105,6 +105,7 @@ sudo make install
 > Uninstall
 
 ```zsh
+cd bpytop
 sudo make uninstall
 ```
 
