@@ -234,7 +234,7 @@ $$
 $$
 \begin{align*}
 \arctan\left[ \frac{\sum_{i=1}^{n} \sin{a + (i-1)d}}{\sum_{i=1}^{n} \cos{a + (i-1)d}} \right] &= \arctan\bigg[ \frac{\sin (a + (N - 1) \frac{1}{2} b)}{\cos (a + (N - 1) \frac{1}{2} b)}\bigg]\\
-&= \arctan\bigg[a + (N - 1) \frac{1}{2} b\tan\left(\right)\bigg]\\
+&= \arctan\bigg[\tan\left(a + (N - 1) \frac{1}{2} b\right)\bigg]\\
 &= \frac{1}{N}\sum_{i=1}^N [a + (i-1)d]
 \end{align*}
 $$
