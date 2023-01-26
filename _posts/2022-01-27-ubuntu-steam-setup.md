@@ -14,8 +14,8 @@ tags:
 ---
 
 
-
-**Table of Contents**
+<div style='border-radius: 1em; border-style:solid; border-color:#D3D3D3; background-color:#F8F8F8'>
+<p class="h4">&nbsp;&nbsp;Table of Contents</p>
 <!-- START doctoc generated TOC please keep comment here to allow auto update -->
 <!-- DON'T EDIT THIS SECTION, INSTEAD RE-RUN doctoc TO UPDATE -->
 
@@ -30,6 +30,7 @@ tags:
 
 <!-- END doctoc generated TOC please keep comment here to allow auto update -->
 
+</div>
 
 ## やりたいこと
 
@@ -72,7 +73,7 @@ Linux 5.13.0-27-generic #29~20.04.1-Ubuntu SMP Fri Jan 14 00:32:30 UTC 2022 x86_
 
 ## そもそもSteamってなに？
 
-Steamは、アメリカのValve Corporationによって開発/運営がされているゲーム配信サービスです. 
+Steamは、アメリカのValve Corporationによって開発/運営がされているゲーム配信サービス. 
 
 > 利用方法
 
@@ -84,9 +85,10 @@ Steamは、アメリカのValve Corporationによって開発/運営がされて
 
 > Steamの特徴
 
-- Windows/Mac/Linux問わずクライアント自体はどの環境でもインストールすることができます
-- PCが利用条件を満たしているならば、インターネット環境のあるどのPCからでもゲームのインストールやプレイを行うことができます
-- Windows専用ソフトも「[Proton](https://www.protondb.com/)」というSteamに組み込まれたソフトを使うことでLinux環境でもプレイできます
+- Windows/Mac/Linux問わずクライアント自体はどの環境でもインストールすることができる
+- ただしSteamクライアント自体がLinuxに対応しているとはいえ, ゲーム自体がLinuxに対応しているとは限らない
+- PCが利用条件を満たしているならば、インターネット環境のあるどのPCからでもゲームのインストールやプレイを行うことができる
+- Windows専用ソフトも「[Proton](https://www.protondb.com/)」というSteamに組み込まれたソフトを使うことでLinux環境でもプレイできる
 
 > すべてのWindowsゲームがプレイできるのか？
 
@@ -97,9 +99,14 @@ Steamは、アメリカのValve Corporationによって開発/運営がされて
 
 > Protonとは？
 
-- Steam上で動作することを目的に作られたValveによるWine魔改造ソフト
-- 完全にWineから独立しているわけではないです
-- Direct3DというMicrosoft御用達グラフィックスAPI対応のためにVulkan APIをサポートしています
+- Steam上で動作することを目的に作られたValveによるWine魔改造ソフト(完全にWineから独立しているわけではない)
+  - Wine自体は, Windowsアプリが動作に必要とするWindows APIをLinux上でも使えるようにする互換レイヤーのこと
+  - Wineを使うことでWindows専用アプリが動作したとしても, Windowsそのものを動作させるのではない
+- Direct X, Direct3DというMicrosoft御用達グラフィックスAPIをVulkan APIへ翻訳しているソフトみたいな感じ
+  - Vulkan APIは3DグラフィックスAPIでGPUなどを制御している
+
+<img src="https://github.com/ryonakimageserver/omorikaizuka/blob/master/20220127_wine_image.png?raw=true">
+
 
 > Dockerコンテナとかでコンテナ管理すべきでは？
 
@@ -113,7 +120,7 @@ SteamのUbuntuへのインストール方法は２つあります:
 1. Ubuntu package repositoryから`apt`経由でインストール
 2. マニュアルでOfficial steam packageをダウンロード&インストール
 
-どちらの手法が良いかは個人の好みに依存しますが、メリット/デメリットとしては以下のようなものがあります：
+どちらの手法が良いかは個人の好みに依存しますが、メリット/デメリットとしては以下のようなものがある：
 
 ||メリット|デメリット|
 |---|---|---|
@@ -173,7 +180,7 @@ STEP 3: Steamの起動
 
 STEP 1: `i386` architectureの追加
 
-普通なら64 bit環境のOSを使っていると思いますが、Steamパッケージは32 bitライブラリーに依存しているのでまず、i386アーキテクチャを利用できるように設定します
+普通なら64 bit環境のOSを使っていると思いますが、Steamパッケージは32 bitライブラリーに依存しているのでまず、i386アーキテクチャを利用できるように設定
 
 ```zsh
 % sudo dpkg --add-architecture i386
@@ -212,19 +219,19 @@ STEP 5: Steamを起動
 
 > Protonの有効化
 
-LinuxでWindowsゲームをプレイするためには、Protonなどのソフトを利用しなくてはならず、そのソフトの多くがベータ版機能でないと利用できません. そのため、`Steam -> Settings -> Account`でBeta Participationを「Steam Beta Update」(ベータ版への参加)へ変更します.
+LinuxでWindowsゲームをプレイするためには、Protonなどのソフトを利用しなくてはならず、そのソフトの多くがベータ版機能でないと利用できません. そのため、`Steam -> Settings -> Account`でBeta Participationを「Steam Beta Update」(ベータ版への参加)へ変更.
 
 <img src="https://github.com/ryonakimageserver/omorikaizuka/blob/master/%E3%83%96%E3%83%AD%E3%82%B0%E7%94%A8/20220127-02.png?raw=true">
 
 
-その後、`Steam -> Settings -> Steam Play`へ移動し、「Enable Steam Play for supported titles and Enable Steam Play for all other titles」をクリックします. これをクリックすることで、WindowsゲームをUbuntuでプレイできるようになります. そして、最後にProton versionを選択します. 自分はExperimentalを選択していますが、Windowsゲームが動作しなかった場合は、ProtonDBの内容を参考にversion設定を変更することが初手として推奨されます.
+その後、`Steam -> Settings -> Steam Play`へ移動し、「Enable Steam Play for supported titles and Enable Steam Play for all other titles」をクリックします. これをクリックすることで、WindowsゲームをUbuntuでプレイできるようになります. そして、最後にProton versionを選択します. 自分はExperimentalを選択していますが、Windowsゲームが動作しなかった場合は、ProtonDBの内容を参考にversion設定を変更することが初手として推奨されてる.
 
 <img src="https://github.com/ryonakimageserver/omorikaizuka/blob/master/%E3%83%96%E3%83%AD%E3%82%B0%E7%94%A8/20220127-01.png?raw=true">
 
 
 ### コントローラーの接続と設定
 
-UbnuntuでSteamを利用する場合、ソフトが対応しているコントローラーの種類を確認することが推奨されます. コントローラーにはDirectInput形式とXinput形式の２つがあります. なお、今回のMGSVはXinput形式のコントローラーが推奨されています.
+UbnuntuでSteamを利用する場合、ソフトが対応しているコントローラーの種類を確認することが推奨されます. コントローラーにはDirectInput形式とXinput形式の２つがあります. なお、今回のMGSVはXinput形式のコントローラーが推奨されてる.
 
 > DirectInput形式
 
