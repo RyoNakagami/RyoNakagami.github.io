@@ -226,7 +226,7 @@ $$
 となることがわかった. これに倣って, $\{a + (i-1)d\}_{i=1}^N$という観測値集合を考えると, Bishop 2.3.8 で紹介されていたCIRCLE MEANは
 
 $$
-\overline{\theta} &= \arctan\left[ \frac{\sum_{i=1}^{n} \sin{\theta_{i}}}{\sum_{i=1}^{n} \cos{\theta_{i}}} \right] 
+\overline{\theta} = \arctan\left[ \frac{\sum_{i=1}^{n} \sin{\theta_{i}}}{\sum_{i=1}^{n} \cos{\theta_{i}}} \right] 
 $$
 
 なので
