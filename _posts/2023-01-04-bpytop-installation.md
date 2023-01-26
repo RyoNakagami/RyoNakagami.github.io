@@ -14,6 +14,30 @@ tags:
 ---
 
 
+<div style='border-radius: 1em; border-style:solid; border-color:#D3D3D3; background-color:#F8F8F8'>
+<p class="h4">&nbsp;&nbsp;Table of Contents</p>
+<!-- START doctoc generated TOC please keep comment here to allow auto update -->
+<!-- DON'T EDIT THIS SECTION, INSTEAD RE-RUN doctoc TO UPDATE -->
+
+- [1. やりたいこと](#1-%E3%82%84%E3%82%8A%E3%81%9F%E3%81%84%E3%81%93%E3%81%A8)
+- [2. リソースモニターとしてのBPYTOP](#2-%E3%83%AA%E3%82%BD%E3%83%BC%E3%82%B9%E3%83%A2%E3%83%8B%E3%82%BF%E3%83%BC%E3%81%A8%E3%81%97%E3%81%A6%E3%81%AEbpytop)
+- [3. Installation](#3-installation)
+- [4. Terminatorでの表示設定](#4-terminator%E3%81%A7%E3%81%AE%E8%A1%A8%E7%A4%BA%E8%A8%AD%E5%AE%9A)
+- [Appendix: ネットワークインターフェース](#appendix-%E3%83%8D%E3%83%83%E3%83%88%E3%83%AF%E3%83%BC%E3%82%AF%E3%82%A4%E3%83%B3%E3%82%BF%E3%83%BC%E3%83%95%E3%82%A7%E3%83%BC%E3%82%B9)
+  - [ネットワークインターフェースの命名規則](#%E3%83%8D%E3%83%83%E3%83%88%E3%83%AF%E3%83%BC%E3%82%AF%E3%82%A4%E3%83%B3%E3%82%BF%E3%83%BC%E3%83%95%E3%82%A7%E3%83%BC%E3%82%B9%E3%81%AE%E5%91%BD%E5%90%8D%E8%A6%8F%E5%89%87)
+- [Appendix: シェルスクリプトの`&&`の意味](#appendix-%E3%82%B7%E3%82%A7%E3%83%AB%E3%82%B9%E3%82%AF%E3%83%AA%E3%83%97%E3%83%88%E3%81%AE%E3%81%AE%E6%84%8F%E5%91%B3)
+- [References](#references)
+
+<!-- END doctoc generated TOC please keep comment here to allow auto update -->
+
+</div>
+
+## 1. やりたいこと
+
+- CPU, memory, diskの利用状況を逐次モニターできる環境にしたい
+- process単位でのCPU, memory利用状況を確認できるようにしたい
+- リソースの利用状況に合わせてprocess操作(`kill`コマンド)が可能なモニターが欲しい
+
 > 実行環境
 
 実行環境
@@ -35,28 +59,8 @@ Release:        20.04
 Codename:       focal
 ```
 
-**Table of Contents**
-<!-- START doctoc generated TOC please keep comment here to allow auto update -->
-<!-- DON'T EDIT THIS SECTION, INSTEAD RE-RUN doctoc TO UPDATE -->
-
-- [1. やりたいこと](#1-%E3%82%84%E3%82%8A%E3%81%9F%E3%81%84%E3%81%93%E3%81%A8)
-- [2. リソースモニターとしてのBPYTOP](#2-%E3%83%AA%E3%82%BD%E3%83%BC%E3%82%B9%E3%83%A2%E3%83%8B%E3%82%BF%E3%83%BC%E3%81%A8%E3%81%97%E3%81%A6%E3%81%AEbpytop)
-- [3. Installation](#3-installation)
-- [4. Terminatorでの表示設定](#4-terminator%E3%81%A7%E3%81%AE%E8%A1%A8%E7%A4%BA%E8%A8%AD%E5%AE%9A)
-- [Appendix: シェルスクリプトの`&&`の意味](#appendix-%E3%82%B7%E3%82%A7%E3%83%AB%E3%82%B9%E3%82%AF%E3%83%AA%E3%83%97%E3%83%88%E3%81%AE%E3%81%AE%E6%84%8F%E5%91%B3)
-- [References](#references)
-
-<!-- END doctoc generated TOC please keep comment here to allow auto update -->
-
-## 1. やりたいこと
-
-- CPU, memory, diskの利用状況を逐次モニターできる環境にしたい
-- process単位でのCPU, memory利用状況を確認できるようにしたい
-- リソースの利用状況に合わせてprocess操作(`kill`コマンド)が可能なモニターが欲しい
-
 ## 2. リソースモニターとしてのBPYTOP
 
-> UI
 
 <img src="https://github.com/aristocratos/bpytop/raw/master/Imgs/menu.png">
 
@@ -116,6 +120,32 @@ sudo make uninstall
 2. `Preference > Layout`で画面分割レイアウトを設定
 3. 上記で設定したLayoutの`Custom command`に `source ~/.zshrc && bpytop`と設定
 4. (任意) Ubuntuの`Startup Application Preference`で `terminator -l <Layout name>` と設定
+
+## Appendix: ネットワークインターフェース
+
+BPYTOPではネットワーク使用情報が確認できますが, どのネットワークインターフェース名がなにを表しているか理解する事が必要です.
+
+### ネットワークインターフェースの命名規則
+
+|種別|説明|例|
+|---|---|---|
+|`en`|イーサネット(有線LAN)|enp2s0|
+|`wl`|無線LAN|wlp3s0|
+|`ww`|無線WAN||
+
+|デバイス|説明|
+|---|---|
+|オンボードデバイス|o<インデックス>|
+|ホットプラグデバイス|s<スロット>|
+|PCIデバイス|p<バス>s<スロット>|
+
+ネットワークインターフェースの一覧の確認は, 次のコマンドで可能です
+
+```zsh
+% ls /sys/class/net
+enp2s0@  lo@  wlp3s0@
+```
+
 
 ## Appendix: シェルスクリプトの`&&`の意味
 
