@@ -39,6 +39,8 @@ tags:
 
 ## 1. 正弦関数の積の積分公式
 
+<div class="math display" style="padding-left: 2em;  border-radius: 1em; border-style:solid; border-color:#D3D3D3; background-color:#F8F8F8">
+
 $n,k$をそれぞれ自然数としたとき
 
 $$
@@ -50,6 +52,7 @@ $$
 \end{align*}
 $$
 
+</div>
 
 ### 正弦関数の積和公式
 
@@ -137,9 +140,13 @@ $$
 ## 2. sinc関数の積分
 ### sinc関数
 
+<div class="math display" style="overflow: auto; border-radius: 1em; border-style:solid; border-color:#D3D3D3; background-color:#F8F8F8">
+
 $$
 \mathrm{sinc}(x)=\begin{cases}\cfrac{\sin(x)}{x} & (x\neq 0)\\[6pt]1 & (x=0)\end{cases}
 $$
+
+</div>
 
 <img src="https://github.com/ryonakimageserver/omorikaizuka/blob/master/20220901_sinc_plot_rescale.png?raw=true">
 
@@ -247,7 +254,7 @@ sinc関数を$(0, x)$の範囲で積分した計算結果をy軸に表示する�
 
 ## Appendix: 積和公式
 
-<div class="math display" style="overflow: auto; border-radius: 1em; border-style:solid; border-color:#D3D3D3; background-color:#F8F8F8">
+<div class="math display" style="padding-left: 2em; overflow: auto; border-radius: 1em; border-style:solid; border-color:#D3D3D3; background-color:#F8F8F8">
 $$
 \begin{align*}
 \cos x \cos y &= \frac{1}{2} \left\{\cos (x + y) + \cos(x - y)\right\}\\
@@ -258,6 +265,13 @@ $$
 $$
 </div>
 
+> Tips
+
+偶関数と奇関数という関数の性質に着目すると覚えやすい
+
+- 偶関数と偶関数の積は偶関数
+- 奇関数と奇関数の積は偶関数
+- 偶関数と奇関数の積は奇関数
 
 
 ## Appendix:正弦関数の連続性
