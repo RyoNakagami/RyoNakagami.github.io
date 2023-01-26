@@ -11,30 +11,31 @@ purpose:
 tags:
 
 - Linux
-- apt
 ---
 
 
 
-**Table of Contents**
+<div style='border-radius: 1em; border-style:solid; border-color:#D3D3D3; background-color:#F8F8F8'>
+<p class="h4">&nbsp;&nbsp;Table of Contents</p>
 <!-- START doctoc generated TOC please keep comment here to allow auto update -->
 <!-- DON'T EDIT THIS SECTION, INSTEAD RE-RUN doctoc TO UPDATE -->
 
 - [コマンドがないときのパッケージのサジェスト](#%E3%82%B3%E3%83%9E%E3%83%B3%E3%83%89%E3%81%8C%E3%81%AA%E3%81%84%E3%81%A8%E3%81%8D%E3%81%AE%E3%83%91%E3%83%83%E3%82%B1%E3%83%BC%E3%82%B8%E3%81%AE%E3%82%B5%E3%82%B8%E3%82%A7%E3%82%B9%E3%83%88)
 - [パッケージのサジェストの仕組み](#%E3%83%91%E3%83%83%E3%82%B1%E3%83%BC%E3%82%B8%E3%81%AE%E3%82%B5%E3%82%B8%E3%82%A7%E3%82%B9%E3%83%88%E3%81%AE%E4%BB%95%E7%B5%84%E3%81%BF)
-- [`/usr/lib/command-not-found`の正体](#usrlibcommand-not-found%E3%81%AE%E6%AD%A3%E4%BD%93)
-  - [プログラム本体](#%E3%83%97%E3%83%AD%E3%82%B0%E3%83%A9%E3%83%A0%E6%9C%AC%E4%BD%93)
-- [Ryo's Tech Blog 関連記事](#ryos-tech-blog-%E9%96%A2%E9%80%A3%E8%A8%98%E4%BA%8B)
-- [References](#references)
-- [Appendix](#appendix)
-  - [bashの終了ステータス](#bash%E3%81%AE%E7%B5%82%E4%BA%86%E3%82%B9%E3%83%86%E3%83%BC%E3%82%BF%E3%82%B9)
+- [zsh環境でのパッケージのサジェスト機能設定](#zsh%E7%92%B0%E5%A2%83%E3%81%A7%E3%81%AE%E3%83%91%E3%83%83%E3%82%B1%E3%83%BC%E3%82%B8%E3%81%AE%E3%82%B5%E3%82%B8%E3%82%A7%E3%82%B9%E3%83%88%E6%A9%9F%E8%83%BD%E8%A8%AD%E5%AE%9A)
   - [zshにおける`command_not_found_handle`](#zsh%E3%81%AB%E3%81%8A%E3%81%91%E3%82%8Bcommand_not_found_handle)
+  - [`.zshrc`での設定](#zshrc%E3%81%A7%E3%81%AE%E8%A8%AD%E5%AE%9A)
+- [Appendix: `/usr/lib/command-not-found`の正体](#appendix-usrlibcommand-not-found%E3%81%AE%E6%AD%A3%E4%BD%93)
+- [Appendix: bashの終了ステータス](#appendix-bash%E3%81%AE%E7%B5%82%E4%BA%86%E3%82%B9%E3%83%86%E3%83%BC%E3%82%BF%E3%82%B9)
+- [References](#references)
 
 <!-- END doctoc generated TOC please keep comment here to allow auto update -->
 
+</div>
+
 ## コマンドがないときのパッケージのサジェスト
 
-bashでは、ユーザーが入力したコマンドが存在しない場合， エラーを表示するだけでなく、必要となりそうなパッケージを推測・提案してくれる機能があります. 
+bashでは、ユーザーが入力したコマンドが存在しない場合， エラーを表示するだけでなく、必要となりそうなパッケージを推測, 提案してくれる機能があります. 
 
 ```bash
 $ sl
@@ -55,7 +56,7 @@ Command 'unko' not found, did you mean:
 See 'snap info <snapname>' for additional versions.
 ```
 
-なお、zshでも同様の機能をもちいることができますが、`.zshrc`でちょっとした設定をしない限り以下のような出力になります(こちらのほうがシンプルで好き):
+なお、zshでも同様の機能をもちいることができますが、`.zshrc`でちょっとした設定(後述)をしない限り以下のような出力になります(こちらのほうがシンプルで好き):
 
 ```zsh
 % sl
@@ -129,8 +130,57 @@ if [ -x /usr/lib/command-not-found -o -x /usr/share/command-not-found/command-no
 
 なお、`>2`だけだと`2`という変数に出力結果をリダイレクトするという意味になってしまいます(=カレントディレクトリに2というファイルが生成されてしまいます).
 
-## `/usr/lib/command-not-found`の正体
-### プログラム本体
+
+
+## zsh環境でのパッケージのサジェスト機能設定
+### zshにおける`command_not_found_handle`
+
+zshではコマンドが無い場合`command_not_found_handler`が呼び出される仕組みになっています.
+コマンドが存在しない場合の出力を変更したい場合は、`.zshrc`で`command_not_found_handler`を定義します.
+
+```zsh
+function command_not_found_handler() {
+  echo "$1; not found";
+  apt moo;
+}
+```
+
+と`.zshrc`に書き込んで`sl`という存在しないコマンドを打ち込むと
+
+```zsh
+% sl
+sl; not found
+                 (__) 
+                 (oo) 
+           /------\/ 
+          / |    ||   
+         *  /\---/\ 
+            ~~   ~~   
+..."Have you mooed today?"...
+```
+
+### `.zshrc`での設定
+
+以下の関数を`.zshrc`に書き込めばzsh環境でもパッケージサジェスト機能を利用することが出来ます.
+
+```zsh
+function command_not_found_handler() {
+  # check because c-n-f could've been removed in the meantime
+  if [ -x /usr/lib/command-not-found ]; then
+	   /usr/lib/command-not-found -- "$1"
+     return $?
+  elif [ -x /usr/share/command-not-found/command-not-found ]; then
+	   /usr/share/command-not-found/command-not-found -- "$1"
+     return $?
+	else
+		 printf "%s: command not found\n" "$1" >&2
+		 return 127
+	fi
+}
+```
+
+
+## Appendix: `/usr/lib/command-not-found`の正体
 
 - プログラムはPythonスクリプト
 - CommandNotFoundパッケージは[zyga/command-not-found](https://github.com/zyga/command-not-found)参照
@@ -240,17 +290,7 @@ if __name__ == "__main__":
 ```
 
 
-## Ryo's Tech Blog 関連記事
-
-- [Ubuntu環境構築基礎知識：パッケージの管理](https://ryonakagami.github.io/2020/12/20/packages-manager-apt-command/)
-
-## References
-
-- [Ubuntu wiki > CommandNotFoundMagic](https://wiki.ubuntu.com/CommandNotFoundMagic)
-- [zyga/command-not-found](https://github.com/zyga/command-not-found)
-
-## Appendix
-### bashの終了ステータス
+## Appendix: bashの終了ステータス
 
 コマンド終了時には「終了ステータス(exit-status)」と呼ばれるコマンドの成否を表す数値が特殊変数 `$?` に自動で設定されます. bashの終了ステータスの範囲は 0 から 255 で、0 は正常終了、それ以外は異常終了です. 予約済みの終了ステータス一覧は以下、
 
@@ -264,28 +304,14 @@ if __name__ == "__main__":
 |128+n| シグナル n で終了|
 |255| 範囲外の終了ステータス |
 
-### zshにおける`command_not_found_handle`
 
-zshではコマンドが無い場合`command_not_found_handler`が呼び出される仕組みになっています.
-コマンドが存在しない場合の出力を変更したい場合は、`.zshrc`で`command_not_found_handler`を定義します.
+## References
 
-```
-function command_not_found_handler() {
-  echo "$1; not found";
-  apt moo;
-}
-```
+> 関連ポスト
 
-と`.zshrc`に書き込んで`sl`という存在しないコマンドを打ち込むと
+- [Ubuntu環境構築基礎知識：パッケージの管理](https://ryonakagami.github.io/2020/12/20/packages-manager-apt-command/)
 
-```zsh
-% sl
-sl; not found
-                 (__) 
-                 (oo) 
-           /------\/ 
-          / |    ||   
-         *  /\---/\ 
-            ~~   ~~   
-..."Have you mooed today?"...
-```
+> オンラインマテリアル
+
+- [Ubuntu wiki > CommandNotFoundMagic](https://wiki.ubuntu.com/CommandNotFoundMagic)
+- [zyga/command-not-found](https://github.com/zyga/command-not-found)
