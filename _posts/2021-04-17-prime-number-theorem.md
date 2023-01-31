@@ -6,18 +6,20 @@ header-img: "img/tag-bg.jpg"
 header-mask: 0.4
 catelog: true
 mathjax: true
-purpose: 
+revise_date: 2023-01-27
 tags:
 
 - math
 - 素数
 ---
 
-**Table of Contents**
+<div style='border-radius: 1em; border-style:solid; border-color:#D3D3D3; background-color:#F8F8F8'>
+<p class="h4">&nbsp;&nbsp;Table of Contents</p>
 <!-- START doctoc generated TOC please keep comment here to allow auto update -->
 <!-- DON'T EDIT THIS SECTION, INSTEAD RE-RUN doctoc TO UPDATE -->
 
 - [素数の定義](#%E7%B4%A0%E6%95%B0%E3%81%AE%E5%AE%9A%E7%BE%A9)
+  - [定理: 素数 $n$ の平方根は無理数](#%E5%AE%9A%E7%90%86-%E7%B4%A0%E6%95%B0-n-%E3%81%AE%E5%B9%B3%E6%96%B9%E6%A0%B9%E3%81%AF%E7%84%A1%E7%90%86%E6%95%B0)
   - [定理：素数の個数は無限](#%E5%AE%9A%E7%90%86%E7%B4%A0%E6%95%B0%E3%81%AE%E5%80%8B%E6%95%B0%E3%81%AF%E7%84%A1%E9%99%90)
 - [素数の分布](#%E7%B4%A0%E6%95%B0%E3%81%AE%E5%88%86%E5%B8%83)
   - [素数が無数にあることの別証明](#%E7%B4%A0%E6%95%B0%E3%81%8C%E7%84%A1%E6%95%B0%E3%81%AB%E3%81%82%E3%82%8B%E3%81%93%E3%81%A8%E3%81%AE%E5%88%A5%E8%A8%BC%E6%98%8E)
@@ -25,26 +27,75 @@ tags:
   - [素数定理](#%E7%B4%A0%E6%95%B0%E5%AE%9A%E7%90%86)
 - [補題: 互いに素な整数の個数](#%E8%A3%9C%E9%A1%8C-%E4%BA%92%E3%81%84%E3%81%AB%E7%B4%A0%E3%81%AA%E6%95%B4%E6%95%B0%E3%81%AE%E5%80%8B%E6%95%B0)
 - [問題集](#%E5%95%8F%E9%A1%8C%E9%9B%86)
-  - [京都大学 2016年](#%E4%BA%AC%E9%83%BD%E5%A4%A7%E5%AD%A6-2016%E5%B9%B4)
+  - [問題 1](#%E5%95%8F%E9%A1%8C-1)
+  - [問題 2: 京都大学 2016年](#%E5%95%8F%E9%A1%8C-2-%E4%BA%AC%E9%83%BD%E5%A4%A7%E5%AD%A6-2016%E5%B9%B4)
 - [References](#references)
 
 <!-- END doctoc generated TOC please keep comment here to allow auto update -->
 
+</div>
+
 ## 素数の定義
 
+<div style="padding-left: 2em; overflow: auto; border-radius: 1em; border-style:solid; border-color:#D3D3D3; background-color:#F8F8F8">
 $$a>1$$ の整数 $$a$$ は少なくとも1と $$a$$ 自身の二つの約数を持つ． 1および $$a$$ 以外の約数を「真の約数」ともいう． $$a>1$$ の整数 $$a$$ が真の約数を持たないとき $$a$$ を 素数 という． 逆に真の約数を持つ整数を 合成数 という
 
-<div style="text-align: right;">
-■
 </div>
 
 合成数は素数の積として順序を除けばただ一通りに表すことができます． これが素因数分解の一意性といわれる基本定理です。証明は[こちら](https://ryonakagami.github.io/2021/04/16/mathematical-induction/#%E4%BE%8B%E9%A1%8C-%E7%B4%A0%E5%9B%A0%E6%95%B0%E5%88%86%E8%A7%A3%E3%81%AE%E4%B8%80%E6%84%8F%E6%80%A7)参照
 
+### 定理: 素数 $n$ の平方根は無理数
+
+<div style="padding-left: 2em; overflow: auto; border-radius: 1em; border-style:solid; border-color:#D3D3D3; background-color:#F8F8F8">
+
+自然数 $n$ が素数であるならば $\sqrt{n}$ は無理数
+
+</div>
+
+**証明**
+
+$\sqrt{n}$ が無理数でないと仮定すると, 互いに素な整数の比と表せる:
+
+$$
+\sqrt{n} = \frac{p}{q}
+$$
+
+Then,
+
+$$
+\begin{align*}
+&n = \frac{p^2}{q^2}\\
+&\Rightarrow q^2 n = p^2
+\end{align*}
+$$
+
+$p, q$は互いに素なので, $p^2$は $n$ の倍数となる. また, $p^2$が$n$の倍数なので$p$も$n$の倍数となる.
+
+$$
+\begin{align*}
+&p = nA \  \ A \text{は適当な定数}\\
+&\Rightarrow q^2n = n^2A^2\\
+&\Rightarrow q^2 = nA^2
+\end{align*}
+$$
+
+同様に, $q$ も $n$ の倍数となってしまい, 仮定の「$p, q$は互いに素」に矛盾.
+
+**証明終了**
+
+---
+
+
 ### 定理：素数の個数は無限
+
+<div class="math display" style="padding-left: 2em; overflow: auto; border-radius: 1em; border-style:solid; border-color:#D3D3D3; background-color:#F8F8F8">
 
 素数の個数は無限である．
 
-> 証明
+</div>
+
+**証明**
+
 
 背理法で示します.まず素数の個数が有限であると仮定します. その個数を$$n$$個とし, $$p_1, p_2, \cdots, p_n$$をそのすべての素数とします.このとき、
 
@@ -55,9 +106,9 @@ $$
 と整数を定義します. 素因数分解の一意性の定理より, $$a$$は素数の積に分解されます.しかし、$$a$$は、$$p_1, p_2, \cdots, p_n$$のいずれで割っても1余ります.
 よって$a$ の素因数分解に現れる素数は $$p_1,\ p_2,\ \cdots,\ p_n$$ ではあり得ず， それら以外の素数である． これは $$p_1,\ p_2,\ \cdots,\ p_n$$ がすべての素数という仮定と矛盾する． ゆえに素数の数は無限である
 
-<div style="text-align: right;">
-■
-</div>
+**証明終了**
+
+---
 
 ## 素数の分布
 
@@ -71,11 +122,16 @@ $$
 
 ### 素数が無数にあることの別証明
 
+<div class="math display" style="padding-left: 2em; overflow: auto; border-radius: 1em; border-style:solid; border-color:#D3D3D3; background-color:#F8F8F8">
+
 $$
 \lim_{x\to\infty}\pi(x) = \infty
 $$
 
-> 証明
+</div>
+
+
+**証明**
 
 $$x$$以下の素数にわたる積
 
@@ -103,9 +159,9 @@ $$
 
 $$x\to \infty$$のとき右辺は発散する．もし $$\lim_{x\to \infty}\pi(x)$$が有限であれば，$$x\to \infty$$のとき左辺は 有限個の素数にわたる和となり収束する． これは矛盾なので題意が示された． 
 
-<div style="text-align: right;">
-■
-</div>
+**証明終了**
+
+---
 
 ### 素数の個数の濃度の上限
 
@@ -301,21 +357,60 @@ $$
 
 
 ## 問題集
-### 京都大学 2016年
+### 問題 1
+
+<div class="math display" style="padding-left: 2em; overflow: auto; border-radius: 1em; border-style:solid; border-color:#D3D3D3; background-color:#F8F8F8">
+
+$\sqrt{6}$ が無理数であることを示せ
+
+</div>
+
+**証明**
+
+$\sqrt{6}$が有理数ならば互いの素な自然数の比, $\sqrt{6} = p/q$と表現できる.
+
+$$
+\begin{align*}
+6 &= \frac{p^2}{q^2}\\
+\Rightarrow & 6q^2 = p^2\\[8pt]
+\Rightarrow & p^2\text{は2の倍数}\\[8pt]
+\Rightarrow & p\text{は2の倍数}\\[8pt]
+\Rightarrow & 6q^2 = 4y^2\\[8pt]
+\Rightarrow & 3q^2 = 2y^2\\[8pt]
+\Rightarrow & q\text{は2の倍数}
+\end{align*}
+$$
+
+$p, q$が互いに素という仮定に矛盾
+
+
+**証明終了**
+
+---
+
+### 問題 2: 京都大学 2016年
+
+<div class="math display" style="padding-left: 2em; overflow: auto; border-radius: 1em; border-style:solid; border-color:#D3D3D3; background-color:#F8F8F8">
 
 素数 $$p, q$$を用いて、$$p^q + q^p$$ と表される素数をすべて求めよ. 
 
-> 解答
+</div>
 
-一般性を失わずに $$p < q$$ と定義する.
+**解答**
 
-まず、$$(p, q)$$を(偶数, 偶数), (偶数, 奇数), (奇数, 偶数), (奇数, 奇数)の場合分けで考える. このとき、偶数の素数は2しか存在しないことに留意すると,
-(偶数, 偶数)は $$2^2 + 2^2 = 8$$となり不敵, (奇数, 奇数)は$$p^q + q^p$$が偶数となり不敵, (奇数, 偶数)は2以下の素数は存在しないので不敵となり、考えるべきは(偶数, 奇数), とくに(2, 奇数)となる.
+一般性を失わずに $p \leq q$ と定義する.
 
-qが$$3k \pm 1$$ (ただし、kは0以上の整数)と表せるとする.このとき、法を3として$$p^q + q^p$$を考えると
+まず、$(p, q)$を(偶数, 偶数), (偶数, 奇数), (奇数, 偶数), (奇数, 奇数)の場合分けで考える. 
+
+このとき、偶数の素数は2しか存在しないことに留意すると,
+(偶数, 偶数)は $2^2 + 2^2 = 8$となり不敵, (奇数, 奇数)は$p^q + q^p$が偶数となり不敵. 
+
+(奇数, 偶数)は2以下の素数は存在しないので不敵となり、考えるべきは(偶数, 奇数), とくに(2, 奇数)となる.
+
+qが$$3k \pm 1$$ (ただし、kは0以上の整数)と表せるとする.このとき、modを3として$p^q + q^p$を考えると
 
 $$
-2^q + q^2 \equiv 2 + 1 \equiv 0 \: \mathrm{mod}
+2^q + q^2 \equiv 2 + 1 \equiv 0 \: \mathrm{mod } 3
 $$
 
 よって、$$p^q + q^p$$ と表される素数は存在しない.
@@ -328,9 +423,10 @@ $$
 
 と題意を満たす. よって、17のみ
 
-<div style="text-align: right;">
-■
-</div>
+**解答終了**
+
+---
+
 
 ## References
 
