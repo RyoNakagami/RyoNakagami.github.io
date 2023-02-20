@@ -1,7 +1,7 @@
 ---
 layout: post
 title: "システム起動時に自動的にドライブをマウントする"
-subtitle: "Ubuntu Desktop環境構築 Part 26"
+subtitle: "Ubuntu Desktop環境構築 Part 25"
 author: "Ryo"
 header-img: "img/about-bg.jpg"
 header-mask: 0.4

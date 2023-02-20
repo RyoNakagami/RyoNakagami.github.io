@@ -25,6 +25,8 @@ tags:
   - [問題.2](#%E5%95%8F%E9%A1%8C2)
 - [Appendix:ベイズ統計とは？](#appendix%E3%83%99%E3%82%A4%E3%82%BA%E7%B5%B1%E8%A8%88%E3%81%A8%E3%81%AF)
   - [ベイズ統計における独立性](#%E3%83%99%E3%82%A4%E3%82%BA%E7%B5%B1%E8%A8%88%E3%81%AB%E3%81%8A%E3%81%91%E3%82%8B%E7%8B%AC%E7%AB%8B%E6%80%A7)
+  - [交換可能性](#%E4%BA%A4%E6%8F%9B%E5%8F%AF%E8%83%BD%E6%80%A7)
+  - [条件付き独立性と交換可能性の関係](#%E6%9D%A1%E4%BB%B6%E4%BB%98%E3%81%8D%E7%8B%AC%E7%AB%8B%E6%80%A7%E3%81%A8%E4%BA%A4%E6%8F%9B%E5%8F%AF%E8%83%BD%E6%80%A7%E3%81%AE%E9%96%A2%E4%BF%82)
 - [Refereneces](#refereneces)
 
 <!-- END doctoc generated TOC please keep comment here to allow auto update -->
@@ -299,6 +301,73 @@ $$
 
 上記独立性が成立しているとき, $H$が真であることを知っているならば, $G$を知っていることは $F$に関する信念を
 変えることはないことを意味しています. (逆もしかり)
+
+### 交換可能性
+
+<div style='padding-left: 2em; border-radius: 1em; border-style:solid; border-color:#D3D3D3; background-color:#F8F8F8'>
+<p class="h4"><ins>Def: 交換可能性</ins></p>
+
+$p(y_1, \cdots, y_n)$ を $Y_1, \cdots, Y_n$ の同時密度とする. もし, $\{1,\cdots, n\}$の
+任意の置換 $pi$ に対して 
+
+$$
+p(y_1, \cdots, y_n) = p(y_{\pi_1}, \cdots, y_{\pi_n})
+$$
+
+が成り立つならば, $Y_1, \cdots, Y_n$ は**交換可能**(exchangeable)であるという.
+
+</div>
+
+### 条件付き独立性と交換可能性の関係
+
+<div style='padding-left: 2em; border-radius: 1em; border-style:solid; border-color:#D3D3D3; background-color:#F8F8F8'>
+<p class="h4"><ins>命題</ins></p>
+
+$\theta\sim p(\theta)$で, $Y_1, \cdots, Y_n$ を $\theta$ が与えられた下, 条件付きで独立同一標本とする.
+このとき, 周辺的に $Y_1, \cdots, Y_n$ は交換可能である.
+
+</div>
+
+**証明**
+
+$Y_1, \cdots, Y_n$ を $\theta$ が与えられた下, 条件付きで独立同一標本であると仮定する.
+このとき, $\{1,\cdots, n\}$の任意の置換 $pi$ と 任意の $(y_1, \cdots, y_n)\in \mathcal{Y}^n$
+($\mathcal{Y}$は標本空間) に対して,
+
+$$
+\begin{align*}
+p(y_1, \cdots, y_n) &= \int p(y_1, \cdots, y_n | \theta) p(\theta)d\theta \\[8pt]
+                    &= \int \left\{\prod_{i=1}^np(y_i|\theta)\right\} p(\theta)d\theta \text{(条件付き独立同一性)}\\[8pt]
+                    &= \int \left\{\prod_{i=1}^np(y_{\pi_i}|\theta)\right\} p(\theta)d\theta \text{(積は順序によらない)}\\[8pt]
+                    &= p(y_{\pi_1}, \cdots, y_{\pi_n})
+\end{align*}
+$$
+
+よって, $Y_1, \cdots, Y_n$ は交換可能である.
+
+**証明終了**
+
+交換可能性が合理的である状況として,
+
+- $Y_1, \cdots, Y_n$は繰り返し実験の出力である
+- $Y_1, \cdots, Y_n$は有限母集団からの復元抽出である
+- $Y_1, \cdots, Y_n$は無限母集団からの非復元抽出である
+
+<div style='padding-left: 2em; border-radius: 1em; border-style:solid; border-color:#D3D3D3; background-color:#F8F8F8'>
+<p class="h4"><ins>定理：デ・フィネッティの定理</ins></p>
+
+任意の $i\in \{1, 2\cdots\}$ について $Y_i\in \mathcal{Y}$ とする. 任意の $n$ に対して,
+$\{Y_1, \cdots, Y_n\}$ に対する信念のモデルは $\{1, 2, \cdots, n\}$ の任意の置換 $\pi$ に対して交換可能
+であるとする. このとき,
+
+$$
+p(y_1, \cdots, y_n) = \int \left\{\prod_{i=1}^np(y_i|\theta)\right\} p(\theta)d\theta 
+$$
+
+つまり, 事前分布モデルが与えられる条件のもと, $\{Y_1, \cdots, Y_n\}$ は独立であるといえる
+
+</div>
+
 
 
 ## Refereneces

@@ -12,6 +12,7 @@ tags:
 
 - 統計
 - 統計検定
+- RCT
 ---
 
 **Table of Contents**
@@ -21,8 +22,10 @@ tags:
 - [有限母集団からのRandom Samplingと平均値](#%E6%9C%89%E9%99%90%E6%AF%8D%E9%9B%86%E5%9B%A3%E3%81%8B%E3%82%89%E3%81%AErandom-sampling%E3%81%A8%E5%B9%B3%E5%9D%87%E5%80%A4)
   - [平均値の期待値と分散の検討](#%E5%B9%B3%E5%9D%87%E5%80%A4%E3%81%AE%E6%9C%9F%E5%BE%85%E5%80%A4%E3%81%A8%E5%88%86%E6%95%A3%E3%81%AE%E6%A4%9C%E8%A8%8E)
   - [標本の不偏分散と期待値](#%E6%A8%99%E6%9C%AC%E3%81%AE%E4%B8%8D%E5%81%8F%E5%88%86%E6%95%A3%E3%81%A8%E6%9C%9F%E5%BE%85%E5%80%A4)
+  - [母分散が未知の場合の平均値の分散の検討](#%E6%AF%8D%E5%88%86%E6%95%A3%E3%81%8C%E6%9C%AA%E7%9F%A5%E3%81%AE%E5%A0%B4%E5%90%88%E3%81%AE%E5%B9%B3%E5%9D%87%E5%80%A4%E3%81%AE%E5%88%86%E6%95%A3%E3%81%AE%E6%A4%9C%E8%A8%8E)
   - [効率的な不偏推定量](#%E5%8A%B9%E7%8E%87%E7%9A%84%E3%81%AA%E4%B8%8D%E5%81%8F%E6%8E%A8%E5%AE%9A%E9%87%8F)
-  - [例: 有限母集団のyes/no調査のCIの計算](#%E4%BE%8B-%E6%9C%89%E9%99%90%E6%AF%8D%E9%9B%86%E5%9B%A3%E3%81%AEyesno%E8%AA%BF%E6%9F%BB%E3%81%AEci%E3%81%AE%E8%A8%88%E7%AE%97)
+- [有限母集団のyes/no調査のCIの計算](#%E6%9C%89%E9%99%90%E6%AF%8D%E9%9B%86%E5%9B%A3%E3%81%AEyesno%E8%AA%BF%E6%9F%BB%E3%81%AEci%E3%81%AE%E8%A8%88%E7%AE%97)
+  - [測定誤差$\epsilon$を0.04以下にするために必要なサンプルサイズ](#%E6%B8%AC%E5%AE%9A%E8%AA%A4%E5%B7%AE%5Cepsilon%E3%82%92004%E4%BB%A5%E4%B8%8B%E3%81%AB%E3%81%99%E3%82%8B%E3%81%9F%E3%82%81%E3%81%AB%E5%BF%85%E8%A6%81%E3%81%AA%E3%82%B5%E3%83%B3%E3%83%97%E3%83%AB%E3%82%B5%E3%82%A4%E3%82%BA)
 - [References](#references)
 
 <!-- END doctoc generated TOC please keep comment here to allow auto update -->
@@ -130,6 +133,12 @@ $$
 \end{align*}
 $$
 
+### 母分散が未知の場合の平均値の分散の検討
+
+
+
+
+
 ### 効率的な不偏推定量
 
 上と同じく有限データサイズ $N$ の母集団から標本の大きさ $n$ を非復元無作為抽出して得た標本 $x_1, \cdots, x_n$とします.
@@ -166,7 +175,7 @@ $$
 
 が条件とわかる.
 
-### 例: 有限母集団のyes/no調査のCIの計算
+## 有限母集団のyes/no調査のCIの計算
 
 $N = 2000$の村を対象にyes/noアンケート調査を実施したいとします.
 測定誤差, $\epsilon$, を0.04以下にしたいと思っていますが, この場合最低何人に対してアンケートすれば良いか考えます.
@@ -219,7 +228,7 @@ $$
 \frac{\hat{p}-p}{\sqrt{\frac{p(1-p)}{n} \left(\frac{N-n}{N-1}\right) }} \sim N(0, 1)
 $$
 
-> 測定誤差$\epsilon$を0.04以下にするために必要なサンプルサイズ
+### 測定誤差$\epsilon$を0.04以下にするために必要なサンプルサイズ
 
 $$
 0.04 \geq \epsilon \equiv |p - \hat p|
@@ -254,3 +263,7 @@ $$
 > オンラインマテリアル
 
 - [PennState > STAT 415 > 6.3 - Estimating a Proportion for a Small, Finite Population](https://online.stat.psu.edu/stat415/lesson/6/6.3)
+
+> 書籍
+
+- [ Sampling: Design and Analysis, By Sharon L. Lohr](https://www.routledge.com/Sampling-Design-and-Analysis/Lohr/p/book/9780367279509)

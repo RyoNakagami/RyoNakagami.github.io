@@ -260,12 +260,39 @@ plt.legend()
 任意の正の実数 $x$ に対して, 
 
 $$
-\Gamma(x+a) = \Gamma(x)
+\Gamma(x+1) = x\Gamma(x)
 $$
 </div>
+
+**証明**
+
+$$
+\Gamma(1) = \int^\infty_0 \exp(-t) dt = [-\exp(-t)]^\infty_0 = 1
+$$
+
+また任意の正の実数 $x$ に対して,
+
+$$
+\begin{align*}
+\Gamma(x) &= \int_0^\infty t^{x-1}\exp(-t)dt\\[8pt]
+          &= [-t^{x-1}\exp(-t)]^\infty_0 + \int_0^\infty (x-1)t^{x-2}\exp(-t)dt\\[8pt]
+          &= 0 + (x-1)\int_0^\infty t^{x-2}\exp(-t)dt\\[8pt]
+          &= (x-1)\Gamma(x-1)
+\end{align*}
+$$
+
+
+**証明終了**
+
+---
+
 
 ## References
 
 > 関連ポスト
 
 - [Ryo's Tech Blog > Flip a Coin and Bayesian estimation](https://ryonakagami.github.io/2021/12/17/bayesian-basic/#%E7%B7%B4%E7%BF%92%E5%95%8F%E9%A1%8C-flip-a-coin-and-bayesian-estimation)
+
+> オンラインマテリアル
+
+- [ 高校数学の美しい物語 > ガンマ関数（階乗の一般化）の定義と性質](https://manabitimes.jp/math/960)

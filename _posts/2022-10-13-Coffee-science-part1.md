@@ -3,7 +3,7 @@ layout: post
 title: "焙煎によるコーヒー豆の変化の仕組み"
 subtitle: "焙煎研究編 1/N"
 author: "Ryo"
-header-img: "img/tag-bg.jpg"
+header-img: "img/coffee.jpg"
 header-mask: 0.4
 catelog: true
 mathjax: true
@@ -13,7 +13,8 @@ tags:
 - Coffee
 ---
 
-**Table of Contents**
+<div style='border-radius: 1em; border-style:solid; border-color:#D3D3D3; background-color:#F8F8F8'>
+<p class="h4">&nbsp;&nbsp;Table of Contents</p>
 <!-- START doctoc generated TOC please keep comment here to allow auto update -->
 <!-- DON'T EDIT THIS SECTION, INSTEAD RE-RUN doctoc TO UPDATE -->
 
@@ -28,6 +29,8 @@ tags:
 - [References](#references)
 
 <!-- END doctoc generated TOC please keep comment here to allow auto update -->
+
+</div>
 
 ## コーヒー豆の焙煎度
 

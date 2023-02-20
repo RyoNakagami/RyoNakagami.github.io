@@ -134,7 +134,7 @@ two_sample_bootstrap(treat, control, statistic_median, 100000, 0.975)
 観測したデータに基づき, 平均やMedianの差といった統計量 $T_{obs}$を計算し, それをテストしたいというのがモチベーションです.
 
 $$
-(x_1, y_1), \codts, (x_{100}, y_{100}) \to T_{obs}
+(x_1, y_1), \cdots, (x_{100}, y_{100}) \to T_{obs}
 $$
 
 Paired Permutation Testは, the null hypothesisがどちらも同一分布に従っているという仮説(具体的には平均やMedianが同じ)の下ならば, 

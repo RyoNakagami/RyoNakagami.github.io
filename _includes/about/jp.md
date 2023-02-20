@@ -68,3 +68,8 @@ Topicsとしては以下のものを扱う傾向があります.
 このTech Blogは僕の勉強のためにインターネットの海に存在するお手本ページを参考にしながら（魔改造しながら）作ったものなので、僕の許可なんかいらないので勝手に使ってください. ただ、魔改造の結果、僕のGA4タグ, Google Search Console Tagとかが至るところ散らばっています.
 
 インターネットの海にはもっときれいなページがあると思いますが、もしこのブログフォーマットを使う場合は、上述のタグをなんとか除去しながら使っていただけると嬉しいです. 除去しないで使うと、あなたのブログへ流入したセッションのデータが僕のBigQueryのテーブルにやってきてしまいます.
+
+### Phrases I Like
+
+- It is a danger that prosepective data scientists might think that statistical science is merely a computational toolbox consisting of a variety of algorithms
+- Your eyeball is not a well-defined statistical procedure

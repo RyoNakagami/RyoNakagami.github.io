@@ -3,7 +3,7 @@ layout: post
 title: "Linux System Monitor - BPYTOPのインストール"
 subtitle: "Ubuntu Desktop環境構築 Part 26"
 author: "Ryo"
-header-img: "img/about-bg.jpg"
+header-img: "img/cpu.png"
 header-mask: 0.4
 catelog: true
 mathjax: true
