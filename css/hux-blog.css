@@ -1214,7 +1214,7 @@ samp {
   margin-top: -5px;
 }
 .intro-header .post-heading .meta {
-  font-family: 'Lora', 'Times New Roman', serif;
+  font-family: "Noto Sans Japanese", 'Lora', 'Times New Roman', serif;
   font-style: italic;
   font-weight: 300;
   font-size: 16px;
@@ -1274,7 +1274,7 @@ samp {
   margin-bottom: 10px;
 }
 .post-preview > .post-meta {
-  font-family: 'Lora', 'Times New Roman', serif;
+  font-family: "Noto Sans Japanese", 'Lora', 'Times New Roman', serif;
   color: #a3a3a3;
   font-size: 16px;
   font-style: italic;
@@ -1384,7 +1384,7 @@ footer .copyright a:focus {
      *     TypeIsBeautiful,
      *     [This Post](http://zhuanlan.zhihu.com/ibuick/20186806) etc.
      */
-  font-family: -apple-system,"Noto Sans Japanese", 'Hiragino Kaku Gothic ProN', 'ヒラギノ角ゴ ProN W3', Meiryo, メイリオ, Osaka, 'MS PGothic', arial, helvetica, sans-serif;
+  font-family: -apple-system, "Noto Sans Japanese", 'Hiragino Kaku Gothic ProN', 'ヒラギノ角ゴ ProN W3', Meiryo, メイリオ, Osaka, 'MS PGothic', arial, helvetica, sans-serif;
   line-height: 1.7;
   text-transform: uppercase;
   font-size: 13px;
