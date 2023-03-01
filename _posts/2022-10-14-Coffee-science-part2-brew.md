@@ -32,8 +32,6 @@ tags:
   - [RULE 7: 抽出液はすぐ飲む](#rule-7-%E6%8A%BD%E5%87%BA%E6%B6%B2%E3%81%AF%E3%81%99%E3%81%90%E9%A3%B2%E3%82%80)
   - [ペーパードリップ抽出のアンチパターン](#%E3%83%9A%E3%83%BC%E3%83%91%E3%83%BC%E3%83%89%E3%83%AA%E3%83%83%E3%83%97%E6%8A%BD%E5%87%BA%E3%81%AE%E3%82%A2%E3%83%B3%E3%83%81%E3%83%91%E3%82%BF%E3%83%BC%E3%83%B3)
 - [ペーパードリップによる抽出](#%E3%83%9A%E3%83%BC%E3%83%91%E3%83%BC%E3%83%89%E3%83%AA%E3%83%83%E3%83%97%E3%81%AB%E3%82%88%E3%82%8B%E6%8A%BD%E5%87%BA)
-  - [How-to-Brew](#how-to-brew)
-  - [抽出方法参考動画の紹介](#%E6%8A%BD%E5%87%BA%E6%96%B9%E6%B3%95%E5%8F%82%E8%80%83%E5%8B%95%E7%94%BB%E3%81%AE%E7%B4%B9%E4%BB%8B)
 - [References](#references)
 
 <!-- END doctoc generated TOC please keep comment here to allow auto update -->
@@ -219,21 +217,6 @@ tags:
 3杯|24~28g
 4杯|28~32g
 5杯|35g
-
-
-
-
-### How-to-Brew
-
-
-
-
-
-
-
-### 抽出方法参考動画の紹介
-
-
 
 
 ## References
