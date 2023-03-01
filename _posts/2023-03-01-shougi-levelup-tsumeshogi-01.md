@@ -18,16 +18,17 @@ tags:
 <!-- START doctoc generated TOC please keep comment here to allow auto update -->
 <!-- DON'T EDIT THIS SECTION, INSTEAD RE-RUN doctoc TO UPDATE -->
 
-- [本日の問題](#%E6%9C%AC%E6%97%A5%E3%81%AE%E5%95%8F%E9%A1%8C)
+- [居飛車系第一問:馬の利きを通す](#%E5%B1%85%E9%A3%9B%E8%BB%8A%E7%B3%BB%E7%AC%AC%E4%B8%80%E5%95%8F%E9%A6%AC%E3%81%AE%E5%88%A9%E3%81%8D%E3%82%92%E9%80%9A%E3%81%99)
   - [同金パターン](#%E5%90%8C%E9%87%91%E3%83%91%E3%82%BF%E3%83%BC%E3%83%B3)
   - [王逃げパターン](#%E7%8E%8B%E9%80%83%E3%81%92%E3%83%91%E3%82%BF%E3%83%BC%E3%83%B3)
+- [居飛車系第二問:４筋に逃さない](#%E5%B1%85%E9%A3%9B%E8%BB%8A%E7%B3%BB%E7%AC%AC%E4%BA%8C%E5%95%8F%EF%BC%94%E7%AD%8B%E3%81%AB%E9%80%83%E3%81%95%E3%81%AA%E3%81%84)
 - [References](#references)
 
 <!-- END doctoc generated TOC please keep comment here to allow auto update -->
 
 </div>
 
-## 本日の問題
+## 居飛車系第一問:馬の利きを通す
 
 ### 同金パターン
 
@@ -48,6 +49,27 @@ tags:
 <div class="math display" style="overflow: auto">
 <iframe width="500" height="590" src="https://nbviewer.org/github/RyoNakagami/ryonak_kifPlayer/blob/main/kif_html/myoshu_zokusyu_levelup_01_01_C.html" frameborder="0" allow="autoplay; encrypted-media" allowfullscreen></iframe>
 </div>
+
+## 居飛車系第二問:４筋に逃さない
+
+> 4筋逃げるパターン
+
+<div class="math display" style="overflow: auto">
+<iframe width="500" height="590" src="https://nbviewer.org/github/RyoNakagami/ryonak_kifPlayer/blob/main/kif_html/myoshu_zokusyu_levelup_01_02_A.html" frameborder="0" allow="autoplay; encrypted-media" allowfullscreen></iframe>
+</div>
+
+> 上がってくるパターン
+
+<div class="math display" style="overflow: auto">
+<iframe width="500" height="590" src="https://nbviewer.org/github/RyoNakagami/ryonak_kifPlayer/blob/main/kif_html/myoshu_zokusyu_levelup_01_02_B.html" frameborder="0" allow="autoplay; encrypted-media" allowfullscreen></iframe>
+</div>
+
+> 相手自滅パターン
+
+<div class="math display" style="overflow: auto">
+<iframe width="500" height="590" src="https://nbviewer.org/github/RyoNakagami/ryonak_kifPlayer/blob/main/kif_html/myoshu_zokusyu_levelup_01_02_C.html" frameborder="0" allow="autoplay; encrypted-media" allowfullscreen></iframe>
+</div>
+
 
 ## References
 
