@@ -31,18 +31,23 @@ tags:
 
 ### 同金パターン
 
+<div class="math display" style="overflow: auto">
 <iframe width="560" height="600" src="https://nbviewer.org/github/RyoNakagami/ryonak_kifPlayer/blob/main/kif_html/myoshu_zokusyu_levelup_01_01_A.html" frameborder="0" allow="autoplay; encrypted-media" allowfullscreen></iframe>
+</div>
 
 ### 王逃げパターン
 
 > ６一玉へ逃げた場合
 
+<div class="math display" style="overflow: auto">
 <iframe width="560" height="600" src="https://nbviewer.org/github/RyoNakagami/ryonak_kifPlayer/blob/main/kif_html/myoshu_zokusyu_levelup_01_01_B.html" frameborder="0" allow="autoplay; encrypted-media" allowfullscreen></iframe>
+</div>
 
 > ４一玉へ逃げた場合
 
+<div class="math display" style="overflow: auto">
 <iframe width="560" height="600" src="https://nbviewer.org/github/RyoNakagami/ryonak_kifPlayer/blob/main/kif_html/myoshu_zokusyu_levelup_01_01_C.html" frameborder="0" allow="autoplay; encrypted-media" allowfullscreen></iframe>
-
+</div>
 
 ## References
 
