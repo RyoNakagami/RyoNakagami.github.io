@@ -1,7 +1,7 @@
 ---
 layout: post
 title: "機械学習モデル精度の評価"
-subtitle: "二値分類におけるMetricsの紹介"
+subtitle: "意思決定とモデル精度の橋渡し"
 author: "Ryo"
 header-img: "img/bg-statistics.png"
 header-mask: 0.4
@@ -11,26 +11,54 @@ revise_date: 2022-04-11
 tags:
 
 - Metrics
+- 方法論
 - 統計
-- Python
 ---
 
-**Table of Contents**
-<!-- START doctoc generated TOC please keep comment here to allow auto update -->
-<!-- DON'T EDIT THIS SECTION, INSTEAD RE-RUN doctoc TO UPDATE -->
+<div style='border-radius: 1em; border-style:solid; border-color:#D3D3D3; background-color:#F8F8F8'>
+<p class="h4">&nbsp;&nbsp;Table of Contents</p>
+<!-- START doctoc -->
+<!-- END doctoc -->
 
-- [Confusion matrix](#confusion-matrix)
-- [Metrics](#metrics)
-  - [特異度 (specificity, True Negative Rate, TNR)](#%E7%89%B9%E7%95%B0%E5%BA%A6-specificity-true-negative-rate-tnr)
-  - [False Positive Rate, FPR](#false-positive-rate-fpr)
-  - [Accuracy](#accuracy)
-  - [Precision-Recall](#precision-recall)
-  - [F-measures](#f-measures)
-- [ROC曲線](#roc%E6%9B%B2%E7%B7%9A)
-  - [AUCの計算式について](#auc%E3%81%AE%E8%A8%88%E7%AE%97%E5%BC%8F%E3%81%AB%E3%81%A4%E3%81%84%E3%81%A6)
-- [Refrences](#refrences)
+</div>
 
-<!-- END doctoc generated TOC please keep comment here to allow auto update -->
+## 評価指標の基本原則
+### RULE 1: ビジネスの構造を理解する
+
+- ビジネスの利益構造をまず理解する
+- ビジネスの利益構造を踏まえた上で, 解くべき目的関数を定式化する
+
+> 誤り起因の損失の非対称と目的関数
+
+観測データを基にクラス分類を実行する時, 性病検査のように梅毒感染者を陰性と分類するときと非感染者を陽性と分類する時の損失が違うように, 
+**誤りを犯すことによって発生する危険性はクラス間で対称とは限らない**ということを忘れてはいけません.
+
+このような状況における目的関数の定式化例として以下:
+
+$$
+\min\sum_{i=1}^N \sum_{k=1}^K L_{ik} P(C_{k}|\pmb{x_i})
+$$
+
+- $i$: 観測単位
+- $C_k$: モデルが予測するクラス
+- $\pmb{x_i}$: $i$についての特徴量ベクトル
+- $L_{ik}$: $i$についてクラス$k$と分類した時の損失を表すベクトル, 正しいクラスを予測した時は $0$
+
+
+### RULE 2: ビジネスKPIと結びつきの強い評価指標を選択する
+
+- AUC, F1スコア, RMSEというモデル指標自体はビジネスKPIではないケースが多い
+- ビジネスKPIと相関のあるモデル指標を選ばないと, モデル改善の努力が無駄になるリスクがある
+
+
+## ビジネスにおける評価指標
+### KPI
+
+KPIは健康診断と施策評価という２つの側面で用いられます.
+
+---|---
+健康診断指標|組織の目標を達成するための重要な業績評価の指標を意味し, 達成状況を定点観測することで, 目標達成に向けた組織のパフォーマンスの動向を把握するためのもの
+施策評価指標|ビジネス施策が正しくビジネスに対してインパクトを与えたかを判断するための指標として現場では用いられる
 
 
 ## Confusion matrix
@@ -398,9 +426,32 @@ $$
 - $z$: $C_0$に属する観測対象を表すindex
 - 実質的にthe Mann-Whitney U-test(Wilcoxon rank sum test)の統計量を計算している
 
+## Appendix
+### DSがビジネス問題を解くときに考えるべきこと
+
+- どういうビジネス課題を解くのか？
+- モデルでビジネス課題の内, どの部分を解くのか？
+- 予測結果にも基づき, どういうビジネス施策を行うのか？（クーポン配布のパーソナライズなど）
+- なにをもってモデルの良し悪しをビジネス的に判断するのか？
+- 開発段階でのモデルの良し悪しをどのように判断するのか？
+- どういうモデルを使うのか？
+- どういうアーキテクチャー, 体制でモデルを運用, 改善していくのか？
+
+
 
 
 ## Refrences
 
-- [Machine Learning Crash Course > Classification: ROC Curve and AUC](https://developers.google.com/machine-learning/crash-course/classification/roc-and-auc)
+> 関連ポスト
+
+- [Ryo's Tech Blog > いかにして問題を解くか](https://ryonakagami.github.io/2021/03/09/How-to-Solve-It/#%E9%96%A2%E4%BF%82%E8%80%85%E3%82%92%E8%AA%AC%E5%BE%97%E3%81%99%E3%82%8B-%E3%83%A1%E3%83%83%E3%82%BB%E3%83%BC%E3%82%B8%E3%83%89%E3%83%AA%E3%83%96%E3%83%B3)
+
+
+> 書籍
+
 - [技術評論社, Kaggleで勝つデータ分析の技術, 門脇大輔，阪田隆司，保坂桂佑，平松雄司著](https://gihyo.jp/book/2019/978-4-297-10843-4)
+- [森北出版株式会社, はじめてのパターン認識, 平井有三(著)](https://www.morikita.co.jp/books/mid/084971)
+
+> オンラインマテリアル
+
+- [Machine Learning Crash Course > Classification: ROC Curve and AUC](https://developers.google.com/machine-learning/crash-course/classification/roc-and-auc)

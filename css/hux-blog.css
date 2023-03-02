@@ -59,7 +59,7 @@
   width: 195px;
 }
 .side-catalog.fixed {
-  position: fixed;
+  position: relative; /*fixedから変更*/
   top: -21px;
 }
 .side-catalog.fold .catalog-toggle::before {
@@ -894,7 +894,7 @@ samp {
   letter-spacing: 0.5px;
 }
 .post-container .anchorjs-link {
-  position: absolute;
+  position: relative;
   text-decoration: none !important;
 }
 @media only screen and (max-width: 767px) {
