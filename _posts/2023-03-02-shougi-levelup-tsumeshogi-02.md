@@ -56,13 +56,13 @@ tags:
 > 基本形
 
 <div class="math display" style="overflow: auto">
-<iframe width="500" height="590" src="https://nbviewer.org/github/RyoNakagami/ryonak_kifPlayer/blob/main/kif_html/myoshu_zokusyu_levelup_03_01_01_A.html" frameborder="0" allow="autoplay; encrypted-media" allowfullscreen></iframe>
+<iframe width="500" height="590" src="https://nbviewer.org/github/RyoNakagami/ryonak_kifPlayer/blob/main/kif_html/myoshu_zokusyu_levelup_01_03_01_A.html" frameborder="0" allow="autoplay; encrypted-media" allowfullscreen></iframe>
 </div>
 
 > 発展形
 
 <div class="math display" style="overflow: auto">
-<iframe width="500" height="590" src="https://nbviewer.org/github/RyoNakagami/ryonak_kifPlayer/blob/main/kif_html/myoshu_zokusyu_levelup_03_01_01_B.html" frameborder="0" allow="autoplay; encrypted-media" allowfullscreen></iframe>
+<iframe width="500" height="590" src="https://nbviewer.org/github/RyoNakagami/ryonak_kifPlayer/blob/main/kif_html/myoshu_zokusyu_levelup_01_03_01_B.html" frameborder="0" allow="autoplay; encrypted-media" allowfullscreen></iframe>
 
 
 
