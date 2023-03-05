@@ -35,19 +35,19 @@ tags:
 > １一玉逃げパターン
 
 <div class="math display" style="overflow: auto">
-<iframe width="500" height="590" src="https://nbviewer.org/github/RyoNakagami/ryonak_kifPlayer/blob/main/kif_html/myoshu_zokusyu_levelup_03_01_A.html" frameborder="0" allow="autoplay; encrypted-media" allowfullscreen></iframe>
+<iframe width="500" height="590" src="https://nbviewer.org/github/RyoNakagami/ryonak_kifPlayer/blob/main/kif_html/myoshu_zokusyu_levelup_01_03_A.html" frameborder="0" allow="autoplay; encrypted-media" allowfullscreen></iframe>
 </div>
 
 > ３一玉逃げパターン
 
 <div class="math display" style="overflow: auto">
-<iframe width="500" height="590" src="https://nbviewer.org/github/RyoNakagami/ryonak_kifPlayer/blob/main/kif_html/myoshu_zokusyu_levelup_03_01_C.html" frameborder="0" allow="autoplay; encrypted-media" allowfullscreen></iframe>
+<iframe width="500" height="590" src="https://nbviewer.org/github/RyoNakagami/ryonak_kifPlayer/blob/main/kif_html/myoshu_zokusyu_levelup_01_03_C.html" frameborder="0" allow="autoplay; encrypted-media" allowfullscreen></iframe>
 </div>
 
 ### 同金パターン
 
 <div class="math display" style="overflow: auto">
-<iframe width="500" height="590" src="https://nbviewer.org/github/RyoNakagami/ryonak_kifPlayer/blob/main/kif_html/myoshu_zokusyu_levelup_03_01_B.html" frameborder="0" allow="autoplay; encrypted-media" allowfullscreen></iframe>
+<iframe width="500" height="590" src="https://nbviewer.org/github/RyoNakagami/ryonak_kifPlayer/blob/main/kif_html/myoshu_zokusyu_levelup_01_03_B.html" frameborder="0" allow="autoplay; encrypted-media" allowfullscreen></iframe>
 </div>
 
 
