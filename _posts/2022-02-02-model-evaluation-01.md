@@ -17,8 +17,29 @@ tags:
 
 <div style='border-radius: 1em; border-style:solid; border-color:#D3D3D3; background-color:#F8F8F8'>
 <p class="h4">&nbsp;&nbsp;Table of Contents</p>
-<!-- START doctoc -->
-<!-- END doctoc -->
+<!-- START doctoc generated TOC please keep comment here to allow auto update -->
+<!-- DON'T EDIT THIS SECTION, INSTEAD RE-RUN doctoc TO UPDATE -->
+
+- [評価指標の基本原則](#%E8%A9%95%E4%BE%A1%E6%8C%87%E6%A8%99%E3%81%AE%E5%9F%BA%E6%9C%AC%E5%8E%9F%E5%89%87)
+  - [RULE 1: ビジネスの構造を理解する](#rule-1-%E3%83%93%E3%82%B8%E3%83%8D%E3%82%B9%E3%81%AE%E6%A7%8B%E9%80%A0%E3%82%92%E7%90%86%E8%A7%A3%E3%81%99%E3%82%8B)
+  - [RULE 2: ビジネスKPIと結びつきの強い評価指標を選択する](#rule-2-%E3%83%93%E3%82%B8%E3%83%8D%E3%82%B9kpi%E3%81%A8%E7%B5%90%E3%81%B3%E3%81%A4%E3%81%8D%E3%81%AE%E5%BC%B7%E3%81%84%E8%A9%95%E4%BE%A1%E6%8C%87%E6%A8%99%E3%82%92%E9%81%B8%E6%8A%9E%E3%81%99%E3%82%8B)
+- [ビジネスにおける評価指標](#%E3%83%93%E3%82%B8%E3%83%8D%E3%82%B9%E3%81%AB%E3%81%8A%E3%81%91%E3%82%8B%E8%A9%95%E4%BE%A1%E6%8C%87%E6%A8%99)
+  - [KPI](#kpi)
+  - [KPIの４つの必要条件](#kpi%E3%81%AE%EF%BC%94%E3%81%A4%E3%81%AE%E5%BF%85%E8%A6%81%E6%9D%A1%E4%BB%B6)
+- [Confusion matrix](#confusion-matrix)
+- [Metrics](#metrics)
+  - [特異度 (specificity, True Negative Rate, TNR)](#%E7%89%B9%E7%95%B0%E5%BA%A6-specificity-true-negative-rate-tnr)
+  - [False Positive Rate, FPR](#false-positive-rate-fpr)
+  - [Accuracy](#accuracy)
+  - [Precision-Recall](#precision-recall)
+  - [F-measures](#f-measures)
+- [ROC曲線](#roc%E6%9B%B2%E7%B7%9A)
+  - [AUCの計算式について](#auc%E3%81%AE%E8%A8%88%E7%AE%97%E5%BC%8F%E3%81%AB%E3%81%A4%E3%81%84%E3%81%A6)
+- [Appendix](#appendix)
+  - [DSがビジネス問題を解くときに考えるべきこと](#ds%E3%81%8C%E3%83%93%E3%82%B8%E3%83%8D%E3%82%B9%E5%95%8F%E9%A1%8C%E3%82%92%E8%A7%A3%E3%81%8F%E3%81%A8%E3%81%8D%E3%81%AB%E8%80%83%E3%81%88%E3%82%8B%E3%81%B9%E3%81%8D%E3%81%93%E3%81%A8)
+- [Refrences](#refrences)
+
+<!-- END doctoc generated TOC please keep comment here to allow auto update -->
 
 </div>
 
@@ -59,6 +80,23 @@ KPIは健康診断と施策評価という２つの側面で用いられます.
 ---|---
 健康診断指標|組織の目標を達成するための重要な業績評価の指標を意味し, 達成状況を定点観測することで, 目標達成に向けた組織のパフォーマンスの動向を把握するためのもの
 施策評価指標|ビジネス施策が正しくビジネスに対してインパクトを与えたかを判断するための指標として現場では用いられる
+
+ビジネスモデルやビジネス課題に応じてどのKPIに着目すべきかは異なります. ECビジネスでトップライン成長率に課題がある場合は, 
+新規契約者数や商品ページCVR, MRR(Monthly Recurring Revenue)などがKPIになりますし, ボトムライン改善の場合は配送費や返品率がKPIとなる場合もあります.
+
+> トップラインとボトムライン
+
+---|---
+トップライン|損益計算書の一番上（トップ）の項目である売上高（営業収益）のこと
+ボトムライン|総収益から, 商品のコスト、税金、負債の利子を含む全ての損失を引いた金額のこと(=当期純利益)
+
+### KPIの４つの必要条件
+
+1. **aligned**: KGIと整合的な指標であること
+2. **actionable**: 施策によって改善できる指標でなければ, 単なる状態観察指標になってします
+3. **realistic**: 業務フローの中でアクションすることが現実的な指標にすべき
+4. **measurable**: 観察できなかったら意味がない
+
 
 
 ## Confusion matrix
@@ -313,16 +351,15 @@ $$
 
 ## ROC曲線
 
-ROC(Receiver Operating Characteristic)曲線は、false positive(Type I Error)と
-false negative(Type II Error)の関係をグラフにしたものです. グラフの面積が大きいほど性能指標が良く、
-そのエリアの面積の計算はAUCとしてよばれます.
+ROC(Receiver Operating Characteristic)曲線は, TPRとfalse positive(Type I Error)の関係をグラフにしたものです. 
+グラフの面積が大きいほど性能指標が良く, そのエリアの面積の計算はAUCとしてよばれます.
 
 > REMARKS
 
-- 完全な予測を行った場合は、ROC曲線は左上の(0.0, 1.0)の点を通り、AUCは1.0になる
-- ランダムな予測を実行した場合は、AUCは0.5程度となる
-- AUCは、各レコードの予測値の大小関係のみが値に影響するので、予測値は確率でなくても構わない(= AUCはscale-invariant)
-- class所属確率については何も答えてくれないので、予測値の順序性が満たされる条件の下（noiseがheavy tailではないなども必要だが）、probability calibrationで予測値を補正することによって、class確率を計算するなどの対処が必要になる
+- 完全な予測を行った場合は、ROC曲線は左上の(0.0, 1.0)の点を通り, AUCは1.0になる
+- ランダムな予測を実行した場合は, AUCは0.5程度となる
+- AUCは、各レコードの予測値の大小関係のみが値に影響するので, 予測値は確率でなくても構わない(= AUCはscale-invariant)
+- class所属確率については何も答えてくれないので、予測値の順序性が満たされる条件の下（noiseがheavy tailではないなども必要だが）, probability calibrationで予測値を補正することによって, class確率を計算するなどの対処が必要になる
 
 
 ```python

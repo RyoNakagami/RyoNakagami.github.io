@@ -33,7 +33,7 @@ tags:
 ### 同金パターン
 
 <div class="math display" style="overflow: auto">
-<iframe width="500" height="590" src="https://nbviewer.org/github/RyoNakagami/ryonak_kifPlayer/blob/main/kif_html/myoshu_zokusyu_levelup_01_01_A.html" frameborder="0" allow="autoplay; encrypted-media" allowfullscreen></iframe>
+<iframe width="500" height="600" src="https://nbviewer.org/github/RyoNakagami/ryonak_kifPlayer/blob/main/kif_html/myoshu_zokusyu_levelup_01_01_A.html" frameborder="0" allow="autoplay; encrypted-media" allowfullscreen></iframe>
 </div>
 
 ### 王逃げパターン
@@ -41,13 +41,13 @@ tags:
 > ６一玉へ逃げた場合
 
 <div class="math display" style="overflow: auto">
-<iframe width="500" height="590" src="https://nbviewer.org/github/RyoNakagami/ryonak_kifPlayer/blob/main/kif_html/myoshu_zokusyu_levelup_01_01_B.html" frameborder="0" allow="autoplay; encrypted-media" allowfullscreen></iframe>
+<iframe width="500" height="600" src="https://nbviewer.org/github/RyoNakagami/ryonak_kifPlayer/blob/main/kif_html/myoshu_zokusyu_levelup_01_01_B.html" frameborder="0" allow="autoplay; encrypted-media" allowfullscreen></iframe>
 </div>
 
 > ４一玉へ逃げた場合
 
 <div class="math display" style="overflow: auto">
-<iframe width="500" height="590" src="https://nbviewer.org/github/RyoNakagami/ryonak_kifPlayer/blob/main/kif_html/myoshu_zokusyu_levelup_01_01_C.html" frameborder="0" allow="autoplay; encrypted-media" allowfullscreen></iframe>
+<iframe width="500" height="600" src="https://nbviewer.org/github/RyoNakagami/ryonak_kifPlayer/blob/main/kif_html/myoshu_zokusyu_levelup_01_01_C.html" frameborder="0" allow="autoplay; encrypted-media" allowfullscreen></iframe>
 </div>
 
 ## 居飛車系第二問:４筋に逃さない
@@ -55,19 +55,19 @@ tags:
 > 4筋逃げるパターン
 
 <div class="math display" style="overflow: auto">
-<iframe width="500" height="590" src="https://nbviewer.org/github/RyoNakagami/ryonak_kifPlayer/blob/main/kif_html/myoshu_zokusyu_levelup_01_02_A.html" frameborder="0" allow="autoplay; encrypted-media" allowfullscreen></iframe>
+<iframe width="500" height="600" src="https://nbviewer.org/github/RyoNakagami/ryonak_kifPlayer/blob/main/kif_html/myoshu_zokusyu_levelup_01_02_A.html" frameborder="0" allow="autoplay; encrypted-media" allowfullscreen></iframe>
 </div>
 
 > 上がってくるパターン
 
 <div class="math display" style="overflow: auto">
-<iframe width="500" height="590" src="https://nbviewer.org/github/RyoNakagami/ryonak_kifPlayer/blob/main/kif_html/myoshu_zokusyu_levelup_01_02_B.html" frameborder="0" allow="autoplay; encrypted-media" allowfullscreen></iframe>
+<iframe width="500" height="600" src="https://nbviewer.org/github/RyoNakagami/ryonak_kifPlayer/blob/main/kif_html/myoshu_zokusyu_levelup_01_02_B.html" frameborder="0" allow="autoplay; encrypted-media" allowfullscreen></iframe>
 </div>
 
 > 相手自滅パターン
 
 <div class="math display" style="overflow: auto">
-<iframe width="500" height="590" src="https://nbviewer.org/github/RyoNakagami/ryonak_kifPlayer/blob/main/kif_html/myoshu_zokusyu_levelup_01_02_C.html" frameborder="0" allow="autoplay; encrypted-media" allowfullscreen></iframe>
+<iframe width="500" height="600" src="https://nbviewer.org/github/RyoNakagami/ryonak_kifPlayer/blob/main/kif_html/myoshu_zokusyu_levelup_01_02_C.html" frameborder="0" allow="autoplay; encrypted-media" allowfullscreen></iframe>
 </div>
 
 
