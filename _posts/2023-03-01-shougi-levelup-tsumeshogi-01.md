@@ -21,6 +21,7 @@ tags:
 - [居飛車系第一問:馬の利きを通す](#%E5%B1%85%E9%A3%9B%E8%BB%8A%E7%B3%BB%E7%AC%AC%E4%B8%80%E5%95%8F%E9%A6%AC%E3%81%AE%E5%88%A9%E3%81%8D%E3%82%92%E9%80%9A%E3%81%99)
   - [同金パターン](#%E5%90%8C%E9%87%91%E3%83%91%E3%82%BF%E3%83%BC%E3%83%B3)
   - [王逃げパターン](#%E7%8E%8B%E9%80%83%E3%81%92%E3%83%91%E3%82%BF%E3%83%BC%E3%83%B3)
+- [居飛車系第一問発展:馬の利きを通す](#%E5%B1%85%E9%A3%9B%E8%BB%8A%E7%B3%BB%E7%AC%AC%E4%B8%80%E5%95%8F%E7%99%BA%E5%B1%95%E9%A6%AC%E3%81%AE%E5%88%A9%E3%81%8D%E3%82%92%E9%80%9A%E3%81%99)
 - [居飛車系第二問:４筋に逃さない](#%E5%B1%85%E9%A3%9B%E8%BB%8A%E7%B3%BB%E7%AC%AC%E4%BA%8C%E5%95%8F%EF%BC%94%E7%AD%8B%E3%81%AB%E9%80%83%E3%81%95%E3%81%AA%E3%81%84)
 - [References](#references)
 
@@ -48,6 +49,26 @@ tags:
 
 <div class="math display" style="overflow: auto">
 <iframe width="500" height="600" src="https://nbviewer.org/github/RyoNakagami/ryonak_kifPlayer/blob/main/kif_html/myoshu_zokusyu_levelup_01_01_C.html" frameborder="0" allow="autoplay; encrypted-media" allowfullscreen></iframe>
+</div>
+
+## 居飛車系第一問発展:馬の利きを通す
+
+> 合駒 & ４三玉逃げパターン
+
+<div class="math display" style="overflow: auto">
+<iframe width="500" height="600" src="https://nbviewer.org/github/RyoNakagami/ryonak_kifPlayer/blob/main/kif_html/myoshu_zokusyu_levelup_01_01_01_A.html" frameborder="0" allow="autoplay; encrypted-media" allowfullscreen></iframe>
+</div>
+
+> 合駒 & ３二玉逃げパターン 
+
+<div class="math display" style="overflow: auto">
+<iframe width="500" height="600" src="https://nbviewer.org/github/RyoNakagami/ryonak_kifPlayer/blob/main/kif_html/myoshu_zokusyu_levelup_01_01_01_B.html" frameborder="0" allow="autoplay; encrypted-media" allowfullscreen></iframe>
+</div>
+
+> ４三玉へ逃げた場合
+
+<div class="math display" style="overflow: auto">
+<iframe width="500" height="600" src="https://nbviewer.org/github/RyoNakagami/ryonak_kifPlayer/blob/main/kif_html/myoshu_zokusyu_levelup_01_01_01_C.html" frameborder="0" allow="autoplay; encrypted-media" allowfullscreen></iframe>
 </div>
 
 ## 居飛車系第二問:４筋に逃さない
