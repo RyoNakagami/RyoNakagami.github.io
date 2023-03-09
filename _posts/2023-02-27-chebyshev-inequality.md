@@ -29,12 +29,12 @@ tags:
 <div style='padding-left: 2em; padding-right: 2em; border-radius: 1em; border-style:solid; border-color:#D3D3D3; background-color:#F8F8F8'>
 <p class="h4"><ins>Theorem</ins></p>
 
-確率変数 $X$ に対して $\mathbf E[X] = \mu, Var(X) = \sigma^2$とおいたとき
+確率変数 $X$ に対して $\mathbb E[X] = \mu, Var(X) = \sigma^2$とおいたとき,
 
 $$
 \begin{align*}
-&Pr\{|X - \mu|\geq k\sigma\} \leq \frac{1}{k^2}\\
-&\text{where } k > 1 \text{ and constant}
+\ \ &Pr(|X - \mu|\geq k\sigma) \leq \frac{1}{k^2}\\
+\ \ &\text{where } k > 1 \text{ and constant}
 \end{align*}
 $$
 
@@ -47,7 +47,7 @@ $$
 
 $$
 D = \begin{cases}
-1 & \text{ if } |X - \mu|\geq k\sigma\\
+1 & \text{ if } |X - \mu|\geq k\sigma\\[8pt]
 0 & \text{ otherwise}
 \end{cases}
 $$
@@ -63,14 +63,14 @@ $$
 $$
 \begin{align*}
 \sigma^2 &= Var(X)\\
-         &= \mathbf E[(X - \mu)^2]\\
-         &\geq \mathbf E[k^2\sigma^2U]\\
-         &= k^2\sigma^2\mathbf E[U]\\
-\Rightarrow& \frac{1}{k^2} \geq  \mathbf E[U]
+         &= \mathbb E[(X - \mu)^2]\\
+         &\geq \mathbb E[k^2\sigma^2U]\\
+         &= k^2\sigma^2\mathbb E[U]\\
+\Rightarrow& \frac{1}{k^2} \geq  \mathbb E[U]
 \end{align*}
 $$
 
-定義より, $\mathbf E[U]$は $Pr\{|X - \mu|\geq k\sigma\}$と同値なので
+定義より, $\mathbb E[U]$は $Pr(\|X - \mu\| \geq k\sigma)$と同値なので
 
 $$
 Pr\{|X - \mu|\geq k\sigma\} \leq \frac{1}{k^2}
