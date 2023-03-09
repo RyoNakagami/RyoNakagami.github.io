@@ -115,7 +115,7 @@ $$
 
 > SensitivityとSpecificity
 
-- Sensitivity: TPF(True Position Fraction)
+- Sensitivity: TPF(True Position Fraction), Recall
 - Specificity: 1-FPF(False Positive Fraction)
 
 例として, 診断レベル 5 を基準にNormalとDiseased判定をしたとすると,

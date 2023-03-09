@@ -26,6 +26,8 @@ tags:
 - [Pearson相関係数の例題](#pearson%E7%9B%B8%E9%96%A2%E4%BF%82%E6%95%B0%E3%81%AE%E4%BE%8B%E9%A1%8C)
   - [Pearson相関係数が 0 となるケース](#pearson%E7%9B%B8%E9%96%A2%E4%BF%82%E6%95%B0%E3%81%8C-0-%E3%81%A8%E3%81%AA%E3%82%8B%E3%82%B1%E3%83%BC%E3%82%B9)
   - [Pearson相関係数の絶対値が 1 となるケース](#pearson%E7%9B%B8%E9%96%A2%E4%BF%82%E6%95%B0%E3%81%AE%E7%B5%B6%E5%AF%BE%E5%80%A4%E3%81%8C-1-%E3%81%A8%E3%81%AA%E3%82%8B%E3%82%B1%E3%83%BC%E3%82%B9)
+  - [基本統計量から相関係数を計算する](#%E5%9F%BA%E6%9C%AC%E7%B5%B1%E8%A8%88%E9%87%8F%E3%81%8B%E3%82%89%E7%9B%B8%E9%96%A2%E4%BF%82%E6%95%B0%E3%82%92%E8%A8%88%E7%AE%97%E3%81%99%E3%82%8B)
+- [References](#references)
 
 <!-- END doctoc generated TOC please keep comment here to allow auto update -->
 
@@ -237,3 +239,40 @@ $$
 **終了**
 
 ---
+
+### 基本統計量から相関係数を計算する
+
+とある母集団から$(x_i, y_i, z_i)$の組標本を $n$サンプルサイズで収集したとする. また 三変数の関係として
+
+$$
+z_i = x_i + y_i
+$$
+
+このとき標本より以下のようなことが分かったとする
+
+|変数|標本平均|標準偏差($s$と表記する)|
+|---|---|---|
+|$x$| 250|80|
+|$y$| 200|75|
+|$z$| 450|145|
+
+この情報しかないときでも 相関係数 $\rho_{xy}$は以下のように計算可能です.
+
+$$
+\rho_{xy} = \frac{s_{xy}}{s_xs_y}
+$$
+
+なので, $s_{xy}$のみが未知.
+
+
+$$
+\begin{align*}
+Var(z_i) &= Var(x_i + y_i)\\
+         &= Var(x_i) + Var(y_i) + 2Cov(x_i, y_i)\\
+\Rightarrow s_{xy}&= \frac{1}{2} (s_z^2 - s_x^2 - s_y^2)
+\end{align*}
+$$
+
+従って, 計算により $\rho_{xy} = 0.75$ とわかる
+
+## References

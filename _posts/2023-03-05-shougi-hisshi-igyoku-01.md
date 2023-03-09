@@ -30,11 +30,12 @@ tags:
 
 ## 問題設定
 
+２筋の飛車を一段へ運び相手玉にプレッシャーを掛けにいきたい局面を想定します.
+
 <div class="math display" style="overflow: auto">
 <iframe width="500" height="600" src="https://nbviewer.org/github/RyoNakagami/ryonak_kifPlayer/blob/main/kif_html/kuzushikata/20230307_hisshi_igyoku_01.html" frameborder="0" allow="autoplay; encrypted-media" allowfullscreen></iframe>
 </div>
 
-２筋の飛車を一段へ運び相手玉にプレッシャーを掛けにいきたい局面を想定します.
 
 ## 攻め筋
 
