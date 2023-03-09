@@ -18,7 +18,8 @@ tags:
 <!-- DON'T EDIT THIS SECTION, INSTEAD RE-RUN doctoc TO UPDATE -->
 
 - [Chebyshev inequalityの定理](#chebyshev-inequality%E3%81%AE%E5%AE%9A%E7%90%86)
-- [証明](#%E8%A8%BC%E6%98%8E)
+  - [証明](#%E8%A8%BC%E6%98%8E)
+- [例題: 合計診察時間の確率計算](#%E4%BE%8B%E9%A1%8C-%E5%90%88%E8%A8%88%E8%A8%BA%E5%AF%9F%E6%99%82%E9%96%93%E3%81%AE%E7%A2%BA%E7%8E%87%E8%A8%88%E7%AE%97)
 
 <!-- END doctoc generated TOC please keep comment here to allow auto update -->
 
@@ -41,7 +42,7 @@ $$
 
 </div>
 
-## 証明
+### 証明
 
 以下のような確率変数 $D$ を定義する
 
@@ -77,3 +78,41 @@ Pr\{|X - \mu|\geq k\sigma\} \leq \frac{1}{k^2}
 $$
 
 **証明終了**
+
+## 例題: 合計診察時間の確率計算
+
+<div style='padding-left: 2em; padding-right: 2em; border-radius: 1em; border-style:solid; border-color:#D3D3D3; background-color:#F8F8F8'>
+<p class="h4"><ins>Problem</ins></p>
+
+100人の患者を次々と診察する１人医者を考える. 一人あたりの診察時間についての確率変数 $X$について
+$\mathbb E[X] = 1$, $Var(X) = 0.64$ が事前に知られている.
+
+患者の診察は互いに独立に実施されるとして, 100人全員の診察が完了するまでに要した時間を $T$ としたとき, 
+平均を中央とした上下区間が下限96%になるような区間を求めよ.
+
+
+**解答**
+
+問題文より, $\mathbb E[T] = 100$, $Var(T) = 64$は自明.
+
+Chebyshev inequalityより
+
+$$
+Pr(|T - 100|< 8k) \geq 1-\frac{1}{k^2} = 0.96
+$$
+
+従って, $k=5$のときを求めればいいので
+
+$$
+Pr(60 < T < 140) \geq 0.96
+$$
+
+
+
+
+**解答終了**
+
+---
+
+
+</div>
