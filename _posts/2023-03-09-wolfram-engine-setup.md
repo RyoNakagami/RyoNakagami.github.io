@@ -1,7 +1,7 @@
 ---
 layout: post
 title: "Wolfram Engineをローカルで使用できるようにするまで"
-subtitle: "VSCode Live Previewの紹介"
+subtitle: "Ubuntu Desktop環境構築 Part 27"
 author: "Ryo"
 header-img: "img/cpu.png"
 header-mask: 0.4
