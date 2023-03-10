@@ -18,8 +18,11 @@ tags:
 <!-- DON'T EDIT THIS SECTION, INSTEAD RE-RUN doctoc TO UPDATE -->
 
 - [Chebyshev inequalityの定理](#chebyshev-inequality%E3%81%AE%E5%AE%9A%E7%90%86)
-  - [証明](#%E8%A8%BC%E6%98%8E)
+  - [Cantelli's inequality](#cantellis-inequality)
+    - [Chebyshev's inequalityとの比較](#chebyshevs-inequality%E3%81%A8%E3%81%AE%E6%AF%94%E8%BC%83)
 - [例題: 合計診察時間の確率計算](#%E4%BE%8B%E9%A1%8C-%E5%90%88%E8%A8%88%E8%A8%BA%E5%AF%9F%E6%99%82%E9%96%93%E3%81%AE%E7%A2%BA%E7%8E%87%E8%A8%88%E7%AE%97)
+- [Appendix: Markov's inequlity](#appendix-markovs-inequlity)
+- [References](#references)
 
 <!-- END doctoc generated TOC please keep comment here to allow auto update -->
 
@@ -42,7 +45,7 @@ $$
 
 </div>
 
-### 証明
+**証明**
 
 以下のような確率変数 $D$ を定義する
 
@@ -78,6 +81,77 @@ Pr\{|X - \mu|\geq k\sigma\} \leq \frac{1}{k^2}
 $$
 
 **証明終了**
+
+---
+
+### Cantelli's inequality
+
+Chebyshev's inequalityのよりweakerなboundの定理としてCantelli's inequalityがあります.
+
+<div style='padding-left: 2em; padding-right: 2em; border-radius: 1em; border-style:solid; border-color:#D3D3D3; background-color:#F8F8F8'>
+<p class="h4"><ins>Theorem: Cantelli's inequality</ins></p>
+
+期待値 $\mu$ と分散 $\sigma^2$ を持つ確率変数$X$ について
+
+$$
+\begin{align*}
+&Pr(X\geq \mu + t\sigma) \leq \frac{1}{1 + t^2}\\[8pt]
+&Pr(X\leq \mu - t\sigma) \leq \frac{1}{1 + t^2}
+\end{align*}
+$$
+
+</div>
+
+**証明**
+
+証明にはMarkov's inequlityを用います. for any $v>0$, 
+
+$$
+\begin{align*}
+Pr(X - \mu \geq t) &= Pr(X - \mu + v \geq t + v)\\
+                   &\leq Pr((X - \mu +v)^2 \geq (t + v)^2)\\
+                   &\leq \frac{\mathbb E[(X - \mu +v)^2]}{ (t + v)^2}\\
+                   &= \frac{v^2 + v^2}{(t + v)^2}
+\end{align*}
+$$
+
+ここで $v = \sigma/t$ とすると
+
+$$
+\begin{align*}
+Pr(X \geq \mu + t) &\leq \frac{\sigma^2 + v^2}{(t + v)^2}\\
+                           &= \frac{\sigma^2}{t^2 + \sigma^2}
+\end{align*}
+$$
+
+さらに $t = t^*\sigma$と変換すると
+
+$$
+Pr(X \geq \mu + t^*\sigma) \leq \frac{1}{1+t^{*2}}
+$$
+
+**証明終了**
+
+
+
+#### Chebyshev's inequalityとの比較
+
+> Chebyshev's inequality
+
+$$
+\begin{align*}
+Pr(X - \mu \geq k\sigma) \leq Pr(|X - \mu|\geq k\sigma) \leq \frac{1}{k^2}
+\end{align*}
+$$
+
+> Cantelli's inequality
+
+$$
+Pr(|X - \mu|\geq k\sigma) = Pr(X - \mu\geq k\sigma) + Pr(|X - \mu|\leq -k\sigma) \leq \frac{2}{1+k^2}
+$$
+
+従って, two-sidedにおける比較においては$k>1$について常にChebyshev's inequalityに対して劣るboundであることがわかる.
+
 
 ## 例題: 合計診察時間の確率計算
 
@@ -116,3 +190,52 @@ $$
 
 
 </div>
+
+## Appendix: Markov's inequlity
+
+<div style='padding-left: 2em; padding-right: 2em; border-radius: 1em; border-style:solid; border-color:#D3D3D3; background-color:#F8F8F8'>
+<p class="h4"><ins>Theorem </ins></p>
+
+期待値 $\mu$ のnon-negativeな確率変数 $X$について
+
+$$
+Pr(X\geq t) \leq \frac{\mu}{t} \  \ \forall t>0
+$$
+
+or
+
+$$
+Pr(X\geq t\mu) \leq \frac{1}{t} \  \ \forall t>0
+$$
+
+</div>
+
+**証明**
+
+non-negativeな確率変数 $X$について以下は常に成り立つ
+
+$$
+1\{X\geq t\} = 1\{X/t\geq 1\} \leq X/t
+$$
+
+これについて期待値をとると
+
+$$
+\begin{align*}
+\mathbb E[1\{X\geq t\}] &= Pr(X\geq t)\\
+                        &\leq \mathbb E[X/t]\\
+                        &= \frac{\mu}{t}
+\end{align*}
+$$
+
+
+**証明終了**
+
+---
+
+
+## References
+
+> Book
+
+- [Principles of Statistical Analysis Learning from Randomized Experiments](https://www.cambridge.org/core/books/principles-of-statistical-analysis/74C6545BBEF83D5E41C48BA11756032C)

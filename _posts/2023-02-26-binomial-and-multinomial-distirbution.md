@@ -47,6 +47,17 @@ $$
 (p_1+\cdots + p_k)^n =  \sum_D\frac{n!}{x_1!\cdots x_k!}p_1^{x_1}\cdots p_k^{x_k}
 $$
 
+> どんなとき多項分布がでてくるの？
+
+ある袋の中に, 赤玉: 5個, 青玉: 3個, 黒玉: 2個, 合計: 10個が入っているときにこの袋から６回復元抽出で１つの玉をランダムに
+取り出す試行を考えます. なお, **同じ色の玉同士は区別できない**とします. 取り出された赤, 青, 黒の個数を $(X_1, X_2, X_3)$とすると、この確率変数の組は多項分布に従い
+
+$$
+f(x_1, x_2, x_3) = \frac{6!}{x_1!x_3!x_3!}\bigg(\frac{5}{10}\bigg)^{x_1}\bigg(\frac{3}{10}\bigg)^{x_1}\bigg(\frac{2}{10}\bigg)^{x_1}
+$$
+
+と確率分布を表現することができる.
+
 ### 共分散の導出
 
 <div style='padding-left: 2em; padding-right: 2em; border-radius: 1em; border-style:solid; border-color:#D3D3D3; background-color:#F8F8F8'>
