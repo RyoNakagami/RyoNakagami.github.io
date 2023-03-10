@@ -27,7 +27,8 @@ tags:
   - [Pearson相関係数が 0 となるケース](#pearson%E7%9B%B8%E9%96%A2%E4%BF%82%E6%95%B0%E3%81%8C-0-%E3%81%A8%E3%81%AA%E3%82%8B%E3%82%B1%E3%83%BC%E3%82%B9)
   - [Pearson相関係数の絶対値が 1 となるケース](#pearson%E7%9B%B8%E9%96%A2%E4%BF%82%E6%95%B0%E3%81%AE%E7%B5%B6%E5%AF%BE%E5%80%A4%E3%81%8C-1-%E3%81%A8%E3%81%AA%E3%82%8B%E3%82%B1%E3%83%BC%E3%82%B9)
   - [基本統計量から相関係数を計算する](#%E5%9F%BA%E6%9C%AC%E7%B5%B1%E8%A8%88%E9%87%8F%E3%81%8B%E3%82%89%E7%9B%B8%E9%96%A2%E4%BF%82%E6%95%B0%E3%82%92%E8%A8%88%E7%AE%97%E3%81%99%E3%82%8B)
-- [References](#references)
+- [Appendix](#appendix)
+  - [確率変数の和の分散の分解](#%E7%A2%BA%E7%8E%87%E5%A4%89%E6%95%B0%E3%81%AE%E5%92%8C%E3%81%AE%E5%88%86%E6%95%A3%E3%81%AE%E5%88%86%E8%A7%A3)
 
 <!-- END doctoc generated TOC please keep comment here to allow auto update -->
 
@@ -256,7 +257,7 @@ $$
 |$y$| 200|75|
 |$z$| 450|145|
 
-この情報しかないときでも 相関係数 $\rho_{xy}$は以下のように計算可能です.
+この情報しかないときでも 相関係数 $\rho_{xy}$は以下のように計算可能.
 
 $$
 \rho_{xy} = \frac{s_{xy}}{s_xs_y}
@@ -275,4 +276,57 @@ $$
 
 従って, 計算により $\rho_{xy} = 0.75$ とわかる
 
-## References
+## Appendix
+### 確率変数の和の分散の分解
+
+<div style='padding-left: 2em; padding-right: 2em; border-radius: 1em; border-style:solid; border-color:#D3D3D3; background-color:#F8F8F8'>
+<p class="h4"><ins>Theorem </ins></p>
+
+確率変数 $X$, $Y$に対して
+
+$$
+V(X+Y) = Var(X) + Var(Y) + 2Cov(X,Y)
+$$
+
+</div>
+
+**証明**
+
+$\mathbb E[X] = \mu_x, \mathbb E[Y] = \mu_y$とおき
+
+$$
+\begin{align*}
+Var(X+Y) &= \mathbb E[(X+Y - \mu_x - \mu_y)^2]\\
+         &= \mathbb E[(X-\mu_x)^2] + 2\mathbb E[(X-\mu_x)(Y-\mu_y)] + \mathbb E[(Y-\mu_y)^2]\\
+         &= Var(X) + Var(Y) + 2Cov(X,Y)
+\end{align*}
+$$
+
+**証明終了**
+
+---
+
+<div style='padding-left: 2em; padding-right: 2em; border-radius: 1em; border-style:solid; border-color:#D3D3D3; background-color:#F8F8F8'>
+<p class="h4"><ins>Theorem </ins></p>
+
+確率変数 $X_1 \cdots, X_n$, それぞれの期待値が存在し $\mu_1, \cdots, \mu_n$ と表せるとき
+
+$$
+V(X_1+X_2 + \cdots + X_n) = \sum_i^n Var(X_i) + 2\sum_{i<j}Cov(X_i, X_j)
+$$
+
+</div>
+
+**証明**
+
+$$
+\begin{align*}
+Var(X_1+\cdots+X_n) &= \mathbb E[(X_1+\cdots+X_n - \mu_1 - \cdots - \mu_n)^2]\\
+         &= \mathbb E[\sum (X_i - \mu_i)^2 + 2\sum_{i<j}(X_i - \mu_i)(X_j-\mu_j)]\\
+         &= \sum \mathbb E[(X_i - \mu_i)^2] +2\sum_{i<j}\mathbb E[(X_i - \mu_i)(X_j-\mu_j)]\\
+         &= \sum_i^n Var(X_i) + 2\sum_{i<j}Cov(X_i, X_j)
+\end{align*}
+$$
+
+
+**証明終了**

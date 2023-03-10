@@ -2,7 +2,7 @@
 title: Tag Search
 layout: default
 description: ""
-header-img: "img/tag-bg.jpg"
+header-img: "img/home-bg.jpg"
 ---
 
 
@@ -11,7 +11,8 @@ Credits: this page shamelessly borrowed a lot from:
 https://github.com/kitian616/jekyll-TeXt-theme
 -->
 <!-- Page Header -->
-{% include intro-header.html type='page' short=true %}
+{% include intro-header.html type='page' short=false %}
+<!--{% include intro-header.html type='page' short=true %}-->
 
 <!-- Main Content -->
 <div class="container">
@@ -76,8 +77,19 @@ https://github.com/kitian616/jekyll-TeXt-theme
 				        <h3 class="post-subtitle">
 				            {{ _article.subtitle }}
 				        </h3>
-				        {% endif %}
+						{% endif %}
 				    </a>
+					<h6 class="post-tags">
+						{% for tag in _article.tags %}
+        				&#9658;
+        				<a class="post-tag" 
+        				    href="{{ site.baseurl }}/archive/?tag={{ tag | url_encode }}"
+        				    rel="{{ tag.size }}"
+        				    style="padding: 2px; margin-bottom: 6px; border: 1px dotted #ffffffcc; border-radius: 99em; color: #0085a1;"
+        				    >{{ tag }} 
+        				</a>
+        				{% endfor %}
+					</h6>
 					<hr>
 				</div>
 			{%- if forloop.last -%}</section>{%- endif -%}

@@ -20,6 +20,10 @@
     - 統計, 数値計算, 数学についてコンパクトにレベルの高い内容をカバー
 - [パズルの国のアリス](https://www.nikkei-science.com/page/magazine/alice/yyyymm/question.html)
 
+> Lecture pages
+
+- [Introduction To Probability, Statistics and Random Processes](https://www.probabilitycourse.com/chapter6/6_2_2_markov_chebyshev_inequalities.php)
+
 > Lecture notes/Related contents
 
 - [An Introduction to Statistical Learning](https://www.statlearning.com/)
