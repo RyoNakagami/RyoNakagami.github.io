@@ -252,6 +252,12 @@ th {
   .label {
     border: 1px solid #000;
   }
+  .fa-search {
+    top: 2px;
+    left: 5px; /* for left side */
+    /* right: 5px; for right side*/
+    position: absolute;
+  }
   .table {
     border-collapse: collapse !important;
   }

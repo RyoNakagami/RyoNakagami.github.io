@@ -1,18 +1,19 @@
 ---
 layout: post
 title: "機械学習モデル精度の評価"
-subtitle: "意思決定とモデル精度の橋渡し"
+subtitle: "意思決定とモデル精度の橋渡し 1/N"
 author: "Ryo"
 header-img: "img/bg-statistics.png"
 header-mask: 0.4
 catelog: true
 mathjax: true
-revise_date: 2022-04-11
+revise_date: 2023-03-13
 tags:
 
 - Metrics
 - 方法論
 - 統計
+- statistical inference
 ---
 
 <div style='border-radius: 1em; border-style:solid; border-color:#D3D3D3; background-color:#F8F8F8'>
