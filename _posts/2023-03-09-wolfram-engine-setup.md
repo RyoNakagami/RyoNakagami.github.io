@@ -26,6 +26,7 @@ tags:
 - [Jupyer notebookでWolfram Language kernelを選択できるようにする](#jupyer-notebook%E3%81%A7wolfram-language-kernel%E3%82%92%E9%81%B8%E6%8A%9E%E3%81%A7%E3%81%8D%E3%82%8B%E3%82%88%E3%81%86%E3%81%AB%E3%81%99%E3%82%8B)
   - [手順](#%E6%89%8B%E9%A0%86)
   - [Removeしたい場合](#remove%E3%81%97%E3%81%9F%E3%81%84%E5%A0%B4%E5%90%88)
+- [Example](#example)
 - [References](#references)
 
 <!-- END doctoc generated TOC please keep comment here to allow auto update -->
@@ -143,6 +144,11 @@ Activation後の二回目以降に`wolframscript`を実行しようとするとA
 % ./configure-jupyter.wls remove
 ```
 
+## Example
+
+<div class="math display" style="overflow: auto">
+<iframe width="770" height="2800" src="https://nbviewer.org/github/RyoNakagami/Wolfram_playground/blob/main/example/calculate_pi.ipynb" frameborder="0" allow="autoplay; encrypted-media" allowfullscreen></iframe>
+</div>
 
 
 ## References
