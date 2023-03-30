@@ -12,13 +12,12 @@ session_cnt: 100
 tags:
 
 - 統計
-- 統計検定
-- 二項分布
+- statistical inference
 - delta method
 ---
 
-
-**Table of Contents**
+<div style='border-radius: 1em; border-style:solid; border-color:#D3D3D3; background-color:#F8F8F8'>
+<p class="h4">&nbsp;&nbsp;Table of Contents</p>
 <!-- START doctoc generated TOC please keep comment here to allow auto update -->
 <!-- DON'T EDIT THIS SECTION, INSTEAD RE-RUN doctoc TO UPDATE -->
 
@@ -32,7 +31,12 @@ tags:
 
 <!-- END doctoc generated TOC please keep comment here to allow auto update -->
 
+</div>
+
 ## 問題：Latent variableに依存したパラメーターの推定
+
+<div style='padding-left: 2em; padding-right: 2em; border-radius: 1em; border-style:solid; border-color:#D3D3D3; background-color:#F8F8F8'>
+<p class="h4"><ins>Problem </ins></p>
 
 とある地域でポケルスが流行ってるとします. 長年の研究によりポケモン$i$がポケルスに罹患するかしないかは$X_i\in \mathrm R$という確率変数に依存することがわかっており、
 ポケモン$i$がポケルスに罹患するかしないかを表した確率変数を$Z_i$とすると
@@ -57,6 +61,9 @@ $$
 $$
 \text{s.e}(\hat p) = \sqrt{\frac{\hat p (1 - \hat p)}{n}}
 $$
+
+</div>
+
 
 ### (1) $\hat p$の推定方法を述べよ
 

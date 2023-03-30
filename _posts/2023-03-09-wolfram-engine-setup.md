@@ -129,7 +129,6 @@ Activation後の二回目以降に`wolframscript`を実行しようとするとA
 ### 手順
 
 ```zsh
-# 
 % git clone git@github.com:WolframResearch/WolframLanguageForJupyter.git
 % cd ./WolframLanguageForJupyter
 % ./configure-jupyter.wls add
