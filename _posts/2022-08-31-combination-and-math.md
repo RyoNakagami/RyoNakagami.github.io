@@ -1,11 +1,3 @@
-<!-- START doctoc generated TOC please keep comment here to allow auto update -->
-<!-- DON'T EDIT THIS SECTION, INSTEAD RE-RUN doctoc TO UPDATE -->
-**Table of Contents**  *generated with [DocToc](https://github.com/thlorenz/doctoc)*
-
-- [References](#references)
-
-<!-- END doctoc generated TOC please keep comment here to allow auto update -->
-
 ---
 layout: post
 title: "Combinationの性質: 二項定理の応用"
@@ -15,6 +7,7 @@ header-img: "img/post-bg-miui6.jpg"
 header-mask: 0.4
 catelog: true
 mathjax: true
+doctoc: false
 revise_date: 2023-04-03
 tags:
 
