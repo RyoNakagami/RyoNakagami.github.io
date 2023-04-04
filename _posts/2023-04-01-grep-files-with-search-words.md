@@ -7,7 +7,7 @@ header-img: "img/post-bg-rwd.jpg"
 header-mask: 0.4
 catelog: true
 mathjax: true
-purpose: 
+revise_date: 2023-04-04
 tags:
 
 - Linux
