@@ -22,7 +22,8 @@ tags:
 - [ギリシア文字対応表](#%E3%82%AE%E3%83%AA%E3%82%B7%E3%82%A2%E6%96%87%E5%AD%97%E5%AF%BE%E5%BF%9C%E8%A1%A8)
 - [Unicodeとは？](#unicode%E3%81%A8%E3%81%AF)
   - [UnicodeとUTF-8の関係](#unicode%E3%81%A8utf-8%E3%81%AE%E9%96%A2%E4%BF%82)
-    - [UTF-8の変換ルール](#utf-8%E3%81%AE%E5%A4%89%E6%8F%9B%E3%83%AB%E3%83%BC%E3%83%AB)
+  - [UTF-8の変換ルール](#utf-8%E3%81%AE%E5%A4%89%E6%8F%9B%E3%83%AB%E3%83%BC%E3%83%AB)
+  - [UTF-8エンコードされたUnicodeに慣れよう](#utf-8%E3%82%A8%E3%83%B3%E3%82%B3%E3%83%BC%E3%83%89%E3%81%95%E3%82%8C%E3%81%9Funicode%E3%81%AB%E6%85%A3%E3%82%8C%E3%82%88%E3%81%86)
 - [References](#references)
 
 <!-- END doctoc generated TOC please keep comment here to allow auto update -->
@@ -79,6 +80,13 @@ Unicodeはギリシャ語, 日本語, 中国語, 記号など、世界で使わ�
 
 Unicodeで割り振ったコードポイントの文字符号化形式(encoding形式)の一種です. なので厳密には文字コードそれ自体ではなく, その構成要素としての「文字符号化方式（エンコーディング）」のことです. 
 
+UTF-8の特徴として
+
+- ASCIIと同じ文字は1バイト
+- その他の文字については2～6バイトを用いて文字を表現する
+
+という特徴があります. ASCIIとの対応関係があるので **「ASCIIと上位互換性がある」** と言われたりします.
+
 今回は詳しく説明しないですが, UTF-16と異なりUTF-8にはエンディアンの問題がないというメリットがあります.
 
 UnicodeとUTF-8の対応例として, 小文字ギリシア文字の $\alpha$ を考えます.
@@ -87,7 +95,14 @@ UnicodeとUTF-8の対応例として, 小文字ギリシア文字の $\alpha$ �
 |---|---|---|
 |α|`03B1`|`0xCE 0xB1`|
 
-#### UTF-8の変換ルール
+> 他のエンコーディング方式の特徴
+
+---|---
+UTF-7|ASCII文字だけを使用することが前提の電子メールで利用するために, 7ビットで表現
+UTF-16|2バイトで表現する領域に収まらない文字は, 上位サロゲートと下位サロゲートを組み合わせて4バイトで表現
+UTF-32|各符号位置が4バイトの固定長で表現
+
+### UTF-8の変換ルール
 
 Unicodeを2進数へ一旦変換し, その値をUTF-8の2進数へ変換, 16進数UTF-8へ変換するのが基本です.
 しかし, Unicode2進数をUTF-8の2進数へ変換する際に, Unicodeの範囲の応じて変換ルールが異なります.
@@ -101,6 +116,14 @@ Unicodeを2進数へ一旦変換し, その値をUTF-8の2進数へ変換, 16進
 
 なお, 範囲1の`U+0000` - `U+007F`の文字はUS-ASCIIと互換を持っており, UTF-8の表現範囲は`0x00` - `0x7F`となります.
 
+<div style='padding-left: 2em; padding-right: 2em; border-radius: 1em; border-style:solid; border-color:#D3D3D3; background-color:#F8F8F8'>
+<p class="h4"><ins>Tips</ins></p>
+
+Unicode文字列をUTF-8でエンコードすると，各文字のエンコード結果の先頭バイトは2進表示が`0`又は`11`で始まり, それ以降のバイトは`10`で始まります. つまり, 1 byte = 8 bitなので, 最初の8桁は`0`又は`11`で始まり, それ以降の8桁グループは `10`で始まる.
+
+</div>
+
+
 > Example
 
 $\alpha$を例に, UnicodeからUTF-8への変換を紹介します.
@@ -110,6 +133,33 @@ $\alpha$を例に, UnicodeからUTF-8への変換を紹介します.
 3. `1100 1110 1011 0001`を16進数変換する → `CEB1`
 4. 16進数リテラルの表記へ変換する → `0xCE 0xB1`
 
+### UTF-8エンコードされたUnicodeに慣れよう
+
+<div style='padding-left: 2em; padding-right: 2em; border-radius: 1em; border-style:solid; border-color:#D3D3D3; background-color:#F8F8F8'>
+<p class="h4"><ins>Problem: 文字数カウント</ins></p>
+
+Unicode文字列をUTF-8でエンコードすると,各文字のエンコード結果の先頭バイトは2進表示が0又は11で始まり,それ以降のバイトは10で始まる. 16進表示された次のデータは何文字のUnicode文字列をエンコードしたものか?
+
+```raw
+CF 80 E3 81 AF E7 B4 84 33 2E 31 34 E3 81 A7 E3 81 99
+```
+
+</div>
+
+**解答**
+
+- 先頭ビットが`0`になるのは16進表記で`0～7`
+- 先頭が`11`になるビットは16進表記で`C～F`
+
+なので
+
+<span style="color: red; ">C</span>F 80 <span style="color: red; ">E</span>3 81 AF <span style="color: red; ">E</span>7 B4 84 <span style="color: red; ">3</span>3 <span style="color: red; ">2</span>E <span style="color: red; ">3</span>1 <span style="color: red; ">3</span>4 <span style="color: red; ">E</span>3 81 A7 <span style="color: red; ">E</span>3 81 99
+
+なのでデータに含まれる文字数は9文字
+
+**解答終了**
+
+---
 
 ## References
 

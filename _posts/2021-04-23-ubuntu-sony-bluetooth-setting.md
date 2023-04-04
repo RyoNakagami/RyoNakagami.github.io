@@ -13,8 +13,8 @@ tags:
 - Ubuntu 20.04 LTS
 - bluetooth
 ---
-
-**Table of Contents**
+<div style='border-radius: 1em; border-style:solid; border-color:#D3D3D3; background-color:#F8F8F8'>
+<p class="h4">&nbsp;&nbsp;Table of Contents</p>
 <!-- START doctoc generated TOC please keep comment here to allow auto update -->
 <!-- DON'T EDIT THIS SECTION, INSTEAD RE-RUN doctoc TO UPDATE -->
 
@@ -34,11 +34,12 @@ tags:
 - [3. Ubuntu 20.04とWF-1000XM3の接続設定](#3-ubuntu-2004%E3%81%A8wf-1000xm3%E3%81%AE%E6%8E%A5%E7%B6%9A%E8%A8%AD%E5%AE%9A)
   - [Bluetooth Managerのインストール](#bluetooth-manager%E3%81%AE%E3%82%A4%E3%83%B3%E3%82%B9%E3%83%88%E3%83%BC%E3%83%AB)
   - [pulseaudio-modules-btの設定](#pulseaudio-modules-bt%E3%81%AE%E8%A8%AD%E5%AE%9A)
-- [Appendix](#appendix)
-  - [ビットレートとは](#%E3%83%93%E3%83%83%E3%83%88%E3%83%AC%E3%83%BC%E3%83%88%E3%81%A8%E3%81%AF)
+- [Appendix: ビットレートとは](#appendix-%E3%83%93%E3%83%83%E3%83%88%E3%83%AC%E3%83%BC%E3%83%88%E3%81%A8%E3%81%AF)
 - [References](#references)
 
 <!-- END doctoc generated TOC please keep comment here to allow auto update -->
+
+</div>
 
 ## 今回のスコープ
 
@@ -94,9 +95,23 @@ Linux 5.13.0-27-generic #29~20.04.1-Ubuntu SMP Fri Jan 14 00:32:30 UTC 2022 x86_
 
 ## 2. Bluetooth技術
 
-Bluetoothとは、2.4GHz帯の電波を用い、数m～数十m程度の比較的短距離な無線データ通信を目的とした規格の名称です。IEEE規格名は「IEEE 802.15.1」。機器同士をペアリング（原則1対1の通信に制限）してデータの送受信を行います。Wi-Fiのように大容量のデータを高速で送ることはできませんが、Wi-Fiと比べ接続が簡単で、消費電力も小さく、手軽に利用できる特長があります。
+Bluetoothとは, 免許申請や使用登録の不要な22.4GHz帯の電波を用い, 数m～数十m程度の比較的短距離の情報機器間で, 電波を使い最大24Mbpsの無線通信を行う規格です. IEEE規格名は「IEEE 802.15.1」. 機器同士をペアリング（原則1対1の通信に制限）してデータの送受信を行います. 
+
+Wi-Fiのように大容量のデータを高速で送ることはできませんが, Wi-Fiと比べ接続が簡単で, 消費電力も小さい. また赤外線で無線通信を行うIrDAと比較して通信間にある障害物に強いという特徴があります.
+
+また, Bluetoothでは通信の指向性がないため, 機器のレイアウトや向きを自由に変更することが可能というメリットもあります.
 
 Bluetooth対応機器を購入する場合、機能や性能を100%発揮させるためには、主に通信に関わる「バージョン」と、機器同士の機能連携に関わる「プロファイル」、そして通信距離に関わる「Class」の確認が重要です。
+
+<div style='padding-left: 2em; padding-right: 2em; border-radius: 1em; border-style:solid; border-color:#e6e6fa ; background-color:#e6e6fa'>
+<p class="h4"><ins>Column: IrDA</ins></p>
+
+IrDaとはInfrared Data Associationの略で, 携帯電話のアドレス帳などのデータ交換を行う場合に使用される赤外線を使って無線通信をする技術のこと. 通信可能範囲は30cm～2m程度とBluetoothと比較して狭く, 固い壁で隔てられた場所同士の通信はできません.
+
+ちなみにゲームボーイカラーの赤外線はIrDA規格ではありませんが, SONYのポケットステーションの赤外線はIrDA準拠です.
+
+</div>
+
 
 ### Bluetoothのバージョン
 
@@ -259,8 +274,7 @@ name: <bluez_card.XX_XX_XX_XX_XX_XX>
 profiles の欄に選択可能なものが表示されます．available: no となっているものは使えません.
 あとはBlueman(GUI)経由でprofile/codecを自分の好みにあった規格に設定するだけで完了です.
 
-## Appendix
-### ビットレートとは
+## Appendix: ビットレートとは
 
 ビットレートは、動画の1秒あたりのデータ量を示す値です。 bps（bits per second）と表記され、1Mbpsに設定されている場合、1秒あたりデータ量が0.125MB（1byte＝8bit）の動画ということになります。 ビットレートが高い動画ほど、データ量が多く高画質です。
 
