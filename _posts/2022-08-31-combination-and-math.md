@@ -1,7 +1,7 @@
 ---
 layout: post
 title: "Combinationの性質: 二項定理の応用"
-subtitle: "組合せ論シリーズ"
+subtitle: "組合せ論シリーズ 1/N"
 author: "Ryo"
 header-img: "img/post-bg-miui6.jpg"
 header-mask: 0.4
@@ -20,9 +20,11 @@ tags:
 
 $1$より大きい奇数 $n$ が任意に与えられている. このとき,
 
+<p style="text-align: center;">
 $$
-_nC_1, _nC_2, \cdots, _nC_{\frac{n-1}{2}}
+\\_nC_1, \\_nC_2, \cdots, \\_nC_{\frac{n-1}{2}}
 $$
+</p>
 
 のなかに奇数は奇数個存在することを示せ.
 
@@ -49,7 +51,7 @@ _nC_1 + _nC_2 + \cdots + _nC_{\frac{n-1}{2}} &= \frac{1}{2}(2^n - 2)\\
 \end{align*}
 $$
 
-従って, $(_nC_1, _nC_2, \cdots , _nC_{\frac{n-1}{2}})$の中に奇数は奇数個存在する.
+従って, $$(\\_nC_1, \\_nC_2, \cdots, \\_nC_{(n-1)/2})$$ の中に奇数は奇数個存在する.
 
 **証明終了**
 
