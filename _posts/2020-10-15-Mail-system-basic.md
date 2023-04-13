@@ -255,7 +255,7 @@ POP3プロトコルでは, コマンド & レスポンスについて以下の�
 - コマンド: 4文字のアルファベット
 - レスポンス: `+OK`, `- ERR`で表す
 
-<figure style="text-align: center;">
+<figure style="text-align: center; width:100%;">
 
 ```mermaid
 sequenceDiagram
@@ -278,16 +278,13 @@ sequenceDiagram
 
   loop メールの数だけ繰り返す
     A->>B: RETR 1<br>1をください
-    B->>A: +ok 1000 octets<br>FROM:<user@example.co.jp><br>To: <receiver_1@hoge.co.jp><br>Subject:Good Morning&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <br>...
+    B->>A: +ok 1000 octets<br>FROM:<user@example.co.jp><br>To: <receiver_1@hoge.co.jp><br>Subject:Good Morning<br>...
     A->>B: DELE 1<br>1をすててください
     B->>A: +OK message 1 has been deleted<br>この段階では削除フラグをつけるのみ. 通信終了後削除する.
   end
 
   A->>B: QUIT<br>通信を終了しましょう
   B->>A: +OK pop server at hoge.co.jp<br>了解
-
-
-
   Note over A, B: TCP通信の切断 
 ```
 
