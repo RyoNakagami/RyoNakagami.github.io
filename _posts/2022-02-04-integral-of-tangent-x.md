@@ -12,7 +12,6 @@ session_cnt: 100
 tags:
 
 - math
-- 大学院入試
 ---
 
 

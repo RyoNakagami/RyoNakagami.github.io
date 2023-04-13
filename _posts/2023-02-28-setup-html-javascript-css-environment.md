@@ -1,7 +1,7 @@
 ---
 layout: post
 title: "VS CodeでHTML + JavaScript + CSS開発環境構築"
-subtitle: "VSCode Live Previewの紹介"
+subtitle: "VS Code Live Previewの紹介"
 author: "Ryo"
 header-img: "img/cpu.png"
 header-mask: 0.4
@@ -12,7 +12,7 @@ purpose:
 tags:
 
 - 環境構築
-- VS Code
+- VSCode
 ---
 
 <div style='border-radius: 1em; border-style:solid; border-color:#D3D3D3; background-color:#F8F8F8'>

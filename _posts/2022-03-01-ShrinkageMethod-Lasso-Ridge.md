@@ -10,7 +10,6 @@ mathjax: true
 revise_date: 2022-04-11
 tags:
 
-- Shrinkage Method
 - 統計
 - Python
 ---

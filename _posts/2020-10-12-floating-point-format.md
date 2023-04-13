@@ -9,7 +9,7 @@ mathjax: true
 catelog: true
 revise_date: 2023-04-01
 tags:
-  - Computer Science
+  - 数値計算
 ---
 
 <div style='border-radius: 1em; border-style:solid; border-color:#D3D3D3; background-color:#F8F8F8'>

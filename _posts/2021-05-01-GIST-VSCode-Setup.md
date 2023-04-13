@@ -1,7 +1,7 @@
 ---
 layout: post
 title: "GistとVS Codeの連携"
-subtitle: "VS codeからGistにgist createできるようにする"
+subtitle: "VS CodeからGistにgist createできるようにする"
 author: "Ryo"
 header-img: "img/about-bg.jpg"
 header-mask: 0.4

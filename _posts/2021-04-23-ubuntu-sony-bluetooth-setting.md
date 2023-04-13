@@ -12,6 +12,8 @@ tags:
 
 - Ubuntu 20.04 LTS
 - bluetooth
+- ネットワーク
+
 ---
 <div style='border-radius: 1em; border-style:solid; border-color:#D3D3D3; background-color:#F8F8F8'>
 <p class="h4">&nbsp;&nbsp;Table of Contents</p>
