@@ -7,6 +7,7 @@ header-img: "img/cpu.png"
 header-mask: 0.4
 mathjax: true
 catelog: true
+revise_date: 2023-05-09
 tags:
   - Development
 ---
