@@ -5,29 +5,29 @@ Ryo's Tech Blog User Manual
 <!-- START doctoc generated TOC please keep comment here to allow auto update -->
 <!-- DON'T EDIT THIS SECTION, INSTEAD RE-RUN doctoc TO UPDATE -->
 
-  - [Getting Started](#getting-started)
-  - [Development](#development)
-  - [Configs](#configs)
-  - [Posts](#posts)
-  - [MathJax設定: LaTex数式のレンダリング用](#mathjax%E8%A8%AD%E5%AE%9A-latex%E6%95%B0%E5%BC%8F%E3%81%AE%E3%83%AC%E3%83%B3%E3%83%80%E3%83%AA%E3%83%B3%E3%82%B0%E7%94%A8)
-  - [SideBar](#sidebar)
-    - [LATEST COMMIT](#latest-commit)
-  - [Mini About Me](#mini-about-me)
-  - [Featured Tags](#featured-tags)
-  - [Friends](#friends)
-  - [Keynote Layout](#keynote-layout)
-  - [Share Buttons](#share-buttons)
-  - [Comment: utterrances](#comment-utterrances)
-  - [Google Analytics 4](#google-analytics-4)
-  - [SEO対策: Google Search Console](#seo%E5%AF%BE%E7%AD%96-google-search-console)
-    - [サイトマップの登録](#%E3%82%B5%E3%82%A4%E3%83%88%E3%83%9E%E3%83%83%E3%83%97%E3%81%AE%E7%99%BB%E9%8C%B2)
-    - [Google Search Consoleへの登録](#google-search-console%E3%81%B8%E3%81%AE%E7%99%BB%E9%8C%B2)
-  - [Reference](#reference)
-- [Releases](#releases)
+- [Getting Started](#getting-started)
+- [Development](#development)
+- [Configs](#configs)
+- [Posts](#posts)
+  - [How to center align the text in Markdown?](#how-to-center-align-the-text-in-markdown)
+- [MathJax設定: LaTex数式のレンダリング用](#mathjax%E8%A8%AD%E5%AE%9A-latex%E6%95%B0%E5%BC%8F%E3%81%AE%E3%83%AC%E3%83%B3%E3%83%80%E3%83%AA%E3%83%B3%E3%82%B0%E7%94%A8)
+- [SideBar](#sidebar)
+  - [LATEST COMMIT](#latest-commit)
+- [Mini About Me](#mini-about-me)
+- [Featured Tags](#featured-tags)
+- [Friends](#friends)
+- [Keynote Layout](#keynote-layout)
+- [Share Buttons](#share-buttons)
+- [Comment: utterrances](#comment-utterrances)
+- [Google Analytics 4](#google-analytics-4)
+- [SEO対策: Google Search Console](#seo%E5%AF%BE%E7%AD%96-google-search-console)
+  - [サイトマップの登録](#%E3%82%B5%E3%82%A4%E3%83%88%E3%83%9E%E3%83%83%E3%83%97%E3%81%AE%E7%99%BB%E9%8C%B2)
+  - [Google Search Consoleへの登録](#google-search-console%E3%81%B8%E3%81%AE%E7%99%BB%E9%8C%B2)
+- [Reference](#reference)
 
 <!-- END doctoc generated TOC please keep comment here to allow auto update -->
 
-### Getting Started
+## Getting Started
 
 1. [Jekyll](https://jekyllrb.com/)ベースで構築しているため[Ruby](https://www.ruby-lang.org/en/) と [Bundler](https://bundler.io/)をinstallする必要があります. [Using Jekyll with Bundler](https://jekyllrb.com/tutorials/using-jekyll-with-bundler/)に従って環境構築推奨.
 
@@ -43,7 +43,7 @@ $ bundle install
 $ bundle exec jekyll serve  # alternatively, npm start
 ```
 
-### Development
+## Development
 
 - Jekyll Themeを修正するためには[Grunt](https://gruntjs.com/)が必要です.
 - `Gruntfile.js`に修正が必要な作業が記載されています:
@@ -56,7 +56,7 @@ $ bundle exec jekyll serve  # alternatively, npm start
     - see [here](http://jwarby.github.io/jekyll-pygments-themes/languages/javascript.html))
     - 修正したい場合は`highlight.less`を参照
 
-### Configs
+## Configs
 
 ブログをカスタマイズする場合は`_config.yml`を修正します:
 
@@ -76,7 +76,7 @@ paginate: 10                # nums of posts in one page
 For more options, see [Jekyll - Official Site](http://jekyllrb.com/). 
 
 
-### Posts
+## Posts
 
 Posts are simply just Markdown files in the `_posts/`. 
 Metadata of posts are listed in a YAML style _front-matter_.
@@ -131,12 +131,47 @@ mathjax: true
 header-mask: 0.3
 ```
 
-### MathJax設定: LaTex数式のレンダリング用
+### How to center align the text in Markdown?
+
+```
+<p style="text-align: center;">Text_content</p>
+```
+
+> Adding text formatting
+
+```
+***<p style="text-align: center;">Text with basic formatting applied</p>***
+```
+
+### mermaidの記載
+
+```mermaid
+sequenceDiagram
+    participant dotcom
+    participant iframe
+    participant viewscreen
+    dotcom->>iframe: loads html w/ iframe url
+    iframe->>viewscreen: request template
+    viewscreen->>iframe: html & javascript
+    iframe->>dotcom: iframe ready
+    dotcom->>iframe: set mermaid data on iframe
+    iframe->>iframe: render mermaid
+```
+
+### LaTexチートシート
+
+|項目|レンダリング|コマンド|
+|---|---|---|
+|ベクトル|$$\pmb x_i$$|`\pmb`|
+
+
+
+## MathJax設定: LaTex数式のレンダリング用
 
 - `_includes/mathjax_support.html`にて、MathJax の読み込みとオプション設定を記述してあります.
 - 詳細は右を参照：[Github Pages で数式を ～ MathJax v3 設定のポイント](https://qiita.com/memakura/items/e4d2de379f98ad7be498)
 
-### SideBar
+## SideBar
 
 ![](../img/ryos-tech-blog-sidebars.png)
 
@@ -152,7 +187,7 @@ sidebar-avatar: /img/avatar-ryo.jpg     # use absolute URL.
 Modules *[Featured Tags](#featured-tags)*, *[Mini About Me](#mini-about-me)* and *[Friends](#friends)* are turned on by default and you can add your own. The sidebar is naturally responsive, i.e. be pushed to bottom in a smaller screen (`<= 992px`, according to [Bootstarp Grid System](http://getbootstrap.com/css/#grid))  
 
 
-#### LATEST COMMIT
+### LATEST COMMIT
 
 Shields.ioというサービスを使用してGitHubの最新コミット日をバッジで表示しています.
 
@@ -168,13 +203,13 @@ Shields.ioというサービスを使用してGitHubの最新コミット日を�
 
 を表示することができます. For more info, see [Shields.io: Quality metadata badges for open source projects](https://shields.io/category/platform-support).
 
-### Mini About Me
+## Mini About Me
 
 **Mini-About-Me** displays your avatar, description and all SNS buttons if  `sidebar-avatar` and `sidebar-about-description` variables are set. 
 
 It would be hidden in a smaller screen when the entire sidebar are pushed to bottom. Since there is already SNS portion there in the footer.
 
-### Featured Tags
+## Featured Tags
 
 **Featured-Tags** is similar to any cool tag features in website like [Medium](http://medium.com).
 Started from V1.4, this module can be used even when sidebar is off and displayed always in the bottom. 
@@ -187,7 +222,7 @@ featured-condition-size: 1     # A tag will be featured if the size of it is mor
 
 The only thing need to be paid attention to is `featured-condition-size`, which indicate a criteria that tags need to have to be able to "featured". Internally, a condition `{% if tag[1].size > {{site.featured-condition-size}} %}` are made.
 
-### Friends
+## Friends
 
 Friends is a common feature of any blog. It helps with SEO if you have a bi-directional hyperlinks with your friends sites.
 This module can live when sidebar is off as well.
@@ -209,7 +244,7 @@ friends: [
 ```
 
 
-### Keynote Layout
+## Keynote Layout
 
 ![](http://huangxuan.me/img/blog-keynote.jpg)
 
@@ -228,12 +263,12 @@ The `iframe` element will be automatically resized to adapt different form facto
 Because most of the keynote framework prevent the browser default scroll behavior. A bottom-padding is set to help user and imply user that more content could be presented below.
 
 
-### Share Buttons
+## Share Buttons
 
 
 
 
-### Comment: utterrances
+## Comment: utterrances
 
 [utterances](https://utteranc.es/)というコメントサービスを用いています. utterancesはGitHubのIssueを作ってコメントを生成しているため、utterancesがGitHubのIssueを作れるようにするためGitHubと連動する権限を許可する必要があります. 
 
@@ -247,18 +282,18 @@ Because most of the keynote framework prevent the browser default scroll behavio
 4. スクリプト生成を生成し、`_layouts/post.html`に記述する
 
 
-### Google Analytics 4
+## Google Analytics 4
 
 
 
 
-### SEO対策: Google Search Console
-#### サイトマップの登録
+## SEO対策: Google Search Console
+### サイトマップの登録
 
 - `_config.yml`でサイトマップgeneratorのjekyll-sitemapを指定しており、buildのタイミングで自動的にsitemapが作成されます
 - `https://ryonakagami.github.io/sitemap.xml`で確認することができます
 
-#### Google Search Consoleへの登録
+### Google Search Consoleへの登録
 
 Google Search Console は、Google 検索結果でのサイトの掲載順位を監視、管理、改善するのに役立つ Google の無料サービスです. Search Console に登録しなくても Google 検索結果にサイトが表示されるようにすることはできますが、Search Console に登録することで、Google のサイトに対する認識を理解し、改善できるようになります.
 
@@ -288,7 +323,7 @@ Google Search Console は、Google 検索結果でのサイトの掲載順位を
 
 
 
-### Reference
+## Reference
 
 - [Hux Blog](http://huangxuan.me/)
 - [フリー素材>cyberpunk](https://pixabay.com/ja/images/search/cyberpunk/)
@@ -299,6 +334,3 @@ Google Search Console は、Google 検索結果でのサイトの掲載順位を
 - [Jekyllブログにコメント機能](https://dev-yakuza.posstree.com/jekyll/utterances/)
 - [GitHub Pagesで作ったブログをGoogle検索にヒットさせる](https://www.bedroomcomputing.com/2020/04/2020-0408-googleconsole/)
 - [Jekyll Theme](https://github.com/yk-liu/yk-liu.github.io)
-
-Releases
---------

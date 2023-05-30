@@ -263,9 +263,6 @@ Initiatives|複数のエピックによって構成されたグループ
 上記のStoriesはすべて関連しており, より大きな作業の完了(= Epic)に向けてドライブする個々のチケットと考えることができます.
 この場合, Epicは「**ストリーミングサービスの改善**」となります.
 
-</div>
-
-<div style='padding-left: 2em; padding-right: 2em; border-radius: 1em; border-style:solid; border-color:#e6e6fa; background-color:#e6e6fa'>
 <p class="h4"><ins>EpicとInitiativeの関係</ins></p>
 
 民間宇宙探索会社が今年1回あたりの打ち上げコストを5％減らしたいと思っているとします. これは大きな目標なので, Initiativeとなります.
@@ -279,33 +276,53 @@ Initiatives|複数のエピックによって構成されたグループ
 
 #### テンプレート例
 
-```
+```markdown
 ## For Whom
 
-- iPhoneユーザー
+- 分析者
 
-## What 
+## Want
 
-- モバイルアプリを使用時にライブフィードの垂直ビューにアクセスできるようにする
+- OLS ClassをData Classを用いて簡略化
+- 余分なMethodのcallを少なくする
+- 機能のダウングレードは許容しない
 
-## Purpose
+## How
 
-- ストリーミングサービスの改善
+- モジュール構成の整理
+- class attributeの関係性の整理
+- 関数名や変数名のタイポ修正
 
-## How 
-### Overview
+## Why Important?
 
-- hogehoge
+- version 1.1.8総仕上げ
 
-### Task
+## Action
+### Repository structure
 
-- [ ] XXXX
-- [ ] XXXX
-- [ ] XXXX
+- [x] : OLS Class用前処理関数をpreprocess.commonへ集約
+- [x] : ReadData Class, OLS Class共通で使うmoduleはutilities.pyへ集約 
+
+### Module FIX  
+> Main
+
+- [x] : hogehoge
+
+> 前処理
+
+- [x] : hogehoge
+
+> 数値計算
+
+- [x] : hogehoge
+
+> Visualize
+
+- [x] : hogehoge
 
 ## References
 
-- 
+- hogehoge
 
 ```
 

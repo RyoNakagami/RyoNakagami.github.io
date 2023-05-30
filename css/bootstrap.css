@@ -28,6 +28,11 @@ section,
 summary {
   display: block;
 }
+summary:hover {
+  cursor: pointer; /* カーソルを指マークに */
+  background-color: #EFEFEF;
+}
+
 audio,
 canvas,
 progress,
