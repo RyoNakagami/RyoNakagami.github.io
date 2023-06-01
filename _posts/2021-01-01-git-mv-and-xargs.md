@@ -93,7 +93,7 @@ tags:
 ### ファイルが見つからなかった場合
 
 ```zsh
-% find ./data/test_1[0-9].txt | xargs -I{} git mv {} ./data/old
+% find ./data/test_1[0-9].txt | xargs -P2 -I{} git mv {} ./data/old
 zsh: no matches found: ./data/test_1[0-9].txt
 ```
 
@@ -105,7 +105,7 @@ zsh: no matches found: ./data/test_1[0-9].txt
 ```zsh
 % echo hogehoge > ./data/test_11.txt
 % echo foofoo > ./data/old/test_11.txt
-% find ./data/test_1[0-9].txt | xargs -I{} git mv {} ./data/old
+% find ./data/test_1[0-9].txt | xargs -P2 -I{} git mv {} ./data/old
 fatal: destination exists, source=data/test_11.txt, destination=data/old/test_11.txt
 % tree
 .
@@ -152,8 +152,8 @@ foofoo
 
 |オプション|効果|
 |---|---|
-|`-I replace-str`|xargs実行時に指定したコマンドの引数のうち, 置換文字部分を標準入力から読み込んだ名前で置き換える|
-
+|`-I replace-str`|xargs実行時に指定したコマンドの引数のうち, 置換文字部分を標準入力から読み込んだ名前で置き換える. `-L1` が自動的に指定される.|
+|`-P max-procs`|一度に最大でmax-procs個のプロセスを実行. デフォルトは1. max-procsが0の場合, xargsは可能な限り多くのプロセスを同時に実行.|
 
 ## References
 

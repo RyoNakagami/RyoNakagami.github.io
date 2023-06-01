@@ -3,7 +3,7 @@
     @param {boolean} short
 {% endcomment %}
 
-{% if include.type == 'post' %}
+{% if include.type == 'post' or include.type == 'page' %}
 <style type="text/css">
     header.intro-header{
         position: relative;
@@ -20,6 +20,9 @@
     }
     {% endif %}
 </style>
+{% endif %}
+
+{% if include.type == 'post' %}
 {% if page.header-style == 'text' %}
 <header class="intro-header style-text" >
 {% else %}
