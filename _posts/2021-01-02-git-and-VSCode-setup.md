@@ -29,6 +29,7 @@ tags:
 - [Viewing diffs Between the active file and the selected](#viewing-diffs-between-the-active-file-and-the-selected)
 - [Checking Commit Graph with Git Graph](#checking-commit-graph-with-git-graph)
 - [Checking Commit History with Git History](#checking-commit-history-with-git-history)
+- [Quick-Checking Which File Causes Conflict](#quick-checking-which-file-causes-conflict)
 - [References](#references)
 
 <!-- END doctoc generated TOC please keep comment here to allow auto update -->
@@ -204,7 +205,28 @@ ext install donjayamanne.githistory
     },
 ```
 
+## Quick-Checking Which File Causes Conflict
 
+> What I Want
+
+- Confictを引き起こすファイル一覧をEditorの中から確認したい
+
+> How to Check
+
+- GitリポジトリとなっているフォルダをVSCode Workspaceとして開くだけで,「ソースコントロールビュー」経由でChanges一覧が確認可能
+
+<img src="https://github.com/ryonakimageserver/omorikaizuka/blob/master/%E3%83%96%E3%83%AD%E3%82%B0%E7%94%A8/20201228-Git-VsCode.png?raw=true">
+
+> アルファベットの意味
+
+|アルファベット|説明|
+|---|---|
+|`U`|git管理下にないファイル（untracked）|
+|`A`|added|
+|`M`|modified|
+|`D`|deleted|
+|`R`|renamed|
+|`C`|conflictしたファイル|
 
 
 ## References
