@@ -16,14 +16,10 @@ tags:
 - GitHub
 ---
 
+<div style='border-radius: 1em; border-style:solid; border-color:#D3D3D3; background-color:#F8F8F8'>
 
+<p class="h4">&nbsp;&nbsp;Table of Contents</p>
 
----|---
-目的|VS codeから簡単にgistにgist createできるようにする
-OS |	ubuntu 20.04 LTS Focal Fossa
-CPU| 	Intel Core i7-9700 CPU 3.00 GHz
-
-**Table of Contents**
 <!-- START doctoc generated TOC please keep comment here to allow auto update -->
 <!-- DON'T EDIT THIS SECTION, INSTEAD RE-RUN doctoc TO UPDATE -->
 
@@ -40,10 +36,12 @@ CPU| 	Intel Core i7-9700 CPU 3.00 GHz
   - [プロトコル: 共有まで](#%E3%83%97%E3%83%AD%E3%83%88%E3%82%B3%E3%83%AB-%E5%85%B1%E6%9C%89%E3%81%BE%E3%81%A7)
   - [コードレビューの項目](#%E3%82%B3%E3%83%BC%E3%83%89%E3%83%AC%E3%83%93%E3%83%A5%E3%83%BC%E3%81%AE%E9%A0%85%E7%9B%AE)
 - [References](#references)
-  - [VS Code Extension](#vs-code-extension)
-  - [オンラインマテリアル](#%E3%82%AA%E3%83%B3%E3%83%A9%E3%82%A4%E3%83%B3%E3%83%9E%E3%83%86%E3%83%AA%E3%82%A2%E3%83%AB)
 
 <!-- END doctoc generated TOC please keep comment here to allow auto update -->
+
+
+</div>
+
 
 ## 問題設定
 
@@ -129,11 +127,12 @@ CPU| 	Intel Core i7-9700 CPU 3.00 GHz
 - Style (形式はスタイルガイドに従っているか、統一性あるか)
 
 ## References
-### VS Code Extension
+
+>  VS Code Extension
 
 - [VS Code Extension Gist, kenhowardpdx.vscode-gist](https://marketplace.visualstudio.com/items?itemName=kenhowardpdx.vscode-gist#review-details)
 
-### オンラインマテリアル
+>  GitHub公式ドキュメント
 
 - [GitHub > gist](https://gist.github.com/)
 - [GitHub > Google Engineering Practices Documentation](https://github.com/google/eng-practices)

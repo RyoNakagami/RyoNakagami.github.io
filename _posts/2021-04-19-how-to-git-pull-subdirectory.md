@@ -1,9 +1,10 @@
 ---
 layout: post
 title: "GitHub Repositoryの任意のサブディレクトリのみをローカル側で取得する"
+subtitle: "How to use git command 6/N"
 author: "Ryo"
-header-img: "img/tag-bg.jpg"
-header-mask: 0.4
+header-mask: 0.0
+header-style: text
 catelog: true
 tags:
   - git
@@ -12,23 +13,31 @@ tags:
 
 
 
-|概要||
-|---|---|
-|目的|GitHub Repositoryの任意のサブディレクトリのみをローカル側で取得する|
+<div style='border-radius: 1em; border-style:solid; border-color:#D3D3D3; background-color:#F8F8F8'>
+
+<p class="h4">&nbsp;&nbsp;Table of Contents</p>
 
 <!-- START doctoc generated TOC please keep comment here to allow auto update -->
 <!-- DON'T EDIT THIS SECTION, INSTEAD RE-RUN doctoc TO UPDATE -->
 
-- [Git version](#git-version)
+- [Overview](#overview)
 - [サブディレクトレリ取得までの手順](#%E3%82%B5%E3%83%96%E3%83%87%E3%82%A3%E3%83%AC%E3%82%AF%E3%83%88%E3%83%AC%E3%83%AA%E5%8F%96%E5%BE%97%E3%81%BE%E3%81%A7%E3%81%AE%E6%89%8B%E9%A0%86)
 - [Sparse checkoutとは？](#sparse-checkout%E3%81%A8%E3%81%AF)
   - [sparse-checkoutの無効化と解除](#sparse-checkout%E3%81%AE%E7%84%A1%E5%8A%B9%E5%8C%96%E3%81%A8%E8%A7%A3%E9%99%A4)
-- [Appendix](#appendix)
-  - [リダイレクション](#%E3%83%AA%E3%83%80%E3%82%A4%E3%83%AC%E3%82%AF%E3%82%B7%E3%83%A7%E3%83%B3)
+- [References](#references)
 
 <!-- END doctoc generated TOC please keep comment here to allow auto update -->
 
-## Git version
+
+</div>
+
+## Overview
+
+> What I Want
+
+- GitHub Repositoryの任意のサブディレクトリのみをローカル側で取得する
+
+> Git version
 
 ```zsh
 % git --version
@@ -82,6 +91,17 @@ git version 2.31.1
 % git pull origin master
 ```
 
+<div style='padding-left: 2em; padding-right: 2em; border-radius: 1em; border-style:solid; border-color:#e6e6fa; background-color:#e6e6fa'>
+<p class="h4"><ins>Column: シェルコマンドにおけるリダイレクション</ins></p>
+
+|項目 |説明|
+|---|---|
+|`>` |	ファイルへの上書き|
+|`>>` |	ファイルへの追記|
+
+</div>
+
+
 ## Sparse checkoutとは？
 
 `Sparse checkout` では、作業ディレクトリをコンパクトにすることができます. skip-worktree bit を使って、作業ディレクトリにあるファイルを見る価値があるかどうかを Git に伝えます。skip-worktree bitが設定されている場合、そのファイルは作業ディレクトリでは無視されます。Git はこれらのファイルの内容を入力しません。そのため、多くのファイルがあるリポジトリで作業をしていて、現在のユーザーにとって重要なファイルがほんの少ししかない場合などにSparse checkoutが役立ちます。
@@ -130,11 +150,4 @@ git version 2.31.1
 3. `.git/info/sparse-checkout` を削除
 4. `sparsecheckout` を無効にする
 
-
-## Appendix
-### リダイレクション
-
-|項目 |説明|
-|---|---|
-|`>` |	ファイルへの上書き|
-|`>>` |	ファイルへの追記|
+## References

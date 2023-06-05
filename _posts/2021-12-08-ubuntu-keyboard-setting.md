@@ -3,7 +3,6 @@ layout: post
 title: "Keychron K6 Wireless Mechanical Keyboardとショートカットの整理"
 subtitle: "Ubuntu Desktop環境構築 Part 24"
 author: "Ryo"
-header-img: "img/about-bg.jpg"
 header-mask: 0.4
 catelog: true
 mathjax: true
@@ -16,8 +15,9 @@ tags:
 - Keyboard
 ---
 
----|---
-やりたいこと|- Keychron K6 Wireless Mechanical Keyboardの初期設定<br>- VSCodeやUbuntuのショートカットの整理
+<div style='border-radius: 1em; border-style:solid; border-color:#D3D3D3; background-color:#F8F8F8'>
+
+<p class="h4">&nbsp;&nbsp;Table of Contents</p>
 
 <!-- START doctoc generated TOC please keep comment here to allow auto update -->
 <!-- DON'T EDIT THIS SECTION, INSTEAD RE-RUN doctoc TO UPDATE -->
@@ -38,14 +38,16 @@ tags:
   - [Ubuntu Keyboard Shortcutの変更](#ubuntu-keyboard-shortcut%E3%81%AE%E5%A4%89%E6%9B%B4)
     - [`Super` + `P` ショートカットの解除とscreenshotコマンドの設定](#super--p-%E3%82%B7%E3%83%A7%E3%83%BC%E3%83%88%E3%82%AB%E3%83%83%E3%83%88%E3%81%AE%E8%A7%A3%E9%99%A4%E3%81%A8screenshot%E3%82%B3%E3%83%9E%E3%83%B3%E3%83%89%E3%81%AE%E8%A8%AD%E5%AE%9A)
     - [Caps Lock キーを無効化する](#caps-lock-%E3%82%AD%E3%83%BC%E3%82%92%E7%84%A1%E5%8A%B9%E5%8C%96%E3%81%99%E3%82%8B)
-  - [VSCode Keyboard Shortcutの変更](#vscode-keyboard-shortcut%E3%81%AE%E5%A4%89%E6%9B%B4)
-    - [VSCodeで分割先にActive Editorを移動するショートカットの設定](#vscode%E3%81%A7%E5%88%86%E5%89%B2%E5%85%88%E3%81%ABactive-editor%E3%82%92%E7%A7%BB%E5%8B%95%E3%81%99%E3%82%8B%E3%82%B7%E3%83%A7%E3%83%BC%E3%83%88%E3%82%AB%E3%83%83%E3%83%88%E3%81%AE%E8%A8%AD%E5%AE%9A)
-    - [VSCodeでsplit terminal tab間の移動](#vscode%E3%81%A7split-terminal-tab%E9%96%93%E3%81%AE%E7%A7%BB%E5%8B%95)
+- [5. VSCode Keyboard Shortcutの変更](#5-vscode-keyboard-shortcut%E3%81%AE%E5%A4%89%E6%9B%B4)
+  - [分割先へActive Editorを移動するショートカットの設定](#%E5%88%86%E5%89%B2%E5%85%88%E3%81%B8active-editor%E3%82%92%E7%A7%BB%E5%8B%95%E3%81%99%E3%82%8B%E3%82%B7%E3%83%A7%E3%83%BC%E3%83%88%E3%82%AB%E3%83%83%E3%83%88%E3%81%AE%E8%A8%AD%E5%AE%9A)
+  - [split terminal tab間の移動](#split-terminal-tab%E9%96%93%E3%81%AE%E7%A7%BB%E5%8B%95)
+  - [`git`: Active Fileの前回commit時との変更差分確認](#git-active-file%E3%81%AE%E5%89%8D%E5%9B%9Ecommit%E6%99%82%E3%81%A8%E3%81%AE%E5%A4%89%E6%9B%B4%E5%B7%AE%E5%88%86%E7%A2%BA%E8%AA%8D)
 - [References](#references)
 
 <!-- END doctoc generated TOC please keep comment here to allow auto update -->
 
 
+</div>
 
 ## 1. 技術スペック
 
@@ -353,17 +355,16 @@ Defaultではモニター設定のキーが割り当てられているのでそ�
 5. Reboot
 
 
-### VSCode Keyboard Shortcutの変更
-
-#### VSCodeで分割先にActive Editorを移動するショートカットの設定
+## 5. VSCode Keyboard Shortcutの変更
 
 > 方針
 
 - `keybindings.json`ファイルに新たなキーボートショートカットを追記する
-- commandはshortcuts一覧から変更したいコマンドを探し、それに対してkeyを設定する
 
 
-> 設定例
+### 分割先へActive Editorを移動するショートカットの設定
+
+> 設定
 
 - `meta`とは`Super`のこと
 
@@ -380,9 +381,9 @@ Defaultではモニター設定のキーが割り当てられているのでそ�
     }
 ```
 
-#### VSCodeでsplit terminal tab間の移動
+### split terminal tab間の移動
 
-> 設定例
+> 設定
 
 
 ```json
@@ -398,8 +399,41 @@ Defaultではモニター設定のキーが割り当てられているのでそ�
     }
 ```
 
+### `git`: Active Fileの前回commit時との変更差分確認
+
+> 機能
+
+- 現在編集中のファイルについて, 前回commit時との変更差分確認(=`Viewing diffs`)する
+- `Viewing diffs`を閉じる
+
+> 設定
+
+```json
+    //-----------------------------------------------------------
+    //  Git Settings
+    //-----------------------------------------------------------
+    {
+        "key": "ctrl+alt+h",
+        "command": "git.openChange",
+        "when": "editorTextFocus"
+    },
+    {
+        "key": "ctrl+alt+h",
+        "command": "git.openFile",
+        "when": "isInDiffEditor",
+        "description": "git.OpenChangeを閉じる"
+    },
+```
+
+
+
+
 ## References
 
 - [Archlinux: Function keys do not work](https://wiki.archlinux.org/title/Apple_Keyboard#Function_keys_do_not_work)
 - [How to disable global Super-p shortcut?](https://askubuntu.com/questions/68463/how-to-disable-global-super-p-shortcut)
+
+> VSCode関連
+
+- [VSCode > Using Git source control in VS Code > Viewing diffs](https://code.visualstudio.com/docs/sourcecontrol/overview#_viewing-diffs)
 - [stackoverflow:How to switch between terminals in Visual Studio Code](https://stackoverflow.com/questions/48440673/how-to-switch-between-terminals-in-visual-studio-code/60224585)

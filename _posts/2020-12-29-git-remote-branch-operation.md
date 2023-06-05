@@ -114,34 +114,6 @@ fatal: invalid reference: test
 fatal: a branch named 'non_existing_branch' already exists
 ```
 
-### Get/Switch to a remote branch
-
-> What I Want to Do
-
-- リモートブランチ(`project/adhoc_analysis`)をローカルにチェックアウトしたい
-
-> How
-
-1. リモートの追跡ブランチを更新
-2. `git switch` (リモート側にすでにブランチが存在するので`-c`は必要なし)
-
-```zsh
-% git branch -r
-  origin/HEAD -> origin/main
-  origin/develop
-  origin/add_cross_validation
-  origin/add_visualize_module
-  origin/main
-  origin/project/ad_hoc_analysis
-% git fetch --all
-% git switch project/adhoc_analysis
-```
-
-> REMARKS
-
-- 内部的にLocal側に新しくリモートと同じブランチ名のブランチが作成, からのswitchとなる
-
-
 ### Create a New Branch Locally from a Specified Branch
 
 > Syntax
@@ -213,6 +185,48 @@ develop
 ```
 
 ## Remote Branch Operation
+### Get/Switch to a remote branch: `git switch` version
+
+> What I Want to Do
+
+- リモートブランチ(`project/adhoc_analysis`)をローカルにチェックアウトしたい
+
+> How
+
+1. リモートの追跡ブランチを更新
+2. `git switch` (リモート側にすでにブランチが存在するので`-c`は必要なし)
+
+```zsh
+% git branch -r
+  origin/HEAD -> origin/main
+  origin/develop
+  origin/add_cross_validation
+  origin/add_visualize_module
+  origin/main
+  origin/project/ad_hoc_analysis
+% git fetch --all
+% git switch project/adhoc_analysis
+```
+
+> REMARKS
+
+- 内部的にLocal側に新しくリモートと同じブランチ名のブランチが作成, からのswitchとなる
+
+
+### Get/Switch to a remote branch: `git fetch` version
+
+> What I Want to Do
+
+- リモートブランチ(`project/adhoc_analysis`)をローカルにbranch nameを指定して取り込みたい
+
+> How
+
+```zsh
+% git fetch <remote> <remote-branchname>:<local-branchname>
+```
+
+
+
 ### Delete Remote Branch
 
 ```zsh

@@ -1,9 +1,8 @@
 ---
 layout: post
 title: "git rebase: リモートリポジトリの更新後にローカルリポジトリを編集 & commitした場合のエラー対策"
-subtitle: "How to use git command 3/N"
+subtitle: "How to use git command 2/N"
 author: "Ryo"
-header-img: "img/post-git-github-logo.jpg"
 header-mask: 0.4
 catelog: true
 mathjax: true
@@ -16,10 +15,8 @@ tags:
 
 <div style='border-radius: 1em; border-style:solid; border-color:#D3D3D3; background-color:#F8F8F8'>
 
-<details>
-<summary>
 <p class="h4">&nbsp;&nbsp;Table of Contents</p>
-</summary>
+
 <!-- START doctoc generated TOC please keep comment here to allow auto update -->
 <!-- DON'T EDIT THIS SECTION, INSTEAD RE-RUN doctoc TO UPDATE -->
 
@@ -32,7 +29,6 @@ tags:
 
 <!-- END doctoc generated TOC please keep comment here to allow auto update -->
 
-</details>
 
 </div>
 

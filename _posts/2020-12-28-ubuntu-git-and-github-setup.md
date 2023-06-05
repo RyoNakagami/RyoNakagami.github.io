@@ -3,11 +3,12 @@ layout: post
 title: "GitとGitHubの設定"
 subtitle: "Ubuntu Desktop環境構築 Part 13"
 author: "Ryo"
-header-img: "img/post-git-github-logo.jpg"
 header-mask: 0.4
 catelog: true
 mathjax: true
 revise_date: 2022-08-01
+header-mask: 0.0
+header-style: text
 tags:
 
 - Ubuntu 20.04 LTS
@@ -15,12 +16,17 @@ tags:
 - GitHub
 ---
 
-**Table of Contents**
+<div style='border-radius: 1em; border-style:solid; border-color:#D3D3D3; background-color:#F8F8F8'>
+
+<p class="h4">&nbsp;&nbsp;Table of Contents</p>
+
 <!-- START doctoc generated TOC please keep comment here to allow auto update -->
 <!-- DON'T EDIT THIS SECTION, INSTEAD RE-RUN doctoc TO UPDATE -->
 
-- [1. 今回のスコープ](#1-%E4%BB%8A%E5%9B%9E%E3%81%AE%E3%82%B9%E3%82%B3%E3%83%BC%E3%83%97)
-- [2. Gitとはなにか？](#2-git%E3%81%A8%E3%81%AF%E3%81%AA%E3%81%AB%E3%81%8B)
+- [1. What is this Post all about?](#1-what-is-this-post-all-about)
+- [2. What is Git?](#2-what-is-git)
+  - [About Version Control](#about-version-control)
+  - [Local VCS vs Distributed VCS](#local-vcs-vs-distributed-vcs)
   - [Version管理の方法](#version%E7%AE%A1%E7%90%86%E3%81%AE%E6%96%B9%E6%B3%95)
   - [Gitのバージョン管理の仕組み](#git%E3%81%AE%E3%83%90%E3%83%BC%E3%82%B8%E3%83%A7%E3%83%B3%E7%AE%A1%E7%90%86%E3%81%AE%E4%BB%95%E7%B5%84%E3%81%BF)
   - [Gitはどこにバージョン管理のDBをもっているのか？](#git%E3%81%AF%E3%81%A9%E3%81%93%E3%81%AB%E3%83%90%E3%83%BC%E3%82%B8%E3%83%A7%E3%83%B3%E7%AE%A1%E7%90%86%E3%81%AEdb%E3%82%92%E3%82%82%E3%81%A3%E3%81%A6%E3%81%84%E3%82%8B%E3%81%AE%E3%81%8B)
@@ -39,9 +45,6 @@ tags:
   - [Git へ GPG キーを伝える](#git-%E3%81%B8-gpg-%E3%82%AD%E3%83%BC%E3%82%92%E4%BC%9D%E3%81%88%E3%82%8B)
   - [`.zshrc`への登録](#zshrc%E3%81%B8%E3%81%AE%E7%99%BB%E9%8C%B2)
   - [コミットに署名する](#%E3%82%B3%E3%83%9F%E3%83%83%E3%83%88%E3%81%AB%E7%BD%B2%E5%90%8D%E3%81%99%E3%82%8B)
-- [6. VSCodeとGitの連携](#6-vscode%E3%81%A8git%E3%81%AE%E9%80%A3%E6%90%BA)
-  - [アルファベットの意味](#%E3%82%A2%E3%83%AB%E3%83%95%E3%82%A1%E3%83%99%E3%83%83%E3%83%88%E3%81%AE%E6%84%8F%E5%91%B3)
-  - [diff画面で変更を確認する](#diff%E7%94%BB%E9%9D%A2%E3%81%A7%E5%A4%89%E6%9B%B4%E3%82%92%E7%A2%BA%E8%AA%8D%E3%81%99%E3%82%8B)
 - [7. BFG Repo-Cleanerのインストール](#7-bfg-repo-cleaner%E3%81%AE%E3%82%A4%E3%83%B3%E3%82%B9%E3%83%88%E3%83%BC%E3%83%AB)
   - [BFG Repo-Cleanerとは？](#bfg-repo-cleaner%E3%81%A8%E3%81%AF)
   - [BFGのインストール](#bfg%E3%81%AE%E3%82%A4%E3%83%B3%E3%82%B9%E3%83%88%E3%83%BC%E3%83%AB)
@@ -49,9 +52,12 @@ tags:
 
 <!-- END doctoc generated TOC please keep comment here to allow auto update -->
 
-## 1. 今回のスコープ
 
-> やりたいこと
+</div>
+
+## 1. What is this Post all about?
+
+> Goal
 
 - Gitの概念の理解
 - Gitのインストールと初期設定
@@ -62,22 +68,65 @@ tags:
 - GitHubの個人アカウント作成済み
 - Visual Studio Codeインストール済み
 
-## 2. Gitとはなにか？
+## 2. What is Git?
 
-Gitとは分散型バージョン管理システムです.Version管理とは,変更履歴を管理することで, ソースコードを書き足したり,変更したりする過程を記録したり,特定の段階に戻ったり,ファイルを復活させたり,メタデータからの状態の検索することができるようになります. Version管理システム,特にGitを活用することで以下のような課題を解決することができます：
+Gitとは, ファイルやソースコードの変更を分散型でトラッキングする仕組みです. 
+ファイルやソースコードの変更をトラッキングする仕組みのことをバージョン管理システムと呼んだりします.
 
-- あのとき動いたが,今は動かない.一回動いていた状態に戻したい
+### About Version Control
+
+<div style='padding-left: 2em; padding-right: 2em; border-radius: 1em; border-style:solid; border-color:#D3D3D3; background-color:#F8F8F8'>
+<p class="h4"><ins>Def: Version Control System</ins></p>
+
+変更履歴を管理することを通じて, 
+
+- 前回差分箇所をハイライト
+- ファイルの特定の段階に戻る
+- ファイルを復活
+
+などを実現する仕組みがVersion Control System(VCS)です.
+
+</div>
+
+VCSを活用するメリットの具体例として, 
+
+- あのとき動いたが,今は動かない... もう一回動いていた状態に戻したい
 - このコードを加えた人とタイミングを知りたい
-- 共同開発者が編集したファイルのせいで,自分のコードが動かなくなってしまった
+- 前回消してしまったコードを復活させたい
 
->  Gitのuse case
+など. 「**VCSを活用することで, 一回とんでもない変更をしたとしても, すぐプロジェクト全体の状態を戻すことができる**」ということです.
+
+>  Git commandとUse Caseの対応
 
 |問題|やりたいこと|関連コマンド|
 |---|----------|----------|
-|エラーを含んだ状態でプログラムを保存してしまった|動作していたときの状態に戻したい|`git reset --hard <hash>`|
-|レポートのファイルを間違って削除してしまった(staging area)|元に戻したい|`git reset <file path>`|
-|1週間ぶりに開くファイル、以前どんな編集をしたのか忘れてしまった。|何をしたのか記録しておきたい|README.mdやIssue, ToDoリストを更新|
-|二人で1つのファイルを編集してしまい、一方の人がした 編集が反映されなかった|conflictを発見かつ修正したい|(1) conflict箇所の確認:git merge後に `git status`<br>(2)コンフリクトしているファイルが分かったら、直接ファイルを開いて修正<br><br>開発チームごとにルールがあるはずなので確認|
+|エラーを含んだ状態でプログラムを保存してしまった|動作していたときの状態に戻したい|`git reset`<br>`git restore`|
+|レポートのファイルを間違って削除してしまった(staging area)|元に戻したい|`git restore`|
+|1週間ぶりに開くファイル, 以前どんな編集をしたのか忘れてしまった|何をしたのか記録しておきたい|`git diff`|
+|二人で1つのファイルを編集してしまい, 2つのファイルが生まれてしまった|conflictを発見かつ修正したい|`git diff -- <FilePathA> <FilePathB>`|
+
+### Local VCS vs Distributed VCS
+
+Version管理システムは分散型と集中型の２つに大別することができます. 
+
+- 集中型: 変更履歴などのデータを一つの中央サーバーに集めて管理する種類のこと
+- 分散型: 各クライアントがリポジトリをミラーし終わったあとは, 変更履歴の参照などのVersion管理アクションは各々のクライアント内部で閉じている種類のこと
+
+
+分散型は,最新のソースコードの管理が難しいというデメリットがありますが(いわゆるコンフリクト), 
+クライアントのローカル環境内部で変更履歴の確認等の作業が完結するので, 
+集中型Version管理システムで直面するnetwork latency overhead問題を余り気にせずに開発作業をすることができます.
+
+
+> Centralized Version Control vs Distributed Version Control
+
+<table>
+<tr>
+<td><img src="https://github.com/ryonakimageserver/omorikaizuka/blob/master/git/GitHub_pages_Posts/20210104_Git_Centralized_version_control.png?raw=true" width="100%" height="100%"></td> 
+<td><img src="https://github.com/ryonakimageserver/omorikaizuka/blob/master/git/GitHub_pages_Posts/20200104_Git_Distributed_version_control.png?raw=true" width="100%" height="100%"></td>
+</tr>
+</table>
+
 
 ### Version管理の方法
 
@@ -91,20 +140,6 @@ Snapshots vs Differencesのイメージは以下のFiguresとなります.
 
 <img src="https://github.com/ryonakimageserver/omorikaizuka/blob/master/git/GitHub_pages_Posts/20210104_git_snapshots_02.png?raw=true">
 
-> 分散型と集中型
-
-Version管理システムは分散型と集中型の２つに大別することができます.集中型とは変更履歴などのデータを一つの中央サーバーに集めて管理する種類のことです.分散型とは,各クライアントがリポジトリをミラーし終わったあとは,変更履歴の参照などのVersion管理アクションは各々のクライアント内部で閉じている種類のことを指します.
-
-分散型は,最新のソースコードの管理が難しいというデメリットがありますが(いわゆるコンフリクト),クライアントのローカル環境内部で変更履歴の確認等の作業が完結するので,集中型Version管理システムで直面するnetwork latency overhead問題を憂慮すること少なく開発作業をすることができます.
-
-|システム|例|メリット|デメリット|
-|---|---|---|---|
-|集中型|Suversion|単一リポジトリなので管理が容易|リポジトリへのアクセスが常にネットワーク経由になる|
-|分散型|Git|ローカル上のリポジトリを更新することで,ネットワークがつながらないときでも作業可能|リポジトリが複数存在するため管理が困難(どれが最新なのか判断が難しい)|
-
-<img src="https://github.com/ryonakimageserver/omorikaizuka/blob/master/git/GitHub_pages_Posts/20210104_Git_Centralized_version_control.png?raw=true">
-
-<img src="https://github.com/ryonakimageserver/omorikaizuka/blob/master/git/GitHub_pages_Posts/20200104_Git_Distributed_version_control.png?raw=true">
 
 > Gitにおけるリポジトリの種類
 
@@ -138,7 +173,20 @@ Git管理されたファイルは`modified`, `staged`, `committed`という状�
 |`staged`|ファイルが次のcommitでデータベースに記録される準備ができたことを示します|
 |`committed`|ローカルレポジトリにファイル変更履歴が記録されていることを示します|
 
-<img src="https://github.com/ryonakimageserver/omorikaizuka/blob/master/git/GitHub_pages_Posts/20210104_Git_Three_states.png?raw=true">
+
+```mermaid
+sequenceDiagram
+    participant wd as Working Directory
+    participant sd as Staging Area
+    participant cd as .git directory<br>(=Repository)
+    cd->>wd: Checkout the project
+    Note left of sd: git checkout<br>git restore
+    wd->>sd: Stage Fixes
+    Note left of sd: git add<br>git rm
+    sd->>cd: Commit
+    Note left of cd: git commit
+```
+
 
 > git ls-fles: stagedにインデックスされているファイルの表示
 
@@ -538,43 +586,10 @@ GPG キー ID は 3AA5C34371567BD2の場合,
 # 署名済みのタグを検証する
 ```
 
-## 6. VSCodeとGitの連携
-
-VSCodeでは, Gitリポジトリとなっているフォルダをワークスペースとして開くだけで,「ソースコントロールビュー」を使ってGitに関する操作が可能になります.
-
-<img src="https://github.com/ryonakimageserver/omorikaizuka/blob/master/%E3%83%96%E3%83%AD%E3%82%B0%E7%94%A8/20201228-Git-VsCode.png?raw=true">
-
-ソースコントロールビューには,まだコミットされていない変更のあるファイルが「変更」と「ステージング済みの変更」に分かれてリスト化されています.ファイルの右側のアイコンをクリックすることで`git add`や`git reset`といった操作をGUIで実行することができます.
-
-上の例におけるアイコンは,左から
-
-- ファイルをエディターで開く
-- 変更を元に戻す
-- `+`: 変更をステージングに追加する（ここが`-`の場合は`git reset`と同じ）
-
-### アルファベットの意味
-
-|アルファベット|説明|
-|---|---|
-|`U`|git管理下にないファイル（untracked）|
-|`A`|added|
-|`M`|modified|
-|`D`|deleted|
-|`R`|renamed|
-|`C`|conflictしたファイル|
-
-### diff画面で変更を確認する
-
-ステージング前に変更点を確認したい場合は`Open Changes`やファイルをクリックすることで,直前のcommit時のファイルの状態との比較をハイライト付きで確認することができます.
-
-<img src= "https://github.com/ryonakimageserver/omorikaizuka/blob/master/%E3%83%96%E3%83%AD%E3%82%B0%E7%94%A8/20201228-Git-VsCode-diff.png?raw=true">
-
-コンフリクト発生時における,該当箇所の確認も同様の方法で実施することができます.
-
-## 7. BFG Repo-Cleanerのインストール
+## 6. BFG Repo-Cleanerのインストール
 ### BFG Repo-Cleanerとは？
 
-BFGは,git-filter-branchと同様にGit Repository Historyから機密データ(例:パスワードや認証情報、その他のプライベートなデータ)をクレンジングしてくれるツールです.オープンソースコミュニティによって構築およびメンテナンスされています.
+BFGは, git-filter-branchと同様にGit Repository Historyから機密データ(例:パスワードや認証情報、その他のプライベートなデータ)をクレンジングしてくれるツールです.オープンソースコミュニティによって構築およびメンテナンスされています.
 
 誤って個人情報を含んだファイルをrepositoryに上げてしまい情報流出が発生してしまう恐れは多々あります. その際,ファイルの削除だけでなくhistoryの削除も実施する必要があり,そのようなときにBFGが役に立ちます.
 
@@ -616,14 +631,18 @@ Replace all passwords listed in a file (prefix lines 'regex:' or 'glob:' if requ
 - [Ryo's Tech Blog > 2021-04-25: Githubパスワード認証廃止への対応](https://ryonakagami.github.io/2021/04/25/github-token-authentication/)
 - [Ryo's Tech Blog > 2020-12-23: Git in Zshの設定](https://ryonakagami.github.io/2020/12/23/ubuntu-zshsetup/)
 
-> 公式ドキュメント
+> Git公式ドキュメント
+
+- [Git Getting Started](https://git-scm.com/book/en/v2/Getting-Started-First-Time-Git-Setup)
+
+
+> GitHub公式ドキュメント
 
 - [GitHub Docs > 新しい GPG キーを生成する](https://docs.github.com/ja/authentication/managing-commit-signature-verification/generating-a-new-gpg-key)
 - [GitHub Docs > Git へ署名キーを伝える](https://docs.github.com/ja/authentication/managing-commit-signature-verification/telling-git-about-your-signing-key)
 
 > オンラインマテリアル
 
-- [Git Getting Started](https://git-scm.com/book/en/v2/Getting-Started-First-Time-Git-Setup)
 - [Conventional Commits](https://www.conventionalcommits.org/en/v1.0.0/)
 - [Gitの内側 - Gitオブジェクト](https://git-scm.com/book/ja/v2/Git%E3%81%AE%E5%86%85%E5%81%B4-Git%E3%82%AA%E3%83%96%E3%82%B8%E3%82%A7%E3%82%AF%E3%83%88)
 - [BFG Repo-Cleaner](https://rtyley.github.io/bfg-repo-cleaner/)

@@ -89,6 +89,7 @@ tags:
 > What I Want?
 
 - 編集中ファイルについて前回Commitとの差分をクイックにEditor内部で確認する
+- Editor画面のみに修正/変更/削除箇所のインジケーターが表示される(minimapには表示させない)
 
 <img src="https://raw.githubusercontent.com/ryonakimageserver/omorikaizuka/aefac090f173d35f1e3580e1e5b2a540bca4bb2a/Setup/20210102_git_VSCode_Gutter.png">
 
@@ -98,21 +99,23 @@ tags:
 - `settings.json`ファイルを以下のように指定
 
 ```json
-  // Controls diff decorations in the editor.
-  //  - all: Show the diff decorations in all available locations.
-  //  - gutter: Show the diff decorations only in the editor gutter.
-  //  - overview: Show the diff decorations only in the overview ruler.
-  //  - minimap: Show the diff decorations only in the minimap.
-  //  - none: Do not show the diff decorations.
-    "scm.diffDecorations": "all",
+{
+    // Controls diff decorations in the editor.
+    //  - all: Show the diff decorations in all available locations.
+    //  - gutter: Show the diff decorations only in the editor gutter.
+    //  - overview: Show the diff decorations only in the overview ruler.
+    //  - minimap: Show the diff decorations only in the minimap.
+    //  - none: Do not show the diff decorations.
+    "scm.diffDecorations": "gutter",
 
-  // Controls the visibility of the Source Control diff decorator in the gutter.
-  //  - always: Show the diff decorator in the gutter at all times.
-  //  - hover: Show the diff decorator in the gutter only on hover.
+    // Controls the visibility of the Source Control diff decorator in the gutter.
+    //  - always: Show the diff decorator in the gutter at all times.
+    //  - hover: Show the diff decorator in the gutter only on hover.
     "scm.diffDecorationsGutterVisibility": "always",
     
     // https://stackoverflow.com/questions/43969277/how-can-you-disable-gutter-indicators-in-vs-code
     //"scm.diffDecorationsGutterAction": "none",
+}
 ```
 
 > REMARKS
