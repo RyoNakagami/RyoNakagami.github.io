@@ -184,6 +184,39 @@ Deleted branch non-existing-branch (was 1d6ed41).
 develop
 ```
 
+
+## Local Branch Operation: Compare and Merge
+### Compare the current branch with the Selected Branches
+
+> What I Want
+
+- 選択したブランチと比較した時, conflictを引き起こすファイル及び差分箇所を確認したい
+- コマンド実行中に, ファイルの編集も実現可能
+
+> Requirements
+
+`.gitconfig`に以下のラインを追記
+
+```
+[diff]
+	tool = vscode
+[difftool "vscode"]
+	cmd = code --wait --diff $LOCAL $REMOTE
+```
+
+> How
+
+```zsh
+% git difftool <the selected branch> <path>
+```
+
+- 左側にthe selected branch, 右側にthe current branchのファイルが表示される
+- the current branchのファイルは編集 & 保存が可能
+- `<path>`指定時は, その対象ファイルのみの差分を表示
+- `<path>`を指定しなかった場合は, 差分全てを表示
+
+
+
 ## Remote Branch Operation
 ### Get/Switch to a remote branch: `git switch` version
 
@@ -253,7 +286,7 @@ develop
 
 
 ## Remote Branch Operation: `git clone`
-### 特定のフォルダにクローンを作成
+### git clone to a specified folder
 
 ```zsh
 % git clone <repo> <directory>
@@ -273,7 +306,7 @@ develop
 fatal: destination path 'pokochin' already exists and is not an empty directory.
 ```
 
-### 特定のブランチのみをローカルにcloneする
+### git clone a specified branch only
 
 ```zsh
 % git clone -b <branch> <repo>

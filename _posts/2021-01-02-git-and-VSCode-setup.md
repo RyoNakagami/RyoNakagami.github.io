@@ -46,6 +46,45 @@ tags:
 [Git History](https://marketplace.visualstudio.com/items?itemName=donjayamanne.githistory)|ファイル観点のCommit履歴の確認
 
 
+## Write a commit/merge message via VSCode
+
+> What I Want
+
+- `git commit` or `git merge` コマンド入力時にVSCodeが立ち上がり, commit template画面が表示される
+- commit message記載後, `Ctrl + Enter`で内容の保存とcommit編集画面の終了が実行される
+
+> How
+
+1. `.gitconfig`に以下の記述を追加
+
+```
+[core]
+	editor = code --wait
+```
+
+2. `shortcuts.json`に以下の記述を追加
+
+```json
+    {
+        "key": "ctrl+enter",
+        "command": "git.commitMessageAccept",
+        "when": "editorFocus && !isInDiffEditor && resourceDirname =~ /.git$/ && resourceFilename == COMMIT_EDITMSG"
+    },
+    {
+        "key": "ctrl+enter",
+        "command": "git.commitMessageAccept",
+        "when": "editorFocus && resourceDirname =~ /.git$/ && resourceFilename == MERGE_MSG"
+    },
+```
+
+|設定|意味|
+|---|---|
+|`<args> =~ <pattern>` | `args`が`<pattern>`にマッチした際にTrueを変えす|
+|`resourceDirname`| 編集ファイルのdirectory名|
+|`resourceFilename`| 編集ファイル名|
+
+
+
 ## Viewing diffs with the previous commit in VS Code
 
 > What I Want?
@@ -216,7 +255,7 @@ ext install donjayamanne.githistory
 
 > How to Check
 
-- GitリポジトリとなっているフォルダをVSCode Workspaceとして開くだけで,「ソースコントロールビュー」経由でChanges一覧が確認可能
+- 「ソースコントロールビュー」経由でChanges一覧が確認可能
 
 <img src="https://github.com/ryonakimageserver/omorikaizuka/blob/master/%E3%83%96%E3%83%AD%E3%82%B0%E7%94%A8/20201228-Git-VsCode.png?raw=true">
 
@@ -244,6 +283,7 @@ ext install donjayamanne.githistory
 - [Using Git source control in VS Code](https://code.visualstudio.com/docs/sourcecontrol/overview#_working-in-a-git-repository)
 - [Git Graph](https://marketplace.visualstudio.com/items?itemName=mhutchie.git-graph)
 - [Git History](https://marketplace.visualstudio.com/items?itemName=donjayamanne.githistory)
+- [Visual Studio Code > when clause contexts](https://code.visualstudio.com/api/references/when-clause-contexts#add-a-custom-when-clause-context)
 
 
 > VSCodeショートカット設定参考
