@@ -25,6 +25,7 @@ tags:
 
 - [Overview](#overview)
 - [Viewing diffs with the previous commit in VS Code](#viewing-diffs-with-the-previous-commit-in-vs-code)
+- [Quick-Viewing diffs Between the current file and the previous commit in VS Code](#quick-viewing-diffs-between-the-current-file-and-the-previous-commit-in-vs-code)
 - [Viewing diffs Between the active file and the selected](#viewing-diffs-between-the-active-file-and-the-selected)
 - [Checking Commit Graph with Git Graph](#checking-commit-graph-with-git-graph)
 - [Checking Commit History with Git History](#checking-commit-history-with-git-history)
@@ -82,6 +83,46 @@ tags:
     },
 ```
 
+## Quick-Viewing diffs Between the current file and the previous commit in VS Code
+
+> What I Want?
+
+- 編集中ファイルについて前回Commitとの差分をクイックにEditor内部で確認する
+
+<img src="https://raw.githubusercontent.com/ryonakimageserver/omorikaizuka/aefac090f173d35f1e3580e1e5b2a540bca4bb2a/Setup/20210102_git_VSCode_Gutter.png">
+
+> Setup
+
+- VSCodeの「Gutter Indicator」というデフォルト機能をOnにする
+- `settings.json`ファイルを以下のように指定
+
+```json
+  // Controls diff decorations in the editor.
+  //  - all: Show the diff decorations in all available locations.
+  //  - gutter: Show the diff decorations only in the editor gutter.
+  //  - overview: Show the diff decorations only in the overview ruler.
+  //  - minimap: Show the diff decorations only in the minimap.
+  //  - none: Do not show the diff decorations.
+    "scm.diffDecorations": "all",
+
+  // Controls the visibility of the Source Control diff decorator in the gutter.
+  //  - always: Show the diff decorator in the gutter at all times.
+  //  - hover: Show the diff decorator in the gutter only on hover.
+    "scm.diffDecorationsGutterVisibility": "always",
+    
+    // https://stackoverflow.com/questions/43969277/how-can-you-disable-gutter-indicators-in-vs-code
+    //"scm.diffDecorationsGutterAction": "none",
+```
+
+> REMARKS
+
+非表示にしたい場合は以下のように指定
+
+```json
+  "scm.diffDecorations": "none"
+```
+
+
 ## Viewing diffs Between the active file and the selected
 
 > What I Want?
@@ -104,6 +145,9 @@ tags:
         "description": "Compare the active file with the selected"
     },
 ```
+
+
+
 
 ## Checking Commit Graph with Git Graph
 
@@ -139,7 +183,6 @@ ext install mhutchie.git-graph
 > What I Want
 
 - ファイル観点でCommit履歴と差分確認
-- 若干, Git Graphと機能が被っている...
 
 
 > Install
@@ -162,6 +205,8 @@ ext install donjayamanne.githistory
 ```
 
 
+
+
 ## References
 
 > 関連ポスト
@@ -180,3 +225,7 @@ ext install donjayamanne.githistory
 
 - [stackoverflow > Shortcut with multiple command in VSCode](https://stackoverflow.com/questions/55160717/shortcut-with-multiple-command-in-vscode)
 - [stackoverflow > VS Code - Shortcut for toggling Git Open Changes and Git Open File](https://stackoverflow.com/questions/44737285/vs-code-shortcut-for-toggling-git-open-changes-and-git-open-file)
+
+> その他VSCode設定
+
+- [VSCodeの行番号右のガターインジケーターを非表示にする方法](https://www.exceedsystem.net/2020/11/25/how-to-hide-gutter-indicator-on-vscode/)
