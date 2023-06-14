@@ -24,6 +24,7 @@ tags:
 <!-- DON'T EDIT THIS SECTION, INSTEAD RE-RUN doctoc TO UPDATE -->
 
 - [Overview](#overview)
+- [Write a commit/merge message via VSCode](#write-a-commitmerge-message-via-vscode)
 - [Viewing diffs with the previous commit in VS Code](#viewing-diffs-with-the-previous-commit-in-vs-code)
 - [Quick-Viewing diffs Between the current file and the previous commit in VS Code](#quick-viewing-diffs-between-the-current-file-and-the-previous-commit-in-vs-code)
 - [Viewing diffs Between the active file and the selected](#viewing-diffs-between-the-active-file-and-the-selected)

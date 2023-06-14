@@ -25,17 +25,23 @@ tags:
 - [Local Branch Operation](#local-branch-operation)
   - [List up Repository Branches](#list-up-repository-branches)
   - [Switch/Create Branch Locally](#switchcreate-branch-locally)
-  - [Get/Switch to a remote branch](#getswitch-to-a-remote-branch)
   - [Create a New Branch Locally from a Specified Branch](#create-a-new-branch-locally-from-a-specified-branch)
   - [Rename a Local Branch Name](#rename-a-local-branch-name)
   - [Delete a Local Branch](#delete-a-local-branch)
+  - [Check the Upstream Branch](#check-the-upstream-branch)
+  - [Set up an upstream branch to a local branch](#set-up-an-upstream-branch-to-a-local-branch)
   - [Check the Parent Branch](#check-the-parent-branch)
+- [Local Branch Operation: Compare and Merge](#local-branch-operation-compare-and-merge)
+  - [Compare the current branch with the Selected Branches](#compare-the-current-branch-with-the-selected-branches)
 - [Remote Branch Operation](#remote-branch-operation)
+  - [Get/Switch to a remote branch: `git switch` version](#getswitch-to-a-remote-branch-git-switch-version)
+  - [Get/Switch to a remote branch: `git fetch` version](#getswitch-to-a-remote-branch-git-fetch-version)
   - [Delete Remote Branch](#delete-remote-branch)
   - [Rename Remote Branch](#rename-remote-branch)
 - [Remote Branch Operation: `git clone`](#remote-branch-operation-git-clone)
-  - [特定のフォルダにクローンを作成](#%E7%89%B9%E5%AE%9A%E3%81%AE%E3%83%95%E3%82%A9%E3%83%AB%E3%83%80%E3%81%AB%E3%82%AF%E3%83%AD%E3%83%BC%E3%83%B3%E3%82%92%E4%BD%9C%E6%88%90)
-  - [特定のブランチのみをローカルにcloneする](#%E7%89%B9%E5%AE%9A%E3%81%AE%E3%83%96%E3%83%A9%E3%83%B3%E3%83%81%E3%81%AE%E3%81%BF%E3%82%92%E3%83%AD%E3%83%BC%E3%82%AB%E3%83%AB%E3%81%ABclone%E3%81%99%E3%82%8B)
+  - [git clone to a specified folder](#git-clone-to-a-specified-folder)
+  - [git clone a specified branch only](#git-clone-a-specified-branch-only)
+  - [Install Private Python Packages via git clone](#install-private-python-packages-via-git-clone)
 - [References](#references)
 
 <!-- END doctoc generated TOC please keep comment here to allow auto update -->
@@ -145,10 +151,72 @@ Switched to a new branch 'hoge2'
 
 ### Delete a Local Branch
 
+- Upstream branchに編集記録が最新版までmergeされているローカルブランチを消去する場合に使用可能
+
 ```zsh
-% git branch --delete non-existing-branch # git branch -d <branch> is also ok
+% git branch --delete non-existing-branch
 Deleted branch non-existing-branch (was 1d6ed41).
+% git branch -d <branch> 
+Deleted branch <branch> (was 1d6ed42).
 ```
+
+複数の場合は
+
+```zsh
+% git branch --delete <branch> <branch> <branch>
+```
+
+upstream branchにmergeされていない場合は次のようなエラーが返ってくる
+
+```zsh
+% git branch -d hoge
+error: The branch 'hoge' is not fully merged.
+If you are sure you want to delete it, run 'git branch -D hoge'.
+```
+
+強制的に消去したい場合は
+
+```zsh
+% git branch -D hoge
+Deleted branch hoge (was eb79802).
+```
+
+### Check the Upstream Branch
+
+> What I Want
+
+- local repositoryとupstream branchの対応関係を知りたい
+
+> How
+
+```zsh
+% git branch -vv
+branch_A            214c991 [origin/branch_A: ahead 1, behind 3] FIX readme
+  branch_B            a387619 [origin/non_existing_branch] add yml
+  hoge                f5663c5 [origin/hoge] hoge test
+* hoge2               4a1e30f Update hoge2.txt
+  hoge3               376ef7c [origin/hoeg3: gone] add hoge
+  main                16a340c [origin/main] a
+  non_existing_branch a387619 [origin/non_existing_branch] add yml
+```
+
+- 対応していないブランチ(上では`hoge2`)では `[origin/<remote branch name>]`が出力されない
+
+
+### Set up an upstream branch to a local branch
+
+> What I Want
+
+- upstream branchが設定されていないlocal branchに対して, upstream branchを指定したい
+
+> How
+
+```zsh
+% git branch -u <remote branch>
+% git branch <local branch> -u <remote branch>
+```
+
+- `<local branch>`を省略した場合は, 現在のbranchに対してupstream branchを設定する
 
 
 ### Check the Parent Branch
@@ -270,6 +338,14 @@ develop
 
 - コロン(=`:`)の前に何も指定しないことで,「空」をpushするという挙動になる
 
+> 複数の場合
+
+```zsh 
+% git push origin --delete <branch1> <branch2> <branch3>
+```
+
+
+
 ### Rename Remote Branch
 
 > Syntax
@@ -317,7 +393,26 @@ fatal: destination path 'pokochin' already exists and is not an empty directory.
 - `-b` は `--branch` optionのこと
 
 
+### Install Private Python Packages via git clone
 
+- <branch-name>: installしたいversionを指定
+- <folder-name>: レポジトリのローカルにおける保存先
+
+```zsh
+% git clone -b <branch-name> <repository url> <local-folder-path>
+```
+
+Then, pip経由の場合は編集可能性を考慮して `-e` オプションを付与してインストール
+
+```zsh
+% pip install -e <folder-name>
+```
+
+Poetry経由の場合は
+
+```zsh
+% poetry add --editable <folder-name>
+```
 
 ## References
 

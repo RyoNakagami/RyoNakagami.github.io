@@ -3,7 +3,8 @@ layout: post
 title: "git rebase: リモートリポジトリの更新後にローカルリポジトリを編集 & commitした場合のエラー対策"
 subtitle: "How to use git command 2/N"
 author: "Ryo"
-header-mask: 0.4
+header-mask: 0.0
+header-style: text
 catelog: true
 mathjax: true
 revise_date: 2022-08-01
@@ -22,9 +23,9 @@ tags:
 
 - [Describe the Error](#describe-the-error)
 - [How to Solve the Problem](#how-to-solve-the-problem)
-  - [`git reset`を使って, Commitを取り消す](#git-reset%E3%82%92%E4%BD%BF%E3%81%A3%E3%81%A6-commit%E3%82%92%E5%8F%96%E3%82%8A%E6%B6%88%E3%81%99)
-  - [`git revert`を使って, Commitを戻す](#git-revert%E3%82%92%E4%BD%BF%E3%81%A3%E3%81%A6-commit%E3%82%92%E6%88%BB%E3%81%99)
-  - [`git rebase`を使って, 最新のアップストリームブランチを参照先に変更する](#git-rebase%E3%82%92%E4%BD%BF%E3%81%A3%E3%81%A6-%E6%9C%80%E6%96%B0%E3%81%AE%E3%82%A2%E3%83%83%E3%83%97%E3%82%B9%E3%83%88%E3%83%AA%E3%83%BC%E3%83%A0%E3%83%96%E3%83%A9%E3%83%B3%E3%83%81%E3%82%92%E5%8F%82%E7%85%A7%E5%85%88%E3%81%AB%E5%A4%89%E6%9B%B4%E3%81%99%E3%82%8B)
+  - [方針 1.1: `git reset`を使って, Commitを取り消す](#%E6%96%B9%E9%87%9D-11-git-reset%E3%82%92%E4%BD%BF%E3%81%A3%E3%81%A6-commit%E3%82%92%E5%8F%96%E3%82%8A%E6%B6%88%E3%81%99)
+  - [方針 1.2: `git revert`を使って, Commitを戻す](#%E6%96%B9%E9%87%9D-12-git-revert%E3%82%92%E4%BD%BF%E3%81%A3%E3%81%A6-commit%E3%82%92%E6%88%BB%E3%81%99)
+  - [方針2: `git pull --rebase`を使って, 最新のアップストリームブランチを参照先に変更する](#%E6%96%B9%E9%87%9D2-git-pull---rebase%E3%82%92%E4%BD%BF%E3%81%A3%E3%81%A6-%E6%9C%80%E6%96%B0%E3%81%AE%E3%82%A2%E3%83%83%E3%83%97%E3%82%B9%E3%83%88%E3%83%AA%E3%83%BC%E3%83%A0%E3%83%96%E3%83%A9%E3%83%B3%E3%83%81%E3%82%92%E5%8F%82%E7%85%A7%E5%85%88%E3%81%AB%E5%A4%89%E6%9B%B4%E3%81%99%E3%82%8B)
 - [References](#references)
 
 <!-- END doctoc generated TOC please keep comment here to allow auto update -->
@@ -77,11 +78,11 @@ fatal: Need to specify how to reconcile divergent branches.
 
 ## How to Solve the Problem
 
-1. ローカル側のcommitを取り消し, `pull` & `commit` & `push`
-2. `git rebase`を使って, 最新のアップストリームブランチを参照先に変更する
+- 方針1: ローカル側のcommitを取り消し, `pull` & `commit` & `push`
+- 方針2: `git rebase`を使って, 最新のアップストリームブランチを参照先に変更する
 
 
-### `git reset`を使って, Commitを取り消す
+### 方針 1.1: `git reset`を使って, Commitを取り消す
 
 > Command
 
@@ -105,7 +106,7 @@ fatal: Need to specify how to reconcile divergent branches.
 - **ローカルな変更を取り消して元に戻したいときに限って使用**
 
 
-### `git revert`を使って, Commitを戻す
+### 方針 1.2: `git revert`を使って, Commitを戻す
 
 > Command
 
@@ -125,7 +126,21 @@ fatal: Need to specify how to reconcile divergent branches.
 - conflictを引き起こすCommitが１つだけならば問題ないが, 複数の場合は変更履歴の整理が大変になるので非推奨
 
 
-### `git rebase`を使って, 最新のアップストリームブランチを参照先に変更する
+### 方針2: `git pull --rebase`を使って, 最新のアップストリームブランチを参照先に変更する
+
+> How
+
+リモート側の変更内容を `diff-1`, ローカル側の変更内容群を `diff-2`としたとき, 
+
+ローカル側にて以下の手順でコンフリクトを解消していきます: 
+
+1. `git pull --rebase`でremoteとlocalのconflict箇所を確認する(このときbranch nameは`<local branch>|rebase`となっている)
+2. `diff-1`と`diff-2`の採択の取捨選択をし, `git add`
+3. `git rebase --continue`でrebaseを実行(このときbranch nameは`<local branch>`に戻る)
+4. remoteへpush = remote repositoryにdiff-2をリモートに反映させる
+
+logをきれいにしたままconflictを解消することが出来ます.
+
 
 > Command
 
@@ -134,24 +149,19 @@ fatal: Need to specify how to reconcile divergent branches.
 From https://github.com/RyoNakagami/github_sandbox
  * branch            <branch name>       -> FETCH_HEAD
 Successfully rebased and updated refs/heads/main.
+% git add <conflict-resolved files>
+% git rebase --continue
 ```
-
-> メリット
-
-リモート側の変更内容を `diff-1`, ローカル側の変更内容群を `diff-2`としたとき, 
-
-
-**ローカル側**|**リモート側**
-:---|:---
-1. diff-2をローカルから一時的に取り除く<br>2. diff-1をローカルに反映させる<br>3. diff-2をローカルに反映させる|1. diff-2をリモートに反映させる
-
-このようにcommit順番を取り消すことなく, 変更を反映させる事ができるので履歴をきれいにしたままconflictを解消することが出来ます.
 
 
 ## References
 
 > 関連ポスト
 
+
+> git pull --rebase
+
+- [stackoverflow > git pull --rebase - how to proceed after conflict resolution](https://stackoverflow.com/questions/30119874/git-pull-rebase-how-to-proceed-after-conflict-resolution)
 
 
 > その他

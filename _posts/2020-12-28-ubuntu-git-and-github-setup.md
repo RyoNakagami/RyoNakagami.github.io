@@ -3,7 +3,6 @@ layout: post
 title: "GitとGitHubの設定"
 subtitle: "Ubuntu Desktop環境構築 Part 13"
 author: "Ryo"
-header-mask: 0.4
 catelog: true
 mathjax: true
 revise_date: 2022-08-01
@@ -45,7 +44,7 @@ tags:
   - [Git へ GPG キーを伝える](#git-%E3%81%B8-gpg-%E3%82%AD%E3%83%BC%E3%82%92%E4%BC%9D%E3%81%88%E3%82%8B)
   - [`.zshrc`への登録](#zshrc%E3%81%B8%E3%81%AE%E7%99%BB%E9%8C%B2)
   - [コミットに署名する](#%E3%82%B3%E3%83%9F%E3%83%83%E3%83%88%E3%81%AB%E7%BD%B2%E5%90%8D%E3%81%99%E3%82%8B)
-- [7. BFG Repo-Cleanerのインストール](#7-bfg-repo-cleaner%E3%81%AE%E3%82%A4%E3%83%B3%E3%82%B9%E3%83%88%E3%83%BC%E3%83%AB)
+- [6. BFG Repo-Cleanerのインストール](#6-bfg-repo-cleaner%E3%81%AE%E3%82%A4%E3%83%B3%E3%82%B9%E3%83%88%E3%83%BC%E3%83%AB)
   - [BFG Repo-Cleanerとは？](#bfg-repo-cleaner%E3%81%A8%E3%81%AF)
   - [BFGのインストール](#bfg%E3%81%AE%E3%82%A4%E3%83%B3%E3%82%B9%E3%83%88%E3%83%BC%E3%83%AB)
 - [References](#references)
