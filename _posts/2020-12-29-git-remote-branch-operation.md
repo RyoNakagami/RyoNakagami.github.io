@@ -37,6 +37,7 @@ tags:
   - [Get/Switch to a remote branch: `git switch` version](#getswitch-to-a-remote-branch-git-switch-version)
   - [Get/Switch to a remote branch: `git fetch` version](#getswitch-to-a-remote-branch-git-fetch-version)
   - [Delete Remote Branch](#delete-remote-branch)
+  - [Refresh the list of remote branches](#refresh-the-list-of-remote-branches)
   - [Rename Remote Branch](#rename-remote-branch)
 - [Remote Branch Operation: `git clone`](#remote-branch-operation-git-clone)
   - [git clone to a specified folder](#git-clone-to-a-specified-folder)
@@ -342,6 +343,24 @@ develop
 
 ```zsh 
 % git push origin --delete <branch1> <branch2> <branch3>
+```
+
+### Refresh the list of remote branches
+
+> What I Want
+
+- To update the local list of remote branches
+
+> How: remote updateで実施する場合
+
+```zsh
+% git remote update origin --prune
+```
+
+> How: fetchで実施する場合(推奨)
+
+```zsh
+% git fetch -p 
 ```
 
 

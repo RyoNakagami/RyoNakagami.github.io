@@ -24,7 +24,8 @@ tags:
 - [What are upstream branches?](#what-are-upstream-branches)
 - [Why Do We set upstream branches?](#why-do-we-set-upstream-branches)
   - [引数の省略](#%E5%BC%95%E6%95%B0%E3%81%AE%E7%9C%81%E7%95%A5)
-  - [非同期commitの確認](#%E9%9D%9E%E5%90%8C%E6%9C%9Fcommit%E3%81%AE%E7%A2%BA%E8%AA%8D)
+  - [非同期commitの確認: `git status`](#%E9%9D%9E%E5%90%8C%E6%9C%9Fcommit%E3%81%AE%E7%A2%BA%E8%AA%8D-git-status)
+  - [unpushed local commitの詳細確認: `git log`](#unpushed-local-commit%E3%81%AE%E8%A9%B3%E7%B4%B0%E7%A2%BA%E8%AA%8D-git-log)
 - [Check the Upstream Branch](#check-the-upstream-branch)
 - [Set up/unset an upstream branch to a local branch](#set-upunset-an-upstream-branch-to-a-local-branch)
   - [新しくremote branchを作成し, そのブランチをupstream branchとしたい場合](#%E6%96%B0%E3%81%97%E3%81%8Fremote-branch%E3%82%92%E4%BD%9C%E6%88%90%E3%81%97-%E3%81%9D%E3%81%AE%E3%83%96%E3%83%A9%E3%83%B3%E3%83%81%E3%82%92upstream-branch%E3%81%A8%E3%81%97%E3%81%9F%E3%81%84%E5%A0%B4%E5%90%88)
@@ -71,7 +72,7 @@ Tracking branchesとは, remote branch と直接的な関係を持つlocal branc
 % git fetch
 ```
 
-### 非同期commitの確認
+### 非同期commitの確認: `git status`
 
 - upstream branchが設定されていると, 現在のlocal branchがremote branchに対してどのくらいの非同期commitがあるか`git status`が表示してくれる
 - `behind`ならばremoteの方が進んでいる
@@ -85,6 +86,31 @@ Your branch is behind 'origin/hoge' by 2 commits, and can be fast-forwarded.
 
 nothing to commit, working tree clean
 ```
+
+### unpushed local commitの詳細確認: `git log`
+
+- upstreamへpushされていないlocal commitのIDの確認が可能
+- `--stat` optionを付与することで, 変更ファイルもterminal上から確認することができる
+- `.gitconfig`にaliasとして登録することが推奨
+
+> syntax
+
+```
+% git log <tracking-remote>..<local branch>
+```
+
+> upstreamとの差分を確認したい場合
+
+以下のことも同時に知りたいので, `--stat`, `--abbrev-comit` optionを付与していつも実行しています
+
+- commit毎の差分ファイルを確認したい
+- 実行日を知りたい
+- commit hash idはshort versionにしたい
+
+```zsh
+% git log --stat --abbrev-comit @{upstream}..HEAD
+```
+
 
 ## Check the Upstream Branch
 
@@ -149,15 +175,17 @@ HEADを`git push`することは, 現在のブランチと同じ名前を持つ�
 
 > What I Want
 
-- 毎回, `git push -u origin HEAD`と入力するのが面倒なので `git uppush`というコマンドで代替させたい.
+- 毎回, `git push -u origin HEAD`と入力するのが面倒なので `git up-push`というコマンドで代替させたい.
+- `git log --stat --abbrev-commit @{upstream}..HEAD`を`git ls-unpush`というコマンドで代替させたい
 
 > How
 
 `~/.gitconfig`に対して以下のように指定
 
-```
+```zsh
 [alias]
-	uppush = "push -u origin HEAD"
+	up-push = "push -u origin HEAD"
+	ls-unpush = "log --stat --abbrev-commit @{upstream}..HEAD"
 ```
 
 

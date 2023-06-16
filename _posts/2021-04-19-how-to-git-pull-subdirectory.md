@@ -24,7 +24,6 @@ tags:
 - [サブディレクトレリ取得までの手順](#%E3%82%B5%E3%83%96%E3%83%87%E3%82%A3%E3%83%AC%E3%82%AF%E3%83%88%E3%83%AC%E3%83%AA%E5%8F%96%E5%BE%97%E3%81%BE%E3%81%A7%E3%81%AE%E6%89%8B%E9%A0%86)
 - [Sparse checkoutとは？](#sparse-checkout%E3%81%A8%E3%81%AF)
   - [sparse-checkoutの無効化と解除](#sparse-checkout%E3%81%AE%E7%84%A1%E5%8A%B9%E5%8C%96%E3%81%A8%E8%A7%A3%E9%99%A4)
-- [References](#references)
 
 <!-- END doctoc generated TOC please keep comment here to allow auto update -->
 
@@ -71,13 +70,13 @@ git version 2.31.1
 % echo <subdirectory name> > .git/info/sparse-checkout
 ```
 
-仮に特定のファイルのみ取得したい場合は、
+仮に特定のファイルのみ取得したい場合は、上書きリダイレクション `>` を用いて
 
 ```zsh
 % echo <path/to/file name> > .git/info/sparse-checkout
 ```
 
-更に別ファイルを追加したい場合は
+更に別ファイルを追加したい場合は, 追記リダイレクション `>>` を用いて
 
 ```zsh
 % echo add-sub-directory >> .git/info/sparse-checkout
@@ -90,17 +89,6 @@ git version 2.31.1
 ```zsh
 % git pull origin master
 ```
-
-<div style='padding-left: 2em; padding-right: 2em; border-radius: 1em; border-style:solid; border-color:#e6e6fa; background-color:#e6e6fa'>
-<p class="h4"><ins>Column: シェルコマンドにおけるリダイレクション</ins></p>
-
-|項目 |説明|
-|---|---|
-|`>` |	ファイルへの上書き|
-|`>>` |	ファイルへの追記|
-
-</div>
-
 
 ## Sparse checkoutとは？
 
@@ -149,5 +137,3 @@ git version 2.31.1
 2. `git read-tree` でツリー情報を読み込み直す
 3. `.git/info/sparse-checkout` を削除
 4. `sparsecheckout` を無効にする
-
-## References
