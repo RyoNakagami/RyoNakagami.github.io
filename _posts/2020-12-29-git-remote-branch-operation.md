@@ -182,6 +182,61 @@ If you are sure you want to delete it, run 'git branch -D hoge'.
 Deleted branch hoge (was eb79802).
 ```
 
+### Restore a branch after its deletion in Git
+
+> What I Want
+
+- 誤って削除してしまったbranchをlocalで復旧させたい
+- branchを削除してから別ブランチですでに作業を開始してしまっている状況を考える
+- 復元後も, 昔の作業履歴が確認できるようにしたい
+
+> How to Solve the problem
+
+- `git reflog`は, すでに消去された履歴自体も確認できるコマンド
+- `git reflog`で消去してしまったbranchからcheckoutした`commit-hash`
+- 上記で取得した`commit-hash`を参照する形で`git switch -c`を実行
+
+> Example
+
+`non_existing_branch`というbranchを消去してしまったあと, `main` branchで作業を開始してし
+まった状況を考えます.
+
+
+`main` branchへ移動した直後に`non_existing_branch`を消去してしまいます.
+
+```zsh
+% git switch main
+% git branch --delete non_existing_branch
+```
+
+消去したあと, `main` branchで適当に作業します 
+
+```zsh
+% touch hoge.txt
+% echo unkounko > hoge.txt
+% git add hoge.txt
+% git commit -m "DOC: Add hoge.txt about the family secret"
+% git push
+```
+
+このタイミングで, ``non_existing_branch`を消去するのはやばかったと発覚しました.
+慌てずに, `git reflog`コマンドでブランチ消去直前のcommit-hashを確認します.
+
+```zsh
+% git reflog
+c65bac9 (HEAD -> main, origin/main) HEAD@{0}: commit: DOC: Add hoge.txt about the family secret
+9fb60c5 HEAD@{1}: checkout: moving from non_existing_branch to main
+```
+
+checkoutタイミングの履歴が`9fb60c5`で残っていることがわかります. 
+なお, このcommit-hashは`git log`では確認できません( = `git reflog`と`git log`の違い)
+
+最後にこのcommit-hashを用いて, branchを復元します.
+
+```zsh
+% git switch -c non_existing_branch 9fb60c5
+```
+
 ### Check the Upstream Branch
 
 > What I Want
@@ -252,6 +307,9 @@ branch_A            214c991 [origin/branch_A: ahead 1, behind 3] FIX readme
 % git parent
 develop
 ```
+
+
+
 
 
 ## Local Branch Operation: Compare and Merge
@@ -435,14 +493,15 @@ Poetry経由の場合は
 
 ## References
 
+> git config
+
+- [Stackoverflow > Pipes in a Git alias?](https://stackoverflow.com/questions/19525387/pipes-in-a-git-alias)
+
 > git sparse checkout
 
 - [Ryo's Tech Blog > GitHub Repositoryの任意のサブディレクトリのみをローカル側で取得する](https://ryonakagami.github.io/2021/04/19/how-to-git-pull-subdirectory/)
 
-> git switch
+> git branch operation tips
 
 - [stackoverflow > How can I use the new `git switch` syntax to create a new branch?](https://stackoverflow.com/questions/58124219/how-can-i-use-the-new-git-switch-syntax-to-create-a-new-branch)
-
-> git config
-
-- [Stackoverflow > Pipes in a Git alias?](https://stackoverflow.com/questions/19525387/pipes-in-a-git-alias)
+- [stackoverflow > Can I recover a branch after its deletion in Git?](https://stackoverflow.com/questions/3640764/can-i-recover-a-branch-after-its-deletion-in-git)
