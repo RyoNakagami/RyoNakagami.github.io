@@ -89,7 +89,7 @@ nothing to commit, working tree clean
 
 ### unpushed local commitの詳細確認: `git log`
 
-- upstreamへpushされていないlocal commitのIDの確認が可能
+- upstreamへpushされていないlocal commitのhash値の確認が可能
 - `--stat` optionを付与することで, 変更ファイルもterminal上から確認することができる
 - `.gitconfig`にaliasとして登録することが推奨
 
