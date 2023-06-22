@@ -3,12 +3,11 @@ layout: post
 title: "zshの設定とinteractive shellのカスタマイズ"
 subtitle: "Ubuntu Desktop環境構築 Part 10"
 author: "Ryo"
-header-img: "img/post-bg-rwd.jpg"
-header-mask: 0.4
+header-mask: 0.0
+header-style: text
 catelog: true
 mathjax: true
-revise_date: 2022-08-08
-reading_time: 10
+revise_date: 2023-06-16
 tags:
 
 - Ubuntu 20.04 LTS

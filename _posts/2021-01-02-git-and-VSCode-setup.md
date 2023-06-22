@@ -3,7 +3,6 @@ layout: post
 title: "VSCode設定: VSCodeとGitの連携"
 subtitle: "Ubuntu Desktop環境構築 Part 13"
 author: "Ryo"
-header-mask: 0.4
 catelog: true
 mathjax: true
 revise_date: 2022-08-01

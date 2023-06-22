@@ -3,11 +3,11 @@ layout: post
 title: "Githubパスワード認証廃止への対応"
 subtitle: "個人アクセストークン(PAT)の設定"
 author: "Ryo"
-header-img: "img/about-bg.jpg"
-header-mask: 0.4
 catelog: true
 mathjax: true
-revise_date: 2023-04-05
+revise_date: 2023-06-20
+header-mask: 0.0
+header-style: text
 tags:
 
 - Ubuntu 20.04 LTS
@@ -20,40 +20,27 @@ tags:
 <!-- START doctoc generated TOC please keep comment here to allow auto update -->
 <!-- DON'T EDIT THIS SECTION, INSTEAD RE-RUN doctoc TO UPDATE -->
 
-- [今回の環境](#%E4%BB%8A%E5%9B%9E%E3%81%AE%E7%92%B0%E5%A2%83)
+- [PC環境](#pc%E7%92%B0%E5%A2%83)
 - [解決したい症状](#%E8%A7%A3%E6%B1%BA%E3%81%97%E3%81%9F%E3%81%84%E7%97%87%E7%8A%B6)
   - [何が問題か？](#%E4%BD%95%E3%81%8C%E5%95%8F%E9%A1%8C%E3%81%8B)
   - [Background](#background)
   - [だれが影響を受けるのか？](#%E3%81%A0%E3%82%8C%E3%81%8C%E5%BD%B1%E9%9F%BF%E3%82%92%E5%8F%97%E3%81%91%E3%82%8B%E3%81%AE%E3%81%8B)
-- [対応方針](#%E5%AF%BE%E5%BF%9C%E6%96%B9%E9%87%9D)
+- [対応方針: PATの発行](#%E5%AF%BE%E5%BF%9C%E6%96%B9%E9%87%9D-pat%E3%81%AE%E7%99%BA%E8%A1%8C)
   - [トークンの作成](#%E3%83%88%E3%83%BC%E3%82%AF%E3%83%B3%E3%81%AE%E4%BD%9C%E6%88%90)
   - [トークン使用のテスト](#%E3%83%88%E3%83%BC%E3%82%AF%E3%83%B3%E4%BD%BF%E7%94%A8%E3%81%AE%E3%83%86%E3%82%B9%E3%83%88)
-- [PATとGPG encrypted`.netrc`を用いたリモートレポジトリアクセス設定](#pat%E3%81%A8gpg-encryptednetrc%E3%82%92%E7%94%A8%E3%81%84%E3%81%9F%E3%83%AA%E3%83%A2%E3%83%BC%E3%83%88%E3%83%AC%E3%83%9D%E3%82%B8%E3%83%88%E3%83%AA%E3%82%A2%E3%82%AF%E3%82%BB%E3%82%B9%E8%A8%AD%E5%AE%9A)
-  - [作業方針](#%E4%BD%9C%E6%A5%AD%E6%96%B9%E9%87%9D)
+- [GPG encrypted`.netrc.gpg`を用いたリモートレポジトリアクセス設定](#gpg-encryptednetrcgpg%E3%82%92%E7%94%A8%E3%81%84%E3%81%9F%E3%83%AA%E3%83%A2%E3%83%BC%E3%83%88%E3%83%AC%E3%83%9D%E3%82%B8%E3%83%88%E3%83%AA%E3%82%A2%E3%82%AF%E3%82%BB%E3%82%B9%E8%A8%AD%E5%AE%9A)
   - [対応作業](#%E5%AF%BE%E5%BF%9C%E4%BD%9C%E6%A5%AD)
-    - [STEP 1: `.netrc`ファイルの作成](#step-1-netrc%E3%83%95%E3%82%A1%E3%82%A4%E3%83%AB%E3%81%AE%E4%BD%9C%E6%88%90)
-    - [STEP 2: GPG暗号化](#step-2-gpg%E6%9A%97%E5%8F%B7%E5%8C%96)
-    - [STEP 3: netrc credential helperの設定](#step-3-netrc-credential-helper%E3%81%AE%E8%A8%AD%E5%AE%9A)
-    - [STEP 4: git configの設定](#step-4-git-config%E3%81%AE%E8%A8%AD%E5%AE%9A)
-- [remote originをSSH URLからaccess token URLへ変更する](#remote-origin%E3%82%92ssh-url%E3%81%8B%E3%82%89access-token-url%E3%81%B8%E5%A4%89%E6%9B%B4%E3%81%99%E3%82%8B)
-  - [基本手順](#%E5%9F%BA%E6%9C%AC%E6%89%8B%E9%A0%86)
-  - [実際にやってみる](#%E5%AE%9F%E9%9A%9B%E3%81%AB%E3%82%84%E3%81%A3%E3%81%A6%E3%81%BF%E3%82%8B)
-- [Appendix: リモートリポジトリについて](#appendix-%E3%83%AA%E3%83%A2%E3%83%BC%E3%83%88%E3%83%AA%E3%83%9D%E3%82%B8%E3%83%88%E3%83%AA%E3%81%AB%E3%81%A4%E3%81%84%E3%81%A6)
-  - [リモートレポジトリの作成](#%E3%83%AA%E3%83%A2%E3%83%BC%E3%83%88%E3%83%AC%E3%83%9D%E3%82%B8%E3%83%88%E3%83%AA%E3%81%AE%E4%BD%9C%E6%88%90)
-  - [HTTPS URLによるクローンのメリット](#https-url%E3%81%AB%E3%82%88%E3%82%8B%E3%82%AF%E3%83%AD%E3%83%BC%E3%83%B3%E3%81%AE%E3%83%A1%E3%83%AA%E3%83%83%E3%83%88)
 - [References](#references)
 
 <!-- END doctoc generated TOC please keep comment here to allow auto update -->
 
 </div>
 
-## 今回の環境
+## PC環境
 
 ---|---
 OS |	ubuntu 20.04 LTS Focal Fossa
 CPU| 	Intel Core i7-9700 CPU 3.00 GHz
-
-
 
 ## 解決したい症状
 
@@ -81,11 +68,13 @@ Beginning August 13, 2021, we will no longer accept account passwords when
 authenticating Git operations on GitHub.com
 ```
 
-これにより, コマンドラインでのGit操作, Gitを使用するデスクトップアプリケーション, GitHub.comのGitリポジトリに直接アクセスするアプリやサービスでは, パスワードを用いてリポジトリへアクセスすることができなくなる恐れがあります.
+これにより, コマンドラインでのGit操作, Gitを使用するデスクトップアプリケーション, 
+GitHub.comのGitリポジトリに直接アクセスするアプリやサービスでは, パスワードを用いてリポジトリへアクセスすることができなくなる恐れがあります.
 
 ### Background
 
-GitHubでは, 従来よりパスワード認証に代わってトークンベースの認証を使用することを推奨していました. 2020年11月にはすでにREST API利用時のパスワード認証を廃止しており, 今回の発表はその適用範囲を大きく広げた形となります.
+GitHubでは, 従来よりパスワード認証に代わってトークンベースの認証を使用することを推奨していました. 
+2020年11月にはすでにREST API利用時のパスワード認証を廃止しており, 今回の発表はその適用範囲を大きく広げた形となります.
 
 トークンベースの認証を推奨する理由として, セキュリティ上の利点が挙げられます：
 
@@ -98,7 +87,9 @@ Random|トークンは, 定期的に覚えたり入力したりする必要の�
 
 </div>
 
-難しく考えずに, 個人アクセストークンは, GitHub API またはコマンドラインを使用するときに GitHub への認証でパスワードの代わりに使用できる程度の知識で普段は十分です.なお, セキュリティ上の理由から, **GitHub は過去 1 年間使用されていない個人アクセストークンを自動的に削除します**.
+難しく考えずに, 個人アクセストークンは, GitHub API またはコマンドラインを使用するときに
+GitHub への認証でパスワードの代わりに使用できる程度の知識で普段は十分です.
+
 
 ### だれが影響を受けるのか？
 
@@ -108,7 +99,8 @@ Random|トークンは, 定期的に覚えたり入力したりする必要の�
 - SSHベースの認証を行っている場合
 - 2要素認証を使用したGitHubアカウント
 
-## 対応方針
+
+## 対応方針: PATの発行
 
 2021年8月13日までに, 
 
@@ -167,9 +159,13 @@ From https://github.com/RyoNakagami/sample_size
 % rm -rf ./test
 ```
 
+> REMARKS
 
-## PATとGPG encrypted`.netrc`を用いたリモートレポジトリアクセス設定
-### 作業方針
+- セキュリティ上の理由から, **GitHub は過去 1 年間使用されていない個人アクセストークンを自動的に削除します**.
+
+
+
+## GPG encrypted`.netrc.gpg`を用いたリモートレポジトリアクセス設定
 
 > 問題設定
 
@@ -184,11 +180,13 @@ From https://github.com/RyoNakagami/sample_size
 3. `git-credential-netrc`機能を実行可能にする
 4. `git config`設定
 
+
 ### 対応作業
 
-#### STEP 1: `.netrc`ファイルの作成
+> STEP 1: `.netrc`ファイルの作成
 
-`.netrc`ファイルは, 元々はftp のためのユーザー設定ファイルで, 自動ログインプロセスで使われる ログイン情報と初期化情報を記載します.
+`.netrc`ファイルは, 元々はftpのためのユーザー設定ファイルで, 自動ログインプロセスで使われる
+ログイン情報と初期化情報を記載します.
 
 ```
 machine github.com
@@ -202,10 +200,12 @@ password <token>
 protocol https
 ```
 
-#### STEP 2: GPG暗号化
+> STEP 2: GPG暗号化 & `.netrc.gpg`の生成
 
-こちらの作業はすでにGPGキーが発行されている前提です. 
-なおこの工程後, `.netrc.gpg`が生成されます.
+**こちらの作業はすでにGPGキーが発行されている前提**です. 
+GPGキーの発行は[こちら](https://ryonakagami.github.io/2020/12/28/ubuntu-git-and-github-setup/#5-gpg%E3%82%AD%E3%83%BC%E3%81%AE%E7%99%BB%E9%8C%B2)
+を参照してください
+
 
 ```zsh
 % gpg -e -r email@example.com ~/.netrc #~/.netrc.gpgが生成される
@@ -213,18 +213,30 @@ protocol https
 % rm ~/.netrc
 ```
 
-#### STEP 3: netrc credential helperの設定
+これで`.netrc.gpg`が生成されます.
 
-git commandには, `git-credential-netrc.perl`というファイルの中にnetrcファイルを参照する機能が実装されています.
-これに対して実行可能設定をします.
+> STEP 3: netrc credential helperの設定
+
+[git contrib](https://github.com/git/git)には, `git-credential-netrc.perl`というファイルの中に
+netrcファイルを参照する機能が実装されています.
+
+これをlocalへcopyして, PATHを通しに行きます.
 
 ```zsh
+% git clone https://github.com/git/git <git-contribu-path>
 % touch ~/.local/bin/git-credential-netrc
-% cp git-credential-netrc.perl ~/.local/bin/git-credential-netrc
+% cp <git-contribu-path>/contrib/netrc/git-credential-netrc.perl ~/.local/bin/git-credential-netrc
 % sudo chmod +x ~/.local/bin/git-credential-netrc
 ```
 
-#### STEP 4: git configの設定
+なお, `~/.local/bin/`にPATHが通っていない時は以下のコマンドでPATHを通してください.
+
+```zsh
+% export PATH="$HOME/.local/bin:$PATH"
+```
+
+
+> STEP 4: git configの設定
 
 ```zsh
 % git config --global credential.helper "netrc -d -v"
@@ -234,74 +246,6 @@ git commandには, `git-credential-netrc.perl`というファイルの中にnetr
 ---|---
 `-d`, `--debug`| turn on debugging (developer info)
 `-v`, `--verbose`| be more verbose (show files and information found)
-
-なお, gitconfigに以下の情報を記載する形でもOKです
-
-```
-[credential]
-    helper = /usr/share/git/credential/netrc/git-credential-netrc.perl
-```
-
-## remote originをSSH URLからaccess token URLへ変更する
-
-すでにSSH経由でcloneしてしまったrepositoryについてPATによるアクセスを設定する場合には, 
-`origin` URLを `git remote set-url`コマンドで更新する必要があります.
-
-### 基本手順
-
-[GitHub Docs > Managing remote repositories](https://docs.github.com/en/get-started/getting-started-with-git/managing-remote-repositories)に書いてある通りに紹介します.
-
-1. Terminalを開く
-2. the current working directoryを変更を加えるlocal repositoryへ変更する
-3. `git remote -v`でremote repositoryの名前を確認する
-4. SSH to HTTPSとremote repositoryを変更する
-
-
-### 実際にやってみる
-
-```zsh
-% git remote -v #まずremote urlの確認
-origin  git@github.com:RyoNakagami/RyoNakagami.github.io (fetch)
-origin  git@github.com:RyoNakagami/RyoNakagami.github.io (push)
-
-% git remote set-url origin https://github.com/<username>/<repo_name>
-
-% git remote -v #更新されたか確認
-origin  https://github.com/RyoNakagami/RyoNakagami.github.io (fetch)
-origin  https://github.com/RyoNakagami/RyoNakagami.github.io (push)
-```
-
-## Appendix: リモートリポジトリについて
-
-インターネット上あるいはその他ネットワーク上のどこかに存在するファイルやディレクトリの履歴を管理する場所のことです.プッシュできるのは, 2 種類の URL アドレスに対してのみです:
-
-- `https://github.com/user/repo.git` のような HTTPS URL
-- `git@github.com:user/repo.git` のような SSH URL
-
-Git はリモート URL に名前を関連付けます. デフォルトのリモートは通常 `origin` と呼ばれます. 
-
-
-### リモートレポジトリの作成
-
-git remote add コマンドを使用してリモート URL に名前を関連付けることができます。 たとえば, コマンドラインに以下のように入力できます:
-
-```
-git remote add origin  <REMOTE_URL> 
-```
-
-設定状況を確認したい場合は
-
-```
-git remote -v
-```
-
-これで `origin` という名前が `REMOTE_URL` に関連付けられます。 `git remote set-url` を使えば, リモートの URL を変更できます。
-
-
-### HTTPS URLによるクローンのメリット
-
-- `https://` は, 可視性に関係なく, すべてのリポジトリで使用できます. 
-- `https://` のクローン URL は, ファイアウォールまたはプロキシの内側にいる場合でも機能する.
 
 
 ## References
@@ -315,7 +259,7 @@ git remote -v
 - [GitHub Docs > Managing remote repositories](https://docs.github.com/en/get-started/getting-started-with-git/managing-remote-repositories)
 
 
-> オンラインマテリアル
+> Others
 
 - [Token authentication requirements for Git operations](https://github.blog/2020-12-15-token-authentication-requirements-for-git-operations/)
 - [個人アクセストークンを使用する](https://docs.github.com/ja/github-ae@latest/github/authenticating-to-github/keeping-your-account-and-data-secure/creating-a-personal-access-token)
