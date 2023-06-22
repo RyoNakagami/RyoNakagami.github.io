@@ -1,7 +1,7 @@
 ---
 layout: post
 title: "Why Do We Set Upstream Branch and What is it?"
-subtitle: "How to use git command 5/N"
+subtitle: "How to use git command 6/N"
 author: "Ryo"
 header-mask: 0.0
 header-style: text

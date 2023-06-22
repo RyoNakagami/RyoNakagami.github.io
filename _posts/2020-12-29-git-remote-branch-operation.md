@@ -28,11 +28,13 @@ tags:
   - [Create a New Branch Locally from a Specified Branch](#create-a-new-branch-locally-from-a-specified-branch)
   - [Rename a Local Branch Name](#rename-a-local-branch-name)
   - [Delete a Local Branch](#delete-a-local-branch)
+  - [Restore a branch after its deletion in Git](#restore-a-branch-after-its-deletion-in-git)
   - [Check the Upstream Branch](#check-the-upstream-branch)
   - [Set up an upstream branch to a local branch](#set-up-an-upstream-branch-to-a-local-branch)
-  - [Check the Parent Branch](#check-the-parent-branch)
+  - [Check the Nearest Branch](#check-the-nearest-branch)
 - [Local Branch Operation: Compare and Merge](#local-branch-operation-compare-and-merge)
   - [Compare the current branch with the Selected Branches](#compare-the-current-branch-with-the-selected-branches)
+  - [Undo a Merge Commit](#undo-a-merge-commit)
 - [Remote Branch Operation](#remote-branch-operation)
   - [Get/Switch to a remote branch: `git switch` version](#getswitch-to-a-remote-branch-git-switch-version)
   - [Get/Switch to a remote branch: `git fetch` version](#getswitch-to-a-remote-branch-git-fetch-version)
@@ -275,11 +277,12 @@ branch_A            214c991 [origin/branch_A: ahead 1, behind 3] FIX readme
 - `<local branch>`を省略した場合は, 現在のbranchに対してupstream branchを設定する
 
 
-### Check the Parent Branch
+### Check the Nearest Branch
 
 > What I Want
 
-- カレントブランチの親ブランチ名を取得する
+- カレントブランチの派生元ブランチ名を取得する
+- Merge後は, 直近のMerge元を派生元ブランチとして参照する
 
 > Setup
 
@@ -287,7 +290,7 @@ branch_A            214c991 [origin/branch_A: ahead 1, behind 3] FIX readme
 
 ```zsh
 [alias]
-	parent = "!git show-branch  -a| grep -v `git rev-parse --abbrev-ref HEAD`| head -n1| sed 's/.*\\[\\(.*\\)\\].*/\\1/'| sed 's/[\\^~].*//' #"
+	nearest = "!git show-branch  -a| grep '*' | grep -v `git rev-parse --abbrev-ref HEAD`| head -n1| sed 's/.*\\[\\(.*\\)\\].*/\\1/'| sed 's/[\\^~].*//' #"
 ```
 
 - `!`はシェルコマンドを入力しますよ, という指示語
@@ -296,7 +299,7 @@ branch_A            214c991 [origin/branch_A: ahead 1, behind 3] FIX readme
 > How to Use it
 
 - `develop`ブランチから派生した`feature_model`ブランチに現在いるとする
-- `feature_model`ブランチの親ブランチとして`develop`ブランチ名が出力されてほしい
+- `feature_model`ブランチの派生元ブランチとして`develop`ブランチ名が出力されてほしい
 
 ```zsh
 % git branch
@@ -304,7 +307,7 @@ branch_A            214c991 [origin/branch_A: ahead 1, behind 3] FIX readme
   feature_cv
 * feature_model
   main
-% git parent
+% git nearest
 develop
 ```
 
@@ -342,7 +345,110 @@ develop
 - `<path>`指定時は, その対象ファイルのみの差分を表示
 - `<path>`を指定しなかった場合は, 差分全てを表示
 
+### Undo a Merge Commit
 
+> What I Want
+
+- merge commitを取り消す
+
+> How
+
+merge commitを取り消すには2つの方法があります:
+
+|方針|効果|
+|---|---|
+|`git reset --merge`|Branch Historyを強制的に書き換える(= merge commitの痕跡を履歴から消す)|
+|`git revert`|merge変更自体は打ち消すが, merge commitの履歴は残る|
+
+本来mergeされるべきではなかったbranchがmergeされたときに実施するundoなので, 基本的には
+`git reset --merge`を用いることが良いと考えています. 実際に, [Linus](https://github.com/git/git/blob/master/Documentation/howto/revert-a-faulty-merge.txt#L62-L78)も次のように言っています:
+
+```
+Reverting a regular commit just effectively undoes what that commit did, and is fairly straightforward. 
+But reverting a merge commit also undoes the _data_ that the commit changed, 
+but it does absolutely nothing to the effects on _history_ that the merge had.
+
+So the merge will still exist, and it will still be seen as joining the two 
+branches together, and future merges will see that merge as the last shared 
+state – and the revert that reverted the merge brought in will not affect that at all.
+
+So a "revert" undoes the data changes, but it's very much not an "undo" in the 
+sense that it doesn't undo the effects of a commit on the repository history.
+
+So if you think of "revert" as "undo", then you're going to always miss this 
+part of reverts. Yes, it undoes the data, but no, it doesn't undo history.
+```
+
+
+> How to do `git reset --merge` in order to undo the merge
+
+```zsh
+% git reset --merge <commit-hash>
+```
+
+`git reset –merge`はtracked filesに加えられたuncommitedな変更についての情報を残してくれるため,
+全てを参照地点までの情報まで戻してしまう`git reset --hard`に対してsafer versionと一般的に言われています.
+
+documentを確認してみると,
+
+```
+--hard    Matches the working tree and index to that of the tree being
+               switched  to. Any changes to tracked files in the working tree since
+               <commit> are lost.
+
+--merge
+              Resets the index to match the tree recorded by the named commit, and
+              updates the files that are different between the named commit and
+              the current commit in the working tree.
+```
+
+> Check the difference between `--hard` and `--marge`
+
+
+`--hard` と `--marge`はtracked fileのuncommittedな変更について情報を残すか残さないかの違いです.
+それを確認するため以下の状況を作ります:
+
+1. `main`と`merge_test`の2つのbranch
+2. `main`へ`merge_test`をmergeする前に、tracked-fileの`README.md`に「good bye」という文字列を加える
+3. good byeをstashしてから, `merge_test`で適当に作業, `main`へ戻る
+4.  good byeをstashからpopしてから`merge_test`を`main`へmerge
+
+```zsh
+% mkdir test
+% cd ./test
+% git init
+% touch README.md
+% git commit -m "initial commit"
+% git switch -c merge_test
+% touch merge_log.txt
+% echo test > merge_log.txt
+% git add merge_log.tx
+% git commit -m "DOC: Additing merge_log"
+% git switch main
+% echo hello world > README.md
+% git add README.md
+% git commit -m "DOC: updating README"
+% echo good bye >> README.md
+% git stash
+% git switch merge_test
+% echo 'hope this line will disappear'
+% echo 'hope this line will disappear' > merge_log.txt
+% git add merge_log.txt
+% git commit -m "DOC: updating merge_log"
+% git switch main
+% git stash pop
+% git merge merge_test
+```
+
+このとき, `--hard` と `--marge`で以下のような挙動の違いが発生します:
+
+```zsh
+## stashされたgood byeは残る
+% git reset --merge ORIG_HEAD
+
+## stashされたgood byeが消える
+% git reset --hard ORIG_HEAD
+```
 
 ## Remote Branch Operation
 ### Get/Switch to a remote branch: `git switch` version
@@ -505,3 +611,4 @@ Poetry経由の場合は
 
 - [stackoverflow > How can I use the new `git switch` syntax to create a new branch?](https://stackoverflow.com/questions/58124219/how-can-i-use-the-new-git-switch-syntax-to-create-a-new-branch)
 - [stackoverflow > Can I recover a branch after its deletion in Git?](https://stackoverflow.com/questions/3640764/can-i-recover-a-branch-after-its-deletion-in-git)
+- [git documentation > Linus explains the revert and the reset](https://github.com/git/git/blob/master/Documentation/howto/revert-a-faulty-merge.txt#L62-L78)
