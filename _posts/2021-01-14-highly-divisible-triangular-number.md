@@ -3,8 +3,8 @@ layout: post
 title: "Highly divisible triangular numberの計算"
 subtitle: "Project Euler Problem 12の解説"
 author: "Ryo"
-header-img: "img/post-bg-miui6.jpg"
-header-mask: 0.4
+header-style: text
+header-mask: 0.0
 catelog: true
 mathjax: true
 purpose: 

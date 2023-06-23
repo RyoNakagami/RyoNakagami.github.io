@@ -3,8 +3,8 @@ layout: post
 title: "変数間の直線的関係性の尺度としてのPearsonの相関係数"
 subtitle: "相関係数 1/N"
 author: "Ryo"
-header-img: "img/bg-statistics.png"
-header-mask: 0.4
+header-style: text
+header-mask: 0.0
 catelog: true
 mathjax: true
 revise_date: 2023-02-20

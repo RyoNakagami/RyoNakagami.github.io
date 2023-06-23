@@ -3,8 +3,8 @@ layout: post
 title: "タンジェントのN乗の区間積分と数列"
 subtitle: "H31東京大学大学院工学研究科入試問1を題材に"
 author: "Ryo"
-header-img: "img/bg-math.jpg"
-header-mask: 0.4
+header-style: text
+header-mask: 0.0
 catelog: true
 mathjax: true
 uu_cnt: 100

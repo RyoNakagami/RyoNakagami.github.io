@@ -3,8 +3,8 @@ layout: post
 title: "ベータ分布の性質"
 subtitle: "ベイズ統計入門 2/N"
 author: "Ryo"
-header-img: "img/bg-statistics.png"
-header-mask: 0.4
+header-style: text
+header-mask: 0.0
 catelog: true
 mathjax: true
 purpose: 

@@ -3,8 +3,8 @@ layout: post
 title: "Ubuntu Desktop環境構築 Part 16"
 subtitle: "Dockerによる環境構築 Part 2: サンプルアプリケーションを動かしてみる"
 author: "Ryo"
-header-img: "img/about-bg.jpg"
-header-mask: 0.4
+header-style: text
+header-mask: 0.0
 catelog: true
 mathjax: true
 purpose: 

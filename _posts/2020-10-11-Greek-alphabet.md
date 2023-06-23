@@ -2,8 +2,8 @@
 layout: post
 title: "文字コード > ギリシア文字"
 author: "Ryo"
-header-img: "img/cpu.png"
-header-mask: 0.4
+header-style: text
+header-mask: 0.0
 catelog: true
 mathjax: true
 revise_date: 2020-10-10

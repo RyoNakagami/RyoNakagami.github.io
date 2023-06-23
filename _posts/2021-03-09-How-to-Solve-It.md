@@ -3,8 +3,8 @@ layout: post
 title: "いかにして問題を解くか"
 subtitle: "問題を解くときの方法論の紹介"
 author: "Ryo"
-header-img: "img/about-bg.jpg"
-header-mask: 0.4
+header-style: text
+header-mask: 0.0
 catelog: true
 mathjax: true
 revise_date: 2022-04-13

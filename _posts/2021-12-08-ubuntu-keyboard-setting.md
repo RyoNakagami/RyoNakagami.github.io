@@ -3,7 +3,7 @@ layout: post
 title: "Keychron K6 Wireless Mechanical Keyboardとショートカットの整理"
 subtitle: "Ubuntu Desktop環境構築 Part 24"
 author: "Ryo"
-header-mask: 0.4
+header-mask: 0.0
 catelog: true
 mathjax: true
 revise_date: 

@@ -3,8 +3,8 @@ layout: post
 title: "対雁木囲い詰将棋"
 subtitle: "実践詰将棋練習 居飛車編 3/N"
 author: "Ryo"
-header-img: "img/bg-shougi.jpg"
-header-mask: 0.4
+header-style: text
+header-mask: 0.0
 catelog: true
 mathjax: true
 revise_date: 2023-03-03

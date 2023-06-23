@@ -3,8 +3,8 @@ layout: post
 title: "死神とのコイントスゲーム"
 subtitle: "制約条件付きコイントスゲームとゲーム勝率の計算"
 author: "Ryo"
-header-img: "img/bg-statistics.png"
-header-mask: 0.4
+header-style: text
+header-mask: 0.0
 catelog: true
 mathjax: true
 purpose: 成果物：制約条件付きコイントスゲームのDPの実装

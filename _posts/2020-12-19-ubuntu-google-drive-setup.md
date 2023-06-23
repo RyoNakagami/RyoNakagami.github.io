@@ -3,8 +3,8 @@ layout: post
 title: "google-drive-ocamlfuseのインストール: Linux版google-drive-stream"
 subtitle: "Ubuntu Desktop環境構築 Part 7"
 author: "Ryo"
-header-img: "img/post-bg-rwd.jpg"
-header-mask: 0.4
+header-style: text
+header-mask: 0.0
 catelog: true
 mathjax: true
 revise_date: 2022-09-03

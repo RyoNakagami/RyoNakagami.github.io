@@ -3,8 +3,8 @@ layout: post
 title: "有限母集団からの標本抽出と有限母集団修正項"
 subtitle: "Random Samplingの理論と実践 1/N"
 author: "Ryo"
-header-img: "img/about-bg.jpg"
-header-mask: 0.4
+header-style: text
+header-mask: 0.0
 catelog: true
 mathjax: true
 revise_date: 2022-10-06

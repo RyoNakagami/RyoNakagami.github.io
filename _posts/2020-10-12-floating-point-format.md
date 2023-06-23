@@ -3,8 +3,8 @@ layout: post
 title: "固定小数点表示と浮動小数点表示"
 subtitle: "コンピューターにおける算術演算 3/N"
 author: "Ryo"
-header-img: "img/cpu.png"
-header-mask: 0.4
+header-style: text
+header-mask: 0.0
 mathjax: true
 catelog: true
 revise_date: 2023-04-01

@@ -3,8 +3,8 @@ layout: post
 title: "Wolfram Engineをローカルで使用できるようにするまで"
 subtitle: "Ubuntu Desktop環境構築 Part 27"
 author: "Ryo"
-header-img: "img/cpu.png"
-header-mask: 0.4
+header-style: text
+header-mask: 0.0
 catelog: true
 mathjax: true
 revise_date: 2023-03-09

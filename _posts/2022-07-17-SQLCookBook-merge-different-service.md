@@ -3,8 +3,8 @@ layout: post
 title: "Standard SQL CookBook - 6/N"
 subtitle: "異なるサービスの会員データを複数カラムをマッチさせて名前寄せをする"
 author: "Ryo"
-header-img: "img/about-bg.jpg"
-header-mask: 0.4
+header-style: text
+header-mask: 0.0
 catelog: true
 mathjax: true
 revise_date: 2022-09-01

@@ -3,8 +3,8 @@ layout: post
 title: "カイ二乗適合度検定"
 subtitle: "数理統計：適合度検定 1/N"
 author: "Ryo"
-header-img: "img/bg-statistics.png"
-header-mask: 0.4
+header-style: text
+header-mask: 0.0
 catelog: true
 mathjax: true
 revise_date: 2022-08-03

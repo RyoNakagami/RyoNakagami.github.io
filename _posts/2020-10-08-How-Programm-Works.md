@@ -3,8 +3,8 @@ layout: post
 title: "一般教養としてのComputer Science"
 subtitle: "プログラムが動作する根本的な仕組みを理解する"
 author: "Ryo"
-header-img: "img/cpu.png"
-header-mask: 0.4
+header-style: text
+header-mask: 0.0
 catelog: true
 tags:
   - Computer Science

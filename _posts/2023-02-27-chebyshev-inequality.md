@@ -2,8 +2,8 @@
 layout: post
 title: "Chebyshev inequalityの導出"
 author: "Ryo"
-header-img: "img/bg-statistics.png"
-header-mask: 0.4
+header-style: text
+header-mask: 0.0
 catelog: true
 mathjax: true
 revise_date: 2023-03-09

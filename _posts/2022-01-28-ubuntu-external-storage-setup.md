@@ -3,8 +3,8 @@ layout: post
 title: "システム起動時に自動的にドライブをマウントする"
 subtitle: "Ubuntu Desktop環境構築 Part 25"
 author: "Ryo"
-header-img: "img/about-bg.jpg"
-header-mask: 0.4
+header-style: text
+header-mask: 0.0
 catelog: true
 mathjax: true
 revise_date: 2022-08-06

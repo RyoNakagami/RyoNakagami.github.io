@@ -3,8 +3,8 @@ layout: post
 title: "調和級数からみるオイラーの世界"
 subtitle: "調和級数, オイラーの定理,ゼータ関数"
 author: "Ryo"
-header-img: "img/tag-bg.jpg"
-header-mask: 0.4
+header-style: text
+header-mask: 0.0
 catelog: true
 mathjax: true
 purpose: 

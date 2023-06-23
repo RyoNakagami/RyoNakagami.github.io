@@ -3,8 +3,8 @@ layout: post
 title: "Standard SQL CookBook - 2/N"
 subtitle: "複数カラムのmin, maxのとり方 - GREATEST, LEAST"
 author: "Ryo"
-header-img: "img/about-bg.jpg"
-header-mask: 0.4
+header-style: text
+header-mask: 0.0
 catelog: true
 mathjax: true
 tags:

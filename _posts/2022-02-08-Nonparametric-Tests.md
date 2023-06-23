@@ -3,8 +3,8 @@ layout: post
 title: "Non Parameteric Tests - Permutation Test"
 subtitle: "Statistical Inference: Significance Testing Note 1/N"
 author: "Ryo"
-header-img: "img/bg-statistics.png"
-header-mask: 0.4
+header-style: text
+header-mask: 0.0
 catelog: true
 mathjax: true
 revise_date: 2022-10-31

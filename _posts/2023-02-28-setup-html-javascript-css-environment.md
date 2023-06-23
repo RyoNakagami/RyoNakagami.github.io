@@ -3,8 +3,8 @@ layout: post
 title: "VS CodeでHTML + JavaScript + CSS開発環境構築"
 subtitle: "VS Code Live Previewの紹介"
 author: "Ryo"
-header-img: "img/cpu.png"
-header-mask: 0.4
+header-style: text
+header-mask: 0.0
 catelog: true
 mathjax: true
 revise_date: 2023-03-05

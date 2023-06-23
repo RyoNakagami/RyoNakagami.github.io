@@ -3,8 +3,8 @@ layout: post
 title: "シェルスクリプトと前処理 Part 2"
 subtitle: "シェルコマンドを用いたデータの取得"
 author: "Ryo"
-header-img: "img/post-git-github-logo.jpg"
-header-mask: 0.4
+header-style: text
+header-mask: 0.0
 catelog: true
 tags:
   - 前処理

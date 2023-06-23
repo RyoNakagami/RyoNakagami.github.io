@@ -3,8 +3,8 @@ layout: post
 title: "静的サイトジェネレーター Jekyllのインストール: GitHub Pages作成環境の構築"
 subtitle: "Ubuntu Desktop環境構築 Part 12"
 author: "Ryo"
-header-img: "img/post-bg-rwd.jpg"
-header-mask: 0.4
+header-style: text
+header-mask: 0.0
 catelog: true
 mathjax: true
 purpose: 

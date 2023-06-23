@@ -3,8 +3,8 @@ layout: post
 title: "統計検定：二項分布の性質"
 subtitle: "条件付き期待値の計算"
 author: "Ryo"
-header-img: "img/bg-statistics.png"
-header-mask: 0.4
+header-style: text
+header-mask: 0.0
 catelog: true
 mathjax: true
 purpose: 

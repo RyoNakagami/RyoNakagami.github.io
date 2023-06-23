@@ -3,8 +3,8 @@ layout: post
 title: "Linux基礎知識：lsコマンドのカラー引数の挙動差"
 subtitle: "--color=autoと--color=alwaysの挙動差"
 author: "Ryo"
-header-img: "img/post-bg-rwd.jpg"
-header-mask: 0.4
+header-style: text
+header-mask: 0.0
 catelog: true
 mathjax: true
 purpose: 

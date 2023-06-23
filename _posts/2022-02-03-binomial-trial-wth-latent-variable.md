@@ -3,8 +3,8 @@ layout: post
 title: "Latent variableに依存したパラメーターの推定"
 subtitle: "罹患率から背景のパラメーターを推定する"
 author: "Ryo"
-header-img: "img/bg-statistics.png"
-header-mask: 0.4
+header-style: text
+header-mask: 0.0
 catelog: true
 mathjax: true
 uu_cnt: 100

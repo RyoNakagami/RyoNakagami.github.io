@@ -3,8 +3,8 @@ layout: post
 title: "初心者からのリサーチデザイン"
 subtitle: "実証分析プロジェクトの方法論　1/N"
 author: "Ryo"
-header-img: "img/about-bg.jpg"
-header-mask: 0.4
+header-style: text
+header-mask: 0.0
 catelog: true
 mathjax: true
 revise_date: 2022-06-20

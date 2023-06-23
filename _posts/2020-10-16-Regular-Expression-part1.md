@@ -3,8 +3,8 @@ layout: post
 title: "正規表現入門 part 1"
 subtitle: "正規表現は何か？"
 author: "Ryo"
-header-img: "img/post-bg-rwd.jpg"
-header-mask: 0.4
+header-style: text
+header-mask: 0.0
 catelog: true
 mathjax: true
 purpose: 目的：正規表現の構文の基礎を理解する

@@ -3,8 +3,8 @@ layout: post
 title: "Ubuntu 20.04 LTSでの古いカーネルの削除"
 subtitle: ""
 author: "Ryo"
-header-img: "img/about-bg.jpg"
-header-mask: 0.4
+header-style: text
+header-mask: 0.0
 catelog: true
 mathjax: true
 revise_date: 2022-08-06

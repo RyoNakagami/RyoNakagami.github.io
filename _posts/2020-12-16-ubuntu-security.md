@@ -3,8 +3,8 @@ layout: post
 title: "ファイヤウォールの設定: ufw と Gufw"
 subtitle: "Ubuntu Desktop環境構築 Part 4"
 author: "Ryo"
-header-img: "img/post-bg-rwd.jpg"
-header-mask: 0.4
+header-style: text
+header-mask: 0.0
 catelog: true
 mathjax: true
 purpose: 

@@ -3,8 +3,8 @@ layout: post
 title: "補数を用いた整数の表現"
 subtitle: "コンピューターにおける算術演算 2/N"
 author: "Ryo"
-header-img: "img/cpu.png"
-header-mask: 0.4
+header-style: text
+header-mask: 0.0
 mathjax: true
 catelog: true
 tags:

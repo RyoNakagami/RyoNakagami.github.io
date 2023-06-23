@@ -3,8 +3,8 @@ layout: post
 title: "Capital Expenditures vs. Operating Expenses"
 subtitle: "CapExとOPEXの理解"
 author: "Ryo"
-header-img: "img/about-bg.jpg"
-header-mask: 0.4
+header-style: text
+header-mask: 0.0
 catelog: true
 mathjax: true
 purpose: 

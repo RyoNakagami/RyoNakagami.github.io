@@ -3,8 +3,8 @@ layout: post
 title: "GitLab開発環境設定 1/N"
 subtitle: "個人アクセストークンの設定"
 author: "Ryo"
-header-img: "img/about-bg.jpg"
-header-mask: 0.4
+header-style: text
+header-mask: 0.0
 catelog: true
 mathjax: true
 revise_date: 2022-08-04

@@ -3,8 +3,8 @@ layout: post
 title: "Pandas CookBook - 1/N"
 subtitle: "Group毎の集計値を用いたデータ処理方法の紹介"
 author: "Ryo"
-header-img: "img/about-bg.jpg"
-header-mask: 0.4
+header-style: text
+header-mask: 0.0
 catelog: true
 mathjax: true
 revise_date: 2022-07-20

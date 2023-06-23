@@ -2,8 +2,8 @@
 layout: post
 title: "素数の分布と素数定理"
 author: "Ryo"
-header-img: "img/tag-bg.jpg"
-header-mask: 0.4
+header-style: text
+header-mask: 0.0
 catelog: true
 mathjax: true
 revise_date: 2023-01-27

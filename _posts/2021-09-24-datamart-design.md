@@ -3,8 +3,8 @@ layout: post
 title: "データ設計のいろは"
 subtitle: "実務で使えるデータ設計のコツ"
 author: "Ryo"
-header-img: "img/about-bg.jpg"
-header-mask: 0.4
+header-style: text
+header-mask: 0.0
 catelog: true
 mathjax: true
 purpose: 

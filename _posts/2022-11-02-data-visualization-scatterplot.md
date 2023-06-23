@@ -3,8 +3,8 @@ layout: post
 title: "Scatterplot"
 subtitle: "Story-telling with data 2/N"
 author: "Ryo"
-header-img: "img/bg-statistics.png"
-header-mask: 0.4
+header-style: text
+header-mask: 0.0
 catelog: true
 mathjax: true
 revise_date: 2023-01-10

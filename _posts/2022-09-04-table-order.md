@@ -3,8 +3,8 @@ layout: post
 title: "円卓テーブルの座り方問題"
 subtitle: "組合せ論シリーズ 2/N"
 author: "Ryo"
-header-img: "img/post-bg-miui6.jpg"
-header-mask: 0.4
+header-style: text
+header-mask: 0.0
 catelog: true
 mathjax: true
 doctoc: false

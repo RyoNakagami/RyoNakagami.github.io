@@ -3,8 +3,8 @@ layout: post
 title: "一様分布の変数変換"
 subtitle: "数理統計：変数変換 3/n"
 author: "Ryo"
-header-img: "img/bg-statistics.png"
-header-mask: 0.4
+header-style: text
+header-mask: 0.0
 catelog: true
 mathjax: true
 purpose: 

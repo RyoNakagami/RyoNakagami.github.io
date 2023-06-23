@@ -3,8 +3,8 @@ layout: post
 title: "ユークリッドの互除法とジェネラティブアート"
 subtitle: "Processingでユークリッドの互除法の可視化"
 author: "Ryo"
-header-img: "img/about-bg.jpg"
-header-mask: 0.4
+header-style: text
+header-mask: 0.0
 catelog: true
 mathjax: true
 purpose: 

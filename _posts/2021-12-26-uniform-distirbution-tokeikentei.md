@@ -3,8 +3,8 @@ layout: post
 title: "統計検定：一様分布の性質の紹介"
 subtitle: "Appendix: 十分統計量"
 author: "Ryo"
-header-img: "img/tag-bg.jpg"
-header-mask: 0.4
+header-style: text
+header-mask: 0.0
 catelog: true
 mathjax: true
 uu_cnt: 100

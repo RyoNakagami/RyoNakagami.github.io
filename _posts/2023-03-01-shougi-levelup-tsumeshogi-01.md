@@ -3,8 +3,8 @@ layout: post
 title: "馬の利きを通す"
 subtitle: "実践詰将棋練習 居飛車編 1/N"
 author: "Ryo"
-header-img: "img/bg-shougi.jpg"
-header-mask: 0.4
+header-style: text
+header-mask: 0.0
 catelog: true
 mathjax: true
 revise_date: 2023-03-01

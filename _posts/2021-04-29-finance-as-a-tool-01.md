@@ -3,8 +3,8 @@ layout: post
 title: "道具としてのファイナンス勉強ノート"
 subtitle: "プロジェクト投資判断のポイントまとめ"
 author: "Ryo"
-header-img: "img/about-bg.jpg"
-header-mask: 0.4
+header-style: text
+header-mask: 0.0
 catelog: true
 mathjax: true
 purpose: 

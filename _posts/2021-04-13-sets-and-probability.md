@@ -3,8 +3,8 @@ layout: post
 title: "集合と確率"
 subtitle: "ポーカーの手札の確率"
 author: "Ryo"
-header-img: "img/bg-statistics.png"
-header-mask: 0.4
+header-style: text
+header-mask: 0.0
 catelog: true
 mathjax: true
 purpose: 

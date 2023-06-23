@@ -3,8 +3,8 @@ layout: post
 title: "Linux環境構築基礎知識：パッケージマネジャーの導入"
 subtitle: "APTによるパッケージ管理"
 author: "Ryo"
-header-img: "img/post-bg-rwd.jpg"
-header-mask: 0.4
+header-style: text
+header-mask: 0.0
 catelog: true
 mathjax: true
 purpose: 

@@ -3,8 +3,8 @@ layout: post
 title: "コーヒーチャフとは？"
 subtitle: "焙煎研究編 2/N"
 author: "Ryo"
-header-img: "img/coffee.jpg"
-header-mask: 0.4
+header-style: text
+header-mask: 0.0
 catelog: true
 mathjax: true
 revise_date: 2022-10-15

@@ -3,8 +3,8 @@ layout: post
 title: "コーヒー豆の栽培と収穫"
 subtitle: "1杯のコーヒーができるまで 1/N"
 author: "Ryo"
-header-img: "img/coffee.jpg"
-header-mask: 0.4
+header-style: text
+header-mask: 0.0
 catelog: true
 mathjax: true
 revise_date: 2022-10-20

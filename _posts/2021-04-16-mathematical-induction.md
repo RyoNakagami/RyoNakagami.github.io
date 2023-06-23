@@ -3,8 +3,8 @@ layout: post
 title: "数学的帰納法の原理"
 subtitle: "数学の技法その１"
 author: "Ryo"
-header-img: "img/tag-bg.jpg"
-header-mask: 0.4
+header-style: text
+header-mask: 0.0
 catelog: true
 mathjax: true
 purpose: 

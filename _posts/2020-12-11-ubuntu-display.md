@@ -3,8 +3,8 @@ layout: post
 title: "Ubuntu 20.04 LTS マルチディスプレイ設定"
 subtitle: "Ubuntu Desktop環境構築 Part 3"
 author: "Ryo"
-header-img: "img/post-bg-rwd.jpg"
-header-mask: 0.4
+header-style: text
+header-mask: 0.0
 catelog: true
 mathjax: true
 revise_date: 2022-08-22

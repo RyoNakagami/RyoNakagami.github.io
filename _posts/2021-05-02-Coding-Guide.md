@@ -3,8 +3,8 @@ layout: post
 title: "Coding Style Guide Part 1"
 subtitle: "哲学：良いコードとは？"
 author: "Ryo"
-header-img: "img/about-bg.jpg"
-header-mask: 0.4
+header-style: text
+header-mask: 0.0
 catelog: true
 mathjax: true
 purpose: 
