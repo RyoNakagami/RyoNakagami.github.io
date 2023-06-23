@@ -3,8 +3,8 @@ layout: post
 title: "Linux基礎知識：bash環境でのパッケージのサジェスト機能"
 subtitle: "command-not-foundの実装の確認"
 author: "Ryo"
-header-img: "img/post-bg-rwd.jpg"
-header-mask: 0.4
+header-style: text
+header-mask: 0.0
 catelog: true
 mathjax: true
 revise_date: 2023-01-26

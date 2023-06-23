@@ -3,8 +3,8 @@ layout: post
 title: "ベルヌーイ試行と漸化式"
 subtitle: "練習問題編"
 author: "Ryo"
-header-img: "img/bg-statistics.png"
-header-mask: 0.4
+header-style: text
+header-mask: 0.0
 catelog: true
 mathjax: true
 uu_cnt: 100

@@ -3,8 +3,8 @@ layout: post
 title: "Ubuntu Desktop環境構築 Part 17"
 subtitle: "Processing 3.5.4の導入"
 author: "Ryo"
-header-img: "img/about-bg.jpg"
-header-mask: 0.4
+header-style: text
+header-mask: 0.0
 catelog: true
 mathjax: true
 purpose: 

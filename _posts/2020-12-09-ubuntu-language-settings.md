@@ -3,8 +3,8 @@ layout: post
 title: "Ubuntuのディレクトリ名をEnglishにrename & 日本語入力環境を整える"
 subtitle: "Ubuntu Desktop環境構築 Part 2"
 author: "Ryo"
-header-img: "img/post-bg-rwd.jpg"
-header-mask: 0.4
+header-style: text
+header-mask: 0.0
 catelog: true
 mathjax: true
 revise_date: 2022-07-31 

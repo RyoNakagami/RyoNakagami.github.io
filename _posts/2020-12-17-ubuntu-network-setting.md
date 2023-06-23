@@ -3,8 +3,8 @@ layout: post
 title: "Ubuntu Desktop環境構築 Part 5 (未実施 Part)"
 subtitle: "デスクトップへのリモート接続：WoL設定"
 author: "Ryo"
-header-img: "img/post-bg-rwd.jpg"
-header-mask: 0.4
+header-style: text
+header-mask: 0.0
 catelog: true
 mathjax: true
 purpose: 

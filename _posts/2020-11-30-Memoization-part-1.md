@@ -3,8 +3,8 @@ layout: post
 title: "Memoization(メモ化)のまとめ Part 1"
 subtitle: "PythonにおけるMemoizationの実践"
 author: "Ryo"
-header-img: "img/tag-bg.jpg"
-header-mask: 0.4
+header-style: text
+header-mask: 0.0
 catelog: true
 mathjax: true
 purpose: 

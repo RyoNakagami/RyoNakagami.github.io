@@ -3,8 +3,8 @@ layout: post
 title: "LinuxのGPU機械学習環境構築: GPUドライバ/CUDA toolkitのインストール"
 subtitle: "Ubuntu Desktop Datascience環境構築 2/N"
 author: "Ryo"
-header-img: "img/about-bg.jpg"
-header-mask: 0.4
+header-style: text
+header-mask: 0.0
 catelog: true
 mathjax: true
 revise_date: 

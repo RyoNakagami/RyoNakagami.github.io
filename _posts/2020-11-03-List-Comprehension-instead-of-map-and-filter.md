@@ -3,8 +3,8 @@ layout: post
 title: "List comprehensionとmapとfilterの比較"
 subtitle: "PythonとList comprehension"
 author: "Ryo"
-header-img: "img/tag-bg.jpg"
-header-mask: 0.4
+header-style: text
+header-mask: 0.0
 catelog: true
 mathjax: true
 purpose: 

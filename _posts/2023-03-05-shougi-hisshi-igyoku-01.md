@@ -3,8 +3,8 @@ layout: post
 title: "対居玉攻め筋"
 subtitle: "実践攻め筋 1/N"
 author: "Ryo"
-header-img: "img/bg-shougi.jpg"
-header-mask: 0.4
+header-style: text
+header-mask: 0.0
 catelog: true
 mathjax: true
 revise_date: 2023-03-07

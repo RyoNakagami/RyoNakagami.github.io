@@ -3,8 +3,8 @@ layout: post
 title: "Ridge/Lasso推定量の性質"
 subtitle: "LassoとRidgeの性能比較"
 author: "Ryo"
-header-img: "img/bg-statistics.png"
-header-mask: 0.4
+header-style: text
+header-mask: 0.0
 catelog: true
 mathjax: true
 revise_date: 2022-04-11

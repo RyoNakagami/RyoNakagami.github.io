@@ -3,7 +3,7 @@ layout: post
 title: "一般常識 & マナー攻略"
 subtitle: "日常ライフハッキング 1/N"
 author: "Ryo"
-header-mask: 0.4
+header-mask: 0.0
 catelog: true
 tags:
   - hacking

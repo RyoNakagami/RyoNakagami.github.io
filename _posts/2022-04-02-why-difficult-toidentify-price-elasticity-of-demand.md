@@ -3,8 +3,8 @@ layout: post
 title: "需要の価格弾力性の識別はなぜ難しいのか?"
 subtitle: "市場均衡価格とEndogeneity bias"
 author: "Ryo"
-header-img: "img/about-bg.jpg"
-header-mask: 0.4
+header-style: text
+header-mask: 0.0
 catelog: true
 mathjax: true
 revise_date: 2022-08-01

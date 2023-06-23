@@ -3,8 +3,8 @@ layout: post
 title: "Standard SQL CookBook - 1/N"
 subtitle: "Averageのとり方 - Weighted Average, Moving Average, Moving Weighted Average"
 author: "Ryo"
-header-img: "img/about-bg.jpg"
-header-mask: 0.4
+header-style: text
+header-mask: 0.0
 catelog: true
 mathjax: true
 purpose: 

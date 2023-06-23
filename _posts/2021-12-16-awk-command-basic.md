@@ -3,8 +3,8 @@ layout: post
 title: "Linux commandの復習: awkコマンド"
 subtitle: "awkコマンドの基本 & awkコマンドを用いた前処理の紹介"
 author: "Ryo"
-header-img: "img/about-bg.jpg"
-header-mask: 0.4
+header-style: text
+header-mask: 0.0
 catelog: true
 mathjax: true
 purpose: 

@@ -3,8 +3,8 @@ layout: post
 title: "Psuedo code Tutorial"
 subtitle: "疑似コードの読み方と書き方"
 author: "Ryo"
-header-img: "img/post-bg-miui6.jpg"
-header-mask: 0.4
+header-style: text
+header-mask: 0.0
 catelog: true
 mathjax: true
 purpose: 

@@ -3,8 +3,8 @@ layout: post
 title: "SSH(Secure Shell)の基礎知識"
 subtitle: "VSCodeを用いたSSH接続設定まで"
 author: "Ryo"
-header-img: "img/about-bg.jpg"
-header-mask: 0.4
+header-style: text
+header-mask: 0.0
 catelog: true
 mathjax: true
 revise_date: 2022-09-03

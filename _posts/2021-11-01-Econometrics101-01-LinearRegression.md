@@ -3,8 +3,8 @@ layout: post
 title: "Econometrics101 - 復習"
 subtitle: "Linear Regression: OLS finite sample and larger sample property"
 author: "Ryo"
-header-img: "img/about-bg.jpg"
-header-mask: 0.4
+header-style: text
+header-mask: 0.0
 catelog: true
 mathjax: true
 purpose: 

@@ -3,8 +3,8 @@ layout: post
 title: "Standard SQL CookBook - 3/N"
 subtitle: "RCTにおけるunit of observationのsampling - Farm Fingerprint"
 author: "Ryo"
-header-img: "img/about-bg.jpg"
-header-mask: 0.4
+header-style: text
+header-mask: 0.0
 catelog: true
 mathjax: true
 revise_date: 2022-07-20

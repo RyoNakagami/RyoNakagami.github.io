@@ -3,8 +3,8 @@ layout: post
 title: "権限管理入門とsudoの使い方"
 subtitle: "Linux復習: Permission"
 author: "Ryo"
-header-img: "img/about-bg.jpg"
-header-mask: 0.4
+header-style: text
+header-mask: 0.0
 catelog: true
 mathjax: true
 revise_date: 2022-08-08

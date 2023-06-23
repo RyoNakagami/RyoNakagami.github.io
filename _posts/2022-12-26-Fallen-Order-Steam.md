@@ -3,8 +3,8 @@ layout: post
 title: "Start Wars Jedi: Fallen Orderプレイ環境設定"
 subtitle: "Ubuntu Desktop環境構築: Steam編 2/N"
 author: "Ryo"
-header-img: "img/about-bg.jpg"
-header-mask: 0.4
+header-style: text
+header-mask: 0.0
 revise_date: 2022-12-26
 catelog: true
 mathjax: true

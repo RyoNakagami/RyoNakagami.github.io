@@ -3,8 +3,8 @@ layout: post
 title: "GitHub Pages環境構築: GA4 Source/Medium 設定"
 subtitle: "GA4 カスタム URL で集客ソースデータを収集する"
 author: "Ryo"
-header-img: "img/tag-bg.jpg"
-header-mask: 0.4
+header-style: text
+header-mask: 0.0
 catelog: true
 tags:
   - GA4

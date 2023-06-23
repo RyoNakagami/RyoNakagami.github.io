@@ -3,8 +3,8 @@ layout: post
 title: "Arrayに対する任意のReduce Operationの定義の仕方"
 subtitle: "itertools.accumulate の確認"
 author: "Ryo"
-header-img: "img/cpu.png"
-header-mask: 0.4
+header-style: text
+header-mask: 0.0
 catelog: true
 mathjax: true
 revise_date: 2023-01-26

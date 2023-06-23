@@ -3,8 +3,8 @@ layout: post
 title: "ブログ編集手引きノート"
 subtitle: "Git branchを用いたブログ更新テストのメモ"
 author: "Ryo"
-header-img: "img/post-git-github-logo.jpg"
-header-mask: 0.4
+header-style: text
+header-mask: 0.0
 purpose: 目的 git branchを活用したRyo's Tech blogの更新手順のメモ
 goal: 成果物 git branchを用いたファイルバージョン管理やブログレイアウト管理を実現
 catelog: true

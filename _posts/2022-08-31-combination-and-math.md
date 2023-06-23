@@ -3,8 +3,8 @@ layout: post
 title: "Combinationの性質: 二項定理の応用"
 subtitle: "組合せ論シリーズ 1/N"
 author: "Ryo"
-header-img: "img/post-bg-miui6.jpg"
-header-mask: 0.4
+header-style: text
+header-mask: 0.0
 catelog: true
 mathjax: true
 doctoc: false

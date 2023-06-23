@@ -3,8 +3,8 @@ layout: post
 title: "IPアドレスの構造"
 subtitle: "ネットワークを学ぶ 3/N"
 author: "Ryo"
-header-img: "img/cpu.png"
-header-mask: 0.4
+header-style: text
+header-mask: 0.0
 mathjax: true
 catelog: true
 revise_date: 2023-04-13

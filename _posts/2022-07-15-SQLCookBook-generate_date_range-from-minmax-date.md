@@ -3,8 +3,8 @@ layout: post
 title: "Standard SQL CookBook - 5/N"
 subtitle: "ユーザーごとの開始日, 終了日が記録されたレコードから開始日から終了日までのDate sequenceを作成する"
 author: "Ryo"
-header-img: "img/about-bg.jpg"
-header-mask: 0.4
+header-style: text
+header-mask: 0.0
 catelog: true
 mathjax: true
 revise_date: 2022-08-01

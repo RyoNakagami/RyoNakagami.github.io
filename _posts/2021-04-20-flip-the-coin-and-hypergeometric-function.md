@@ -3,8 +3,8 @@ layout: post
 title: "2人が同じ回数コインを投げて、表が出る回数が同じになる確率"
 subtitle: "二項係数とGauss hypergeometric function"
 author: "Ryo"
-header-img: "img/tag-bg.jpg"
-header-mask: 0.4
+header-style: text
+header-mask: 0.0
 catelog: true
 mathjax: true
 purpose: 

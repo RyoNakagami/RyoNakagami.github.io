@@ -3,8 +3,8 @@ layout: post
 title: "Dockerを用いたシェルスクリプト練習環境の作成"
 subtitle: "Data Science at the Command Lineの練習環境の作成"
 author: "Ryo"
-header-img: "img/post-git-github-logo.jpg"
-header-mask: 0.4
+header-style: text
+header-mask: 0.0
 catelog: true
 tags:
   - 前処理

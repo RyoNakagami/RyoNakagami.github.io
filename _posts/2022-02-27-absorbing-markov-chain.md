@@ -3,8 +3,8 @@ layout: post
 title: "吸収マルコフ連鎖の紹介"
 subtitle: "コミュニティー内部でNewsはどのように広がるのか"
 author: "Ryo"
-header-img: "img/bg-statistics.png"
-header-mask: 0.4
+header-style: text
+header-mask: 0.0
 catelog: true
 mathjax: true
 purpose: 

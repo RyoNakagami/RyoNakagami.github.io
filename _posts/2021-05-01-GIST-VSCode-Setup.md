@@ -3,8 +3,8 @@ layout: post
 title: "GistとVS Codeの連携"
 subtitle: "VS CodeからGistにgist createできるようにする"
 author: "Ryo"
-header-img: "img/about-bg.jpg"
-header-mask: 0.4
+header-style: text
+header-mask: 0.0
 catelog: true
 mathjax: true
 revise_date: 2022-08-04

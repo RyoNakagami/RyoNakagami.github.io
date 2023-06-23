@@ -3,8 +3,8 @@ layout: post
 title: "正規表現入門 part 2"
 subtitle: "Pythonと正規表現によるパターンマッチング"
 author: "Ryo"
-header-img: "img/post-bg-rwd.jpg"
-header-mask: 0.4
+header-style: text
+header-mask: 0.0
 catelog: true
 mathjax: true
 purpose: 成果物：Pythonのre モジュールを用いた文字列操作ができるようになる

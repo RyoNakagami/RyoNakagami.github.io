@@ -3,8 +3,8 @@ layout: post
 title: "数理統計: 重複順列と順列"
 subtitle: "Permuation and Permutation with repetitionの実装"
 author: "Ryo"
-header-img: "img/bg-statistics.png"
-header-mask: 0.4
+header-style: text
+header-mask: 0.0
 catelog: true
 mathjax: true
 tags:

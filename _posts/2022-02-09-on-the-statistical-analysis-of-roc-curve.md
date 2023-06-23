@@ -3,8 +3,8 @@ layout: post
 title: "論文紹介: Topmpson 1989, On The Statistical Analysis of ROC Curve"
 subtitle: "ROC曲線の解釈指標としての「Binormal ROCを仮定したAUC」"
 author: "Ryo"
-header-img: "img/bg-statistics.png"
-header-mask: 0.4
+header-style: text
+header-mask: 0.0
 catelog: true
 mathjax: true
 revise_date: 2023-03-03

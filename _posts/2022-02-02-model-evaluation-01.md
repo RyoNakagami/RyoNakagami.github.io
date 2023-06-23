@@ -3,8 +3,8 @@ layout: post
 title: "機械学習モデル精度の評価"
 subtitle: "意思決定とモデル精度の橋渡し 1/N"
 author: "Ryo"
-header-img: "img/bg-statistics.png"
-header-mask: 0.4
+header-style: text
+header-mask: 0.0
 catelog: true
 mathjax: true
 revise_date: 2023-03-13

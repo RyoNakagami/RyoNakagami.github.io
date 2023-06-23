@@ -3,8 +3,8 @@ layout: post
 title: "EDA CookBook - 生存分析とKaplanMeier推定量"
 subtitle: "生存分析 1/N"
 author: "Ryo"
-header-img: "img/about-bg.jpg"
-header-mask: 0.4
+header-style: text
+header-mask: 0.0
 catelog: true
 mathjax: true
 revise_date: 2022-10-06

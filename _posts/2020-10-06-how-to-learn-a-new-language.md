@@ -3,8 +3,8 @@ layout: post
 title: "言語習得のための７つの習慣"
 subtitle: "How to learn a new language: 7 secrets from TED Translators"
 author: "Ryo"
-header-img: "img/tag-bg.jpg"
-header-mask: 0.4
+header-style: text
+header-mask: 0.0
 catelog: true
 tags:
   - English

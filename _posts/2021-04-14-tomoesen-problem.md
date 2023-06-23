@@ -3,8 +3,8 @@ layout: post
 title: "巴戦の確率"
 subtitle: "巴戦の勝利確率と公平な巴戦の検討"
 author: "Ryo"
-header-img: "img/bg-statistics.png"
-header-mask: 0.4
+header-style: text
+header-mask: 0.0
 catelog: true
 mathjax: true
 purpose: 

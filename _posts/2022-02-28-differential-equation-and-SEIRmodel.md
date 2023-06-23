@@ -3,8 +3,8 @@ layout: post
 title: "微分方程式の基礎と分析モデルの紹介"
 subtitle: "The COVID-19 SEIR Modelの紹介"
 author: "Ryo"
-header-img: "img/bg-statistics.png"
-header-mask: 0.4
+header-style: text
+header-mask: 0.0
 catelog: true
 mathjax: true
 revise_date: 2022-03-09 

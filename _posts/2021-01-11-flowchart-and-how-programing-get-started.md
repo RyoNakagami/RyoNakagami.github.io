@@ -3,8 +3,8 @@ layout: post
 title: "プログラムができるまでの流れとフローチャート"
 subtitle: "料理レシピをフローチャートで書いてみる"
 author: "Ryo"
-header-img: "img/post-bg-miui6.jpg"
-header-mask: 0.4
+header-style: text
+header-mask: 0.0
 catelog: true
 mathjax: true
 revise_date: 2022-10-05

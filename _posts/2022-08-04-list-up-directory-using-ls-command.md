@@ -3,8 +3,8 @@ layout: post
 title: "Linux基礎知識：カレントディレクトリ下のフォルダ一覧表示"
 subtitle: "du,grep,awkを活用してls likeに出力する"
 author: "Ryo"
-header-img: "img/post-bg-rwd.jpg"
-header-mask: 0.4
+header-style: text
+header-mask: 0.0
 catelog: true
 mathjax: true
 revise_date: 2022-08-04

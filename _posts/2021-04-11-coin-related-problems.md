@@ -3,8 +3,8 @@ layout: post
 title: "コインの両替問題とプログラミング"
 subtitle: "コインの両替問題に関係して面白いなと思った問題をまとめる"
 author: "Ryo"
-header-img: "img/tag-bg.jpg"
-header-mask: 0.4
+header-style: text
+header-mask: 0.0
 catelog: true
 mathjax: true
 purpose: 

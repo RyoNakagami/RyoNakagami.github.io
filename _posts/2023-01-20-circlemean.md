@@ -3,8 +3,8 @@ layout: post
 title: "周期変数の平均の導出"
 subtitle: "三角関数を用いた座標変換による計算"
 author: "Ryo"
-header-img: "img/about-bg.jpg"
-header-mask: 0.4
+header-style: text
+header-mask: 0.0
 catelog: true
 mathjax: true
 revise_date: 2023-01-26

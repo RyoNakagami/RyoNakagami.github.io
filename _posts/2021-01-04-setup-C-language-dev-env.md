@@ -3,8 +3,8 @@ layout: post
 title: "C言語練習環境の作成"
 subtitle: "プログラミング練習環境の構築例"
 author: "Ryo"
-header-img: "img/post-bg-miui6.jpg"
-header-mask: 0.4
+header-style: text
+header-mask: 0.0
 catelog: true
 mathjax: true
 purpose: 

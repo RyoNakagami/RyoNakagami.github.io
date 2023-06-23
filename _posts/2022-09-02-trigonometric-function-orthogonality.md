@@ -3,8 +3,8 @@ layout: post
 title: "三角関数系の直交性"
 subtitle: "フーリエ解析 2/N"
 author: "Ryo"
-header-img: "img/post-bg-miui6.jpg"
-header-mask: 0.4
+header-style: text
+header-mask: 0.0
 catelog: true
 mathjax: true
 revise_date: 2023-01-24

@@ -3,8 +3,8 @@ layout: post
 title: "Google Chrome経由でLINEをDesktop Appのように使う"
 subtitle: "Ubuntu Desktop環境構築 Part 22"
 author: "Ryo"
-header-img: "img/about-bg.jpg"
-header-mask: 0.4
+header-style: text
+header-mask: 0.0
 catelog: true
 mathjax: true
 purpose: 

@@ -2,8 +2,8 @@
 layout: post
 title: "多項分布の周辺密度関数としての二項分布密度関数"
 author: "Ryo"
-header-img: "img/bg-statistics.png"
-header-mask: 0.4
+header-style: text
+header-mask: 0.0
 catelog: true
 mathjax: true
 revise_date: 2023-03-10
