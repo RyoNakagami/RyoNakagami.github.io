@@ -24,6 +24,7 @@ tags:
 
 - [Local Branch Operation](#local-branch-operation)
   - [List up Repository Branches](#list-up-repository-branches)
+  - [List up Branches with the last updatetime](#list-up-branches-with-the-last-updatetime)
   - [Switch/Create Branch Locally](#switchcreate-branch-locally)
   - [Create a New Branch Locally from a Specified Branch](#create-a-new-branch-locally-from-a-specified-branch)
   - [Rename a Local Branch Name](#rename-a-local-branch-name)

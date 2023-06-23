@@ -28,16 +28,17 @@ Requirements|・ GitHubの個人アカウント作成済み<br>・ Visual Studio
 <!-- START doctoc generated TOC please keep comment here to allow auto update -->
 <!-- DON'T EDIT THIS SECTION, INSTEAD RE-RUN doctoc TO UPDATE -->
 
-- [1. What is this Post all about?](#1-what-is-this-post-all-about)
-- [2. What is Git?](#2-what-is-git)
-  - [About Version Control](#about-version-control)
+- [What is Git?](#what-is-git)
   - [Local VCS vs Distributed VCS](#local-vcs-vs-distributed-vcs)
-  - [Version管理の方法](#version%E7%AE%A1%E7%90%86%E3%81%AE%E6%96%B9%E6%B3%95)
+  - [What is Git Repository?](#what-is-git-repository)
+  - [GitによるVersion管理](#git%E3%81%AB%E3%82%88%E3%82%8Bversion%E7%AE%A1%E7%90%86)
+    - [Snapshots vs Differences](#snapshots-vs-differences)
+    - [commits are snapshots, not diffs](#commits-are-snapshots-not-diffs)
   - [Gitのバージョン管理の仕組み](#git%E3%81%AE%E3%83%90%E3%83%BC%E3%82%B8%E3%83%A7%E3%83%B3%E7%AE%A1%E7%90%86%E3%81%AE%E4%BB%95%E7%B5%84%E3%81%BF)
   - [Gitはどこにバージョン管理のDBをもっているのか？](#git%E3%81%AF%E3%81%A9%E3%81%93%E3%81%AB%E3%83%90%E3%83%BC%E3%82%B8%E3%83%A7%E3%83%B3%E7%AE%A1%E7%90%86%E3%81%AEdb%E3%82%92%E3%82%82%E3%81%A3%E3%81%A6%E3%81%84%E3%82%8B%E3%81%AE%E3%81%8B)
   - [Gitはどのように履歴データを取り出しているのか？](#git%E3%81%AF%E3%81%A9%E3%81%AE%E3%82%88%E3%81%86%E3%81%AB%E5%B1%A5%E6%AD%B4%E3%83%87%E3%83%BC%E3%82%BF%E3%82%92%E5%8F%96%E3%82%8A%E5%87%BA%E3%81%97%E3%81%A6%E3%81%84%E3%82%8B%E3%81%AE%E3%81%8B)
-- [3. GitのInstallと初期設定](#3-git%E3%81%AEinstall%E3%81%A8%E5%88%9D%E6%9C%9F%E8%A8%AD%E5%AE%9A)
-  - [初期設定](#%E5%88%9D%E6%9C%9F%E8%A8%AD%E5%AE%9A)
+- [How to Install Git](#how-to-install-git)
+  - [Setup](#setup)
     - [`~/.gitconfig`の設定](#gitconfig%E3%81%AE%E8%A8%AD%E5%AE%9A)
   - [commit templateの作成](#commit-template%E3%81%AE%E4%BD%9C%E6%88%90)
 - [4. GitHubの個人アカウントとの連携(非推奨)](#4-github%E3%81%AE%E5%80%8B%E4%BA%BA%E3%82%A2%E3%82%AB%E3%82%A6%E3%83%B3%E3%83%88%E3%81%A8%E3%81%AE%E9%80%A3%E6%90%BA%E9%9D%9E%E6%8E%A8%E5%A5%A8)

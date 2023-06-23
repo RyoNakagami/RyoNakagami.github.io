@@ -1,6 +1,6 @@
 ---
 layout: post
-title: "git rebase: リモートリポジトリの更新後にローカルリポジトリを編集 & commitした場合のエラー対策"
+title: "git tips: リモートリポジトリの更新後にローカルリポジトリを編集 & commitした場合のエラー対策"
 subtitle: "How to use git command 2/N"
 author: "Ryo"
 header-mask: 0.0
