@@ -1,7 +1,7 @@
 ---
 layout: post
 title: "VSCode設定: VSCodeとGitの連携"
-subtitle: "Ubuntu Desktop環境構築 Part 13"
+subtitle: "Ubuntu Desktop環境構築 Part 14"
 author: "Ryo"
 catelog: true
 mathjax: true

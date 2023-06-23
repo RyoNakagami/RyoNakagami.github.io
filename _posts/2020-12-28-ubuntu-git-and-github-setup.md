@@ -15,6 +15,12 @@ tags:
 - GitHub
 ---
 
+
+---|---
+Goal|・ Gitの概念の理解<br>・ Gitのインストールと初期設定<br>・ GitHubの個人アカウントとの連携
+Requirements|・ GitHubの個人アカウント作成済み<br>・ Visual Studio Codeインストール済み
+
+
 <div style='border-radius: 1em; border-style:solid; border-color:#D3D3D3; background-color:#F8F8F8'>
 
 <p class="h4">&nbsp;&nbsp;Table of Contents</p>
@@ -54,25 +60,10 @@ tags:
 
 </div>
 
-## 1. What is this Post all about?
-
-> Goal
-
-- Gitの概念の理解
-- Gitのインストールと初期設定
-- GitHubの個人アカウントとの連携
-
-> Requirements
-
-- GitHubの個人アカウント作成済み
-- Visual Studio Codeインストール済み
-
-## 2. What is Git?
+## What is Git?
 
 Gitとは, ファイルやソースコードの変更を分散型でトラッキングする仕組みです. 
 ファイルやソースコードの変更をトラッキングする仕組みのことをバージョン管理システムと呼んだりします.
-
-### About Version Control
 
 <div style='padding-left: 2em; padding-right: 2em; border-radius: 1em; border-style:solid; border-color:#D3D3D3; background-color:#F8F8F8'>
 <p class="h4"><ins>Def: Version Control System</ins></p>
@@ -92,17 +83,9 @@ VCSを活用するメリットの具体例として,
 - あのとき動いたが,今は動かない... もう一回動いていた状態に戻したい
 - このコードを加えた人とタイミングを知りたい
 - 前回消してしまったコードを復活させたい
+- 同じテーマで2つファイルが発生してしまったから差分を確認したい
 
-など. 「**VCSを活用することで, 一回とんでもない変更をしたとしても, すぐプロジェクト全体の状態を戻すことができる**」ということです.
-
->  Git commandとUse Caseの対応
-
-|問題|やりたいこと|関連コマンド|
-|---|----------|----------|
-|エラーを含んだ状態でプログラムを保存してしまった|動作していたときの状態に戻したい|`git reset`<br>`git restore`|
-|レポートのファイルを間違って削除してしまった(staging area)|元に戻したい|`git restore`|
-|1週間ぶりに開くファイル, 以前どんな編集をしたのか忘れてしまった|何をしたのか記録しておきたい|`git diff`|
-|二人で1つのファイルを編集してしまい, 2つのファイルが生まれてしまった|conflictを発見かつ修正したい|`git diff -- <FilePathA> <FilePathB>`|
+つまるところ,「**VCSを活用することで, 一回とんでもない変更をしたとしても, すぐプロジェクト全体の状態を戻したり修正することができる**」ということです.
 
 ### Local VCS vs Distributed VCS
 
@@ -116,10 +99,8 @@ Version管理システムは分散型と集中型の２つに大別すること�
 クライアントのローカル環境内部で変更履歴の確認等の作業が完結するので, 
 集中型Version管理システムで直面するnetwork latency overhead問題を余り気にせずに開発作業をすることができます.
 
-
-> Centralized Version Control vs Distributed Version Control
-
 <table>
+<td>Centralized Version Control</td><td>Distributed Version Control</td>
 <tr>
 <td><img src="https://github.com/ryonakimageserver/omorikaizuka/blob/master/git/GitHub_pages_Posts/20210104_Git_Centralized_version_control.png?raw=true" width="100%" height="100%"></td> 
 <td><img src="https://github.com/ryonakimageserver/omorikaizuka/blob/master/git/GitHub_pages_Posts/20200104_Git_Distributed_version_control.png?raw=true" width="100%" height="100%"></td>
@@ -127,11 +108,59 @@ Version管理システムは分散型と集中型の２つに大別すること�
 </table>
 
 
-### Version管理の方法
+集中型VCSでは, １つのrepository(=データを保存する場所)に対して多くの開発者とコンテンツを共有しているため, 
+2人で同じファイルを同時に編集してしまうと, 先に編集した人の変更内容が消えてしまうリスクがありました.
+一方, Gitではリモート側の内容をローカルへコピーした上で, 手元のVCS内部で編集作業を行い, remoteへ同期する際は, 
+merge conflictという形でdiffが警告され強制的な上書きを防止くれるので, 分散型のメリットに基づく平行開発環境を提供してくれています.
 
-> Snapshots vs Dufferences
+また, merge conflictが発生してもそれを解消するコマンドを提供してくれているので, その便利さがGitが今日普及した理由と考えられます.
 
-Version管理の方法として,Gitは差分(Differences)でなくSnapshotsでデータを管理しています.Git は基本的に,すべてのファイルが各時点でどのように見えるかをSnapshotで記録し,そのSnapshotへの参照を保存します.効率化のため,ファイルが変更されていない場合は,Git はファイルを再び保存せず,すでに保存されている以前の同じファイルへのリンクだけを保存します.
+
+### What is Git Repository?
+
+repositoryとはデータを保存する場所のことです. 
+Gitでは,このrepository単位でデータを管理しており,修正ログもrepository内に保存されています.
+Gitは分散型Version管理システムであるため,repositoryは各開発者側にlocal環境へミラーリングして利用します. 
+
+このとき, GitHub/GitLab上のリモートサーバーに置かれたrepositoryをremote repository, 
+開発者がlocalにおくrepositoryはlocal repositoryと呼ばれます.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+### GitによるVersion管理
+#### Snapshots vs Differences
+
+Version管理の方法として, Gitは差分(Differences)でなくSnapshotsでデータを管理しています.
+Git は基本的に,すべてのファイルが各時点でどのように見えるかをSnapshotで記録し,そのSnapshotへの参照を保存します. 
+効率化のため,ファイルが変更されていない場合は, Git はファイルを再び保存せず,すでに保存されている以前の同じファイルへのリンクだけを保存します.
 
 Snapshots vs Differencesのイメージは以下のFiguresとなります.
 
@@ -140,18 +169,36 @@ Snapshots vs Differencesのイメージは以下のFiguresとなります.
 <img src="https://github.com/ryonakimageserver/omorikaizuka/blob/master/git/GitHub_pages_Posts/20210104_git_snapshots_02.png?raw=true">
 
 
-> Gitにおけるリポジトリの種類
+#### commits are snapshots, not diffs
 
-リポジトリとはデータを保存する場所のことです. Gitでは,このリポジトリ単位でデータを管理しており,修正履歴ログもリポジトリ内に保存されています.
 
-Gitは分散型Version管理システムであるため,リポジトリは各開発者側にミラーリングして利用します. このとき, GitHub/GitLab上のリモートサーバーに置かれたリポジトリをリモートリポジトリ, 開発者がローカルにおくリポジトリはローカルリポジトリと呼ばれます.
 
-<img src="https://github.com/ryonakimageserver/omorikaizuka/blob/master/git/Git_workflow_Introduction/20201228-Git-Workflow-total.png?raw=true">
+
+
+
 
 
 ### Gitのバージョン管理の仕組み
 
-Gitはディレクトリ単位でVersion管理します.管理されるディレクトリには3つのエリアが作られ,それぞれWorking Directory,Staging Area,Respositoryと呼びます.
+```mermaid
+sequenceDiagram
+
+  participant A as working directory<br>(working tree)
+  participant B as staging area<br>(index)
+  participant C as local repository<br>(local branch)
+  participant D as local repository<br>(tracking branch)
+  participant E as remote repository
+
+  A->>B: git add
+  B->>C: git commit
+  C->>E: git push
+  C->>A: git switch -c<br>(checkout)
+  E->>D: git fetch
+  D->>A: git merge
+  E->>A: git pull (実質的には git fetch + git merge)
+```
+
+Gitはディレクトリ単位でVersion管理します. 管理されるディレクトリには3つのエリアが作られ,それぞれWorking Directory,Staging Area,Respositoryと呼びます.
 
 - Working Directory:
   - ドキュメントやプログラムファイルの作成などの作業を行う場所
@@ -253,7 +300,7 @@ second commit
 hash = sha1("commit<半角スペース><コミットオブジェクトのバイト数>\0<コミットオブジェクトの中身>")
 ```
 
-## 3. GitのInstallと初期設定
+## How to Install Git
 
 Ubuntu 20.04 LTSにGitをインストールすのは簡単で以下のコマンドをターミナルで実行するだけです.
 
@@ -269,7 +316,7 @@ Versionを確認しときます.
 git version 2.30.0
 ```
 
-### 初期設定
+### Setup
 
 Git configファイルの置き場所は３パターンあります：
 
@@ -420,22 +467,10 @@ SSH 公開鍵をGitHubに登録するところまでを目指します.そのた
 % xclip -selection clipboard < ~/.ssh/id_ed25519.pub
 ```
 
-その後,GitHubにwebブラウザでアクセスし,`Settings`を変更します（Settingsをクリック）.
-
-<img src="https://docs.github.com/assets/images/help/settings/userbar-account-settings.png">
-
-
-ユーザ設定サイドバーでSSH and GPG keys（SSH及びGPGキー）をクリックします.
-
-<img src="https://docs.github.com/assets/images/help/settings/settings-sidebar-ssh-keys.png">
-
-`[New SSH key]` または `[Add SSH key]` をクリックします.
-
-<img src="https://docs.github.com/assets/images/help/settings/ssh-add-ssh-key.png">
-
-`[Title]` フィールドで,新しいキーを説明するラベルを追加します. たとえば個人の Ubuntu Desktop を使っている場合,このキーを "Personal Ubuntu Desktop" などと呼ぶことが考えられます.
-
-次に,クリップボードにコピーしたキーを `[Key]` フィールドに貼り付けます. 
+1. その後,GitHubにwebブラウザでアクセスし,`Settings`を変更します（Settingsをクリック）.
+2. ユーザ設定サイドバーでSSH and GPG keys（SSH及びGPGキー）をクリックします.
+3. `[New SSH key]` または `[Add SSH key]` をクリックします. `[Title]` フィールドで,新しいキーを説明するラベルを追加します. たとえば個人の Ubuntu Desktop を使っている場合,このキーを "Personal Ubuntu Desktop" などと呼ぶことが考えられます.
+4. 次に,クリップボードにコピーしたキーを `[Key]` フィールドに貼り付けます. 
 
 <img src="https://docs.github.com/assets/images/help/settings/ssh-key-paste.png">
 

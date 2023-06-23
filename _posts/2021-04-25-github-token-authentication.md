@@ -190,19 +190,20 @@ From https://github.com/RyoNakagami/sample_size
 
 ```
 machine github.com
-login <username>
-password <token>
-protocol https
+  login <username>
+  password <token>
+  protocol https
 
 machine gitlab.com
-login <username>
-password <token>
-protocol https
+  login <username>
+  password <token>
+  protocol https
 ```
 
 > STEP 2: GPG暗号化 & `.netrc.gpg`の生成
 
 **こちらの作業はすでにGPGキーが発行されている前提**です. 
+
 GPGキーの発行は[こちら](https://ryonakagami.github.io/2020/12/28/ubuntu-git-and-github-setup/#5-gpg%E3%82%AD%E3%83%BC%E3%81%AE%E7%99%BB%E9%8C%B2)
 を参照してください
 

@@ -96,6 +96,31 @@ tags:
   origin
 ```
 
+### List up Branches with the last updatetime
+
+- branchをcommit-baseの更新日時順（最新が上）で表示する
+- `git branch`のoptionが利用可能とする
+
+
+```zsh
+% git branch --sort=-committerdate --format='%(refname:short)%09%(committername)%09%(objectname:short)%09%(committerdate:iso-strict)' | tr '\t' '|'| column -s '|' -t
+```
+
+formatについては[git-for-each-ref](https://git-scm.com/docs/git-for-each-ref)と同様なものが使用可能です.
+
+---|---
+`--sort=-committerdate`|branchをcommit更新順(最新が上)にsortする
+`--sort=committerdate`|branchをcommit更新順（最新が下）にsortする
+`%(objectname:short)`|commit-hashをshortで表示, defaultはlong
+
+
+なお, `.gitconfig`にて引数optionが使用可能にするため, 以下のようにalias指定をしている:
+
+```
+[alias]
+    branch-update = "!f(){ git branch --sort=-committerdate --format='%(refname:short)%09%(committername)%09%(objectname:short)%09%(committerdate:iso-strict)' $1| tr '\t' '|'| column -s '|' -t;};f"
+```
+
 ### Switch/Create Branch Locally
 
 - ブランチ移動は`git switch`コマンドを用いる
@@ -310,9 +335,6 @@ branch_A            214c991 [origin/branch_A: ahead 1, behind 3] FIX readme
 % git nearest
 develop
 ```
-
-
-
 
 
 ## Local Branch Operation: Compare and Merge
