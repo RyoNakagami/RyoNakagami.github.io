@@ -3,23 +3,28 @@ layout: post
 title: "grepを用いて特定の文字列を含む/含まないファイルをリストアップする"
 subtitle: "grepコマンドちょっとできるようになるぞ編 1/N"
 author: "Ryo"
-header-img: "img/post-bg-rwd.jpg"
-header-mask: 0.4
+header-mask: 0.0
+header-style: text
 catelog: true
 mathjax: true
-revise_date: 2023-04-04
+revise_date: 2023-05-29
 tags:
 
 - Linux
 - Shell
 ---
 
+
+---|---
+Goal|特定のディクトリ以下において, 中身に特定の文字列を含んだ/含まないファイル一覧を表示させたい
+OS|Ubuntu 20.04 LTS
+
+
 <div style='border-radius: 1em; border-style:solid; border-color:#D3D3D3; background-color:#F8F8F8'>
 <p class="h4">&nbsp;&nbsp;Table of Contents</p>
 <!-- START doctoc generated TOC please keep comment here to allow auto update -->
 <!-- DON'T EDIT THIS SECTION, INSTEAD RE-RUN doctoc TO UPDATE -->
 
-- [やりたいこと](#%E3%82%84%E3%82%8A%E3%81%9F%E3%81%84%E3%81%93%E3%81%A8)
 - [特定の文字列を含んだファイル一覧取得コマンド紹介](#%E7%89%B9%E5%AE%9A%E3%81%AE%E6%96%87%E5%AD%97%E5%88%97%E3%82%92%E5%90%AB%E3%82%93%E3%81%A0%E3%83%95%E3%82%A1%E3%82%A4%E3%83%AB%E4%B8%80%E8%A6%A7%E5%8F%96%E5%BE%97%E3%82%B3%E3%83%9E%E3%83%B3%E3%83%89%E7%B4%B9%E4%BB%8B)
 - [特定の文字列を含まないファイル一覧取得コマンド紹介](#%E7%89%B9%E5%AE%9A%E3%81%AE%E6%96%87%E5%AD%97%E5%88%97%E3%82%92%E5%90%AB%E3%81%BE%E3%81%AA%E3%81%84%E3%83%95%E3%82%A1%E3%82%A4%E3%83%AB%E4%B8%80%E8%A6%A7%E5%8F%96%E5%BE%97%E3%82%B3%E3%83%9E%E3%83%B3%E3%83%89%E7%B4%B9%E4%BB%8B)
 - [オプション解説](#%E3%82%AA%E3%83%97%E3%82%B7%E3%83%A7%E3%83%B3%E8%A7%A3%E8%AA%AC)
@@ -31,9 +36,6 @@ tags:
 
 </div>
 
-## やりたいこと
-
-特定のディクトリ以下において, 中身に特定の文字列を含んだ/含まないファイル一覧を表示させたい.
 
 ## 特定の文字列を含んだファイル一覧取得コマンド紹介
 
@@ -69,7 +71,7 @@ tags:
 ## 特定の文字列を含まないファイル一覧取得コマンド紹介
 
 ```zsh
-% grep <search words> -Lr <target directory path>
+% grep <search words> -rL <target directory path>
 ```
 
 正確には`-L`を指定することで, `search words`の条件に合致したファイルを除いて出力するという挙動になります.
