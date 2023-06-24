@@ -1,6 +1,6 @@
 ---
 layout: post
-title: "grepを用いて特定の文字列を含む/含まないファイルをリストアップする"
+title: "grep: 特定の文字列を含む/含まないファイルをリストアップする"
 subtitle: "grepコマンドちょっとできるようになるぞ編 1/N"
 author: "Ryo"
 header-mask: 0.0
@@ -25,7 +25,8 @@ OS|Ubuntu 20.04 LTS
 <!-- START doctoc generated TOC please keep comment here to allow auto update -->
 <!-- DON'T EDIT THIS SECTION, INSTEAD RE-RUN doctoc TO UPDATE -->
 
-- [特定の文字列を含んだファイル一覧取得コマンド紹介](#%E7%89%B9%E5%AE%9A%E3%81%AE%E6%96%87%E5%AD%97%E5%88%97%E3%82%92%E5%90%AB%E3%82%93%E3%81%A0%E3%83%95%E3%82%A1%E3%82%A4%E3%83%AB%E4%B8%80%E8%A6%A7%E5%8F%96%E5%BE%97%E3%82%B3%E3%83%9E%E3%83%B3%E3%83%89%E7%B4%B9%E4%BB%8B)
+- [`grep`ってなに？](#grep%E3%81%A3%E3%81%A6%E3%81%AA%E3%81%AB)
+- [特定の文字列を含んだファイル一覧取得](#%E7%89%B9%E5%AE%9A%E3%81%AE%E6%96%87%E5%AD%97%E5%88%97%E3%82%92%E5%90%AB%E3%82%93%E3%81%A0%E3%83%95%E3%82%A1%E3%82%A4%E3%83%AB%E4%B8%80%E8%A6%A7%E5%8F%96%E5%BE%97)
 - [特定の文字列を含まないファイル一覧取得コマンド紹介](#%E7%89%B9%E5%AE%9A%E3%81%AE%E6%96%87%E5%AD%97%E5%88%97%E3%82%92%E5%90%AB%E3%81%BE%E3%81%AA%E3%81%84%E3%83%95%E3%82%A1%E3%82%A4%E3%83%AB%E4%B8%80%E8%A6%A7%E5%8F%96%E5%BE%97%E3%82%B3%E3%83%9E%E3%83%B3%E3%83%89%E7%B4%B9%E4%BB%8B)
 - [オプション解説](#%E3%82%AA%E3%83%97%E3%82%B7%E3%83%A7%E3%83%B3%E8%A7%A3%E8%AA%AC)
   - [オプション `-l`: grep output to show only matching file](#%E3%82%AA%E3%83%97%E3%82%B7%E3%83%A7%E3%83%B3--l-grep-output-to-show-only-matching-file)
@@ -36,8 +37,19 @@ OS|Ubuntu 20.04 LTS
 
 </div>
 
+## `grep`ってなに？
 
-## 特定の文字列を含んだファイル一覧取得コマンド紹介
+What `grep` lets you do is to search for arbitrary pattern of text in one or more files
+and there could be an unbounded number of files of input. The input could be coming from 
+some other program, for example as it is if you're using Unix pipelines.
+
+<iframe width="560" height="315" src="https://www.youtube.com/embed/NTfOnGZUZDk" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
+
+`grep`の名前はText Editor, `ed`の構文に従った `g/regular expression/p` から来ているらしいです.
+globalにregrexに合致するlineをprintするという意味らしいです.
+
+
+## 特定の文字列を含んだファイル一覧取得
 
 ```zsh
 % grep <search words> -rl <target directory path>
@@ -176,11 +188,8 @@ grep: ./subtest: Is a directory
 ちゃんと検索してくれます. 出力順序はなんか変なのでパイプで`sort`とつなげて出力しても良いかなと思っています.
 
 
-
-
-
 ## References
 
-> stackoverflow
-
-- [grep output to show only matching file](https://stackoverflow.com/questions/3908156/grep-output-to-show-only-matching-file)
+- [ubuntu manuals > ed](https://manpages.ubuntu.com/manpages/trusty/man1/ed.1plan9.html)
+- [stackoverflow > grep output to show only matching file](https://stackoverflow.com/questions/3908156/grep-output-to-show-only-matching-file)
+- [youtube > Where GREP Came From - Computerphile](https://www.youtube.com/watch?v=NTfOnGZUZDk)
