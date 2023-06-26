@@ -13,7 +13,7 @@ tags:
 
 - VSCode
 - git
-- GitHub
+
 ---
 
 <div style='border-radius: 1em; border-style:solid; border-color:#D3D3D3; background-color:#F8F8F8'>

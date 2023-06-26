@@ -12,7 +12,7 @@ tags:
 
 - Ubuntu 20.04 LTS
 - git
-- GitHub
+
 ---
 
 

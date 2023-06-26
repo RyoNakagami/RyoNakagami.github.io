@@ -8,7 +8,6 @@ header-mask: 0.0
 catelog: true
 reading_time: 10
 tags:
-  - git
   - GitHub Pages
 ---
 

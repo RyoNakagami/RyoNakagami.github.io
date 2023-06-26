@@ -1,14 +1,14 @@
 ---
 layout: post
 title: "GitHub Repositoryの任意のサブディレクトリのみをローカル側で取得する"
-subtitle: "How to use git command 6/N"
+subtitle: "How to use git command 11/N"
 author: "Ryo"
 header-mask: 0.0
 header-style: text
 catelog: true
 tags:
   - git
-  - GitHub
+
 ---
 
 
