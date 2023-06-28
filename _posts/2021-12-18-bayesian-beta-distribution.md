@@ -157,9 +157,9 @@ $X_i\sim U(0,1)$なので
 
 $$
 \begin{align*}
-F_k(x) &= \sum_{i=k}^n _nC_i Pr(X_{(1)} \leq x, X_{(2)} \leq x, \cdots, X_{(i)} \leq x, X_{(i+1)} > x,\cdots, X_{(n)} > x)
-       &= \sum_{i=k}^n _nC_i Pr(X_{(1)} \leq x)Pr(X_{(2)} \leq x) \cdots Pr(X_{(i)} \leq x)Pr(X_{(i+1)} > x)\cdots Pr(X_{(n)} > x)\\
-       &= \sum_{i=k}^n _nC_i x^{i}(1-x)^{n-i}\\
+F_k(x) &= \sum_{i=k}^n \bigg(\begin{array}{c}n\\i\end{array}\bigg) Pr(X_{(1)} \leq x, X_{(2)} \leq x, \cdots, X_{(i)} \leq x, X_{i+1} > x,\cdots, X_{n} > x)\\
+       &= \sum_{i=k}^n \bigg(\begin{array}{c}n\\i\end{array}\bigg) Pr(X_{(1)} \leq x)Pr(X_{(2)} \leq x) \cdots Pr(X_{(i)} \leq x)Pr(X_{(i+1)} > x)\cdots Pr(X_{(n)} > x)\\
+       &= \sum_{i=k}^n \bigg(\begin{array}{c}n\\i\end{array}\bigg) x^{i}(1-x)^{n-i}\\
        &= \frac{n!}{(k-1)!(n-k)!}\int^x_0 t^{k-1}(1-t)^{n-k}dt\\
        &\Rightarrow f_k(x) = \frac{n!}{(k-1)!(n-k)!}x^{k-1}(1-x)^{n-k}
 \end{align*}

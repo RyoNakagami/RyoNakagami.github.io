@@ -7,7 +7,7 @@ header-style: text
 header-mask: 0.0
 catelog: true
 mathjax: true
-purpose: 
+revise_date: 2022-06-01
 tags:
 
 - 統計
@@ -20,6 +20,7 @@ tags:
 <!-- START doctoc generated TOC please keep comment here to allow auto update -->
 <!-- DON'T EDIT THIS SECTION, INSTEAD RE-RUN doctoc TO UPDATE -->
 
+- [Card Identification](#card-identification)
 - [Flip a Coin and Bayesian estimation](#flip-a-coin-and-bayesian-estimation)
   - [問題.1](#%E5%95%8F%E9%A1%8C1)
   - [問題.2](#%E5%95%8F%E9%A1%8C2)
@@ -33,12 +34,69 @@ tags:
 
 </div>
 
+## Card Identification
+
+同じ大きさの以下の3枚のカードがある:
+
+- 両面ともに赤
+- 片面赤, 片面青
+- 両面ともに青
+
+これらカードをとあるボックスにいれてランダムに1枚引いた時, 片面が赤だった.
+このとき, もう片面が赤である確率を求めてください.
+
+なお, 引いたカードのどっちの面がは
+
+**解答**
+
+それぞれのカードを選ぶ事象を
+
+$$
+(RR, RB, BB)
+$$
+
+と表記します. これら事象は互いに排反 & 全ての可能性を尽くしているので
+
+$$
+1 = Pr(RR) + Pr(RB) + Pr(BB)
+$$
+
+また, それぞれを選ぶ確率は等しいので,
+
+$$
+\frac{1}{3} = Pr(RR) = Pr(RB) = Pr(BB)
+$$
+
+
+このとき, 選んだカードと引いたときに観察されたカードの色の同時分布を
+$Pr(observed_color, card)$と表現すると,
+
+$$
+\begin{align*}
+Pr(R|RR) &= \frac{Pr(R, RR)}{Pr(RR)} = 1\\
+Pr(R|RB) &= \frac{Pr(R, RB)}{Pr(RB)} = \frac{1}{2}\\
+Pr(R|BB) &= \frac{Pr(R, BB)}{Pr(BB)} = 0
+\end{align*}
+$$
+
+となります. 従って, 今回求めたいのは $Pr(RR|R)$なので
+
+$$
+\begin{align*}
+Pr(RR|R) &= \frac{Pr(R, RR)}{Pr(R|RR)Pr(RR) + Pr(R|BB)Pr(BB) + Pr(R|RB)Pr(RB)}\\
+&= \frac{1/3}{4/6}\\
+&= \frac{2}{3}
+\end{align*}
+$$
+
+**解答終了**
+
 ## Flip a Coin and Bayesian estimation
 
 ### 問題.1
 
 とあるコインを独立に3回投げた時, 表３回, 裏が０回出現したのデータ(以下, $D$ と表記)があるとします(各施行は独立とする). \\
-このコインの表の出る確率を $\theta$, その事前分布を$\theta \sim Beta(1,1))$としたとき, 観測結果を踏まえた上の$\theta$の事後分布を推定せよ
+このコインの表の出る確率を $\theta$, その事前分布を$\theta \sim Beta(1,1)$としたとき, 観測結果を踏まえた上の$\theta$の事後分布を推定せよ
 
 
 **解答**
@@ -90,7 +148,7 @@ $$
 $$
 \begin{aligned}
 P(\theta|D) &= \frac{_{h+t}C_h \theta^{h}(1-\theta)^{t}}{_{h+t} C_h B(h+1, t+1)}\\[8pt]
-            &= \frac{1}{B(h+1, t+1)}\theta^{h}(1-\theta)^{t}
+            &= \frac{1}{B(h+1, t+1)}\theta^{h}(1-\theta)^{t} \sim Beta(h+1, t+1)
 \end{aligned}
 $$
 
@@ -101,14 +159,17 @@ $$
 <div style='padding-left: 2em; border-radius: 1em; border-style:solid; border-color:#D3D3D3; background-color:#F8F8F8'>
 <p class="h4"><ins>Remarks: </ins></p>
 一般に, 事前の信念として $Beta(\alpha, \beta)$ で表現されるBeta-binomial分布について, <br> 
-試行回数が$n$, 表の回数が $y$と観測された時の事後分布は $Beta(\alpha + y, \beta + n -y)$
+試行回数が$n$, 表の回数が $y$と観測された時の事後分布は $Beta(\alpha + y, \beta + n -y)$でこのように事前分布と事後分布がが同じになる事前分布のことを, Conjugate prior distributionという
+
+また, 事後平均, Mode, Varianceは以下のように表現される:
 
 $$
-\mathbf E[\theta |y] = \frac{n}{\alpha + \beta + n}\frac{y}{n} + \frac{\alpha+\beta}{\alpha + \beta + n}\frac{\alpha}{\alpha+\beta}
+\begin{align*}
+\mathbf E[\theta |y] &= \frac{n}{\alpha + \beta + n}\frac{y}{n} + \frac{\alpha+\beta}{\alpha + \beta + n}\frac{\alpha}{\alpha+\beta}\\[8pt]
+Mode(\theta |y) &= \frac{ \alpha + y - 1 }{ \alpha + \beta + n - 2 }\\[8pt]
+Var(\theta |y) &= \frac{ (\alpha + y)(\beta + n - y) }{ (\alpha + \beta + n)^2 (\alpha + \beta + n) + 1 }
+\end{align*}
 $$
-
-また, 事後平均も事前平均と標本平均の加重平均となる.
-
 </div>
 
 
@@ -263,112 +324,6 @@ axes[4,0].set_xticks([0.5]);
 ```
 
 <img src="https://github.com/ryonakimageserver/omorikaizuka/blob/master/%E3%83%96%E3%83%AD%E3%82%B0%E7%94%A8/2021121706-12-13.png?raw=true">
-
-
-## Appendix:ベイズ統計とは？
-
-- 不確かな状況において合理的な(=目的関数の最大化問題に質する)意思決定を行うための理論的フレームワークを提供する統計手法
-- その場その場で変わっていく情報を意思決定にどのように反映させるべきか?, という意思決定プロセスを提供
-- 新しく観測データが与えられたとき, 次に自分はどのような決定をすべきであろうか?という問題を扱う
-
-> REMARK
-
-ベイズ法では事前分布が主観により(近似的にも)真でありモデルは正しいとして情報をアップデートしていくので, 
-データを得たのちに事前分布やモデルの変更を行うことは禁止されています.
-
-### ベイズ統計における独立性
-
-<div style='padding-left: 2em; border-radius: 1em; border-style:solid; border-color:#D3D3D3; background-color:#F8F8F8'>
-<p class="h4"><ins>Def: 独立性</ins></p>
-
-２つの事象 $F, G$ が 事象 $H$ が与えられた下で条件付き独立とは以下が成立することをいう:
-
-$$
-Pr(F\cap G|H) = Pr(F|H)Pr(G|H)
-$$
-
-</div>
-
-独立性が成立しているならば
-
-$$
-\begin{align*}
-Pr(F\cap G|H) &= Pr(F|H, G)Pr(G|H)\\
-              &= Pr(F|H)Pr(G|H)\\
-\Rightarrow Pr(F|H, G) &= Pr(F|H) 
-\end{align*}
-$$
-
-上記独立性が成立しているとき, $H$が真であることを知っているならば, $G$を知っていることは $F$に関する信念を
-変えることはないことを意味しています. (逆もしかり)
-
-### 交換可能性
-
-<div style='padding-left: 2em; border-radius: 1em; border-style:solid; border-color:#D3D3D3; background-color:#F8F8F8'>
-<p class="h4"><ins>Def: 交換可能性</ins></p>
-
-$p(y_1, \cdots, y_n)$ を $Y_1, \cdots, Y_n$ の同時密度とする. もし, $\{1,\cdots, n\}$の
-任意の置換 $pi$ に対して 
-
-$$
-p(y_1, \cdots, y_n) = p(y_{\pi_1}, \cdots, y_{\pi_n})
-$$
-
-が成り立つならば, $Y_1, \cdots, Y_n$ は**交換可能**(exchangeable)であるという.
-
-</div>
-
-### 条件付き独立性と交換可能性の関係
-
-<div style='padding-left: 2em; border-radius: 1em; border-style:solid; border-color:#D3D3D3; background-color:#F8F8F8'>
-<p class="h4"><ins>命題</ins></p>
-
-$\theta\sim p(\theta)$で, $Y_1, \cdots, Y_n$ を $\theta$ が与えられた下, 条件付きで独立同一標本とする.
-このとき, 周辺的に $Y_1, \cdots, Y_n$ は交換可能である.
-
-</div>
-
-**証明**
-
-$Y_1, \cdots, Y_n$ を $\theta$ が与えられた下, 条件付きで独立同一標本であると仮定する.
-このとき, $\{1,\cdots, n\}$の任意の置換 $pi$ と 任意の $(y_1, \cdots, y_n)\in \mathcal{Y}^n$
-($\mathcal{Y}$は標本空間) に対して,
-
-$$
-\begin{align*}
-p(y_1, \cdots, y_n) &= \int p(y_1, \cdots, y_n | \theta) p(\theta)d\theta \\[8pt]
-                    &= \int \left\{\prod_{i=1}^np(y_i|\theta)\right\} p(\theta)d\theta \text{(条件付き独立同一性)}\\[8pt]
-                    &= \int \left\{\prod_{i=1}^np(y_{\pi_i}|\theta)\right\} p(\theta)d\theta \text{(積は順序によらない)}\\[8pt]
-                    &= p(y_{\pi_1}, \cdots, y_{\pi_n})
-\end{align*}
-$$
-
-よって, $Y_1, \cdots, Y_n$ は交換可能である.
-
-**証明終了**
-
-交換可能性が合理的である状況として,
-
-- $Y_1, \cdots, Y_n$は繰り返し実験の出力である
-- $Y_1, \cdots, Y_n$は有限母集団からの復元抽出である
-- $Y_1, \cdots, Y_n$は無限母集団からの非復元抽出である
-
-<div style='padding-left: 2em; border-radius: 1em; border-style:solid; border-color:#D3D3D3; background-color:#F8F8F8'>
-<p class="h4"><ins>定理：デ・フィネッティの定理</ins></p>
-
-任意の $i\in \{1, 2\cdots\}$ について $Y_i\in \mathcal{Y}$ とする. 任意の $n$ に対して,
-$\{Y_1, \cdots, Y_n\}$ に対する信念のモデルは $\{1, 2, \cdots, n\}$ の任意の置換 $\pi$ に対して交換可能
-であるとする. このとき,
-
-$$
-p(y_1, \cdots, y_n) = \int \left\{\prod_{i=1}^np(y_i|\theta)\right\} p(\theta)d\theta 
-$$
-
-つまり, 事前分布モデルが与えられる条件のもと, $\{Y_1, \cdots, Y_n\}$ は独立であるといえる
-
-</div>
-
-
 
 ## Refereneces
 

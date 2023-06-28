@@ -8,7 +8,6 @@ catelog: true
 mathjax: true
 tags:
 
-- English
 - Terminology
 ---
 
