@@ -1,6 +1,6 @@
 ---
 layout: post
-title: "Coherence and Cohesion"
+title: "Catch a lead when it’s hot"
 author: "Ryo"
 header-style: text
 header-mask: 0.0

@@ -161,7 +161,7 @@ postgresql.service                 loaded active exited  PostgreSQL RDBMS
 postgresql@14-main.service         loaded active running PostgreSQL Cluster 14-main   
 ```
 
-"It appears that the PostgreSQL service is functioning smoothly without any issues.
+It appears that the PostgreSQL service is functioning smoothly without any issues.
 
 ```
 sudo -u postgres psql -c "insert into persons(name) values ('jane smith');" -d dt
