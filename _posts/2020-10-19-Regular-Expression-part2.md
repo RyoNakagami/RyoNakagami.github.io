@@ -10,7 +10,7 @@ mathjax: true
 purpose: 成果物：Pythonのre モジュールを用いた文字列操作ができるようになる
 tags:
 
-- 正規表現
+- regex
 - Python
 ---
 

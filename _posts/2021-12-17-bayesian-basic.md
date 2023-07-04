@@ -24,10 +24,6 @@ tags:
 - [Flip a Coin and Bayesian estimation](#flip-a-coin-and-bayesian-estimation)
   - [問題.1](#%E5%95%8F%E9%A1%8C1)
   - [問題.2](#%E5%95%8F%E9%A1%8C2)
-- [Appendix:ベイズ統計とは？](#appendix%E3%83%99%E3%82%A4%E3%82%BA%E7%B5%B1%E8%A8%88%E3%81%A8%E3%81%AF)
-  - [ベイズ統計における独立性](#%E3%83%99%E3%82%A4%E3%82%BA%E7%B5%B1%E8%A8%88%E3%81%AB%E3%81%8A%E3%81%91%E3%82%8B%E7%8B%AC%E7%AB%8B%E6%80%A7)
-  - [交換可能性](#%E4%BA%A4%E6%8F%9B%E5%8F%AF%E8%83%BD%E6%80%A7)
-  - [条件付き独立性と交換可能性の関係](#%E6%9D%A1%E4%BB%B6%E4%BB%98%E3%81%8D%E7%8B%AC%E7%AB%8B%E6%80%A7%E3%81%A8%E4%BA%A4%E6%8F%9B%E5%8F%AF%E8%83%BD%E6%80%A7%E3%81%AE%E9%96%A2%E4%BF%82)
 - [Refereneces](#refereneces)
 
 <!-- END doctoc generated TOC please keep comment here to allow auto update -->

@@ -1,7 +1,7 @@
 ---
 layout: post
 title: "Linux環境構築基礎知識：パッケージマネジャーの導入"
-subtitle: "APTによるパッケージ管理"
+subtitle: "APTによるパッケージ管理 1/N"
 author: "Ryo"
 header-style: text
 header-mask: 0.0
@@ -10,7 +10,6 @@ mathjax: true
 purpose: 
 tags:
 
-- Ubuntu 20.04 LTS
 - Linux
 - apt
 ---
@@ -28,8 +27,10 @@ tags:
 ..."Have you mooed today?"...
 ```
 
+<div style='border-radius: 1em; border-style:solid; border-color:#D3D3D3; background-color:#F8F8F8'>
 
-**Table of Contents**
+<p class="h4">&nbsp;&nbsp;Table of Contents</p>
+
 <!-- START doctoc generated TOC please keep comment here to allow auto update -->
 <!-- DON'T EDIT THIS SECTION, INSTEAD RE-RUN doctoc TO UPDATE -->
 
@@ -56,6 +57,9 @@ tags:
 - [References](#references)
 
 <!-- END doctoc generated TOC please keep comment here to allow auto update -->
+
+
+</div>
 
 ## 1. パッケージとは
 
@@ -95,10 +99,6 @@ _gpgbuilder
 
 Linux環境では, インストールしようとしているパッケージが正しい配布先のものか?本物であるか？を検証してから
 インストールします. このとき, ソフトウェアの検証に使用される仕組みがGNU Privacy Guard (GnuPG, GPG)です.
-
-
-
-
 
 
 ## 2. パッケージ管理とは？
@@ -170,7 +170,9 @@ dpkg はシステムツール (バックエンド)、apt はユーザに近い�
 
 ## 3. APT
 
-APT(Advanced Packaging Tool)はDevian系ディストリビューションで使われているパッケージ管理システムです。依存関係を自動的に調整しながら、パッケージのインストールやアップデート、削除を行います。APTでは、あらかじめ設定されたリポジトリからパッケージとパッケージの情報を取得します。リポジトリとは、ファイルやデータを集積している場所、及びその情報を管理しているデータベースを意味します。APTを使うには、まず、利用可能なパッケージリストを更新する必要があります。インストールやアップデートに必要なファイルは、インターネット上のリポジトリから自動的にダウンロードされますが、その最新情報を取得する必要があるからです。
+APT(Advanced Packaging Tool)は, Debian系ディストリビューションで使われているパッケージ管理システムで, 2014年に追加されました. APTでは, あらかじめ設定された(多くの場合インターネット上の)リポジトリからパッケージとパッケージの情報を取得します. その情報を用いて, 依存関係を自動的に調整しながら, パッケージのインストールやアップデート, 削除を行います. なお, この文脈におけるリポジトリとは, ファイルやデータを集積している場所及びその情報を管理しているデータベースを意味します.
+
+この概念としてのAPTに対応するコマンドが`apt`となります.
 
 <img src="https://raw.githubusercontent.com//ryonakimageserver/omorikaizuka//master/linux/packages/20201222_apt_packages_system.png">
 
@@ -464,3 +466,4 @@ embrosyn-ubuntu-cinnamon-focal.list	     slack.list
 - [Debianパッケージ管理](https://www.debian.org/doc/manuals/debian-reference/ch02.ja.html)
 - [Debian 管理者ハンドブック](https://debian-handbook.info/browse/ja-JP/stable/index.html)
 - [Launchpad](https://launchpad.net/)
+- [APT vs APT-GET What's Difference](https://www.tutorialspoint.com/apt-vs-apt-get-what-s-difference)

@@ -1,7 +1,7 @@
 ---
 layout: post
-title: "grep: 特定の文字列を含む/含まないファイルをリストアップする"
-subtitle: "grepコマンドちょっとできるようになるぞ編 1/N"
+title: "grep: List up files with/without match"
+subtitle: grep command 1/N"
 author: "Ryo"
 header-mask: 0.0
 header-style: text
@@ -26,8 +26,7 @@ OS|Ubuntu 20.04 LTS
 <!-- DON'T EDIT THIS SECTION, INSTEAD RE-RUN doctoc TO UPDATE -->
 
 - [`grep`ってなに？](#grep%E3%81%A3%E3%81%A6%E3%81%AA%E3%81%AB)
-- [特定の文字列を含んだファイル一覧取得](#%E7%89%B9%E5%AE%9A%E3%81%AE%E6%96%87%E5%AD%97%E5%88%97%E3%82%92%E5%90%AB%E3%82%93%E3%81%A0%E3%83%95%E3%82%A1%E3%82%A4%E3%83%AB%E4%B8%80%E8%A6%A7%E5%8F%96%E5%BE%97)
-- [特定の文字列を含まないファイル一覧取得コマンド紹介](#%E7%89%B9%E5%AE%9A%E3%81%AE%E6%96%87%E5%AD%97%E5%88%97%E3%82%92%E5%90%AB%E3%81%BE%E3%81%AA%E3%81%84%E3%83%95%E3%82%A1%E3%82%A4%E3%83%AB%E4%B8%80%E8%A6%A7%E5%8F%96%E5%BE%97%E3%82%B3%E3%83%9E%E3%83%B3%E3%83%89%E7%B4%B9%E4%BB%8B)
+- [List up files with match](#list-up-files-with-match)
 - [オプション解説](#%E3%82%AA%E3%83%97%E3%82%B7%E3%83%A7%E3%83%B3%E8%A7%A3%E8%AA%AC)
   - [オプション `-l`: grep output to show only matching file](#%E3%82%AA%E3%83%97%E3%82%B7%E3%83%A7%E3%83%B3--l-grep-output-to-show-only-matching-file)
   - [オプション `-r`: Recursiveに検索を実行する](#%E3%82%AA%E3%83%97%E3%82%B7%E3%83%A7%E3%83%B3--r-recursive%E3%81%AB%E6%A4%9C%E7%B4%A2%E3%82%92%E5%AE%9F%E8%A1%8C%E3%81%99%E3%82%8B)
@@ -39,9 +38,14 @@ OS|Ubuntu 20.04 LTS
 
 ## `grep`ってなに？
 
+<div style='padding-left: 2em; padding-right: 2em; border-radius: 1em; border-style:solid; border-color:#D3D3D3; background-color:#F8F8F8'>
+
 What `grep` lets you do is to search for arbitrary pattern of text in one or more files
 and there could be an unbounded number of files of input. The input could be coming from 
 some other program, for example as it is if you're using Unix pipelines.
+
+</div>
+
 
 <iframe width="560" height="315" src="https://www.youtube.com/embed/NTfOnGZUZDk" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
 
@@ -49,7 +53,7 @@ some other program, for example as it is if you're using Unix pipelines.
 globalにregrexに合致するlineをprintするという意味らしいです.
 
 
-## 特定の文字列を含んだファイル一覧取得
+## List up files with match
 
 ```zsh
 % grep <search words> -rl <target directory path>
@@ -80,7 +84,7 @@ globalにregrexに合致するlineをprintするという意味らしいです.
 ```
 
 
-## 特定の文字列を含まないファイル一覧取得コマンド紹介
+> List up files without matches
 
 ```zsh
 % grep <search words> -rL <target directory path>
@@ -111,14 +115,6 @@ File and Directory Selection
 ```
 
 ### オプション `-l`: grep output to show only matching file
-
-<div style='padding-left: 2em; padding-right: 2em; border-radius: 1em; border-style:solid; border-color:#D3D3D3; background-color:#F8F8F8'>
-<p class="h4"><ins>REMARKS</ins></p>
-
-`-L` オプションはこの逆なので説明は割愛します. 
-
-</div>
-
 
 オプション `-l`は grepコマンドにマッチするlineをsuppressする(=条件に合致したファイル名だけを出力する)オプションです.
 

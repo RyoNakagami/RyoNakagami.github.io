@@ -144,7 +144,8 @@ speech-dispatcher-espeak-ng/focal,now 0.9.1-4 amd64 [installed,automatic]
 
 ## `apt` vs `apt-get`
 
-`apt`と`apt-get`は, 両方ともDebianベースLinuxディストリビューションで使用されるパッケージマネージャーですが, 
+`apt`と`apt-get`は, 両方ともDebianベースLinuxディストリビューションで使用されるパッケージマネージャーです.
+パッケージのinstall, upgrade, removeで用いられるという意味では共通していますが, 
 
 - Level of Control(=制御レベル)
 - User interface
