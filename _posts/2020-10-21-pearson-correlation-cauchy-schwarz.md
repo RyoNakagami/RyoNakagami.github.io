@@ -17,8 +17,13 @@ tags:
 
 <p class="h4">&nbsp;&nbsp;Table of Contents</p>
 
-<!-- START doctoc -->
-<!-- END doctoc -->
+<!-- START doctoc generated TOC please keep comment here to allow auto update -->
+<!-- DON'T EDIT THIS SECTION, INSTEAD RE-RUN doctoc TO UPDATE -->
+
+- [Theorem: Pearson Correlation always between -1 and 1](#theorem-pearson-correlation-always-between--1-and-1)
+  - [Proof: Cauchy-Schwarz Inequality](#proof-cauchy-schwarz-inequality)
+
+<!-- END doctoc generated TOC please keep comment here to allow auto update -->
 
 
 </div>

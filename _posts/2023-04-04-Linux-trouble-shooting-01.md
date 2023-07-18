@@ -27,6 +27,7 @@ tags:
   - [Where is the log files stored?:  `/var/log/`](#where-is-the-log-files-stored--varlog)
 - [`journalctl` command](#journalctl-command)
   - [Basic Log Viewing](#basic-log-viewing)
+  - [Use-cases for `journalctl` command](#use-cases-for-journalctl-command)
 - [References](#references)
 
 <!-- END doctoc generated TOC please keep comment here to allow auto update -->
@@ -230,7 +231,7 @@ All of the timestamps being displayed are local time. If you want to display the
 
 ```zsh
 % journalctl --utc
-```W
+```
 
 ### Use-cases for `journalctl` command
 
