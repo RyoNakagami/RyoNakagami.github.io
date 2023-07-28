@@ -15,7 +15,10 @@ tags:
 - Shell
 ---
 
-**Table of Contents**
+<div style='border-radius: 1em; border-style:solid; border-color:#D3D3D3; background-color:#F8F8F8'>
+
+<p class="h4">&nbsp;&nbsp;Table of Contents</p>
+
 <!-- START doctoc generated TOC please keep comment here to allow auto update -->
 <!-- DON'T EDIT THIS SECTION, INSTEAD RE-RUN doctoc TO UPDATE -->
 
@@ -36,6 +39,9 @@ tags:
 - [References](#references)
 
 <!-- END doctoc generated TOC please keep comment here to allow auto update -->
+
+
+</div>
 
 ## Overview
 
@@ -277,8 +283,9 @@ zsh configurationに関するファイル管理の観点から以下のような
 
 1. ヒストリーサイズの再設定
 2. Zshのgit command補完を有効にする
-3. git branch statusを`posh-git` likeに表示
-4. `ls`や`grep`コマンドを実行した結果で表示される項目のうち,ディレクトリやシンボリックリンクファイルの場合,色や記号が付与されるようにする
+3. apt package suggest機能を有効にする
+4. git branch statusを`posh-git` likeに表示
+5. `ls`や`grep`コマンドを実行した結果で表示される項目のうち,ディレクトリやシンボリックリンクファイルの場合,色や記号が付与されるようにする
 
 </div> 
 
@@ -345,6 +352,21 @@ alias code-cd='if [[ -z $VSCODE_WS ]]; then echo "There is no VSCODE_WS variable
 #-------------------------------------
 # general
 source ~/.zsh.d/bin/util_function.sh
+
+# package suggest
+function command_not_found_handler() {
+  # check because c-n-f could've been removed in the meantime
+  if [ -x /usr/lib/command-not-found ]; then
+	   /usr/lib/command-not-found -- "$1"
+     return $?
+  elif [ -x /usr/share/command-not-found/command-not-found ]; then
+	   /usr/share/command-not-found/command-not-found -- "$1"
+     return $?
+	else
+		 printf "%s: command not found\n" "$1" >&2
+		 return 127
+	fi
+}
 
 
 #-------------------------------------
@@ -540,3 +562,7 @@ References
 > git-prompt
 
 - [GitHub.com > lyze/posh-git-sh](https://github.com/dahlbyk/posh-git)
+
+> apt package suggestion
+
+- [Ryo's Tech Blog > Linux基礎知識：bash環境でのパッケージのサジェスト機能](https://ryonakagami.github.io/2022/02/06/suggest-apt-packages-function/)

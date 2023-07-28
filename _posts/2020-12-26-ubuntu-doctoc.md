@@ -15,46 +15,40 @@ tags:
 - Shell
 ---
 
+<div style='border-radius: 1em; border-style:solid; border-color:#D3D3D3; background-color:#F8F8F8'>
 
----|---
-目的|Markdown目次作成ツール doctocのインストール
+<p class="h4">&nbsp;&nbsp;Table of Contents</p>
 
-
-**Table of Contents**
 <!-- START doctoc generated TOC please keep comment here to allow auto update -->
 <!-- DON'T EDIT THIS SECTION, INSTEAD RE-RUN doctoc TO UPDATE -->
 
-- [1. 今回のスコープ](#1-%E4%BB%8A%E5%9B%9E%E3%81%AE%E3%82%B9%E3%82%B3%E3%83%BC%E3%83%97)
-  - [やりたいこと](#%E3%82%84%E3%82%8A%E3%81%9F%E3%81%84%E3%81%93%E3%81%A8)
-  - [方針](#%E6%96%B9%E9%87%9D)
-- [2.`doctoc`のインストール](#2doctoc%E3%81%AE%E3%82%A4%E3%83%B3%E3%82%B9%E3%83%88%E3%83%BC%E3%83%AB)
-- [3. `doctoc`の使用例の紹介](#3-doctoc%E3%81%AE%E4%BD%BF%E7%94%A8%E4%BE%8B%E3%81%AE%E7%B4%B9%E4%BB%8B)
-  - [オプション](#%E3%82%AA%E3%83%97%E3%82%B7%E3%83%A7%E3%83%B3)
-  - [使用例: git addとの組わせ](#%E4%BD%BF%E7%94%A8%E4%BE%8B-git-add%E3%81%A8%E3%81%AE%E7%B5%84%E3%82%8F%E3%81%9B)
-  - [複数のmarkdown fileを対象にdoctoc update](#%E8%A4%87%E6%95%B0%E3%81%AEmarkdown-file%E3%82%92%E5%AF%BE%E8%B1%A1%E3%81%ABdoctoc-update)
-- [4. sort-markdown-tablesのインストール](#4-sort-markdown-tables%E3%81%AE%E3%82%A4%E3%83%B3%E3%82%B9%E3%83%88%E3%83%BC%E3%83%AB)
-  - [何ができるようになるか？](#%E4%BD%95%E3%81%8C%E3%81%A7%E3%81%8D%E3%82%8B%E3%82%88%E3%81%86%E3%81%AB%E3%81%AA%E3%82%8B%E3%81%8B)
+- [What Do I Want to DO?](#what-do-i-want-to-do)
+- [`npm` & `doctoc`のインストール](#npm--doctoc%E3%81%AE%E3%82%A4%E3%83%B3%E3%82%B9%E3%83%88%E3%83%BC%E3%83%AB)
+- [`doctoc`の使用例の紹介](#doctoc%E3%81%AE%E4%BD%BF%E7%94%A8%E4%BE%8B%E3%81%AE%E7%B4%B9%E4%BB%8B)
+  - [Options](#options)
+  - [Usage Example](#usage-example)
+- [sort-markdown-tablesのインストール](#sort-markdown-tables%E3%81%AE%E3%82%A4%E3%83%B3%E3%82%B9%E3%83%88%E3%83%BC%E3%83%AB)
   - [インストール](#%E3%82%A4%E3%83%B3%E3%82%B9%E3%83%88%E3%83%BC%E3%83%AB)
-  - [使い方](#%E4%BD%BF%E3%81%84%E6%96%B9)
-- [Appendix](#appendix)
-  - [`find`コマンド](#find%E3%82%B3%E3%83%9E%E3%83%B3%E3%83%89)
+  - [Usage](#usage)
 - [References](#references)
 
 <!-- END doctoc generated TOC please keep comment here to allow auto update -->
 
-## 1. 今回のスコープ
-### やりたいこと
+
+</div>
+
+## What Do I Want to DO?
 
 - Markdown目次作成ツール `doctoc`のインストール
 - Markdown table sort用の `sort-markdown-tables`のインストール
 
-### 方針
+> Solution
 
-1. `npm`のインストール
+1. `npm`, `nodejs` のインストール
 2. `doctoc`をインストール
-3. `doctoc`の使用例の紹介
+3. `sort-markdown-tables`のインストール
 
-## 2.`doctoc`のインストール
+## `npm` & `doctoc`のインストール
 
 doctocはnpmパッケージなのでまず`npm`と`nodejs`をインストールします。
 
@@ -77,7 +71,7 @@ v10.19.0
 % npm install -g doctoc
 ```
 
-## 3. `doctoc`の使用例の紹介
+## `doctoc`の使用例の紹介
 
 以下のような形式のMarkdown file, `test.md` を用意します
 
@@ -95,7 +89,7 @@ v10.19.0
 このファイルに対して以下のコマンドを実行します。
 
 ```zsh
-% doctoc test.md --github
+% doctoc test.md
 ```
 
 すると
@@ -121,19 +115,29 @@ v10.19.0
 以上のように`<!--START doctoc --><!--END doctoc -->`の間で囲まれたエリアにIndexを自動的に作ってくれます。
 
 
-### オプション
+### Options
 
-目次の作成形式について、以下のサイトと整合的なフォームを選択することができます。
+目次の作成形式について、以下のサイトと整合的なフォームを選択することができます:
 
+```zsh
+% doctoc -h
+Usage: doctoc [mode] [--entryprefix prefix] [--notitle | --title title] [--maxlevel level] [--all] [--update-only] <path> (where path is some path to a directory (e.g., .) or a file (e.g., README.md))
+
+Available modes are:
+  --bitbucket   bitbucket.org
+  --nodejs      nodejs.org
+  --github      github.com
+  --gitlab      gitlab.com
+  --ghost       ghost.org
+Defaults to 'github.com'.
 ```
---bitbucket bitbucket.org
---nodejs    nodejs.org
---github    github.com
---gitlab    gitlab.com
---ghost     ghost.org
-```
 
-### 使用例: git addとの組わせ
+`doctoc`のdefaultは`--github`なので, GitHub Pages用に目次を作成したい場合はoptionを指定する必要はありません.
+
+
+### Usage Example
+
+> combination with git add command
 
 ```zsh
 % doctoc --github README.md 
@@ -142,31 +146,35 @@ v10.19.0
 
 - `!$`は直前に実行したコマンドの最後の引数を引用するコマンド
 
+> doctoc all markdown files under the current directory
 
-### 複数のmarkdown fileを対象にdoctoc update
+```bash
+#!/bin/bash
+## doctoc all markdown files under the current directory
+## Author: Ryo Nakagami
+## Revised: 2023-06-13
+## REQUIREMENT: doctoc
 
-複数のファイルを対象にdoctoc updateを実施したい場合, 現状では逐次コマンドを入力する必要があり, 複数のドキュメントを同時編集している際にはやや億劫な作業となります.
-
-そこで, ここではカレントディレクトリ下に存在するmarkdown fileに対してのみ一括でdoctoc updateを実行するエイリアスを紹介します.
+set -e
 
 
-> 完成物
+# Variable Assignment
+if [[ -z $1  ]]; then
+    DOCTOC_OPTION='--github'
+else
+    DOCTOC_OPTION=$1
+fi
 
-```zsh
-doctoc_all='echo $(find . -maxdepth 1 -name "*.md" -type f|xargs doctoc --github|grep -Eo "\./\S{1,}\.md"| sort --unique|wc -l) files are updated'
+
+# Main
+echo $(grep -lL "doctoc\: false$" ./*.md\
+|xargs doctoc $DOCTOC_OPTION|grep -Eo "\./\S{1,}\.md"\
+| sort --unique|wc -l) files are updated
 ```
 
-> 機能
+## sort-markdown-tablesのインストール
 
-- カレントディレクトリに存在するmarkdown fileのみ取得する = サブディレクトリ以下は検索しない
-- 取得したmarkdown fileに対して`doctoc --github`コマンドを一括で実行したい
-- `doctoc --github`コマンド対象ファイル数を表示したい
-
-## 4. sort-markdown-tablesのインストール
-### 何ができるようになるか？
-
-- Markdown tableを最初のカラムに基づいてsortすることができるようになる
-- [公式レポジトリ](https://github.com/fmma/sort-markdown-tables#readme)
+Markdown tableを最初のカラムに基づいてsortすることができるようになります
 
 ### インストール
 
@@ -174,36 +182,14 @@ doctoc_all='echo $(find . -maxdepth 1 -name "*.md" -type f|xargs doctoc --github
 % sudo npm install -g @fmma-npm/sort-markdown-tables
 ```
 
-### 使い方
+### Usage
 
 1. sortの対象としたいテーブルの直前に`<!-- sort-table -->`タグをつける
 2. `sort-markdown-tables -i Readme.md`とコンソールで実行する
 
-## Appendix
-### `find`コマンド
 
-`find`コマンドは, ファイルを検索するためのコマンドです.
-ファイル名だけでなく, アクセス権, ファイルサイズ, 更新日時といった条件でファイルを検索することも可能です.
+References
+-----------
 
-> Syntax
-
-```zsh
-find [検索開始ディレクトリ] [検索式]
-```
-
-> Options
-
-今回使用したoptionのみを紹介します.
-
----|---
-`-maxdepth` LEVEL|指定したディレクトリから最大LEVEL階層下のディレクトリまで検索
-`-name`|検索対象ファイル名の指定（ワイルドカード使用可能）
-`-type`|検索対象ファイルタイプの指定(f: ファイル, d: ディレクトリ, l:シンボリック)
-
-
-
-
-## References
-
-- [doctoc GitHubレポジトリー](https://github.com/thlorenz/doctoc)
+- [GitHub.com > thlorenz/doctoc](https://github.com/thlorenz/doctoc)
 - [npm公式ページ](https://docs.npmjs.com/about-npm)
