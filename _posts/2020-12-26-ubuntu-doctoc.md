@@ -53,7 +53,11 @@ tags:
 doctocはnpmパッケージなのでまず`npm`と`nodejs`をインストールします。
 
 ```zsh
+### ubuntu
 % sudo apt install -y nodejs npm
+
+### windows
+~> sudo choco install -y --force nodejs-lts
 ```
 
 インストールしたバージョンを確認すると
