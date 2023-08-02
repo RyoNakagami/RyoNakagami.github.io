@@ -19,7 +19,6 @@ tags:
 <!-- START doctoc generated TOC please keep comment here to allow auto update -->
 <!-- DON'T EDIT THIS SECTION, INSTEAD RE-RUN doctoc TO UPDATE -->
 
-
 - [How Do You Use "Could have"?](#how-do-you-use-could-have)
 - ["Could have" in a datascience context](#could-have-in-a-datascience-context)
 

@@ -7,7 +7,6 @@ header-style: text
 header-mask: 0.0
 catelog: true
 mathjax: true
-purpose: 
 tags:
 
 - Econometrics

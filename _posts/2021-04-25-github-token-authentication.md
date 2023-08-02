@@ -1,16 +1,17 @@
 ---
 layout: post
-title: "Githubパスワード認証廃止への対応"
-subtitle: "個人アクセストークン(PAT)の設定"
+title: "Set Up Personal Access Token for GitHub"
+subtitle: "Githubパスワード認証廃止への対応"
 author: "Ryo"
 catelog: true
 mathjax: true
-revise_date: 2023-06-20
+revise_date: 2023-07-29
 header-mask: 0.0
 header-style: text
 tags:
 
 - Ubuntu 20.04 LTS
+- Ubuntu 22.04.2 LTS
 - git
 
 ---
@@ -20,12 +21,11 @@ tags:
 <!-- START doctoc generated TOC please keep comment here to allow auto update -->
 <!-- DON'T EDIT THIS SECTION, INSTEAD RE-RUN doctoc TO UPDATE -->
 
-- [PC環境](#pc%E7%92%B0%E5%A2%83)
-- [解決したい症状](#%E8%A7%A3%E6%B1%BA%E3%81%97%E3%81%9F%E3%81%84%E7%97%87%E7%8A%B6)
-  - [何が問題か？](#%E4%BD%95%E3%81%8C%E5%95%8F%E9%A1%8C%E3%81%8B)
+- [Overview](#overview)
+  - [Pain](#pain)
   - [Background](#background)
   - [だれが影響を受けるのか？](#%E3%81%A0%E3%82%8C%E3%81%8C%E5%BD%B1%E9%9F%BF%E3%82%92%E5%8F%97%E3%81%91%E3%82%8B%E3%81%AE%E3%81%8B)
-- [対応方針: PATの発行](#%E5%AF%BE%E5%BF%9C%E6%96%B9%E9%87%9D-pat%E3%81%AE%E7%99%BA%E8%A1%8C)
+- [Solution: PATの発行](#solution-pat%E3%81%AE%E7%99%BA%E8%A1%8C)
   - [トークンの作成](#%E3%83%88%E3%83%BC%E3%82%AF%E3%83%B3%E3%81%AE%E4%BD%9C%E6%88%90)
   - [トークン使用のテスト](#%E3%83%88%E3%83%BC%E3%82%AF%E3%83%B3%E4%BD%BF%E7%94%A8%E3%81%AE%E3%83%86%E3%82%B9%E3%83%88)
 - [GPG encrypted`.netrc.gpg`を用いたリモートレポジトリアクセス設定](#gpg-encryptednetrcgpg%E3%82%92%E7%94%A8%E3%81%84%E3%81%9F%E3%83%AA%E3%83%A2%E3%83%BC%E3%83%88%E3%83%AC%E3%83%9D%E3%82%B8%E3%83%88%E3%83%AA%E3%82%A2%E3%82%AF%E3%82%BB%E3%82%B9%E8%A8%AD%E5%AE%9A)
@@ -36,13 +36,15 @@ tags:
 
 </div>
 
-## PC環境
+## Overview
 
----|---
-OS |	ubuntu 20.04 LTS Focal Fossa
-CPU| 	Intel Core i7-9700 CPU 3.00 GHz
+今回のSolutionの想定OSは以下,
 
-## 解決したい症状
+- Ubuntu 20.04 LTS Focal Fossa
+- Ubuntu 22.04.2 LTS Jammy Jellyfish
+
+
+### Pain
 
 Githubから以下のメールが来たのでその対処をしたい：
 
@@ -58,8 +60,6 @@ for more information around suggested workarounds and removal dates.
 Thanks,
 The GitHub Team
 ```
-
-### 何が問題か？
 
 対応がなぜ必要かというと, [Token authentication requirements for Git operations](https://github.blog/2020-12-15-token-authentication-requirements-for-git-operations/)をみると
 
@@ -100,7 +100,7 @@ GitHub への認証でパスワードの代わりに使用できる程度の知�
 - 2要素認証を使用したGitHubアカウント
 
 
-## 対応方針: PATの発行
+## Solution: PATの発行
 
 2021年8月13日までに, 
 
@@ -216,6 +216,16 @@ GPGキーの発行は[こちら](https://ryonakagami.github.io/2020/12/28/ubuntu
 
 これで`.netrc.gpg`が生成されます.
 
+なお, 暗号化したファイルを復号化したい場合は, 
+
+```zsh
+% gpg ~/.netrc.gpg
+% cat ~/.netrc
+```
+
+で確認することができます.
+
+
 > STEP 3: netrc credential helperの設定
 
 [git contrib](https://github.com/git/git)には, `git-credential-netrc.perl`というファイルの中に
@@ -240,16 +250,17 @@ netrcファイルを参照する機能が実装されています.
 > STEP 4: git configの設定
 
 ```zsh
-% git config --global credential.helper "netrc -d -v"
+% git config --global credential.helper "netrc -v"
 % cat ~/.gitconfig #設定確認
 ```
 
 ---|---
-`-d`, `--debug`| turn on debugging (developer info)
+`-d`, `--debug`| turn on debugging (developer info), Onにする必要はない
 `-v`, `--verbose`| be more verbose (show files and information found)
 
 
-## References
+References
+-----
 
 > 関連記事
 
@@ -258,10 +269,9 @@ netrcファイルを参照する機能が実装されています.
 > 公式ドキュメント
 
 - [GitHub Docs > Managing remote repositories](https://docs.github.com/en/get-started/getting-started-with-git/managing-remote-repositories)
-
+- [GitHub Docs > 個人アクセストークンを使用する](https://docs.github.com/ja/github-ae@latest/github/authenticating-to-github/keeping-your-account-and-data-secure/creating-a-personal-access-token)
 
 > Others
 
 - [Token authentication requirements for Git operations](https://github.blog/2020-12-15-token-authentication-requirements-for-git-operations/)
-- [個人アクセストークンを使用する](https://docs.github.com/ja/github-ae@latest/github/authenticating-to-github/keeping-your-account-and-data-secure/creating-a-personal-access-token)
 - [How to update remote origin to use access token instead of SSH key?](https://stackoverflow.com/questions/71453194/how-to-update-remote-origin-to-use-access-token-instead-of-ssh-key)
