@@ -35,7 +35,9 @@ tags:
     - [(1) ヒストリーサイズの再設定](#1-%E3%83%92%E3%82%B9%E3%83%88%E3%83%AA%E3%83%BC%E3%82%B5%E3%82%A4%E3%82%BA%E3%81%AE%E5%86%8D%E8%A8%AD%E5%AE%9A)
     - [(2) Zshのgit command補完を有効にする](#2-zsh%E3%81%AEgit-command%E8%A3%9C%E5%AE%8C%E3%82%92%E6%9C%89%E5%8A%B9%E3%81%AB%E3%81%99%E3%82%8B)
     - [(3) git-posh like git prompt](#3-git-posh-like-git-prompt)
-- [Appendix: chshコマンド](#appendix-chsh%E3%82%B3%E3%83%9E%E3%83%B3%E3%83%89)
+- [Appendix](#appendix)
+  - [chshコマンド](#chsh%E3%82%B3%E3%83%9E%E3%83%B3%E3%83%89)
+  - [パスの設定](#%E3%83%91%E3%82%B9%E3%81%AE%E8%A8%AD%E5%AE%9A)
 - [References](#references)
 
 <!-- END doctoc generated TOC please keep comment here to allow auto update -->
@@ -332,6 +334,9 @@ typeset -U path PATH
 # general
 export PATH="$HOME/bin:$PATH"
 
+# zsh completion
+fpath+=~/.zsh.d/.zfunc
+
 #-------------------------------------
 # Alias settings
 #-------------------------------------
@@ -506,34 +511,33 @@ prompt_setup() {
 add-zsh-hook precmd prompt_setup
 ```
 
-## Appendix: chshコマンド
+## Appendix
+### chshコマンド
 
-> 機能
+**機能**
 
 - ログインシェルを変更するコマンド
 - 一般ユーザは自分のアカウントのログインシェルのみを変更できるが, スーパーユーザは全てのアカウントのログインシェルを変更できます
 
-> Syntax
+**Syntax**
 
 ```zsh
 chsh [-s login_shell] [user]
 ```
-
-> Options
 
 ---|---
 `-h, --help`            |ヘルプメッセージの表示
 `-R, --root CHROOT_DIR` |directory to chroot into
 `-s, --shell SHELL`     |現在のユーザーのログインシェルを設定
 
-> Exmaple
+**Exmaple**
 
 ```bash
 #bashに変更
 chsh -s /bin/bash
 ```
 
-> 設定可能なログインシェルリストの表示
+**設定可能なログインシェルリストの表示**
 
 設定可能なシェルは`/etc/shells`ファイルに登録されているのでこれを表示させれば十分です.
 
@@ -549,6 +553,34 @@ chsh -s /bin/bash
 /usr/bin/dash
 /bin/zsh
 /usr/bin/zsh
+```
+
+### パスの設定
+
+<div style='padding-left: 2em; padding-right: 2em; border-radius: 1em; border-style:solid; border-color:#D3D3D3; background-color:#F8F8F8'>
+<p class="h4"><ins>Def: PATHを通す</ins></p>
+
+コマンドのあるディレクトのパスを設定することで, コマンド名を入力するだけでそのコマンドがどこでも使えるようになります.
+これを「**パスを通す**」という.
+
+</div>
+
+現在のシェルのPATH変数は以下のコマンドで確認できます:
+
+```zsh
+% echo $PATH
+/home/hoge/.local/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/usr/games:/usr/local/games:/snap/bin
+```
+
+上記の例でわかるように, 複数のPATHは `:` で繋がれています. 前にある方が優先順位が高く,
+`/usr/local/bin:/bin:/usr/bin` と指定されている場合は `/usr/local/bin` にある実行可能ファイルが優先されます.
+
+```zsh
+# $HOME/binを優先したい場合
+% export PATH="$HOME/bin:$PATH"
+
+# $HOME/binを最後に見るように設定したい場合
+% export PATH="$PATH:$HOME/bin"
 ```
 
 

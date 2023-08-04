@@ -152,19 +152,19 @@ speech-dispatcher-espeak-ng/focal,now 0.9.1-4 amd64 [installed,automatic]
 
 といった観点で異なる点があります.
 
-> Level of Control
+**Level of Control**
 
 ```zsh
 % sudo apt install chromium-browser
 ```
 
-と実施するとchromiumが動作するために必要なdependenciesを自動的にdowload & installしてくれますが, `apt-get`の場合は自動的にはdependencies対応を実行しれません. もし必要なdependenciesを自動的にdowload & install場合は, `-f` を用いて以下のように実行する必要があります:
+と実施するとchromiumが動作するために必要なdependenciesを自動的にdownload & installしてくれますが, `apt-get`の場合は自動的にはdependencies対応を実行しれません. もし必要なdependenciesを自動的にdownload & install場合は, `-f` を用いて以下のように実行する必要があります:
 
 ```zsh
 % sudo apt-get install chromium-browser -f
 ```
 
-> User interface
+**User interface**
 
 - `apt install`はpackage install時のprogress barの表示をしてくれます
 - `apt-get install`はprogress barの表示はない
@@ -202,7 +202,8 @@ WARNING: apt does not have a stable CLI interface. Use with caution in scripts.
 |Removes package with associated configuration|`Apt-get purge`|`apt purge`|
 
 
-## References
+References
+----------------
 
 > Ryo's Tech Blog
 
