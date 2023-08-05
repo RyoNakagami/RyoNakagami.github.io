@@ -8,7 +8,6 @@ header-mask: 0.0
 catelog: true
 mathjax: true
 revise_date: 2023-08-05
-purpose: 
 tags:
 
 - Wolfram Engine

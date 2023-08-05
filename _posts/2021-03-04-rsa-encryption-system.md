@@ -7,7 +7,7 @@ header-style: text
 header-mask: 0.0
 catelog: true
 mathjax: true
-purpose: 
+revise_date: 2023-08-06
 tags:
 
 - RSA
@@ -15,17 +15,14 @@ tags:
 - 素数
 ---
 
+<div style='border-radius: 1em; border-style:solid; border-color:#D3D3D3; background-color:#F8F8F8'>
 
-
-||概要|
-|---|---|
-|目的|RSA公開鍵暗号方式の仕組み|
-|参考|- [【図解】初心者も分かる”公開鍵/秘密鍵”の仕組み～公開鍵暗号方式の身近で具体的な利用例やメリット〜](https://milestone-of-se.nesuke.com/sv-advanced/digicert/public-private-key/)<br>- [wolfram.com: TotientFunction](https://mathworld.wolfram.com/TotientFunction.html)<br>- [高校数学の美しい物語: フェルマーの小定理の証明と例題](https://mathtrain.jp/fermat_petit)<br>- [ucdenver lecture note](http://www-math.ucdenver.edu/~wcherowi/courses/m5410/ctcrsa.html)<br>- [RSA暗号のpython実装](https://banboooo.hatenablog.com/entry/2018/07/12/162800)|
+<p class="h4">&nbsp;&nbsp;Table of Contents</p>
 
 <!-- START doctoc generated TOC please keep comment here to allow auto update -->
 <!-- DON'T EDIT THIS SECTION, INSTEAD RE-RUN doctoc TO UPDATE -->
 
-- [1. コンピューターがインターネットを介して機密情報の通信を行うとは？](#1-%E3%82%B3%E3%83%B3%E3%83%94%E3%83%A5%E3%83%BC%E3%82%BF%E3%83%BC%E3%81%8C%E3%82%A4%E3%83%B3%E3%82%BF%E3%83%BC%E3%83%8D%E3%83%83%E3%83%88%E3%82%92%E4%BB%8B%E3%81%97%E3%81%A6%E6%A9%9F%E5%AF%86%E6%83%85%E5%A0%B1%E3%81%AE%E9%80%9A%E4%BF%A1%E3%82%92%E8%A1%8C%E3%81%86%E3%81%A8%E3%81%AF)
+- [コンピューターがインターネットを介して機密情報の通信を行うとは？](#%E3%82%B3%E3%83%B3%E3%83%94%E3%83%A5%E3%83%BC%E3%82%BF%E3%83%BC%E3%81%8C%E3%82%A4%E3%83%B3%E3%82%BF%E3%83%BC%E3%83%8D%E3%83%83%E3%83%88%E3%82%92%E4%BB%8B%E3%81%97%E3%81%A6%E6%A9%9F%E5%AF%86%E6%83%85%E5%A0%B1%E3%81%AE%E9%80%9A%E4%BF%A1%E3%82%92%E8%A1%8C%E3%81%86%E3%81%A8%E3%81%AF)
   - [RSA公開鍵暗号方式の概要](#rsa%E5%85%AC%E9%96%8B%E9%8D%B5%E6%9A%97%E5%8F%B7%E6%96%B9%E5%BC%8F%E3%81%AE%E6%A6%82%E8%A6%81)
   - [RSAの仕組み](#rsa%E3%81%AE%E4%BB%95%E7%B5%84%E3%81%BF)
   - [AさんからBさんに秘密のメッセージを送る方法](#a%E3%81%95%E3%82%93%E3%81%8B%E3%82%89b%E3%81%95%E3%82%93%E3%81%AB%E7%A7%98%E5%AF%86%E3%81%AE%E3%83%A1%E3%83%83%E3%82%BB%E3%83%BC%E3%82%B8%E3%82%92%E9%80%81%E3%82%8B%E6%96%B9%E6%B3%95)
@@ -54,20 +51,84 @@ tags:
     - [系２：フェルマーの小定理](#%E7%B3%BB%EF%BC%92%E3%83%95%E3%82%A7%E3%83%AB%E3%83%9E%E3%83%BC%E3%81%AE%E5%B0%8F%E5%AE%9A%E7%90%86)
     - [系３：フェルマーの小定理の補題](#%E7%B3%BB%EF%BC%93%E3%83%95%E3%82%A7%E3%83%AB%E3%83%9E%E3%83%BC%E3%81%AE%E5%B0%8F%E5%AE%9A%E7%90%86%E3%81%AE%E8%A3%9C%E9%A1%8C)
     - [オイラーの定理の別証明](#%E3%82%AA%E3%82%A4%E3%83%A9%E3%83%BC%E3%81%AE%E5%AE%9A%E7%90%86%E3%81%AE%E5%88%A5%E8%A8%BC%E6%98%8E-1)
+- [References](#references)
 
 <!-- END doctoc generated TOC please keep comment here to allow auto update -->
 
-## 1. コンピューターがインターネットを介して機密情報の通信を行うとは？
 
-Amazon.comで何かしらの商品を注文したいとします。商品をカートに入れたあとに決済というプロセスを経る際に、クレジットカード情報のやり取りをOver the Internetで自分のラップトップとAmazonのサーバーの間で実施する必要があります。Over the Internetでやり取りすると、ルーターと呼ばれる無数のコンピューターを経由して、自分のラップトップからAmazonのサーバーに情報が送られるため、ルーターにアクセスできるあらゆる人が情報を覗く（ときには改変する）ことができてしまいます。例えるなら、クレジットカード情報を封のされていない葉書でやり取りするようなものです。葉書を２つの住所間で郵送するとき、複数の配達人を経由して送られるので、葉書に書かれた内容は郵便配達員に見られてしまうリスクがあります。
+</div>
 
-この問題の一つの解決方法として、予めAmazonサーバーと自分のラップトップの間で他の人には秘密の符牒（二人だけに共有された秘密）を設定し、その符牒を用いてメッセージを暗号化してOver the Internetでやり取りするという手法が考えられます（他にもVPNを張ってやり取りをするなど）。しかし、(1) 一番最初に秘密の符牒をどのように共有するのか, (2) 他の人にバレないようにVPNの設定をどのように実施すればよいのかという問題が生まれてしまいます。つまり、見知らぬ人同士の間でオープンな場でどのように「共有された秘密」を確立するのか？という問題です。この一つの解決方法がRSA公開鍵暗号方式です。
+## コンピューターがインターネットを介して機密情報の通信を行うとは？
+
+Amazon.comで何かしらの商品を注文したいとします. 商品をカートに入れたあとに決済というプロセスを経る際に, 
+クレジットカード情報のやり取りをOver the Internetで自分のラップトップとAmazonのサーバーの間で実施する必要があります. 
+このとき, 以下のような問題が発生します
+
+- Over the Internetでやり取りすると, ルーターと呼ばれる無数のコンピューターを経由して自分のラップトップからAmazonのサーバーに情報が送られるため, ルーターにアクセスできるあらゆる人が情報を覗く（ときには改変する）ことができてしまう
+- 例えるなら, クレジットカード情報を封のされていない葉書でやり取りするようなものです. 
+- 葉書を２つの住所間で郵送するとき, 複数の配達人を経由して送られるので, 葉書に書かれた内容は郵便配達員に見られてしまうリスクがあります。
+
+
+この問題の解決方法として, 
+
+- 予めAmazonサーバーと自分のラップトップの間で他の人には秘密の符牒（二人だけに共有された秘密）を設定し, その符牒を用いてメッセージを暗号化してOver the Internetでやり取りするという手法が考えられます
+- VPNを張ってやり取りをする
+
+ということが考えられます. 前者がいわゆる暗号通信というものですが, 
+
+1. 一番最初に秘密の符牒をどのように共有するのか?
+2. 他の人にバレないようにVPNの設定をどのように実施すればよいのか?
+
+という問題が生まれてしまいます. つまり, **見知らぬ人同士の間でオープンな場でどのように「共有された秘密」を確立するのか？**という問題です. 
+この一つの解決方法がRSA公開鍵暗号方式です.
 
 ### RSA公開鍵暗号方式の概要
 
-とあるサーバ A がRSA秘密鍵を持ち、任意のクライアントがその対となるRSA公開鍵 (サーバ A のRSA公開鍵) を持っているとします。RSA公開鍵を使って暗号化するとRSA秘密鍵でのみ復号できます。RSA秘密鍵は原則サーバ A 以外には知られないため、サーバ A のみが復号でき、機密性が確保できます。逆に、RSA秘密鍵を使って暗号化すると、RSA公開鍵でのみ復号できます。RSA公開鍵は広く知られる前提であるため、機密性の確保はできませんが、「サーバ A のRSA公開鍵で復号できた」通信というのは、「発信源が間違いなくサーバ A であり、内容は改竄されていない」という完全性・真正性が確保できます。後者はデジタル署名で主に用いられます。
+<div style='padding-left: 2em; padding-right: 2em; border-radius: 1em; border-style:solid; border-color:#D3D3D3; background-color:#F8F8F8'>
+<p class="h4"><ins>公開鍵暗号方式</ins></p>
 
-<img src="https://raw.githubusercontent.com/ryonakimageserver/omorikaizuka/master/%E3%83%96%E3%83%AD%E3%82%B0%E7%94%A8/20210304_RSA_how_it_works.webp">
+- 公開鍵と復号鍵という, 暗号化と復号のそれぞれの鍵を用いる非対称型暗号方式の一種
+- 秘密鍵と公開鍵は１対１対応
+- 秘密鍵をベースに公開鍵を計算する（その逆の演算は事実上不可能）
+
+</div>
+
+とあるサーバ A がRSA秘密鍵を持ち, 任意のクライアントがその対となるRSA公開鍵 (サーバ A のRSA公開鍵) を持っているとします. RSA公開鍵を使って暗号化するとRSA秘密鍵でのみ復号できます. 
+RSA秘密鍵は原則サーバ A 以外には知られないため, サーバ A のみが復号でき, 機密性が確保できます. 逆に、RSA秘密鍵を使って暗号化すると, RSA公開鍵でのみ復号できます. 
+
+RSA公開鍵は広く知られる前提であるため, 機密性の確保はできませんが, 「サーバ A のRSA公開鍵で復号できた」通信というのは「**発信源が間違いなくサーバ A であり, 内容は改竄されていない**」という**完全性・真正性**が確保を意味します.
+この特性を活かした通信を公開鍵認証といいますが, この仕組みはデジタル署名で主に用いられてます.
+
+```mermaid
+sequenceDiagram
+    title 公開鍵暗号
+    participant Client
+    participant eavesdropper
+    participant Cloud Server
+    
+    Note left of Client: (1) 公開鍵・秘密鍵ペア作成
+    Client->>Cloud Server: (2) 公開鍵の登録
+    Note right of Cloud Server: (3) 公開鍵でデータを暗号化
+    Cloud Server->>Client: (4) 暗号化データを送信
+    Cloud Server-->>eavesdropper: データ盗聴しても<br>復号化不可能
+    Note left of Client: (5) 秘密鍵によるデータの復号
+```
+
+```mermaid
+sequenceDiagram
+    title 公開鍵認証
+    participant 認証側
+    participant なりすまし
+    participant 被認証側
+    
+    Note right of 被認証側: (1) 公開鍵・秘密鍵ペア作成
+    被認証側->>認証側: (2) 公開鍵の共有
+    Note right of 被認証側: (3) 秘密鍵で認証データ作成
+    被認証側->>認証側: (4) 認証データを送信
+    Note left of 認証側: (5) 公開鍵によるデータ検証
+    なりすまし -->> 認証側: なりすましてデータを送信<br>しても公開鍵検証できない
+```
+
 
 ### RSAの仕組み
 
@@ -733,3 +794,12 @@ $$
 <div style="text-align: right;">
 ■
 </div>
+
+References
+----
+
+- [【図解】初心者も分かる”公開鍵/秘密鍵”の仕組み～公開鍵暗号方式の身近で具体的な利用例やメリット〜](https://milestone-of-se.nesuke.com/sv-advanced/digicert/public-private-key/)
+- [wolfram.com: TotientFunction](https://mathworld.wolfram.com/TotientFunction.html)
+- [高校数学の美しい物語: フェルマーの小定理の証明と例題](https://mathtrain.jp/fermat_petit)
+- [ucdenver lecture note](http://www-math.ucdenver.edu/~wcherowi/courses/m5410/ctcrsa.html)
+- [RSA暗号のpython実装](https://banboooo.hatenablog.com/entry/2018/07/12/162800)|
