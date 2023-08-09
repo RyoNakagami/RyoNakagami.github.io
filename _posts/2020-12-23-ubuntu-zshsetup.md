@@ -560,10 +560,16 @@ chsh -s /bin/bash
 <div style='padding-left: 2em; padding-right: 2em; border-radius: 1em; border-style:solid; border-color:#D3D3D3; background-color:#F8F8F8'>
 <p class="h4"><ins>Def: PATHを通す</ins></p>
 
-コマンドのあるディレクトのパスを設定することで, コマンド名を入力するだけでそのコマンドがどこでも使えるようになります.
-これを「**パスを通す**」という.
+コマンドのあるディレクトのパスを設定することでを環境変数`PATH`に登録することを「**PATHを通す**」という.
+PATHを通すことによって, 
 
+- コマンド実行時にKernelが環境変数`PATH`で指定されたディレクトリを確認
+- 各コマンドの実行ファイルを見つけ出す
+- 入力されたコマンド使える
+
+という仕組みになっている
 </div>
+
 
 現在のシェルのPATH変数は以下のコマンドで確認できます:
 

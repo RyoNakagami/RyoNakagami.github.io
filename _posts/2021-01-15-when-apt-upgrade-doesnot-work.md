@@ -1,6 +1,6 @@
 ---
 layout: post
-title: "apt vs apt-get"
+title: "packages are being kept back: not able to upgrade packages"
 subtitle: "APTによるパッケージ管理 3/N"
 author: "Ryo"
 header-style: text

@@ -1,18 +1,17 @@
 ---
 layout: post
-title: "Linux基本コマンド"
-subtitle: "reboot コマンド／poweroff コマンドの仕組み"
+title: "reboot コマンド／poweroff コマンドの仕組み"
+subtitle: "Understanding systemd, systemctl 1/N"
 author: "Ryo"
 header-style: text
 header-mask: 0.0
 catelog: true
 mathjax: true
-revise_date: 2022-08-04
+revise_date: 2023-08-04
 tags:
 
-- Ubuntu 20.04 LTS
 - Linux
-- Shell
+- systemd
 ---
 
 
@@ -21,10 +20,9 @@ tags:
 <!-- START doctoc generated TOC please keep comment here to allow auto update -->
 <!-- DON'T EDIT THIS SECTION, INSTEAD RE-RUN doctoc TO UPDATE -->
 
-- [今回紹介すること](#%E4%BB%8A%E5%9B%9E%E7%B4%B9%E4%BB%8B%E3%81%99%E3%82%8B%E3%81%93%E3%81%A8)
 - [reboot/poweroffコマンド](#rebootpoweroff%E3%82%B3%E3%83%9E%E3%83%B3%E3%83%89)
+    - [`shutdown`コマンドによる電源オフ/再起動処理](#shutdown%E3%82%B3%E3%83%9E%E3%83%B3%E3%83%89%E3%81%AB%E3%82%88%E3%82%8B%E9%9B%BB%E6%BA%90%E3%82%AA%E3%83%95%E5%86%8D%E8%B5%B7%E5%8B%95%E5%87%A6%E7%90%86)
   - [rebootコマンドとpoweroffコマンドの実体](#reboot%E3%82%B3%E3%83%9E%E3%83%B3%E3%83%89%E3%81%A8poweroff%E3%82%B3%E3%83%9E%E3%83%B3%E3%83%89%E3%81%AE%E5%AE%9F%E4%BD%93)
-  - [なぜreboot/poweroffコマンドではなくshutdownコマンドが推奨されるのか？](#%E3%81%AA%E3%81%9Crebootpoweroff%E3%82%B3%E3%83%9E%E3%83%B3%E3%83%89%E3%81%A7%E3%81%AF%E3%81%AA%E3%81%8Fshutdown%E3%82%B3%E3%83%9E%E3%83%B3%E3%83%89%E3%81%8C%E6%8E%A8%E5%A5%A8%E3%81%95%E3%82%8C%E3%82%8B%E3%81%AE%E3%81%8B)
 - [systemctlとは？Ubuntuはどのようにサービス管理をしているのか？](#systemctl%E3%81%A8%E3%81%AFubuntu%E3%81%AF%E3%81%A9%E3%81%AE%E3%82%88%E3%81%86%E3%81%AB%E3%82%B5%E3%83%BC%E3%83%93%E3%82%B9%E7%AE%A1%E7%90%86%E3%82%92%E3%81%97%E3%81%A6%E3%81%84%E3%82%8B%E3%81%AE%E3%81%8B)
   - [systemdはどの段階で登場するのか？](#systemd%E3%81%AF%E3%81%A9%E3%81%AE%E6%AE%B5%E9%9A%8E%E3%81%A7%E7%99%BB%E5%A0%B4%E3%81%99%E3%82%8B%E3%81%AE%E3%81%8B)
   - [unit: systemd によるサービス処理の単位](#unit-systemd-%E3%81%AB%E3%82%88%E3%82%8B%E3%82%B5%E3%83%BC%E3%83%93%E3%82%B9%E5%87%A6%E7%90%86%E3%81%AE%E5%8D%98%E4%BD%8D)
@@ -34,16 +32,15 @@ tags:
 
 <!-- END doctoc generated TOC please keep comment here to allow auto update -->
 
-## 今回紹介すること
-
-- CLIからLinux OSをrebootとshutdownするコマンドの確認
-- システム起動の仕組みのまとめ
 
 ## reboot/poweroffコマンド
 
----|---
-`reboot [option]`|再起動コマンド
-`poweroff [option]`|shutdownコマンド
+Ubuntuを始めとするLinux Distributionを用いるとき再起動やシャットダウンを実行するとき以下のコマンドを用います.
+
+|コマンド|説明|`systemctl`対応コマンド|
+|---|---|---|
+|`reboot [option]`|システムを停止して再起動|`systemctl poweroff`|
+|`poweroff [option]`|システムを停止して電源をオフにする|`systemctl reboot`|
 
 rebootコマンド／poweroffコマンドのオプションは
 
@@ -51,53 +48,76 @@ rebootコマンド／poweroffコマンドのオプションは
 |---|---|---|
 |`-f` |	`--force` |	強制的に再起動または電源をオフにする|
 
-コマンドラインからLinuxを再起動したり、PCの電源をオフにしたりする場合、伝統的には　`shutdown` コマンドを使用します.しかし、shutdownコマンドは「スーパーユーザー」しか利用が許可されておらず、一般ユーザーはパスワードを入力しないと実行できません.個人用のLinux PCの場合、デスクトップのメニューから簡単に再起動や電源をオフできるように、rebootコマンドやpoweroffコマンドを使うことで、一般ユーザーでもコマンドから手軽に再起動や電源オフが実行できます.
+CLIからLinuxを再起動したり, PCの電源をオフにしたりする場合, 伝統的には　`shutdown` コマンドを使用します.
 
-**`shutdown`コマンドとの対応表**
+#### `shutdown`コマンドによる電源オフ/再起動処理
+
+`shutdown`コマンドでも`poweroff`, `reboot`処理を実行することも可能です.
+
+```zsh
+## poweroff
+% sudo shutdown -h +5 "Shutdown At 03:48"
+
+## reboot
+% sudo shutdown -r +5 "Shutdown At 03:48"
+```
 
 ---|---
-`reboot`|`sudo shutdown -r now`
-`poweroff`|`sudo shutdown -h now`
+`-h`/`-r`| poweroffの指定（指定なしでもデフォルトでpoweroff）
+`+5`| 5分後に停止時間の指定, 時間を指定しなかった場合は１分後がデフォルト
+`Shutdown At 10:43`| Wallメッセージ, ログインユーザー全員に通知する
 
-
-> `shutdown`コマンドになぜ管理者権限が必要?
-
-LinuxというかUnixシステムの話になりますが、Unixシステムの利用方法の基本は「UNIXがインストールされたコンピューター（ホスト）に、ネットワーク経由で複数の別のターミナルから接続して、作業を行う」です. そのため、一般ユーザーレベルに`shutdown`コマンドの利用を許してしまうと、他の人が作業しているのにいきなりホストが停止するという事態を招きかねません. そのため、`shutdown`コマンドに管理者権限が必要ということになっています.
-
-### rebootコマンドとpoweroffコマンドの実体
-
-rebootコマンドとpoweroffコマンドは共に「/usr/bin/systemctl」(`systemctl` コマンド)への「シンボリックリンク」となっています.確認方法として、
-
-```zsh
-% ls -l $(which reboot)               
-lrwxrwxrwx 1 root root 14 Mar 18 06:36 /usr/sbin/reboot -> /bin/systemctl*
-% ls -l $(which shutdown)                                                 ?master
-lrwxrwxrwx 1 root root 14 Apr 21 21:54 /usr/sbin/shutdown -> /bin/systemctl*
-```
-
-### なぜreboot/poweroffコマンドではなくshutdownコマンドが推奨されるのか？
-
-`shutdown`コマンドはユーザー通知や時間指定の機能がある一方, `poweroff/reboot`はそれらの機能がありません.
-後者はお手軽に実行できるメリットはありますが, 環境によっては複数ユーザーで共有しているなど「一般ユーザーが勝手に終了すべきではない」場面があります.
-そのため, reboot/poweroffコマンドが嫌われているのではないかなと思います.
-
-```zsh
-% shutdown -h +5 "Shutdown At 03:48"
-```
-
-- `-h`: poweroffの指定（指定なしでもデフォルトでpoweroff）
-- `+5`: 5分後
-- `Shutdown At 10:43`: ユーザー通知メッセージ
-
-キャンセルしたい場合は
+予約した`shutdown`処理をキャンセルしたい場合は
 
 ```zsh
 % shutdown -c
 ```
 
+
+<div style='padding-left: 2em; padding-right: 2em; border-radius: 1em; border-style:solid; border-color:#e6e6fa; background-color:#e6e6fa'>
+<p class="h4"><ins>shutdown`コマンドとの対応表</ins></p>
+
+---|---
+`reboot`|`shutdown -r now`
+`poweroff`|`shutdown -h now`
+
+</div>
+
+
+### rebootコマンドとpoweroffコマンドの実体
+
+rebootコマンドとpoweroffコマンドは共に`/usr/bin/systemctl`への「シンボリックリンク」となっています.
+
+```zsh
+% ls -l $(which reboot)               
+lrwxrwxrwx 1 root root 14 Mar 18 06:36 /usr/sbin/reboot -> /bin/systemctl*
+% ls -l $(which shutdown)
+lrwxrwxrwx 1 root root 14 Apr 21 21:54 /usr/sbin/shutdown -> /bin/systemctl*
+```
+
+`reboot`, `poweroff`それぞれ実態としてはsystemctlコマンドが動いています.
+これらを実行すると以下の順序で事が運びます:
+
+1. systemctlはD-Busを介してsystemdにmメッセージ「poweroff」「reboot」を送信
+2. systemdは並列に各ユニットの停止処理を実行
+3. 最後に`reboot`や`poweroff`自体を実行する
+
+なお, `shutdown`コマンドも現代では同じく`/usr/bin/systemctl`への「シンボリックリンク」となっています.
+
+```zsh
+% ls -l $(which shutdown)
+lrwxrwxrwx 1 root root 14 Mar 20 23:32 /usr/sbin/shutdown -> /bin/systemctl*
+```
+
+となっており, optionに応じて`reboot`や`poweroff`が呼ばれる仕様となっています.
+
+
+
 ## systemctlとは？Ubuntuはどのようにサービス管理をしているのか？
 
-Ubuntuでは、システムの起動とサービスの管理に `systemd` というLinuxの起動処理やシステム管理を行う仕組み（システム管理デーモン）を採用しています. なおここでのサービスの意味は、OS本体から切り離し可能な、何らかの役割をもったサブシステムのことです.ログ管理サービスやネットワークサービス、各種サーバープログラム(DBなど)がサービスに当たります. 
+Ubuntuでは、システムの起動とサービスの管理に `systemd` というLinuxの起動処理やシステム管理を行う仕組み（システム管理デーモン）を採用しています. 
+なおここでのサービスの意味は, **OS本体から切り離し可能な**何らかの役割をもったサブシステムのことです. 
+ログ管理サービスやネットワークサービス、各種サーバープログラム(DBなど)がサービスに当たります. 
 
 `systemctl` は `sytemd`を操作するコマンドと理解しています.
 
