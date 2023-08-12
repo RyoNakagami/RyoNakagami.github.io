@@ -148,8 +148,7 @@ USキーボードの使用に関係無く、入力ソースを Mozc 1つにし�
 
 各種設定が終わったらTerminalで`reboot`と打ち込み、変更内容が反映されているか再起動後確認して終了です。
 
-## Appendix 
-### `etc`などの主要なディレクトリ
+## Appendix : `etc`などの主要なディレクトリ
 
 |ディレクトリ|役割|
 |---|---|
@@ -194,17 +193,10 @@ USキーボードの使用に関係無く、入力ソースを Mozc 1つにし�
 
 ```
 
-## References
-
-> コマンドソースコード
+References
+------
 
 - [xdg-user-dirs-gtk-update](https://gitlab.gnome.org/GNOME/xdg-user-dirs-gtk)
-
-> オンラインマテリアル
-
-- [ロケール: 言語、地域の設定](hhttps://memo.open-code.club/Linux/locale.html)|
-- [Windows PCにUbuntu 20.04 LTS (Focal Fossa)をインストールする](https://ryonakagami.github.io/2020/12/07/ubuntu-setup/)|
-
-> 書籍
-
+- [ロケール: 言語、地域の設定](hhttps://memo.open-code.club/Linux/locale.html)
+- [Windows PCにUbuntu 20.04 LTS (Focal Fossa)をインストールする](https://ryonakagami.github.io/2020/12/07/ubuntu-setup/)
 - [UNIXの絵本, 株式会社アンク著](https://www.shoeisha.co.jp/book/detail/4798109339)

@@ -7,12 +7,12 @@ header-style: text
 header-mask: 0.0
 catelog: true
 mathjax: true
-revise_date: 2022-08-08
+revise_date: 2023-08-08
 reading_time: 10
 tags:
 
 - Linux
-- Shell
+- システム管理
 ---
 
 
@@ -281,9 +281,8 @@ t|スティッキービット|1000
 % chmod -R 766 dir
 ```
 
-### シンボリックモードとオクタルモードでのPermission設定
-
-<div style='padding-left: 2em; padding-right: 2em; border-radius: 1em; border-style:solid; border-color:#D3D3D3; background-color:#F8F8F8'>
+<div style='padding-left: 2em; padding-right: 2em; border-radius: 1em; border-style:solid; border-color:#e6e6fa; background-color:#e6e6fa'>
+<p class="h4"><ins>Problem: シンボリックモードとオクタルモードでのPermission設定</ins></p>
 
 ```
 % ls -l
@@ -297,6 +296,8 @@ t|スティッキービット|1000
 
 </div>
 
+シンボリックモードで記載する際は, カンマ区切りを用いて定義します. 
+
 ```zsh
 # シンボリックモード
 % chmod a+x,g-w fileA
@@ -304,8 +305,6 @@ t|スティッキービット|1000
 # オクタルモード
 % chmod 755 fileA
 ```
-
-シンボリックモードで記載する際は, カンマ区切りを用いて定義します. 
 
 
 ### umaskを用いたDefault Permissionフラグの管理

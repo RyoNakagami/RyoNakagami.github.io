@@ -300,6 +300,9 @@ zsh configurationに関するファイル管理の観点から以下のような
 # clear settings
 unalias -a
 
+# umask
+umask 022
+
 # autoload
 autoload -Uz promptinit 
 
