@@ -33,10 +33,7 @@ tags:
   - [不要になったパッケージの削除](#%E4%B8%8D%E8%A6%81%E3%81%AB%E3%81%AA%E3%81%A3%E3%81%9F%E3%83%91%E3%83%83%E3%82%B1%E3%83%BC%E3%82%B8%E3%81%AE%E5%89%8A%E9%99%A4)
   - [パッケージがインストールしたファイル群を確認する](#%E3%83%91%E3%83%83%E3%82%B1%E3%83%BC%E3%82%B8%E3%81%8C%E3%82%A4%E3%83%B3%E3%82%B9%E3%83%88%E3%83%BC%E3%83%AB%E3%81%97%E3%81%9F%E3%83%95%E3%82%A1%E3%82%A4%E3%83%AB%E7%BE%A4%E3%82%92%E7%A2%BA%E8%AA%8D%E3%81%99%E3%82%8B)
 - [リポジトリの設定](#%E3%83%AA%E3%83%9D%E3%82%B8%E3%83%88%E3%83%AA%E3%81%AE%E8%A8%AD%E5%AE%9A)
-  - [`/etc/apt/sources.list`ファイル例](#etcaptsourceslist%E3%83%95%E3%82%A1%E3%82%A4%E3%83%AB%E4%BE%8B)
-  - [Syntax](#syntax)
-  - [パッケージの一覧](#%E3%83%91%E3%83%83%E3%82%B1%E3%83%BC%E3%82%B8%E3%81%AE%E4%B8%80%E8%A6%A7)
-- [Repositoryとは？](#repository%E3%81%A8%E3%81%AF)
+  - [`sources.list`のフォーマット](#sourceslist%E3%81%AE%E3%83%95%E3%82%A9%E3%83%BC%E3%83%9E%E3%83%83%E3%83%88)
 - [References](#references)
 
 <!-- END doctoc generated TOC please keep comment here to allow auto update -->
@@ -481,27 +478,29 @@ Remv libopts25 [1:5.18.16-3]
 
 ## リポジトリの設定
 
-リポジトリの設定は`/etc/apt/sources.list`ファイル及び`/etc/apt/sources.list.d`ディレクトリ以下の`.list`ファイルで行います。
+<div style='padding-left: 2em; padding-right: 2em; border-radius: 1em; border-style:solid; border-color:#D3D3D3; background-color:#F8F8F8'>
 
-### `/etc/apt/sources.list`ファイル例
+`apt-get`, `apt update`で最新のパッケージ情報を取得 & インストールができるが, そのパッケージ保管場所の情報は
+どのように管理しているのか？
 
-```
-deb http://jp.archive.ubuntu.com/ubuntu/ focal main restricted
-deb http://jp.archive.ubuntu.com/ubuntu/ focal-updates main restricted
-deb http://jp.archive.ubuntu.com/ubuntu/ focal-updates universe
-deb http://jp.archive.ubuntu.com/ubuntu/ focal-updates multiverse
-```
+</div>
 
-### Syntax
 
-```
-dep http://jp.archive.ubuntu.com/ubuntu/ focal main restricted
-```
+パッケージの保管場所であるリポジトリの設定は, Debian系では
 
-このapt-lineは以下の構成となっています：
+- `/etc/apt/sources.list`ファイル
+- `/etc/apt/sources.list.d`ディレクトリ以下の`.list`ファイル
 
-```
-<パッケージの種類> <取得先URI> <Ubuntu version> <コンポーネント>
+で管理しています. この２つの種類の使い分けとして, Ubuntu公式のリポジトリ情報を`/etc/apt/sources.list`に記述し, 
+サードパーティの情報は`/etc/apt/sources.list.d/`以下に`.list`というファイル名で保存するのが一般的です.
+
+### `sources.list`のフォーマット
+
+<div style='padding-left: 2em; padding-right: 2em; border-radius: 1em; border-style:solid; border-color:#e6e6fa; background-color:#e6e6fa'>
+<p class="h4"><ins>Column: `/etc/apt/sources.list`の記述ルール</ins></p>
+
+```zsh
+<パッケージの種類> <取得先URI> <Ubuntu version=suite> <component>
 ```
 
 |パッケージの種類|説明|
@@ -509,38 +508,40 @@ dep http://jp.archive.ubuntu.com/ubuntu/ focal main restricted
 |deb|バイナリパッケージを取得する|
 |deb-src|ソースパッケージを取得する|
 
-|コンポーネント|説明|
+|component|説明|
 |---|---|
 |main|Canonicalがサポートするフリーなオープンソースソフトウェア|
 |restricted|プロプライエタリなソフトウェア(主にデバイスドライバー)|
 |universe|コミュニティによってメンテナンスされるフリーなオープンソースソフトウェア|
 |multiverse|著作権もしくは法的な問題によって制限されたソフトウェア|
 
-### パッケージの一覧
 
-apt listコマンドを使うと、パッケージ一覧を表示します。パッケージ名でソートされています。インストールされているパッケージは`[[installed]]`, 依存関係に従ってインストールされたパッケージは`[[installed,automatic]]`と表示されます。それらが表示されていないパッケージはインストールされていないパッケージです。また、ワイルドカードを使った指定も可能です。`apt list "apache2*"`と入力すると、`apache2`から始まる名前のパッケージを表示します。インストールされているパッケージだけを表示したい場合は、`apt list --installed`と入力します。
-
+</div>
 
 
-## Repositoryとは？
+一例として, 
 
-A repository is a collection of files that has information about various software, their versions and some other details like the checksum. Each Ubuntu version has its own official set of four repositories:
+```zsh
+% cat /etc/apt/sources.list
+# deb cdrom:[Ubuntu 22.04.2 LTS _Jammy Jellyfish_ - Release amd64 (20230223)]/ jammy main restricted
 
-Main – Canonical-supported free and open-source software.
-Universe – Community-maintained free and open-source software.
-Restricted – Proprietary drivers for devices.
-Multiverse – Software restricted by copyright or legal issues.
+# See http://help.ubuntu.com/community/UpgradeNotes for how to upgrade to
+# newer versions of the distribution.
+deb http://jp.archive.ubuntu.com/ubuntu/ jammy main restricted
+...
+```
+
+上のラインの意味するところは
+
+- `http://jp.archive.ubuntu.com/ubuntu/`からdebパッケージを取得する
+- Ubuntuディストリビューションは`jammy`
+- `main restricted`はコンポーネントが属するクラス
 
 
-So basically it’s a web URL that has information about the software.
-How does your system know where are these repositories?
+References
+--------
 
-This information is stored in the sources.list file in the directory /etc/apt. If you look at its content, you’ll see that it has the URL of the repositories. The lines with # at the beginning are ignored.
-
-
-## References
-
-> 関連ポスト
+> 関連記事
 
 - [Ryo's Tech Blog > Linux基礎知識：bash環境でのパッケージのサジェスト機能](https://ryonakagami.github.io/2022/02/06/suggest-apt-packages-function/)
 - [Ryo's Tech Blog > (dpkgを用いたpackage install例)キャッシュ削除ツール Bleachbitのインストール](https://ryonakagami.github.io/2020/12/21/ubuntu-bleachbit/)
