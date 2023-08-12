@@ -511,6 +511,25 @@ prompt_setup() {
 add-zsh-hook precmd prompt_setup
 ```
 
+
+<div style='padding-left: 2em; padding-right: 2em; border-radius: 1em; border-style:solid; border-color:#e6e6fa; background-color:#e6e6fa'>
+<p class="h4"><ins>Column: aliasを一時的に解除したい場合</ins></p>
+
+`.zshrc`にて, `ls`と`grep`コマンドのaliasを設定していますが, 一時的に解除してそれぞれのコマンドを実行したい場合は, `\`をコマンドに付与して実行します:
+
+```zsh
+### 一時的にaliasを解除したい場合
+% \ls
+
+### aliasを解除したい場合（session中解除される）
+% unalias ls
+```
+
+</div>
+
+
+
+
 ## Appendix
 ### chshコマンド
 
