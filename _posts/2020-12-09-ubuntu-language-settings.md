@@ -26,8 +26,7 @@ tags:
   - [ロケールとは？](#%E3%83%AD%E3%82%B1%E3%83%BC%E3%83%AB%E3%81%A8%E3%81%AF)
 - [3. 日本語入力設定](#3-%E6%97%A5%E6%9C%AC%E8%AA%9E%E5%85%A5%E5%8A%9B%E8%A8%AD%E5%AE%9A)
   - [入力ソースの設定](#%E5%85%A5%E5%8A%9B%E3%82%BD%E3%83%BC%E3%82%B9%E3%81%AE%E8%A8%AD%E5%AE%9A)
-- [Appendix](#appendix)
-  - [`etc`などの主要なディレクトリ](#etc%E3%81%AA%E3%81%A9%E3%81%AE%E4%B8%BB%E8%A6%81%E3%81%AA%E3%83%87%E3%82%A3%E3%83%AC%E3%82%AF%E3%83%88%E3%83%AA)
+- [Appendix : `etc`などの主要なディレクトリ](#appendix--etc%E3%81%AA%E3%81%A9%E3%81%AE%E4%B8%BB%E8%A6%81%E3%81%AA%E3%83%87%E3%82%A3%E3%83%AC%E3%82%AF%E3%83%88%E3%83%AA)
 - [References](#references)
 
 <!-- END doctoc generated TOC please keep comment here to allow auto update -->
