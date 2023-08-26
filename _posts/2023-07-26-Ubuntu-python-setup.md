@@ -31,6 +31,11 @@ tags:
   - [Install Poetry](#install-poetry)
   - [Poetry config setup](#poetry-config-setup)
 - [Maintenance](#maintenance)
+- [How to use `poetry` in your project](#how-to-use-poetry-in-your-project)
+  - [Package install: `poetry add`](#package-install-poetry-add)
+    - [`poetry add` with version constraints](#poetry-add-with-version-constraints)
+    - [`poetry add` directly from GitHub Repository](#poetry-add-directly-from-github-repository)
+    - [editable mode でのインストール](#editable-mode-%E3%81%A7%E3%81%AE%E3%82%A4%E3%83%B3%E3%82%B9%E3%83%88%E3%83%BC%E3%83%AB)
 - [Tips](#tips)
   - [List up pyenv-based python version](#list-up-pyenv-based-python-version)
   - [poetry install when there is no project module](#poetry-install-when-there-is-no-project-module)
@@ -217,10 +222,32 @@ fpath+=~/.zsh.d/.zfunc
 
 ### Poetry config setup
 
+Poetryのconfig directoryはデフォルトでは以下で管理されてます
+
+- Linux: `~/.config/pypoetry`
+- MacOS: `~/Library/Application Support/pypoetry`
+- Windows: `%APPDATA%\pypoetry`
+
+config file自体は上記のディレクトリの`config.toml`に記載されます.
 config setup内容は以下のコマンドで確認できます
 
 ```zsh
 % poetry config --list
+cache-dir = "/home/hoshino_kirby/.cache/pypoetry"
+experimental.system-git-client = false
+installer.max-workers = null
+installer.modern-installation = true
+installer.no-binary = null
+installer.parallel = true
+virtualenvs.create = true
+virtualenvs.in-project = true
+virtualenvs.options.always-copy = false
+virtualenvs.options.no-pip = false
+virtualenvs.options.no-setuptools = false
+virtualenvs.options.system-site-packages = false
+virtualenvs.path = "{cache-dir}/virtualenvs"  # /home/hoshino_kirby/.cache/pypoetry/virtualenvs
+virtualenvs.prefer-active-python = true
+virtualenvs.prompt = "{project_name}-py{python_version}"
 ```
 
 設定項目のうち明示的に今回指定しているのは以下です:
@@ -232,6 +259,29 @@ config setup内容は以下のコマンドで確認できます
 |`virtualenvs.prefer-active-python`|true|Use currently activated Python version to create a new virtual environment.|
 
 
+**設定方法**
+
+```zsh
+## setting
+% poetry config virtualenvs.in-project true
+% poetry config virtualenvs.create true
+% poetry config virtualenvs.prefer-active-python true
+
+## use --unset option if you want to unset
+% poetry config virtualenvs.path --unset
+```
+
+**Local specificに設定する場合**
+
+とあるレポジトリ特有の設定をしたい場合は `--local` オプションを付与してconfig設定をします. 例として,
+
+```zsh
+% poetry config virtualenvs.create false --local
+```
+
+local configurationは`poetry.toml`というファイルの中に記載されます. `.gitignore`で
+gitの管理から外しておくことが推奨です.
+
 
 ## Maintenance
 
@@ -239,6 +289,7 @@ poetryとpyenvのupdateは定期的に実行したいので, shell scriptに僕�
 
 ```bash
 #!/bin/bash
+## name: python_update
 ## Update the python env
 ## Author: RyoNak
 ## Revised: 2023-07-28
@@ -289,6 +340,70 @@ else
 fi
 ```
 
+## How to use `poetry` in your project
+### Package install: `poetry add`
+
+パッケージをインストールするときは, `poetry add` commandを用います. 
+以下のようにバージョン制約を指定いない場合, poetryは利用可能なパッケージバージョンに基づいて適したものを選びます.
+
+```
+poetry add requests pendulum
+```
+
+#### `poetry add` with version constraints
+
+Version成約をつける場合は以下のように指定します:
+
+```zsh
+# Allow >=2.0.5, <3.0.0 versions
+poetry add pendulum@^2.0.5
+
+# Allow >=2.0.5, <2.1.0 versions
+poetry add pendulum@~2.0.5
+
+# Allow >=2.0.5 versions, without upper bound
+poetry add "pendulum>=2.0.5"
+
+# Allow only 2.0.5 version
+poetry add pendulum==2.0.5
+
+# get the latest version
+poetry add pendulum@latest
+```
+
+#### `poetry add` directly from GitHub Repository
+
+GitHubのレポジトリからpackageをインストールしたい場合は以下のようなコマンドを用います
+
+```zsh
+## via https protocol
+% poetry add git+https://github.com/sdispater/pendulum.git
+
+# install a package from the develop branch
+% poetry add git+https://github.com/sdispater/pendulum.git#develop
+
+# install a package based on a specific tag(2.0.5)
+poetry add git+ssh://github.com/sdispater/pendulum.git#2.0.5
+```
+
+#### editable mode でのインストール
+
+<div style='padding-left: 2em; padding-right: 2em; border-radius: 1em; border-style:solid; border-color:#D3D3D3; background-color:#F8F8F8'>
+<p class="h4"><ins>Def: editable mode</ins></p>
+
+- `editable mode`とはコードが編集可能な状態でパッケージをインストールするオプションのこと
+- `editable mode`` でインストールされたパッケージのコードに変更を加えると, 再インストールをしなくてもそのまま実行環境に反映される
+
+</div>
+
+
+```zsh
+% poetry add --editable <package>
+```
+
+で`editable mode`でのインストールがpoetryではできます. 
+ローカルにファイルのあるパッケージをpluginとして利用するが, バグの可能性も考えて編集モードでインストールしたい場合に便利です.
+
 
 ## Tips
 ### List up pyenv-based python version
@@ -298,6 +413,7 @@ fi
 ```
 
 - `grep -P`: Pearl regular expressionを用いて検索
+- `pyenv-list`などシェルスクリプト定義しておくと便利
 
 ### poetry install when there is no project module
 

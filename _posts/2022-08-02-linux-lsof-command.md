@@ -1,7 +1,7 @@
 ---
 layout: post
 title: "lsof: list open files"
-subtitle: "Linux command 1/N"
+subtitle: "Linux command 2/N"
 author: "Ryo"
 header-style: text
 header-mask: 0.0
