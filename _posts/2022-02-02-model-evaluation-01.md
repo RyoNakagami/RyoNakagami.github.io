@@ -11,7 +11,6 @@ revise_date: 2023-03-13
 tags:
 
 - Metrics
-- 方法論
 - 統計
 - statistical inference
 ---

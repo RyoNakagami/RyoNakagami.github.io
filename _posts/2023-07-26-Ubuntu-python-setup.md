@@ -35,7 +35,7 @@ tags:
   - [Package install: `poetry add`](#package-install-poetry-add)
     - [`poetry add` with version constraints](#poetry-add-with-version-constraints)
     - [`poetry add` directly from GitHub Repository](#poetry-add-directly-from-github-repository)
-    - [editable mode でのインストール](#editable-mode-%E3%81%A7%E3%81%AE%E3%82%A4%E3%83%B3%E3%82%B9%E3%83%88%E3%83%BC%E3%83%AB)
+    - [`editable mode`でのインストール](#editable-mode%E3%81%A7%E3%81%AE%E3%82%A4%E3%83%B3%E3%82%B9%E3%83%88%E3%83%BC%E3%83%AB)
 - [Tips](#tips)
   - [List up pyenv-based python version](#list-up-pyenv-based-python-version)
   - [poetry install when there is no project module](#poetry-install-when-there-is-no-project-module)
@@ -386,7 +386,7 @@ GitHubのレポジトリからpackageをインストールしたい場合は以�
 poetry add git+ssh://github.com/sdispater/pendulum.git#2.0.5
 ```
 
-#### editable mode でのインストール
+#### `editable mode`でのインストール
 
 <div style='padding-left: 2em; padding-right: 2em; border-radius: 1em; border-style:solid; border-color:#D3D3D3; background-color:#F8F8F8'>
 <p class="h4"><ins>Def: editable mode</ins></p>
