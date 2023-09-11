@@ -1,6 +1,6 @@
 ---
 layout: post
-title: "Distinction between the terms "accomplish" and "achieve"
+title: "Distinction between the terms accomplish and achieve"
 author: "Ryo"
 header-style: text
 header-mask: 0.0

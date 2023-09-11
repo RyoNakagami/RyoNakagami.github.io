@@ -23,7 +23,8 @@ tags:
 
 - [Rename an existing Git remote?](#rename-an-existing-git-remote)
   - [How to rename the remote?](#how-to-rename-the-remote)
-- [Chaneg a Remote Repository's URL](#chaneg-a-remote-repositorys-url)
+- [Change a Remote Repository's URL](#change-a-remote-repositorys-url)
+- [Checkout a remote Git Branch](#checkout-a-remote-git-branch)
 - [References](#references)
 
 <!-- END doctoc generated TOC please keep comment here to allow auto update -->
@@ -81,7 +82,7 @@ upstream	https://github.com/RyoNakagami/github_sandbox.git (fetch)
 upstream	https://github.com/RyoNakagami/github_sandbox.git (push)
 ```
 
-## Chaneg a Remote Repository's URL
+## Change a Remote Repository's URL
 
 まずどのrepositoryもremote urlの設定から入ります
 
@@ -115,8 +116,43 @@ git@github.com:OWNER/REPOSITORY.git
 https://github.com/OWNER/REPOSITORY.git
 ```
 
+## Checkout a remote Git Branch
+
+localにて`git branch`が以下のような構成になっているとします.
+
+```zsh
+% git branch -a
+* main
+  remotes/origin/HEAD -> origin/main
+  remotes/origin/main
+  remotes/origin/hoge
+```
+
+localにはないがremoteに存在する`hoge`ブランチへcheckoutしたい場合は以下の手順を踏みます:
+
+- `git fetch`でremote branchの情報を取り込む
+- `git branch -va`でbranch情報を確認する
+- `git switch`を用いてcheckoutする
+
+```zsh
+## git fetch
+% git fetch
+
+## check branch info
+% git branch -va
+
+## checkout the branch
+% git switch hoge
+
+## this can work too
+% git switch -c hoge origin/hoge
+```
+
+checkoutする場合は`origin/hoge`ではなく, `hoge`というbranch nameだけで十分です.
+ただし, **内部挙動的には git commandがbranch nameからcheckoutしたいブランチを推測してcheckoutしている**ことに留意が必要です.
 
 
 ## References
 
 - [GitHub Docs > Managing remote repositories](https://docs.github.com/en/get-started/getting-started-with-git/managing-remote-repositories)
+- [Ryo's Tech Blog > Switch to a remote branch](https://ryonakagami.github.io/2020/12/29/git-remote-branch-operation/#getswitch-to-a-remote-branch-git-switch-version)

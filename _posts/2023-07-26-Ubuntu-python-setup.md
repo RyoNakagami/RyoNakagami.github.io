@@ -36,6 +36,7 @@ tags:
     - [`poetry add` with version constraints](#poetry-add-with-version-constraints)
     - [`poetry add` directly from GitHub Repository](#poetry-add-directly-from-github-repository)
     - [`editable mode`でのインストール](#editable-mode%E3%81%A7%E3%81%AE%E3%82%A4%E3%83%B3%E3%82%B9%E3%83%88%E3%83%BC%E3%83%AB)
+  - [Pythonコマンドの実行](#python%E3%82%B3%E3%83%9E%E3%83%B3%E3%83%89%E3%81%AE%E5%AE%9F%E8%A1%8C)
 - [Tips](#tips)
   - [List up pyenv-based python version](#list-up-pyenv-based-python-version)
   - [poetry install when there is no project module](#poetry-install-when-there-is-no-project-module)
@@ -404,6 +405,23 @@ poetry add git+ssh://github.com/sdispater/pendulum.git#2.0.5
 で`editable mode`でのインストールがpoetryではできます. 
 ローカルにファイルのあるパッケージをpluginとして利用するが, バグの可能性も考えて編集モードでインストールしたい場合に便利です.
 
+### Pythonコマンドの実行
+
+Poetryで作成した仮想環境のPythonでfileを実行したい場合, 
+
+- `poetry shell`で仮想環境を呼び出して, Pythonコマンドを実行
+- `poetry run`コマンドを頭につけて, Pythonコマンドを実行
+
+の２つがあります
+
+```zsh
+## 仮想環境を呼び出して実行
+% poetry shell
+(.venv) $ python main.py
+
+## poetry runで実行
+% poetry run python main.py
+```
 
 ## Tips
 ### List up pyenv-based python version
