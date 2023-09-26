@@ -224,6 +224,51 @@ find <search-path> -type d -empty -delete
         └── file_9.csv
 ```
 
+> Goal
+
+```zsh
+% tree
+.
+├── dir_a
+│   ├── loc_A_file_1.csv
+│   ├── loc_A_file_2.csv
+│   ├── loc_A_file_3.csv
+│   ├── loc_A_file_4.csv
+│   ├── loc_A_file_5.csv
+│   ├── loc_A_file_6.csv
+│   ├── loc_A_file_7.csv
+│   ├── loc_A_file_8.csv
+│   ├── loc_A_file_9.csv
+│   ├── loc_B_file_1.csv
+│   ├── loc_B_file_2.csv
+│   ├── loc_B_file_3.csv
+│   ├── loc_B_file_4.csv
+│   ├── loc_B_file_5.csv
+│   ├── loc_B_file_6.csv
+│   ├── loc_B_file_7.csv
+│   ├── loc_B_file_8.csv
+│   └── loc_B_file_9.csv
+└── dir_b
+    ├── loc_A_file_1.csv
+    ├── loc_A_file_2.csv
+    ├── loc_A_file_3.csv
+    ├── loc_A_file_4.csv
+    ├── loc_A_file_5.csv
+    ├── loc_A_file_6.csv
+    ├── loc_A_file_7.csv
+    ├── loc_A_file_8.csv
+    ├── loc_A_file_9.csv
+    ├── loc_B_file_1.csv
+    ├── loc_B_file_2.csv
+    ├── loc_B_file_3.csv
+    ├── loc_B_file_4.csv
+    ├── loc_B_file_5.csv
+    ├── loc_B_file_6.csv
+    ├── loc_B_file_7.csv
+    ├── loc_B_file_8.csv
+    └── loc_B_file_9.csv
+```
+
 ### solution
 
 <div style='padding-left: 2em; padding-right: 2em; border-radius: 1em; border-style:solid; border-color:#e6e6fa; background-color:#e6e6fa'>
