@@ -1,7 +1,7 @@
 ---
 layout: post
-title: "find command"
-subtitle: "条件を指定してファイルを検索する"
+title: "条件を指定してファイルを検索する"
+subtitle: "find command 1/N"
 author: "Ryo"
 header-style: text
 header-mask: 0.0
