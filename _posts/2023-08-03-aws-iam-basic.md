@@ -1,6 +1,7 @@
 ---
 layout: post
-title: "AWS Identity and Access Management 1/N"
+title: "AWS Identity and Access Management"
+subtitle : "Getting used to AWS Service 1/N"
 author: "Ryo"
 header-style: text
 header-mask: 0.0
@@ -23,6 +24,7 @@ tags:
 
 - [AWS Identity and Access Management](#aws-identity-and-access-management)
   - [IAMの仕組み](#iam%E3%81%AE%E4%BB%95%E7%B5%84%E3%81%BF)
+  - [IAMグループ](#iam%E3%82%B0%E3%83%AB%E3%83%BC%E3%83%97)
 - [IAMロール](#iam%E3%83%AD%E3%83%BC%E3%83%AB)
   - [AWS CLI で IAM ロールを使用する](#aws-cli-%E3%81%A7-iam-%E3%83%AD%E3%83%BC%E3%83%AB%E3%82%92%E4%BD%BF%E7%94%A8%E3%81%99%E3%82%8B)
 - [References](#references)
@@ -89,6 +91,17 @@ human userまたはアプリケーションがサインイン認証情報を使�
 という違いがあります. 
 
 </div>
+
+### IAMグループ
+
+- IAMグループは同じ権限を持ったユーザーの集まり
+- IAMグループ自体は, AWSへのアクセス認証情報は保持せず, 認証自体はあくまでユーザー単位で行う
+- IAMグループの目的は権限を容易に, かつ正確に管理すること
+
+複数のユーザーに同一の権限を個別に与えると, 権限付与漏れや過剰付与などミスが発生する可能性が高くなるので,
+Linuxにおけるグループと同じようにまとめて管理することを可能にした機能と理解できます. 1つのユーザーに対して複数のグループを割り当てることもできますが, 
+グループ自体を階層化して管理するということはできません.
+
 
 ## IAMロール
 
