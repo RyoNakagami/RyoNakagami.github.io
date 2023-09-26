@@ -1,6 +1,6 @@
 ---
 layout: post
-title: "条件を指定してファイルを検索する"
+title: "find & rename files & mv: 条件にあったファイルをmvし一つのディレクトリに集約する"
 subtitle: "find command 2/N"
 author: "Ryo"
 header-style: text
