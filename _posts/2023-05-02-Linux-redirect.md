@@ -133,6 +133,9 @@ tags:
 % ls exist-file non-exist-file >& fileA
 % ls exist-file non-exist-file 1> fileA 2>&1
 % ls > fileA exist-file non-exist-file 2>&1
+
+## 標準出力と標準エラーのリダイレクト先を分けるとき
+% CMD 1> result.txt 2> error.txt
 ```
 
 ### パイプ

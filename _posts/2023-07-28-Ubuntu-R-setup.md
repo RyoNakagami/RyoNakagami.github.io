@@ -241,6 +241,7 @@ References
 > Ubuntu package
 
 - [dirmngr](https://packages.ubuntu.com/focal-updates/dirmngr)
+- [ask Ubuntu > When a PPA has a package of the same name in the Ubuntu Software Center](https://askubuntu.com/questions/89862/when-a-ppa-has-a-package-of-the-same-name-in-the-ubuntu-software-center)
 
 
 > Renv

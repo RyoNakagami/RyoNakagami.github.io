@@ -1,7 +1,7 @@
 ---
 layout: post
 title: "spaceなどお行儀の悪い文字がPATHに含まれている場合の対処"
-subtitle: "Linux command 1/N"
+subtitle: "シングルクォートとダブルクォートの挙動の違い"
 author: "Ryo"
 header-style: text
 header-mask: 0.0
