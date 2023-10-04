@@ -24,8 +24,12 @@ tags:
 - [Linuxのシステム起動の流れ](#linux%E3%81%AE%E3%82%B7%E3%82%B9%E3%83%86%E3%83%A0%E8%B5%B7%E5%8B%95%E3%81%AE%E6%B5%81%E3%82%8C)
   - [initプロセスの起動](#init%E3%83%97%E3%83%AD%E3%82%BB%E3%82%B9%E3%81%AE%E8%B5%B7%E5%8B%95)
   - [ランレベル](#%E3%83%A9%E3%83%B3%E3%83%AC%E3%83%99%E3%83%AB)
-- [BIOS vs UEFI](#bios-vs-uefi)
+- [`systemd`](#systemd)
+  - [`systemd`の特徴](#systemd%E3%81%AE%E7%89%B9%E5%BE%B4)
+  - [`systemd`が最初に実行するターゲット: `sysinit.target`](#systemd%E3%81%8C%E6%9C%80%E5%88%9D%E3%81%AB%E5%AE%9F%E8%A1%8C%E3%81%99%E3%82%8B%E3%82%BF%E3%83%BC%E3%82%B2%E3%83%83%E3%83%88-sysinittarget)
+- [Appendix: BIOS vs UEFI](#appendix-bios-vs-uefi)
   - [BIOSとbootloader](#bios%E3%81%A8bootloader)
+  - [UEFI](#uefi)
   - [LinuxカーネルのBios/UEFI起動経由の確認](#linux%E3%82%AB%E3%83%BC%E3%83%8D%E3%83%AB%E3%81%AEbiosuefi%E8%B5%B7%E5%8B%95%E7%B5%8C%E7%94%B1%E3%81%AE%E7%A2%BA%E8%AA%8D)
 - [References](#references)
 
