@@ -257,7 +257,6 @@ BIOSに変わるファームウェア企画としてUEFIがあります, BIOSと
 - NVRAMに設定された優先順位に従って, ディスクのEFIパーティションに格納されているbootloaderを起動
 
 
-
 ### LinuxカーネルのBios/UEFI起動経由の確認
 
 root userでloginした後, 
