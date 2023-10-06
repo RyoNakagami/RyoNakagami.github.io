@@ -12,6 +12,7 @@ tags:
 
 - 競技プログラミング
 - データ構造
+- Python
 
 ---
 
@@ -25,6 +26,7 @@ tags:
 - [Hash Tableとは？](#hash-table%E3%81%A8%E3%81%AF)
   - [どうやってkey-valueの対応関係を実現しているのか？: hash function](#%E3%81%A9%E3%81%86%E3%82%84%E3%81%A3%E3%81%A6key-value%E3%81%AE%E5%AF%BE%E5%BF%9C%E9%96%A2%E4%BF%82%E3%82%92%E5%AE%9F%E7%8F%BE%E3%81%97%E3%81%A6%E3%81%84%E3%82%8B%E3%81%AE%E3%81%8B-hash-function)
   - [Collision in Hashing](#collision-in-hashing)
+    - [Open addressの実装](#open-address%E3%81%AE%E5%AE%9F%E8%A3%85)
   - [Hash Setの実装](#hash-set%E3%81%AE%E5%AE%9F%E8%A3%85)
 - [References](#references)
 

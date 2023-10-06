@@ -18,8 +18,34 @@ tags:
 
 <p class="h4">&nbsp;&nbsp;Table of Contents</p>
 
-<!-- START doctoc -->
-<!-- END doctoc -->
+<!-- START doctoc generated TOC please keep comment here to allow auto update -->
+<!-- DON'T EDIT THIS SECTION, INSTEAD RE-RUN doctoc TO UPDATE -->
+
+- [What I want to do?](#what-i-want-to-do)
+- [Vimのインストール](#vim%E3%81%AE%E3%82%A4%E3%83%B3%E3%82%B9%E3%83%88%E3%83%BC%E3%83%AB)
+  - [デフォルトのvim](#%E3%83%87%E3%83%95%E3%82%A9%E3%83%AB%E3%83%88%E3%81%AEvim)
+  - [Vimのインストール](#vim%E3%81%AE%E3%82%A4%E3%83%B3%E3%82%B9%E3%83%88%E3%83%BC%E3%83%AB-1)
+  - [Vimの初期設定](#vim%E3%81%AE%E5%88%9D%E6%9C%9F%E8%A8%AD%E5%AE%9A)
+- [Vimの基本](#vim%E3%81%AE%E5%9F%BA%E6%9C%AC)
+  - [コマンドモードでの操作の基本](#%E3%82%B3%E3%83%9E%E3%83%B3%E3%83%89%E3%83%A2%E3%83%BC%E3%83%89%E3%81%A7%E3%81%AE%E6%93%8D%E4%BD%9C%E3%81%AE%E5%9F%BA%E6%9C%AC)
+    - [画面のスクロール](#%E7%94%BB%E9%9D%A2%E3%81%AE%E3%82%B9%E3%82%AF%E3%83%AD%E3%83%BC%E3%83%AB)
+    - [カーソルの移動](#%E3%82%AB%E3%83%BC%E3%82%BD%E3%83%AB%E3%81%AE%E7%A7%BB%E5%8B%95)
+    - [UNDO操作](#undo%E6%93%8D%E4%BD%9C)
+  - [ex modeでの操作](#ex-mode%E3%81%A7%E3%81%AE%E6%93%8D%E4%BD%9C)
+    - [Vimを開きながらシェルコマンドを実行](#vim%E3%82%92%E9%96%8B%E3%81%8D%E3%81%AA%E3%81%8C%E3%82%89%E3%82%B7%E3%82%A7%E3%83%AB%E3%82%B3%E3%83%9E%E3%83%B3%E3%83%89%E3%82%92%E5%AE%9F%E8%A1%8C)
+    - [編集ファイル上にシェルスクリプトの結果を出力](#%E7%B7%A8%E9%9B%86%E3%83%95%E3%82%A1%E3%82%A4%E3%83%AB%E4%B8%8A%E3%81%AB%E3%82%B7%E3%82%A7%E3%83%AB%E3%82%B9%E3%82%AF%E3%83%AA%E3%83%97%E3%83%88%E3%81%AE%E7%B5%90%E6%9E%9C%E3%82%92%E5%87%BA%E5%8A%9B)
+  - [insert modeでの操作](#insert-mode%E3%81%A7%E3%81%AE%E6%93%8D%E4%BD%9C)
+  - [文字の削除](#%E6%96%87%E5%AD%97%E3%81%AE%E5%89%8A%E9%99%A4)
+    - [コマンドを用いない削除方法](#%E3%82%B3%E3%83%9E%E3%83%B3%E3%83%89%E3%82%92%E7%94%A8%E3%81%84%E3%81%AA%E3%81%84%E5%89%8A%E9%99%A4%E6%96%B9%E6%B3%95)
+    - [コマンドを用いる削除方法](#%E3%82%B3%E3%83%9E%E3%83%B3%E3%83%89%E3%82%92%E7%94%A8%E3%81%84%E3%82%8B%E5%89%8A%E9%99%A4%E6%96%B9%E6%B3%95)
+  - [コピーと貼り付け](#%E3%82%B3%E3%83%94%E3%83%BC%E3%81%A8%E8%B2%BC%E3%82%8A%E4%BB%98%E3%81%91)
+  - [文字のReplace](#%E6%96%87%E5%AD%97%E3%81%AEreplace)
+  - [文字列の検索](#%E6%96%87%E5%AD%97%E5%88%97%E3%81%AE%E6%A4%9C%E7%B4%A2)
+  - [対応するカギカッコの検索](#%E5%AF%BE%E5%BF%9C%E3%81%99%E3%82%8B%E3%82%AB%E3%82%AE%E3%82%AB%E3%83%83%E3%82%B3%E3%81%AE%E6%A4%9C%E7%B4%A2)
+  - [文字の置換](#%E6%96%87%E5%AD%97%E3%81%AE%E7%BD%AE%E6%8F%9B)
+- [References](#references)
+
+<!-- END doctoc generated TOC please keep comment here to allow auto update -->
 
 
 </div>

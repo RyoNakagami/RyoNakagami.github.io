@@ -37,7 +37,7 @@ tags:
     - [(3) git-posh like git prompt](#3-git-posh-like-git-prompt)
 - [Appendix](#appendix)
   - [chshコマンド](#chsh%E3%82%B3%E3%83%9E%E3%83%B3%E3%83%89)
-  - [パスの設定](#%E3%83%91%E3%82%B9%E3%81%AE%E8%A8%AD%E5%AE%9A)
+  - [PATHの設定](#path%E3%81%AE%E8%A8%AD%E5%AE%9A)
 - [References](#references)
 
 <!-- END doctoc generated TOC please keep comment here to allow auto update -->
