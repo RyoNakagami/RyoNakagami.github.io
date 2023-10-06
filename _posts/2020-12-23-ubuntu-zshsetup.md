@@ -577,7 +577,10 @@ chsh -s /bin/bash
 /usr/bin/zsh
 ```
 
-### パスの設定
+### PATHの設定
+
+ファイルを開いたり, コマンドを実行したりするには, そのファイルやコマンドの場所を正確に指定しないとカーネルは何を実行していいか理解することができません.
+この場所指定のことを**PATH**といいます.
 
 <div style='padding-left: 2em; padding-right: 2em; border-radius: 1em; border-style:solid; border-color:#D3D3D3; background-color:#F8F8F8'>
 <p class="h4"><ins>Def: PATHを通す</ins></p>

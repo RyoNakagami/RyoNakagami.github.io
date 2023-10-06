@@ -7,46 +7,24 @@ header-style: text
 header-mask: 0.0
 catelog: true
 mathjax: true
-purpose: 
+revise_date: 2023-10-06
 tags:
 
 - Ubuntu 20.04 LTS
 - vim
 ---
 
+<div style='border-radius: 1em; border-style:solid; border-color:#D3D3D3; background-color:#F8F8F8'>
+
+<p class="h4">&nbsp;&nbsp;Table of Contents</p>
+
+<!-- START doctoc -->
+<!-- END doctoc -->
 
 
-||概要|
-|---|---|
-|目的|Vimのインストールとチュートリアル|
-|参考|- [ubuntu manuals: vimtutor](http://manpages.ubuntu.com/manpages/bionic/man1/vimtutor.1.html)<br>- [vimエディタが（勝手に）作成する、一見、不要に見えるファイルが何をしているか ](https://nanasi.jp/articles/howto/file/seemingly-unneeded-file.html#viminfo)|
+</div>
 
-<!-- START doctoc generated TOC please keep comment here to allow auto update -->
-<!-- DON'T EDIT THIS SECTION, INSTEAD RE-RUN doctoc TO UPDATE -->
-
-- [解決したい問題](#%E8%A7%A3%E6%B1%BA%E3%81%97%E3%81%9F%E3%81%84%E5%95%8F%E9%A1%8C)
-- [Vimのインストール](#vim%E3%81%AE%E3%82%A4%E3%83%B3%E3%82%B9%E3%83%88%E3%83%BC%E3%83%AB)
-  - [デフォルトのvim](#%E3%83%87%E3%83%95%E3%82%A9%E3%83%AB%E3%83%88%E3%81%AEvim)
-  - [Vimの種類](#vim%E3%81%AE%E7%A8%AE%E9%A1%9E)
-  - [Vimのインストール](#vim%E3%81%AE%E3%82%A4%E3%83%B3%E3%82%B9%E3%83%88%E3%83%BC%E3%83%AB-1)
-- [Vimの初期設定](#vim%E3%81%AE%E5%88%9D%E6%9C%9F%E8%A8%AD%E5%AE%9A)
-- [Vim操作のチュートリアル](#vim%E6%93%8D%E4%BD%9C%E3%81%AE%E3%83%81%E3%83%A5%E3%83%BC%E3%83%88%E3%83%AA%E3%82%A2%E3%83%AB)
-  - [カーソルの移動](#%E3%82%AB%E3%83%BC%E3%82%BD%E3%83%AB%E3%81%AE%E7%A7%BB%E5%8B%95)
-  - [Normal Modeでの基本操作](#normal-mode%E3%81%A7%E3%81%AE%E5%9F%BA%E6%9C%AC%E6%93%8D%E4%BD%9C)
-  - [deleteの基本構文](#delete%E3%81%AE%E5%9F%BA%E6%9C%AC%E6%A7%8B%E6%96%87)
-  - [Motionと数字](#motion%E3%81%A8%E6%95%B0%E5%AD%97)
-  - [一括削除コマンド](#%E4%B8%80%E6%8B%AC%E5%89%8A%E9%99%A4%E3%82%B3%E3%83%9E%E3%83%B3%E3%83%89)
-  - [Cut and Paste](#cut-and-paste)
-  - [文字のReplace](#%E6%96%87%E5%AD%97%E3%81%AEreplace)
-  - [文字列の検索](#%E6%96%87%E5%AD%97%E5%88%97%E3%81%AE%E6%A4%9C%E7%B4%A2)
-  - [対応するカギカッコの検索](#%E5%AF%BE%E5%BF%9C%E3%81%99%E3%82%8B%E3%82%AB%E3%82%AE%E3%82%AB%E3%83%83%E3%82%B3%E3%81%AE%E6%A4%9C%E7%B4%A2)
-  - [文字の置換](#%E6%96%87%E5%AD%97%E3%81%AE%E7%BD%AE%E6%8F%9B)
-- [Appendix](#appendix)
-
-<!-- END doctoc generated TOC please keep comment here to allow auto update -->
-
-
-## 解決したい問題
+## What I want to do?
 
 - Vim Hugeのインストール
 - Vimの使い方を覚える
@@ -63,37 +41,34 @@ Ubuntu 20.04 LTSのデフォルトでは、`vim`はインストールされて�
 
 で確認すると、「Small version without GUI」となっています. 
 
-### Vimの種類
-
-ディストリビューションごとに最適化されたもの（vim-gtk など）や、そもそも Vim 自体の機能が制限されたもの（vim-tiny など）などが存在し、
+Vimの種類はたくさんあり, ディストリビューションごとに最適化されたもの（例: `vim-gtk`）や, 
+そもそも Vim 自体の機能が制限されたもの（例: `vim-tiny`）などが存在します.
 
 ```zsh
 % apt search vim-
 ```
 
-で様々な種類のvimのパッケージが存在することが確認できます. しかし、環境に依存しない Vim 自体の種類（タイプ）として基本的に以下の5つに大別できます。
+で様々な種類のvimのパッケージが存在することが確認できます. 
+
+<div style='padding-left: 2em; padding-right: 2em; border-radius: 1em; border-style:solid; border-color:#e6e6fa; background-color:#e6e6fa'>
+<p class="h4"><ins>Column: Vimの種類</ins></p>
+
+環境に依存しない Vim 自体の種類（タイプ）として基本的に以下の5つに大別できます:
 
 ---|---
-tiny|vim-tiny とは、最小構成でビルドされた Vim です。シンタックスハイライト（:syntax on）が有効にならなかったり、複数バッファ（:n など）、テキストオブジェクト（ciw）などが使用できない
-small|一部の機能を無効にしてコンパイル
-normal|標準の機能を有効にしてコンパイル
-big|多くの機能を有効にしてコンパイル
-huge|ほとんどの機能を有効にしてコンパイル
+`tiny`|vim-tiny とは、最小構成でビルドされた Vim です。シンタックスハイライト（:syntax on）が有効にならなかったり、複数バッファ（:n など）、テキストオブジェクト（ciw）などが使用できない
+`small`|一部の機能を無効にしてコンパイル
+`normal`|標準の機能を有効にしてコンパイル
+`big`|多くの機能を有効にしてコンパイル
+`huge`|ほとんどの機能を有効にしてコンパイル
 
-今回はとりあえず、huge な Vim さえインストールできればいいので
-
-```
-vim/focal,now 2:8.1.2269-1ubuntu5 amd64
-  Vi IMproved - enhanced vi editor
-```
-
-なお最新版は、`8.2.2911 - 2020年5月30日 [±]`ですがレポジトリ追加がめんどくさいので、apt公式でサポートされている `8.1` をインストールします. 
+</div>
 
 ### Vimのインストール
 
-インストールとversion確認は以下、
+今回はとりあえず、huge な Vim をインストールします.
 
-```
+```zsh
 % sudo apt install vim
 % vim --version
 VIM - Vi IMproved 8.1 (2018 May 18, compiled Apr 15 2020 06:40:31)
@@ -143,10 +118,11 @@ Compilation: gcc -c -I. -Iproto -DHAVE_CONFIG_H   -Wdate-time  -g -O2 -fdebug-pr
 Linking: gcc   -Wl,-Bsymbolic-functions -Wl,-z,relro -Wl,-z,now -Wl,--as-needed -o vim        -lm -ltinfo -lnsl  -lselinux  -lcanberra -lacl -lattr -lgpm -ldl     -L/usr/lib/python3.8/config-3.8-x86_64-linux-gnu -lpython3.8 -lcrypt -lpthread -ldl -lutil -lm -lm  
 ```
 
-「Huge version」となっており、いろいろな機能が含まれた状態のVimがインストールされていることが分かります。また、この時点ですでに `vi`と実行しても、新しくインストールしたvimが起動する様になっています.
+「`Huge version`」となっており, いろいろな機能が含まれた状態のVimがインストールされていることが分かります.
+また, この時点ですでに `vi`と実行しても、新しくインストールしたvimが起動する様になっています.
 
 
-## Vimの初期設定
+### Vimの初期設定
 
 Vimの設定を行うには、ターミナル上で `.vimrc` というファイルをホームディレクトリ上に作成する必要があります。
 
@@ -265,13 +241,51 @@ scriptencoding utf-8
 set nobomb
 ```
 
-## Vim操作のチュートリアル
+## Vimの基本
 
-`vimtutor`を実行するとvimでチュートリアルが起動します。チュートリアルは大きく7つの章で構成されており各章に複数のレッスンがあります。ここではレッスンの要約を紹介します.
+Vimでは, 行う作業に応じて
 
-### カーソルの移動
+- コマンドモード: 入力コマンド待機状態
+- インサートモード: テキスト入力を行うモード
+- exモード: ファイルの保存やVimの終了といった処理を行う
 
-Normal mode (`Esc`でモードを切り替え)におけるカーソルに移動は以下、
+の３つがあります.
+
+```mermaid
+sequenceDiagram
+    participant A as terminal
+    participant B as command mode
+    participant C as insert mode
+    participant D as ex mode
+    participant E as visual mode
+    
+    A-->>B: 起動 (= vim 入力)
+    B-->>C: i key 入力
+    C-->>B: esc key入力
+    B-->>D: : key 入力
+    B-->>D: : key 入力
+    B-->>E: v key 入力
+    E-->>B: esc key 入力
+    D-->>A: q key 入力
+```
+
+### コマンドモードでの操作の基本
+
+コマンドモードでは, 画面のスクロールやカーソル移動を行います.
+
+#### 画面のスクロール
+
+基本的には, `pageup`, `pagedown`コマンドで十分ですが, キー入力で操作したい場合は以下,
+
+|vi command|説明|
+|---|---|
+|`ctrl + b`|`pageup`|
+|`ctrl + f`|`pagedown`|
+
+
+#### カーソルの移動
+
+vi commandでのカーソルに移動は以下、
 
 ```
              ^
@@ -281,65 +295,172 @@ Normal mode (`Esc`でモードを切り替え)におけるカーソルに移動�
              v
 ```
 
-### Normal Modeでの基本操作
+ただし, 基本的には矢印キーでもカーソル移動できるので覚えなくても大丈夫です.
+どうしても覚えたいときは, 全角の矢印の方向と同じなのでそれで覚えれば大丈夫です.
 
----|---
-保存無しでvimを終了|Normal modeで `:q!`, then Enter を入力.
-保存してvimを終了|Normal modeで `:wq`, then Enter を入力.
-文字の消去|Normal modeで `x` を入力, または `dw`を入力
-insert modeへの切り替え|Normal modeで`i`を入力, または`Esc`による切り替え
-appendへの切り替え (文末へカーソルが移動する) |Normal modeで文字を付け足したい箇所にカーソルを合わせ`a`を入力
-カーソルの下の行にinsertで編集したい場合|Normal modeで`o`を入力
-カーソルの上の行にinsertで編集したい場合|Normal modeで`O`を入力
-行の文字を削除(行自体は残す)| Normal modeで `d$` を入力
-行の削除(行自体も消える)|`dd`
-最後に実行されたコマンドのUNDO|Normal modeで `u` を入力
-行をoriginalの状態（カーソルが合わせられる直前）まで戻す|Normal modeで `U` を入力
-UNDOのUNDO|`Ctrl + r`
-File locationとステータス確認|`Ctrl + g`
-先頭への移動|`gg`
-末尾までの移動|`G`
-ラインのコピー|Normal modeで`y`. Visual modeを`v`で立ち上げた後、選択範囲を`y`すると複数行コピーできる
+|vi command|説明|
+|---|---|
+|`h` or `←`|カーソルを左に１文字移動|
+|`j` or `↓`|カーソルを下に１文字移動|
+|`k` or `↑`|カーソルを上に１文字移動|
+|`l` or `→`|カーソルを右に１文字移動|
+|`0`|現在の行の先頭へ移動|
+|`^`|現在の行の空白を除く先頭へ移動|
+|`$`|現在の行の末尾へ移動|
+|`1G`|先頭へ移動|
+|`G`|最終行へ移動|
+|`nG`|n行へ移動|
+|`H`|先頭へ移動|
+|`gg`|先頭へ移動|
 
-### deleteの基本構文
+#### UNDO操作
 
-Vimの多くのテキスト編集コマンドは operator と motion によって構成されています. deleteを例に取ってみると、 基本構文は
+|vi command|説明|
+|---|---|
+|`u`|最後に実行されたコマンドのUNDO|
+|`U`|行をoriginalの状態（カーソルが合わせられる直前）まで戻す|
+|`Ctrl + r`|UNDOのUNDO|
+
+
+### ex modeでの操作
+
+ファイルの保存や終了はex mode経由で実施します. 代表的なコマンドは以下です.
+
+|vi command|説明|
+|---|---|
+|`:w`|ファイル名を変更せずに保存|
+|`:w!`|ファイル名を変更せずに強制保存|
+|`:w <filename>`|ファイル名を変更して保存|
+|`:q`|ファイルを保存せずに終了|
+|`:q!`|ファイルを保存せずに強制終了|
+|`:wq`|ファイルを保存して終了|
+|`:wq!`|強制的にファイルを保存&終了|
+|`:wq <filename>`|ファイル名を変更して保存&終了|
+
+<div style='padding-left: 2em; padding-right: 2em; border-radius: 1em; border-style:solid; border-color:#e6e6fa; background-color:#e6e6fa'>
+<p class="h4"><ins>Column: .swpファイル</ins></p>
+
+- `.swp`ファイルはスワップファイルと呼ばれるもの
+- アプリケーションのクラッシュに備えて, vimエディタでの編集開始時に作成され, 編集後に削除される編集情報の記録ファイル
+- vimエディタがシステムエラーで強制終了しても, `.swp`ファイルを用いてVimは保存前のデータを復元しようとしてくる
+
+</div>
+
+#### Vimを開きながらシェルコマンドを実行
+
+Vimを開きながらシェルコマンドを実行するためにはex モードで以下のコマンドを入力します
 
 ```
-d motion
+:! shell-command
 ```
 
-- `d` : delete operator
-- motion: deleteの動きの方向性を規定
+Vimの実行中にファイル保存しようと思ったときに, 書き込み権限がないことが判明し, 
+Permissionを調べたいときなどに役に立ちます.
 
----|---
-`w`| 次の単語が始まる前まで文字を削除する
-`e`| 現在の単語の末尾まで文字を消去する
-`$`| カーソル地点からline末までの文字を削除する
+#### 編集ファイル上にシェルスクリプトの結果を出力
 
-また、`d`や`x`といった削除moveは基本的には「切り取り」です.
+編集ファイル上にシェルスクリプトの結果を出力する場合は以下の手順で実行します
 
-### Motionと数字
+1. 入力したい行にカーソルを合わせる
+2. `v`コマンドなどを用いてVisual Modeに移行する
+3. `:! shell-command`を入力してEnter
 
-Motionの前に数字をつけるとそのMotionを何回繰り返すかを指示することができます.
+```
+#!/bin/bash
+ 
+echo "Hello World!"
+ 
+echo "Good Bye"
+```
 
----|---
-`2w`|2単語すすむ = 3単語目の先頭にカーソルが合わせられる
-`3e`|3単語目の末尾にカーソルが合わせられる
-`0`|lineの先頭に移動
-`d2w`|２つの単語をを消去する
-`2dd`|2行削除
+から, 4行目にカーソルを合わせてVisual Mode経由で`date`コマンドを実行すると,
+以下のように標準出力結果をinsertすることができます
 
-### 一括削除コマンド
+```
+#!/bin/bash
+ 
+echo "Hello World!"
+Tue Apr 27 04:46:09 PM JST 2021
+echo "Good Bye"
+```
 
-Normal modeで`:%d`を入力
+### insert modeでの操作
 
-### Cut and Paste
+コマンドモードからinsert modeへの移行コマンドはいくつかあります
 
-1. 対象とする行や文字にカーソルを合わせ、`x`や`dd`といった処理をする
-2. その後、Paste死体箇所までカーソルを合わせ, Normal modeで `p` を入力
+|vi command|挙動|
+|---|---|
+|`i`|カーソルの前に文字挿入|
+|`a`|カーソルの後に文字挿入|
+|`I`|カーソル行の先頭から文字挿入|
+|`A`|カーソル行の末尾から文字挿入|
+|`o`|カーソルの下に新しい行を作成し, 先頭から文字挿入|
+|`O`|カーソルの上に新しい行を作成し, 先頭から文字挿入|
 
-Pasteは何回もできる.
+
+### 文字の削除
+
+Vimにおける削除は基本的には「**切り取り**(=カット)」です.
+削除の実行の仕方は, 「コマンドを用いる方法」と「コマンドを用いない方法」の２つがあります.
+
+#### コマンドを用いない削除方法
+
+コマンドモードに応じて使用できるコマンドが異なります
+
+|key|mode|削除対象|
+|---|---|---|
+|`del`|insert mode<br>コマンドmode|カーソルのある文字を削除（感覚的には後ろ）|
+|`backspace`|insert mode|カーソルの左文字を削除|
+
+
+#### コマンドを用いる削除方法
+
+コマンドモードにて, Vimでは文字, 単語, 行の削除を実行するコマンドが用意されています.
+
+> 文字単位の削除
+
+|vi command|挙動|
+|---|---|
+|`x`|カーソルのある文字を削除|
+|`X`|カーソルの左にある文字を削除|
+|`<数値>x`|カーソル右にn文字を削除|
+|`<数値>X`|カーソル左にn文字を削除|
+
+
+> 行指向の削除
+
+|vi command|挙動|
+|---|---|
+|`J`|カーソルのある行の改行を削除|
+|`dd`|カーソル行を削除|
+|`<数値>dd`|カーソル行からn行削除|
+|`D`|カーソル位置から行末まで削除|
+|`d$`|カーソル行を削除(行自体は残す)|
+|`dG`|カーソル行から最終行まで削除|
+|`dH`|先頭からカーソル行まで削除|
+|`:%d`|exモードにて全削除|
+
+> 単語指向の削除
+
+|vi command|挙動|
+|---|---|
+|`dw`|カーソルから１単語削除|
+|`de`|カーソルから１単語削除(スペースは残す)|
+|`d<数値>w`|カーソルからn単語削除|
+|`d<数値>e`|カーソルからn単語削除(スペースは残す)|
+
+### コピーと貼り付け
+
+|vi command|挙動|
+|---|---|
+|`yy`|カーソル行をコピー|
+|`yw`|カーソルから１単語コピー|
+|`p`|カーソル位置から後ろに貼り付け|
+|`P`|カーソル位置から前に貼り付け|
+
+
+
+
 
 ### 文字のReplace
 
@@ -360,11 +481,8 @@ operator `c` と motion `e`を入力した後、文字列を入力する|「to c
 行単位で thee を theに置換したい場合は、Normal modeで`:s/thee/the` `<Enter>`で置換できる. グローバルに置換したい場合は `:s/thee/the/g` `<Enter>`. 
 
 
-## Appendix
+References
+--------------
 
-vimエディタにより自動的に作成される、 スワップファイル、バックアップファイル、viminfoファイルがどのような役割を持ったファイルであるか紹介します.（詳細は[こちら](https://nanasi.jp/articles/howto/file/seemingly-unneeded-file.html#viminfo)参照）
-
----|---
-`.swp`ファイル|.swpファイルはスワップファイルと呼ばれています。スワップファイルはアプリケーションのクラッシュに備えて、 vimエディタでの編集開始時に作成され、編集後に削除される編集情報の記録ファイルです。スワップファイルを使用していれば、vimエディタがシステムエラーで強制終了しても、 保存前のデータが失われずに済みことがあります。
-`~`ファイル|~（チルダ）ファイルバックアップファイルです。 ファイルを保存時に、変更前のファイルをもとにして作成されます。 
-`.viminfo`ファイル|.viminfo、_viminfoファイルは、コマンド、編集情報、検索情報、レジスタなどの 履歴情報を保存しているファイルです。 
+- [ubuntu manuals: vimtutor](http://manpages.ubuntu.com/manpages/bionic/man1/vimtutor.1.html)
+- [vimエディタが（勝手に）作成する、一見、不要に見えるファイルが何をしているか ](https://nanasi.jp/articles/howto/file/seemingly-unneeded-file.html#viminfo)

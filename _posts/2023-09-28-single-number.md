@@ -78,6 +78,8 @@ Each element in the array appears twice except for one element which appears onl
 - array lengthに対して, Linear runtime complexity, i.e., $O(n)$
 - extra memory spaceしか使えない, i.e.,  $O(1)$ memory space
 
+extra memory spaceしか使えないのでhash tableは今回使用できません.
+
 ## Solution
 
 「**一つの例外を除いて, intgersは偶数回(2回出現する)**」というポイントから

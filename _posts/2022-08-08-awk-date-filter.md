@@ -27,6 +27,7 @@ tags:
 - [Solution 2: 上記で得られたリストから任意の２つの日付の間のdateのみ取得](#solution-2-%E4%B8%8A%E8%A8%98%E3%81%A7%E5%BE%97%E3%82%89%E3%82%8C%E3%81%9F%E3%83%AA%E3%82%B9%E3%83%88%E3%81%8B%E3%82%89%E4%BB%BB%E6%84%8F%E3%81%AE%EF%BC%92%E3%81%A4%E3%81%AE%E6%97%A5%E4%BB%98%E3%81%AE%E9%96%93%E3%81%AEdate%E3%81%AE%E3%81%BF%E5%8F%96%E5%BE%97)
   - [変数定義](#%E5%A4%89%E6%95%B0%E5%AE%9A%E7%BE%A9)
   - [日付の大小関係を評価する](#%E6%97%A5%E4%BB%98%E3%81%AE%E5%A4%A7%E5%B0%8F%E9%96%A2%E4%BF%82%E3%82%92%E8%A9%95%E4%BE%A1%E3%81%99%E3%82%8B)
+  - [Summary](#summary)
 - [References](#references)
 
 <!-- END doctoc generated TOC please keep comment here to allow auto update -->
@@ -206,6 +207,45 @@ gensub("置換前", "置換後", "変更箇所(基本は数値, gならばすべ
 ```
 
 </div>
+
+
+### Summary
+
+これをシェルスクリプトに落とし込むと
+
+```zsh
+#!/bin/bash
+## get date list from start to end
+## Author: Ryo Nakagami
+## Revised: 2023-08-09
+
+set -e
+
+# var
+SEARCH_PATH=$1
+START=$2
+END=$3
+
+# Functions
+function args_error {
+    echo 'fatal: start or end missing, date format is yyyymmdd'
+    exit 1
+}
+
+# Main
+if [[ -z $3  ]]; then
+    args_error
+fi
+
+find $SEARCH_PATH -type f -printf "%f\n" \
+| grep -Eo '[0-9]{4}-[0-9]{2}-[0-9]{2}'\
+| awk -v start=$START -v end=$END\
+      -F= '{date=gensub("-", "", "g", $0); gsub("-", "", start); gsub("-", "", end)}\
+           (date >= start) && (date <= end)'\
+| sort
+```
+
+
 
 
 References
