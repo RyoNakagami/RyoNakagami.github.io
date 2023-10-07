@@ -26,6 +26,7 @@ tags:
   - [デフォルトのvim](#%E3%83%87%E3%83%95%E3%82%A9%E3%83%AB%E3%83%88%E3%81%AEvim)
   - [Vimのインストール](#vim%E3%81%AE%E3%82%A4%E3%83%B3%E3%82%B9%E3%83%88%E3%83%BC%E3%83%AB-1)
   - [Vimの初期設定](#vim%E3%81%AE%E5%88%9D%E6%9C%9F%E8%A8%AD%E5%AE%9A)
+  - [標準エディタをVimに設定する](#%E6%A8%99%E6%BA%96%E3%82%A8%E3%83%87%E3%82%A3%E3%82%BF%E3%82%92vim%E3%81%AB%E8%A8%AD%E5%AE%9A%E3%81%99%E3%82%8B)
 - [Vimの基本](#vim%E3%81%AE%E5%9F%BA%E6%9C%AC)
   - [コマンドモードでの操作の基本](#%E3%82%B3%E3%83%9E%E3%83%B3%E3%83%89%E3%83%A2%E3%83%BC%E3%83%89%E3%81%A7%E3%81%AE%E6%93%8D%E4%BD%9C%E3%81%AE%E5%9F%BA%E6%9C%AC)
     - [画面のスクロール](#%E7%94%BB%E9%9D%A2%E3%81%AE%E3%82%B9%E3%82%AF%E3%83%AD%E3%83%BC%E3%83%AB)
@@ -39,10 +40,9 @@ tags:
     - [コマンドを用いない削除方法](#%E3%82%B3%E3%83%9E%E3%83%B3%E3%83%89%E3%82%92%E7%94%A8%E3%81%84%E3%81%AA%E3%81%84%E5%89%8A%E9%99%A4%E6%96%B9%E6%B3%95)
     - [コマンドを用いる削除方法](#%E3%82%B3%E3%83%9E%E3%83%B3%E3%83%89%E3%82%92%E7%94%A8%E3%81%84%E3%82%8B%E5%89%8A%E9%99%A4%E6%96%B9%E6%B3%95)
   - [コピーと貼り付け](#%E3%82%B3%E3%83%94%E3%83%BC%E3%81%A8%E8%B2%BC%E3%82%8A%E4%BB%98%E3%81%91)
-  - [文字のReplace](#%E6%96%87%E5%AD%97%E3%81%AEreplace)
+- [検索と置換](#%E6%A4%9C%E7%B4%A2%E3%81%A8%E7%BD%AE%E6%8F%9B)
   - [文字列の検索](#%E6%96%87%E5%AD%97%E5%88%97%E3%81%AE%E6%A4%9C%E7%B4%A2)
-  - [対応するカギカッコの検索](#%E5%AF%BE%E5%BF%9C%E3%81%99%E3%82%8B%E3%82%AB%E3%82%AE%E3%82%AB%E3%83%83%E3%82%B3%E3%81%AE%E6%A4%9C%E7%B4%A2)
-  - [文字の置換](#%E6%96%87%E5%AD%97%E3%81%AE%E7%BD%AE%E6%8F%9B)
+  - [文字列の置換](#%E6%96%87%E5%AD%97%E5%88%97%E3%81%AE%E7%BD%AE%E6%8F%9B)
 - [References](#references)
 
 <!-- END doctoc generated TOC please keep comment here to allow auto update -->
@@ -267,6 +267,29 @@ scriptencoding utf-8
 set nobomb
 ```
 
+### 標準エディタをVimに設定する
+
+標準エディタを切り替える場合は以下のコマンドを入力します:
+
+```zsh
+% sudo update-alternatives --config editor
+[sudo] password for ryo_billiken: 
+There are 5 choices for the alternative editor (providing /usr/bin/editor).
+
+  Selection    Path               Priority   Status
+------------------------------------------------------------
+* 0            /bin/nano           40        auto mode
+  1            /bin/ed            -100       manual mode
+  2            /bin/nano           40        manual mode
+  3            /usr/bin/code       0         manual mode
+  4            /usr/bin/nvim       30        manual mode
+  5            /usr/bin/vim.tiny   15        manual mode
+
+Press <enter> to keep the current choice[*], or type selection number: 4
+update-alternatives: using /usr/bin/nvim to provide /usr/bin/editor (editor) in manual mode
+```
+
+
 ## Vimの基本
 
 Vimでは, 行う作業に応じて
@@ -484,28 +507,40 @@ Vimにおける削除は基本的には「**切り取り**(=カット)」です.
 |`p`|カーソル位置から後ろに貼り付け|
 |`P`|カーソル位置から前に貼り付け|
 
+## 検索と置換
 
-
-
-
-### 文字のReplace
-
----|---
-operator `r` と変換したい文字の入力によって行う|「at the cursor」ベース
-operator `c` と motion `e`を入力した後、文字列を入力する|「to change until the end of a word」ベース
+検索と置換はどちらもex modeで実行します. 
 
 ### 文字列の検索
 
-文字列を検索したい場合はNormal modeで`/`を入力し、文字列を入力します。その後, Enterを入力すると検索できます。同じ文字列を検索したい場合は`n`を入力、逆方向で検索を欠けたい場合は`N`を入力.
+Vimで文字列を検索する場合, 先頭から検索するのか, 末尾から検索するのか, に応じてコマンドが異なります
 
-### 対応するカギカッコの検索
+|vi command|説明|
+|---|---|
+|`/searchword`|カーソルのある位置から末尾に向かって検索|
+|`?searchword`|カーソルのある位置から先頭に向かって検索|
 
-`(`, `[`, `{`のそれぞれに対応する`)`, `]`, `}`を検索したい場合は。カーソルを対応を検索したいカギカッコに合わせ `%` を入力.
+検索コマンドは１値度実行すると最初にヒットしたキーワードで止まります. 続けて検索したい場合は,
 
-### 文字の置換
+- `n`を入力: 同じ方向に向かって検索
+- `N`を入力: 逆の方向に向かって検索
 
-行単位で thee を theに置換したい場合は、Normal modeで`:s/thee/the` `<Enter>`で置換できる. グローバルに置換したい場合は `:s/thee/the/g` `<Enter>`. 
 
+### 文字列の置換
+
+置換は, `sed`コマンドと似たsyntaxで行います. 
+`unko`という文字列を`kirby`という文字列に置換したい場合, 置換範囲を指定して以下のように実行します
+
+```bash
+## ファイル全体を対象に先頭から見つけた１つ目を置換
+:%s/unko/kirby/
+
+## ファイル全体を対象に一括置換
+:%s/unko/kirby/g
+
+## ファイルの１行目から５行目を対象に一括置換
+:1,5s/unko/kirby/g
+```
 
 References
 --------------
