@@ -1,7 +1,7 @@
 ---
 layout: post
 title: "SRE, SLIs, SLOs, SLAs?"
-title: "Linux Boot Sequence 1/N"
+subtitle: "MLOps tutorial 1/N"
 author: "Ryo"
 header-style: text
 header-mask: 0.0
