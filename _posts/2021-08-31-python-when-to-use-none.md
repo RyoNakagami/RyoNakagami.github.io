@@ -1,6 +1,6 @@
 ---
 layout: post
-title: "A Clockwork Orange, Anthony Burgess"
+title: "PythonにおけるNoneとは？いつつかうのか？"
 subtitle: "Pythonista Tips 2/N"
 author: "Ryo"
 header-style: text
