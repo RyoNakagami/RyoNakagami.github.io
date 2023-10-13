@@ -10,7 +10,7 @@ mathjax: true
 revise_date: 2023-07-28
 tags:
 
-- Ubuntu 22.04.2 LTS
+- Ubuntu 22.04 LTS
 - Shell
 
 ---

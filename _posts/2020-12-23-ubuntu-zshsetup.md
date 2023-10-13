@@ -11,7 +11,7 @@ revise_date: 2023-07-27
 tags:
 
 - Ubuntu 20.04 LTS
-- Ubuntu 22.04.2 LTS
+- Ubuntu 22.04 LTS
 - Shell
 ---
 

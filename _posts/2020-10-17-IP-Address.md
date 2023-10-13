@@ -9,7 +9,7 @@ mathjax: true
 catelog: true
 revise_date: 2023-04-13
 tags:
-  - ネットワーク
+  - Network
 ---
 
 <div style='border-radius: 1em; border-style:solid; border-color:#D3D3D3; background-color:#F8F8F8'>

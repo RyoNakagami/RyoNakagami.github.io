@@ -10,7 +10,7 @@ mathjax: true
 revise_date: 2023-10-08
 tags:
 
-- python
+- Python
 - 競技プログラミング
 ---
 

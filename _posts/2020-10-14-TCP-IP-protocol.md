@@ -9,7 +9,7 @@ mathjax: true
 catelog: true
 revise_date: 2023-04-07
 tags:
-  - ネットワーク
+  - Network
 ---
 
 <div style='border-radius: 1em; border-style:solid; border-color:#D3D3D3; background-color:#F8F8F8'>
@@ -93,15 +93,30 @@ TCP/IP階層モデルは５つの階層に分かれており, 上に行くほど
   - エラー検出/再送などの伝送制御を担い通信の品質を保証する役割をもつ層
 - 第３層: ネットワーク層
   - エンドシステム間のデータ伝送を実現するために, ルーティング(通信経路選択)や中継などを行う役割をもつ層
+  - ルーターが関係
 - 第２層: データリンク層
   - 隣接ノード間の伝送制御手順(誤り検出，再送制御など)を提供する役割をもつ層
   - ネットワークに直接接続されたノード間を伝送できるようにする役割をもつ
 - 第１層: 物理層
   - データを信号に, 信号をデータに変換する層
   - 変換方法は通信媒体に依存するため, 特定のプロトコルは決められていない
+  - ケーブルやNIC(Network Interface Card)が関係
 
+## TCP/IP階層モデルにおけるデータ送受信
+### データの送信: encapsulation process
 
+<img src="https://github.com/ryonakimageserver/omorikaizuka/blob/master/%E6%8A%80%E8%A1%93%E8%80%85%E8%A9%A6%E9%A8%93/20201014_TCPIP_data_sending.png?raw=true">
 
+データを送信する場合, Application層から物理層の方向へデータが渡されていきます. この際, 
+そのまま渡すのでなく上の図のようにheaderやtrailerが付与されます. 上の例では
+
+- TCP heaeder: sourceやdestination port番号を付与
+- IP heaeder: sourceやdestinationのIP addressを付与
+- ETHERNET header: sourceやdestinationのMAC addressを付与
+- ETHERNET trailer: error checking infoを付与
+
+これらの情報を付与した後, 物理層にデータが渡されてデータが送信されます.
+この送信の仕組みを「**カプセル化**」(=encapsulation process)と呼びます.
 
 
 ## Appendix: コンピューターネットワークの種類
@@ -125,16 +140,7 @@ TCP/IP階層モデルは５つの階層に分かれており, 上に行くほど
 </div>
 
 
-
-
-
 ## References
 
-> 関連ポスト
-
-
-
-
-> 書籍
-
 - [TCP/IPの絵本 第2版 ネットワークを学ぶ新しい9つの扉, 株式会社アンク 著](https://www.shoeisha.co.jp/book/detail/9784798155159)
+- [TCP/IP Model Explained | Cisco CCNA 200-301](https://www.youtube.com/watch?v=OTwp3xtd4dg)
