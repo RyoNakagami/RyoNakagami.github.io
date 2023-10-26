@@ -1,7 +1,7 @@
 ---
 layout: post
 title: "Working day by day toward what you want to be"
-subtitle: "ポケットの中に名言を 1/N"
+subtitle: "Today's words and phrases 1/N"
 author: "Ryo"
 header-style: text
 header-mask: 0.0

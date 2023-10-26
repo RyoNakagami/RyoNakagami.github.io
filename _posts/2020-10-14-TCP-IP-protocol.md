@@ -20,6 +20,8 @@ tags:
 - [TCP/IPとは？](#tcpip%E3%81%A8%E3%81%AF)
   - [通信プロトコルの基本](#%E9%80%9A%E4%BF%A1%E3%83%97%E3%83%AD%E3%83%88%E3%82%B3%E3%83%AB%E3%81%AE%E5%9F%BA%E6%9C%AC)
   - [TCP/IP階層モデル](#tcpip%E9%9A%8E%E5%B1%A4%E3%83%A2%E3%83%87%E3%83%AB)
+- [TCP/IP階層モデルにおけるデータ送受信](#tcpip%E9%9A%8E%E5%B1%A4%E3%83%A2%E3%83%87%E3%83%AB%E3%81%AB%E3%81%8A%E3%81%91%E3%82%8B%E3%83%87%E3%83%BC%E3%82%BF%E9%80%81%E5%8F%97%E4%BF%A1)
+  - [データの送信: encapsulation process](#%E3%83%87%E3%83%BC%E3%82%BF%E3%81%AE%E9%80%81%E4%BF%A1-encapsulation-process)
 - [Appendix: コンピューターネットワークの種類](#appendix-%E3%82%B3%E3%83%B3%E3%83%94%E3%83%A5%E3%83%BC%E3%82%BF%E3%83%BC%E3%83%8D%E3%83%83%E3%83%88%E3%83%AF%E3%83%BC%E3%82%AF%E3%81%AE%E7%A8%AE%E9%A1%9E)
 - [References](#references)
 

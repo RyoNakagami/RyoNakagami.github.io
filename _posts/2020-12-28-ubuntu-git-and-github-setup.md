@@ -5,20 +5,16 @@ subtitle: "Ubuntu Desktop環境構築 Part 13"
 author: "Ryo"
 catelog: true
 mathjax: true
-revise_date: 2022-08-01
+revise_date: 2023-10-01
 header-mask: 0.0
 header-style: text
 tags:
 
 - Ubuntu 20.04 LTS
+- Ubuntu 22.04 LTS
 - git
 
 ---
-
-
----|---
-Goal|・ Gitの概念の理解<br>・ Gitのインストールと初期設定<br>・ GitHubの個人アカウントとの連携
-Requirements|・ GitHubの個人アカウント作成済み<br>・ Visual Studio Codeインストール済み
 
 
 <div style='border-radius: 1em; border-style:solid; border-color:#D3D3D3; background-color:#F8F8F8'>
@@ -28,6 +24,7 @@ Requirements|・ GitHubの個人アカウント作成済み<br>・ Visual Studio
 <!-- START doctoc generated TOC please keep comment here to allow auto update -->
 <!-- DON'T EDIT THIS SECTION, INSTEAD RE-RUN doctoc TO UPDATE -->
 
+- [Requirements](#requirements)
 - [What is Git?](#what-is-git)
   - [Local VCS vs Distributed VCS](#local-vcs-vs-distributed-vcs)
   - [What is Git Repository?](#what-is-git-repository)
@@ -41,17 +38,12 @@ Requirements|・ GitHubの個人アカウント作成済み<br>・ Visual Studio
   - [Setup](#setup)
     - [`~/.gitconfig`の設定](#gitconfig%E3%81%AE%E8%A8%AD%E5%AE%9A)
   - [commit templateの作成](#commit-template%E3%81%AE%E4%BD%9C%E6%88%90)
-- [4. GitHubの個人アカウントとの連携(非推奨)](#4-github%E3%81%AE%E5%80%8B%E4%BA%BA%E3%82%A2%E3%82%AB%E3%82%A6%E3%83%B3%E3%83%88%E3%81%A8%E3%81%AE%E9%80%A3%E6%90%BA%E9%9D%9E%E6%8E%A8%E5%A5%A8)
-  - [新しい SSH キーを生成して ssh-agent に追加する](#%E6%96%B0%E3%81%97%E3%81%84-ssh-%E3%82%AD%E3%83%BC%E3%82%92%E7%94%9F%E6%88%90%E3%81%97%E3%81%A6-ssh-agent-%E3%81%AB%E8%BF%BD%E5%8A%A0%E3%81%99%E3%82%8B)
-  - [GitHub アカウントへの新しい SSH キーの追加](#github-%E3%82%A2%E3%82%AB%E3%82%A6%E3%83%B3%E3%83%88%E3%81%B8%E3%81%AE%E6%96%B0%E3%81%97%E3%81%84-ssh-%E3%82%AD%E3%83%BC%E3%81%AE%E8%BF%BD%E5%8A%A0)
-  - [SSH 接続をテストする](#ssh-%E6%8E%A5%E7%B6%9A%E3%82%92%E3%83%86%E3%82%B9%E3%83%88%E3%81%99%E3%82%8B)
-  - [ssh接続を使ったgit clone](#ssh%E6%8E%A5%E7%B6%9A%E3%82%92%E4%BD%BF%E3%81%A3%E3%81%9Fgit-clone)
-- [5. GPGキーの登録](#5-gpg%E3%82%AD%E3%83%BC%E3%81%AE%E7%99%BB%E9%8C%B2)
+- [GPGキーの登録](#gpg%E3%82%AD%E3%83%BC%E3%81%AE%E7%99%BB%E9%8C%B2)
   - [GPGキーの生成とGitHubへの登録](#gpg%E3%82%AD%E3%83%BC%E3%81%AE%E7%94%9F%E6%88%90%E3%81%A8github%E3%81%B8%E3%81%AE%E7%99%BB%E9%8C%B2)
   - [Git へ GPG キーを伝える](#git-%E3%81%B8-gpg-%E3%82%AD%E3%83%BC%E3%82%92%E4%BC%9D%E3%81%88%E3%82%8B)
   - [`.zshrc`への登録](#zshrc%E3%81%B8%E3%81%AE%E7%99%BB%E9%8C%B2)
   - [コミットに署名する](#%E3%82%B3%E3%83%9F%E3%83%83%E3%83%88%E3%81%AB%E7%BD%B2%E5%90%8D%E3%81%99%E3%82%8B)
-- [6. BFG Repo-Cleanerのインストール](#6-bfg-repo-cleaner%E3%81%AE%E3%82%A4%E3%83%B3%E3%82%B9%E3%83%88%E3%83%BC%E3%83%AB)
+- [Appendix: BFG Repo-Cleanerのインストール](#appendix-bfg-repo-cleaner%E3%81%AE%E3%82%A4%E3%83%B3%E3%82%B9%E3%83%88%E3%83%BC%E3%83%AB)
   - [BFG Repo-Cleanerとは？](#bfg-repo-cleaner%E3%81%A8%E3%81%AF)
   - [BFGのインストール](#bfg%E3%81%AE%E3%82%A4%E3%83%B3%E3%82%B9%E3%83%88%E3%83%BC%E3%83%AB)
 - [References](#references)
@@ -60,6 +52,11 @@ Requirements|・ GitHubの個人アカウント作成済み<br>・ Visual Studio
 
 
 </div>
+
+## Requirements
+
+- GitHubの個人アカウント作成済み
+- Visual Studio Codeインストール済み
 
 ## What is Git?
 
@@ -387,126 +384,7 @@ git commit を実行したときにDefaultのメッセージとして使うた�
 % git config --global commit.template ~/.gitmessage.txt
 ```
 
-## 4. GitHubの個人アカウントとの連携(非推奨)
-
-SSH プロトコルを利用してGitHubへの接続環境を構築します.SSH をセットアップする際には,SSH キーを生成し,ssh-agent に追加し,それから キーを自分の GitHubアカウントに追加します. SSH キーを ssh-agent に追加することで,パスフレーズの利用を通じて SSH キーに追加のセキュリティのレイヤーを持たせることができます.
-
-> REMARKS
-
-- SSH接続ではなく,アクセストークンを用いた接続設定を推奨です
-- アクセストークンを用いた接続設定は[Ryo's Tech Blog > 2021-04-25: Githubパスワード認証廃止への対応](https://ryonakagami.github.io/2021/04/25/github-token-authentication/)にまとめてあります
-
-### 新しい SSH キーを生成して ssh-agent に追加する
-
-`ssh-keygen`というコマンドを用いてsshキーを作成します.`which ssh-keygen`を実行して,コマンドが存在するか確かめます.
-
-```zsh
-% which ssh-keygen
-usr/bin/ssh-keygen
-```
-
-次にsshキーを作成します.メールアドレスは自分のgit configで用いたメールアドレスを用いてください.
-
-```zsh
-% ssh-keygen -t ed25519 -C "your_email@example.com"
-> Generating public/private ed25519 key pair.
-```
-
-Enter a file in which to save the key」というメッセージが表示されたら,Enter キーを押します. これにより,デフォルトのファイル場所が受け入れられます.
-
-```
-> Enter a file in which to save the key (/home/you/.ssh/id_ed25519): [Press enter]
-```
-
-プロンプトで,安全なパスフレーズを入力します. 
-
-```
-> Enter passphrase (empty for no passphrase): [Type a passphrase]
-> Enter same passphrase again: [Type passphrase again]
-```
-
-仮に`~/.ssh/id_ed25519`というキーが発行された場合,Permissionを変更しておく
-
-```zsh
-% chmod 600 ~/.ssh/id_ed25519.pub
-```
-
-`~/.ssh/config`ファイルも編集する.
-
-```
-Host github
-  HostName github.com
-  User git
-  Port 22
-  IdentityFile ~/.ssh/id_ed25519`
-  IdentitiesOnly yes
-  TCPKeepAlive yes
-```
-
-ここの設定は以下のコマンドに対応します.
-
-```
-% git clone [User]@[Host]:[リポジトリアドレス]
-```
-
-|設定項目|説明|
-|---|---|
-|Host|ホスト名, ssh hogehogeでhogehogeとなるところ|
-|User|ログインユーザー, githubの場合はgit|
-|Port| port, default 22|
-|HostName|hostのアドレス, github.com|
-|IdentityFile|秘密鍵のPATHを指定する|
-|TCPKeepAlive|持続的接続の設定|
-|IdentitiesOnly|使用する秘密鍵をIdentityFileだけにします.デフォルトではnoであり,noだと全ての秘密鍵を試そうとします.|
-
-### GitHub アカウントへの新しい SSH キーの追加
-
-SSH 公開鍵をGitHubに登録するところまでを目指します.そのためまず自分が作成したsshキーの公開鍵の内容を取得する必要があります.具体的にはクリップボードへのコピーです.
-
-```zsh
-% sudo apt install xclip
-% xclip -selection clipboard < ~/.ssh/id_ed25519.pub
-```
-
-1. その後,GitHubにwebブラウザでアクセスし,`Settings`を変更します（Settingsをクリック）.
-2. ユーザ設定サイドバーでSSH and GPG keys（SSH及びGPGキー）をクリックします.
-3. `[New SSH key]` または `[Add SSH key]` をクリックします. `[Title]` フィールドで,新しいキーを説明するラベルを追加します. たとえば個人の Ubuntu Desktop を使っている場合,このキーを "Personal Ubuntu Desktop" などと呼ぶことが考えられます.
-4. 次に,クリップボードにコピーしたキーを `[Key]` フィールドに貼り付けます. 
-
-<img src="https://docs.github.com/assets/images/help/settings/ssh-key-paste.png">
-
-その後,`[Add SSH key]` をクリックして完了です.
-
-### SSH 接続をテストする
-
-```
-% ssh -T git@github.com
-```
-
-コマンド実行後以下のようなメッセージが出たら接続テスト成功です.
-
-```
-> Hi username! You've successfully authenticated, but GitHub does not
-> provide shell access
-```
-
-### ssh接続を使ったgit clone
-
-ssh接続のユースケースの一つとして,private repositoryのgit cloneです.
-
-```
-% git clone git@github.com:RyoNakagami/sample_size.git
-Cloning into 'sample_size'...
-remote: Enumerating objects: 8, done.
-remote: Counting objects: 100% (8/8), done.
-remote: Compressing objects: 100% (6/6), done.
-remote: Total 8 (delta 0), reused 8 (delta 0), pack-reused 0
-Receiving objects: 100% (8/8), done.
-```
-
-ただし,GitHubとしてはSSH接続ではなくHTTPS接続による方法が推奨されています.プロジェクトなどで特段の制限や方針がなければHTTPSを使うことを検討してください.
-
-## 5. GPGキーの登録
+## GPGキーの登録
 
 Gitは, メールアドレスを使って誰がAuthorなのか,Committerであるかを判別するしています.
 しかし, メールアドレスは各自がlocalの `git config` で設定できる属性のため, 簡単になりすましができてしまうという
@@ -621,7 +499,7 @@ GPG キー ID は 3AA5C34371567BD2の場合,
 # 署名済みのタグを検証する
 ```
 
-## 6. BFG Repo-Cleanerのインストール
+## Appendix: BFG Repo-Cleanerのインストール
 ### BFG Repo-Cleanerとは？
 
 BFGは, git-filter-branchと同様にGit Repository Historyから機密データ(例:パスワードや認証情報、その他のプライベートなデータ)をクレンジングしてくれるツールです.オープンソースコミュニティによって構築およびメンテナンスされています.
@@ -659,25 +537,18 @@ Replace all passwords listed in a file (prefix lines 'regex:' or 'glob:' if requ
 ```zsh
 % bfg --replace-text passwords.txt  my-repo.git
 ```
-## References
 
-> 関連ポスト
+
+
+References
+------
+
 
 - [Ryo's Tech Blog > 2021-04-25: Githubパスワード認証廃止への対応](https://ryonakagami.github.io/2021/04/25/github-token-authentication/)
 - [Ryo's Tech Blog > 2020-12-23: Git in Zshの設定](https://ryonakagami.github.io/2020/12/23/ubuntu-zshsetup/)
-
-> Git公式ドキュメント
-
 - [Git Getting Started](https://git-scm.com/book/en/v2/Getting-Started-First-Time-Git-Setup)
-
-
-> GitHub公式ドキュメント
-
 - [GitHub Docs > 新しい GPG キーを生成する](https://docs.github.com/ja/authentication/managing-commit-signature-verification/generating-a-new-gpg-key)
 - [GitHub Docs > Git へ署名キーを伝える](https://docs.github.com/ja/authentication/managing-commit-signature-verification/telling-git-about-your-signing-key)
-
-> オンラインマテリアル
-
 - [Conventional Commits](https://www.conventionalcommits.org/en/v1.0.0/)
 - [Gitの内側 - Gitオブジェクト](https://git-scm.com/book/ja/v2/Git%E3%81%AE%E5%86%85%E5%81%B4-Git%E3%82%AA%E3%83%96%E3%82%B8%E3%82%A7%E3%82%AF%E3%83%88)
 - [BFG Repo-Cleaner](https://rtyley.github.io/bfg-repo-cleaner/)
