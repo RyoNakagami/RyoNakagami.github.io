@@ -26,11 +26,6 @@ tags:
 - [Chapter 1: The River Bank](#chapter-1-the-river-bank)
 - [What is animal-etiquette?](#what-is-animal-etiquette)
 - [Words and Phrases](#words-and-phrases)
-  - [seclusion](#seclusion)
-  - [As is always the case](#as-is-always-the-case)
-  - [row (noun)](#row-noun)
-  - [dull (verb)](#dull-verb)
-  - [streak (noun)](#streak-noun)
 - [References](#references)
 
 <!-- END doctoc generated TOC please keep comment here to allow auto update -->
@@ -78,7 +73,23 @@ Spring is usually associated with a sense of renewal, growth, and the arrival of
 
 **Divine discontent** is a phrase used to describe a sense of restlessness or 
 dissatisfaction with the current state of affairs, often with the implication 
-that this discontent is motivated by a desire for positive change or improvement.
+that this discontent is moti<!-- START doctoc generated TOC please keep comment here to allow auto update -->
+<!-- DON'T EDIT THIS SECTION, INSTEAD RE-RUN doctoc TO UPDATE -->
+**Table of Contents**  *generated with [DocToc](https://github.com/thlorenz/doctoc)*
+
+- [What is The Wind in the Willows by Kenneth Grahame?](#what-is-the-wind-in-the-willows-by-kenneth-grahame)
+- [Chapter 1: The River Bank](#chapter-1-the-river-bank)
+- [What is animal-etiquette?](#what-is-animal-etiquette)
+- [Words and Phrases](#words-and-phrases)
+  - [seclusion](#seclusion)
+  - [As is always the case](#as-is-always-the-case)
+  - [row (noun)](#row-noun)
+  - [dull (verb)](#dull-verb)
+  - [streak (noun)](#streak-noun)
+- [References](#references)
+
+<!-- END doctoc generated TOC please keep comment here to allow auto update -->
+vated by a desire for positive change or improvement.
 
 <div style='padding-left: 2em; padding-right: 2em; border-radius: 1em; border-style:solid; border-color:#e6e6fa; background-color:#e6e6fa'>
 
@@ -306,8 +317,6 @@ The Mole is aware of these rules and follows them by not making any comment abou
 |caress|to touch sth/sb gently|
 |chukle|to laugh quietly|
 
-### seclusion
-
 <div style='padding-left: 2em; padding-right: 2em; border-radius: 1em; border-style:solid; border-color:#D3D3D3; background-color:#F8F8F8'>
 <p class="h4"><ins>Def: seclusion</ins></p>
 
@@ -320,18 +329,25 @@ Usage examples are followings:
 - the seclusion and peace of the island
 - He spends much of his time in seclusion in the mountains
 
-### As is always the case
+<div style='padding-left: 2em; padding-right: 2em; border-radius: 1em; border-style:solid; border-color:#D3D3D3; background-color:#F8F8F8'>
+<p class="h4"><ins>Def: As is always the case</ins></p>
 
 The expression "as is always the case" is typically used to indicate that a particular outcome or situation is consistent with what usually happens or is expected. It suggests that the current situation or result is in line with a pattern or a common occurrence.
+
+</div>
 
 For example, if someone were to say, "The traffic is terrible, as is always the case on Fridays," they are expressing that heavy traffic on Fridays is a recurring and expected occurrence.
 
 This expression is often used to emphasize the predictability or regularity of a situation or outcome based on past experiences or patterns.
 
 
-### row (noun)
+<div style='padding-left: 2em; padding-right: 2em; border-radius: 1em; border-style:solid; border-color:#D3D3D3; background-color:#F8F8F8'>
+<p class="h4"><ins>Def: row (noun)</ins></p>
 
 row means a serious disagreement between peopole, organization, etc. about something
+
+</div>
+
 The usage example is as follows:
 
 - A row has broken out over education
@@ -339,19 +355,25 @@ The usage example is as follows:
 - He had a row with his son
 
 
-### dull (verb)
+<div style='padding-left: 2em; padding-right: 2em; border-radius: 1em; border-style:solid; border-color:#D3D3D3; background-color:#F8F8F8'>
+<p class="h4"><ins>Def: dull (verb) </ins></p>
 
 verb dull means to become or be made weaker or less sever.
+
+</div>
+
 The usage example is as follows:
 
 - the edge of their hunger was somewhat dulled
 - The tablets they gave him dulled the pain for a while
 - His eyes dulled and he slumped to the ground
 
-
-### streak (noun)
+<div style='padding-left: 2em; padding-right: 2em; border-radius: 1em; border-style:solid; border-color:#D3D3D3; background-color:#F8F8F8'>
+<p class="h4"><ins>Def: streak (noun)</ins></p>
 
 streak means a long thin mark or line that is different colour from the surface it is on
+
+</div>
 
 - I am looking at a streak of bubbles that I see travelling along the surface of the water
 - There was a streak of blood on his face
