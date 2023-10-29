@@ -1,12 +1,13 @@
 ---
 layout: post
 title: "文字コード > ギリシア文字"
+subtitle: "文字コードに親しむ 1/N"
 author: "Ryo"
 header-style: text
 header-mask: 0.0
 catelog: true
 mathjax: true
-revise_date: 2020-10-10
+revise_date: 2020-10-11
 purpose: 
 tags:
 
