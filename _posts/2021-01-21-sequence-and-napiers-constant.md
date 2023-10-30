@@ -1,7 +1,7 @@
 ---
 layout: post
 title: "自然対数の底ネイピア数とバウンド"
-subtitle: "確率と数学ドリル 1/N"
+subtitle: "確率と数学ドリル 3/N"
 author: "Ryo"
 catelog: true
 mathjax: true

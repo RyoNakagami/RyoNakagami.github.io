@@ -11,7 +11,7 @@ revise_date: 2023-10-07
 tags:
 
 - 競技プログラミング
-- architecture
+- データ構造
 - Python
 
 ---

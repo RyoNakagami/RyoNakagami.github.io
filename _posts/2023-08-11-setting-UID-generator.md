@@ -1,7 +1,7 @@
 ---
 layout: post
 title: "Universally Unique ID Generatorの設計"
-subtitle: "System Design 1/N"
+subtitle: "System Design 2/N"
 author: "Ryo"
 header-style: text
 header-mask: 0.0

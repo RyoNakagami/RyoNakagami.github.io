@@ -167,7 +167,7 @@ The Mole is moving around energetically and with a sense of purpose, exploring m
 For example, 
 
 - the entire household ran hither and thither
-- people began rushingh hither and thither
+- people began rushing hither and thither
 
 <div style='padding-left: 2em; padding-right: 2em; border-radius: 1em; border-style:solid; border-color:#e6e6fa; background-color:#e6e6fa'>
 
@@ -258,6 +258,13 @@ This exclamation is used to playfully chide or tease someone for their behavior.
 
 The character is moving towards or reaching for the food or provisions. This suggests that the character is interested in joining in and partaking in the eating.
 
+<div style='padding-left: 2em; padding-right: 2em; border-radius: 1em; border-style:solid; border-color:#e6e6fa; background-color:#e6e6fa'>
+
+This was an impromptu affair
+
+</div>
+
+The phrase "This was an impromptu affair" suggests that the event or situation being referred to was spontaneous, unplanned, and not prearranged. It indicates that the affair or activity took place without prior notice or preparation. It was likely organized or happened on the spur of the moment, without a formal or structured arrangement. Impromptu affairs are often characterized by their informality and lack of prior thought or organization.
 
 
 <div style='padding-left: 2em; padding-right: 2em; border-radius: 1em; border-style:solid; border-color:#e6e6fa; background-color:#e6e6fa'>
