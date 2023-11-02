@@ -153,7 +153,7 @@ $$
 <div style='padding-left: 2em; padding-right: 2em; border-radius: 1em; border-style:solid; border-color:#e6e6fa; background-color:#e6e6fa'>
 <p class="h4"><ins>balancing Score</ins></p>
 
-$\mathbb E[D_i|X_i] \equiv p(X_i)$ のとき, 
+$ E[D_i|X_i] \equiv p(X_i)$ のとき, 
 
 $$
 D_i \perp X_i|p(X_i)
@@ -163,7 +163,7 @@ $$
 
 </div>
 
-この証明は$\Pr(D_i|X_i, p(X_i)) = \Pr(D_i|p(X_i))$の証明ができればOkです. なぜなら
+この証明は$Pr(D_i|X_i, p(X_i)) = \Pr(D_i|p(X_i))$の証明ができればOkです. なぜなら
 
 $$
 \begin{align*}
