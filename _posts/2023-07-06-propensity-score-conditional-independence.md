@@ -111,7 +111,7 @@ $$
 
 ## CIAが成立するならばなぜCounter-factualが導けるのか？
 
-$E[Y_1 | D_i=0]$をなぜ推定できるようになるのか簡単に以下示します:
+$E[Y_1 \vert D_i=0]$をなぜ推定できるようになるのか簡単に以下示します:
 
 $S_0$をunteatedの特徴量$X_i$の特徴量空間としたときに
 
@@ -142,9 +142,9 @@ $$
 \Pr(X_i=x |D_i = 0) = 0
 $$
 
-は問題になりません. なぜならば, ATUを推定したいときのpopulationは $D_i = 0$の従業員ですが, $Pr(X_i=x |D_i = 0) = 0$のような特徴量水準$x$はそのpopulationに属していないからです.
+は問題になりません. なぜならば, ATUを推定したいときのpopulationは $D_i = 0$の従業員ですが, $\Pr(X_i=x \vert D_i = 0) = 0$のような特徴量水準$x$はそのpopulationに属していないからです.
 
-これは$Pr(X_i=x |D_i = 0) = 0$ならば, $x\not\in S_0$というところからも直感的にはわかります.
+これは$\Pr(X_i=x \vert D_i = 0) = 0$ならば, $x\not\in S_0$というところからも直感的にはわかります.
 
 
 ## Propensity scoreでコントロールするとなぜCIAが成立するのか？
@@ -153,7 +153,7 @@ $$
 <div style='padding-left: 2em; padding-right: 2em; border-radius: 1em; border-style:solid; border-color:#e6e6fa; background-color:#e6e6fa'>
 <p class="h4"><ins>balancing Score</ins></p>
 
-$ E[D_i|X_i] \equiv p(X_i)$ のとき, 
+$ \mathbb E[D_i\vert X_i] \equiv p(X_i)$ のとき, 
 
 $$
 D_i \perp X_i|p(X_i)
@@ -163,7 +163,7 @@ $$
 
 </div>
 
-この証明は$Pr(D_i|X_i, p(X_i)) = Pr(D_i|p(X_i))$の証明ができればOkです. なぜなら
+この証明は$Pr(D_i\vert X_i, p(X_i)) = Pr(D_i\vert p(X_i))$の証明ができればOkです. なぜなら
 
 $$
 \begin{align*}
@@ -173,7 +173,7 @@ $$
 \end{align*}
 $$
 
-$Pr(D_i|X_i, p(X_i)) = E[D_i|X_i, p(X_i)]$であることに留意すると,
+$\Pr(D_i\vert X_i, p(X_i)) = \mathbb E[D_i\vert X_i, p(X_i)]$であることに留意すると,
 
 $$
 \begin{align*}
@@ -223,7 +223,7 @@ $$
 
 MHEにならって以下のように証明できます.
 
-$\{Y_{1i}, Y_{0i}\} \perp D_i |p(X_i)$が成立することを言い換えると
+$\{Y_{1i}, Y_{0i}\} \perp D_i \vert p(X_i)$が成立することを言い換えると
 
 $$
 \begin{align*}
@@ -262,7 +262,7 @@ $$
 \end{align*}
 $$
 
-このとき, 簡略化のため $\mathbb E[Y_{ji}| X_i] \equiv \mu(X_i)$と表記します.
+このとき, 簡略化のため $\mathbb E[Y_{ji}\vert X_i] \equiv \mu(X_i)$と表記します.
 
 $$
 \begin{align*}
