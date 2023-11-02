@@ -173,7 +173,7 @@ $$
 \end{align*}
 $$
 
-$\Pr(D_i|X_i, p(X_i)) = \mathbb E[D_i|X_i, p(X_i)]$であることに留意すると,
+$Pr(D_i|X_i, p(X_i)) = \mathbb E[D_i|X_i, p(X_i)]$であることに留意すると,
 
 $$
 \begin{align*}
