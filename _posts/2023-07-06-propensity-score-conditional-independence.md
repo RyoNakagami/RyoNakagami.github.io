@@ -19,8 +19,24 @@ tags:
 
 <p class="h4">&nbsp;&nbsp;Table of Contents</p>
 
-<!-- START doctoc -->
-<!-- END doctoc -->
+<!-- START doctoc generated TOC please keep comment here to allow auto update -->
+<!-- DON'T EDIT THIS SECTION, INSTEAD RE-RUN doctoc TO UPDATE -->
+
+- [条件付き独立とPropensity score](#%E6%9D%A1%E4%BB%B6%E4%BB%98%E3%81%8D%E7%8B%AC%E7%AB%8B%E3%81%A8propensity-score)
+- [CIAが成立するならばなぜCounter-factualが導けるのか？](#cia%E3%81%8C%E6%88%90%E7%AB%8B%E3%81%99%E3%82%8B%E3%81%AA%E3%82%89%E3%81%B0%E3%81%AA%E3%81%9Ccounter-factual%E3%81%8C%E5%B0%8E%E3%81%91%E3%82%8B%E3%81%AE%E3%81%8B)
+- [Propensity scoreでコントロールするとなぜCIAが成立するのか？](#propensity-score%E3%81%A7%E3%82%B3%E3%83%B3%E3%83%88%E3%83%AD%E3%83%BC%E3%83%AB%E3%81%99%E3%82%8B%E3%81%A8%E3%81%AA%E3%81%9Ccia%E3%81%8C%E6%88%90%E7%AB%8B%E3%81%99%E3%82%8B%E3%81%AE%E3%81%8B)
+  - [Propensity scoreは特徴量のバランシングスコアである](#propensity-score%E3%81%AF%E7%89%B9%E5%BE%B4%E9%87%8F%E3%81%AE%E3%83%90%E3%83%A9%E3%83%B3%E3%82%B7%E3%83%B3%E3%82%B0%E3%82%B9%E3%82%B3%E3%82%A2%E3%81%A7%E3%81%82%E3%82%8B)
+  - [Propensity scoreで条件づけたPotential outcome](#propensity-score%E3%81%A7%E6%9D%A1%E4%BB%B6%E3%81%A5%E3%81%91%E3%81%9Fpotential-outcome)
+    - [推定量に着目した場合](#%E6%8E%A8%E5%AE%9A%E9%87%8F%E3%81%AB%E7%9D%80%E7%9B%AE%E3%81%97%E3%81%9F%E5%A0%B4%E5%90%88)
+- [Heterogeneous Treatment Effectがある場合](#heterogeneous-treatment-effect%E3%81%8C%E3%81%82%E3%82%8B%E5%A0%B4%E5%90%88)
+  - [DGP and Distribution check](#dgp-and-distribution-check)
+  - [推定値の確認](#%E6%8E%A8%E5%AE%9A%E5%80%A4%E3%81%AE%E7%A2%BA%E8%AA%8D)
+    - [シミュレーションでバイアスがあるかの確認](#%E3%82%B7%E3%83%9F%E3%83%A5%E3%83%AC%E3%83%BC%E3%82%B7%E3%83%A7%E3%83%B3%E3%81%A7%E3%83%90%E3%82%A4%E3%82%A2%E3%82%B9%E3%81%8C%E3%81%82%E3%82%8B%E3%81%8B%E3%81%AE%E7%A2%BA%E8%AA%8D)
+  - [Propensity scoreで条件づけたHeterogeneityの推定](#propensity-score%E3%81%A7%E6%9D%A1%E4%BB%B6%E3%81%A5%E3%81%91%E3%81%9Fheterogeneity%E3%81%AE%E6%8E%A8%E5%AE%9A)
+- [Follow up Question](#follow-up-question)
+- [References](#references)
+
+<!-- END doctoc generated TOC please keep comment here to allow auto update -->
 
 
 </div>
