@@ -149,8 +149,12 @@ $$
 
 この関係式は以下のとき成立する
 
-- $X$と$u$が独立
-- $\mathbb E[u|X] = \mathbb E[u] = 0$
+$$
+\begin{align*}
+&X\text{と}u\text{が独立} \\
+&\mathbb E[u|X] = \mathbb E[u] = 0
+\end{align*}
+$$
 
 </div>
 
