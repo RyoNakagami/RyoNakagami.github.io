@@ -163,7 +163,7 @@ $$
 
 </div>
 
-この証明は$Pr(D_i|X_i, p(X_i)) = \Pr(D_i|p(X_i))$の証明ができればOkです. なぜなら
+この証明は$Pr(D_i|X_i, p(X_i)) = Pr(D_i|p(X_i))$の証明ができればOkです. なぜなら
 
 $$
 \begin{align*}
@@ -173,7 +173,7 @@ $$
 \end{align*}
 $$
 
-$Pr(D_i|X_i, p(X_i)) = \mathbb E[D_i|X_i, p(X_i)]$であることに留意すると,
+$Pr(D_i|X_i, p(X_i)) = E[D_i|X_i, p(X_i)]$であることに留意すると,
 
 $$
 \begin{align*}
@@ -187,7 +187,6 @@ $$
 
 $$
 \begin{align*}
-
 \Pr(D_i|X_i, p(X_i)) &= \mathbb E[D_i|X_i, p(X_i)] \\
 &= \mathbb E[D_i|p(X_i)]\\
 &= \Pr(D_i|p(X_i))
