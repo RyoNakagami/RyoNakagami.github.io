@@ -1,15 +1,3 @@
-<!-- START doctoc generated TOC please keep comment here to allow auto update -->
-<!-- DON'T EDIT THIS SECTION, INSTEAD RE-RUN doctoc TO UPDATE -->
-**Table of Contents**  *generated with [DocToc](https://github.com/thlorenz/doctoc)*
-
-- [問題意識](#%E5%95%8F%E9%A1%8C%E6%84%8F%E8%AD%98)
-- [RCT分析結果が意思決定にそのままつかえるのか？](#rct%E5%88%86%E6%9E%90%E7%B5%90%E6%9E%9C%E3%81%8C%E6%84%8F%E6%80%9D%E6%B1%BA%E5%AE%9A%E3%81%AB%E3%81%9D%E3%81%AE%E3%81%BE%E3%81%BE%E3%81%A4%E3%81%8B%E3%81%88%E3%82%8B%E3%81%AE%E3%81%8B)
-- [RCTで主張可能なcausalityの範囲](#rct%E3%81%A7%E4%B8%BB%E5%BC%B5%E5%8F%AF%E8%83%BD%E3%81%AAcausality%E3%81%AE%E7%AF%84%E5%9B%B2)
-- [分析結果から意思決定へ](#%E5%88%86%E6%9E%90%E7%B5%90%E6%9E%9C%E3%81%8B%E3%82%89%E6%84%8F%E6%80%9D%E6%B1%BA%E5%AE%9A%E3%81%B8)
-- [References](#references)
-
-<!-- END doctoc generated TOC please keep comment here to allow auto update -->
-
 ---
 layout: post
 title: "論文紹介: Basu 2014, Randomisation, Causality and the Role of Reasoned Intuition"
@@ -26,6 +14,24 @@ tags:
 - 論文
 
 ---
+
+<div style='border-radius: 1em; border-style:solid; border-color:#D3D3D3; background-color:#F8F8F8'>
+
+<p class="h4">&nbsp;&nbsp;Table of Contents</p>
+
+<!-- START doctoc generated TOC please keep comment here to allow auto update -->
+<!-- DON'T EDIT THIS SECTION, INSTEAD RE-RUN doctoc TO UPDATE -->
+
+- [問題意識](#%E5%95%8F%E9%A1%8C%E6%84%8F%E8%AD%98)
+- [RCT分析結果が意思決定にそのままつかえるのか？](#rct%E5%88%86%E6%9E%90%E7%B5%90%E6%9E%9C%E3%81%8C%E6%84%8F%E6%80%9D%E6%B1%BA%E5%AE%9A%E3%81%AB%E3%81%9D%E3%81%AE%E3%81%BE%E3%81%BE%E3%81%A4%E3%81%8B%E3%81%88%E3%82%8B%E3%81%AE%E3%81%8B)
+- [RCTで主張可能なcausalityの範囲](#rct%E3%81%A7%E4%B8%BB%E5%BC%B5%E5%8F%AF%E8%83%BD%E3%81%AAcausality%E3%81%AE%E7%AF%84%E5%9B%B2)
+- [分析結果から意思決定へ](#%E5%88%86%E6%9E%90%E7%B5%90%E6%9E%9C%E3%81%8B%E3%82%89%E6%84%8F%E6%80%9D%E6%B1%BA%E5%AE%9A%E3%81%B8)
+- [References](#references)
+
+<!-- END doctoc generated TOC please keep comment here to allow auto update -->
+
+
+</div>
 
 ## 問題意識
 
