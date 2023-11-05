@@ -1,7 +1,7 @@
 ---
 layout: post
 title: "傾向スコアのAUCの良さは推定量の性質の良さにつながるのか？"
-subtitle: "Propensity score & Conditional Independence Assumption part 2"
+subtitle: "Propensity score & Conditional Independence Assumption（続編）"
 author: "Ryo"
 header-style: text
 header-mask: 0.0
@@ -74,9 +74,9 @@ x_1 &\sim Uniform(0, 1)\\[3pt]
 x_2 &\sim Uniform(0, 1)\\[3pt]
 x_3 &\sim Uniform(0, 1)\\[3pt]
 \epsilon_i &\sim N(0, 0.5)\\[3pt]
-prob_i &= \frac{1}{1 + \exp(-2 - 0.5x_1 - 3x_2 + 2x_1x_2 + 3x_3)}\\
+prob_i &= \frac{1}{1 + \exp(0.5 - 2x_1 + 2x_2 + 2x_1x_2 - x_3)}\\
 D_i &\sim binom(1, prob_i)\\[3pt]
-Y_{0i} &= \exp(0.5x_1) + \epsilon_i\\[3pt]
+Y_{0i} &= \exp(2x_1) + \epsilon_i\\[3pt]
 Y_{1i} &= Y_{0i} + 1\\[3pt]
 Y_i &= D_iY_{1i} + (1 - D_i)Y_{0i}
 \end{align*}
@@ -91,6 +91,147 @@ $$
 
 
 という状況を考えます. また, uplift effect = 1という形で施策効果はconstantとしています.
+
+DGPの結果の一例として, observed outcome $Y_i$の$D_i$ごとの平均は以下となります.
+単純比較では施策効果が1.5近辺となりupward biasが発生してしまっています, 
+
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>D</th>
+      <th>0</th>
+      <th>1</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th rowspan="8" valign="top">observed</th>
+      <th>count</th>
+      <td>6149.000000</td>
+      <td>3851.000000</td>
+    </tr>
+    <tr>
+      <th>mean</th>
+      <td>2.955953</td>
+      <td>4.465919</td>
+    </tr>
+    <tr>
+      <th>std</th>
+      <td>1.774988</td>
+      <td>1.893814</td>
+    </tr>
+    <tr>
+      <th>min</th>
+      <td>-0.501517</td>
+      <td>-0.031790</td>
+    </tr>
+    <tr>
+      <th>25%</th>
+      <td>1.564539</td>
+      <td>2.893273</td>
+    </tr>
+    <tr>
+      <th>50%</th>
+      <td>2.508593</td>
+      <td>4.125529</td>
+    </tr>
+    <tr>
+      <th>75%</th>
+      <td>4.070802</td>
+      <td>5.898188</td>
+    </tr>
+    <tr>
+      <th>max</th>
+      <td>8.575620</td>
+      <td>9.463890</td>
+    </tr>
+    <tr>
+      <th rowspan="8" valign="top">logit_cia</th>
+      <th>count</th>
+      <td>6149.000000</td>
+      <td>3851.000000</td>
+    </tr>
+    <tr>
+      <th>mean</th>
+      <td>0.378282</td>
+      <td>0.395986</td>
+    </tr>
+    <tr>
+      <th>std</th>
+      <td>0.063560</td>
+      <td>0.064856</td>
+    </tr>
+    <tr>
+      <th>min</th>
+      <td>0.278799</td>
+      <td>0.278796</td>
+    </tr>
+    <tr>
+      <th>25%</th>
+      <td>0.322965</td>
+      <td>0.339708</td>
+    </tr>
+    <tr>
+      <th>50%</th>
+      <td>0.371775</td>
+      <td>0.399320</td>
+    </tr>
+    <tr>
+      <th>75%</th>
+      <td>0.429691</td>
+      <td>0.453660</td>
+    </tr>
+    <tr>
+      <th>max</th>
+      <td>0.502034</td>
+      <td>0.501983</td>
+    </tr>
+    <tr>
+      <th rowspan="8" valign="top">logit_full</th>
+      <th>count</th>
+      <td>6149.000000</td>
+      <td>3851.000000</td>
+    </tr>
+    <tr>
+      <th>mean</th>
+      <td>0.317717</td>
+      <td>0.492693</td>
+    </tr>
+    <tr>
+      <th>std</th>
+      <td>0.176661</td>
+      <td>0.197903</td>
+    </tr>
+    <tr>
+      <th>min</th>
+      <td>0.068672</td>
+      <td>0.078593</td>
+    </tr>
+    <tr>
+      <th>25%</th>
+      <td>0.172645</td>
+      <td>0.333182</td>
+    </tr>
+    <tr>
+      <th>50%</th>
+      <td>0.272893</td>
+      <td>0.500188</td>
+    </tr>
+    <tr>
+      <th>75%</th>
+      <td>0.429088</td>
+      <td>0.654429</td>
+    </tr>
+    <tr>
+      <th>max</th>
+      <td>0.886679</td>
+      <td>0.897462</td>
+    </tr>
+  </tbody>
+</table>
+
+
 
 ### 推定量について
 
@@ -107,6 +248,7 @@ $$
 </div>
 
 なお, 2つのpropensity score推定量の性能比較として今回は簡易的にAUCを用います.
+
 予想される結果としては
 
 - `full_model`のほうがAUCスコアが圧倒的に良い
@@ -119,22 +261,21 @@ $$
 
 ## シミュレーション結果
 
-
 <table border="1" class="dataframe">
   <thead>
     <tr style="text-align: right;">
       <th></th>
       <th>true</th>
-      <th>cia_model_ATE</th>
-      <th>full_model_ATE</th>
-      <th>cia_model_AUC</th>
-      <th>full_model_AUC</th>
+      <th>estimate_cia</th>
+      <th>estimate_full</th>
+      <th>auc_cia</th>
+      <th>auc_full</th>
     </tr>
   </thead>
   <tbody>
     <tr>
       <th>count</th>
-      <td>1.0001000000e+03</td>
+      <td>1.000000e+03</td>
       <td>1000.000000</td>
       <td>1000.000000</td>
       <td>1000.000000</td>
@@ -143,65 +284,76 @@ $$
     <tr>
       <th>mean</th>
       <td>1.000000e+00</td>
-      <td>1.000107</td>
-      <td>1.000263</td>
-      <td>0.5281000947</td>
-      <td>0.757163</td>
+      <td>0.996162</td>
+      <td>0.999949</td>
+      <td>0.575555</td>
+      <td>0.743761</td>
     </tr>
     <tr>
       <th>std</th>
-      <td>2.771164e-16</td>
-      <td>0.010283</td>
-      <td>0.012511</td>
-      <td>0.005965</td>
-      <td>0.004764</td>
+      <td>5.450743e-16</td>
+      <td>0.012943</td>
+      <td>0.018541</td>
+      <td>0.006137</td>
+      <td>0.004751</td>
     </tr>
-    <tr>1000
+    <tr>
       <th>min</th>
       <td>1.000000e+00</td>
-      <td>0.971973</td>
-      <td>0.954883</td>
-      <td>0.506364</td>
-      <td>0.742249</td>
+      <td>0.956735</td>
+      <td>0.931434</td>
+      <td>0.556370</td>
+      <td>0.728875</td>
     </tr>
     <tr>
       <th>25%</th>
       <td>1.000000e+00</td>
-      <td>0.993319</td>
-      <td>0.991344</td>
-      <td>0.5251000189</td>
-      <td>0.754026</td>
+      <td>0.987529</td>
+      <td>0.987892</td>
+      <td>0.571321</td>
+      <td>0.740480</td>
     </tr>
     <tr>
       <th>50%</th>
       <td>1.000000e+00</td>
-      <td>1.000247</td>
-      <td>1.000757</td>
-      <td>0.528931</td>
-      <td>0.757316</td>
+      <td>0.996294</td>
+      <td>1.000240</td>
+      <td>0.575663</td>
+      <td>0.743732</td>
     </tr>
     <tr>
       <th>75%</th>
       <td>1.000000e+00</td>
-      <td>1.006302</td>
-      <td>1.008418</td>
-      <td>0.533067</td>
-      <td>0.760176</td>
+      <td>1.004821</td>
+      <td>1.012625</td>
+      <td>0.579839</td>
+      <td>0.746824</td>
     </tr>
     <tr>
       <th>max</th>
       <td>1.000000e+00</td>
-      <td>1.034495</td>
-      <td>1.046460</td>
-      <td>0.545865</td>
-      <td>0.770333</td>
+      <td>1.037352</td>
+      <td>1.056248</td>
+      <td>0.594460</td>
+      <td>0.757005</td>
     </tr>
   </tbody>
 </table>
 
+
 - `cia_model`, `full_model`ともにバイアスはないと解釈できる形で推定値が出ている
+  - 若干, `full_model`のほうがバイアスは少ないように見受けられる
 - AUCに着目すると`full_model`のほうが圧倒的に`cia_model`より性能が良いと解釈できる
-- 一方, 予想されていたようにATE推定量は`full_model`のほうが分散が 10~20% 程度 `cia_model` よりも大きい
+- 一方, 予想されていたようにATE推定量は`full_model`のほうが分散が `cia_model` よりも大きい
+
+
+> 推定値の傾向について
+
+以下のように傾向としては一致しているので, Robustness checkで両方の推定量が大きくかけ離れていないか？を確認することは今回のケースでは有用であると示唆してくれている.
+
+{% include plotly/20230707_fullmodel_vs_ciamodel.html %}
+
+
 
 ### Normalized Differenceの確認
 
@@ -228,30 +380,31 @@ simulationの最後に出てきたdatasetを用いて簡易的に比較してみ
       <th></th>
       <th>features</th>
       <th>snd_cia</th>
-      <th>snd_full</th>
+      <th>snd_fill</th>
     </tr>
   </thead>
   <tbody>
     <tr>
       <th>0</th>
       <td>x1</td>
-      <td>0.077089</td>
-      <td>0.083974</td>
+      <td>0.160808</td>
+      <td>0.209398</td>
     </tr>
     <tr>
       <th>1</th>
       <td>x2</td>
-      <td>0.333320</td>
-      <td>0.292239</td>
+      <td>0.594803</td>
+      <td>0.470987</td>
     </tr>
     <tr>
       <th>2</th>
       <td>x3</td>
-      <td>0.574004</td>
-      <td>0.515926</td>
+      <td>0.145993</td>
+      <td>0.125899</td>
     </tr>
   </tbody>
 </table>
+
 
 - `cia_model`と`full_model`を比較すると$x_1$のバランシングは`cia_model`のほうが良い
 - Potential outcomeの分布は$x_1$に依存するのでこの変数がバランシングしている方が良い推定量であるはず
@@ -261,9 +414,18 @@ simulationの最後に出てきたdatasetを用いて簡易的に比較してみ
 
 ## 結び
 
-- propensity scoreという推定量のクラスを考えた場合, AUCがよいモデルが本当に良いとは限らない
-- propensity sc1000oreという推定量が機能するか否かはあくまでCIAがどのような形で成立しているかに依存する
+<div style='padding-left: 2em; padding-right: 2em; border-radius: 1em; border-style:solid; border-color:#e6e6fa; background-color:#e6e6fa'>
+<p class="h4"><ins>REMARKS</ins></p>
+
+- propensity scoreという推定量のクラスを考えた場合, AUCがよいモデルが本当に良いとは限らない(あくまで反例の紹介)
+- propensity scoreという推定量が機能するか否かはあくまでCIAがどのような形で成立しているかに依存する
 - Normazlied differenceは重要な特徴量がバランスしているかを判断する指標にはなるが, 解釈はあくまでCIAがどのような形で成立しているかに依存する
+
+</div>
+
+ただし, 上記のシミュレーションではcommon supportの仮定を満たすようにいい感じにパラメータを設定した状況での数値計算の結果であって, 現実的なpropensity scoreの問題はどちらかというとpropensity score推定量のmisspecificationに起因するバイアスの発生です.
+
+また, 今回のケースで$Y_{0i}$のheterogeneityを$\exp(10x_1)$などのように大きくすると, IPW推定量は大きくずれたりするので, Propensity scoreはRobustness checkで複数のspecificationでの結果を踏まえながら解釈する必要がありそうです.
 
 
 ## Appendix: Python code
@@ -285,13 +447,14 @@ def dgp():
     x2 = np.random.uniform(0, 1, N)
     x3 = np.random.uniform(0, 1, N)
 
-    logit_model = np.exp(-2 + 0.5 * x1 + 3 * x2 - 2 * x1*x2 + 3 * x3)
+    logit_model = np.exp(-0.5 + 2 * x1 - 2 * x2 - 2 * x1*x2 + 1 * x3)
     assignment_prob = logit_model / (1 + logit_model)
     assigment = np.random.binomial(1, assignment_prob)
 
-    potential_untreated = np.exp(0.5 * x1) + np.random.normal(0, 0.5, N)
+    potential_untreated = np.exp(2 * x1) + np.random.normal(0, 0.5, N)
     uplift = 1
     potential_treated = potential_untreated + uplift
+
 
     df = pd.DataFrame({
         'const': 1,
@@ -359,7 +522,7 @@ def get_true_effect(df):
                           axis=0).set_index(pd.Index(['ATU', 'ATT', 'ATE']))
     stats_df['effect'] = stats_df['y1'] - stats_df['y0']
     return stats_df
-#%%
+
 def estimate_effect(df, col='logit_cia'):
     y0_treated_weight = ((1 - df['D']) * df[col]) / (1 - df[col])
     y1_untreated_weight = (df['D']) * (1 - df[col]) / df[col]
