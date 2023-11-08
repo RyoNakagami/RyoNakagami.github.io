@@ -337,6 +337,27 @@ True True True
 `numpy.broadcast_to`が流石に一番早いかな？と期待していたところ, `numpy.repeat` & `reshape`
 が圧倒的に速いという結果になった. これは実行順番を変えてみても同じ結論だった.
 
+念の為, 変数のメモリ使用量も確認してみる
+
+```python
+import sys
+
+print(sys.getsizeof(A))
+>> 128
+
+print(sys.getsizeof(B))
+>> 128
+
+print(sys.getsizeof(C))
+>> 192
+
+print(sys.getsizeof(D))
+>> 128
+```
+
+一番実行時間が短いオブジェクトだけがメモリを多く使用しているが, 理由がよくわからない.
+後ほど調べる.
+
 
 References
 ------------
