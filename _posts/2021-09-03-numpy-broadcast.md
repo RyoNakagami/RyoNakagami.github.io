@@ -342,3 +342,4 @@ References
 ------------
 
 - [stackoverflow > Repeat a 2D NumPy array N times [duplicate]](https://stackoverflow.com/questions/53643526/repeat-a-2d-numpy-array-n-times)
+- [ブロードキャストしたNumpy配列に代入するときにハマった話](https://blog.shikoan.com/assign-to-broadcasted-numpy-array/)
