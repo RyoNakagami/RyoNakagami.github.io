@@ -12,12 +12,8 @@ tags:
 - English
 ---
 
-
-<div style='padding-left: 2em; padding-right: 2em; border-radius: 1em; border-style:solid; border-color:#D3D3D3; background-color:#F8F8F8'>
-
 このノートは, [The Economist > What happens to your brain as you age](https://www.youtube.com/watch?v=cMim0uU1yzA)のスクリプトです
 
-</div>
 
 <div style='border-radius: 1em; border-style:solid; border-color:#D3D3D3; background-color:#F8F8F8'>
 
