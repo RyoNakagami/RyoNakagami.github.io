@@ -1,6 +1,7 @@
 ---
 layout: post
 title: "FTE: Full-time equivalent"
+subtitle: "Today's words and phrases 1/N"
 author: "Ryo"
 header-style: text
 header-mask: 0.0

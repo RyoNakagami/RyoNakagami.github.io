@@ -1,6 +1,7 @@
 ---
 layout: post
 title: "Catch a lead when it’s hot"
+subtitle: "Today's words and phrases 3/N"
 author: "Ryo"
 header-style: text
 header-mask: 0.0

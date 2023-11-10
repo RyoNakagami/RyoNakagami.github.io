@@ -1,6 +1,7 @@
 ---
 layout: post
 title: "Wimpy and Wimpiness"
+subtitle: "Today's words and phrases 2/N"
 author: "Ryo"
 header-style: text
 header-mask: 0.0

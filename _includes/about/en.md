@@ -77,11 +77,11 @@
 - [国立成育医療研究センター データサイエンス研修](https://foxglovetree.wiki.fc2.com/wiki/Environment)
     - 試行錯誤しながら頑張ってまとめてたんだろうなって感じのブログ
 
-### Computer Science
-
-> 一般知識
+### Computer Science/技術系
 
 - [木暮　仁, 情報処理技術者試験まとめ](http://www.kogures.com/hitoshi/webtext/index.html/index.html#or)
+- [CUBE SUGAR CONTAINER](https://blog.amedama.jp/)
+
 
 ## Git/GitHub/GitLab
 
