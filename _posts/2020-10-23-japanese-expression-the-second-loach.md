@@ -1,7 +1,7 @@
 ---
 layout: post
 title: "二匹目のどじょうを狙う"
-subtitle: "日本語慣用句 & ことわざ"
+subtitle: "Today's words and phrases 6/N"
 author: "Ryo"
 header-style: text
 header-mask: 0.0

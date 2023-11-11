@@ -1,7 +1,7 @@
 ---
 layout: post
 title: "Would you like this heated up?: こちらの商品あたためますか？"
-subtitile: "Today's words and phrases 4/N"
+subtitle: "Today's words and phrases 10/N"
 author: "Ryo"
 header-style: text
 header-mask: 0.0

@@ -1,7 +1,7 @@
 ---
 layout: post
 title: "dire, Proxy, Prioritize, and we only have a certain amount of time"
-subtitle: "Today's words and phrases 3/N"
+subtitle: "Today's words and phrases 9/N"
 author: "Ryo"
 header-style: text
 header-mask: 0.0

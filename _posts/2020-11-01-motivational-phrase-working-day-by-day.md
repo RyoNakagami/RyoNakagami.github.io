@@ -1,7 +1,7 @@
 ---
 layout: post
 title: "Working day by day toward what you want to be"
-subtitle: "Today's words and phrases 3/N"
+subtitle: "Today's words and phrases 7/N"
 author: "Ryo"
 header-style: text
 header-mask: 0.0

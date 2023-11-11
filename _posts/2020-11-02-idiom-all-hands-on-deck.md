@@ -1,7 +1,7 @@
 ---
 layout: post
 title: "All hands on deck"
-subtitle: "Today's words and phrases 2/N"
+subtitle: "Today's words and phrases 8/N"
 author: "Ryo"
 header-style: text
 header-mask: 0.0

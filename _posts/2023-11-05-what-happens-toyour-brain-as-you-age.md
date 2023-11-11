@@ -7,6 +7,7 @@ header-style: text
 header-mask: 0.0
 catelog: true
 mathjax: true
+revise_date: 2023-11-10
 tags:
 
 - English
@@ -23,6 +24,9 @@ tags:
 <!-- DON'T EDIT THIS SECTION, INSTEAD RE-RUN doctoc TO UPDATE -->
 
 - [Script](#script)
+- [Related Topics](#related-topics)
+  - [Artists 'have structurally different brains' from BBC 17 April 2014](#artists-have-structurally-different-brains-from-bbc-17-april-2014)
+  - [Are artistic brains different? - 6 Minute English](#are-artistic-brains-different---6-minute-english)
 - [Words and phrases](#words-and-phrases)
   - [Neuron](#neuron)
   - [Conception](#conception)
@@ -82,7 +86,7 @@ The insulation of the nuerons which begins at birth continues over many years.
 It starts at the back of the brain and moves forward. So different parts of your brain develop at different rates.
 Area associated with reward, like the ventral striatum, develop faster than the Prefrontal cortex, which is linked to
 self-control and rationality. Teens also experience major changes in their Limbic system, 
-, the part of the brain that controls emotions. All this might explain why teenagers experience
+the part of the brain that controls emotions. All this might explain why teenagers experience
 more mood swings than adults. Neuroscientists believe the difference in development between the 
 emotion-driven part of the brain and the rational part may also be the reason teenagers are
 more likely to take risks or experience addiction compared with adults.
@@ -106,7 +110,7 @@ Decades of experience in dealing with difficult situations activates neural path
 
 For those who go through menopause, changes to the amount of estrogen affect 
 brain energy consumption, producing symptons like hot flushes and mood swings.
-The volume of white matter also falls and doesn't recover. but despite this, tabout a hose
+The volume of white matter also falls and doesn't recover. but despite this, those
 who are post menopausal have higher structural connectivity between some brain regions than 
 those who don't go through menopause, meaning that the connections in those regions may become more efficient. 
 The point at which your brain begins to slow down depends on your genes, but on the whole
@@ -127,6 +131,31 @@ their lives flash before them and your brain doesn't stop working even when you 
 
 Some stidies have found that brain activity may continue for several minutes
 even after your heart has stopped. 
+
+## Related Topics
+### Artists 'have structurally different brains' from BBC 17 April 2014
+
+Researchers peered into the brains of 21 art students and compared them to 23 non-artists using a scanning method called voxel-based morphometry.
+They found that the people who are better at drawing really seem to have more 
+developed structures in regions of the brain that control for fine motor performance and what we call procedural memory.
+
+Those better at drawing had increased grey and white matter in the cerebellum(小脳) and also in the supplementary motor area - both areas that are involved with fine motor control and performance of routine actions.
+Grey matter is largely composed of nerve cells, while white matter is responsible for communication between the grey matter regions.
+
+But still it is unclear what aspect of artistic talent was innate or learnt. 
+
+### Are artistic brains different? - 6 Minute English
+
+<iframe width="560" height="315" src="https://www.youtube.com/embed/Oq2bnLC_DXU?si=iXpoOf2Aw4ImMc7J" frameborder="0" allow="autoplay; encrypted-media" allowfullscreen></iframe>
+
+They are wondering why artistic ability comes more naturally to some people than others.
+They have interviews with experts for their opinions.
+
+Dr Rebecca Chamberlain says:
+
+"Artist seems to be processing the visual world in a different wat to non-artists.
+The artists takes a more global approach to looking, so they make bigger saccades, bigger eye movements,
+and firter fixations onm the image."
 
 
 ## Words and phrases
@@ -262,11 +291,8 @@ Self-evaluation plays a crucial role in shaping and developing one's personality
 - Some of these plants are more susceptible to forst damage than others
 - She was both charming and susceptible
 
-
-
-
-
 References
 ------------
 
 - [The Economist > What happens to your brain as you age](https://www.youtube.com/watch?v=cMim0uU1yzA)
+- [BBC > Artists 'have structurally different brains'](https://www.bbc.com/news/science-environment-26925271)

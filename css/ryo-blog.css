@@ -1692,3 +1692,83 @@ img::-moz-selection {
 .no-scroll {
   overflow-y: hidden;
 }
+.pyramid {
+  position: relative;
+  padding: 0px;
+  margin: 0px auto;
+  width: calc(8em * 5);
+  list-style: none;
+  font-size: 1.4vw;
+}
+.pyramid > li {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 6em;
+  box-sizing: border-box;
+  text-align: center;
+  white-space: nowrap;
+}
+.pyramid > li + li {
+  border-top: 2px solid #fff;
+}
+.pyramid > li::before {
+  position: absolute;
+  top: 0px;
+  left: 50%;
+  width: 100%;
+  transform: translateX(-50%);
+  background-position: top -2px left 1px, top -2px right 1px;
+  background-size: 50% calc(6em * 5);
+  background-repeat: no-repeat;
+  content: "";
+}
+.pyramid > li:nth-of-type(1)::before {
+  z-index: -1;
+  height: calc(6em * 1);
+  background-image:
+      linear-gradient(to bottom right, transparent 50%, #85b8ea 50%),
+      linear-gradient(to bottom left, transparent 50%, #85b8ea 50%);
+}
+.pyramid > li:nth-of-type(2)::before {
+  z-index: -2;
+  height: calc(6em * 2);
+  background-image:
+      linear-gradient(to bottom right, transparent 50%, #73ade7 50%),
+      linear-gradient(to bottom left, transparent 50%, #73ade7 50%);
+}
+.pyramid > li:nth-of-type(3)::before {
+  z-index: -3;
+  height: calc(6em * 3);
+  background-image:
+      linear-gradient(to bottom right, transparent 50%, #62a3e4 50%),
+      linear-gradient(to bottom left, transparent 50%, #62a3e4 50%);
+}
+.pyramid > li:nth-of-type(4)::before {
+  z-index: -4;
+  height: calc(6em * 4);
+  background-image:
+      linear-gradient(to bottom right, transparent 50%, #5199e1 50%),
+      linear-gradient(to bottom left, transparent 50%, #5199e1 50%);
+}
+.pyramid > li:nth-of-type(5)::before {
+  z-index: -5;
+  height: calc(6em * 5);
+  background-image:
+      linear-gradient(to bottom right, transparent 50%, #3388dd 50%),
+      linear-gradient(to bottom left, transparent 50%, #3388dd 50%);
+}
+.pyramid > li:nth-of-type(6)::before {
+  z-index: -5;
+  height: calc(6em * 6);
+  background-image:
+      linear-gradient(to bottom right, transparent 50%, #3388dd 50%),
+      linear-gradient(to bottom left, transparent 50%, #3388dd 50%);
+}
+.pyramid > li:nth-of-type(7)::before {
+  z-index: -5;
+  height: calc(6em * 7);
+  background-image:
+      linear-gradient(to bottom right, transparent 50%, #3388dd 50%),
+      linear-gradient(to bottom left, transparent 50%, #3388dd 50%);
+}
