@@ -183,10 +183,10 @@ address what it is that poeple are feeling when they are conscious?
 David Chalmers calles consciousness the hard problem, a deft description for 
 something is hard to explain and hard to solve.
 
-"The methods of science right now are great for explaining objectives processes and objective fuinctions. 
+"The methods of science right now are great for explaining objective processes and objective fuinctions. 
 So when it comes even to explaining things like the behavior of an organism, you can tell some story
 about a bit of the brain, a neural process, or a computer-like process in the brain that 
-make use behave a certain way. but the problem of consciousness, what we call the hard problem of consciousness,
+make us behave a certain way. but the problem of consciousness, what we call the hard problem of consciousness,
 which is explaining how we get subjective experience from the brain is not that kind of question.
 It's not question about how we behave, but it's a question about what it's like how it feels from the inside
 and looks like you can explain all those objective mechanisms and objective processes
