@@ -81,7 +81,7 @@ Then, for any value $a \in \mathbb R$
 
 $$
 \begin{align*}
-0 \leq \mathbb E[W] &= \mathbb E[(\hat X - a\hat Y)^2]\\
+0 \leq \mathbb E[Z] &= \mathbb E[(\hat X - a\hat Y)^2]\\
                     &= \mathbb E[\hat X^2] - 2a\mathbb E[\hat X\hat Y] + a^2\mathbb E[\hat Y^2]
 \end{align*}
 $$
@@ -91,7 +91,7 @@ Let us choose $a = \frac{\mathbb E[\hat X\hat Y]}{\mathbb E[\hat Y^2]}$. Then,
 $$
 \begin{align*}
 0 &\leq \mathbb E[\hat X^2] - 2\frac{\mathbb E[\hat X\hat Y]}{\mathbb E[\hat Y^2]}\mathbb E[\hat X\hat Y] + \frac{\mathbb E[\hat X\hat Y]^2}{\mathbb E[\hat Y^2]^2}\mathbb E[\hat Y^2]\\
-  &= \mathbb E[\hat \hat X^2] - \frac{\mathbb E[\hat X\hat Y]^2}{\mathbb E[\hat Y^2]}\\
+  &= \mathbb E[\hat X^2] - \frac{\mathbb E[\hat X\hat Y]^2}{\mathbb E[\hat Y^2]}\\
   &\Rightarrow \mathbb E[\hat X\hat Y]^2 \leq \mathbb E[\hat X^2]\mathbb E[\hat Y^2]
 \end{align*}
 $$
@@ -100,7 +100,7 @@ Thus, we have the Cauchy-Schwarz inequality:
 
 $$
 \begin{align*}
-&|E\hat X\hat Y| \leq \sqrt{E[\hat X^2] E[\hat Y^2]}\\
+&|\mathbb E[\hat X\hat Y]| \leq \sqrt{\mathbb E[\hat X^2]\mathbb E[\hat Y^2]}\\
 &\Rightarrow \mathbb E[(X - \mu_x)(Y- \mu_y)]^2 \leq \mathbb E[(X - \mu_x)^2]\mathbb E[(Y- \mu_y)^2]
 \end{align*}
 $$
