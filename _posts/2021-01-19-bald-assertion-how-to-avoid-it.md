@@ -7,7 +7,7 @@ header-style: text
 header-mask: 0.0
 catelog: true
 mathjax: true
-revise_date: 2023-10-13
+last_modified_at: 2023-10-13
 tags:
 
 - 方法論

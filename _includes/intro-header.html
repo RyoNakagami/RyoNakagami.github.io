@@ -48,8 +48,8 @@
                     <h2 class="subheading">{{ page.subtitle }}</h2>
                     <p>
                         公開日: {{ page.date| date: "%Y-%m-%d" }}
-                        {% if page.revise_date %}<br>
-                        更新日: {{ page.revise_date | date: "%Y-%m-%d" }}{% endif %}
+                        {% if page.last_modified_at %}<br>
+                        更新日: {{ page.last_modified_at | date: "%Y-%m-%d" }}{% endif %}
                         {% if page.reading_time %}<br>
                         所要時間: {{ page.reading_time }} min {% endif %}
                     </p>

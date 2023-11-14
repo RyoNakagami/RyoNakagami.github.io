@@ -7,7 +7,7 @@ header-style: text
 header-mask: 0.0
 catelog: true
 mathjax: true
-revise_date: 2022-08-22
+last_modified_at: 2022-08-22
 tags:
 
 - Ubuntu 20.04 LTS

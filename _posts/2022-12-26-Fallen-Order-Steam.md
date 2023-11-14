@@ -5,7 +5,7 @@ subtitle: "Ubuntu Desktop環境構築: Steam編 2/N"
 author: "Ryo"
 header-style: text
 header-mask: 0.0
-revise_date: 2022-12-26
+last_modified_at: 2022-12-26
 catelog: true
 mathjax: true
 tags:

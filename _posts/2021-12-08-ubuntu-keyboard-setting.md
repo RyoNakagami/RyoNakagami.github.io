@@ -6,7 +6,7 @@ author: "Ryo"
 header-mask: 0.0
 catelog: true
 mathjax: true
-revise_date: 
+last_modified_at: 
 reading_time: 6
 tags:
 

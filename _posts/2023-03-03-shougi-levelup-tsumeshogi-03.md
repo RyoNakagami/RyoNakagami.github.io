@@ -7,7 +7,7 @@ header-style: text
 header-mask: 0.0
 catelog: true
 mathjax: true
-revise_date: 2023-03-03
+last_modified_at: 2023-03-03
 tags:
 
 - 将棋

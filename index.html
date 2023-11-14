@@ -30,7 +30,7 @@ description: "日々のこつこつ勉強記録"
     </h6>
         <!--Posted by {% if post.author %}{{ post.author }}{% else %}{{ site.title }}{% endif %} on {{ post.date | date: "%B %-d, %Y" }}  -->
         <font color="gray" size='2'>
-            投稿日 {{ post.date| date: "%Y-%m-%d"}}{% if post.revise_date %}<br>更新日 {{ post.revise_date | date: "%Y-%m-%d" }}{% endif %}
+            投稿日 {{ post.date| date: "%Y-%m-%d"}}{% if post.last_modified_at %}<br>更新日 {{ post.last_modified_at | date: "%Y-%m-%d" }}{% endif %}
         </font>
 </div>
 <hr>

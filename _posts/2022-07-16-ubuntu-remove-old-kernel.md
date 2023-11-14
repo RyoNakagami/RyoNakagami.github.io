@@ -7,7 +7,7 @@ header-style: text
 header-mask: 0.0
 catelog: true
 mathjax: true
-revise_date: 2022-08-06
+last_modified_at: 2022-08-06
 reading_time: 6
 tags:
 

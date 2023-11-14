@@ -5,7 +5,7 @@ subtitle: "確率と数学ドリル 3/N"
 author: "Ryo"
 catelog: true
 mathjax: true
-revise_date: 2023-11-01
+last_modified_at: 2023-11-01
 header-mask: 0.0
 header-style: text
 tags:

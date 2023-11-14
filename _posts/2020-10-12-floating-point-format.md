@@ -7,7 +7,7 @@ header-style: text
 header-mask: 0.0
 mathjax: true
 catelog: true
-revise_date: 2023-04-01
+last_modified_at: 2023-04-01
 tags:
   - 数値計算
 ---
