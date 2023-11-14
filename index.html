@@ -1,6 +1,6 @@
 ---
 layout: page
-description: ""
+description: "日々のこつこつ勉強記録"
 ---
 
 
@@ -28,11 +28,10 @@ description: ""
         </a>
         {% endfor %}
     </h6>
-    
         <!--Posted by {% if post.author %}{{ post.author }}{% else %}{{ site.title }}{% endif %} on {{ post.date | date: "%B %-d, %Y" }}  -->
-            <font color="gray" size='2'>
+        <font color="gray" size='2'>
             投稿日 {{ post.date| date: "%Y-%m-%d"}}{% if post.revise_date %}<br>更新日 {{ post.revise_date | date: "%Y-%m-%d" }}{% endif %}
-            </font>
+        </font>
 </div>
 <hr>
 {% endfor %}
