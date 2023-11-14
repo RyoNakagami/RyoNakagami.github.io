@@ -20,7 +20,7 @@ tags:
 <!-- DON'T EDIT THIS SECTION, INSTEAD RE-RUN doctoc TO UPDATE -->
 
 - [Meaning](#meaning)
-- [Usage example](#usage-example)
+- [Usage exampleThe group then followed up with a fresh analysis of 133 traits in nearly](#usage-examplethe-group-then-followed-up-with-a-fresh-analysis-of-133-traits-in-nearly)
 - [Does Opposites really attract?](#does-opposites-really-attract)
 - [References](#references)
 
