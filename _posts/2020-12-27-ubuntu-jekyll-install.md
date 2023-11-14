@@ -1,7 +1,7 @@
 ---
 layout: post
 title: "静的サイトジェネレーター Jekyllのインストール"
-subtitle: "GitHub Pages作成環境の構築 1/N"
+subtitle: "GitHub Pages作成環境の構築 3/N"
 author: "Ryo"
 header-style: text
 header-mask: 0.0
@@ -72,7 +72,7 @@ Version確認をします
 % ruby -v
 ruby 2.7.0p0 (2019-12-25 revision 647ee6f091) [x86_64-linux-gnu]
 % gem -v
-3.1.2
+3.1.2doctoc\: false
 % gcc -v
 (略)
 gcc version 9.3.0 (Ubuntu 9.3.0-17ubuntu1~20.04) 
@@ -185,7 +185,7 @@ https://ryonakagami.github.io/2020/10/01/terminology-FTE/
 </url>
 ...
 <url>
-<loc>https://ryonakagami.github.io/page25/</loc>
+<loc>https://ryonakagami.github.doctoc\: falseio/page25/</loc>
 </url>
 </urlset>
 ```

@@ -1,16 +1,15 @@
 ---
 layout: post
 title: "Markdown目次作成ツール doctocのインストール"
-subtitle: "Ubuntu Desktop環境構築 Part 11"
+subtitle: "GitHub Pages作成環境の構築 2/N"
 author: "Ryo"
 header-style: text
 header-mask: 0.0
 catelog: true
-mathjax: true
-last_modified_at: 2022-08-10
+reading_time: 10
+last_modified_at: 2023-11-15
 tags:
 
-- Ubuntu 20.04 LTS
 - GitHub Pages
 - Shell
 ---
@@ -24,7 +23,7 @@ tags:
 
 - [What Do I Want to DO?](#what-do-i-want-to-do)
 - [`npm` & `doctoc`のインストール](#npm--doctoc%E3%81%AE%E3%82%A4%E3%83%B3%E3%82%B9%E3%83%88%E3%83%BC%E3%83%AB)
-- [`doctoc`の使用例の紹介](#doctoc%E3%81%AE%E4%BD%BF%E7%94%A8%E4%BE%8B%E3%81%AE%E7%B4%B9%E4%BB%8B)
+  - [`doctoc`の使用例の紹介](#doctoc%E3%81%AE%E4%BD%BF%E7%94%A8%E4%BE%8B%E3%81%AE%E7%B4%B9%E4%BB%8B)
   - [Options](#options)
   - [Usage Example](#usage-example)
 - [sort-markdown-tablesのインストール](#sort-markdown-tables%E3%81%AE%E3%82%A4%E3%83%B3%E3%82%B9%E3%83%88%E3%83%BC%E3%83%AB)
@@ -39,10 +38,15 @@ tags:
 
 ## What Do I Want to DO?
 
+<div style='padding-left: 2em; padding-right: 2em; border-radius: 1em; border-style:solid; border-color:#D3D3D3; background-color:#F8F8F8'>
+<p class="h4"><ins>やりたいこと</ins></p>
+
 - Markdown目次作成ツール `doctoc`のインストール
 - Markdown table sort用の `sort-markdown-tables`のインストール
 
-> Solution
+</div>
+
+上記を達成するために今回行ったことは以下です:
 
 1. `npm`, `nodejs` のインストール
 2. `doctoc`をインストール
@@ -72,10 +76,10 @@ v10.19.0
 つぎに、doctocをインスールします。
 
 ```zsh
-% npm install -g doctoc
+% npm install -g doctocdoctoc\: false
 ```
 
-## `doctoc`の使用例の紹介
+### `doctoc`の使用例の紹介
 
 以下のような形式のMarkdown file, `test.md` を用意します
 

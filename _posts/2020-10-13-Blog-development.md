@@ -1,12 +1,13 @@
 ---
 layout: post
 title: "GitHub Pages: GA4の設定"
-subtitle: "ブログ編集手引きノート 1/N"
+subtitle: "GitHub Pages作成環境の構築 1/N"
 author: "Ryo"
 header-style: text
 header-mask: 0.0
 catelog: true
 reading_time: 10
+last_modified_at: 2023-11-15
 tags:
   - GitHub Pages
 ---
