@@ -5,13 +5,13 @@ subtitle: "Githubパスワード認証廃止への対応"
 author: "Ryo"
 catelog: true
 mathjax: true
-last_modified_at: 2023-07-29
+last_modified_at: 2023-11-15
 header-mask: 0.0
 header-style: text
 tags:
 
 - Ubuntu 20.04 LTS
-- Ubuntu 22.04.2 LTS
+- Ubuntu 22.04 LTS
 - git
 
 ---
