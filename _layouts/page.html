@@ -50,12 +50,10 @@ layout: default
                 sidebar-container
             ">
                 <!-- GitHub Last Commit -->
-                <h5>LATEST COMMIT</a></h5>
-                <a href='https://github.com/RyoNakagami/RyoNakagami.github.io'><img src='https://img.shields.io/github/last-commit/RyoNakagami/RyoNakagami.github.io.svg' alt=''/>
-                <br>
+                {% include latest_commit.html %}
                 
                 <!-- Archive 20230316-->
-                {% include monthly_archive.html %}
+                <!-- {% include monthly_archive.html %} -->
                 
                 <!-- Featured Tags -->
                 {% include featured-tags.html %}
