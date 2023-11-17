@@ -11,6 +11,7 @@ last_modified_at: 2023-11-18
 tags:
 
 - 統計
+- Econometrics
 - Python
 ---
 
@@ -36,7 +37,7 @@ tags:
     - [シミュレーションでバイアスがあるかの確認](#%E3%82%B7%E3%83%9F%E3%83%A5%E3%83%AC%E3%83%BC%E3%82%B7%E3%83%A7%E3%83%B3%E3%81%A7%E3%83%90%E3%82%A4%E3%82%A2%E3%82%B9%E3%81%8C%E3%81%82%E3%82%8B%E3%81%8B%E3%81%AE%E7%A2%BA%E8%AA%8D)
   - [Propensity scoreで条件づけたHeterogeneityの推定](#propensity-score%E3%81%A7%E6%9D%A1%E4%BB%B6%E3%81%A5%E3%81%91%E3%81%9Fheterogeneity%E3%81%AE%E6%8E%A8%E5%AE%9A)
 - [Follow up Question](#follow-up-question)
-- [References](#references)
+- [References](#references)Econometrics 
 
 <!-- END doctoc generated TOC please keep comment here to allow auto update -->
 
