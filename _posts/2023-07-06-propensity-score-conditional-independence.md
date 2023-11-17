@@ -7,7 +7,7 @@ header-style: text
 header-mask: 0.0
 catelog: true
 mathjax: true
-last_modified_at: 2023-10-28
+last_modified_at: 2023-11-18
 tags:
 
 - 統計
@@ -27,7 +27,9 @@ tags:
 - [Propensity scoreでコントロールするとなぜCIAが成立するのか？](#propensity-score%E3%81%A7%E3%82%B3%E3%83%B3%E3%83%88%E3%83%AD%E3%83%BC%E3%83%AB%E3%81%99%E3%82%8B%E3%81%A8%E3%81%AA%E3%81%9Ccia%E3%81%8C%E6%88%90%E7%AB%8B%E3%81%99%E3%82%8B%E3%81%AE%E3%81%8B)
   - [Propensity scoreは特徴量のバランシングスコアである](#propensity-score%E3%81%AF%E7%89%B9%E5%BE%B4%E9%87%8F%E3%81%AE%E3%83%90%E3%83%A9%E3%83%B3%E3%82%B7%E3%83%B3%E3%82%B0%E3%82%B9%E3%82%B3%E3%82%A2%E3%81%A7%E3%81%82%E3%82%8B)
   - [Propensity scoreで条件づけたPotential outcome](#propensity-score%E3%81%A7%E6%9D%A1%E4%BB%B6%E3%81%A5%E3%81%91%E3%81%9Fpotential-outcome)
-    - [推定量に着目した場合](#%E6%8E%A8%E5%AE%9A%E9%87%8F%E3%81%AB%E7%9D%80%E7%9B%AE%E3%81%97%E3%81%9F%E5%A0%B4%E5%90%88)
+    - [MHE version 証明](#mhe-version-%E8%A8%BC%E6%98%8E)
+    - [関数変換後の独立性に基づいた証明](#%E9%96%A2%E6%95%B0%E5%A4%89%E6%8F%9B%E5%BE%8C%E3%81%AE%E7%8B%AC%E7%AB%8B%E6%80%A7%E3%81%AB%E5%9F%BA%E3%81%A5%E3%81%84%E3%81%9F%E8%A8%BC%E6%98%8E)
+    - [条件付き期待値の独立性](#%E6%9D%A1%E4%BB%B6%E4%BB%98%E3%81%8D%E6%9C%9F%E5%BE%85%E5%80%A4%E3%81%AE%E7%8B%AC%E7%AB%8B%E6%80%A7)
 - [Heterogeneous Treatment Effectがある場合](#heterogeneous-treatment-effect%E3%81%8C%E3%81%82%E3%82%8B%E5%A0%B4%E5%90%88)
   - [DGP and Distribution check](#dgp-and-distribution-check)
   - [推定値の確認](#%E6%8E%A8%E5%AE%9A%E5%80%A4%E3%81%AE%E7%A2%BA%E8%AA%8D)
@@ -71,6 +73,7 @@ $$
 会社提供スキルアップクラス受講のyes, noは個人の自発的意思に任されているとします. この状況下でスキルアップクラス受講の
 翌年年収への影響を推定したいときに,単純比較を実施してしまうと
 
+<div class="math display" style="overflow: auto">
 $$
 \begin{align*}
 \mathbb E[Y | D_i=1] - \mathbb E[Y | D_i=0] &=\mathbb E[Y_1 | D_i=1] - \mathbb E[Y_0 | D_i=0]\\
@@ -78,6 +81,7 @@ $$
 &= \text{ATT } + \text{selection bias }
 \end{align*}
 $$
+</div>
 
 以上のようにATT + selection biasのように見たい効果が見ることができません. 
 また, そもそも会社の意思決定問題に応じて「**見たい効果**」というのも変わってきます. 例えば, 
@@ -115,14 +119,16 @@ $\mathbb E[Y_1 \vert D_i=0]$をなぜ推定できるようになるのか簡単�
 
 $S_0$をunteatedの特徴量$X_i$の特徴量空間としたときに
 
+<div class="math display" style="overflow: auto">
 $$
 \begin{align*}
 \mathbb E[Y_1 | D_i=0] &= \mathbb E[\mathbb E[Y_1| D_i=0, X_i] | D_i=0]\\
-&= \mathbb E[\mathbb E[Y_1|X_i] | D_i=0] \because \text{CIA}\\
+&= \mathbb E[\mathbb E[Y_1|X_i] | D_i=0] \  \   \  \ \because \text{ CIA}\\
 &= \sum_{x\in S_0} \mathbb E[Y_1|X_i = x]\Pr(X_i=x |D_i = 0)\\  
 &= \sum_{x\in S_0} \mathbb E[Y_1|D_i = 1, X_i = x]\Pr(X_i=x |D_i = 0) \because \text{CIA and support condition}
 \end{align*}
 $$
+</div>
 
 なお, Support conditionとは
 
@@ -221,6 +227,8 @@ $$
 
 </div>
 
+#### MHE version 証明
+
 MHEにならって以下のように証明できます.
 
 $\{Y_{1i}, Y_{0i}\} \perp D_i \vert p(X_i)$が成立することを言い換えると
@@ -233,18 +241,40 @@ $$
 
 なのでこれを示せれば十分ということがわかります.
 
+<div class="math display" style="overflow: auto">
 $$
 \begin{align*}
-\Pr(D_i=1|Y_{1i}, Y_{0i}, p(X_i)) &= \mathbb E[D_i|Y_{1i}, Y_{0i}, p(X_i)]\\
-&= \mathbb E[\mathbb[D_i|Y_{1i}, Y_{0i}, X_i]|Y_{1i}, Y_{0i}, p(X_i)]\\
-&= \mathbb E[\mathbb[D_i|X_i]|Y_{1i}, Y_{0i}, p(X_i)] \because \text{ CIA holds}\\
-&= \mathbb E[p(X_i)|Y_{1i}, Y_{0i}, p(X_i)] \because \text{ definition}\\
+\Pr(D_i=1|Y_{1i}, Y_{0i}, p(X_i)) &= \mathbb E[D_i|Y_{1i}, Y_{0i}, p(X_i)]\\[3pt]
+&= \mathbb E[\mathbb[D_i|Y_{1i}, Y_{0i}, X_i]|Y_{1i}, Y_{0i}, p(X_i)]\\[3pt]
+&= \mathbb E[\mathbb[D_i|X_i]|Y_{1i}, Y_{0i}, p(X_i)] \because \text{ CIA holds}\\[3pt]
+&= \mathbb E[p(X_i)|Y_{1i}, Y_{0i}, p(X_i)] \because \text{ definition}\\[3pt]
 &= p(X_i)
-
 \end{align*}
 $$
+</div>
 
-#### 推定量に着目した場合
+したがって, $\{Y_{1i}, Y_{0i}\} \perp D_i \vert p(X_i)$が成立する.
+
+#### 関数変換後の独立性に基づいた証明
+
+$p(X_i)$について, 逆写像$p^{-1}$が定義できるとします. 任意の事象$A, B, C$について
+
+<div class="math display" style="overflow: auto">
+$$
+\begin{align*}
+\Pr((Y_{0i}, Y_{1i})\in A, D_i\in B \vert p(X_i)\in C) &= \frac{\Pr((Y_{0i}, Y_{1i})\in A, D_i\in B, p(X_i)\in C)}{\Pr(p(X_i)\in C)}\\[3pt]
+    &= \frac{\Pr((Y_{0i}, Y_{1i})\in A, D_i\in B, X_i\in p^{-1}(C))}{\Pr(X_i\in p^{-1}(C))}\\[3pt]
+    &= \Pr((Y_{0i}, Y_{1i})\in A, D_i\in B \vert X_i\in p^{-1}(C))\\[3pt]
+    &= \Pr((Y_{0i}, Y_{1i})\in A \vert X_i\in p^{-1}(C))\Pr(D_i\in B \vert X_i\in p^{-1}(C)) \\[3pt]
+    &= \Pr((Y_{0i}, Y_{1i})\in A \vert p(X_i)\in C)\Pr(D_i\in B \vert p(X_i)\in C)
+\end{align*}
+$$
+</div>
+
+したがって, $\{Y_{1i}, Y_{0i}\} \perp D_i \vert p(X_i)$が成立する.
+
+
+#### 条件付き期待値の独立性
 
 conditional expectationに着目して以下を示すことも可能です:
 
