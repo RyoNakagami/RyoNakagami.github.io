@@ -171,6 +171,7 @@ $$
 
 この証明は$Pr(D_i\vert X_i, p(X_i)) = Pr(D_i\vert p(X_i))$の証明ができればOkです. なぜなら
 
+<div class="math display" style="overflow: auto">
 $$
 \begin{align*}
 &\Pr(D_i|X_i, p(X_i)) = \Pr(D_i|p(X_i))\\
@@ -178,9 +179,11 @@ $$
 &= \Pr(D_i|p(X_i))\Pr(X_i| p(X_i))
 \end{align*}
 $$
+</div>
 
 $\Pr(D_i\vert X_i, p(X_i)) = \mathbb E[D_i\vert X_i, p(X_i)]$であることに留意すると,
 
+<div class="math display" style="overflow: auto">
 $$
 \begin{align*}
 \mathbb E[D_i|X_i, p(X_i)] &= \mathbb E[D_i|X_i] = p(X_i)\\
@@ -188,9 +191,11 @@ $$
 &= \mathbb E[p(X_i)|p(X_i)] = p(X_i)
 \end{align*}
 $$
+</div>
 
 したがって,
 
+<div class="math display" style="overflow: auto">
 $$
 \begin{align*}
 \Pr(D_i|X_i, p(X_i)) &= \mathbb E[D_i|X_i, p(X_i)] \\
@@ -198,6 +203,7 @@ $$
 &= \Pr(D_i|p(X_i))
 \end{align*}
 $$
+</div>
 
 したがって, 
 
@@ -284,6 +290,7 @@ $$
 
 証明は以下です:
 
+<div class="math display" style="overflow: auto">
 $$
 \begin{align*}
 \mathbb E[Y_{ji} | D_i, p(X_i)] &= \mathbb E[\mathbb E[Y_{ji}| D_i, p(X_i), X_i] | D_i, p(X_i)]\\
@@ -291,9 +298,11 @@ $$
 &=  \mathbb E[\mathbb E[Y_{ji}| X_i] | D_i, p(X_i)] \because \text{ CIA }
 \end{align*}
 $$
+</div>
 
 このとき, 簡略化のため $\mathbb E[Y_{ji}\vert X_i] \equiv \mu(X_i)$と表記します.
 
+<div class="math display" style="overflow: auto">
 $$
 \begin{align*}
 \mathbb E[\mathbb E[Y_{ji}| X_i] | D_i, p(X_i)] &= \mathbb E[\mu(X_i) | D_i, p(X_i)]\\
@@ -303,6 +312,7 @@ $$
 &= \mathbb E[Y_{ji}| p(X_i)] \because \text{ the smaller info set always dominates}
 \end{align*}
 $$
+</div>
 
 したがって, Propensity scoreで条件付けるとPotential outcomeの期待値は$D_i$に依存しないことがわかります.
 
