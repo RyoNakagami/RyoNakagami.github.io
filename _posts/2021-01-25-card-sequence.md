@@ -1,6 +1,6 @@
 ---
 layout: post
-title: " 数字が記載れたカードの並べ替え問題:カード数字とindexの一致確率"
+title: " 数字が記載されたカードの並べ替え問題:カード数字とindexの一致確率"
 subtitle: "確率と数学ドリル 5/N"
 author: "Ryo"
 catelog: true
