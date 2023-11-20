@@ -1,7 +1,7 @@
 ---
 layout: post
 title: "死神とのコイントスゲーム"
-subtitle: "制約条件付きコイントスゲームとゲーム勝率の計算"
+subtitle: "確率と数学ドリル 1/N"
 author: "Ryo"
 header-style: text
 header-mask: 0.0

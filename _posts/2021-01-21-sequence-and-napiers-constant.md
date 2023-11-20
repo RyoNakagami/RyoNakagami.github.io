@@ -1,11 +1,11 @@
 ---
 layout: post
 title: "自然対数の底ネイピア数とバウンド"
-subtitle: "確率と数学ドリル 1/N"
+subtitle: "日々の数学 1/N"
 author: "Ryo"
 catelog: true
 mathjax: true
-last_modified_at: 2023-10-01
+last_modified_at: 2023-11-21
 header-mask: 0.0
 header-style: text
 tags:
