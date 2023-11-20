@@ -1,7 +1,7 @@
 ---
 layout: post
 title: "自然対数の底ネイピア数とバウンド"
-subtitle: "日々の数学 1/N"
+subtitle: "統計のための数学 1/N"
 author: "Ryo"
 catelog: true
 mathjax: true
@@ -11,6 +11,7 @@ header-style: text
 tags:
 
 - math
+- 統計
 
 ---
 
@@ -195,7 +196,87 @@ $$
 したがって, $a_n < 3$となるので上に有界であることが示せた.
 
 
+## 級数によるネイピア数の表現
+
+<div style='padding-left: 2em; padding-right: 2em; border-radius: 1em; border-style:solid; border-color:#D3D3D3; background-color:#F8F8F8'>
+<p class="h4"><ins>級数によるネイピア数の表現</ins></p>
+
+ネイピア数は
+
+$$
+\exp(x) = \sum^{\infty}_{n=0}\frac{x}{n!} 
+$$
+
+という級数によって表すことができる.
+
+</div>
+
+この性質はテイラー展開によっても確認できますが, ここでは二項定理を用いて証明します.
+
+<div class="math display" style="overflow: auto">
+$$
+\begin{align*}
+\bigg(1 + \frac{x}{n}\bigg)^n &= \sum_{k=0}^n\bigg(\begin{array}{c}n\\k\end{array}\bigg)\bigg(\frac{x}{n}\bigg)^{k}\\[3pt]
+                              &= 1 + \frac{n}{1!}\bigg(\frac{x}{n}\bigg) + \frac{n(n-1)}{2!}\bigg(\frac{x}{n}\bigg)^{2} + \cdots + \frac{n(n-1)\cdots(n-k+1)}{k!}\bigg(\frac{x}{n}\bigg)^{k}+\cdots
+\end{align*}
+$$
+</div>
+
+したがって, 
+
+<div class="math display" style="overflow: auto">
+$$
+\begin{align*}
+\lim_{n\to\infty}\bigg(1 + \frac{x}{n}\bigg)^n &= 1 + \frac{n}{1!}\bigg(\frac{x}{n}\bigg) + \frac{n(n-1)}{2!}\bigg(\frac{x}{n}\bigg)^{2} + \cdots + \frac{n(n-1)\cdots(n-k+1)}{k!}\bigg(\frac{x}{n}\bigg)^{k}+\cdots\\[3pt]
+                                               &= 1 + \frac{x}{1!} + \frac{x^2}{2!} + \cdots + \frac{x^k}{k!} + \cdots\\[3pt]
+                                               &= \frac{x^0}{0!} + \frac{x}{1!} + \frac{x^2}{2!} + \cdots + \frac{x^k}{k!} + \cdots\\[3pt]
+                                               &= \sum_{k=0}\frac{x^k}{k!}
+\end{align*}
+$$
+</div>
+
+### 例：ポワソン分布の期待値と分散
+
+パラメーター$\lmabda$のポワソン分布に従う確率変数 $X$ の期待値と分散を求めるときに「級数表現されたネイピア数」を用います.
+
+<div class="math display" style="overflow: auto">
+$$
+\begin{align*}
+\mathbb E[X] &= \sum_{x=0}x\exp(-\lambda)\frac{\lambda^x}{x!}\\[3pt]
+             &= \exp(-\lambda)\sum_{x=1}\frac{\lambda^x}{(x-1)!}\\[3pt]
+             &= \exp(-\lambda)\lambda\sum_{x=1}\frac{\lambda^{x-1}}{(x-1)!}\\[3pt]
+             &= \exp(-\lambda)\lambda\sum_{k=0}\frac{\lambda^k}{k!}\\[3pt]
+             &= \exp(-\lambda)\lambda\exp(\lambda) \  \ \because \text{ 級数表現されたネイピア数より}\\[3pt]
+             &= \lambda
+\end{align*}
+$$
+</div>
+
+分散は$\mathbb E[X^2] - \mathbb E[X]^2$なので
+
+<div class="math display" style="overflow: auto">
+$$
+\begin{align*}
+\mathbb E[X^2] &= \sum_{x=0}x^2\exp(-\lambda)\frac{\lambda^x}{x!}\\[3pt]
+               &= \sum_{x=0}(x(x-1) +x)\exp(-\lambda)\frac{\lambda^x}{x!}\\[3pt]
+               &= \sum_{x=0}(x(x-1))\exp(-\lambda)\frac{\lambda^x}{x!} + \sum_{x=0}x\exp(-\lambda)\frac{\lambda^x}{x!}\\[3pt]
+               &= \lambda^2\sum_{x=2}\exp(-\lambda)\frac{\lambda^{x-2}}{(x-2)!} + \lambda\\[3pt]
+               &= \lambda^2\exp(-\lambda)\sum_{x=2}\frac{\lambda^{x-2}}{(x-2)!} + \lambda\\[3pt]
+               &= \lambda^2\exp(-\lambda)\sum_{k=0}\frac{\lambda^{k}}{(k)!} + \lambda\\[3pt]
+               &= \lambda^2\exp(-\lambda)\exp(\lmambda) + \lambda\\[3pt]
+               &= \lambda^2 + \lmambda
+\end{align*}
+$$
+</div>
+
+したがって, $V(X) = \lambda^2 + \lmambda - \lmabda^2 = \lmabda$.
+
+
+
+
+
 References
 -----
 
 - [高校数学の美しい物語 > 自然対数の底（ネイピア数）の定義：収束することの証明 ](https://manabitimes.jp/math/714)
+- [理数アラカルト > ネイピア数とは？](https://risalc.info/src/Napiers-constant.html)
