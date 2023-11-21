@@ -1,15 +1,3 @@
-<!-- START doctoc generated TOC please keep comment here to allow auto update -->
-<!-- DON'T EDIT THIS SECTION, INSTEAD RE-RUN doctoc TO UPDATE -->
-**Table of Contents**  *generated with [DocToc](https://github.com/thlorenz/doctoc)*
-
-- [問題](#%E5%95%8F%E9%A1%8C)
-  - [(1)の解答](#1%E3%81%AE%E8%A7%A3%E7%AD%94)
-  - [(2)の解答](#2%E3%81%AE%E8%A7%A3%E7%AD%94)
-- [Python Implementation](#python-implementation)
-- [References](#references)
-
-<!-- END doctoc generated TOC please keep comment here to allow auto update -->
-
 ---
 layout: post
 title: "数字の並べ替え"
@@ -19,13 +7,32 @@ header-style: text
 header-mask: 0.0
 catelog: true
 mathjax: true
-last_modified_at: 2023-09-28
+last_modified_at: 2023-11-22
 tags:
 
 - math
 - Python
 
 ---
+
+<div style='border-radius: 1em; border-style:solid; border-color:#D3D3D3; background-color:#F8F8F8'>
+
+<p class="h4">&nbsp;&nbsp;Table of Contents</p>
+
+<!-- START doctoc generated TOC please keep comment here to allow auto update -->
+<!-- DON'T EDIT THIS SECTION, INSTEAD RE-RUN doctoc TO UPDATE -->
+
+- [問題](#%E5%95%8F%E9%A1%8C)
+  - [(1)の解答](#1%E3%81%AE%E8%A7%A3%E7%AD%94)
+  - [(2)の解答](#2%E3%81%AE%E8%A7%A3%E7%AD%94)
+- [Python Implementation](#python-implementation)
+- [References](#references)
+
+<!-- END doctoc generated TOC please keep comment here to allow auto update -->
+
+
+</div>
+
 
 ## 問題
 
