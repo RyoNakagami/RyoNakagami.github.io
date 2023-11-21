@@ -23,9 +23,10 @@ tags:
 <!-- DON'T EDIT THIS SECTION, INSTEAD RE-RUN doctoc TO UPDATE -->
 
 - [関数変換後の独立性](#%E9%96%A2%E6%95%B0%E5%A4%89%E6%8F%9B%E5%BE%8C%E3%81%AE%E7%8B%AC%E7%AB%8B%E6%80%A7)
+  - [関数変換後の独立性の活用例: 積率母関数の導出](#%E9%96%A2%E6%95%B0%E5%A4%89%E6%8F%9B%E5%BE%8C%E3%81%AE%E7%8B%AC%E7%AB%8B%E6%80%A7%E3%81%AE%E6%B4%BB%E7%94%A8%E4%BE%8B-%E7%A9%8D%E7%8E%87%E6%AF%8D%E9%96%A2%E6%95%B0%E3%81%AE%E5%B0%8E%E5%87%BA)
 - [条件付き確率の解釈について](#%E6%9D%A1%E4%BB%B6%E4%BB%98%E3%81%8D%E7%A2%BA%E7%8E%87%E3%81%AE%E8%A7%A3%E9%87%88%E3%81%AB%E3%81%A4%E3%81%84%E3%81%A6)
   - [事象の独立の必要十分条件](#%E4%BA%8B%E8%B1%A1%E3%81%AE%E7%8B%AC%E7%AB%8B%E3%81%AE%E5%BF%85%E8%A6%81%E5%8D%81%E5%88%86%E6%9D%A1%E4%BB%B6)
-    - [確率事象 $B$ に依存しないなら $B^c$ にも依存しないことの確認](#%E7%A2%BA%E7%8E%87%E4%BA%8B%E8%B1%A1-b-%E3%81%AB%E4%BE%9D%E5%AD%98%E3%81%97%E3%81%AA%E3%81%84%E3%81%AA%E3%82%89-b%5Ec-%E3%81%AB%E3%82%82%E4%BE%9D%E5%AD%98%E3%81%97%E3%81%AA%E3%81%84%E3%81%93%E3%81%A8%E3%81%AE%E7%A2%BA%E8%AA%8D)
+    - [確率事象 $B$ に依存しないなら余事象にも依存しないことの確認](#%E7%A2%BA%E7%8E%87%E4%BA%8B%E8%B1%A1-b-%E3%81%AB%E4%BE%9D%E5%AD%98%E3%81%97%E3%81%AA%E3%81%84%E3%81%AA%E3%82%89%E4%BD%99%E4%BA%8B%E8%B1%A1%E3%81%AB%E3%82%82%E4%BE%9D%E5%AD%98%E3%81%97%E3%81%AA%E3%81%84%E3%81%93%E3%81%A8%E3%81%AE%E7%A2%BA%E8%AA%8D)
 - [Refernces](#refernces)
 
 <!-- END doctoc generated TOC please keep comment here to allow auto update -->
@@ -63,6 +64,43 @@ $$
 </div>
 
 したがって, $f(X) \perp g(X)$が成立する. 
+
+### 関数変換後の独立性の活用例: 積率母関数の導出
+
+<div style='padding-left: 2em; padding-right: 2em; border-radius: 1em; border-style:solid; border-color:#D3D3D3; background-color:#F8F8F8'>
+<p class="h4"><ins>Problem: 積率母関数と確率母関数</ins></p>
+
+確率変数 $X, Y$が独立であるとき $X+Y$の積率母関数をもとめよ.
+また, $X, Y$が非負の整数値のみをとる場合の確率母関数も求めよ
+
+</div>
+
+[関数変換後の独立性](#%E9%96%A2%E6%95%B0%E5%A4%89%E6%8F%9B%E5%BE%8C%E3%81%AE%E7%8B%AC%E7%AB%8B%E6%80%A7)が成立することを利用すると簡単に求めることができます.
+
+<div class="math display" style="overflow: auto">
+$$
+\begin{align*}
+M_{X+Y}(t) &= \mathbb E[\exp(t(X+Y))]\\
+           &= \mathbb E[\exp(t(X))\exp(t(Y))]\\
+           &= \mathbb E[\exp(t(X))]\mathbb E[\exp(t(Y))]\\
+           &= M_{X}(t)M_{Y}(t)
+\end{align*}
+$$
+</div>
+
+確率母関数についても同様に
+
+<div class="math display" style="overflow: auto">
+$$
+\begin{align*}
+g_{X+Y}(t) &= \mathbb E[t^{X+Y}]\\
+           &= \mathbb E[t^Xt^Y]\\
+           &= \mathbb E[t^X]\mathbb E[t^Y]\\
+           &= g_{X}(t)g_{Y}(t)
+\end{align*}
+$$
+</div>
+
 
 ## 条件付き確率の解釈について
 
@@ -124,7 +162,7 @@ $$
 
 したがって, 事象の独立性が導かれた.
 
-#### 確率事象 $B$ に依存しないなら $B^c$ にも依存しないことの確認
+#### 確率事象 $B$ に依存しないなら余事象にも依存しないことの確認
 
 確率事象 A, Bが独立ならば 
 

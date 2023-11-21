@@ -27,6 +27,8 @@ tags:
 - [ネイピア数数列の収束について](#%E3%83%8D%E3%82%A4%E3%83%94%E3%82%A2%E6%95%B0%E6%95%B0%E5%88%97%E3%81%AE%E5%8F%8E%E6%9D%9F%E3%81%AB%E3%81%A4%E3%81%84%E3%81%A6)
   - [単調性の証明](#%E5%8D%98%E8%AA%BF%E6%80%A7%E3%81%AE%E8%A8%BC%E6%98%8E)
   - [上に有界の証明](#%E4%B8%8A%E3%81%AB%E6%9C%89%E7%95%8C%E3%81%AE%E8%A8%BC%E6%98%8E)
+- [級数によるネイピア数の表現](#%E7%B4%9A%E6%95%B0%E3%81%AB%E3%82%88%E3%82%8B%E3%83%8D%E3%82%A4%E3%83%94%E3%82%A2%E6%95%B0%E3%81%AE%E8%A1%A8%E7%8F%BE)
+  - [例：ポワソン分布の期待値と分散](#%E4%BE%8B%E3%83%9D%E3%83%AF%E3%82%BD%E3%83%B3%E5%88%86%E5%B8%83%E3%81%AE%E6%9C%9F%E5%BE%85%E5%80%A4%E3%81%A8%E5%88%86%E6%95%A3)
 - [References](#references)
 
 <!-- END doctoc generated TOC please keep comment here to allow auto update -->
