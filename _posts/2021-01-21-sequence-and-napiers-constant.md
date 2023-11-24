@@ -26,6 +26,8 @@ tags:
   - [解答](#%E8%A7%A3%E7%AD%94)
 - [ネイピア数数列の収束について](#%E3%83%8D%E3%82%A4%E3%83%94%E3%82%A2%E6%95%B0%E6%95%B0%E5%88%97%E3%81%AE%E5%8F%8E%E6%9D%9F%E3%81%AB%E3%81%A4%E3%81%84%E3%81%A6)
   - [単調性の証明](#%E5%8D%98%E8%AA%BF%E6%80%A7%E3%81%AE%E8%A8%BC%E6%98%8E)
+    - [二項定理の展開を用いて単調性を証明](#%E4%BA%8C%E9%A0%85%E5%AE%9A%E7%90%86%E3%81%AE%E5%B1%95%E9%96%8B%E3%82%92%E7%94%A8%E3%81%84%E3%81%A6%E5%8D%98%E8%AA%BF%E6%80%A7%E3%82%92%E8%A8%BC%E6%98%8E)
+    - [相加相乗平均の不等式で単調性を証明](#%E7%9B%B8%E5%8A%A0%E7%9B%B8%E4%B9%97%E5%B9%B3%E5%9D%87%E3%81%AE%E4%B8%8D%E7%AD%89%E5%BC%8F%E3%81%A7%E5%8D%98%E8%AA%BF%E6%80%A7%E3%82%92%E8%A8%BC%E6%98%8E)
   - [上に有界の証明](#%E4%B8%8A%E3%81%AB%E6%9C%89%E7%95%8C%E3%81%AE%E8%A8%BC%E6%98%8E)
 - [級数によるネイピア数の表現](#%E7%B4%9A%E6%95%B0%E3%81%AB%E3%82%88%E3%82%8B%E3%83%8D%E3%82%A4%E3%83%94%E3%82%A2%E6%95%B0%E3%81%AE%E8%A1%A8%E7%8F%BE)
   - [例：ポワソン分布の期待値と分散](#%E4%BE%8B%E3%83%9D%E3%83%AF%E3%82%BD%E3%83%B3%E5%88%86%E5%B8%83%E3%81%AE%E6%9C%9F%E5%BE%85%E5%80%A4%E3%81%A8%E5%88%86%E6%95%A3)
@@ -156,7 +158,49 @@ $$
 
 </div>
 
-相加相乗平均の不等式を用いることで示すことができます.
+証明方法として
+
+- 二項定理の展開
+- 相加相乗平均の不等式
+
+があります.
+
+#### 二項定理の展開を用いて単調性を証明
+
+二項定理を用いると$a_n$について以下のように表せる
+
+<div class="math display" style="overflow: auto">
+$$
+\begin{align*}
+a_n &= \bigg(1 + \frac{1}{n}\bigg)^n\\[3pt]
+    &= \sum_{k=0}^n \bigg(\begin{array}{c}n \\ k\end{array}\bigg)\bigg(\frac{1}{n}\bigg)^k\\[3pt]
+    &= 1 + n\frac{1}{n}\sum_{k=2}^n \bigg(\begin{array}{c}n \\ k\end{array}\bigg)\bigg(\frac{1}{n}\bigg)^k\\[3pt]
+    &= 2 + \sum_{k=2}^n\frac{n(n-1)\cdots(n-k-1)}{k!}\frac{1}{n^k}\\[3pt]
+    &= 2 + \sum_{k=2}^n\frac{1}{k!}\bigg(1-\frac{1}{n}\bigg)\bigg(1-\frac{2}{n}\bigg)\cdots\bigg(1-\frac{k-1}{n}\bigg)
+\end{align*}
+$$
+</div>
+
+なお$a_{n+1}$については
+
+<div class="math display" style="overflow: auto">
+$$
+\begin{align*}
+a_{n+1} = 2 + \sum_{k=2}^{n+1}\frac{1}{k!}\bigg(1-\frac{1}{n+1}\bigg)\bigg(1-\frac{2}{n+1}\bigg)\cdots\bigg(1-\frac{k-1}{n+1}\bigg)
+\end{align*}
+$$
+</div>
+
+$a_n, a_{n+1}$を比べると, 後者のほうが項数が１つ多い上に, $\sum$ の内側の各項で後者のほうが大きいので
+
+$$
+a_n < a_{n+1}
+$$
+
+したがって, 単調性が示せた.
+
+
+#### 相加相乗平均の不等式で単調性を証明
 
 $n$個の$\frac{n+1}{n}$と1個の1について相加相乗平均の不等式を表すと
 
@@ -239,7 +283,7 @@ $$
 
 ### 例：ポワソン分布の期待値と分散
 
-パラメーター$\lmabda$のポワソン分布に従う確率変数 $X$ の期待値と分散を求めるときに「級数表現されたネイピア数」を用います.
+パラメーター$\lambda$のポワソン分布に従う確率変数 $X$ の期待値と分散を求めるときに「級数表現されたネイピア数」を用います.
 
 <div class="math display" style="overflow: auto">
 $$
@@ -265,13 +309,13 @@ $$
                &= \lambda^2\sum_{x=2}\exp(-\lambda)\frac{\lambda^{x-2}}{(x-2)!} + \lambda\\[3pt]
                &= \lambda^2\exp(-\lambda)\sum_{x=2}\frac{\lambda^{x-2}}{(x-2)!} + \lambda\\[3pt]
                &= \lambda^2\exp(-\lambda)\sum_{k=0}\frac{\lambda^{k}}{(k)!} + \lambda\\[3pt]
-               &= \lambda^2\exp(-\lambda)\exp(\lmambda) + \lambda\\[3pt]
-               &= \lambda^2 + \lmambda
+               &= \lambda^2\exp(-\lambda)\exp(\lambda) + \lambda\\[3pt]
+               &= \lambda^2 + \lambda
 \end{align*}
 $$
 </div>
 
-したがって, $V(X) = \lambda^2 + \lmambda - \lmabda^2 = \lmabda$.
+したがって, $V(X) = \lambda^2 + \lambda - \lambda^2 = \lambda$.
 
 
 
