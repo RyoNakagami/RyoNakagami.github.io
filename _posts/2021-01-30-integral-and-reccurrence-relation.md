@@ -5,7 +5,7 @@ subtitle: "統計のための数学 2/N"
 author: "Ryo"
 catelog: true
 mathjax: true
-last_modified_at: 2023-11-25
+last_modified_at: 2023-11-29
 header-mask: 0.0
 header-style: text
 tags:
@@ -16,7 +16,6 @@ tags:
 ---
 
 <div style='border-radius: 1em; border-style:solid; border-color:#D3D3D3; background-color:#F8F8F8'>
-https://ryonakagami.github.io/2021/04/21/variable-transformation/
 <p class="h4">&nbsp;&nbsp;Table of Contents</p>
 
 <!-- START doctoc generated TOC please keep comment here to allow auto update -->
@@ -279,7 +278,7 @@ $$
 \begin{align*}
 \Gamma(s)\Gamma(t) &= \int_0^{\pi/2}\int_0^\infty \cos^{2s-1}\theta \sin^{2t-1}\theta \exp(-r)rdrdy\theta\\[3pt]
                    &= \bigg(2\int^{\pi/2}_0\cos^{2s-1}\theta\sin^{2t-1}\theta d\theta\bigg)\bigg(2\int_0^\infty r^{2(s+t)-1}\exp(-r^2)dr\bigg)\\
-                   &= \Beta(s, t)\Gamma(s+t)
+                   &= \beta(s, t)\Gamma(s+t)
 \end{align*}
 $$
 </div>
@@ -287,7 +286,7 @@ $$
 したがって, 
 
 $$
-\Beta(s, t)=\frac{\Gamma(t)\Gamma(s)}{\Gamma(s+t)}
+\beta(s, t)=\frac{\Gamma(t)\Gamma(s)}{\Gamma(s+t)}
 $$
 
 
