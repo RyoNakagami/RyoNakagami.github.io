@@ -5,7 +5,7 @@ subtitle: "確率と数学ドリル 3/N"
 author: "Ryo"
 catelog: true
 mathjax: true
-last_modified_at: 2023-11-01
+last_modified_at: 2023-11-30
 header-mask: 0.0
 header-style: text
 tags:
@@ -27,7 +27,10 @@ tags:
   - [平均の導出](#%E5%B9%B3%E5%9D%87%E3%81%AE%E5%B0%8E%E5%87%BA)
   - [分散の導出](#%E5%88%86%E6%95%A3%E3%81%AE%E5%B0%8E%E5%87%BA)
   - [Pythonで確認してみる](#python%E3%81%A7%E7%A2%BA%E8%AA%8D%E3%81%97%E3%81%A6%E3%81%BF%E3%82%8B)
-- [Appendix: 変数変換のルール](#appendix-%E5%A4%89%E6%95%B0%E5%A4%89%E6%8F%9B%E3%81%AE%E3%83%AB%E3%83%BC%E3%83%AB)
+- [テイラー展開で変数変換後確率変数の期待値を近似的に求める](#%E3%83%86%E3%82%A4%E3%83%A9%E3%83%BC%E5%B1%95%E9%96%8B%E3%81%A7%E5%A4%89%E6%95%B0%E5%A4%89%E6%8F%9B%E5%BE%8C%E7%A2%BA%E7%8E%87%E5%A4%89%E6%95%B0%E3%81%AE%E6%9C%9F%E5%BE%85%E5%80%A4%E3%82%92%E8%BF%91%E4%BC%BC%E7%9A%84%E3%81%AB%E6%B1%82%E3%82%81%E3%82%8B)
+- [Appendix](#appendix)
+  - [変数変換のルール](#%E5%A4%89%E6%95%B0%E5%A4%89%E6%8F%9B%E3%81%AE%E3%83%AB%E3%83%BC%E3%83%AB)
+  - [標準正規分布のn次モーメントについて](#%E6%A8%99%E6%BA%96%E6%AD%A3%E8%A6%8F%E5%88%86%E5%B8%83%E3%81%AEn%E6%AC%A1%E3%83%A2%E3%83%BC%E3%83%A1%E3%83%B3%E3%83%88%E3%81%AB%E3%81%A4%E3%81%84%E3%81%A6)
 - [References](#references)
 
 <!-- END doctoc generated TOC please keep comment here to allow auto update -->
@@ -87,11 +90,6 @@ $$
 &= \exp\bigg(\frac{1}{2}\bigg)
 \end{align*}
 $$
-
-> REMARKS
-
-- 確率変数の関数変換に関して, デルタ法があるがあくまでデルタ法は確率変数列 $a_n$が漸近正規性を満たすときなどに定義されるので今回は使えない
-
 
 ### 分散の導出
 
@@ -164,10 +162,89 @@ fig2.show()
 
 {% include plotly/20210123_second_moment_hist.html %}
 
+## テイラー展開で変数変換後確率変数の期待値を近似的に求める
+
+<div style='padding-left: 2em; padding-right: 2em; border-radius: 1em; border-style:solid; border-color:#D3D3D3; background-color:#F8F8F8'>
+<p class="h4"><ins>Problem</ins></p>
+
+$X\sim N(0, 1)$のとき, $Y = \exp(x)$という変数変換を考えたとき,$Y$の平均をテイラー近似で求めよ
+
+</div>
+
+
+一般に, 確率変数 $X$ の期待値を$\theta$としたとき, 関数$g(X)$の近似的な期待値はデルタ法で求めることができます. $\theta$まわりでの$g(X)$の2次のテイラー展開
+
+$$
+g(x)\approx g(\theta) + g(\theta)(x-\theta) + \frac{1}{2}g''(\theta)(x-\theta)^2
+$$
+
+の両辺について期待値を取ることで求めることができます. 
+
+k次近似を$g_k(x)$と表すとしてまず, 2次近似で考えてみると
+
+$$
+\mathbb E[g_2(x)] = \exp(0) + \frac{1}{2} = 1.5
+$$
+
+$n$を正の整数とし, 今回は $X$ は標準正規分布に従っているので$\mathbb E[X^{2n+1}] = 0$で有ることに留意すると, $2n$近似のみを考えれば良い. $2n$近似について[Appendix]((#%E6%A8%99%E6%BA%96%E6%AD%A3%E8%A6%8F%E5%88%86%E5%B8%83%E3%81%AEn%E6%AC%A1%E3%83%A2%E3%83%BC%E3%83%A1%E3%83%B3%E3%83%88%E3%81%AB%E3%81%A4%E3%81%84%E3%81%A6))より
+
+$$
+\begin{align*}
+\mathbb E[g_{2n}(x)] &= 1  + \frac{1}{2} + \frac{1}{2}\frac{1}{4}+ \frac{1}{2}\frac{1}{4}\frac{1}{6} + \cdots + \frac{1}{2}\cdots\frac{1}{2(n-1)}\frac{1}{2n}\\[3pt]
+                     &= 1 + \sum_{j=1}^{n}\bigg(\prod_{k=1}^j \frac{1}{2k}\bigg)
+\end{align*}
+$$
+
+ここで, 右辺第二項について[Wolfram alpha](https://www.wolframalpha.com/input?i=%5Csum_%7Bn%3D1%7D%5E%5Cinfty%28%5Cprod_%7Bk%3D1%7D%5En+1%2F%282k%29%29)で計算してみると
+
+$$
+\lim_{n\to\infty}\sum_{j=1}^{n}\bigg(\prod_{k=1}^j \frac{1}{2k}\bigg)=\exp\bigg(\frac{1}{2}\bigg)-1
+$$
+
+従って,
+
+$$
+\lim_{k\to\infty}g_k(x) = \exp\bigg(\frac{1}{2}\bigg)
+$$
+
+となり上記で求めた答えと一致します.
+
+
+### 近似誤差が$n$が大きくなるに従ってどのように変化するか？
+
+近似誤差のオーダーについてPythonで確認すると以下のようになります
+
+
+{% include plotly/20210123_taylor_approx.html %}
+
+
+> Python code
+
+```python
+import math
+import numpy as np
+import plotly.express as px
+
+def taylor_term(n):
+    return np.sum(list(map(lambda x: (1/2)**x * 1/math.gamma(x+1), np.arange(1, n+1))))
+
+x = 1 + np.array(list(map(taylor_term, np.arange(1, 10))))
+y = np.exp(1/2)
+
+fig = px.line(x=np.arange(1, 20), 
+              y=(y-np.r_[1, np.repeat(x, 2)])/y,
+              title='テイラー近似とTrue-valueのpercentage error: 6次近似で誤差は0.2%を下回る')
+fig.update_xaxes(title_text="近似レベル")
+fig.update_yaxes(title_text="percentage error")
+fig.update_traces(hovertemplate='テイラー展開%{x}次近似<br>percentage error: %{y:.5%}')
+```
 
 
 
-## Appendix: 変数変換のルール
+
+
+## Appendix
+### 変数変換のルール
 
 <div style='padding-left: 2em; padding-right: 2em; border-radius: 1em; border-style:solid; border-color:#D3D3D3; background-color:#F8F8F8'>
 
@@ -187,7 +264,7 @@ G(y) &= \Pr(Y \leq y)\\
 \end{align*}
 $$
 
-両辺を$y$で微分すると
+両辺を$y$で微分するとこのとき
 
 $$
 g(y) = f(h^{-1}(y))\frac{d}{dy}h^{-1}(y)
@@ -195,7 +272,47 @@ $$
 
 これで$g(y)$が表された.
 
+### 標準正規分布のn次モーメントについて
+
+$l$を自然数として$n=2l$について
+
+$$
+\begin{align*}
+\mathbb E[X^n] &= \frac{1}{\sqrt{2\pi}}\int^{\infty}_{-\infty}x^n\exp\bigg(-\frac{x^2}{2}\bigg)dx\\[3pt]
+               &= \frac{2}{\sqrt{2\pi}}\int^{\infty}_{0}x^{2l}\exp\bigg(-\frac{x^2}{2}\bigg)dx\\[3pt]
+\end{align*}
+$$
+
+$x^2/2 = u$として置換積分を行うと
+
+<div class="math display" style="overflow: auto">
+$$
+\begin{align*}
+\mathbb E[X^n] &= \frac{2^{l+1}}{\sqrt{2\pi}}\int^{\infty}_{0}u^{l}\exp(-u)\frac{1}{\sqrt{2u}}du\\[3pt]
+               &= \frac{2^l}{\sqrt{\pi}}\int^{\infty}_{0}u^{l-\frac{1}{2}}\exp(-u)du\\[3pt]
+               &= \frac{2^l}{\sqrt{\pi}}\int^{\infty}_{0}u^{l+\frac{1}{2}-1}\exp(-u)du\\[3pt]
+               &= \frac{2^l}{\sqrt{\pi}}\Gamma\bigg(l+\frac{1}{2}\bigg)
+\end{align*}
+$$
+</div>
+
+$\Gamma(1/2) = \sqrt{\pi}$であることに留意すると
+
+$$
+\mathbb E[X^n] = 1\times 3\times 5\times\cdots\times (2l-1)
+$$
+
+なお, 
+
+$$
+\frac{1}{2l!}\mathbb E[X^{2l}] = \prod^l_{k=1}\frac{1}{2k}
+$$
+
+となる.
+
+
 References
 ------------
 
 - [Ryo's Tech Blog > 変数変換のルールをまとめる](https://ryonakagami.github.io/2021/04/21/variable-transformation/)
+- [Wolfram alpha > テイラー展開の項についての計算](https://www.wolframalpha.com/input?i=%5Csum_%7Bn%3D1%7D%5E%5Cinfty%28%5Cprod_%7Bk%3D1%7D%5En+1%2F%282k%29%29)
