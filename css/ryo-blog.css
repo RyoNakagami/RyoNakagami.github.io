@@ -3,8 +3,7 @@
     padding-right: 5%;
   }}
   .sidebar-container {
-    padding-right: 5%;
-    margin-left: 75%;
+    padding-right: 1%;
   }
 @media (min-width: 768px) {
   .post-container {
@@ -14,7 +13,7 @@
 .sidebar-container {
   color: #bfbfbf;
   font-size: 14px;
-  margin-left: 75%;
+  margin-left: 74%;
 }
 .sidebar-container h5 {
   color: #a3a3a3;
