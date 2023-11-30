@@ -2,6 +2,7 @@
   .post-container,
   .sidebar-container {
     padding-right: 5%;
+    margin-left: 75%;
   }
 }
 @media (min-width: 768px) {
