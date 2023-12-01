@@ -112,7 +112,7 @@ $$
 <div class="math display" style="overflow: auto">
 $$
 \begin{align*}
-\Pr(X\geq m+n\vert X\geq m) &= \frac{(1-p)^{m+n}}{(1-p)^m$}\\[3pt]
+\Pr(X\geq m+n\vert X\geq m) &= \frac{(1-p)^{m+n}}{(1-p)^m}\\[3pt]
                             &= (1-p)^n\\
                             &= \Pr(X\geq n)
 \end{align*}
