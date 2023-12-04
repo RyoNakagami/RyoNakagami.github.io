@@ -63,7 +63,7 @@ $$
 \begin{align*}
 \Pr(X \leq x) &= \Pr(\sin(\theta) \leq x)\\[3pt]
               &= \Pr(0\leq \theta \leq \hat\theta) + \Pr(\pi-\hat\theta\leq \theta \leq \pi)\\[3pt]
-              &= \frac{1}{\pi}(\hat\theta + \pi - (\pi-\hat\theta))\\[3pt]
+              &= \frac{1}{\pi}(\hat\theta + \pi - (\pi-\hat\theta))\\[3pt]20210122_simulation.html
               &= \frac{2\hat\theta}{\pi}
 \end{align*}
 $$
