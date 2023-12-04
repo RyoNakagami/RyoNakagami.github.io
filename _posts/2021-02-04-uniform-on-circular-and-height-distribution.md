@@ -5,7 +5,7 @@ subtitle: "確率と数学ドリル 10/N"
 author: "Ryo"
 catelog: true
 mathjax: true
-last_modified_at: 2023-12-01
+last_modified_at: 2023-12-05
 header-mask: 0.0
 header-style: text
 tags:
@@ -22,15 +22,18 @@ tags:
 <!-- START doctoc generated TOC please keep comment here to allow auto update -->
 <!-- DON'T EDIT THIS SECTION, INSTEAD RE-RUN doctoc TO UPDATE -->
 
-- [本日のクイズ](#%E6%9C%AC%E6%97%A5%E3%81%AE%E3%82%AF%E3%82%A4%E3%82%BA)
+- [半円周上に一様分布する点について](#%E5%8D%8A%E5%86%86%E5%91%A8%E4%B8%8A%E3%81%AB%E4%B8%80%E6%A7%98%E5%88%86%E5%B8%83%E3%81%99%E3%82%8B%E7%82%B9%E3%81%AB%E3%81%A4%E3%81%84%E3%81%A6)
   - [Pythonでのsimulation](#python%E3%81%A7%E3%81%AEsimulation)
+- [４分円内部に一様分布する点について](#%EF%BC%94%E5%88%86%E5%86%86%E5%86%85%E9%83%A8%E3%81%AB%E4%B8%80%E6%A7%98%E5%88%86%E5%B8%83%E3%81%99%E3%82%8B%E7%82%B9%E3%81%AB%E3%81%A4%E3%81%84%E3%81%A6)
+- [Appendix: 二次元極座標変換におけるヤコビアン](#appendix-%E4%BA%8C%E6%AC%A1%E5%85%83%E6%A5%B5%E5%BA%A7%E6%A8%99%E5%A4%89%E6%8F%9B%E3%81%AB%E3%81%8A%E3%81%91%E3%82%8B%E3%83%A4%E3%82%B3%E3%83%93%E3%82%A2%E3%83%B3)
+- [References](#references)
 
 <!-- END doctoc generated TOC please keep comment here to allow auto update -->
 
 
 </div>
 
-## 本日のクイズ
+## 半円周上に一様分布する点について
 
 <div style='padding-left: 2em; padding-right: 2em; border-radius: 1em; border-style:solid; border-color:#D3D3D3; background-color:#F8F8F8'>
 <p class="h4"><ins>Problem</ins></p>
@@ -131,3 +134,135 @@ fig.for_each_trace(lambda t: t.update(name = newnames[t.name],
 ```
 
 {% include plotly/20210204_simulation.html %}
+
+## ４分円内部に一様分布する点について
+
+<div style='padding-left: 2em; padding-right: 2em; border-radius: 1em; border-style:solid; border-color:#D3D3D3; background-color:#F8F8F8'>
+<p class="h4"><ins>Problem</ins></p>
+
+$D = \{(x, y)\vert x^2 + y^2 < 1, x>0, y >0\}$領域に一様分布する確率変数$(X, Y)$を考える.
+このとき以下を求めよ, 
+
+- $(X, Y)$の同時密度関数
+- $X$の期待値
+- $\text{Cov}(X + Y, X)$
+
+</div>
+
+$D$の面積は
+
+$$
+\text{Dの面積} = \frac{\pi}{4}\times 1\times 1 = \frac{\pi}{4}
+$$
+
+なので, $(X, Y)$の同時密度関数は
+
+$$
+f(x, y) = \begin{cases}\frac{4}{\pi} & (x, y) \in D\\[3pt]0 & \text{ otherwise}\end{cases}
+$$
+
+$X$の期待値は二次元極座標 $(r, \theta)$と直交座標 $(x, y)$間の変数変換を用いて
+
+<div class="math display" style="overflow: auto">
+$$
+\begin{align*}
+\mathbb E[X] &= \int\int_D x\frac{4}{\pi}dxdy\\[3pt]
+             &= \frac{4}{\pi}\int^1_0\int^{\pi/2}_0r\cos\theta \times r d\theta dr\\[3pt]
+             &= \frac{4}{\pi}\int^1_0 r^2 [\sin\theta]^{\pi/2}_0 dr\\[3pt]
+             &= \frac{4}{3\pi}
+\end{align*}
+$$
+</div>
+
+$\text{Cov}(X + Y, X) = \text{Var}(X) + \text{Cov}(Y, X)$なので
+
+<div class="math display" style="overflow: auto">
+$$
+\begin{align*}
+\mathbb E[X^2] &= \frac{4}{\pi}\int^1_0\int^{\pi/2}_0r^2\cos^2\theta \times r d\theta dr\\[3pt]
+               &= \frac{4}{\pi}\int^1_0r^3\int^{\pi/2}_0\frac{1 + \cos 2\theta}{2} d\theta dr\\[3pt]
+               &= \frac{4}{\pi}\int^1_0r^3\bigg[\frac{\theta}{2} + \frac{\sin2\theta}{4}\bigg]^{\pi/2}_0 dr\\[3pt]
+               &= \frac{4}{\pi} \frac{\pi}{4}\frac{1}{4}\\
+               &= \frac{1}{4}
+\end{align*}
+$$
+</div>
+
+また, 
+
+<div class="math display" style="overflow: auto">
+$$
+\begin{align*}
+\mathbb E[XY] &= \int\int_D xy\frac{4}{\pi}dxdy\\[3pt]
+              &= \frac{4}{\pi}\int^1_0\int^{\pi/2}_0r^3\cos\theta\sin\theta d\theta dr\\[3pt]
+              &= \frac{4}{\pi}\times \frac{1}{4} \times \frac{1}{2}\\[3pt]
+              &= \frac{1}{2\pi}
+\end{align*}
+$$
+</div>
+
+従って,
+
+$$
+\begin{align*}
+\text{Cov}(X + Y, X) &= \text{Var}(X) + \text{Cov}(Y, X)\\
+                     &= \frac{1}{4} - \frac{16}{9\pi^2} + \frac{1}{2\pi} - \frac{16}{9\pi^2}\\[3pt]
+                     &= \frac{1}{4} + \frac{1}{2\pi} - \frac{32}{9\pi^2}
+\end{align*}
+$$
+
+> Python simulation
+
+- radiusはsquare rootを取る必要がある点に留意
+- 面積で一様分布しているが, その面積は$r^2$に比例するのが直感的理解
+
+```python
+import numpy as np
+N = 10000
+r = np.sqrt(np.random.uniform(0, 1, N))
+theta = np.random.uniform(0, 1, N) * np.pi/2
+x, y = r * np.cos(theta), r * np.sin(theta)
+
+print(np.mean(x), 4/(3*np.pi))
+print(np.mean(x**2), 1/4)
+print(np.mean(x*y), 1/(2*np.pi))
+print(np.cov(x+y, x, ddof=1)[1,0], 1/4 + 1/(2*np.pi) - 32/(9*(np.pi**2)))
+```
+
+
+## Appendix: 二次元極座標変換におけるヤコビアン
+
+二次元極座標 $(r, \theta)$と直交座標 $(x, y)$間の変数変換を以下のように考えます:
+
+$$
+\begin{align*}
+&x = r\cos\theta\\
+&y = r\sin\theta
+\end{align*}
+$$
+
+二変数関数2つ組なのでヤコビ行列のサイズは$2\times 2$となります.
+
+ヤコビ行列は
+
+$$
+\left(\begin{array}{cc}
+\frac{\partial x}{\partial r} & \frac{\partial x}{\partial \theta}\\
+\frac{\partial y}{\partial r} & \frac{\partial y}{\partial \theta}
+\end{array}\right)
+
+=
+
+\left(\begin{array}{cc}
+r\cos\theta & -r\sin\theta\\
+r\sin\theta & r\cos\theta
+\end{array}\right)
+
+$$
+
+なので $\vert J \vert = r$と求まります.
+
+
+References
+------------
+- [高校数学の美しい物語 > 二次元極座標](https://manabitimes.jp/math/1209)
