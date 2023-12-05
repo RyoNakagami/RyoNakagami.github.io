@@ -132,7 +132,7 @@ $$
 \end{align*}
 $$
 
-つぎに $\plim_{n\to\infty}Z_n$を考えてみる.
+つぎに $\text{plim}_{n\to\infty}Z_n$を考えてみる.
 
 $$
 \lim_{n\to\infty} -\frac{z}{\mu} \times \ln\bigg(1 + \frac{1}{n}\bigg)^n = -\frac{z}{\mu}e

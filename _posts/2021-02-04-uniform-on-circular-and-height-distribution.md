@@ -25,6 +25,9 @@ tags:
 - [半円周上に一様分布する点について](#%E5%8D%8A%E5%86%86%E5%91%A8%E4%B8%8A%E3%81%AB%E4%B8%80%E6%A7%98%E5%88%86%E5%B8%83%E3%81%99%E3%82%8B%E7%82%B9%E3%81%AB%E3%81%A4%E3%81%84%E3%81%A6)
   - [Pythonでのsimulation](#python%E3%81%A7%E3%81%AEsimulation)
 - [４分円内部に一様分布する点について](#%EF%BC%94%E5%88%86%E5%86%86%E5%86%85%E9%83%A8%E3%81%AB%E4%B8%80%E6%A7%98%E5%88%86%E5%B8%83%E3%81%99%E3%82%8B%E7%82%B9%E3%81%AB%E3%81%A4%E3%81%84%E3%81%A6)
+- [円周内部に一様分布する二次元確率変数](#%E5%86%86%E5%91%A8%E5%86%85%E9%83%A8%E3%81%AB%E4%B8%80%E6%A7%98%E5%88%86%E5%B8%83%E3%81%99%E3%82%8B%E4%BA%8C%E6%AC%A1%E5%85%83%E7%A2%BA%E7%8E%87%E5%A4%89%E6%95%B0)
+  - [$\mathbb E[\exp(-(X^2 + Y^2))]$について](#%5Cmathbb-e%5Cexp-x%5E2--y%5E2%E3%81%AB%E3%81%A4%E3%81%84%E3%81%A6)
+  - [$\text{Cov}(X, Y)$について](#%5Ctextcovx-y%E3%81%AB%E3%81%A4%E3%81%84%E3%81%A6)
 - [Appendix: 二次元極座標変換におけるヤコビアン](#appendix-%E4%BA%8C%E6%AC%A1%E5%85%83%E6%A5%B5%E5%BA%A7%E6%A8%99%E5%A4%89%E6%8F%9B%E3%81%AB%E3%81%8A%E3%81%91%E3%82%8B%E3%83%A4%E3%82%B3%E3%83%93%E3%82%A2%E3%83%B3)
 - [References](#references)
 
@@ -228,6 +231,99 @@ print(np.mean(x**2), 1/4)
 print(np.mean(x*y), 1/(2*np.pi))
 print(np.cov(x+y, x, ddof=1)[1,0], 1/4 + 1/(2*np.pi) - 32/(9*(np.pi**2)))
 ```
+
+## 円周内部に一様分布する二次元確率変数
+
+<div style='padding-left: 2em; padding-right: 2em; border-radius: 1em; border-style:solid; border-color:#D3D3D3; background-color:#F8F8F8'>
+<p class="h4"><ins>Problem</ins></p>
+
+二次元確率変数 $(X, Y)$の同時密度関数が以下のように与えられているとします:
+
+$$
+f_{X, Y}(x, y) = \begin{cases}
+\frac{1}{\pi} & \text{ where } x^2 +y^2 < 1\\
+0 & \text{ otherwise}
+\end{cases}
+$$
+
+これは, $(X, Y)$が原点を中心とした半径1の円内部に一様分布していることを示している. このとき, 以下を求めよ
+
+- $X$の期待値と分散
+- $\mathbb E[\exp(-(X^2 + Y^2))]$
+- $\text{Cov}(X, Y)$
+
+</div>
+
+$X$の期待値は直感的に0とわかりますが, 以下のように数式を用いて導出できます
+
+<div class="math display" style="overflow: auto">
+$$
+\begin{align*}
+\mathbb E[X] &= \int\int_{x^2+y^2<1} x \frac{1}{\pi}dxdy\\[3pt]
+             &= \frac{1}{\pi}\int^1_0\int^{2\pi}_0 r\cos(\theta)\times r d\theta dr\\[3pt]
+             &= \frac{1}{\pi}\int^1_0 r^2 \int^{2\pi}_0 \cos(\theta)d\theta dr\\[3pt]
+             &= \frac{1}{\pi}\int^1_0 r^2 [\sin\theta]^{2\pi}_0\\
+             &= 0
+\end{align*}
+$$
+</div>
+
+同様に
+
+<div class="math display" style="overflow: auto">
+$$
+\begin{align*}
+\mathbb E[X^2] &= \int\int_{x^2+y^2<1} x^2 \frac{1}{\pi}dxdy\\[3pt]
+             &= \frac{1}{\pi}\int^1_0\int^{2\pi}_0 r^2\cos^2(\theta)\times rd\theta dr\\[3pt]
+             &= \frac{1}{\pi}\int^1_0 r^3 \int^{2\pi}_0 \frac{1 + \cos(2\theta)}{2}d\theta dr\\[3pt]
+             &= \frac{1}{\pi}\int^1_0 r^3 \bigg(\pi + \left[\frac{\sin 2\theta}{4}\right]^{2\pi}_0\bigg)\\[3pt]
+             &= \frac{1}{4}
+\end{align*}
+$$
+</div>
+
+従って, 
+
+$$
+\text{Var}(X^2) = \frac{1}{4}
+$$
+
+### $\mathbb E[\exp(-(X^2 + Y^2))]$について
+
+これも極座標変換を用いて計算することができます
+
+<div class="math display" style="overflow: auto">
+$$
+\begin{align*}
+\mathbb E[\exp(-(X^2 + Y^2))] &=  \int\int_{x^2+y^2<1} \exp(-x^2 -y^2) \frac{1}{\pi}dxdy\\[3pt]
+                              &=  \int^1_0\int^{2\pi}_0 r\exp(-r^2) \frac{1}{\pi}d\theta dr\\[3pt]
+                              &= \int^1_02r\exp(-r^2) dr\\[3pt]
+                              &= \left[-\exp(-r^2)\right]^1_0\\[3pt]
+                              &= 1 - \exp(-1)
+\end{align*}
+$$
+</div>
+
+### $\text{Cov}(X, Y)$について
+
+$$
+\begin{align*}
+\mathbb E[XY] &=  \int\int_{x^2+y^2<1} xy \frac{1}{\pi}dxdy\\[3pt]
+                              &=  \int^1_0\int^{2\pi}_0 r^3\cos\theta\sin\theta \frac{1}{\pi}d\theta dr\\[3pt]
+                              &= \frac{1}{2\pi}\int^1_0r^3\int^{2\pi}_0\sin(2\theta) d\theta dr\\[3pt]
+                              &= 0
+\end{align*}
+$$
+
+従って, $\text{Cov}(X, Y) = 0$
+
+<div style='padding-left: 2em; padding-right: 2em; border-radius: 1em; border-style:solid; border-color:#e6e6fa; background-color:#e6e6fa'>
+<p class="h4"><ins>REMARKS</ins></p>
+
+- $X, Y$は, 上記より無相関だが$x^2 + y^2 < 1$内部で一様分布と定義されているので独立ではない
+- 無相関であったとしても独立ではない例の一つ
+
+</div>
 
 
 ## Appendix: 二次元極座標変換におけるヤコビアン
