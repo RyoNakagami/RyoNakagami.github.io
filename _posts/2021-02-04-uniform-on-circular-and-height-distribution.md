@@ -26,8 +26,8 @@ tags:
   - [Pythonでのsimulation](#python%E3%81%A7%E3%81%AEsimulation)
 - [４分円内部に一様分布する点について](#%EF%BC%94%E5%88%86%E5%86%86%E5%86%85%E9%83%A8%E3%81%AB%E4%B8%80%E6%A7%98%E5%88%86%E5%B8%83%E3%81%99%E3%82%8B%E7%82%B9%E3%81%AB%E3%81%A4%E3%81%84%E3%81%A6)
 - [円周内部に一様分布する二次元確率変数](#%E5%86%86%E5%91%A8%E5%86%85%E9%83%A8%E3%81%AB%E4%B8%80%E6%A7%98%E5%88%86%E5%B8%83%E3%81%99%E3%82%8B%E4%BA%8C%E6%AC%A1%E5%85%83%E7%A2%BA%E7%8E%87%E5%A4%89%E6%95%B0)
-  - [$\mathbb E[\exp(-(X^2 + Y^2))]$について](#%5Cmathbb-e%5Cexp-x%5E2--y%5E2%E3%81%AB%E3%81%A4%E3%81%84%E3%81%A6)
-  - [$\text{Cov}(X, Y)$について](#%5Ctextcovx-y%E3%81%AB%E3%81%A4%E3%81%84%E3%81%A6)
+  - [変数変換後の期待値について](#%E5%A4%89%E6%95%B0%E5%A4%89%E6%8F%9B%E5%BE%8C%E3%81%AE%E6%9C%9F%E5%BE%85%E5%80%A4%E3%81%AB%E3%81%A4%E3%81%84%E3%81%A6)
+  - [(X, Y)の共分散について：無相関だが独立ではない](#x-y%E3%81%AE%E5%85%B1%E5%88%86%E6%95%A3%E3%81%AB%E3%81%A4%E3%81%84%E3%81%A6%E7%84%A1%E7%9B%B8%E9%96%A2%E3%81%A0%E3%81%8C%E7%8B%AC%E7%AB%8B%E3%81%A7%E3%81%AF%E3%81%AA%E3%81%84)
 - [Appendix: 二次元極座標変換におけるヤコビアン](#appendix-%E4%BA%8C%E6%AC%A1%E5%85%83%E6%A5%B5%E5%BA%A7%E6%A8%99%E5%A4%89%E6%8F%9B%E3%81%AB%E3%81%8A%E3%81%91%E3%82%8B%E3%83%A4%E3%82%B3%E3%83%93%E3%82%A2%E3%83%B3)
 - [References](#references)
 
@@ -216,8 +216,25 @@ $$
 
 > Python simulation
 
-- radiusはsquare rootを取る必要がある点に留意
-- 面積で一様分布しているが, その面積は$r^2$に比例するのが直感的理解
+radiusはsquare rootを取る必要がある点に留意. 面積で一様分布しているが, その面積は$r^2$に比例するのが直感的理解ですが, 変数変換によって導出した確率密度関数から逆関数法で以下のようにも示せます
+
+$$
+\begin{align*}
+\Pr(r\leq x) &= \int^x_0\int^{\pi/2}_0\frac{4}{\pi}rd\theta dr\\[3pt]
+             &= \int^x_0 2r dr\\
+             &= x^2
+\end{align*}
+$$
+
+従って, $\Pr(r\leq x) \sim Unif(0, 1)$よりradius, $r$は
+
+$$
+\begin{align*}
+r = \sqrt{U} \  \ \text{ where } U\sim Unif(0, 1)
+\end{align*}
+$$
+
+と計算できます. $\theta$は同様に確かめると $\theta\sim Unif(0, \pi/2)$ であることがわかる.
 
 ```python
 import numpy as np
@@ -288,7 +305,7 @@ $$
 \text{Var}(X^2) = \frac{1}{4}
 $$
 
-### $\mathbb E[\exp(-(X^2 + Y^2))]$について
+### 変数変換後の期待値について
 
 これも極座標変換を用いて計算することができます
 
@@ -304,7 +321,7 @@ $$
 $$
 </div>
 
-### $\text{Cov}(X, Y)$について
+### (X, Y)の共分散について：無相関だが独立ではない
 
 $$
 \begin{align*}
