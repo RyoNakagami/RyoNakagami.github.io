@@ -330,6 +330,7 @@ $$
 
 について$x = \sin\theta$と変数変換し, $\theta$についての密度関数$g$を考えてみると $\theta\in(0, \pi/2)$
 について
+
 $$
 \begin{align*}
 g(\theta) &= \frac{2}{\pi\sqrt{1-\sin^2\theta}}\cos\theta\\
