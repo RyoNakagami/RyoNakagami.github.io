@@ -347,6 +347,35 @@ $$
 
 に従う$\theta$に対して$x = \sin(\theta)$と変換してシミュレーションデータの生成もできそうです.
 
+<div style='padding-left: 2em; padding-right: 2em; border-radius: 1em; border-style:solid; border-color:#e6e6fa; background-color:#e6e6fa'>
+<p class="h4"><ins>Column: 変数変換は一意ではない</ins></p>
+
+$$
+\theta\sim\text{Unif}(0, \pi)
+$$
+
+について$x=\sin(\theta)$と考えたときの$x$の密度関数を考えてみます. 
+
+$$
+\begin{align*}
+\Pr(X\leq x) &= \Pr(\sin\theta \leq x)\\
+             &= \Pr(\theta \in (0, \arcsin(x))) + \Pr(\theta \in (\pi-\Pr(\theta \in (0, \arcsin(x))), \pi))\\
+             &= \frac{2\arcsin(x)}{\pi}
+\end{align*}
+$$
+
+従って, 
+
+$$
+f(x) = \frac{2}{\pi\sqrt{1-x^2}}
+$$
+
+$\theta\sim\text{Unif}(0, \pi)$からの変数変換でも今回の目的密度関数が再現できる.
+
+</div>
+
+
+
 #### Python simulation
 
 ```python
@@ -423,3 +452,4 @@ print("sample mean:{:.4f}, true-val::{:.4f}".format(np.var(x2), 1/2 - 4/np.pi**2
 References
 -------------
 - [Lecture note 2007 by Karl Sigman > Acceptance-Rejection Method](http://www.columbia.edu/~ks20/4703-Sigman/4703-07-Notes-ARM.pdf)
+- [Ryo's Tech Blog > 半円周上に一様分布する点の高さの分布](https://ryonakagami.github.io/2021/02/04/uniform-on-circular-and-height-distribution/#%E5%8D%8A%E5%86%86%E5%91%A8%E4%B8%8A%E3%81%AB%E4%B8%80%E6%A7%98%E5%88%86%E5%B8%83%E3%81%99%E3%82%8B%E7%82%B9%E3%81%AB%E3%81%A4%E3%81%84%E3%81%A6)
