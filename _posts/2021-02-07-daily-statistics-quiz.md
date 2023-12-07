@@ -21,7 +21,6 @@ tags:
 
 <!-- START doctoc generated TOC please keep comment here to allow auto update -->
 <!-- DON'T EDIT THIS SECTION, INSTEAD RE-RUN doctoc TO UPDATE -->
-\int^\infty_0 u \exp(-3u) du \\[3pt]
 
 - [自然対数と置換積分](#%E8%87%AA%E7%84%B6%E5%AF%BE%E6%95%B0%E3%81%A8%E7%BD%AE%E6%8F%9B%E7%A9%8D%E5%88%86)
   - [Python simulation: Acceptance-Rejection Sampling](#python-simulation-acceptance-rejection-sampling)
@@ -35,7 +34,6 @@ tags:
 - [References](#references)
 
 <!-- END doctoc generated TOC please keep comment here to allow auto update -->
-\int^\infty_0 u \exp(-3u) du \\[3pt]
 
 </div>
 
