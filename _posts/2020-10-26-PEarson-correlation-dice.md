@@ -1,13 +1,13 @@
 ---
 layout: post
 title: "Pearson相関係数: 多項分布とサイコロの出目の相関係数"
-subtitle: "相関係数 2/N"
+subtitle: "相関係数 3/N"
 author: "Ryo"
 header-style: text
 header-mask: 0.0
 catelog: true
 mathjax: true
-last_modified_at: 2023-03-02
+last_modified_at: 2023-12-08
 tags:
 
 - 統計
@@ -41,7 +41,7 @@ $n$ 個のフェアな6面サイコロについて, 1と2以外の出目の個�
 は多項分布に従うので以下のように表現できる
 
 $$
-Pr(X=x, Y=y, Z=z) = \frac{n!}{x!y!z!}\bigg(\frac{1}{6}\bigg)^{x+y}\bigg(\frac{4}{6}\bigg)^z
+\Pr(X=x, Y=y, Z=z) = \frac{n!}{x!y!z!}\bigg(\frac{1}{6}\bigg)^{x+y}\bigg(\frac{4}{6}\bigg)^z
 $$
 
 従って, 共分散は
@@ -60,8 +60,8 @@ $$
 
 $$
 \begin{align*}
-&\mathbf E[X] = \mathbf E[Y] = \frac{n}{6}\\
-&Var(X) = Var(Y) = n\times\frac{1}{6}\times\frac{5}{6}= \frac{5n}{36}
+&\mathbb E[X] = \mathbb E[Y] = \frac{n}{6}\\
+&\text{Var}(X) = \text{Var}(Y) = n\times\frac{1}{6}\times\frac{5}{6}= \frac{5n}{36}
 \end{align*}
 $$
 

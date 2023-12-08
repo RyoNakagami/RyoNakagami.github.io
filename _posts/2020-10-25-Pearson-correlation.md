@@ -1,13 +1,13 @@
 ---
 layout: post
 title: "変数間の直線的関係性の尺度としてのPearsonの相関係数"
-subtitle: "相関係数 1/N"
+subtitle: "相関係数 2/N"
 author: "Ryo"
 header-style: text
 header-mask: 0.0
 catelog: true
 mathjax: true
-last_modified_at: 2023-02-20
+last_modified_at: 2023-12-08
 tags:
 
 - 統計検定
@@ -39,7 +39,7 @@ tags:
 とある母集団からランダムサンプリングされた 2変数 $(x, y)$ からなる大きさ $n$ の数値データが存在するとします:
 
 $$
-\bigg(\begin{array}{c}  x_1\\y_1\end{array}\bigg), \cdots,\bigg(\begin{array}{c}  x_n\\y_n\end{array}\bigg)
+\bigg(\begin{array}{c}  x_1\\y_1\end{array}\bigg), \cdots,\bigg(\begin{array}{c}x_n\\ y_n \end{array}\bigg)
 $$
 
 このサンプルについて, 2変数間の「直線的関係」の尺度としてPearsonの相関係数, $r_{xy}$ がしばしば用いられます:
@@ -57,10 +57,10 @@ $$
 -1 \leq r_{xy} \leq 1
 $$
 
-$|r_{xy}|=1$は2変数間に1次式の関係があるときに限定されます. つまり, 
+$\vert r_{xy}\vert=1$は2変数間に1次式の関係があるときに限定されます. つまり, 
 
 $$
-|r_{xy}|=1 \Longleftrightarrow y_i = a + bx_i
+\vert r_{xy}\vert=1 \Longleftrightarrow y_i = a + bx_i
 $$ 
 
 </div>
@@ -91,7 +91,7 @@ $$
 y_i = kx_i + \bar y - k\bar x = kx_i + c \ \ ( \text{ c は定数とする})
 $$
 
-となり, $|r_{xy}|=1$ は変数間に1次式の関係があるときに限定されるときとわかる.
+となり, $\vert r_{xy}\vert=1$ は変数間に1次式の関係があるときに限定されるときとわかる.
 
 **証明終了**
 
@@ -152,9 +152,9 @@ $$
 
 $$
 \begin{align*}
-\mathbf{Cov}(U, V) &= \mathbf V(Y) > 0\\ 
-\mathbf{Cov}(V, W) &= \mathbf V(Z) > 0\\ 
-\mathbf{Cov}(U, W) &= -\mathbf V(X) < 0 
+\text{Cov}(U, V) &= \mathbf V(Y) > 0\\ 
+\text{Cov}(V, W) &= \mathbf V(Z) > 0\\ 
+\text{Cov}(U, W) &= -\mathbf V(X) < 0 
 \end{align*}
 $$
 
@@ -285,7 +285,7 @@ $$
 確率変数 $X$, $Y$に対して
 
 $$
-V(X+Y) = Var(X) + Var(Y) + 2Cov(X,Y)
+\text{Var}(X+Y) = \text{Var}(X) + \text{Var}(Y) + 2\text{Cov}(X,Y)
 $$
 
 </div>
@@ -296,9 +296,9 @@ $\mathbb E[X] = \mu_x, \mathbb E[Y] = \mu_y$とおき
 
 $$
 \begin{align*}
-Var(X+Y) &= \mathbb E[(X+Y - \mu_x - \mu_y)^2]\\
+\text{Var}(X+Y) &= \mathbb E[(X+Y - \mu_x - \mu_y)^2]\\
          &= \mathbb E[(X-\mu_x)^2] + 2\mathbb E[(X-\mu_x)(Y-\mu_y)] + \mathbb E[(Y-\mu_y)^2]\\
-         &= Var(X) + Var(Y) + 2Cov(X,Y)
+         &= \text{Var}(X) + \text{Var}(Y) + 2\text{XCov}(X,Y)
 \end{align*}
 $$
 
@@ -312,7 +312,7 @@ $$
 確率変数 $X_1 \cdots, X_n$, それぞれの期待値が存在し $\mu_1, \cdots, \mu_n$ と表せるとき
 
 $$
-V(X_1+X_2 + \cdots + X_n) = \sum_i^n Var(X_i) + 2\sum_{i<j}Cov(X_i, X_j)
+\text{Var}(X_1+X_2 + \cdots + X_n) = \sum_i^n Var(X_i) + 2\sum_{i<j}Cov(X_i, X_j)
 $$
 
 </div>
@@ -324,7 +324,7 @@ $$
 Var(X_1+\cdots+X_n) &= \mathbb E[(X_1+\cdots+X_n - \mu_1 - \cdots - \mu_n)^2]\\
          &= \mathbb E[\sum (X_i - \mu_i)^2 + 2\sum_{i<j}(X_i - \mu_i)(X_j-\mu_j)]\\
          &= \sum \mathbb E[(X_i - \mu_i)^2] +2\sum_{i<j}\mathbb E[(X_i - \mu_i)(X_j-\mu_j)]\\
-         &= \sum_i^n Var(X_i) + 2\sum_{i<j}Cov(X_i, X_j)
+         &= \sum_i^n \text{Var}(X_i) + 2\sum_{i<j}\text{Cov}(X_i, X_j)
 \end{align*}
 $$
 
