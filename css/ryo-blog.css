@@ -1,19 +1,23 @@
 @media (min-width: 1200px) {
   .post-container {
     padding-right: 5%;
-  }}
+  }
   .sidebar-container {
     padding-right: 1%;
-  }
-@media (min-width: 768px) {
+    margin-left: 74%;
+  }}
+@media (min-width: 992px) {
   .post-container {
     padding-right: 5%;
+  }
+  .sidebar-container {
+    padding-right: 1%;
+    margin-left: 74%;
   }
 }
 .sidebar-container {
   color: #bfbfbf;
   font-size: 14px;
-  margin-left: 74%;
 }
 .sidebar-container h5 {
   color: #a3a3a3;

@@ -59,9 +59,9 @@ $D_i, i \in \{A, B, C\}$をドアの選択を表す確率変数とすると$\mat
 
 $$
 \begin{align*}
-\mathbb E[T] &= \mathbb E[\mathbb E[T|D_i]]\\
-             &= \mathbb E[T|D_A]\Pr(D_A) + \mathbb E[T|D_B]\Pr(D_B) + \mathbb E[T|D_C]\Pr(D_C)\\
-             &= \mathbb 2 \times \Pr(D_A) + \mathbb E[3 + T]\Pr(D_B) + \mathbb E[5 + T]\Pr(D_C)\\
+\mathbb E[T] &= \mathbb E[\mathbb E[T|D_i]]\\[3pt]
+             &= \mathbb E[T|D_A]\Pr(D_A) + \mathbb E[T|D_B]\Pr(D_B) + \mathbb E[T|D_C]\Pr(D_C)\\[3pt]
+             &= \mathbb 2 \times \Pr(D_A) + \mathbb E[3 + T]\Pr(D_B) + \mathbb E[5 + T]\Pr(D_C)\\[3pt]
              &= \frac{1}{3}(2 + 3 + 5 + 2\mathbb E[T])
 \end{align*}
 $$
@@ -88,9 +88,9 @@ $$
 $$
 \begin{align*}
 \mathbb E[T] &= \mathbb E[\mathbb E[T\vert N=n]]\\[3pt]
-             &= \sum_n \mathbb E[T\vert N=n] \Pr(N=n)\\
-             &= \sum_{n\geq1}(4n-2)\frac{1}{3}\sum_{k=0}^{n-1}\frac{1}{3^k}\frac{1}{3^{n-k}}\\
-             &= \sum_{n\geq1}\frac{2^{n-1}}{3^n}(4n-2)\\
+             &= \sum_n \mathbb E[T\vert N=n] \Pr(N=n)\\[3pt]
+             &= \sum_{n\geq1}(4n-2)\frac{1}{3}\sum_{k=0}^{n-1}\frac{1}{3^k}\frac{1}{3^{n-k}}\\[3pt]
+             &= \sum_{n\geq1}\frac{2^{n-1}}{3^n}(4n-2)\\[3pt]
              &= 12 - 2 = 10
 \end{align*}
 $$
@@ -105,9 +105,9 @@ $$
 
 $$
 \begin{align*}
-\mathbb E[T^2] &= \mathbb E[\mathbb E[T^2|D_i]]\\
-             &= \mathbb E[T^2|D_A]\Pr(D_A) + \mathbb E[T^2|D_B]\Pr(D_B) + \mathbb E[T^2|D_C]\Pr(D_C)\\
-             &= \mathbb 2^2 \times \Pr(D_A) + \mathbb E[(3 + T)^2]\Pr(D_B) + \mathbb E[(5 + T)^2]\Pr(D_C)\\
+\mathbb E[T^2] &= \mathbb E[\mathbb E[T^2|D_i]]\\[3pt]
+             &= \mathbb E[T^2|D_A]\Pr(D_A) + \mathbb E[T^2|D_B]\Pr(D_B) + \mathbb E[T^2|D_C]\Pr(D_C)\\[3pt]
+             &= \mathbb 2^2 \times \Pr(D_A) + \mathbb E[(3 + T)^2]\Pr(D_B) + \mathbb E[(5 + T)^2]\Pr(D_C)\\[3pt]
              &= \frac{1}{3}(4 + 9 + 25 + (6 + 10)\mathbb E[T] + 2\mathbb E[T^2])
 \end{align*}
 $$
