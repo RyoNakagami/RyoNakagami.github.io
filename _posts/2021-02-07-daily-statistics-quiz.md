@@ -5,7 +5,7 @@ subtitle: "確率と数学ドリル 12/N"
 author: "Ryo"
 catelog: true
 mathjax: true
-last_modified_at: 2023-12-07
+last_modified_at: 2023-12-08
 header-mask: 0.0
 header-style: text
 tags:
@@ -22,6 +22,7 @@ tags:
 <!-- START doctoc generated TOC please keep comment here to allow auto update -->
 <!-- DON'T EDIT THIS SECTION, INSTEAD RE-RUN doctoc TO UPDATE -->
 
+- [置換積分](#%E7%BD%AE%E6%8F%9B%E7%A9%8D%E5%88%86)
 - [自然対数と置換積分](#%E8%87%AA%E7%84%B6%E5%AF%BE%E6%95%B0%E3%81%A8%E7%BD%AE%E6%8F%9B%E7%A9%8D%E5%88%86)
   - [Python simulation: Acceptance-Rejection Sampling](#python-simulation-acceptance-rejection-sampling)
 - [ガンマ関数と置換積分](#%E3%82%AC%E3%83%B3%E3%83%9E%E9%96%A2%E6%95%B0%E3%81%A8%E7%BD%AE%E6%8F%9B%E7%A9%8D%E5%88%86)
@@ -36,6 +37,48 @@ tags:
 <!-- END doctoc generated TOC please keep comment here to allow auto update -->
 
 </div>
+
+## 置換積分
+
+<div style='padding-left: 2em; padding-right: 2em; border-radius: 1em; border-style:solid; border-color:#D3D3D3; background-color:#F8F8F8'>
+<p class="h4"><ins>Problem</ins></p>
+
+$a>0$のとき, 以下を求めよ
+
+$$
+\int^a_0 x\sqrt{a^2 - x^2}dx
+$$
+
+</div>
+
+以下のように変数変換を置く:
+
+$$
+\begin{align*}
+x &= a\sin\theta\\
+dx &= a\cos\theta d\theta
+\end{align*}
+$$
+
+このとき, $\theta$は$0$から$\pi/2$を動くので
+
+$$
+\begin{align*}
+\int^a_0 x\sqrt{a^2 - x^2}dx &= \int^{\pi/2}_0 a\sin\theta\sqrt{a^2 - a^2\sin^2\theta}a\cos\theta d\theta\\[3pt]
+                             &= a^3 \int^{\pi/2}_0\sin\theta\cos^2\theta dx\\[3pt]
+\end{align*}
+$$
+
+あらためて, $u = \cos\theta$とおくと, $du = -\sin\theta d\theta$なので
+
+$$
+\begin{align*}
+a^3 \int^{\pi/2}_0\sin\theta\cos^2\theta dx &= a^3\int^0_1 -u^2 du\\[3pt]
+                                            &= a^3\int^1_0 u^2 du\\[3pt]
+                                            &= \frac{a^3}{3}
+\end{align*}
+$$
+
 
 ## 自然対数と置換積分
 

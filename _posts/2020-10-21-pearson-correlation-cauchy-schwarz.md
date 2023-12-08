@@ -1,17 +1,18 @@
 ---
 layout: post
 title: "Prove Pearson Correlation always between -1 and 1"
-subtitle: "Cauchy-Schwarz Inequality Proof"
+subtitle: "相関係数 1/N"
 author: "Ryo"
 header-style: text
 header-mask: 0.0
 catelog: true
 mathjax: true
-purpose: 
+last_modified_at: 2023-12-08
 tags:
 
 - 統計
 ---
+
 
 <div style='border-radius: 1em; border-style:solid; border-color:#D3D3D3; background-color:#F8F8F8'>
 
@@ -22,6 +23,9 @@ tags:
 
 - [Theorem: Pearson Correlation always between -1 and 1](#theorem-pearson-correlation-always-between--1-and-1)
   - [Proof: Cauchy-Schwarz Inequality](#proof-cauchy-schwarz-inequality)
+  - [Proof: composition of random variables and Discriminant](#proof-composition-of-random-variables-and-discriminant)
+  - [Proof: composition of random variables divided by their standard deviations](#proof-composition-of-random-variables-divided-by-their-standard-deviations)
+- [References](#references)
 
 <!-- END doctoc generated TOC please keep comment here to allow auto update -->
 
@@ -56,7 +60,7 @@ The above equation is equivalent to the followings:
 
 $$
 \begin{align*}
-& |\rho_{xy}| \leq 1\\
+& |\rho_{xy}| \leq 1\\t_0X
 & \Leftrightarrow \rho_{xy}^2 - 1 \leq 0\\
 & \Leftrightarrow Cov(X, Y)^2 \leq Var(X)Var(Y)\\
 &= \mathbb E[(X - \mu_x)(Y- \mu_y)]^2 \leq \mathbb E[(X - \mu_x)^2]\mathbb E[(Y- \mu_y)^2]
@@ -110,3 +114,72 @@ The above Cauchy-Schwarz inequality implies
 $$
 |\rho_{xy}| \leq 1
 $$
+
+### Proof: composition of random variables and Discriminant
+
+Define $t \in \mathbb R$. Then
+
+$$
+\begin{align*}
+\text{Var}(tX + Y) &= t^2\text{Var}(X) + 2\text{Cov}(X, Y) + \text{Var}(Y)\\
+                   &\geq 0
+\end{align*}
+$$
+
+The discriminat of a quadratic equation w.r.t $t$ should be less than 0, i.e.,
+
+$$
+\begin{align*}
+D &= \text{Cov}(X, Y)^2 - \text{Var}(X)\text{Var}(Y)\\
+  &\leq 0
+\end{align*}
+$$
+
+Then, we have
+
+$$
+\begin{align*}
+&\frac{\text{Cov}(X, Y)^2 }{\text{Var}(X)\text{Var}(Y)} \leq 1\\[3pt]
+&\Rightarrow \vert \rho_{xy}\vert^2 \leq 1\\[3pt]
+&\Rightarrow -1 \leq \rho_{xy} \leq 1
+\end{align*}
+$$
+
+From the above, we know that $\vert\rho_{xy}\vert = 1$ when the discriminat takes 0 and $\text{Var}(tX + Y)=0$. Therefore, there is a constant $b$ such that
+
+$$
+\begin{align*}
+&t_0X +Y = b\\
+&Y= -t_0X + b
+\end{align*}
+$$
+
+So, when the two random variable can be expressed as a linear formula, the absolute value of pearson correlation takes 1.
+
+### Proof: composition of random variables divided by their standard deviations
+
+Let $\sigma_x, \sigma_y$ be the standard deviations of $X, Y$. Then, we have
+
+$$
+\begin{align*}
+0 &\leq \text{Var}\bigg(\frac{X}{\sigma_x} \pm \frac{Y}{\sigma_y}\bigg)\\[3pt]
+  &= \text{Var}\bigg(\frac{X}{\sigma_x}\bigg) \pm 2\text{Cov}\bigg(\frac{X}{\sigma_x},\frac{Y}{\sigma_y}\bigg) + \text{Var}\bigg(\frac{Y}{\sigma_y}\bigg)\\[3pt]
+  &= \frac{1}{\sigma^2_x}\text{Var}(X) \pm \frac{2}{\sigma_x\sigma_y}\text{Cov}(X, Y) + \frac{1}{\sigma^2_y}\text{Var}(Y)\\[3pt]
+  &= 2 \pm \frac{2}{\sigma_x\sigma_y}\text{Cov}(X, Y)\\[3pt]
+  &= 2\pm 2 \rho_{xy}
+\end{align*}
+$$
+
+Therefore,
+
+$$
+-1 \leq \rho_{xy} \leq 1
+$$
+
+
+
+
+
+References
+--------------
+- [The Book of Statistical Proofs > Proof: Correlation always falls between -1 and +1](https://statproofbook.github.io/P/corr-range.html)
