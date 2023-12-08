@@ -22,13 +22,14 @@ tags:
 - [Pearsonの相関係数](#pearson%E3%81%AE%E7%9B%B8%E9%96%A2%E4%BF%82%E6%95%B0)
   - [Pearsonの相関係数の性質 (1): Peason相関係数の値域](#pearson%E3%81%AE%E7%9B%B8%E9%96%A2%E4%BF%82%E6%95%B0%E3%81%AE%E6%80%A7%E8%B3%AA-1-peason%E7%9B%B8%E9%96%A2%E4%BF%82%E6%95%B0%E3%81%AE%E5%80%A4%E5%9F%9F)
   - [Pearsonの相関係数の性質 (2): スケール変換に対して不変](#pearson%E3%81%AE%E7%9B%B8%E9%96%A2%E4%BF%82%E6%95%B0%E3%81%AE%E6%80%A7%E8%B3%AA-2-%E3%82%B9%E3%82%B1%E3%83%BC%E3%83%AB%E5%A4%89%E6%8F%9B%E3%81%AB%E5%AF%BE%E3%81%97%E3%81%A6%E4%B8%8D%E5%A4%89)
-  - [正の相関係数の非推移性](#%E6%AD%A3%E3%81%AE%E7%9B%B8%E9%96%A2%E4%BF%82%E6%95%B0%E3%81%AE%E9%9D%9E%E6%8E%A8%E7%A7%BB%E6%80%A7)
+  - [Pearsonの相関係数の性質 (3): 正の相関係数の非推移性](#pearson%E3%81%AE%E7%9B%B8%E9%96%A2%E4%BF%82%E6%95%B0%E3%81%AE%E6%80%A7%E8%B3%AA-3-%E6%AD%A3%E3%81%AE%E7%9B%B8%E9%96%A2%E4%BF%82%E6%95%B0%E3%81%AE%E9%9D%9E%E6%8E%A8%E7%A7%BB%E6%80%A7)
 - [Pearson相関係数の例題](#pearson%E7%9B%B8%E9%96%A2%E4%BF%82%E6%95%B0%E3%81%AE%E4%BE%8B%E9%A1%8C)
-  - [Pearson相関係数が 0 となるケース](#pearson%E7%9B%B8%E9%96%A2%E4%BF%82%E6%95%B0%E3%81%8C-0-%E3%81%A8%E3%81%AA%E3%82%8B%E3%82%B1%E3%83%BC%E3%82%B9)
+  - [独立ではないがPearson相関係数が 0 となるケース](#%E7%8B%AC%E7%AB%8B%E3%81%A7%E3%81%AF%E3%81%AA%E3%81%84%E3%81%8Cpearson%E7%9B%B8%E9%96%A2%E4%BF%82%E6%95%B0%E3%81%8C-0-%E3%81%A8%E3%81%AA%E3%82%8B%E3%82%B1%E3%83%BC%E3%82%B9)
   - [Pearson相関係数の絶対値が 1 となるケース](#pearson%E7%9B%B8%E9%96%A2%E4%BF%82%E6%95%B0%E3%81%AE%E7%B5%B6%E5%AF%BE%E5%80%A4%E3%81%8C-1-%E3%81%A8%E3%81%AA%E3%82%8B%E3%82%B1%E3%83%BC%E3%82%B9)
   - [基本統計量から相関係数を計算する](#%E5%9F%BA%E6%9C%AC%E7%B5%B1%E8%A8%88%E9%87%8F%E3%81%8B%E3%82%89%E7%9B%B8%E9%96%A2%E4%BF%82%E6%95%B0%E3%82%92%E8%A8%88%E7%AE%97%E3%81%99%E3%82%8B)
 - [Appendix](#appendix)
   - [確率変数の和の分散の分解](#%E7%A2%BA%E7%8E%87%E5%A4%89%E6%95%B0%E3%81%AE%E5%92%8C%E3%81%AE%E5%88%86%E6%95%A3%E3%81%AE%E5%88%86%E8%A7%A3)
+- [References](#references)
 
 <!-- END doctoc generated TOC please keep comment here to allow auto update -->
 
@@ -97,6 +98,9 @@ $$
 
 ---
 
+他の証明の方法については, [Ryo's Tech Blog > Prove Pearson Correlation always between -1 and 1](https://ryonakagami.github.io/2020/10/21/pearson-correlation-cauchy-schwarz/)を参照してくだい.
+
+
 ### Pearsonの相関係数の性質 (2): スケール変換に対して不変
 
 <div style='padding-left: 2em; border-radius: 1em; border-style:solid; border-color:#D3D3D3; background-color:#F8F8F8'>
@@ -136,7 +140,25 @@ $$
 
 ---
 
-### 正の相関係数の非推移性
+
+<div style='padding-left: 2em; padding-right: 2em; border-radius: 1em; border-style:solid; border-color:#e6e6fa; background-color:#e6e6fa'>
+<p class="h4"><ins>Column: 共分散はスケールに依存する</ins></p>
+
+２つの確率変数の関係性を捉える指標として相関係数の他に共分散もあります. 
+確率変数$X, Y$について, 実数$(a, b, c, d)$としたとき
+
+$$
+\text{Cov}(aX + b, cY + d) = ac\text{Cov}(X, Y)
+$$
+
+このことから, 共分散について
+
+- $(b, d)$の値が変化しても共分散が変化しないことから, 平行移動に関しては不変
+- $(a, c)$という尺度のとり方に応じて値が変化してしまう = スケール変換に対して不変ではない
+
+</div>
+
+### Pearsonの相関係数の性質 (3): 正の相関係数の非推移性
 
 3つの独立な確率変数 $X, Y, Z$ にたいして、
 
@@ -152,18 +174,19 @@ $$
 
 $$
 \begin{align*}
-\text{Cov}(U, V) &= \mathbf V(Y) > 0\\ 
-\text{Cov}(V, W) &= \mathbf V(Z) > 0\\ 
-\text{Cov}(U, W) &= -\mathbf V(X) < 0 
+\text{Cov}(U, V) &= \text{Var}(Y) > 0\\ 
+\text{Cov}(V, W) &= \text{Var}(Z) > 0\\ 
+\text{Cov}(U, W) &= -\text{Var}(X) < 0 
 \end{align*}
 $$
 
-となり, 正の推移性我成立しないことがわかる
+となり, 正の推移性が成立しないことがわかる
 
 **終了**
 
+
 ## Pearson相関係数の例題
-### Pearson相関係数が 0 となるケース
+### 独立ではないがPearson相関係数が 0 となるケース
 
 単位円周上の一様分布に従う確率変数 $\Theta$ を考える. このとき, 確率変数 $\Theta$ のpdfは
 
@@ -330,3 +353,8 @@ $$
 
 
 **証明終了**
+
+
+References
+--------
+- [Ryo's Tech Blog > Prove Pearson Correlation always between -1 and 1](https://ryonakagami.github.io/2020/10/21/pearson-correlation-cauchy-schwarz/)
