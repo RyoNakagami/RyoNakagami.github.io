@@ -52,24 +52,33 @@ $$
 
 証明は積の微分公式から導くことができます
 
-> **証明**
-> 
-> $G(x)$ を $g(x)$の原始関数とすると
-> $$
-> \begin{align*}
-> &(f(x)G(x))^{\prime} = f^{\prime}(x)g(x) + f(x)g(x)\\[3pt]
-> &\Leftrightarrow f(x)g(x)\ = (f(x)G(x))^{\prime} - f^{\prime}(x)g(x)
-> \end{align*}
-> $$
-> 両辺を $x$で不定積分すると
-> $$
-> \int f(x)g(x)\ = f(x)G(x) - \int f^{\prime}(x)g(x)
-> $$
-> 両辺 $a$ から $b$ で定積分すると
-> $$
-> \int^b_a f(x)g(x)\ = [f(x)G(x)]^b_a - \int^b_a f^{\prime}(x)g(x)
-> $$
-> **証明終了**
+<div style="display: inline-block; background: #6495ED;; border: 1px solid #6495ED; padding: 3px 10px;color:#FFFFFF"><span >証明</span>
+</div>
+
+<div style="border: 1px solid #6495ED; font-size: 100%; padding: 20px;">
+
+$G(x)$ を $g(x)$の原始関数とすると
+
+$$
+\begin{align*}
+&(f(x)G(x))^{\prime} = f^{\prime}(x)g(x) + f(x)g(x)\\[3pt]
+&\Leftrightarrow f(x)g(x)\ = (f(x)G(x))^{\prime} - f^{\prime}(x)g(x)
+\end{align*}
+$$
+
+両辺を $x$で不定積分すると
+
+$$
+\int f(x)g(x)\ = f(x)G(x) - \int f^{\prime}(x)g(x)
+$$
+
+両辺 $a$ から $b$ で定積分すると
+
+$$
+\int^b_a f(x)g(x)\ = [f(x)G(x)]^b_a - \int^b_a f^{\prime}(x)g(x)
+$$
+
+</div>
 
 ### 三角関数と部分積分
 
@@ -83,6 +92,13 @@ I_n = \int^{\pi/2}_0\sin^nxdx
 $$
 
 </div>
+
+<br>
+
+<div style="display: inline-block; background: #6495ED;; border: 1px solid #6495ED; padding: 3px 10px;color:#FFFFFF"><span >解答</span>
+</div>
+
+<div style="border: 1px solid #6495ED; font-size: 100%; padding: 20px;">
 
 $d\cos x = -\sin x dx$であるので与えられた定積分を以下のように変換します
 
@@ -126,6 +142,11 @@ I_n = \begin{cases}
 $$
 </div>
 
+
+</div>
+
+<br>
+
 <div style='padding-left: 2em; padding-right: 2em; border-radius: 1em; border-style:solid; border-color:#D3D3D3; background-color:#F8F8F8'>
 <p class="h4"><ins>Problem</ins></p>
 
@@ -137,6 +158,13 @@ $$
 
 </div>
 
+<br>
+
+<div style="display: inline-block; background: #6495ED;; border: 1px solid #6495ED; padding: 3px 10px;color:#FFFFFF"><span >解答</span>
+</div>
+
+<div style="border: 1px solid #6495ED; font-size: 100%; padding: 20px;">
+
 $$
 \begin{align*}
 \int^\pi_0 x\cos x dx &= \bigg[x\sin x\bigg]^\pi_0 - \int^\pi_0\sin xdx\\[3pt]
@@ -144,6 +172,11 @@ $$
                       &= -2
 \end{align*}
 $$
+
+
+</div>
+
+<br>
 
 <div style='padding-left: 2em; padding-right: 2em; border-radius: 1em; border-style:solid; border-color:#D3D3D3; background-color:#F8F8F8'>
 <p class="h4"><ins>Problem</ins></p>
@@ -156,7 +189,12 @@ $$
 
 </div>
 
-**パターン1**
+<br>
+
+<div style="display: inline-block; background: #6495ED;; border: 1px solid #6495ED; padding: 3px 10px;color:#FFFFFF"><span >解答パターン1</span>
+</div>
+
+<div style="border: 1px solid #6495ED; font-size: 100%; padding: 20px;">
 
 $$
 \sin x\cos x = \frac{1}{2}\sin 2x
@@ -176,9 +214,14 @@ $$
 </div>
 
 
+</div>
+
 ----
 
-**パターン2**
+<div style="display: inline-block; background: #6495ED;; border: 1px solid #6495ED; padding: 3px 10px;color:#FFFFFF"><span >解答パターン2</span>
+</div>
+
+<div style="border: 1px solid #6495ED; font-size: 100%; padding: 20px;">
 
 <div class="math display" style="overflow: auto">
 $$
@@ -191,19 +234,29 @@ $$
 $$
 </div>
 
+</div>
+
+---
 
 ### ベータ分布密度関数の分子に似た関数と部分積分
 
 <div style='padding-left: 2em; padding-right: 2em; border-radius: 1em; border-style:solid; border-color:#D3D3D3; background-color:#F8F8F8'>
 <p class="h4"><ins>Problem</ins></p>
 
-自然数$n$に対して次の定積分を計算せよ-\frac{1}{4}x\cos2x
+自然数$n$に対して次の定積分を計算せよ
 
 $$
 \int^b_a(x-a)(b-x)^ndx
 $$
 
 </div>
+
+<br>
+
+<div style="display: inline-block; background: #6495ED;; border: 1px solid #6495ED; padding: 3px 10px;color:#FFFFFF"><span >解答</span>
+</div>
+
+<div style="border: 1px solid #6495ED; font-size: 100%; padding: 20px;">
 
 <div class="math display" style="overflow: auto">
 $$
@@ -216,6 +269,10 @@ $$
 \end{align*}
 $$
 </div>
+
+</div>
+
+
 
 なお, 関数 $(x-a)(b-x)^n$をパラメーター$n$に応じてplotすると以下のようになります
 
@@ -234,12 +291,22 @@ $$
 
 </div>
 
+<br>
+
+<div style="display: inline-block; background: #6495ED;; border: 1px solid #6495ED; padding: 3px 10px;color:#FFFFFF"><span >解答</span>
+</div>
+
+<div style="border: 1px solid #6495ED; font-size: 100%; padding: 20px;">
+
 $$
 \begin{align*}
 \int x^2\log x dx &= \frac{1}{3}x^3\log x - \int \frac{1}{3}x^2dx\\[3pt]
                   &= \frac{x^3}{3}\log x - \frac{x^3}{9} + C
 \end{align*}
 $$
+
+</div>
+
 
 ### ネイピア数と部分積分
 
@@ -254,6 +321,13 @@ $$
 
 </div>
 
+<br>
+
+<div style="display: inline-block; background: #6495ED;; border: 1px solid #6495ED; padding: 3px 10px;color:#FFFFFF"><span >解答</span>
+</div>
+
+<div style="border: 1px solid #6495ED; font-size: 100%; padding: 20px;">
+
 $$
 \begin{align*}
 \int x(\exp(x) + \exp(-x))dx &= x (\exp(x) - \exp(-x)) - \int  (\exp(x) - \exp(-x)) dx\\[3pt]
@@ -261,6 +335,8 @@ $$
                              &= (x - 1)\exp(x) - (x + 1)\exp(-x) 
 \end{align*}
 $$
+
+</div>
 
 ## Appendix: 三角関数の公式
 
@@ -280,17 +356,23 @@ $$
 
 証明はそれぞれ以下のように加法定理より示せる.
 
-> **証明**
-> $$
-> \begin{align*}
-> \sin(\theta + \theta) &= \sin\theta\cos\theta + \cos\theta\sin\theta\\
->                       &= 2\cos\theta\sin\theta\\[3pt]
-> \cos2\theta &= \cos\theta\cos\theta - \sin\theta\sin\theta\\
->             &= \cos^2\theta - \sin^2\theta\\[3pt]
-> \tan2\theta &= \frac{\tan\theta + \tan\theta}{1 - \tan\theta\tan\theta}\\
->             &= \frac{2\tan\theta}{1-\tan^2\theta}
-> \end{align*}
-> $$
+<div style="display: inline-block; background: #6495ED;; border: 1px solid #6495ED; padding: 3px 10px;color:#FFFFFF"><span >証明</span>
+</div>
+
+<div style="border: 1px solid #6495ED; font-size: 100%; padding: 20px;">
+
+$$
+\begin{align*}
+\sin(\theta + \theta) &= \sin\theta\cos\theta + \cos\theta\sin\theta\\
+                      &= 2\cos\theta\sin\theta\\[3pt]
+\cos2\theta &= \cos\theta\cos\theta - \sin\theta\sin\theta\\
+            &= \cos^2\theta - \sin^2\theta\\[3pt]
+\tan2\theta &= \frac{\tan\theta + \tan\theta}{1 - \tan\theta\tan\theta}\\
+            &= \frac{2\tan\theta}{1-\tan^2\theta}
+\end{align*}
+$$
+
+</div>
 
 
 ## Appendix: Python code

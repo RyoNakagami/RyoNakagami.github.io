@@ -27,10 +27,10 @@ tags:
   - [Python simulation: Acceptance-Rejection Sampling](#python-simulation-acceptance-rejection-sampling)
 - [ガンマ関数と置換積分](#%E3%82%AC%E3%83%B3%E3%83%9E%E9%96%A2%E6%95%B0%E3%81%A8%E7%BD%AE%E6%8F%9B%E7%A9%8D%E5%88%86)
 - [三角関数と置換積分](#%E4%B8%89%E8%A7%92%E9%96%A2%E6%95%B0%E3%81%A8%E7%BD%AE%E6%8F%9B%E7%A9%8D%E5%88%86)
-  - [シミュレーションは可能なのか？](#%E3%82%B7%E3%83%9F%E3%83%A5%E3%83%AC%E3%83%BC%E3%82%B7%E3%83%A7%E3%83%B3%E3%81%AF%E5%8F%AF%E8%83%BD%E3%81%AA%E3%81%AE%E3%81%8B)
-    - [パターン1: 逆関数法](#%E3%83%91%E3%82%BF%E3%83%BC%E3%83%B31-%E9%80%86%E9%96%A2%E6%95%B0%E6%B3%95)
-    - [パターン2: 変数変換](#%E3%83%91%E3%82%BF%E3%83%BC%E3%83%B32-%E5%A4%89%E6%95%B0%E5%A4%89%E6%8F%9B)
+  - [$\arcsin$と置換積分](#%5Carcsin%E3%81%A8%E7%BD%AE%E6%8F%9B%E7%A9%8D%E5%88%86)
+    - [シミュレーションは可能なのか？](#%E3%82%B7%E3%83%9F%E3%83%A5%E3%83%AC%E3%83%BC%E3%82%B7%E3%83%A7%E3%83%B3%E3%81%AF%E5%8F%AF%E8%83%BD%E3%81%AA%E3%81%AE%E3%81%8B)
     - [Python simulation](#python-simulation)
+  - [$\arctan$と置換積分](#%5Carctan%E3%81%A8%E7%BD%AE%E6%8F%9B%E7%A9%8D%E5%88%86)
 - [Appendix: Acceptance-Rejection Sampling](#appendix-acceptance-rejection-sampling)
 - [References](#references)
 
@@ -50,6 +50,13 @@ $$
 $$
 
 </div>
+
+<br>
+
+<div style="display: inline-block; background: #6495ED;; border: 1px solid #6495ED; padding: 3px 10px;color:#FFFFFF"><span >解答</span>
+</div>
+
+<div style="border: 1px solid #6495ED; font-size: 100%; padding: 20px;">
 
 以下のように変数変換を置く:
 
@@ -80,6 +87,8 @@ a^3 \int^{\pi/2}_0\sin\theta\cos^2\theta dx &= a^3\int^0_1 -u^2 du\\[3pt]
 $$
 
 
+</div>
+
 ## 自然対数と置換積分
 
 <div style='padding-left: 2em; padding-right: 2em; border-radius: 1em; border-style:solid; border-color:#D3D3D3; background-color:#F8F8F8'>
@@ -91,8 +100,9 @@ $$
 f(x) = 2\log(1 + \sqrt{x})
 $$
 
-- $\int^1_0 f(x)dx = 1$になることを確かめよ
-- $X$について, 期待値と分散を求めよ
+(1) $\int^1_0 f(x)dx = 1$になることを確かめよ
+
+(2) $X$について, 期待値と分散を求めよ
 
 </div>
 
@@ -105,7 +115,12 @@ $$
 \end{align*}
 $$
 
-(b)について以下確かめてみる. $1 + \sqrt{x} = t$とおくと
+<div style="display: inline-block; background: #6495ED;; border: 1px solid #6495ED; padding: 3px 10px;color:#FFFFFF"><span >解答</span>
+</div>
+
+<div style="border: 1px solid #6495ED; font-size: 100%; padding: 20px;">
+
+(1)について以下確かめてみる. $1 + \sqrt{x} = t$とおくと
 
 <div class="math display" style="overflow: auto">
 $$
@@ -131,6 +146,9 @@ $$
 \text{Var}(X) &= \mathbb E[X^2] - \mathbb E[X]^2 = \frac{17}{240}
 \end{align*}
 $$
+</div>
+
+
 </div>
 
 ### Python simulation: Acceptance-Rejection Sampling
@@ -221,10 +239,18 @@ $$
 f(x) = -\log(x)
 $$
 
-- $\int^1_0 f(x)dx = 1$になることを確かめよ
-- $X$について, 期待値と分散を求めよ
+(1) $\int^1_0 f(x)dx = 1$になることを確かめよ
+
+(2) $X$について, 期待値と分散を求めよ
 
 </div>
+
+<br>
+
+<div style="display: inline-block; background: #6495ED;; border: 1px solid #6495ED; padding: 3px 10px;color:#FFFFFF"><span >解答</span>
+</div>
+
+<div style="border: 1px solid #6495ED; font-size: 100%; padding: 20px;">
 
 $$
 \begin{align*}
@@ -258,7 +284,7 @@ $$
 
 分散については$\mathbb E[X^2]$が求まれば良いので
 
-$$
+$$expected value using CDF
 \begin{align*}
 \mathbb E[X^2] &= \int^1_0  -x^2\log(x)dx\\[3pt]
                &= \int^\infty_0 u \exp(-3u) du \\[3pt]
@@ -273,7 +299,49 @@ $$
 \text{Var}(X) = \frac{1}{9} - \bigg(\frac{1}{4}\bigg)^2 = \frac{7}{144}
 $$
 
+
+</div>
+
 ## 三角関数と置換積分
+### 基本問題
+
+<div style='padding-left: 2em; padding-right: 2em; border-radius: 1em; border-style:solid; border-color:#D3D3D3; background-color:#F8F8F8'>
+<p class="h4"><ins>Problem</ins></p>
+
+以下の定積分を求めよ
+
+$$
+\int^{\pi}_0\cos\sqrt{x}dx
+$$
+
+
+</div>
+
+<br>
+
+<div style="display: inline-block; background: #6495ED;; border: 1px solid #6495ED; padding: 3px 10px;color:#FFFFFF"><span >解答</span>
+</div>
+
+<div style="border: 1px solid #6495ED; font-size: 100%; padding: 20px;">
+
+$t = \sqrt{x}$とおいて
+
+$$
+\begin{align*}
+\int^{\pi}_0\cos\sqrt{x}dx &= \int^{\sqrt{\pi}}_02t\cos t dt\\[3pt]
+                           &= [2t\sin t]^{\sqrt{\pi}}_0 - \int^{\sqrt{\pi}}_0 2\sin t dt\\[3pt]
+                           &=  [2t\sin t]^{\sqrt{\pi}}_0 + [2\cos t]^{\sqrt{\pi}}_0\\[3pt]
+                           &=  2(\sqrt{\pi}\sin \sqrt{\pi} + \cos \sqrt{\pi} - 1)
+\end{align*}
+$$
+
+
+</div>
+
+
+
+
+### $\arcsin$と置換積分
 
 <div style='padding-left: 2em; padding-right: 2em; border-radius: 1em; border-style:solid; border-color:#D3D3D3; background-color:#F8F8F8'>
 <p class="h4"><ins>Problem</ins></p>
@@ -288,6 +356,13 @@ $$
 - $X$について, 期待値と分散を求めよ
 
 </div>
+
+<br>
+
+<div style="display: inline-block; background: #6495ED;; border: 1px solid #6495ED; padding: 3px 10px;color:#FFFFFF"><span >解答</span>
+</div>
+
+<div style="border: 1px solid #6495ED; font-size: 100%; padding: 20px;">
 
 $$
 \arcsin'(x) = \frac{1}{\sqrt{1-x^2}}
@@ -332,7 +407,9 @@ $$
 \text{Var}(X) = \frac{1}{2} - \frac{4}{\pi^2}
 $$
 
-### シミュレーションは可能なのか？
+</div>
+
+#### シミュレーションは可能なのか？
 
 Acceptance-Rejection samlingでは
 
@@ -348,7 +425,10 @@ $$
 
 なので, Acceptance-Rejection samlingでsimulationするのは難しそうです. 
 
-#### パターン1: 逆関数法
+<div style="display: inline-block; background: #6495ED;; border: 1px solid #6495ED; padding: 3px 10px;color:#FFFFFF"><span >逆関数法</span>
+</div>
+
+<div style="border: 1px solid #6495ED; font-size: 100%; padding: 20px;">
 
 今回の累積密度関数は
 
@@ -364,8 +444,14 @@ $$
 
 とわかるので, 逆関数法でシミュレーションすることができます.
 
+</div>
 
-#### パターン2: 変数変換
+---
+
+<div style="display: inline-block; background: #6495ED;; border: 1px solid #6495ED; padding: 3px 10px;color:#FFFFFF"><span >変数変換法</span>
+</div>
+
+<div style="border: 1px solid #6495ED; font-size: 100%; padding: 20px;">
 
 $$
 f(x) = \frac{2}{\pi\sqrt{1-x^2}}
@@ -388,6 +474,10 @@ $$
 $$
 
 に従う$\theta$に対して$x = \sin(\theta)$と変換してシミュレーションデータの生成もできそうです.
+
+</div>
+
+<br>
 
 <div style='padding-left: 2em; padding-right: 2em; border-radius: 1em; border-style:solid; border-color:#e6e6fa; background-color:#e6e6fa'>
 <p class="h4"><ins>Column: 変数変換は一意ではない</ins></p>
@@ -461,6 +551,95 @@ print("sample mean:{:.4f}, true-val::{:.4f}".format(np.var(x2), 1/2 - 4/np.pi**2
 >>> sample mean:0.0944, true-val::0.0947
 ```
 
+### $\arctan$と置換積分
+
+<div style='padding-left: 2em; padding-right: 2em; border-radius: 1em; border-style:solid; border-color:#D3D3D3; background-color:#F8F8F8'>
+<p class="h4"><ins>Problem</ins></p>
+
+$a, b > 0$としたとき, 次の定積分の値を計算せよ
+
+$$
+I = \int^{\pi/2}_{0}\frac{1}{(a^2\cos^2\theta + b^2\sin^2\theta)^2}d\theta
+$$
+
+</div>
+
+<br>
+
+<div style="display: inline-block; background: #6495ED;; border: 1px solid #6495ED; padding: 3px 10px;color:#FFFFFF"><span >解答</span>
+</div>
+
+<div style="border: 1px solid #6495ED; font-size: 100%; padding: 20px;">
+
+$$
+\begin{align*}
+I &= \int^{\pi/2}_{0}\frac{1}{(a^2\cos^2\theta + b^2\sin^2\theta)^2}d\theta \\[3pt]
+  &= \int^{\pi/2}_{0}\frac{\frac{1}{a^4\cos^4\theta}}{(1 + \frac{b^2}{a^2}\tan^2\theta)^2}d\theta\\[3pt]
+  &= \int^{\pi/2}_{0}\frac{\frac{1}{a^4\cos^2\theta} + \frac{\tan^2\theta}{a^4\cos^2\theta}}{(1 + \frac{b^2}{a^2}\tan^2\theta)^2}d\theta
+\end{align*}
+$$
+
+
+ここで, 
+
+$$
+\begin{align*}
+&t = \bigg(\frac{b}{a}\tan\theta\bigg)\\[3pt]
+&\frac{d\theta}{dt}= \frac{a}{b}\cos^2\theta 
+\end{align*}
+$$
+
+とおくと
+
+$$
+\begin{align*}
+I &= \int^{\pi/2}_{0}\frac{\frac{1}{a^4\cos^2\theta} + \frac{\tan^2\theta}{a^4\cos^2\theta}}{(1 + \frac{b^2}{a^2}\tan^2\theta)^2}d\theta\\[3pt]
+&= \frac{1}{a^3b^3}\int^{\infty}_0\frac{b^2 + a^2t^2}{(1+t^2)^2}dt
+\end{align*}
+$$
+
+このとき
+
+$$
+I_1 = \int^{\infty}_0\frac{b^2 + a^2t^2}{(1+t^2)^2}dt
+$$
+
+に対して, 以下のような変数変換を実施する
+
+$$
+t = \frac{1}{x}
+$$
+
+すると
+
+$$
+\begin{align*}
+\int^{\infty}_0\frac{b^2 + a^2t^2}{(1+t^2)^2}dt &= \int_{\infty}^0\frac{b^2 + a^2x^{-2}}{(1+x^{-2})^2}(-x^{-2})dx\\[3pt]
+&= \int^{\infty}_0\frac{b^2 + a^2x^{-2}}{(1+x^{-2})^2}\frac{x^2}{x^4}dx\\[3pt]
+&= \int^{\infty}_0\frac{x^2b^2 + a^2}{(x^2+1)^2}dx
+\end{align*}
+$$
+
+従って
+
+$$
+\begin{align*}
+2I_1 &= \int^{\infty}_0\frac{b^2 + a^2t^2}{(1+t^2)^2}dt + \int^{\infty}_0\frac{x^2b^2 + a^2}{(x^2+1)^2}dx\\[3pt]
+&= \int^\infty_0\frac{a^2+b^2}{(1+t^2)}dt\\[3pt]
+&= (a^2+b^2)[\arctan(t)]^\infty_0\\[3pt]
+&= (a^2+b^2)\frac{\pi}{2}
+\end{align*}
+$$
+
+
+従って, 
+
+$$
+I = \frac{a^2+b^2}{a^3b^3}\frac{\pi}{4}
+$$
+
+
+</div>
 
 
 
