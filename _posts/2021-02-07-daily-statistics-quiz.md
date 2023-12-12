@@ -284,7 +284,7 @@ $$
 
 分散については$\mathbb E[X^2]$が求まれば良いので
 
-$$expected value using CDF
+$$
 \begin{align*}
 \mathbb E[X^2] &= \int^1_0  -x^2\log(x)dx\\[3pt]
                &= \int^\infty_0 u \exp(-3u) du \\[3pt]
