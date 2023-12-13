@@ -141,6 +141,16 @@ $$
 $$
 \begin{array}{|c|c|c|}
 \hline
+  7 & 4 & 1 \\ 
+\hline
+  8 & 5 & 2 \\ 
+\hline
+  9 & 6 & 3 \\
+\hline
+\end{array}
+\   \  \  \
+\begin{array}{|c|c|c|}
+\hline
   3 & 6 & 9 \\ 
 \hline
   2 & 5 & 8 \\ 
@@ -156,17 +166,6 @@ $$
   6 & 5 & 4 \\ 
 \hline
   3 & 2 & 1 \\
-\hline
-\end{array}
-
-\   \  \  \
-\begin{array}{|c|c|c|}
-\hline
-  7 & 4 & 1 \\ 
-\hline
-  8 & 5 & 2 \\ 
-\hline
-  9 & 6 & 3 \\
 \hline
 \end{array}
 $$
