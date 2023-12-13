@@ -1699,3 +1699,14 @@ img::-moz-selection {
 .no-scroll {
   overflow-y: hidden;
 }
+.psuedo_line {
+  display:block;
+  border-top:2px solid #000000;
+  border-bottom:2px solid #000000;
+  padding:1px 1px;
+}
+.psuedo_endline {
+  display:block;
+  border-bottom:2px solid #000000;
+  padding:1px 1px;
+}
