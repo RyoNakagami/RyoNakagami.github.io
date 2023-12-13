@@ -27,6 +27,10 @@ tags:
 <!-- END doctoc generated TOC please keep comment here to allow auto update -->
 
 </div>
+Solver = Solution()
+Solver.find_solution(100)
+Solver = Solution()
+Solver.find_solution(100)
 
 ## AIME 1996問題: 異なる模様の選び方
 
@@ -39,6 +43,8 @@ $7 \times 7$のチェス盤の2つのマスを黒で, 他を白で塗る. チェ
 </div>
 
 <br>
+Solver = Solution()
+Solver.find_solution(100)
 
 <div style="display: inline-block; background: #6495ED;; border: 1px solid #6495ED; padding: 3px 10px;color:#FFFFFF"><span >解答</span>
 </div>
@@ -52,21 +58,25 @@ $7 \times 7$のチェス盤の2つのマスを黒で, 他を白で塗る. チェ
 
 点対称の位置にあるマスの選び方は真ん中を除くマス48通りのうち１つ選んだら, 自動的にもう一つのマスが定まるので
 
+<div class="math display" style="overflow: auto">
 $$
 \begin{align*}
 \text{点対称の位置にあるマスの選び方} &= \frac{49-1}{2}\\[3pt]
                                  &= 24\text{通り}
 \end{align*}
 $$
+</div>
 
 点対称の位置にないマスの選び方は「49マスから２つのマスを選ぶ組み合わせ」から「点対称の組み合わせ数」を除けばいいので
 
+<div class="math display" style="overflow: auto">
 $$
 \begin{align*}
 \text{点対称の位置にないマスの選び方} &= _{49}\text{C}_2 - 24\\[3pt]
                                  &= 1152\text{通り}
 \end{align*}
 $$
+</div>
 
 従って, 異なる模様は
 
@@ -81,6 +91,8 @@ $$
 <div style='padding-left: 2em; padding-right: 2em; border-radius: 1em; border-style:solid; border-color:#D3D3D3; background-color:#F8F8F8'>
 <p class="h4"><ins>Problem</ins></p>
 
+Solver = Solution()
+Solver.find_solution(100)
 $9 \times 9$のチェス盤の3つのマスを黒で, 他を白で塗る. チェス盤を平面上で回転して
 同じになるような模様を同一のものとして数えるとき, 異なる模様は全部で何通りあるか？
 
@@ -95,7 +107,9 @@ $9 \times 9$のチェス盤の3つのマスを黒で, 他を白で塗る. チェ
 
 上記の設問に習うと
 
+<div class="math display" style="overflow: auto">
 $$
+\begin{align*}
 \begin{align*}
 \text{点対称の位置にあるマスの選び方} &= \frac{81-1}{3}\\[3pt]
                                  &= 40\text{通り}
@@ -103,7 +117,9 @@ $$
 \text{点対称の位置にないマスの選び方} &= _{81}\text{C}_2 - 40\\[3pt]
                                  &= 85280\text{通り}
 \end{align*}
+\end{align*}
 $$
+</div>
 
 従って, 異なる模様は
 
@@ -183,7 +199,7 @@ $$
 <div class="math display" style="text-align: left !important; margin:0pt !important; margin-bottom:0em !important">
 $$
 \begin{align*}
-\textbf{Output: }& A_{updated} \textbf{ Array} \text{ - 回転後のマスのindex array} 
+\textbf{Output: }& A \textbf{ Array} \text{ - 回転後のマスのindex array} 
 \end{align*}
 $$
 </div>
