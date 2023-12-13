@@ -160,7 +160,7 @@ $$
 \end{array}
 
 \   \  \  \
-\begin{array}{|c|c|c|}Solver = Solution()
+\begin{array}{|c|c|c|}
 \hline
   7 & 4 & 1 \\ 
 \hline
