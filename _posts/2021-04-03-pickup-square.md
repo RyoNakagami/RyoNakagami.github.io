@@ -170,7 +170,7 @@ $$
 \end{array}
 $$
 
-ここから, $N\times N$マスについて, 時300計回りに$90^\circ \times M$回転させるとそれぞれのindexのupdateは
+ここから, $N\times N$マスについて, 時計回りに$90^\circ \times M$回転させるとそれぞれのindexのupdateは
 以下のようなAlgorithmで表現されることがわかります
 
 
