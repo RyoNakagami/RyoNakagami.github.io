@@ -27,10 +27,6 @@ tags:
 <!-- END doctoc generated TOC please keep comment here to allow auto update -->
 
 </div>
-Solver = Solution()
-Solver.find_solution(100)
-Solver = Solution()
-Solver.find_solution(100)
 
 ## AIME 1996問題: 異なる模様の選び方
 
@@ -43,8 +39,7 @@ $7 \times 7$のチェス盤の2つのマスを黒で, 他を白で塗る. チェ
 </div>
 
 <br>
-Solver = Solution()
-Solver.find_solution(100)
+
 
 <div style="display: inline-block; background: #6495ED;; border: 1px solid #6495ED; padding: 3px 10px;color:#FFFFFF"><span >解答</span>
 </div>
