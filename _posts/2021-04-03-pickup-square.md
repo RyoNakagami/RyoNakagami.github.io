@@ -14,7 +14,7 @@ tags:
 
 ---
 
-<div style='border-radius: 1em; border-style:solid; border-color:#D3D3D3; background-color:#F8F8F8'>
+<div style='border-radius: 1em; border-style:solid; border-color:#D3D3D3; background-color:#F8F8F8 margin-bottom:0px !important'>
 
 <p class="h4">&nbsp;&nbsp;Table of Contents</p>
 
@@ -25,7 +25,6 @@ tags:
 - [Pythonでsimulation](#python%E3%81%A7simulation)
 
 <!-- END doctoc generated TOC please keep comment here to allow auto update -->
-
 
 </div>
 
@@ -47,7 +46,7 @@ $7 \times 7$のチェス盤の2つのマスを黒で, 他を白で塗る. チェ
 <div style="border: 1px solid #6495ED; font-size: 100%; padding: 20px;">
 
 適当に49マスから２つのマスの組み合わせを選ぶと以下の２つ似分類されます
-(N \times N)!
+
 - 点対称の位置にあるマスの選び方 → 回転して重なる模様は2通り
 - そうではないマスの選び方 → 回転して重なる模様は４通り
 
