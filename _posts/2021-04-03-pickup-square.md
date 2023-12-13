@@ -151,21 +151,21 @@ $$
 \   \  \  \
 \begin{array}{|c|c|c|}
 \hline
-  3 & 6 & 9 \\ 
-\hline
-  2 & 5 & 8 \\ 
-\hline
-  1 & 4 & 7 \\
-\hline
-\end{array}
-\   \  \  \
-\begin{array}{|c|c|c|}
-\hline
   9 & 8 & 7 \\ 
 \hline
   6 & 5 & 4 \\ 
 \hline
   3 & 2 & 1 \\
+\hline
+\end{array}
+\   \  \  \
+\begin{array}{|c|c|c|}
+\hline
+  3 & 6 & 9 \\ 
+\hline
+  2 & 5 & 8 \\ 
+\hline
+  1 & 4 & 7 \\
 \hline
 \end{array}
 $$
