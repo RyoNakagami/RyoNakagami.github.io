@@ -34,6 +34,25 @@ classes: wide
                 {% include share-buttons.html %}
                 
                 <hr/>
+
+                <!-- Featured Tags -->
+                <b><font size="5">Feature Tags</b>
+                    <div id="tag_cloud" class="tags tags-sup js-tags" 
+                    style="line-height: 0px !important;">
+                        {% capture tags %}
+                        {% for tag in site.tags %}{% if tag[1].size > site.featured-condition-size %}
+                                <a data-sort="{{ site.posts.size | minus: tag[1].size | prepend: '0000' | slice: -4, 4 }}" 
+                                    href="{{ site.baseurl }}/archive/?tag={{ tag[0] | url_encode }}"
+                                    title="{{ tag[0] }}"
+                                    style="color: #337ab7 !important;"
+                                    rel="{{ tag[1].size }}">{{ tag[0] }}</a>__SEPARATOR__
+                        {% endif %}{% endfor %}
+                        {% endcapture %}
+                        {{ tags | split:'__SEPARATOR__' | sort }}
+                    </div>
+
+                <br>
+
                 <b><font size="5">Leave a Comment</font><br>(注意：GitHub Accountが必要となります）</b>
                 
                 <script src="https://utteranc.es/client.js"
@@ -45,8 +64,6 @@ classes: wide
                 
                 </script>
 
-                <!-- Featured Tags -->
-                <!-- {% include featured-tags.html bottom=true%} -->
 
             </div>  
 
@@ -70,12 +87,9 @@ classes: wide
             <!-- <div class="
                 col-lg-10 col-lg-offset-1
                 col-md-10 col-md-offset-1
-                sidebar-container row">
-
-                {% include featured-tags.html bottom=true %}
-
-                {% include friends.html %}
-            </div> -->
+                sidebar-container row"> -->
+                <!-- {% include friends.html %} -->
+            </div>
         </div>
     </div>
 </article>

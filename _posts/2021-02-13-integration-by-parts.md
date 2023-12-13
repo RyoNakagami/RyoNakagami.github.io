@@ -307,6 +307,68 @@ $$
 
 </div>
 
+----
+
+<div style='padding-left: 2em; padding-right: 2em; border-radius: 1em; border-style:solid; border-color:#D3D3D3; background-color:#F8F8F8'>
+<p class="h4"><ins>Problem</ins></p>
+
+以下の不定積分をもとめよ
+
+$$
+\int\frac{\log x}{\sqrt{x}}dx
+$$
+
+</div>
+
+<br>
+
+<div style="display: inline-block; background: #6495ED;; border: 1px solid #6495ED; padding: 3px 10px;color:#FFFFFF"><span >解答</span>
+</div>
+
+<div style="border: 1px solid #6495ED; font-size: 100%; padding: 20px;">
+
+$$
+\begin{align*}
+&\int\frac{\log x}{\sqrt{x}}dx\\[3pt]
+&= (2\sqrt{x}\log x) - \int 2\frac{1}{\sqrt{x}}dx\\[3pt]
+&= 2\sqrt{x}\log x - 4\sqrt{x} + C
+\end{align*}
+$$
+
+
+</div>
+
+----
+
+<div style='padding-left: 2em; padding-right: 2em; border-radius: 1em; border-style:solid; border-color:#D3D3D3; background-color:#F8F8F8'>
+<p class="h4"><ins>Problem</ins></p>
+
+次の定積分をもとめよ
+
+$$
+\int^e_1 x\log xdx
+$$
+
+</div>
+
+<br>
+
+<div style="display: inline-block; background: #6495ED;; border: 1px solid #6495ED; padding: 3px 10px;color:#FFFFFF"><span >解答</span>
+</div>
+
+<div style="border: 1px solid #6495ED; font-size: 100%; padding: 20px;">
+
+$$
+\begin{align*}
+\int^e_1 x\log xdx &= \bigg[\frac{1}{2}x^2\log x\bigg]^e_1 - \int^e_1\frac{1}{2}xdx\\[3pt]
+                   &= \bigg[\frac{1}{2}x^2\log x\bigg]^e_1 - \bigg[\frac{1}{4}x^2\bigg]^e_1\\[3pt]
+                   &= \frac{e^2 + 1}{4}
+\end{align*}
+$$
+
+</div>
+
+
 
 ### ネイピア数と部分積分
 
