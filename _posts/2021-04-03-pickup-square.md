@@ -202,7 +202,7 @@ $$
 \text{3.}\quad&\quad b \equiv a \times N^{m} \mod N^2 + 1\\
 \text{4.}\quad&\quad A[i] = b\\
 \text{5.}\quad&\textbf{return } A
-\end{align*}fi
+\end{align*}
 $$
 </div>
 <span class='psuedo_endline'></span>
