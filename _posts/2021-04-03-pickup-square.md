@@ -110,13 +110,11 @@ $9 \times 9$のチェス盤の3つのマスを黒で, 他を白で塗る. チェ
 <div class="math display" style="overflow: auto">
 $$
 \begin{align*}
-\begin{align*}
 \text{点対称の位置にあるマスの選び方} &= \frac{81-1}{3}\\[3pt]
                                  &= 40\text{通り}
 \qquad&\\
 \text{点対称の位置にないマスの選び方} &= _{81}\text{C}_2 - 40\\[3pt]
                                  &= 85280\text{通り}
-\end{align*}
 \end{align*}
 $$
 </div>
