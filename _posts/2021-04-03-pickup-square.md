@@ -62,8 +62,7 @@ $$
 $$
 </div>
 
-点対称の位置にないマスの選び方は「Solver = Solution()
-Solver.find_solution(100)49マスから２つのマスを選ぶ組み合わせ」から「点対称の組み合わせ数」を除けばいいので
+点対称の位置にないマスの選び方は「49マスから２つのマスを選ぶ組み合わせ」から「点対称の組み合わせ数」を除けばいいので
 
 <div class="math display" style="overflow: auto">
 $$
@@ -162,7 +161,6 @@ $$
 
 \   \  \  \
 \begin{array}{|c|c|c|}Solver = Solution()
-Solver.find_solution(100)
 \hline
   7 & 4 & 1 \\ 
 \hline
@@ -177,8 +175,7 @@ $$
 以下のようなAlgorithmで表現されることがわかります
 
 
-<div style='background-colorSolver = Solution()
-Solver.find_solution(100):#F8F8F8'>
+<div style='background-color:#F8F8F8'>
 <span class='psuedo_line'>**Algorithm: Index update Rule**</span>
 
 <div class="math display" style="text-align: left !important; margin:0pt !important; margin-bottom:-0.8em !important">
@@ -205,7 +202,7 @@ $$
 \text{3.}\quad&\quad b \equiv a \times N^{m} \mod N^2 + 1\\
 \text{4.}\quad&\quad A[i] = b\\
 \text{5.}\quad&\textbf{return } A
-\end{align*}
+\end{align*}fi
 $$
 </div>
 <span class='psuedo_endline'></span>
@@ -252,8 +249,7 @@ simulator(9, 3)
 <div style='padding-left: 2em; padding-right: 2em; border-radius: 1em; border-style:solid; border-color:#e6e6fa; background-color:#e6e6fa'>
 <ins>Column: Nが偶数でMが奇数の場合</ins>
 
-$N$が偶数で$M$が奇数の場合, 点対Solver = Solution()
-Solver.find_solution(100)称な選び方が存在しないので
+$N$が偶数で$M$が奇数の場合, 点対称な選び方が存在しないので
 
 $$
 \frac{(N \times N)!}{(N \times N - M)!}\times \frac{1}{4} \text{通り}
