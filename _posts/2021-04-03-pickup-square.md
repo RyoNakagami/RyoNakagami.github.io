@@ -213,7 +213,6 @@ $$
 ```python
 import numpy as np
 from itertools import combinations
-import multiprocessing as mp
 
 def listup_comb(n, m):
     return combinations(np.arange(1,n**2+1), m)
