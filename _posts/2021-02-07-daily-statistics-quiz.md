@@ -27,9 +27,11 @@ tags:
   - [Python simulation: Acceptance-Rejection Sampling](#python-simulation-acceptance-rejection-sampling)
 - [ガンマ関数と置換積分](#%E3%82%AC%E3%83%B3%E3%83%9E%E9%96%A2%E6%95%B0%E3%81%A8%E7%BD%AE%E6%8F%9B%E7%A9%8D%E5%88%86)
 - [三角関数と置換積分](#%E4%B8%89%E8%A7%92%E9%96%A2%E6%95%B0%E3%81%A8%E7%BD%AE%E6%8F%9B%E7%A9%8D%E5%88%86)
+  - [基本問題](#%E5%9F%BA%E6%9C%AC%E5%95%8F%E9%A1%8C)
   - [$\arcsin$と置換積分](#%5Carcsin%E3%81%A8%E7%BD%AE%E6%8F%9B%E7%A9%8D%E5%88%86)
     - [シミュレーションは可能なのか？](#%E3%82%B7%E3%83%9F%E3%83%A5%E3%83%AC%E3%83%BC%E3%82%B7%E3%83%A7%E3%83%B3%E3%81%AF%E5%8F%AF%E8%83%BD%E3%81%AA%E3%81%AE%E3%81%8B)
     - [Python simulation](#python-simulation)
+  - [$\arccos$と置換積分](#%5Carccos%E3%81%A8%E7%BD%AE%E6%8F%9B%E7%A9%8D%E5%88%86)
   - [$\arctan$と置換積分](#%5Carctan%E3%81%A8%E7%BD%AE%E6%8F%9B%E7%A9%8D%E5%88%86)
 - [Appendix: Acceptance-Rejection Sampling](#appendix-acceptance-rejection-sampling)
 - [References](#references)
@@ -551,6 +553,61 @@ print("sample mean:{:.4f}, true-val::{:.4f}".format(np.var(x2), 1/2 - 4/np.pi**2
 >>> sample mean:0.0944, true-val::0.0947
 ```
 
+### $\arccos$と置換積分
+
+<div style='padding-left: 2em; padding-right: 2em; border-radius: 1em; border-style:solid; border-color:#D3D3D3; background-color:#F8F8F8'>
+<p class="h4"><ins>Problem</ins></p>
+
+$$
+\int^1_0 x^2\arccos x dx
+$$
+
+</div>
+
+<br>
+
+<div style="display: inline-block; background: #6495ED;; border: 1px solid #6495ED; padding: 3px 10px;color:#FFFFFF"><span >解答</span>
+</div>
+
+<div style="border: 1px solid #6495ED; font-size: 100%; padding: 20px;">
+
+$$
+\begin{align*}
+t &= \arccos x\\
+x &= \cos t\\
+\frac{dx}{dt}&= -\sin t
+\end{align*}
+$$
+
+であるので
+
+$$
+\begin{align*}
+&\int^1_0 x^2\arccos x dx\\[3pt]
+&=-\int^{\pi/2}_0t\cos^2t(-\sin t)dt\\[3pt]
+&= -\bigg[t\frac{\cos^3t}{3}\bigg]^{\pi/2}_0 + \int^{\pi/2}_0\frac{\cos^3t}{3}dt 
+\end{align*}
+$$
+
+このとき, 積和の公式より
+
+$$
+\cos^3t = \frac{3\cos x + \cos 3x}{4}
+$$
+
+従って
+
+$$
+\begin{align*}
+&-\bigg[t\frac{\cos^3t}{3}\bigg]^{\pi/2}_0 + \int^{\pi/2}_0\frac{\cos^3t}{3}dt \\[3pt]
+&= 0 + \bigg[\frac{\sin x}{4}\bigg]^{\pi/2}_0 + \bigg[\frac{\sin 3x}{36}\bigg]^{\pi/2}_0 \\[3pt]
+&= \frac{2}{9} 
+\end{align*}
+$$
+
+</div>
+
+
 ### $\arctan$と置換積分
 
 <div style='padding-left: 2em; padding-right: 2em; border-radius: 1em; border-style:solid; border-color:#D3D3D3; background-color:#F8F8F8'>
@@ -674,3 +731,4 @@ References
 -------------
 - [Lecture note 2007 by Karl Sigman > Acceptance-Rejection Method](http://www.columbia.edu/~ks20/4703-Sigman/4703-07-Notes-ARM.pdf)
 - [Ryo's Tech Blog > 半円周上に一様分布する点の高さの分布](https://ryonakagami.github.io/2021/02/04/uniform-on-circular-and-height-distribution/#%E5%8D%8A%E5%86%86%E5%91%A8%E4%B8%8A%E3%81%AB%E4%B8%80%E6%A7%98%E5%88%86%E5%B8%83%E3%81%99%E3%82%8B%E7%82%B9%E3%81%AB%E3%81%A4%E3%81%84%E3%81%A6)
+- [KIT数学ナビゲーション > 三角関数の1次化のための公式](https://w3e.kanazawa-it.ac.jp/math/category/sekibun/henkan-tex.cgi?target=/math/category/sekibun/ichijika-notameno-kousiki.html)

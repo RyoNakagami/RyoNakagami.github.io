@@ -1,6 +1,6 @@
 ---
 layout: post
-title: "加法定理の図形的理解"
+title: "加法定理と積和の公式の図形的理解"
 subtitle: "統計のための数学 5/N"
 author: "Ryo"
 catelog: true
@@ -23,6 +23,7 @@ tags:
 
 - [加法定理の図形的理解](#%E5%8A%A0%E6%B3%95%E5%AE%9A%E7%90%86%E3%81%AE%E5%9B%B3%E5%BD%A2%E7%9A%84%E7%90%86%E8%A7%A3)
   - [各加法定理の証明](#%E5%90%84%E5%8A%A0%E6%B3%95%E5%AE%9A%E7%90%86%E3%81%AE%E8%A8%BC%E6%98%8E)
+- [積和の公式の図形的理解](#%E7%A9%8D%E5%92%8C%E3%81%AE%E5%85%AC%E5%BC%8F%E3%81%AE%E5%9B%B3%E5%BD%A2%E7%9A%84%E7%90%86%E8%A7%A3)
 - [チェビチェフの多項式](#%E3%83%81%E3%82%A7%E3%83%93%E3%83%81%E3%82%A7%E3%83%95%E3%81%AE%E5%A4%9A%E9%A0%85%E5%BC%8F)
 - [練習問題](#%E7%B7%B4%E7%BF%92%E5%95%8F%E9%A1%8C)
 
@@ -154,7 +155,57 @@ $$
 
 </div>
 
----
+
+## 積和の公式の図形的理解
+
+三角関数の積を三角関数の足し算の問題に変換する定理として積和の公式があります
+
+<div style='padding-left: 2em; padding-right: 2em; border-radius: 1em; border-style:solid; border-color:#D3D3D3; background-color:#F8F8F8'>
+<p class="h4"><ins>Theorem: 積和の公式</ins></p>
+
+$$
+\begin{align*}
+\sin A\cos B &= \frac{1}{2}\{\sin(A+B) + \sin(A-B)\}\\[3pt]
+\sin A\sin B &= \frac{1}{2}\{-\cos(A+B) + \cos(A-B)\}\\[3pt]
+\cos A\cos B &= \frac{1}{2}\{\cos(A+B) + \cos(A-B)\}\\[3pt]
+\end{align*}
+$$
+
+</div>
+
+これらの導出は加法定理から導くことができます.
+
+掛け算が足し算に変換できることで計算がかんたんになるというメリットがあります. 例えば, $\sin 40^\circ\cos 20^\circ$を計算したいとき三角表を用いて, 
+それぞれの角に対応する数値がわかったとしても
+
+$$
+\sin 40^\circ\cos 20^\circ = 0.6428 \times 0.9397
+$$
+
+と電卓がないと計算することが大変です. 一方, 積和の公式を用いて足し算に問題に変換すると
+
+$$
+\begin{align*}
+&\sin 40^\circ\cos 20^\circ\\[3pt]
+&=\frac{1}{2}\times (\sin 60^\circ + \sin 20^\circ)\\[3pt]
+&= (0.8660 + 0.3420) \div 2\\[3pt]
+&=0.6040
+\end{align*}
+$$
+
+と計算できます.
+
+積和に公式の図形的理解は以下のように角度$\alpha$に対して角度$\alpha+\beta, \alpha-\beta$に対応する単位円周上の点を２つ取ります.
+
+すると, 
+
+- $\cos\alpha\cos\beta$が$\cos(\alpha + \beta)$と$\cos(\alpha - \beta)$の平均
+- $\sin\alpha\cos\beta$が$\sin(\alpha + \beta)$と$\sin(\alpha - \beta)$の平均
+
+であることがわかります. また, $\sin\alpha\sin\beta$については$\cos(\alpha - \beta)$と$\cos(\alpha + \beta)$の差分の半分であることもわかります.
+
+<img src= "https://github.com/ryonakimageserver/omorikaizuka/blob/master/math/20210214_sekiwa.png?raw=true">
+
 
 ## チェビチェフの多項式
 

@@ -238,6 +238,37 @@ $$
 
 ---
 
+<div style='padding-left: 2em; padding-right: 2em; border-radius: 1em; border-style:solid; border-color:#D3D3D3; background-color:#F8F8F8'>
+<p class="h4"><ins>Problem</ins></p>
+
+$$
+\int^1_0 x\arctan x dx
+$$
+
+</div>
+
+<br>
+
+<div style="display: inline-block; background: #6495ED;; border: 1px solid #6495ED; padding: 3px 10px;color:#FFFFFF"><span >解答</span>
+</div>
+
+<div style="border: 1px solid #6495ED; font-size: 100%; padding: 20px;">
+
+$$
+\begin{align*}
+&\int^1_0 x\arctan x dx\\[3pt]
+&= \left[\frac{1}{2}x^2\arctan x\right]^1_0 - \int^1_0 \frac{x^2}{2}\frac{1}{1+x^2} dx\\[3pt]
+&= \frac{\pi}{8} - \int^1_0 \frac{1}{2}\left(1 - \frac{1}{1+x^2}\right) dx\\[3pt]
+&= \frac{\pi}{8} - \frac{1}{2} + \left[\frac{1}{2}\arctan x\right]^1_0\\[3pt]
+&= \frac{\pi}{4}-\frac{1}{2}
+\end{align*}
+$$
+
+</div>
+
+
+
+
 ### ベータ分布密度関数の分子に似た関数と部分積分
 
 <div style='padding-left: 2em; padding-right: 2em; border-radius: 1em; border-style:solid; border-color:#D3D3D3; background-color:#F8F8F8'>
