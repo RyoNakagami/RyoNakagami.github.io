@@ -24,7 +24,7 @@ tags:
 
 - [差が２以上の整数の選び方](#%E5%B7%AE%E3%81%8C%EF%BC%92%E4%BB%A5%E4%B8%8A%E3%81%AE%E6%95%B4%E6%95%B0%E3%81%AE%E9%81%B8%E3%81%B3%E6%96%B9)
   - [差が5の場合](#%E5%B7%AE%E3%81%8C5%E3%81%AE%E5%A0%B4%E5%90%88)
-- [AIME 11998: 合計が98となる４つの正の奇数の組](#aime-11998-%E5%90%88%E8%A8%88%E3%81%8C98%E3%81%A8%E3%81%AA%E3%82%8B%EF%BC%94%E3%81%A4%E3%81%AE%E6%AD%A3%E3%81%AE%E5%A5%87%E6%95%B0%E3%81%AE%E7%B5%84)
+- [AIME 1998: 合計が98となる４つの正の奇数の組](#aime-1998-%E5%90%88%E8%A8%88%E3%81%8C98%E3%81%A8%E3%81%AA%E3%82%8B%EF%BC%94%E3%81%A4%E3%81%AE%E6%AD%A3%E3%81%AE%E5%A5%87%E6%95%B0%E3%81%AE%E7%B5%84)
 - [ARML 1999: 連続する４つ要素の合計が3で割り切れる並べ方](#arml-1999-%E9%80%A3%E7%B6%9A%E3%81%99%E3%82%8B%EF%BC%94%E3%81%A4%E8%A6%81%E7%B4%A0%E3%81%AE%E5%90%88%E8%A8%88%E3%81%8C3%E3%81%A7%E5%89%B2%E3%82%8A%E5%88%87%E3%82%8C%E3%82%8B%E4%B8%A6%E3%81%B9%E6%96%B9)
 
 <!-- END doctoc generated TOC please keep comment here to allow auto update -->
@@ -132,7 +132,7 @@ $$
 
 になることがわかります. $N$以下の正の整数という問題が与えられたら求めるべき答えは $_{N- 4(m-1)}\text{C}_5$ 通りとなります.
 
-## AIME 11998: 合計が98となる４つの正の奇数の組
+## AIME 1998: 合計が98となる４つの正の奇数の組
 
 <div style='padding-left: 2em; padding-right: 2em; border-radius: 1em; border-style:solid; border-color:#D3D3D3; background-color:#F8F8F8'>
 <p class="h4"><ins>Problem</ins></p>
@@ -195,7 +195,7 @@ $\{21, 31, 41, 51, 61, 71 ,81\}$について$\bmod 3$をとると
 
 $$
 0, 1, 2, 0, 1, 2, 0
-$$
+$$a_2\equiv a_6 \bmod 3
 
 となる. 
 
