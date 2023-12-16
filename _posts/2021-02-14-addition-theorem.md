@@ -5,6 +5,7 @@ subtitle: "統計のための数学 5/N"
 author: "Ryo"
 catelog: true
 mathjax: true
+mermaid: false
 last_modified_at: 2023-12-16
 header-mask: 0.0
 header-style: text

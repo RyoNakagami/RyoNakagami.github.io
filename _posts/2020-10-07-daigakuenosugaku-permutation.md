@@ -6,8 +6,9 @@ author: "Ryo"
 header-style: text
 header-mask: 0.0
 catelog: true
+mermaid: false
 mathjax: true
-last_modified_at: 2023-11-22
+last_modified_at: 2023-12-16
 tags:
 
 - math
@@ -23,8 +24,6 @@ tags:
 <!-- DON'T EDIT THIS SECTION, INSTEAD RE-RUN doctoc TO UPDATE -->
 
 - [問題](#%E5%95%8F%E9%A1%8C)
-  - [(1)の解答](#1%E3%81%AE%E8%A7%A3%E7%AD%94)
-  - [(2)の解答](#2%E3%81%AE%E8%A7%A3%E7%AD%94)
 - [Python Implementation](#python-implementation)
 - [References](#references)
 
@@ -48,7 +47,10 @@ tags:
 
 要素5つの配列を考えたとき, 上記を満たす配列の数を求める問題です. ただし配列のindexは1から始まるものという感じです.
 
-### (1)の解答
+<div style="display: inline-block; background: #6495ED;; border: 1px solid #6495ED; padding: 3px 10px;color:#FFFFFF"><span >(1)の解答]</span>
+</div>
+
+<div style="border: 1px solid #6495ED; font-size: 100%; padding: 20px;">
 
 奇数番目に必ず奇数があるので, 
 
@@ -74,8 +76,14 @@ $$
 
 したがって, 答えは$1800$個.
 
+</div>
 
-### (2)の解答
+<br>
+
+<div style="display: inline-block; background: #6495ED;; border: 1px solid #6495ED; padding: 3px 10px;color:#FFFFFF"><span >(2)の解答</span>
+</div>
+
+<div style="border: 1px solid #6495ED; font-size: 100%; padding: 20px;">
 
 偶数はたかだか4個しかないので, 奇数が使用される１個, 2個, 3個で場合分けして計算するのも一つの方法ですが, 対偶をとると(1)と同じ考えで個数を計算することができます.
 
@@ -102,6 +110,8 @@ $$
 $$
 
 したがって, 答えは$2520$個.
+
+</div>
 
 ## Python Implementation
 

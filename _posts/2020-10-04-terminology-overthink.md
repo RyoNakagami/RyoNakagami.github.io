@@ -6,7 +6,8 @@ author: "Ryo"
 header-style: text
 header-mask: 0.0
 catelog: true
-mathjax: true
+mathjax: false
+mermaid: false
 last_modified_at: 2023-11-08
 tags:
 

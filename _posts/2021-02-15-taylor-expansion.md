@@ -226,7 +226,12 @@ $$
 
 ## コイン投げ問題とマクローリン展開
 
+<div style='padding-left: 2em; padding-right: 2em; border-radius: 1em; border-style:solid; border-color:#D3D3D3; background-color:#F8F8F8'>
+<p class="h4"><ins>Problem</ins></p>
 
+
+
+</div>
 
 
 

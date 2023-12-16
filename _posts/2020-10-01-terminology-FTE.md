@@ -6,11 +6,11 @@ author: "Ryo"
 header-style: text
 header-mask: 0.0
 catelog: true
+mermaid: false
 mathjax: true
 last_modified_at: 2023-10-08
 tags:
 
-- Terminology
 - English
 ---
 
