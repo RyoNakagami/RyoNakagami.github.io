@@ -26,6 +26,7 @@ tags:
 - [Taylor展開](#taylor%E5%B1%95%E9%96%8B)
   - [基本問題](#%E5%9F%BA%E6%9C%AC%E5%95%8F%E9%A1%8C)
   - [オイラーの公式](#%E3%82%AA%E3%82%A4%E3%83%A9%E3%83%BC%E3%81%AE%E5%85%AC%E5%BC%8F)
+- [コイン投げ問題とマクローリン展開](#%E3%82%B3%E3%82%A4%E3%83%B3%E6%8A%95%E3%81%92%E5%95%8F%E9%A1%8C%E3%81%A8%E3%83%9E%E3%82%AF%E3%83%AD%E3%83%BC%E3%83%AA%E3%83%B3%E5%B1%95%E9%96%8B)
 - [Appendix: 平均値の定理](#appendix-%E5%B9%B3%E5%9D%87%E5%80%A4%E3%81%AE%E5%AE%9A%E7%90%86)
 - [References](#references)
 
@@ -162,10 +163,13 @@ $$
 これは $x\in (0, 1)$のときの等比級数の和と一致することがわかる
 
 $$
-(1 + x)^a = \sum_{k=0} \bigg(\begin{array}{c}a\\ k \end{array}\bigg)x^k
+\begin{align*}
+(1 + x)^a &= \sum_{k=0}^\infty \frac{a(a-1)\cdots(a-n+1)}{n!}x^n\\[3pt]
+          &= \sum_{k=0}^\infty \bigg(\begin{array}{c}a\\ k \end{array}\bigg)x^k
+\end{align*}
 $$
 
-これは２項定理と一致することがわかる.
+これは拡張された２項定理と一致することがわかる.
 
 </div>
 
@@ -229,11 +233,168 @@ $$
 <div style='padding-left: 2em; padding-right: 2em; border-radius: 1em; border-style:solid; border-color:#D3D3D3; background-color:#F8F8F8'>
 <p class="h4"><ins>Problem</ins></p>
 
+整数全体を考える. 表と裏がそれぞれ確率50%のフェアコインを投げて,
 
+- 表なら $+1$
+- 裏なら $-1$
+
+次に, 以下の確率を考える
+
+- $f_n$: 0から始めてコイン投げ$n$回目に初めて0に戻る確率, $f_0=0$
+- $u_n$: コイン投げ$n$回目に0に戻る確率, $u_0 = 0$
+
+このとき以下の問題を答えよ:
+
+1. $u_n$を求めよ
+2. $U(t) = u_1t + u_2t^2 + \cdots$のとき, $U(t)=1/\sqrt{1-t^2} - 1$で有ることを示せ
+3. $F(t) = f_1t + f_2t^2 + \cdots$を求めよ
+4. いずれ0に戻ってくる確率を求めよ
+5. はじめて0に戻ってくるまでの平均回数を求めよ
 
 </div>
 
+$F(t)$が確立母関数の形式となっていることがわかるとかんたんに解けます.
 
+<div style="display: inline-block; background: #6495ED;; border: 1px solid #6495ED; padding: 3px 10px;color:#FFFFFF"><span >(1) の解答</span>
+</div>
+
+<div style="border: 1px solid #6495ED; font-size: 100%; padding: 20px;">
+
+$$
+u_n =\begin{cases}
+0 & n \text{が奇数のとき}\\
+_nC_{n/2}(\frac{1}{2})^n & n \text{が偶数のとき}
+\end{cases}
+$$
+
+</div>
+
+<br>
+
+<div style="display: inline-block; background: #6495ED;; border: 1px solid #6495ED; padding: 3px 10px;color:#FFFFFF"><span >(2) の解答</span>
+</div>
+
+<div style="border: 1px solid #6495ED; font-size: 100%; padding: 20px;">
+
+(1)の解答より
+
+$$
+U(t) = \sum_{k=1}^\infty \bigg(\begin{array}{c}2k\\ k\end{array}\bigg)\bigg(\frac{t^2}{4}\bigg)^k
+$$
+
+次に, $1/\sqrt{1-t^2}$について考える. このとき, 拡張された２項定理(基本問題(6)参照)より
+
+$$
+\begin{align*}
+(1 + x)^{-1/2} = \sum_{n=0}^\infty\bigg(\begin{array}{c}-\frac{1}{2}\\ n\end{array}\bigg)x^n
+\end{align*}
+$$
+
+ここで
+
+$$
+\begin{align*}
+\bigg(\begin{array}{c}-\frac{1}{2}\\ n\end{array}\bigg) &= \bigg(-\frac{1}{2}\bigg)\bigg(-\frac{1}{2} - 1\bigg)\bigg(-\frac{1}{2} - 2\bigg)\cdots \bigg(-\frac{1}{2} - (n-1)\bigg)\bigg/n!\\[3pt]
+&= (-1)^n\frac{1\cdot 3\cdot5\cdots (2n-1)}{2^n n!}
+\end{align*}
+$$
+
+$$
+\begin{align*}
+1\cdot 3\cdot5\cdots (2n-1) = \frac{(2n)!}{2^n n!} 
+\end{align*}
+$$
+
+より
+
+$$
+\bigg(\begin{array}{c}-\frac{1}{2}\\ n\end{array}\bigg) = (-1)^n\left(\frac{1}{2}\right)^{2n} \frac{(2n)!}{n!n!} 
+$$
+
+従って,
+
+$$
+\begin{align*}
+\frac{1}{\sqrt{1-t^2}} - 1 &= \sum_{n=0}^\infty\bigg(\begin{array}{c}-\frac{1}{2}\\ n\end{array}\bigg)(-t^2)^n - 1\\[3pt]
+&= \sum_{n=0}^\infty \left(\frac{t}{2}\right)^{2n} \frac{(2n)!}{n!n!} - 1\\[3pt] 
+&= \sum_{n=1}^\infty \left(\frac{t}{2}\right)^{2n} \frac{(2n)!}{n!n!} \\[3pt]
+&= U(t)
+\end{align*}
+$$
+
+</div>
+
+<br>
+
+<div style="display: inline-block; background: #6495ED;; border: 1px solid #6495ED; padding: 3px 10px;color:#FFFFFF"><span >(3)の解答</span>
+</div>
+
+<div style="border: 1px solid #6495ED; font-size: 100%; padding: 20px;">
+
+$u_n = f_n + \sum_{k=1}^{n-1} f_k u_{n-k}$より
+
+$$
+\begin{align*}
+U(t) &= \sum_{n=1}^\infty u_n t^n\\[3pt]
+     &= \sum_{n=1}^\infty (f_n + \sum_{k=1}^{n-1} f_k u_{n-k}) t^n\\[3pt]
+     &= F(t) + \sum_{n=1}^\infty\sum_{k=1}^{n-1} f_k u_{n-k} t^n\\[3pt]
+     &= F(t) + \sum_{k=1}^\infty f_k t^k \sum_{m=1}^\infty u_m t^m\\[3pt]
+     &= F(t) + F(t)U(t)
+\end{align*}
+$$
+
+従って
+
+$$
+\begin{align*}
+F(t) &= \frac{U(t)}{1 + U(t)}\\[3pt]
+     &= 1 - \sqrt{1 -t^2}
+\end{align*}
+$$
+
+</div>
+
+<br>
+
+<div style="display: inline-block; background: #6495ED;; border: 1px solid #6495ED; padding: 3px 10px;color:#FFFFFF"><span >(4)の解答</span>
+</div>
+
+<div style="border: 1px solid #6495ED; font-size: 100%; padding: 20px;">
+
+いずれ0に戻る確率は
+
+$$
+f_0 + f_1 + f_2 + \cdots = F(1) = 1
+$$
+
+</div>
+
+<br>
+
+<div style="display: inline-block; background: #6495ED;; border: 1px solid #6495ED; padding: 3px 10px;color:#FFFFFF"><span >(5)の解答</span>
+</div>
+
+<div style="border: 1px solid #6495ED; font-size: 100%; padding: 20px;">
+
+$$
+F^\prime(1) = \sum_{i=1}^\infty i f_i
+$$
+
+となるのでこれが平均と一致することがわかる.
+
+$$
+F^\prime(t) = \frac{t}{\sqrt{1-t^2}}
+$$
+
+従って, 
+
+$$
+\lim_{t\to 1}F^\prime(t) = \infty
+$$
+
+より平均は定義できないことがわかる.
+
+</div>
 
 
 ## Appendix: 平均値の定理
