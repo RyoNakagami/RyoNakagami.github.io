@@ -5,7 +5,8 @@ subtitle: "確率と数学ドリル 11/N"
 author: "Ryo"
 catelog: true
 mathjax: true
-last_modified_at: 2023-12-04
+mermaid: false
+last_modified_at: 2023-12-16
 header-mask: 0.0
 header-style: text
 tags:
@@ -52,7 +53,12 @@ tags:
 
 </div>
 
-> (1) $r$分以上待つ確率
+<br>
+
+<div style="display: inline-block; background: #6495ED;; border: 1px solid #6495ED; padding: 3px 10px;color:#FFFFFF"><span >(1) $r$分以上待つ確率</span>
+</div>
+
+<div style="border: 1px solid #6495ED; font-size: 100%; padding: 20px;">
 
 「**信号の３分サイクルのどのタイミングで信号の場所にたどり着くかは一旦は一様分布に従う**」としているので,
 
@@ -69,7 +75,14 @@ $$
 \end{align*}
 $$
 
-> (2) $0 \leq a < b \leq 2$について, $a$分から$b$分まつ確率
+</div>
+
+<br>
+
+<div style="display: inline-block; background: #6495ED;; border: 1px solid #6495ED; padding: 3px 10px;color:#FFFFFF"><span >(2) $0 \leq a < b \leq 2$について, $a$分から$b$分まつ確率</span>
+</div>
+
+<div style="border: 1px solid #6495ED; font-size: 100%; padding: 20px;">
 
 (1)の答えより, $0 < a < b \leq 2$のときは
 
@@ -90,7 +103,14 @@ $$
 \end{align*}
 $$
 
-> (3) 待ち時間の期待値と分散
+</div>
+
+<br>
+
+<div style="display: inline-block; background: #6495ED;; border: 1px solid #6495ED; padding: 3px 10px;color:#FFFFFF"><span >(3) 待ち時間の期待値と分散</span>
+</div>
+
+<div style="border: 1px solid #6495ED; font-size: 100%; padding: 20px;">
 
 <div class="math display" style="overflow: auto">
 $$
@@ -119,6 +139,8 @@ $$
 $$
 V(X) = \frac{20}{9}
 $$
+
+</div>
 
 References
 -------------
