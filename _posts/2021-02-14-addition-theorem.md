@@ -5,7 +5,7 @@ subtitle: "統計のための数学 5/N"
 author: "Ryo"
 catelog: true
 mathjax: true
-last_modified_at: 2023-12-11
+last_modified_at: 2023-12-16
 header-mask: 0.0
 header-style: text
 tags:
@@ -23,9 +23,11 @@ tags:
 
 - [加法定理の図形的理解](#%E5%8A%A0%E6%B3%95%E5%AE%9A%E7%90%86%E3%81%AE%E5%9B%B3%E5%BD%A2%E7%9A%84%E7%90%86%E8%A7%A3)
   - [各加法定理の証明](#%E5%90%84%E5%8A%A0%E6%B3%95%E5%AE%9A%E7%90%86%E3%81%AE%E8%A8%BC%E6%98%8E)
+  - [オイラーの公式から加法定理を導く](#%E3%82%AA%E3%82%A4%E3%83%A9%E3%83%BC%E3%81%AE%E5%85%AC%E5%BC%8F%E3%81%8B%E3%82%89%E5%8A%A0%E6%B3%95%E5%AE%9A%E7%90%86%E3%82%92%E5%B0%8E%E3%81%8F)
 - [積和の公式の図形的理解](#%E7%A9%8D%E5%92%8C%E3%81%AE%E5%85%AC%E5%BC%8F%E3%81%AE%E5%9B%B3%E5%BD%A2%E7%9A%84%E7%90%86%E8%A7%A3)
 - [チェビチェフの多項式](#%E3%83%81%E3%82%A7%E3%83%93%E3%83%81%E3%82%A7%E3%83%95%E3%81%AE%E5%A4%9A%E9%A0%85%E5%BC%8F)
 - [練習問題](#%E7%B7%B4%E7%BF%92%E5%95%8F%E9%A1%8C)
+- [References](#references)
 
 <!-- END doctoc generated TOC please keep comment here to allow auto update -->
 
@@ -152,6 +154,51 @@ $$
 \end{align*}
 $$
 
+
+</div>
+
+### オイラーの公式から加法定理を導く
+
+<div style='padding-left: 2em; padding-right: 2em; border-radius: 1em; border-style:solid; border-color:#D3D3D3; background-color:#F8F8F8'>
+<p class="h4"><ins>Theorem: Euler's formula</ins></p>
+
+$$
+e^{i\theta} = \cos\theta + i\sin\theta
+$$
+
+</div>
+
+オイラーの公式からも加法定理を導くことができます.
+
+<div style="display: inline-block; background: #6495ED;; border: 1px solid #6495ED; padding: 3px 10px;color:#FFFFFF"><span >証明</span>
+</div>
+
+<div style="border: 1px solid #6495ED; font-size: 100%; padding: 20px;">
+
+オイラーの公式より
+
+$$
+e^{i(\alpha +\beta)} = \cos(\alpha +\beta) + i\sin(\alpha +\beta)
+$$
+
+LHSに注目すると
+
+$$
+\begin{align*}
+e^{i(\alpha +\beta)} &= e^{i\alpha} \times e^{i\beta}\\
+                     &= (\cos\alpha + i\sin\alpha)(\cos\beta + i\sin\beta)\\
+                     &= \cos\alpha\cos\beta-\sin\alpha\sin\beta + i(\sin\alpha\cos\beta + \cos\alpha\sin\beta)
+\end{align*}
+$$
+
+最初の式と導かれた式のRHSの実部と虚部どうしがそれぞれ等しくなるので
+
+$$
+\begin{align*}
+\cos(\alpha +\beta) &= \cos\alpha\cos\beta-\sin\alpha\sin\beta\\
+\sin(\alpha +\beta) &= \sin\alpha\cos\beta + \cos\alpha\sin\beta
+\end{align*}
+$$
 
 </div>
 
@@ -425,3 +472,7 @@ RHSが整数なのでLHSも整数, つまり $2^{n-1}/p$も整数だが, $p$ は
 従って, $\cos\theta=1/p$のとき, $\theta = \pi m/n$となるような正の整数$m, n$が存在しない.
 
 </div>
+
+References
+-----------
+- [Ryo's Tech Blog > テイラー展開](https://ryonakagami.github.io/2021/02/15/taylor-expansion/)

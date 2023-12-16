@@ -6,7 +6,7 @@ author: "Ryo"
 catelog: true
 mathjax: true
 mermaid: false
-last_modified_at: 2023-12-15
+last_modified_at: 2023-12-16
 header-mask: 0.0
 header-style: text
 tags:
@@ -33,7 +33,7 @@ tags:
 
 
 </div>
-複素数とはなにか 
+
 ## Taylor展開
 
 <div style='padding-left: 2em; padding-right: 2em; border-radius: 1em; border-style:solid; border-color:#D3D3D3; background-color:#F8F8F8'>
