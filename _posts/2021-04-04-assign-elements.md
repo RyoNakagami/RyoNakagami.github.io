@@ -5,6 +5,7 @@ subtitle: "組合せ論 2/N"
 author: "Ryo"
 catelog: true
 mathjax: true
+mermaid: false
 last_modified_at: 2023-12-14
 header-mask: 0.0
 header-style: text
