@@ -276,7 +276,7 @@ $$
 
 <div style="border: 1px solid #6495ED; font-size: 100%; padding: 20px;">
 
-(1)の解答より
+(1)の解答よりF^\prime(t)
 
 $$
 U(t) = \sum_{k=1}^\infty \bigg(\begin{array}{c}2k\\ k\end{array}\bigg)\bigg(\frac{t^2}{4}\bigg)^k
