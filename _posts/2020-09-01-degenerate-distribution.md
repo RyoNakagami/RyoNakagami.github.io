@@ -27,7 +27,7 @@ tags:
   - [密度関数と累積分布関数](#%E5%AF%86%E5%BA%A6%E9%96%A2%E6%95%B0%E3%81%A8%E7%B4%AF%E7%A9%8D%E5%88%86%E5%B8%83%E9%96%A2%E6%95%B0)
   - [退化分布の平均, 分散, 特性関数](#%E9%80%80%E5%8C%96%E5%88%86%E5%B8%83%E3%81%AE%E5%B9%B3%E5%9D%87-%E5%88%86%E6%95%A3-%E7%89%B9%E6%80%A7%E9%96%A2%E6%95%B0)
 - [分布収束と退化分布](#%E5%88%86%E5%B8%83%E5%8F%8E%E6%9D%9F%E3%81%A8%E9%80%80%E5%8C%96%E5%88%86%E5%B8%83)
-  - [例: 一様分布 to 退化分布](#%E4%BE%8B-%E4%B8%80%E6%A7%98%E5%88%86%E5%B8%83-to-%E9%80%80%E5%8C%96%E5%88%86%E5%B8%83)
+  - [例: 一様分布 to 退化分布 or 指数分布](#%E4%BE%8B-%E4%B8%80%E6%A7%98%E5%88%86%E5%B8%83-to-%E9%80%80%E5%8C%96%E5%88%86%E5%B8%83-or-%E6%8C%87%E6%95%B0%E5%88%86%E5%B8%83)
 - [Appendix: ディラックのデルタ関数の性質](#appendix-%E3%83%87%E3%82%A3%E3%83%A9%E3%83%83%E3%82%AF%E3%81%AE%E3%83%87%E3%83%AB%E3%82%BF%E9%96%A2%E6%95%B0%E3%81%AE%E6%80%A7%E8%B3%AA)
 - [References](#references)
 
@@ -364,7 +364,7 @@ $$
 </div>
 
 
-### 例: 一様分布 to 退化分布
+### 例: 一様分布 to 退化分布 or 指数分布
 
 <div style='padding-left: 2em; padding-right: 2em; border-radius: 1em; border-style:solid; border-color:#D3D3D3; background-color:#F8F8F8'>
 <p class="h4"><ins>Proposition</ins></p>
@@ -491,6 +491,33 @@ fig.add_trace(go.Scatter(x=support,
 fig.update_layout(title='10000 samples simulated from 100000 uniform variables')
 fig.show()
 ```
+
+なお, こんなややこしいことしなくても $X\sim U(0, 1)$ に対して
+
+$$
+Y = -\frac{\log X}{\lambda} \ \ \text{ where } \lambda > 0
+$$
+
+とすると, yの定義域が$(0, \infty)$となり, また
+
+$$
+\begin{align*}
+x & = \exp(-\lambda y) \\
+dx &= -\lambda \exp(-\lambda y)dy
+\end{align*}
+$$
+
+従って, $Y$の確率密度関数 $f$は
+
+$$
+\begin{align*}
+f(y) &= 1 \cdot \vert -\lambda \exp(-\lambda y)\vert \\
+     &= \lambda \exp(-\lambda y) 
+\end{align*}
+$$
+
+よって, $Y$は指数分布に従うことがわかる.
+
 
 ## Appendix: ディラックのデルタ関数の性質
 
