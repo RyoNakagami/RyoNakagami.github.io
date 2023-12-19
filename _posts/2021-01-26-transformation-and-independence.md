@@ -240,6 +240,7 @@ $$
 </div>
 
 
+
 なお, この例ではA, Cが独立であるが感覚的には無関係ではないことがわかるので, 独立だからといって無関係と思うことは回避したほうが良いと言えます(= 無関係なら独立だけど, 独立だからといって無関係ではない)
 
 <div style='padding-left: 2em; padding-right: 2em; border-radius: 1em; border-style:solid; border-color:#e6e6fa; background-color:#e6e6fa'>

@@ -424,7 +424,6 @@ $$
 <div class="math display" style="overflow: auto">
 $$
 \begin{align*}
-\begin{align*}
 G_n(w) &= \Pr(W_n \leq w)\\[3pt]
        &= \Pr(n(1 - U_n) \leq w)\\[3pt]
        &= \Pr(U_n \geq (1-w/n))\\[3pt]
@@ -449,7 +448,7 @@ $W_n$は平均1をもつ指数分布$\text{Ex}(1)$の分布関数に分布収束
 
 Pythonで検証してみても$\text{Ex}(1)$のdensity functionとfitは結構良いです
 
-{% include plotly/20200901_expoentialdist.html %}
+{% include plotly/20200901_exponentialdist.html %}
 
 ```python
 import numpy as np
