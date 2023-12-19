@@ -6,6 +6,7 @@ header-style: text
 header-mask: 0.0
 catelog: true
 mathjax: true
+mermaid: false
 last_modified_at: 2023-08-13
 tags:
 
