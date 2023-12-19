@@ -148,7 +148,7 @@ $$
 \frac{\Pr(A\cap B)}{\Pr(B)} = \frac{\Pr(A)}{1}
 $$
 
-が成立するので加比の理より
+が成立するので[加比の理](https://manabitimes.jp/math/941)より
 
 <div class="math display" style="overflow: auto">
 $$
