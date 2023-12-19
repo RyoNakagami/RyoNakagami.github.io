@@ -6,9 +6,9 @@ author: "Ryo"
 header-style: text
 header-mask: 0.0
 catelog: true
-mathjax: true
 last_modified_at: 2020-10-11
-purpose: 
+mathjax: true
+mermaid: false
 tags:
 
 - LaTex
@@ -162,9 +162,13 @@ CF 80 E3 81 AF E7 B4 84 33 2E 31 34 E3 81 A7 E3 81 99
 
 </div>
 
-**解答**
+<br>
 
-- 先頭ビットが`0`になるのは16進表記で`0～7`
+<div style="display: inline-block; background: #6495ED;; border: 1px solid #6495ED; padding: 3px 10px;color:#FFFFFF"><span >解答</span>
+</div>
+
+<div style="border: 1px solid #6495ED; font-size: 100%; padding: 20px;">
+
 - 先頭が`11`になるビットは16進表記で`C～F`
 
 なので
@@ -173,9 +177,8 @@ CF 80 E3 81 AF E7 B4 84 33 2E 31 34 E3 81 A7 E3 81 99
 
 なのでデータに含まれる文字数は9文字
 
-**解答終了**
+</div>
 
----
 
 References
 -----

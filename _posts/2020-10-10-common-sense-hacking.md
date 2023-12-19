@@ -5,8 +5,10 @@ subtitle: "日常ライフハッキング 1/N"
 author: "Ryo"
 header-mask: 0.0
 catelog: true
+mathjax: false
+mermaid: false
 tags:
-  - hacking
+  - その他
 ---
 
 <div style='border-radius: 1em; border-style:solid; border-color:#D3D3D3; background-color:#F8F8F8'>

@@ -6,6 +6,7 @@ author: "Ryo"
 header-style: text
 header-mask: 0.0
 mathjax: true
+mermaid: false
 catelog: true
 tags:
   - 数値計算
@@ -38,7 +39,7 @@ tags:
 $$
 \begin{array}{rr}
  & 00000111\\
- +\big{)}&11111010\\
+ +\{)}&11111010\\
  \hline
  &00000001
 \end{array}

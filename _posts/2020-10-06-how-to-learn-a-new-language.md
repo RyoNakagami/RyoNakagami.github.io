@@ -6,6 +6,7 @@ author: "Ryo"
 header-style: text
 header-mask: 0.0
 catelog: true
+mermaid: false
 tags:
   - English
 ---

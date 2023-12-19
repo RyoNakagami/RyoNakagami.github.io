@@ -285,7 +285,7 @@ $$
 従って
 
 $$
-\forall \epsilon > 0, \exist N(\epsilon) \text{ such that } \vert a_n - \alpha\vert < \epsilon
+\forall \epsilon > 0, \exists N(\epsilon) \text{ such that } \vert a_n - \alpha\vert < \epsilon
 $$
 
 となるので, $\lim_{n\to\infty} a_n = \alpha$
