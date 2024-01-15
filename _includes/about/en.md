@@ -89,8 +89,11 @@
     - Git Tutorial for Beginners
 
 
-
 ## 開発ツール
 
 - [Devdocs](https://devdocs.io/)
     - 公式ドキュメントブラウザー
+
+## 好きな言葉集
+
+- ガリレオ: 「自然という書物は数学の言葉で書かれている」

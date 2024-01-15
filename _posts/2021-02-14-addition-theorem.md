@@ -12,6 +12,7 @@ header-style: text
 tags:
 
 - math
+- 三角関数
 
 ---
 
@@ -160,6 +161,8 @@ $$
 
 ### オイラーの公式から加法定理を導く
 
+オイラーの公式は, 一見全く異なる挙動を示す三角関数と指数関数を結びつけるものです.
+
 <div style='padding-left: 2em; padding-right: 2em; border-radius: 1em; border-style:solid; border-color:#D3D3D3; background-color:#F8F8F8'>
 <p class="h4"><ins>Theorem: Euler's formula</ins></p>
 
@@ -169,7 +172,7 @@ $$
 
 </div>
 
-オイラーの公式からも加法定理を導くことができます.
+上記のオイラーの公式からも加法定理を導くことができます.
 
 <div style="display: inline-block; background: #6495ED;; border: 1px solid #6495ED; padding: 3px 10px;color:#FFFFFF"><span >証明</span>
 </div>

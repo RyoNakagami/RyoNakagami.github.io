@@ -1,7 +1,7 @@
 ---
 layout: post
 title: "正弦関数の積の積分公式"
-subtitle: "フーリエ解析 1/N"
+subtitle: "フーリエ解析 2/N"
 author: "Ryo"
 header-style: text
 header-mask: 0.0
