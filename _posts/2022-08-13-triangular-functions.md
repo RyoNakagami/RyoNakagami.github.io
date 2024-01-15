@@ -29,7 +29,7 @@ tags:
   - [正弦関数の直交性](#%E6%AD%A3%E5%BC%A6%E9%96%A2%E6%95%B0%E3%81%AE%E7%9B%B4%E4%BA%A4%E6%80%A7)
   - [余弦関数の直交性](#%E4%BD%99%E5%BC%A6%E9%96%A2%E6%95%B0%E3%81%AE%E7%9B%B4%E4%BA%A4%E6%80%A7)
   - [正弦関数と余弦関数の積](#%E6%AD%A3%E5%BC%A6%E9%96%A2%E6%95%B0%E3%81%A8%E4%BD%99%E5%BC%A6%E9%96%A2%E6%95%B0%E3%81%AE%E7%A9%8D)
-- [円周問題](#%E5%86%86%E5%91%A8%E5%95%8F%E9%A1%8C)
+- [演習問題](#%E6%BC%94%E7%BF%92%E5%95%8F%E9%A1%8C)
   - [三角関数の公式の証明](#%E4%B8%89%E8%A7%92%E9%96%A2%E6%95%B0%E3%81%AE%E5%85%AC%E5%BC%8F%E3%81%AE%E8%A8%BC%E6%98%8E)
   - [基本周期](#%E5%9F%BA%E6%9C%AC%E5%91%A8%E6%9C%9F)
 - [References](#references)
@@ -350,7 +350,7 @@ $$
 
 <div style="border: 1px solid #6495ED; font-size: 100%; padding: 20px;">
 
-和積の公式より
+加法定理より
 
 $$
 \begin{align*}
@@ -415,7 +415,7 @@ $$
 
 <div style="border: 1px solid #6495ED; font-size: 100%; padding: 20px;">
 
-和積の公式より
+加法定理より
 
 $$
 \begin{align*}
@@ -464,11 +464,11 @@ $$
 
 が成立するので, サインとコサインが直交していることがわかります.
 
-## 円周問題
+## 演習問題
 ### 三角関数の公式の証明
 
 <div style='padding-left: 2em; padding-right: 2em; border-radius: 1em; border-style:solid; border-color:#D3D3D3; background-color:#F8F8F8'>
-<p class="h4"><ins>Problem</ins></p>
+<p class="h4"><ins>例題</ins></p>
 
 次の公式を証明せよ
 
@@ -497,6 +497,47 @@ $$
 これは偶関数と偶関数の積が偶関数になっているという観点から解答の正しさが確認できる.
 
 </div>
+
+<br>
+
+<div style='padding-left: 2em; padding-right: 2em; border-radius: 1em; border-style:solid; border-color:#D3D3D3; background-color:#F8F8F8'>
+<p class="h4"><ins>例題: フーリエ級数展開</ins></p>
+
+三角関数の積を和に変換する公式を利用して, 次の関数のフーリエ級数展開をもとめよ
+
+$$
+\begin{align*}
+(1) \qquad& f(x) = \sin x \cos x\qquad\\
+(2) \qquad& f(x) = \sin x\sin 3x \qquad\\
+(3) \qquad& f(x) = \cos x\cos 3x \qquad\\
+
+\end{align*}
+$$
+
+</div>
+
+<br>
+
+<div style="display: inline-block; background: #6495ED;; border: 1px solid #6495ED; padding: 3px 10px;color:#FFFFFF"><span >解答</span>
+</div>
+
+<div style="border: 1px solid #6495ED; font-size: 100%; padding: 20px;">
+
+加法定理より
+
+$$
+\begin{align*}
+\sin x \cos x &= \frac{1}{2}\sin 2x\\[3pt]
+\sin x\sin 3x &= \frac{1}{2}(\cos 2x - \cos 4x)\\[3pt]
+\cos x\cos 3x &= \frac{1}{2}(\cos 2x + \cos 4x)
+\end{align*}
+$$
+
+</div>
+
+
+
+
 
 
 ### 基本周期
@@ -581,7 +622,7 @@ $$
 
 <div style="border: 1px solid #6495ED; font-size: 100%; padding: 20px;">
 
-和積の公式より
+加法定理より
 
 $$
 \begin{align*}

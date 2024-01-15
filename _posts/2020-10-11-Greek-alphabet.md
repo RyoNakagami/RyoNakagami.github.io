@@ -11,7 +11,6 @@ mathjax: true
 mermaid: false
 tags:
 
-- LaTex
 - 文字コード
 ---
 
@@ -70,9 +69,8 @@ tags:
 
 文字コードは2つの要素から成り立っています:
 
----|---
-符号化文字集合|表現したい文字の範囲
-文字符号化方式（エンコーディング）|文字集合を構成する個々の文字の表現方法（数値の振り方）
+- 符号化文字集合: 表現したい文字の範囲
+- 文字符号化方式（エンコーディング）: 文字集合を構成する個々の文字の表現方法（数値の振り方）
 
 この「**符号化文字集合**」にはJISやASCIIがあり, Unicodeもこの一種です. 
 Unicodeはギリシャ語, 日本語, 中国語, 記号など、世界で使われているすべての文字を共通の文字集合で利用できることを目的に
@@ -111,12 +109,17 @@ UnicodeとUTF-8の対応例として, 小文字ギリシア文字の $\alpha$ �
 |---|---|---|
 |α|`03B1`|`0xCE 0xB1`|
 
-> 他のエンコーディング方式の特徴
+<div style='padding-left: 2em; padding-right: 2em; border-radius: 1em; border-style:solid; border-color:#e6e6fa; background-color:#e6e6fa'>
+<p class="h4"><ins>他のエンコーディング方式の特徴</ins></p>
+
 
 ---|---
 UTF-7|ASCII文字だけを使用することが前提の電子メールで利用するために, 7ビットで表現
 UTF-16|2バイトで表現する領域に収まらない文字は, 上位サロゲートと下位サロゲートを組み合わせて4バイトで表現.<br>BE(Big Endian)とLE(Little Endian)の2種類がある
 UTF-32|各符号位置が4バイトの固定長で表現
+
+</div>
+
 
 ### UTF-8の変換ルール
 
@@ -139,8 +142,13 @@ Unicode文字列をUTF-8でエンコードすると，各文字のエンコー�
 
 </div>
 
+<br>
 
-> Example
+<div style="display: inline-block; background: #6495ED;; border: 1px solid #6495ED; padding: 3px 10px;color:#FFFFFF"><span >Example</span>
+</div>
+
+<div style="border: 1px solid #6495ED; font-size: 100%; padding: 20px;">
+
 
 $\alpha$を例に, UnicodeからUTF-8への変換を紹介します.
 
@@ -148,6 +156,9 @@ $\alpha$を例に, UnicodeからUTF-8への変換を紹介します.
 2. `03B1`は範囲2なので範囲2のルールに従って変換する → `1100 1110 1011 0001`
 3. `1100 1110 1011 0001`を16進数変換する → `CEB1`
 4. 16進数リテラルの表記へ変換する → `0xCE 0xB1`
+
+</div>
+
 
 ### UTF-8エンコードされたUnicodeに慣れよう
 

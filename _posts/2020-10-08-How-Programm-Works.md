@@ -7,7 +7,7 @@ header-style: text
 header-mask: 0.0
 catelog: true
 tags:
-  - Computer Science
+  - Linux
 ---
 
 ||概要|
