@@ -588,7 +588,7 @@ $$
 </div>
 
 <br>
-周期は$T/a$
+
 <div style="display: inline-block; background: #6495ED;; border: 1px solid #6495ED; padding: 3px 10px;color:#FFFFFF"><span >解答</span>
 </div>
 

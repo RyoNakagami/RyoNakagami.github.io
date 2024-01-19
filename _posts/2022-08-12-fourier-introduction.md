@@ -206,8 +206,8 @@ $$
 $$
 \begin{align*}
 \int^{\pi}_0\sin nx \sin kx dx =\begin{cases}
-0 & (k\neq n)\\[4pt]
-\frac{\pi}{2} & (k = n)
+\displaystyle 0 & (k\neq n)\\[4pt]
+\displaystyle \frac{\pi}{2} & (k = n)
 \end{cases}
 \end{align*}
 $$
@@ -233,8 +233,8 @@ $n,k$をそれぞれ自然数としたとき
 $$
 \begin{align*}
 \int^{\pi}_0\sin nx \sin kx dx =\begin{cases}
-0 & (k\neq n)\\[4pt]
-\frac{\pi}{2} & (k = n)
+\displaystyle 0 & (k\neq n)\\[4pt]
+\displaystyle \frac{\pi}{2} & (k = n)
 \end{cases}
 \end{align*}
 $$
