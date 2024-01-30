@@ -6,7 +6,7 @@ author: "Ryo"
 catelog: true
 mathjax: true
 mermaid: false
-last_modified_at: 2024-01-15
+last_modified_at: 2024-01-30
 header-mask: 0.0
 header-style: text
 tags:
@@ -335,6 +335,9 @@ $$
 
 ### 正弦関数の直交性
 
+<div style='padding-left: 2em; padding-right: 2em; border-radius: 1em; border-style:solid; border-color:#D3D3D3; background-color:#F8F8F8'>
+<p class="h4"><ins>Proposition</ins></p>
+
 $m, n$が共に整数で, かつ $m\neq n$が成立するとします. このとき, $\sin nx$ と$ \sin mx$は周期$2\pi$をもちます.
 
 もし, $\sin nx$ と$\sin mx$が直交するならば
@@ -343,7 +346,11 @@ $$
 \int^{\pi}_{-\pi} \sin nx \sin mx\ dx = 0
 $$
 
-が成立します.
+が成立する
+
+</div>
+
+<br>
 
 <div style="display: inline-block; background: #6495ED;; border: 1px solid #6495ED; padding: 3px 10px;color:#FFFFFF"><span >証明</span>
 </div>
@@ -404,11 +411,18 @@ $$
 
 ### 余弦関数の直交性
 
-コサインの場合もクロネッカーのデルタを用いて以下のように表現できます:
+<div style='padding-left: 2em; padding-right: 2em; border-radius: 1em; border-style:solid; border-color:#D3D3D3; background-color:#F8F8F8'>
+<p class="h4"><ins>Proposition</ins></p>
+
+コサインの場合もクロネッカーのデルタを用いて以下のように表現できる:
 
 $$
 \frac{1}{\pi}\int^\pi_{-\pi}\cos m\theta \cos n\theta\ d\theta = \delta_{mn} \qquad (m,n\text{は整数})
 $$
+
+</div>
+
+<br>
 
 <div style="display: inline-block; background: #6495ED;; border: 1px solid #6495ED; padding: 3px 10px;color:#FFFFFF"><span >証明</span>
 </div>
@@ -442,15 +456,47 @@ $$
 
 ### 正弦関数と余弦関数の積
 
-サインとコサインをかけ合わせた関数の積分について
+<div style='padding-left: 2em; padding-right: 2em; border-radius: 1em; border-style:solid; border-color:#D3D3D3; background-color:#F8F8F8'>
+<p class="h4"><ins>Proposition</ins></p>
+
+サインとコサインをかけ合わせた関数の積分について, $m,n$を自然数としたとき, 
 
 $$
 \int^{\pi}_{-\pi}\sin m\theta \cos n\theta\ d\theta = 0
 $$
 
-が成立します.
+が成立する.
 
-一般に, 奇関数に偶関数をかけると奇関数になるので
+</div>
+
+<br>
+
+<div style="display: inline-block; background: #6495ED;; border: 1px solid #6495ED; padding: 3px 10px;color:#FFFFFF"><span >証明</span>
+</div>
+
+<div style="border: 1px solid #6495ED; font-size: 100%; padding: 20px;">
+
+積和の公式より
+
+$$
+\sin x \cos y = \frac{1}{2}\{\sin (x+y) + \sin(x-y)\}
+$$
+
+なので
+
+$$
+\begin{align*}
+&\int^{\pi}_{-\pi}\sin m\theta \cos n\theta\ d\theta\\[3pt]
+&= \int^{\pi}_{-\pi}\sin(m + n)\theta + \sin(m - n)\theta d\theta\\[3pt]
+&= -\frac{1}{m+n}[\cos (m+n)\theta]^\pi_{-\pi} -\frac{1}{m-n}[\cos (m-n)\theta]^\pi_{-\pi}\\[3pt]
+&= 0
+\end{align*}
+$$
+
+</div>
+
+
+なお, 一般に奇関数に偶関数をかけると奇関数になるので
 
 $$
 \sin m\theta \cos n\theta =f_o(\theta)
@@ -463,6 +509,7 @@ $$
 $$
 
 が成立するので, サインとコサインが直交していることがわかります.
+
 
 ## 演習問題
 ### 三角関数の公式の証明
