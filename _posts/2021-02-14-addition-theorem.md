@@ -12,7 +12,7 @@ header-style: text
 tags:
 
 - math
-- 三角関数
+- フーリエ解析
 
 ---
 

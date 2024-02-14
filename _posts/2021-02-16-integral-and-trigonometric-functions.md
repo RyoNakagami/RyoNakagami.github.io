@@ -332,3 +332,7 @@ $$
 </div>
 
 <br>
+
+References
+---------
+- [Ryo's Tech Blog > 加法定理と積和の公式の図形的理解](https://ryonakagami.github.io/2021/02/14/addition-theorem/)

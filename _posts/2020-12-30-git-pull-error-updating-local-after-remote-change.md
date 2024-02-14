@@ -6,8 +6,9 @@ author: "Ryo"
 header-mask: 0.0
 header-style: text
 catelog: true
-mathjax: true
-last_modified_at: 2022-08-01
+mathjax: false
+mermaid: false
+last_modified_at: 2024-02-14
 tags:
 
 - git
@@ -71,16 +72,27 @@ hint: invocation.
 fatal: Need to specify how to reconcile divergent branches.
 ```
 
-> どういう時発生しやすいのか？
+<div style="display: inline-block; background: #D3D3D3;; border: 1px solid #D3D3D3; padding: 3px 10px;color:black"><span >どういうとき発生しやすいのか？</span>
+</div>
+
+<div style="border: 1px solid #D3D3D3; font-size: 100%; padding: 20px;">
 
 - Remote Repository側でPull requestをmergeした場合
 - Issue TemplateをRemote側で設定してcommitした場合など
 
+</div>
+
 ## How to Solve the Problem
+
+<div style="display: inline-block; background: #6495ED;; border: 1px solid #6495ED; padding: 3px 10px;color:#FFFFFF"><span >方針</span>
+</div>
+
+<div style="border: 1px solid #6495ED; font-size: 100%; padding: 20px;">
 
 - 方針1: ローカル側のcommitを取り消し, `pull` & `commit` & `push`
 - 方針2: `git rebase`を使って, 最新のアップストリームブランチを参照先に変更する
 
+</div>
 
 ### 方針 1.1: `git reset`を使って, Commitを取り消す
 
@@ -88,22 +100,33 @@ fatal: Need to specify how to reconcile divergent branches.
 
 ```zsh
 % git reset --soft <commit-ID>
-% git reset --mixed <commit-ID> # ステージングエリアも取り消し(= git addの取り消し)
+% git reset --mixed <commit-ID> # Default, ステージングエリアも取り消し(= git addの取り消し)
 % git reset --soft HEAD^        # 直前に戻る場合
 ```
 
-- commitのみ取り消し(=作業ディレクトリとステージングエリアは維持), 特定の時点までもどることができます(HEADの位置のみ修正される)
-- `git reset --hard`とすると, 作業ディレクトリのファイルも特定のCommit時点まで戻されます
-- `HEAD^`は, HEADリビジョンの1つ前までという意味
+Optionを問わず共通しているのは, Commitを取り消し, `commit-ID`で指定された特定の時点まで戻ること(=HEADの位置が修正される)です. **誤ったコミット自体を削除出来るので修正後のコミットログが見やすくなる**というメリットがあります. なお, `HEAD^`は, HEADリビジョンの1つ前までという意味なので, 直前に戻りたい場合は`commit-ID`をわざわざ指定するのではなく`HEAD^`の方が簡単です.
 
-> メリット
+Optionによる挙動の違いは以下:
 
-- 誤ったコミット自体を削除出来るのでコミットログが見やすくなる
+|Option|挙動|
+|------|---|
+|`--hard`|コミット, インデックス, ファイルの変更をすべて削除|
+|`--mixed`|コミット, インデックスを削除. ファイルの変更だけは残す|
+|`--soft`|コミットだけを削除する. インデックス, ファイルの変更は残す|
 
-> REMARKS
+`git reset --hard`を指定する場合は「変更自体を手元(ワーキングツリー)に残す必要すらないほど」という例外的な状況と認識しています. 昔の環境での挙動を確認したい場合など完全に昔の環境に戻したい場合はあるかもですが, そのような場合は`git checkout`を利用することが推奨されます.
+
+
+
+<div style="display: inline-block; background: #D3D3D3;; border: 1px solid #D3D3D3; padding: 3px 10px;color:black"><span >運用における注意点</span>
+</div>
+
+<div style="border: 1px solid #D3D3D3; font-size: 100%; padding: 20px;">
 
 - コミットそのものを削除してしまうので, 他の開発者が依拠している親コミットを消してしまうリスクがある
 - **ローカルな変更を取り消して元に戻したいときに限って使用**
+
+</div>
 
 
 ### 方針 1.2: `git revert`を使って, Commitを戻す
@@ -115,20 +138,23 @@ fatal: Need to specify how to reconcile divergent branches.
 % git revert HEAD^ #直前に戻る場合
 ```
 
-- `git reset`と異なり, `git revert`で指定したコミット時点の状態まで作業ツリーを戻す = 逆向きのコミット」の履歴が残る
+`git reset`と異なり, `git revert`で指定したコミット時点の状態まで作業ツリーを戻す = 逆向きのコミット」の履歴が残るという特徴があります. コミット自体を削除するわけではないので, 安全にコミットを元に戻すことができるというメリットがあります. 
 
-> メリット
+<div style="display: inline-block; background: #D3D3D3;; border: 1px solid #D3D3D3; padding: 3px 10px;color:black"><span >運用における注意点</span>
+</div>
 
-- コミット自体を削除するわけではないので, 安全にコミットを元に戻すことができる
-
-> REMARKS
+<div style="border: 1px solid #D3D3D3; font-size: 100%; padding: 20px;">
 
 - conflictを引き起こすCommitが１つだけならば問題ないが, 複数の場合は変更履歴の整理が大変になるので非推奨
 
+</div>
 
 ### 方針2: `git pull --rebase`を使って, 最新のアップストリームブランチを参照先に変更する
 
-> How
+<div style="display: inline-block; background: #6495ED;; border: 1px solid #6495ED; padding: 3px 10px;color:#FFFFFF"><span >方針</span>
+</div>
+
+<div style="border: 1px solid #6495ED; font-size: 100%; padding: 20px;">
 
 リモート側の変更内容を `diff-1`, ローカル側の変更内容群を `diff-2`としたとき, 
 
@@ -141,6 +167,7 @@ fatal: Need to specify how to reconcile divergent branches.
 
 logをきれいにしたままconflictを解消することが出来ます.
 
+</div>
 
 > Command
 
@@ -153,18 +180,9 @@ Successfully rebased and updated refs/heads/main.
 % git rebase --continue
 ```
 
-
-## References
-
-> 関連ポスト
-
-
-> git pull --rebase
+References
+-----------
 
 - [stackoverflow > git pull --rebase - how to proceed after conflict resolution](https://stackoverflow.com/questions/30119874/git-pull-rebase-how-to-proceed-after-conflict-resolution)
-
-
-> その他
-
 - [YoheiM.NET > [git] 変更を取り消す](https://www.yoheim.net/blog.php?q=20140201)
 - [ラクスエンジニアブログ > 【Git入門】git commitを取り消したい、元に戻す方法まとめ](https://tech-blog.rakus.co.jp/entry/20210528/git#reset%E3%81%A7%E3%82%B3%E3%83%9F%E3%83%83%E3%83%88%E3%82%92%E5%8F%96%E3%82%8A%E6%B6%88%E3%81%97%E3%81%A6%E3%81%AA%E3%81%8B%E3%81%A3%E3%81%9F%E3%81%93%E3%81%A8%E3%81%99%E3%82%8B)
