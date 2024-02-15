@@ -7,6 +7,7 @@ header-mask: 0.0
 header-style: text
 catelog: true
 mathjax: true
+mermaid: true
 last_modified_at: 2023-06-24
 tags:
 
@@ -165,7 +166,6 @@ the `<n>`th generation ancestor of the named commit object, following only the f
 公式ドキュメントの定義を確認します:
 
 <div style='padding-left: 2em; padding-right: 2em; border-radius: 0em; border-style:solid; border-color:#D3D3D3; background-color:#F8F8F8'>
-<p class="h4"><ins>Def: </ins></p>
 
 A suffix `^` to a revision parameter means the first parent of that commit object. 
 `^<n>` means the `<n>th` parent (i.e. `<rev>^` is equivalent to `<rev>^1`). 

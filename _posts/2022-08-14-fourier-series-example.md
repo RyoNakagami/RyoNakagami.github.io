@@ -149,6 +149,16 @@ $$
 </div>
 
 ## フーリエ級数展開計算例
+
+ここではフーリエ級数展開で表現可能な周期関数の例を紹介します. 有名なところだとノコギリ波や方形波
+があります.
+
+- ノコギリ波: テレビのブラウン管に流す電流の波形
+- 方形波: コンピューターなどで用いるデジタル信号の基本波形
+
+といわれています.
+
+
 ### 方形波
 
 <div style='padding-left: 2em; padding-right: 2em; border-radius: 1em; border-style:solid; border-color:#D3D3D3; background-color:#F8F8F8'>

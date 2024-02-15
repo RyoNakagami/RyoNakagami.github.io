@@ -1,32 +1,28 @@
 ---
 layout: post
 title: "SSH(Secure Shell)の基礎知識"
-subtitle: "VSCodeを用いたSSH接続設定まで"
+subtitle: "ssh series 1/N"
 author: "Ryo"
 header-style: text
 header-mask: 0.0
 catelog: true
 mathjax: true
-last_modified_at: 2022-09-03
+mermaid: true
+last_modified_at: 2024-02-15
 tags:
 
 - Linux
-- VSCode
+- ssh
 ---
 
-> 技術スペック
+<div style='border-radius: 1em; border-style:solid; border-color:#D3D3D3; background-color:#F8F8F8'>
 
----|---
-OS | ubuntu 20.04 LTS Focal Fossa
-CPU| Intel Core i7-9700 CPU 3.00 GHz
+<p class="h4">&nbsp;&nbsp;Table of Contents</p>
 
-
-**Table of Contents**
 <!-- START doctoc generated TOC please keep comment here to allow auto update -->
 <!-- DON'T EDIT THIS SECTION, INSTEAD RE-RUN doctoc TO UPDATE -->
 
 - [SSHの仕組み](#ssh%E3%81%AE%E4%BB%95%E7%B5%84%E3%81%BF)
-  - [SSHとは？](#ssh%E3%81%A8%E3%81%AF)
   - [ホスト認証](#%E3%83%9B%E3%82%B9%E3%83%88%E8%AA%8D%E8%A8%BC)
   - [ユーザー認証](#%E3%83%A6%E3%83%BC%E3%82%B6%E3%83%BC%E8%AA%8D%E8%A8%BC)
 - [クライアント目線からのssh接続](#%E3%82%AF%E3%83%A9%E3%82%A4%E3%82%A2%E3%83%B3%E3%83%88%E7%9B%AE%E7%B7%9A%E3%81%8B%E3%82%89%E3%81%AEssh%E6%8E%A5%E7%B6%9A)
@@ -36,14 +32,15 @@ CPU| Intel Core i7-9700 CPU 3.00 GHz
   - [sshpassコマンド](#sshpass%E3%82%B3%E3%83%9E%E3%83%B3%E3%83%89)
 - [接続先ホストとクライアント間のファイル転送: scp コマンド](#%E6%8E%A5%E7%B6%9A%E5%85%88%E3%83%9B%E3%82%B9%E3%83%88%E3%81%A8%E3%82%AF%E3%83%A9%E3%82%A4%E3%82%A2%E3%83%B3%E3%83%88%E9%96%93%E3%81%AE%E3%83%95%E3%82%A1%E3%82%A4%E3%83%AB%E8%BB%A2%E9%80%81-scp-%E3%82%B3%E3%83%9E%E3%83%B3%E3%83%89)
   - [実践編](#%E5%AE%9F%E8%B7%B5%E7%B7%A8)
-- [VS CodeとGCEへのSSH接続](#vs-code%E3%81%A8gce%E3%81%B8%E3%81%AEssh%E6%8E%A5%E7%B6%9A)
 - [References](#references)
 
 <!-- END doctoc generated TOC please keep comment here to allow auto update -->
 
 
+</div>
+
+
 ## SSHの仕組み
-### SSHとは？
 
 SSH(Secure SHell)は, ネットワークで接続された他コンピューターを遠隔操作するためのプロトコルです.
 強力な認証機能と暗号化により, ファイル転送やリモート操作を安全に行うことができます. 
@@ -61,16 +58,75 @@ Ubuntu Serverでは, デフォルトでSSH2のみが有効となっています.
 
 ### ホスト認証
 
-SSH接続を試みる際の認証は以下のような手順となります:
+<div style="display: inline-block; background: #D3D3D3;; border: 1px solid #D3D3D3; padding: 3px 10px;color:black"><span >SSH接続の認証手順</span>
+</div>
 
-1. ホスト認証
-2. ユーザー認証
-    - 公開鍵認証
-    - パスワード認証
+<div style="border: 1px solid #D3D3D3; font-size: 100%; padding: 20px;">
 
-<img src="https://github.com/ryonakimageserver/omorikaizuka/blob/master/%E3%83%96%E3%83%AD%E3%82%B0%E7%94%A8/20210506_ssh_protocol.png?raw=true">
+SSH接続を試みる際の認証は「**ホスト認証, ユーザー認証**」の２段階に分かれます.
 
-ホスト認証鍵がクライアント側で登録したknown hostの鍵と一致しない場合は以下のようなエラーメッセージが出現します:
+> ホスト認証
+
+```mermaid
+sequenceDiagram
+    participant A as ssh(client)
+    participant B as sshd(server)
+    A->>B: ssh接続要求
+    B->>A: ホスト認証鍵をクライアントへ渡す
+    A->>B: ホスト認証鍵で暗号化した乱数をサーバーへ渡す
+    B->>A: ホスト認証鍵の秘密鍵で復号化し, そのハッシュ値を送付
+    Note over A,B: ハッシュ値を比較し一致していれば接続成功<br>=ホスト認証完了
+```
+
+
+> 秘密鍵公開鍵によるユーザー認証
+
+ユーザー認証はホスト認証完了後に行われる処理となります. 
+
+
+```mermaid
+sequenceDiagram
+    participant A as ssh(client)
+    participant B as sshd(server)
+    A-->>B: 公開鍵をサーバーに設置
+    A->>B: ssh接続要求
+    B->>A: 公開鍵で暗号化した乱数をssh側に渡す
+    A->>B: 秘密鍵で復号化し, そのハッシュ値を送付
+    Note over A,B: ハッシュ値を比較し一致していれば接続成功<br>=ユーザー認証完了
+```
+
+</div>
+
+<br>
+
+<div style='padding-left: 2em; padding-right: 2em; border-radius: 1em; border-style:solid; border-color:#D3D3D3; background-color:#F8F8F8'>
+<p class="h4"><ins>Def: ホスト認証</ins></p>
+
+接続先が正当な相手であるのかどうかの認証のこと.
+
+</div>
+
+初回接続時の際は, 接続先サーバーのホスト認証鍵を持っていないので,接続先ホストが登録されていない旨のWarningが表示されます.
+このとき, 接続をこのまま続けるか？と聞かれます. yesと選択すると, SSH接続先サーバーが`~/.ssh/known_hosts`に登録されます.
+
+```zsh
+% ssh hogehoge@123.456.78.9
+The authenticity of host '123.456.78.9 (123.456.78.9)' can not be established.
+ECDSA key fingerprint is SHA256:ghzvH/1TBjI0wvlYiRNDJvUsiYAX/R9eip5bw6+Rv10.
+Are you sure you want to continue connecting (yes/no/[fingerprint])?
+$ yes
+Warning: Permanently added '123.456.78.9' (ECDSA) to the list of known hosts.
+Password:
+Last login: Thu Apr 11 04:16:45 2021
+```
+
+上記における`ECDSA key fingerprintSHA256:ghzvH/1TBjI0wvlYiRNDJvUsiYAX/R9eip5bw6+Rv10`, の意味はSHA256で公開鍵をハッシュ化すると
+`ghzvH/1TBjI0wvlYiRNDJvUsiYAX/R9eip5bw6+Rv10`というフィンガープリントが発行されることを指しています.
+
+
+一度接続するとクライアントの `known_hosts` というファイルにサーバーの公開鍵が保存されるので, 初回接続以降は自動的に認証が行われるため警告が表示されなくなります. 目的外のサーバーに接続している場合やサーバーの公開鍵が変わっている場合, 警告が表示されます.一般的にはホストキーの変更は滅多に行わなれないため、許可済みのサーバーに接続した際、 **WARNING: REMOTE HOST IDENTIFICATION HAS CHANGED!** のような警告が出た場合は注意する必要があります.
+
+> 例: WARNING: REMOTE HOST IDENTIFICATION HAS CHANGED!
 
 ```zsh
 % ssh ubuntu@12.3.4.56
@@ -96,24 +152,7 @@ ECDSA host key for 12.3.4.56 has changed and you have requested strict checking.
 Host key verification failed.
 ```
 
-> 初回SSH接続時のメッセージ
 
-初回接続時の際は, 接続先サーバーのホスト認証鍵を持っていないので,接続先ホストが登録されていない旨のWarningが表示されます.
-このとき, 接続をこのまま続けるか？と聞かれます. yesと選択すると, SSH接続先サーバーが`~/.ssh/known_hosts`に登録されます.
-
-```zsh
-% ssh hogehoge@123.456.78.9
-The authenticity of host '123.456.78.9 (123.456.78.9)' can not be established.
-ECDSA key fingerprint is SHA256:ghzvH/1TBjI0wvlYiRNDJvUsiYAX/R9eip5bw6+Rv10.
-Are you sure you want to continue connecting (yes/no/[fingerprint])?
-$ yes
-Warning: Permanently added '123.456.78.9' (ECDSA) to the list of known hosts.
-Password:
-Last login: Thu Apr 11 04:16:45 2021
-```
-
-上記における`ECDSA key fingerprintSHA256:ghzvH/1TBjI0wvlYiRNDJvUsiYAX/R9eip5bw6+Rv10`, の意味はSHA256で公開鍵をハッシュ化すると
-`ghzvH/1TBjI0wvlYiRNDJvUsiYAX/R9eip5bw6+Rv10`というフィンガープリントが発行されることを指しています.
 
 ### ユーザー認証
 
@@ -366,12 +405,7 @@ scp [オプション] コピー元 コピー先
 % scp user1@192.168.10.1:/home/user/tmp/file1 user2@192.168.10.2:/home/user/tmp/
 ```
 
-## VS CodeとGCEへのSSH接続
-
-(後ほど)
-
-## References
-
-> オンラインマテリアル
+References
+----------
 
 - [sshpass: An Excellent Tool for Non-Interactive SSH Login – Never Use on Production Server](https://www.tecmint.com/sshpass-non-interactive-ssh-login-shell-script-ssh-password/)
