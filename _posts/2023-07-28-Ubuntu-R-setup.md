@@ -317,7 +317,21 @@ options(renv.config.auto.snapshot = auto.snapshot)
 ## deb packageのdownload
 % cd ./workingdirectory
 % wget https://download1.rstudio.org/electron/jammy/amd64/rstudio-2023.12.1-402-amd64.deb
+--2023-12-21 18:29:57--  https://download1.rstudio.org/electron/jammy/amd64/rstudio-2023.12.1-402-amd64.deb
+Resolving download1.rstudio.org (download1.rstudio.org)... 13.35.49.53, 13.35.49.35, 13.35.49.76, ...
+Connecting to download1.rstudio.org (download1.rstudio.org)|13.35.49.53|:443... connected.
+HTTP request sent, awaiting response... 200 OK
+Length: 149955068 (143M) [application/octet-stream]
+Saving to: ‘rstudio-2023.12.1-402-amd64.deb’
 
+rstudio-2023.12.1-4 100%[===================>] 143.01M  6.98MB/s    in 21s     
+
+2023-12-21 18:30:18 (6.81 MB/s) - ‘rstudio-2023.12.1-402-amd64.deb’ saved [149955068/149955068]
+```
+
+次にインストールを実行します
+
+```zsh
 ## install
 % sudo dpkg -i ./rstudio-2023.12.1-402-amd64.deb
 ## uninstallの場合はsudo dpkg -r rstudio
