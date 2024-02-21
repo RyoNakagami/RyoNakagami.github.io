@@ -272,7 +272,7 @@ Waiting on bqjob_ ... (0s) Current status                                       
 ### configの切り替え
 
 ```zsh
-% gcloud config configurations activate [config name]
+% gcloud config configurations activate <config name>
 ```
 
 でconfigを切り替えることが出来ます. `default`へ切り替えたい場合の例として
@@ -295,11 +295,6 @@ Activated [default].
 ## 複数configの削除
 % gcloud config configurations delete my-config1 my-config2
 ```
-
-
-
-
-
 
 
 References
