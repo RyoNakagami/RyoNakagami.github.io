@@ -12,6 +12,8 @@ last_modified_at: 2024-02-21
 tags:
 
 - google cloud
+- Ubuntu 22.04 LTS
+- cloud
 ---
 
 <div style='border-radius: 1em; border-style:solid; border-color:#D3D3D3; background-color:#F8F8F8'>
