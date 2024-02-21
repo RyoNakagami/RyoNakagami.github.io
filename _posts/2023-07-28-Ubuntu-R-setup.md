@@ -53,7 +53,7 @@ Ubuntu 22.04 LTSを対象に
 
 ```zsh
 % sudo lshw -class processor 
-[sudo] password for ryo_billiken: 
+[sudo] password for hoshinokirby: 
   *-cpu                     
        description: CPU
        product: AMD Ryzen 9 7950X 16-Core Processor
@@ -135,7 +135,17 @@ sub   rsa2048 2010-10-19 [E] [expires: 2027-09-30]
 
 ```zsh
 % sudo add-apt-repository "deb https://cloud.r-project.org/bin/linux/ubuntu $(lsb_release -cs)-cran40/"
-```
+```--2024-02-21 18:29:57--  https://download1.rstudio.org/electron/jammy/amd64/rstudio-2023.12.1-402-amd64.deb
+Resolving download1.rstudio.org (download1.rstudio.org)... 13.35.49.53, 13.35.49.35, 13.35.49.76, ...
+Connecting to download1.rstudio.org (download1.rstudio.org)|13.35.49.53|:443... connected.
+HTTP request sent, awaiting response... 200 OK
+Length: 149955068 (143M) [application/octet-stream]
+Saving to: ‘rstudio-2023.12.1-402-amd64.deb’
+
+rstudio-2023.12.1-4 100%[===================>] 143.01M  6.98MB/s    in 21s     
+
+2024-02-21 18:30:18 (6.81 MB/s) - ‘rstudio-2023.12.1-402-amd64.deb’ saved [149955068/149955068]
+
 
 登録することで, `r-base`, `r-base-dev`のpackage priorityがUbuntu softwareからCRAN packageへ更新されます.
 その確認は`apt-cache policy`コマンドで確認できます
@@ -145,7 +155,17 @@ sub   rsa2048 2010-10-19 [E] [expires: 2027-09-30]
 r-base:
   Installed: 4.3.1-4.2204.0
   Candidate: 4.3.1-4.2204.0
-  Version table:
+  Version table:--2024-02-21 18:29:57--  https://download1.rstudio.org/electron/jammy/amd64/rstudio-2023.12.1-402-amd64.deb
+Resolving download1.rstudio.org (download1.rstudio.org)... 13.35.49.53, 13.35.49.35, 13.35.49.76, ...
+Connecting to download1.rstudio.org (download1.rstudio.org)|13.35.49.53|:443... connected.
+HTTP request sent, awaiting response... 200 OK
+Length: 149955068 (143M) [application/octet-stream]
+Saving to: ‘rstudio-2023.12.1-402-amd64.deb’
+
+rstudio-2023.12.1-4 100%[===================>] 143.01M  6.98MB/s    in 21s     
+
+2024-02-21 18:30:18 (6.81 MB/s) - ‘rstudio-2023.12.1-402-amd64.deb’ saved [149955068/149955068]
+
  *** 4.3.1-4.2204.0 500
         500 https://cloud.r-project.org/bin/linux/ubuntu jammy-cran40/ Packages
         100 /var/lib/dpkg/status
@@ -173,7 +193,17 @@ install後, R commandの動作を確認します
 > q()
 ```
 
-### R Quickstart: install packages
+### R Quickstart: install packages--2024-02-21 18:29:57--  https://download1.rstudio.org/electron/jammy/amd64/rstudio-2023.12.1-402-amd64.deb
+Resolving download1.rstudio.org (download1.rstudio.org)... 13.35.49.53, 13.35.49.35, 13.35.49.76, ...
+Connecting to download1.rstudio.org (download1.rstudio.org)|13.35.49.53|:443... connected.
+HTTP request sent, awaiting response... 200 OK
+Length: 149955068 (143M) [application/octet-stream]
+Saving to: ‘rstudio-2023.12.1-402-amd64.deb’
+
+rstudio-2023.12.1-4 100%[===================>] 143.01M  6.98MB/s    in 21s     
+
+2024-02-21 18:30:18 (6.81 MB/s) - ‘rstudio-2023.12.1-402-amd64.deb’ saved [149955068/149955068]
+
 #### Packages in CRAN Repository
 CRAN RepositoryからR packageをインストールする場合は以下が基本コマンドです
 
@@ -201,7 +231,17 @@ devtools::install_github('rstudio/shiny')
 ```
 
 
-#### Localのzip fileからインストールする場合
+#### Localのzip fileからインストールする場合--2024-02-21 18:29:57--  https://download1.rstudio.org/electron/jammy/amd64/rstudio-2023.12.1-402-amd64.deb
+Resolving download1.rstudio.org (download1.rstudio.org)... 13.35.49.53, 13.35.49.35, 13.35.49.76, ...
+Connecting to download1.rstudio.org (download1.rstudio.org)|13.35.49.53|:443... connected.
+HTTP request sent, awaiting response... 200 OK
+Length: 149955068 (143M) [application/octet-stream]
+Saving to: ‘rstudio-2023.12.1-402-amd64.deb’
+
+rstudio-2023.12.1-4 100%[===================>] 143.01M  6.98MB/s    in 21s     
+
+2024-02-21 18:30:18 (6.81 MB/s) - ‘rstudio-2023.12.1-402-amd64.deb’ saved [149955068/149955068]
+
 
 ```R
 install.packages('~/Downloads/abc_2.1.zip', repos=NULL, type='source')
@@ -245,7 +285,17 @@ R packageを参照しているのみなので, projectが乱立してもそこ�
 
 > (1) R packageとしてinstallする場合
 
-```R
+```R--2024-02-21 18:29:57--  https://download1.rstudio.org/electron/jammy/amd64/rstudio-2023.12.1-402-amd64.deb
+Resolving download1.rstudio.org (download1.rstudio.org)... 13.35.49.53, 13.35.49.35, 13.35.49.76, ...
+Connecting to download1.rstudio.org (download1.rstudio.org)|13.35.49.53|:443... connected.
+HTTP request sent, awaiting response... 200 OK
+Length: 149955068 (143M) [application/octet-stream]
+Saving to: ‘rstudio-2023.12.1-402-amd64.deb’
+
+rstudio-2023.12.1-4 100%[===================>] 143.01M  6.98MB/s    in 21s     
+
+2024-02-21 18:30:18 (6.81 MB/s) - ‘rstudio-2023.12.1-402-amd64.deb’ saved [149955068/149955068]
+
 install.packages("renv")
 ```
 
