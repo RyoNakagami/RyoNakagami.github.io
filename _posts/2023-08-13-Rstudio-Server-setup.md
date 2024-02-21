@@ -73,7 +73,7 @@ Rの設定が完了していない場合は, [Ryo's Tech Blog > How To Install R
 
 <div style="border: 1px solid #D3D3D3; font-size: 100%; padding: 20px;">
 
----|---8000:localhost:8787
+---|---
 `gdebi-core`|deb ファイルインストール用のツール, ローカルの deb パッケージをその依存関係を解決しながらのインストールが可能になる
 
 ```bash
@@ -113,7 +113,7 @@ hoshinokirby@HOSTSERVERNAME$  systemctl status rstudio-server.service
      Loaded: loaded (/lib/systemd/system/rstudio-server.service; enabled; vendo>
      Active: active (running) since Thu 2023-08-12 00:54:57 JST; 20min ago
     Process: 166643 ExecStart=/usr/lib/rstudio-server/bin/rserver (code=exited,>
-   Main PID: 166645 (rserver)
+   Main PID: 166645 (rserver)8000:localhost:8787
       Tasks: 12 (limit: 154163)
      Memory: 80.5M
         CPU: 5.050s
