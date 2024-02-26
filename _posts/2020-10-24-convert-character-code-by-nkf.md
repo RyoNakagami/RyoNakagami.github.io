@@ -7,7 +7,8 @@ header-style: text
 header-mask: 0.0
 catelog: true
 mathjax: true
-last_modified_at: 2020-11-11
+mermaid: false
+last_modified_at: 2024-02-27
 purpose: 
 tags:
 
@@ -27,9 +28,7 @@ tags:
 - [`nkf`コマンド: 文字コードと改行コード変換コマンド](#nkf%E3%82%B3%E3%83%9E%E3%83%B3%E3%83%89-%E6%96%87%E5%AD%97%E3%82%B3%E3%83%BC%E3%83%89%E3%81%A8%E6%94%B9%E8%A1%8C%E3%82%B3%E3%83%BC%E3%83%89%E5%A4%89%E6%8F%9B%E3%82%B3%E3%83%9E%E3%83%B3%E3%83%89)
   - [`nkf`のインストール](#nkf%E3%81%AE%E3%82%A4%E3%83%B3%E3%82%B9%E3%83%88%E3%83%BC%E3%83%AB)
   - [`nkf`のオプション](#nkf%E3%81%AE%E3%82%AA%E3%83%97%E3%82%B7%E3%83%A7%E3%83%B3)
-    - [出力オプション](#%E5%87%BA%E5%8A%9B%E3%82%AA%E3%83%97%E3%82%B7%E3%83%A7%E3%83%B3)
-    - [入力オプション](#%E5%85%A5%E5%8A%9B%E3%82%AA%E3%83%97%E3%82%B7%E3%83%A7%E3%83%B3)
-    - [改行オプション](#%E6%94%B9%E8%A1%8C%E3%82%AA%E3%83%97%E3%82%B7%E3%83%A7%E3%83%B3)
+  - [`iconv`より優れている点](#iconv%E3%82%88%E3%82%8A%E5%84%AA%E3%82%8C%E3%81%A6%E3%81%84%E3%82%8B%E7%82%B9)
 - [References](#references)
 
 <!-- END doctoc generated TOC please keep comment here to allow auto update -->
@@ -43,10 +42,7 @@ Linuxで共有されたファイルを扱うとき, 時折文字化けが発生�
 これは, 多くの場合そのファイルの文字コードや改行コードが適切に読み込めていないことに起因します.
 
 このポストでは文字コード/改行コードをUTF-8と`LF`へ統一するためのコマンド`nkf`を紹介します.
-
-> REMARKS
-
-- 文字コードを変換するコマンドは`iconv`もありますが, こちらは改行コード変換機能はない
+なお, 文字コードを変換するコマンドは`iconv`もありますが, こちらは改行コード変換機能はありません.
 
 
 ### 改行コード
@@ -69,28 +65,28 @@ Linuxで共有されたファイルを扱うとき, 時折文字化けが発生�
 
 ## `nkf`コマンド: 文字コードと改行コード変換コマンド
 
-`nkf`は `Network Kanji Filter` の略で, LinuxとWindowsなど, 異なるOS間でテキストデータを交換する際に問題となる文字コードと改行コードを変換するためのコマンドです.
+<div style='padding-left: 2em; padding-right: 2em; border-radius: 1em; border-style:solid; border-color:#D3D3D3; background-color:#F8F8F8'>
+<p class="h4"><ins>Def: nkfコマンド</ins></p>
 
-> Syntax
+`nkf`は `Network Kanji Filter` の略で, LinuxとWindowsなど, 異なるOS間でテキストデータを交換する際に問題となる文字コードと改行コードを変換するためのコマンドです.
 
 ```zsh
 % nkf -[flags] [file]
 ```
 
-<div style='padding-left: 2em; padding-right: 2em; border-radius: 1em; border-style:solid; border-color:#e6e6fa; background-color:#e6e6fa'>
-<p class="h4"><ins>Column: ファイルをLF改行 & UTF-8へ変換したい場合</ins></p>
-
-オプションの指定は後述しますが, UTF-8 & LF改行をして新たに保存したい場合は以下のコマンドが例となります.
-
-```zsh
-cat <file> | nkf -wd > <new-file>
-nkf -wd <file> > <new-file>
-```
-
-なお, そのままoverwriteしたい場合は, `--overwrite` optionを使用するだけで足ります.
-
 </div>
 
+UTF-8 & LF改行をして新たに保存したい場合は以下のコマンドが例となります.
+
+```zsh
+% cat file_path | nkf -wd > new_file_path
+% nkf -wd file_path > new_file_path
+```
+
+- `-w`で出力をUTF-8に指定
+- `-d`で出力をLF改行に指定
+
+なお, そのままoverwriteしたい場合は, `--overwrite` optionを使用するだけで足ります.
 
 ### `nkf`のインストール
 
@@ -101,21 +97,22 @@ nkf -wd <file> > <new-file>
 ```
 
 ### `nkf`のオプション
-#### 出力オプション
+iconv -f Shift_JIS -t UTF-8
+**出力オプション**
 
 ---|---
 `-j`| JISコードを出力する（デフォルト）
 `-e`| EUCコードを出力する
 `-s`| シフトJISコードを出力する
 `-w,-w80 `|UTF-8コードを出力する（BOMなし）
-`-w8`UTF-8コードを出力する（BOM有り）
+`-w8`|UTF-8コードを出力する（BOM有り）
 `-w16, -w16B0` |UTF-16コードを出力する（ビッグエンディアン／BOMなし）
 `-w16B`|UTF-16コードを出力する（ビッグエンディアン／BOM有り）
 `-w16L`|UTF-16コードを出力する（リトルエンディアン／BOM有り）
 `-w16L0`|UTF-16コードを出力する（リトルエンディアン／BOMなし）
 `-I`|ISO-2022-JP以外の漢字コードを「げた記号」に変換する
 
-#### 入力オプション
+**入力オプション**
 
 入力オプションは指定しない場合自動判定で実施することに留意
 
@@ -127,14 +124,35 @@ nkf -wd <file> > <new-file>
 `-W16`|入力をUTF-16（リトルエンディアン）と仮定して処理を行う
 `-W16B`|入力をUTF-16（ビッグエンディアン）と仮定して処理を行う
 
-#### 改行オプション
+**改行オプション及びその他**
 
 ---|---
 `-d,-Lu`|LF改行を出力
 `-c,-Lw`|CRLF改行を出力
 `-Lm`|CR改行を出力
+`-g`|ファイルのエンコーディングの確認
+
+### `iconv`より優れている点
+
+`iconv`コマンドでは 
+
+- `-f(from)`オプションで現在のエンコードを指定
+- `-t(to)`オプションで変更後のエンコードを指定
+
+で変換します. `iconv`コマンドには文字コードの種類を表示する機能がないので結局, `nkf`コマンドを使う必要があります.
+また, 上で説明したように`iconv`コマンドには改行コード変換機能がないというデメリットがあります. そのため, 基本的には`nkf`コマンドを用いて変換したほうが良いと考えています.
+
+例として以下のコマンドは同じ挙動を基本的には示します. 
+
+```zsh
+% nkf -g file_a.txt
+Shift_JIS
+
+% iconv -f Shift_JIS -t UTF-8 file_A.txt > file_B.txt
+% nkf -w file_A.txt > file_B.txt
+```
 
 
 References
---------------
+----------
 - [第51回【 nkf 】コマンド――文字コードと改行コードを変換する](https://atmarkit.itmedia.co.jp/ait/articles/1609/29/news016.html)
