@@ -7,30 +7,35 @@ header-style: text
 header-mask: 0.0
 catelog: true
 mathjax: true
-purpose: 
+mermaid: false
+last_modified_at: 2024-02-26
 tags:
 
 - Linux
 - Shell
 ---
 
+<div style='border-radius: 1em; border-style:solid; border-color:#D3D3D3; background-color:#F8F8F8'>
 
+<p class="h4">&nbsp;&nbsp;Table of Contents</p>
 
-**Table of Contents**
 <!-- START doctoc generated TOC please keep comment here to allow auto update -->
 <!-- DON'T EDIT THIS SECTION, INSTEAD RE-RUN doctoc TO UPDATE -->
 
-- [調べたいこと](#%E8%AA%BF%E3%81%B9%E3%81%9F%E3%81%84%E3%81%93%E3%81%A8)
+- [記事の目的](#%E8%A8%98%E4%BA%8B%E3%81%AE%E7%9B%AE%E7%9A%84)
 - [`ls --color=xxx`の仕組み](#ls---colorxxx%E3%81%AE%E4%BB%95%E7%B5%84%E3%81%BF)
   - [「標準出力先がTerminalの場合」とはなにを指しているのか？](#%E6%A8%99%E6%BA%96%E5%87%BA%E5%8A%9B%E5%85%88%E3%81%8Cterminal%E3%81%AE%E5%A0%B4%E5%90%88%E3%81%A8%E3%81%AF%E3%81%AA%E3%81%AB%E3%82%92%E6%8C%87%E3%81%97%E3%81%A6%E3%81%84%E3%82%8B%E3%81%AE%E3%81%8B)
 - [`--color=always`を使用する場面の紹介](#--coloralways%E3%82%92%E4%BD%BF%E7%94%A8%E3%81%99%E3%82%8B%E5%A0%B4%E9%9D%A2%E3%81%AE%E7%B4%B9%E4%BB%8B)
-  - [やりたいこと](#%E3%82%84%E3%82%8A%E3%81%9F%E3%81%84%E3%81%93%E3%81%A8)
   - [zshrcの設定例の紹介](#zshrc%E3%81%AE%E8%A8%AD%E5%AE%9A%E4%BE%8B%E3%81%AE%E7%B4%B9%E4%BB%8B)
+  - [現在の設定(2024.02.26追記)](#%E7%8F%BE%E5%9C%A8%E3%81%AE%E8%A8%AD%E5%AE%9A20240226%E8%BF%BD%E8%A8%98)
 - [References](#references)
 
 <!-- END doctoc generated TOC please keep comment here to allow auto update -->
 
-## 調べたいこと
+
+</div>
+
+## 記事の目的
 
 任意のディレクトリに属するファイルやサブディレクトリを確認する際に使用する`ls`コマンドについて、
 `--color=auto`や`--color=always`をoptionに指定すると、ファイルやディレクトリごとに色分けしてターミナルに出力してくれますが、
@@ -64,7 +69,10 @@ Using color to distinguish file types is disabled both by default and with --col
 
 ### 「標準出力先がTerminalの場合」とはなにを指しているのか？
 
-> Terminal上への出力：挙動差なし
+<div style="display: inline-block; background: #D3D3D3;; border: 1px solid #D3D3D3; padding: 3px 10px;color:black"><span >Terminal上への出力：挙動差なし</span>
+</div>
+
+<div style="border: 1px solid #D3D3D3; font-size: 100%; padding: 20px;">
 
 このGithub Pagesブログのワークスペースディレクトリを例にまずコマンドの挙動を確認してみます:
 
@@ -74,14 +82,27 @@ Using color to distinguish file types is disabled both by default and with --col
 
 このようにTerminal上でファイル要素を確認する場合は挙動差はありません. 
 
-> パイプを用いて、出力結果を表示: 挙動差あり
+</div>
+
+<br>
+
+<div style="display: inline-block; background: #D3D3D3;; border: 1px solid #D3D3D3; padding: 3px 10px;color:black"><span >パイプを用いて、出力結果を表示: 挙動差あり</span>
+</div>
+
+<div style="border: 1px solid #D3D3D3; font-size: 100%; padding: 20px;">
 
 <img src="https://github.com/ryonakimageserver/omorikaizuka/blob/master/%E3%83%96%E3%83%AD%E3%82%B0%E7%94%A8/20220226-ls-always-head.png?raw=true">
 
 <img src="https://github.com/ryonakimageserver/omorikaizuka/blob/master/%E3%83%96%E3%83%AD%E3%82%B0%E7%94%A8/20220226-ls-auto-head.png?raw=true">
 
+</div>
 
-> リダイレクトを用いて、出力結果をテキストへWRITE：挙動差あり
+<br>
+
+<div style="display: inline-block; background: #D3D3D3;; border: 1px solid #D3D3D3; padding: 3px 10px;color:black"><span >リダイレクトを用いて、出力結果をテキストへWRITE：挙動差あり</span>
+</div>
+
+<div style="border: 1px solid #D3D3D3; font-size: 100%; padding: 20px;">
 
 次に、リダイレクトを用いて、`ls`の出力結果をテキストへ吐き、そのテキストを確認してみます.
 
@@ -107,18 +128,19 @@ _doc/         img/          LICENSE     Rakefile
 - `ls --color=auto`の場合は、文字列のみ
 
 
+</div>
+
 ## `--color=always`を使用する場面の紹介
 
-### やりたいこと
+- Shellはzsh
+- OSはDebian系(Ubuntu 20.04 LTS)
+
+という前提条件のもと, 以下のような挙動をする`ls`を定義したいと思います
 
 - `cd`コマンド実行時にファイル, `ls`を同時に実行する
 - 出力結果は、ファイルやディレクトリの種類に応じて色分けされた形にしたい(`--color=always`や`--color=auto`と同じ)
 - 出力行数が多いときは...で省略する
 
-> 前提条件
-
-- Shellはzshとする
-- OSはDebian系(Ubuntu 20.04 LTS)
 
 ### zshrcの設定例の紹介
 
@@ -149,7 +171,7 @@ autoload -Uz add-zsh-hook               # hook関数の呼び出しをOKにす�
 add-zsh-hook chpwd ls_abbrev            # chpwd(カレントディレクトリが変更したとき)をトリガーに ls_abbrevを実行する
 ```
 
-> 挙動確認
+**挙動確認**
 
 ```zsh
 % mkdir test && cd test
@@ -160,8 +182,25 @@ add-zsh-hook chpwd ls_abbrev            # chpwd(カレントディレクトリ�
 <img src="https://github.com/ryonakimageserver/omorikaizuka/blob/master/%E3%83%96%E3%83%AD%E3%82%B0%E7%94%A8/20220226-ls-abbrev.png?raw=true">
 
 
+### 現在の設定(2024.02.26追記)
 
-## References
+現在は`.zshrc`に以下のような alias設定 だけで済ませています
 
+```zsh
+alias ls='ls -F --color=auto --group-directories-first'
+```
+
+なお, 一時的にフックしないでデフォルトの`ls`を実行したい場合は
+
+```
+% \ls
+```
+
+と入力することで一時的に alias を解除した実行が可能となります(=次のコマンドからはalias設定が再び有効になる).
+恒久的にalias解除したい場合は`unalias`コマンドを用いますが, 使う場面はあんまりありません.
+
+
+References
+----------
 - [ls --color=auto, why they offer such an option since there is --color=always by default?](https://unix.stackexchange.com/questions/625214/ls-color-auto-why-they-offer-such-an-option-since-there-is-color-always-by)
 - [シェルでコマンドの実行前後をフックする](https://note.hibariya.org/articles/20170219/shell-postexec.html)

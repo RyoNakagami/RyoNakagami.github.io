@@ -146,20 +146,20 @@ Client側からsshアクセスを以下のコマンドで試みます.
 アクセスのたびに`ssh username@hostname -L 8787:localhost:8787`を入力するのは, 
 補完機能があったとしても少し長すぎます. 
 
-Client側で`~/.ssh/config`ファイルで設定を管理するのが一つの対策となります.
+Client側で`~/.ssh/config`ファイルでssh接続設定を管理するのが一つの対策となります.
 
 
 <div style='padding-left: 2em; padding-right: 2em; border-radius: 1em; border-style:solid; border-color:#D3D3D3; background-color:#F8F8F8'>
 <p class="h4"><ins>configファイルの主な設定項目</ins></p>
 
-|設定項目|説明|
+|ディレクティブ|説明|
 |---|---|
 |Host|任意の接続名|
 |HostName|接続先ホスト名 or IPアドレス|
 |User|ユーザー名|
-|Port|接続先ポート番号|
-|IdentityFile|秘密鍵のパス|
-|LocalForward|ポートフォワーディングの設定|
+|Port|接続先ポート番号, `-p`に対応|
+|IdentityFile|秘密鍵のパス, `-i`に対応|
+|LocalForward|ポートフォワーディングの設定, `-L, -R`に対応|
 
 </div>
 
@@ -173,6 +173,16 @@ Host test
     Port 2222
     LocalForward 8000 localhost:8787
 ```
+
+<div style='padding-left: 2em; padding-right: 2em; border-radius: 0em; border-style:solid; border-color:#e6e6fa; background-color:#e6e6fa'>
+<p class="h4"><ins>REMARKS</ins></p>
+
+ユーザーごとの設定ファイルである`~/.ssh/config`の他に, システムの設定ファイルとして`/etc/ssh/ssh_config`もあります
+
+</div>
+
+
+
 
 References
 ----------
