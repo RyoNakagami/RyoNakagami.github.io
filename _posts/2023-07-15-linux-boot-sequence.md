@@ -7,11 +7,12 @@ header-style: text
 header-mask: 0.0
 catelog: true
 mathjax: true
+mermaid: true
 last_modified_at: 2023-08-16
 tags:
 
 - Linux
-- システム管理
+- systemctl
 ---
 
 <div style='border-radius: 1em; border-style:solid; border-color:#D3D3D3; background-color:#F8F8F8'>
