@@ -1,7 +1,7 @@
 ---
 layout: post
 title: "Sys V initに基づくLinux Boot Sequence"
-title: "Linux Boot Sequence 1/N"
+subtitle: "Understanding systemd, systemctl 3/N"
 author: "Ryo"
 header-style: text
 header-mask: 0.0
@@ -14,6 +14,8 @@ tags:
 - Linux
 - systemctl
 ---
+
+
 
 <div style='border-radius: 1em; border-style:solid; border-color:#D3D3D3; background-color:#F8F8F8'>
 
