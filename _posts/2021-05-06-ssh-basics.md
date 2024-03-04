@@ -174,7 +174,7 @@ PubkeyAuthentication No
 SSHを使ってサーバーに接続するには, 以下のように`ssh`コマンドを使います. 終了する場合は, `exit`を入力します.
 
 ```zsh
-% ssh <username@><hostname>
+% ssh <username>@<hostname>
 ```
 
 ### sshコマンド

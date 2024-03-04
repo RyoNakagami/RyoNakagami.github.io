@@ -110,14 +110,17 @@ flowchart TD
     C -->D{~/.xinitrcがあれば実行}
     D -->|no| E[ /etc/X11/xinit/を実行 ]
     D -->|yes|F
-    E --> F{ ~/.xsessionを実行}
-    F -->|no| G{~/.Xclientsを実行}
+    E --> F[Xサーバー起動] 
+    F --> Z{ ~/.xsessionを実行}
+    Z -->|no| G{~/.Xclientsを実行}
     G -->|no| H{ /etc/X11/xinit/Xclientsを実行}
-    F -->|yes| I[統合デスクトップ環境GNOMEや<br>ウィンドウマネジャーが起動]
+    Z -->|yes| I[統合デスクトップ環境GNOMEや<br>ウィンドウマネジャーが起動]
     H -->|yes| I
     G -->|yes| I
 ```
 
+- `startx`は`xinit`を起動するシェルスクリプト
+- `xinit`はXサーバを起動するプログラム
 - `/etc/X11/xinit/Xclients`: ウィンドウマネージャの起動
 - `.xinitrc`: startxやxinitコマンドで読み込まれるスクリプト
 - `.xsession`: 起動後の処理設定. ログイン後の起動プログラムの定義スクリプト
@@ -170,8 +173,11 @@ AllowIsolate=yes
 
 </div>
 
-- ウィンドウマネジャーの種類として, `Metacity`, `Kwin`, `twm`, `fvwm`, `enlightment`が有名です.
-- ウィンドウマネジャーはあくまでもユーザーがログインした後に立ち上がります. 
+ウィンドウマネジャーの種類として, `Metacity`, `Kwin`, `twm`, `fvwm`, `enlightment`が有名です. ウィンドウマネジャーはあくまでもユーザーがログインした後に立ち上がります. 
+
+ウィンドウヘッダのデザインが変更されてしまった/したい場合は, ウィンドウマネージャの設定を変更します.
+ログイン画面の表示を変更したい場合は, `etc/X11/xdm/Xresources`(設定ファイル自体とは別)のようにディスプレイマネージャの方で表示変更を行います.
+
 
 <div style='padding-left: 2em; padding-right: 2em; border-radius: 1em; border-style:solid; border-color:#D3D3D3; background-color:#F8F8F8'>
 <p class="h4"><ins>Def: 統合デスクトップ環境</ins></p>

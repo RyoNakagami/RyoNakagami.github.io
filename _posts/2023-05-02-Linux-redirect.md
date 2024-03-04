@@ -7,10 +7,11 @@ header-style: text
 header-mask: 0.0
 catelog: true
 mathjax: true
-last_modified_at: 2023-09-28
+mermaid: false
+last_modified_at: 2024-03-04
 tags:
 
-- shell
+- Shell
 - Linux
 
 ---
@@ -32,6 +33,7 @@ tags:
 - [Tips: 実務で役に立つ事例集](#tips-%E5%AE%9F%E5%8B%99%E3%81%A7%E5%BD%B9%E3%81%AB%E7%AB%8B%E3%81%A4%E4%BA%8B%E4%BE%8B%E9%9B%86)
   - [エラーメッセージを出力しない](#%E3%82%A8%E3%83%A9%E3%83%BC%E3%83%A1%E3%83%83%E3%82%BB%E3%83%BC%E3%82%B8%E3%82%92%E5%87%BA%E5%8A%9B%E3%81%97%E3%81%AA%E3%81%84)
   - [エラーメッセージのみ出力させる場合](#%E3%82%A8%E3%83%A9%E3%83%BC%E3%83%A1%E3%83%83%E3%82%BB%E3%83%BC%E3%82%B8%E3%81%AE%E3%81%BF%E5%87%BA%E5%8A%9B%E3%81%95%E3%81%9B%E3%82%8B%E5%A0%B4%E5%90%88)
+  - [ファイルへの書き込みと標準出力を同時に行う: `tee`コマンド](#%E3%83%95%E3%82%A1%E3%82%A4%E3%83%AB%E3%81%B8%E3%81%AE%E6%9B%B8%E3%81%8D%E8%BE%BC%E3%81%BF%E3%81%A8%E6%A8%99%E6%BA%96%E5%87%BA%E5%8A%9B%E3%82%92%E5%90%8C%E6%99%82%E3%81%AB%E8%A1%8C%E3%81%86-tee%E3%82%B3%E3%83%9E%E3%83%B3%E3%83%89)
 - [References](#references)
 
 <!-- END doctoc generated TOC please keep comment here to allow auto update -->
@@ -114,7 +116,7 @@ tags:
 % sort < FileA > FileB
 ```
 
-> 構文まとめ
+**構文まとめ**
 
 ```zsh
 ## CMD標準出力結果をfileAへ格納
@@ -216,10 +218,10 @@ Linux系OSでは `/dev/null` という疑似デバイスファイルを用意し
 これは先に標準出力先が先に`/dev/null`となり, 標準エラーが標準出力の順番なのですべてが`/dev/null`に捨てられてしまう設定になります.
 
 
+<div style="display: inline-block; background: #6495ED;; border: 1px solid #6495ED; padding: 3px 10px;color:#FFFFFF"><span >例: poetryで標準エラー出力のみを出力する場合</span>
+</div>
 
-
-<div style='padding-left: 2em; padding-right: 2em; border-radius: 1em; border-style:solid; border-color:#e6e6fa; background-color:#e6e6fa'>
-<p class="h4"><ins>Column: poetryで標準エラー出力のみを出力する場合</ins></p>
+<div style="border: 1px solid #6495ED; font-size: 100%; padding: 20px;">
 
 `poetry`コマンドを用いるときなど, 標準出力結果には興味がないがエラーだけ知りたいという場合があります.
 この場合は
@@ -227,9 +229,44 @@ Linux系OSでは `/dev/null` という疑似デバイスファイルを用意し
 ```zsh
 % poetry update 1> /dev/null
 % poetry update > /dev/null
+% poetry update 2>&1 1> /dev/null
 ```
 
+どちらも標準出力結果を`/dev/null`に捨てる一方, 標準エラーはちゃんと端末に出力されます.
+
+
 </div>
+
+
+### ファイルへの書き込みと標準出力を同時に行う: `tee`コマンド
+
+<div style='padding-left: 2em; padding-right: 2em; border-radius: 1em; border-style:solid; border-color:#D3D3D3; background-color:#F8F8F8'>
+<p class="h4"><ins>Def: teeコマンド</ins></p>
+
+- `tee`コマンドは, 標準入力から読み込んだデータを標準出力とファイルの両方に出力するコマンド
+
+```zsh
+% tee [option] file_name
+```
+
+`-a`オプションを加えることでファイルに追記することができる.
+
+</div>
+
+`/etc/passwd`ファイルの内容に行番号を付け, その結果をパイプを通してファイルへ出力し, さらにその結果をパイプで`head`コマンドに渡したいとします.
+
+```zsh
+% nl /etc/passwd | tee test.txt | head -3
+     1	root:x:0:0:root:/root:/usr/bin/zsh
+     2	daemon:x:1:1:daemon:/usr/sbin:/usr/sbin/nologin
+     3	bin:x:2:2:bin:/bin:/usr/sbin/nologin
+% cat test.txt
+     1	root:x:0:0:root:/root:/usr/bin/zsh
+     2	daemon:x:1:1:daemon:/usr/sbin:/usr/sbin/nologin
+     3	bin:x:2:2:bin:/bin:/usr/sbin/nologin
+    ...
+    50	vboxadd:x:495:1::/var/run/vboxadd:/bin/false
+```
 
 
 
