@@ -196,7 +196,7 @@ IP4.ROUTE[1]:                           dst = 192.168.10.0/24
 <div style='padding-left: 2em; padding-right: 2em; border-radius: 1em; border-style:solid; border-color:#D3D3D3; background-color:#F8F8F8'>
 <p class="h4"><ins>Def: nmap</ins></p>
 
-Nmap(Network Mapper)は、ネットワーク調査およびセキュリティ監査を行うためのオープンソースのツール. 
+Nmap(Network Mapper)は, ネットワーク調査およびセキュリティ監査を行うためのオープンソースのツール. 
 
 Raw IPパケットを用いて, 
 

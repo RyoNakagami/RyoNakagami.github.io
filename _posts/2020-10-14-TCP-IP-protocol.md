@@ -145,4 +145,4 @@ TCP/IP階層モデルは５つの階層に分かれており, 上に行くほど
 ## References
 
 - [TCP/IPの絵本 第2版 ネットワークを学ぶ新しい9つの扉, 株式会社アンク 著](https://www.shoeisha.co.jp/book/detail/9784798155159)
-- [TCP/IP Model Explained | Cisco CCNA 200-301](https://www.youtube.com/watch?v=OTwp3xtd4dg)
+- [TCP/IP Model Explained, Cisco CCNA 200-301](https://www.youtube.com/watch?v=OTwp3xtd4dg)

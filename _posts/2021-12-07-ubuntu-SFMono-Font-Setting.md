@@ -1,52 +1,47 @@
 ---
 layout: post
 title: "SF Monoのインストールと各アプリケーションのfontFamilyの設定変更"
-subtitle: "Ubuntu Desktop環境構築 Part 23"
+subtitle: "フォント設定 2/N"
 author: "Ryo"
 header-style: text
 header-mask: 0.0
 catelog: true
-mathjax: true
-purpose: 
+mathjax: false
+mermaid: false
+last_modified_at: 2024-03-11
 tags:
 
 - Ubuntu 20.04 LTS
 - Font
 ---
 
+<div style='border-radius: 1em; border-style:solid; border-color:#D3D3D3; background-color:#F8F8F8'>
 
+<p class="h4">&nbsp;&nbsp;Table of Contents</p>
 
-
-||概要|
-|---|---|
-|目的|1. SF Monoのインストール<br>2. 各アプリケーションのfontFamilyの設定変更|
-|参考|[Apple: SF Mono](https://devimages-cdn.apple.com/design/resources/download/SF-Mono.dmg)|
-
-**Table of Contents**
 <!-- START doctoc generated TOC please keep comment here to allow auto update -->
 <!-- DON'T EDIT THIS SECTION, INSTEAD RE-RUN doctoc TO UPDATE -->
 
-- [1. はじめに](#1-%E3%81%AF%E3%81%98%E3%82%81%E3%81%AB)
-  - [今回やりたいこと](#%E4%BB%8A%E5%9B%9E%E3%82%84%E3%82%8A%E3%81%9F%E3%81%84%E3%81%93%E3%81%A8)
-  - [技術スペック](#%E6%8A%80%E8%A1%93%E3%82%B9%E3%83%9A%E3%83%83%E3%82%AF)
-  - [Dependency](#dependency)
-- [2. SF Monoとは？](#2-sf-mono%E3%81%A8%E3%81%AF)
+- [今回やりたいこと](#%E4%BB%8A%E5%9B%9E%E3%82%84%E3%82%8A%E3%81%9F%E3%81%84%E3%81%93%E3%81%A8)
+- [SF Monoとは？](#sf-mono%E3%81%A8%E3%81%AF)
   - [プログラミング用フォントの条件](#%E3%83%97%E3%83%AD%E3%82%B0%E3%83%A9%E3%83%9F%E3%83%B3%E3%82%B0%E7%94%A8%E3%83%95%E3%82%A9%E3%83%B3%E3%83%88%E3%81%AE%E6%9D%A1%E4%BB%B6)
-- [3. SF MonoをUbuntuにインストールする](#3-sf-mono%E3%82%92ubuntu%E3%81%AB%E3%82%A4%E3%83%B3%E3%82%B9%E3%83%88%E3%83%BC%E3%83%AB%E3%81%99%E3%82%8B)
-- [3. Terminal, VSCode(Editor & terminal)にSF Monoを設定する](#3-terminal-vscodeeditor--terminal%E3%81%ABsf-mono%E3%82%92%E8%A8%AD%E5%AE%9A%E3%81%99%E3%82%8B)
-  - [Terminalでの設定](#terminal%E3%81%A7%E3%81%AE%E8%A8%AD%E5%AE%9A)
+- [SF MonoをUbuntuにインストールする](#sf-mono%E3%82%92ubuntu%E3%81%AB%E3%82%A4%E3%83%B3%E3%82%B9%E3%83%88%E3%83%BC%E3%83%AB%E3%81%99%E3%82%8B)
+- [Gnome-Terminator, VSCode(Editor & terminal)にSF Monoを設定する](#gnome-terminator-vscodeeditor--terminal%E3%81%ABsf-mono%E3%82%92%E8%A8%AD%E5%AE%9A%E3%81%99%E3%82%8B)
+  - [Gnome-Terminatorでの設定](#gnome-terminator%E3%81%A7%E3%81%AE%E8%A8%AD%E5%AE%9A)
   - [VSCode(Editor & terminal)にSF Monoを設定する](#vscodeeditor--terminal%E3%81%ABsf-mono%E3%82%92%E8%A8%AD%E5%AE%9A%E3%81%99%E3%82%8B)
+- [References](#references)
 
 <!-- END doctoc generated TOC please keep comment here to allow auto update -->
 
-## 1. はじめに
 
-### 今回やりたいこと
+</div>
+
+## 今回やりたいこと
 
 - SF MonoをUbuntuにインストール
 - Terminal, VSCode(Editor & terminal)にSF Monoを設定する
 
-### 技術スペック
+**技術スペック**
 
 |項目||
 |---|---| 	 
@@ -55,17 +50,17 @@ tags:
 |CPU| 	Intel Core i7-9700 CPU 3.00 GHz|
 |RAM| 	32.0 GB|
 
-### Dependency
+**Dependency**
 
 |ソフト|説明|install|
 |---|---|---|
 |p7zip-full|7zr file archiver|`sudo apt install p7zip-full`|
 
 
-## 2. SF Monoとは？
+## SF Monoとは？
 
 - Appleが開発したMac標準フォント「San Francisco」のバージョンの1つ
-- 等幅フォントという特徴があり、プログラミングに適してしている
+- 等幅フォントという特徴があり, プログラミングに適してしている
 - 見やすさと美しさに定評がある
 
 <img src="https://github.com/ryonakimageserver/omorikaizuka/blob/master/%E3%83%96%E3%83%AD%E3%82%B0%E7%94%A8/20211207_SFMono_font_example.png?raw=true">
@@ -79,9 +74,19 @@ tags:
 |全角文字にも対応すること|日本語ファイル名を表示とかできないと困る<br>markdownで日本語を書くときに統一的な書体で表現されて方が書き手にとって見やすい|
 |リガチャ（合字）に対応していること|oh-my-zshとか使っている人には必須（branch管理状態をtermimal上で表示させるときの矢印マークなど）|
 
-SF Monoは上記すべての点をクリアしているので、今回Ubuntuのプログラミング用fontとして採用しました.
+SF Monoは上記すべての点をクリアしているので今回Ubuntuのプログラミング用fontとして採用しました.
 
-## 3. SF MonoをUbuntuにインストールする
+<div style="display: inline-block; background: #D3D3D3;; border: 1px solid #D3D3D3; padding: 3px 10px;color:black"><span >追記</span>
+</div>
+
+<div style="border: 1px solid #D3D3D3; font-size: 100%; padding: 20px;">
+
+- `l`, `1`の区別が難しかったのでその後プログラミング用フォントとしては使わなくなりました
+
+</div>
+
+
+## SF MonoをUbuntuにインストールする
 
 - まずSF MonoをUbuntuにダウンロードします
 
@@ -120,9 +125,9 @@ SF Monoは上記すべての点をクリアしているので、今回Ubuntuの�
 % fc-list | grep SFMono
 ```
 
-## 3. Terminal, VSCode(Editor & terminal)にSF Monoを設定する
+## Gnome-Terminator, VSCode(Editor & terminal)にSF Monoを設定する
 
-### Terminalでの設定
+### Gnome-Terminatorでの設定
 
 1. Terminalを開く
 2. Preference > Profiles を開く
@@ -137,9 +142,13 @@ SF Monoは上記すべての点をクリアしているので、今回Ubuntuの�
     //Editor font-family
     "editor.fontFamily":"'SF Mono'",
 
-
+    // Terminal font-family
     "terminal.integrated.fontFamily": "'SF Mono', PowerlineSymbols",
     "terminal.integrated.enableBell":true,
-    ...
 }
 ```
+
+References
+----------
+- [Apple: SF Mono](https://devimages-cdn.apple.com/design/resources/download/SF-Mono.dmg)
+- [Ryo's Tech Blog > メイリオフォントをUbuntuにインストール](https://ryonakagami.github.io/2021/04/24/ubuntu-fonts-meiryo-setting/)

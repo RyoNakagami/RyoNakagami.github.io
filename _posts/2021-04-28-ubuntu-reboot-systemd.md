@@ -41,11 +41,11 @@ tags:
 ## reboot/poweroffコマンド
 
 Ubuntuを始めとするLinux Distributionを用いるとき再起動やシャットダウンを実行するとき以下のコマンドを用います.
-
+1分後にシャットダウン
 |コマンド|説明|`systemctl`対応コマンド|
 |---|---|---|
 |`reboot [option]`|システムを停止して再起動|`systemctl poweroff`|
-|`poweroff [option]`|システムを停止して電源をオフにする|`systemctl reboot`|
+|`poweroff [option]`|システムを停止して電源をオフ1分後にシャットダウンにする|`systemctl reboot`|
 
 rebootコマンド／poweroffコマンドのオプションは
 
@@ -55,7 +55,7 @@ rebootコマンド／poweroffコマンドのオプションは
 
 CLIからLinuxを再起動したり, PCの電源をオフにしたりする場合, 伝統的には　`shutdown` コマンドを使用します.
 
-#### `shutdown`コマンドによる電源オフ/再起動処理
+### `shutdown`コマンドによる電源オフ/再起動処理
 
 `shutdown`コマンドでも`poweroff`, `reboot`処理を実行することも可能です.
 
@@ -67,10 +67,11 @@ CLIからLinuxを再起動したり, PCの電源をオフにしたりする場�
 % sudo shutdown -r +5 "Shutdown At 03:48"
 ```
 
----|---
-`-h`/`-r`| poweroffの指定（指定なしでもデフォルトでpoweroff）
-`+5`| 5分後に停止時間の指定, 時間を指定しなかった場合は１分後がデフォルト
-`Shutdown At 10:43`| Wallメッセージ, ログインユーザー全員に通知する
+|オプション|説明|
+|---|---|
+|`-h`/`-r`| poweroff/rebootの指定, デフォルトではpoweroff = `-h`の挙動をする|
+|`+5`| 5分後に停止時間の指定, 時間を指定しなかった場合は１分後がデフォルト|
+|`Shutdown At 10:43`| Wallメッセージ, ログインユーザー全員に通知する|
 
 予約した`shutdown`処理をキャンセルしたい場合は
 
@@ -78,15 +79,32 @@ CLIからLinuxを再起動したり, PCの電源をオフにしたりする場�
 % shutdown -c
 ```
 
+時間を指定しなかった場合は１分後がデフォルトなので, 以下のコマンドはどちらもホストを
+1分後にシャットダウンするコマンドとなります
 
-<div style='padding-left: 2em; padding-right: 2em; border-radius: 1em; border-style:solid; border-color:#e6e6fa; background-color:#e6e6fa'>
-<p class="h4"><ins>shutdown`コマンドとの対応表</ins></p>
+```zsh
+## 1分後にシャットダウン
+% shutdown
 
----|---
-`reboot`|`shutdown -r now`
-`poweroff`|`shutdown -h now`
+## こちらも上と同じ
+% shutdown +1
+```
 
-</div>
+ただちにshutdownする場合は
+
+```zsh
+% shutdown now
+```
+
+
+
+**shutdownコマンドとの対応表**
+
+|command|shutdown command|
+|---|---|
+|`reboot`|`shutdown -r now`|
+|`poweroff`|`shutdown -h now`|
+
 
 
 ### rebootコマンドとpoweroffコマンドの実体
