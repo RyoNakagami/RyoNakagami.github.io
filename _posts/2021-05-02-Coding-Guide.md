@@ -7,26 +7,23 @@ header-style: text
 header-mask: 0.0
 catelog: true
 mathjax: true
-purpose: 
+mermaid: false
+last_modified_at: 2024-03-12
 tags:
 
-- SQL
+- 方法論
 - coding
 ---
 
+<div style='border-radius: 1em; border-style:solid; border-color:#D3D3D3; background-color:#F8F8F8'>
 
-
-||概要|
-|---|---|
-|目的|良いコードを書くためのルールの習得|
-|書籍|- [The Art of Readable Code by Dustin Boswell and Trevor Foucher. Copyright 2012 Dustin Boswell and Trevor Foucher, 978-0-596-80229-5](https://www.oreilly.co.jp/books/9784873115658/)|
+<p class="h4">&nbsp;&nbsp;Table of Contents</p>
 
 <!-- START doctoc generated TOC please keep comment here to allow auto update -->
 <!-- DON'T EDIT THIS SECTION, INSTEAD RE-RUN doctoc TO UPDATE -->
 
-- [はじめに](#%E3%81%AF%E3%81%98%E3%82%81%E3%81%AB)
+- [この記事のスコープ](#%E3%81%93%E3%81%AE%E8%A8%98%E4%BA%8B%E3%81%AE%E3%82%B9%E3%82%B3%E3%83%BC%E3%83%97)
 - [良いコードとは？](#%E8%89%AF%E3%81%84%E3%82%B3%E3%83%BC%E3%83%89%E3%81%A8%E3%81%AF)
-  - [「他の人」とは？](#%E4%BB%96%E3%81%AE%E4%BA%BA%E3%81%A8%E3%81%AF)
   - [Readableなコードを書くにあたっての基本姿勢](#readable%E3%81%AA%E3%82%B3%E3%83%BC%E3%83%89%E3%82%92%E6%9B%B8%E3%81%8F%E3%81%AB%E3%81%82%E3%81%9F%E3%81%A3%E3%81%A6%E3%81%AE%E5%9F%BA%E6%9C%AC%E5%A7%BF%E5%8B%A2)
 - [原則 1: いい名前をつける](#%E5%8E%9F%E5%89%87-1-%E3%81%84%E3%81%84%E5%90%8D%E5%89%8D%E3%82%92%E3%81%A4%E3%81%91%E3%82%8B)
   - [Rule 1-1: 名前に情報を詰め込む](#rule-1-1-%E5%90%8D%E5%89%8D%E3%81%AB%E6%83%85%E5%A0%B1%E3%82%92%E8%A9%B0%E3%82%81%E8%BE%BC%E3%82%80)
@@ -92,10 +89,14 @@ tags:
   - [火星探査機の失敗事故（1999年）](#%E7%81%AB%E6%98%9F%E6%8E%A2%E6%9F%BB%E6%A9%9F%E3%81%AE%E5%A4%B1%E6%95%97%E4%BA%8B%E6%95%851999%E5%B9%B4)
   - [Coding Conventionの構成要素](#coding-convention%E3%81%AE%E6%A7%8B%E6%88%90%E8%A6%81%E7%B4%A0)
   - [命名表](#%E5%91%BD%E5%90%8D%E8%A1%A8)
+- [References](#references)
 
 <!-- END doctoc generated TOC please keep comment here to allow auto update -->
 
-## はじめに
+
+</div>
+
+## この記事のスコープ
 
 このノートとは「良いコード」を書くためのお約束ごと(主に命名規則とコーディングスタイル)を紹介します. 構成としては、はじめに「良いコードとはなにか？」を定義し、良いコードを書くために必要な「４原則」を紹介します. その後、各原則から導き出される「Rule」を提示し、その「Rule」に付随する具体的な「Action」を具体例を交えながら説明するという流れをとってます. 
 
@@ -111,14 +112,17 @@ Improvableなコードを書くためには、改善ポイントを特定しや�
 
 以下では、この考えに基づいてReadableなコードを書くための基本原則を紹介します. 
 
-> Readableなコードの4原則
+<div style='padding-left: 2em; padding-right: 2em; border-radius: 0em; border-style:solid; border-color:#D3D3D3; background-color:#F8F8F8'>
+<p class="h4"><ins>Readableなコードの4原則</ins></p>
 
 1. いい名前をつける
 2. 適切なコメントをつける
 3. 意味のある単位に分割する
 4. 全体の構成をきれいに整形する
 
-### 「他の人」とは？
+</div>
+
+**「他の人」とは？**
 
 「他の人」とは、プロジェクトのことをコードの書き手本人のように熟知していない人のことです. 書き手本人も「他の人」になり得ます. コードを書いてから数日経ってしまったら、コード書いていた時の自分の考えを思い出せないことも十分考えられるからです. 
 
@@ -131,8 +135,6 @@ Improvableなコードを書くためには、改善ポイントを特定しや�
 - 自分の考えを明確にし、簡潔な言葉で表現する
 - 自分の考えを凝縮して、キーポイントなる概念はなにか？を常に考える
 - 細かいことまで話しすぎると相手は混乱するので、あくまで必要最小限の情報を伝える
-
-
 
 
 ## 原則 1: いい名前をつける
@@ -1899,3 +1901,8 @@ Coding Conventionは基本的には以下の項目を定めるものです:
 |`update`|更新保存する|
 |`memoize`|メモリ上に一時的に記録する|
 |`publish`|情報を外部に公開する形で保存する|
+
+
+References
+----------
+- [The Art of Readable Code by Dustin Boswell and Trevor Foucher. Copyright 2012 Dustin Boswell and Trevor Foucher, 978-0-596-80229-5](https://www.oreilly.co.jp/books/9784873115658/)
