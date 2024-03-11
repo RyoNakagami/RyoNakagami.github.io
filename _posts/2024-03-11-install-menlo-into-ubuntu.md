@@ -171,11 +171,36 @@ Linuxでは, システムで使用するフォントの情報をあらかじめ�
 % fc-cache -v ./UDEVGothic
 ```
 
+一応, `UDEVGothic`が日本語対応しているか確認してみます
+
+```zsh
+% fc-list :lang=ja file | grep "UDEV"
+/home/hoshinokirby/.local/share/fonts/UDEVGothic/UDEVGothic_NF_v1.3.1/UDEVGothicNF-Bold.ttf: 
+/home/hoshinokirby/.local/share/fonts/UDEVGothic/UDEVGothic_NF_v1.3.1/UDEVGothic35NFLG-Italic.ttf: 
+/home/hoshinokirby/.local/share/fonts/UDEVGothic/UDEVGothic_NF_v1.3.1/UDEVGothic35NFLG-Bold.ttf: 
+/home/hoshinokirby/.local/share/fonts/UDEVGothic/UDEVGothic_NF_v1.3.1/UDEVGothic35NF-BoldItalic.ttf: 
+/home/hoshinokirby/.local/share/fonts/UDEVGothic/UDEVGothic_NF_v1.3.1/UDEVGothic35NF-Bold.ttf: 
+/home/hoshinokirby/.local/share/fonts/UDEVGothic/UDEVGothic_NF_v1.3.1/UDEVGothicNFLG-Regular.ttf: 
+/home/hoshinokirby/.local/share/fonts/UDEVGothic/UDEVGothic_NF_v1.3.1/UDEVGothic35NFLG-Regular.ttf: 
+/home/hoshinokirby/.local/share/fonts/UDEVGothic/UDEVGothic_NF_v1.3.1/UDEVGothicNF-Regular.ttf: 
+/home/hoshinokirby/.local/share/fonts/UDEVGothic/UDEVGothic_NF_v1.3.1/UDEVGothicNFLG-Italic.ttf: 
+/home/hoshinokirby/.local/share/fonts/UDEVGothic/UDEVGothic_NF_v1.3.1/UDEVGothic35NF-Italic.ttf: 
+/home/hoshinokirby/.local/share/fonts/UDEVGothic/UDEVGothic_NF_v1.3.1/UDEVGothicNFLG-BoldItalic.ttf: 
+/home/hoshinokirby/.local/share/fonts/UDEVGothic/UDEVGothic_NF_v1.3.1/UDEVGothic35NFLG-BoldItalic.ttf: 
+/home/hoshinokirby/.local/share/fonts/UDEVGothic/UDEVGothic_NF_v1.3.1/UDEVGothicNF-Italic.ttf: 
+/home/hoshinokirby/.local/share/fonts/UDEVGothic/UDEVGothic_NF_v1.3.1/UDEVGothicNF-BoldItalic.ttf: 
+/home/hoshinokirby/.local/share/fonts/UDEVGothic/UDEVGothic_NF_v1.3.1/UDEVGothicNFLG-Bold.ttf: 
+/home/hoshinokirby/.local/share/fonts/UDEVGothic/UDEVGothic_NF_v1.3.1/UDEVGothic35NF-Regular.ttf: 
+```
+
+ちゃんと出力されているので, 日本語対応フォントであることがわかります
+
+
 <div style='padding-left: 2em; padding-right: 2em; border-radius: 1em; border-style:solid; border-color:#e6e6fa; background-color:#e6e6fa'>
 <p class="h4"><ins>Column: Nerd Fonts Project</ins></p>
 
-Nerd Fonts Projectは. プログラミングに適したOSSのフォントにアイコンやシンボルなどを拡張するオープンソースのプロジェクトのこと. 主にモノスペースフォント（等幅フォント）を拡張している. 
-
+- Nerd Fonts Projectは. プログラミングに適したOSSのフォントにアイコンやシンボルなどを拡張するオープンソースのプロジェクトのこと. 
+- 主にモノスペースフォント（等幅フォント）を拡張している. 
 
 </div>
 
