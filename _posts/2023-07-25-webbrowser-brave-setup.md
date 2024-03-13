@@ -6,12 +6,13 @@ author: "Ryo"
 header-style: text
 header-mask: 0.0
 catelog: true
-mathjax: true
-last_modified_at: 2023-07-28
+mathjax: false
+mermaid: false
+last_modified_at: 2024-03-13
 tags:
 
 - Ubuntu 22.04 LTS
-- Brave
+- App
 
 ---
 
