@@ -185,8 +185,8 @@ Pythonは変数の型を実行時に変更することについて何のエラ�
 
 ### Duck Typing
 
-> __**Duck Typing**__
->> If it walks like a duck and it quacks like a duck, then it must be a duck.
+> **Duck Typing** <br>
+> If it walks like a duck and it quacks like a duck, then it must be a duck.
 
 Duck typingとは**latent typing(潜在的なtyping)**や**structural typing(構造的ななtyping)**を意味します.
 
