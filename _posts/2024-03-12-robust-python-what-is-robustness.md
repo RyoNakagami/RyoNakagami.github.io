@@ -387,5 +387,5 @@ static indexを用いた処理の用いられるdata typeとしては適して�
 
 References
 ----------
-- [Robust Python > Chapter 1. Introduction to Robust Python](https://learning.oreilly.com/library/view/robust-python/9781098100650/ch01.html#idm44996902834672)
+- [Robust Python > Chapter 1. Introduction to Robust Python](https://learning.oreilly.com/library/view/robust-python/9781098100650/ch01.html)
 - [Ryo's Tech Blog > Coding Style Guide Part 1](https://ryonakagami.github.io/2021/05/02/Coding-Guide/#%E8%89%AF%E3%81%84%E3%82%B3%E3%83%BC%E3%83%89%E3%81%A8%E3%81%AF)

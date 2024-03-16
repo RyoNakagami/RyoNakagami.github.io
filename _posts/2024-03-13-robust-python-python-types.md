@@ -239,7 +239,7 @@ True
 
 References
 ----------
-- [Robust Python > Chapter 1. Introduction to Robust Python](https://learning.oreilly.com/library/view/robust-python/9781098100650/ch01.html#idm44996902834672)
+- [Robust Python > Chapter 2. Introduction to Python Types](https://learning.oreilly.com/library/view/robust-python/9781098100650/ch02.html)
 - [ALL Things Pythonic - Adding Optional Static Typing to Python](https://www.artima.com/weblogs/viewpost.jsp?thread=85551)
 - [Computing Thoughts - Duck Typing, Libraries, and Concurrency](https://www.artima.com/weblogs/viewpost.jsp?thread=131502)
 - [Ryo's Tech Blog > Coding Style Guide Part 1](https://ryonakagami.github.io/2021/05/02/Coding-Guide/#%E8%89%AF%E3%81%84%E3%82%B3%E3%83%BC%E3%83%89%E3%81%A8%E3%81%AF)
