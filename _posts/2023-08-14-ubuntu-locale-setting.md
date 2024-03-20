@@ -1,10 +1,10 @@
 ---
 layout: post
-title: "fcitx5-mozcを用いた日本語入力設定"
+title: "Ubuntu 22.04 LTSにおけるロケール設定"
 subtitle: "Ubuntu Jammy Jellyfish Setup 2/N"
 author: "Ryo"
 catelog: true
-mathjax: true
+mathjax: false
 mermaid: false
 last_modified_at: 2024-02-26
 header-mask: 0.0
