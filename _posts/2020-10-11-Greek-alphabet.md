@@ -3,10 +3,10 @@ layout: post
 title: "文字コード > ギリシア文字"
 subtitle: "文字コードに親しむ 1/N"
 author: "Ryo"
+last_modified_at: 2020-10-11
 header-style: text
 header-mask: 0.0
 catelog: true
-last_modified_at: 2020-10-11
 mathjax: true
 mermaid: false
 tags:
@@ -15,7 +15,9 @@ tags:
 ---
 
 <div style='border-radius: 1em; border-style:solid; border-color:#D3D3D3; background-color:#F8F8F8'>
+
 <p class="h4">&nbsp;&nbsp;Table of Contents</p>
+
 <!-- START doctoc generated TOC please keep comment here to allow auto update -->
 <!-- DON'T EDIT THIS SECTION, INSTEAD RE-RUN doctoc TO UPDATE -->
 
@@ -24,12 +26,16 @@ tags:
   - [UnicodeとUTF-8の関係](#unicode%E3%81%A8utf-8%E3%81%AE%E9%96%A2%E4%BF%82)
   - [UTF-8の変換ルール](#utf-8%E3%81%AE%E5%A4%89%E6%8F%9B%E3%83%AB%E3%83%BC%E3%83%AB)
   - [UTF-8エンコードされたUnicodeに慣れよう](#utf-8%E3%82%A8%E3%83%B3%E3%82%B3%E3%83%BC%E3%83%89%E3%81%95%E3%82%8C%E3%81%9Funicode%E3%81%AB%E6%85%A3%E3%82%8C%E3%82%88%E3%81%86)
+- [Appendix: 文字コード](#appendix-%E6%96%87%E5%AD%97%E3%82%B3%E3%83%BC%E3%83%89)
+  - [符号化方式](#%E7%AC%A6%E5%8F%B7%E5%8C%96%E6%96%B9%E5%BC%8F)
+  - [UTF-8がなぜ推奨されるのか](#utf-8%E3%81%8C%E3%81%AA%E3%81%9C%E6%8E%A8%E5%A5%A8%E3%81%95%E3%82%8C%E3%82%8B%E3%81%AE%E3%81%8B)
+  - [ファイルの文字コードを確認する方法](#%E3%83%95%E3%82%A1%E3%82%A4%E3%83%AB%E3%81%AE%E6%96%87%E5%AD%97%E3%82%B3%E3%83%BC%E3%83%89%E3%82%92%E7%A2%BA%E8%AA%8D%E3%81%99%E3%82%8B%E6%96%B9%E6%B3%95)
 - [References](#references)
 
 <!-- END doctoc generated TOC please keep comment here to allow auto update -->
 
-</div>
 
+</div>
 
 ## ギリシア文字対応表
 
@@ -131,7 +137,7 @@ Unicodeを2進数へ一旦変換し, その値をUTF-8の2進数へ変換, 16進
 |範囲1|`U+0000` - `U+007F`|`0xxx xxxx`|
 |範囲2|`U+0080` - `U+07FF`|`110x xxxx 10xx xxxx`|
 |範囲3|`U+0800` - `U+FFFF`|`1110 xxxx 10xx xxxx 10xx xxxx`|
-|範囲4|`U+1000`0 -` U+10FFFF`|`1111 0xxx 10xx xxxx 10xx xxxx 10xx xxxx`|
+|範囲4|`U+1000` -` U+10FFFF`|`1111 0xxx 10xx xxxx 10xx xxxx 10xx xxxx`|
 
 なお, 範囲1の`U+0000` - `U+007F`の文字はUS-ASCIIと互換を持っており, UTF-8の表現範囲は`0x00` - `0x7F`となります.
 
@@ -167,7 +173,7 @@ $\alpha$を例に, UnicodeからUTF-8への変換を紹介します.
 
 Unicode文字列をUTF-8でエンコードすると,各文字のエンコード結果の先頭バイトは2進表示が0又は11で始まり,それ以降のバイトは10で始まる. 16進表示された次のデータは何文字のUnicode文字列をエンコードしたものか?
 
-```raw
+```
 CF 80 E3 81 AF E7 B4 84 33 2E 31 34 E3 81 A7 E3 81 99
 ```
 
@@ -189,6 +195,56 @@ CF 80 E3 81 AF E7 B4 84 33 2E 31 34 E3 81 A7 E3 81 99
 なのでデータに含まれる文字数は9文字
 
 </div>
+
+## Appendix: 文字コード
+
+コンピューター上で文字や記号を扱うために, 1つ1つの文字や記号に与えられた識別用の数字(=バイト表現)を文字コードといいます.
+最も基本的な文字コードととしてASCIIコードがあり, これに日本語の文字コードを加えたものがShift-JIS(SJIS)です.
+
+CP932は「①」などのいわゆる機種依存文字をMicrosoftがSJISに追加した文字コードです. 
+CP932はSJISの文字集合のスーパーセットと考えることができます.
+
+### 符号化方式
+
+文字コードの構成要素は文字集合だけでなく, 符号化方式も含まれます. 
+符号化方式とは, 文字集合を構成する個々の文字の表現方法です. Unicodeという文字集合の表現方法として,
+UTF-8, UTF-16, UTF-32がありますがそれぞれ文字集合の符号化方式がことなるので別の文字コードとして取り扱われています.
+
+|文字| 	コードポイント(Unicode) |UTF-32 |UTF-16 |UTF-8|
+|---|---|---|---|---|
+|a| 	61| 	61 00 00 00| 	61 00| 	61|
+|α| 	3B1| 	B1 03 00 00| 	B1 03| 	CE B1|
+|あ| 	3042| 	42 30 00 00| 	42 30| 	E3 81 82|
+
+### UTF-8がなぜ推奨されるのか
+
+VSCodeではUTF-8がデフォルトエンコーディングとされています. UTF-8の特徴として,
+
+- 既存のASCII文字（いわゆる半角文字）しか使えない通信路やシステムなどでも、大きな変更なしにそのまま使える
+- UTF-8にはエンディアンの問題がない(UTF-16ではBig Endian/Little Endianの区別必要)
+- [Unicode standard](http://www.unicode.org/versions/Unicode5.0.0/ch02.pdf)では, BOMを加えることは非推奨
+
+### ファイルの文字コードを確認する方法
+
+`file -e encoding`とオプションを指定することでファイルの文字コードを確認することができます.
+カレントディレクトリに存在するファイルのエンコーディングを確認したい場合は, `xargs`コマンドを組合せて
+
+```zsh
+% find -maxdepth 1 -type f | xargs -n1 file -e encoding
+./test_utf8.md: UTF-8 Unicode text
+./test_utf8_bom.txt: UTF-8 Unicode (with BOM) text, with no line terminators
+./test_ascii.md: ASCII text
+./test.sh: Bourne-Again shell script executable (binary data)
+./test.pptx: Microsoft PowerPoint 2007+
+```
+
+BOM付UTF-8エンコーディングされたファイルからBOMを外したい場合は, `nkf`コマンドを用いて
+
+```zsh
+% nkf --overwrite --oc=UTF-8 test_utf8_bom.txt   
+```
+
+
 
 
 References

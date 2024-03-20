@@ -1,79 +1,76 @@
 ---
 layout: post
 title: "VSCodeのインストールと初期設定"
-subtitle: "Ubuntu Desktop Datascience環境構築 1/N"
+subtitle: "VSCode setup 1/N"
 author: "Ryo"
+catelog: true
+mathjax: false
+mermaid: false
+last_modified_at: 2024-03-21
 header-style: text
 header-mask: 0.0
-catelog: true
-mathjax: true
-last_modified_at: 
 tags:
 
 - Ubuntu 20.04 LTS
 - VSCode
 ---
 
----|---
-目的|VSCodeのインストール
-OS | ubuntu 20.04 LTS Focal Fossa
-CPU| Intel Core i7-9700 CPU 3.00 GHz
-RAM| 32.0 GB
+<div style='border-radius: 1em; border-style:solid; border-color:#D3D3D3; background-color:#F8F8F8'>
 
-**Table of Contents**
+<p class="h4">&nbsp;&nbsp;Table of Contents</p>
+
 <!-- START doctoc generated TOC please keep comment here to allow auto update -->
 <!-- DON'T EDIT THIS SECTION, INSTEAD RE-RUN doctoc TO UPDATE -->
 
-- [1. VSCodeのインストール方法](#1-vscode%E3%81%AE%E3%82%A4%E3%83%B3%E3%82%B9%E3%83%88%E3%83%BC%E3%83%AB%E6%96%B9%E6%B3%95)
-  - [なぜSnap経由インストールをしないのか？](#%E3%81%AA%E3%81%9Csnap%E7%B5%8C%E7%94%B1%E3%82%A4%E3%83%B3%E3%82%B9%E3%83%88%E3%83%BC%E3%83%AB%E3%82%92%E3%81%97%E3%81%AA%E3%81%84%E3%81%AE%E3%81%8B)
-  - [なぜ公式`.deb`パッケージDL経由でのインストールをしないのか？](#%E3%81%AA%E3%81%9C%E5%85%AC%E5%BC%8Fdeb%E3%83%91%E3%83%83%E3%82%B1%E3%83%BC%E3%82%B8dl%E7%B5%8C%E7%94%B1%E3%81%A7%E3%81%AE%E3%82%A4%E3%83%B3%E3%82%B9%E3%83%88%E3%83%BC%E3%83%AB%E3%82%92%E3%81%97%E3%81%AA%E3%81%84%E3%81%AE%E3%81%8B)
-- [2. 実践編](#2-%E5%AE%9F%E8%B7%B5%E7%B7%A8)
-- [3. 初期設定](#3-%E5%88%9D%E6%9C%9F%E8%A8%AD%E5%AE%9A)
+- [VSCodeのインストール方法](#vscode%E3%81%AE%E3%82%A4%E3%83%B3%E3%82%B9%E3%83%88%E3%83%BC%E3%83%AB%E6%96%B9%E6%B3%95)
+- [MicrosoftのVSCodeレポジトリを登録 & インストール](#microsoft%E3%81%AEvscode%E3%83%AC%E3%83%9D%E3%82%B8%E3%83%88%E3%83%AA%E3%82%92%E7%99%BB%E9%8C%B2--%E3%82%A4%E3%83%B3%E3%82%B9%E3%83%88%E3%83%BC%E3%83%AB)
+- [初期設定](#%E5%88%9D%E6%9C%9F%E8%A8%AD%E5%AE%9A)
   - [Telemetry 無効化](#telemetry-%E7%84%A1%E5%8A%B9%E5%8C%96)
   - [Font family設定](#font-family%E8%A8%AD%E5%AE%9A)
   - [行番号表示設定](#%E8%A1%8C%E7%95%AA%E5%8F%B7%E8%A1%A8%E7%A4%BA%E8%A8%AD%E5%AE%9A)
-- [4. 拡張機能設定](#4-%E6%8B%A1%E5%BC%B5%E6%A9%9F%E8%83%BD%E8%A8%AD%E5%AE%9A)
-  - [一覧](#%E4%B8%80%E8%A6%A7)
+  - [Window Reload設定](#window-reload%E8%A8%AD%E5%AE%9A)
+- [拡張機能設定](#%E6%8B%A1%E5%BC%B5%E6%A9%9F%E8%83%BD%E8%A8%AD%E5%AE%9A)
 - [Appendix: Snapパッケージとは？](#appendix-snap%E3%83%91%E3%83%83%E3%82%B1%E3%83%BC%E3%82%B8%E3%81%A8%E3%81%AF)
-- [Appendix: 文字コード](#appendix-%E6%96%87%E5%AD%97%E3%82%B3%E3%83%BC%E3%83%89)
-  - [符号化方式](#%E7%AC%A6%E5%8F%B7%E5%8C%96%E6%96%B9%E5%BC%8F)
-  - [UTF-8がなぜ推奨されるのか](#utf-8%E3%81%8C%E3%81%AA%E3%81%9C%E6%8E%A8%E5%A5%A8%E3%81%95%E3%82%8C%E3%82%8B%E3%81%AE%E3%81%8B)
-  - [ファイルの文字コードを確認する方法](#%E3%83%95%E3%82%A1%E3%82%A4%E3%83%AB%E3%81%AE%E6%96%87%E5%AD%97%E3%82%B3%E3%83%BC%E3%83%89%E3%82%92%E7%A2%BA%E8%AA%8D%E3%81%99%E3%82%8B%E6%96%B9%E6%B3%95)
 - [References](#references)
 
 <!-- END doctoc generated TOC please keep comment here to allow auto update -->
 
-## 1. VSCodeのインストール方法
+
+</div>
+
+## VSCodeのインストール方法
 
 VSCodeをLinux環境にインストールする方法は大きく３つあります:
 
 1. MicrosoftのVSCodeレポジトリを登録し, `apt`経由でインストール
 2. Snapパッケージ経由インストール
-3. 公式ページからDebianパッケージをダウンロード & install
+3. 公式ページからdebパッケージをダウンロード & install
 
 今回は公式サイトも推奨している(1)「MicrosoftのVSCodeレポジトリを登録し, `apt`経由でインストール」を採用します.
 
-### なぜSnap経由インストールをしないのか？
+<div style="display: inline-block; background: #D3D3D3;; border: 1px solid #D3D3D3; padding: 3px 10px;color:black"><span >なぜSnap経由インストールをしないのか？</span>
+</div>
+
+<div style="border: 1px solid #D3D3D3; font-size: 100%; padding: 20px;">
 
 Snap経由でインストールすると, SnapデーモンがバックグラウンドでVS Codeの自動アップデートを担当してくれるので
 自動的に最新のVSCodeが使えるというメリットがあります. ただし, 日本語入力ができない, 漢字が入力できないというバグが
 見受けられ, Native Japanese Speakerとして看過できないバグなので今回はお見送りしました.
 
-### なぜ公式`.deb`パッケージDL経由でのインストールをしないのか？
+</div>
 
-`.deb`パッケージをインストールすると, aptリポジトリと署名キーが自動的にインストールされ,
-システムのパッケージマネージャを使った自動更新が可能となります. ですのでこちらの方法でもOKです.
-
-> インストール方法
+なお, 上記の3番目の手法については, `.deb`パッケージをインストールすると, 
+aptリポジトリと署名キーが自動的にインストールされ, システムのパッケージマネージャを使った
+自動更新が可能となります. ですのでこちらの方法でもOKです.
 
 ```zsh
+# 公式debパッケージからのインストール
 % sudo apt install -y curl
 % curl -L https://go.microsoft.com/fwlink/?LinkID=760868 -o vscode.deb
 % sudo apt install ./vscode.deb
 ```
 
-
-## 2. 実践編
+## MicrosoftのVSCodeレポジトリを登録 & インストール
 
 ```zsh
 % sudo apt-get install wget gpg
@@ -91,7 +88,7 @@ Snap経由でインストールすると, Snapデーモンがバックグラウ�
 % sudo apt install code
 ```
 
-## 3. 初期設定
+## 初期設定
 ### Telemetry 無効化
 
 VSCodeはデフォルトで, クラッシュ時の情報や使用状況/ErrorのデータをMicrosoftに送信する
@@ -109,35 +106,7 @@ VSCodeはデフォルトで, クラッシュ時の情報や使用状況/Errorの
 
 ### Font family設定
 
-> Requirement
-
-- 設定可能なフォントは`/usr/share/fonts`または`/usr/local/share/fonts`に格納されているフォントのみです
-- SF MonoのUbuntuへのインストール方法は, [Ryo's Tech Blog > SF Monoのインストール](https://ryonakagami.github.io/2021/12/07/ubuntu-SFMono-Font-Setting/)を参照してください
-
-> 利用可能なFont familyの確認コマンド
-
-```zsh
-% which fc-list
-/usr/bin/fc-list
-% fc-list : family | sort
-```
-
-
-> 設定方針
-
-- TerminalとEditorのFontはともにSF Monoで揃える
-- Zsh, とくにGit statusを`RPROMPT`機能を使って表示させるので, 特殊シンボルを扱うPowerlineSymbolsを設定する
-
-
-> Settings.json記述内容
-
-```json
-    // Editor Settings
-    "editor.fontFamily": "'SF Mono'", // font-family
-
-    // Terminal Settings
-    "terminal.integrated.fontFamily": "'SF Mono', PowerlineSymbols",// font-family
-```
+[Ryo's Tech Blog > Ubuntu 22.04 LTSに Meslo LGSとUDEV Gothicをインストールする](https://ryonakagami.github.io/2024/03/11/install-menlo-into-ubuntu/#vscode%E3%81%A7%E3%81%AE%E8%A8%AD%E5%AE%9A)を参照してください
 
 ### 行番号表示設定
 
@@ -148,15 +117,30 @@ VSCodeでは `Ctrl+G` で Vimのように指定した行番号までジャンプ
   "editor.lineNumbers": "on", // 行番号の表示
 ```
 
+### Window Reload設定
+
+VSCodeを使用しているとき, パッケージインストール直後にMissingImportErrorが発生するときがあります.
+この場合, VSCodeを閉じて開き直すという動作をすると解決したりします.
+
+ただ, 毎回閉じる & 開き直すのはめんどくさいので, Reload Windowをショートカットで設定します
+
+```json
+    // Reload Windows
+    {
+        "key": "ctrl+r",
+        "command": "-workbench.action.reloadWindow",
+        "when": "isDevelopment"
+    },
+    {
+        "key": "shift+meta+r",
+        "command": "workbench.action.reloadWindow",
+    },
+```
 
 
-## 4. 拡張機能設定
+## 拡張機能設定
 
-### 一覧
-
-1. autoDocstring
-    - Pythonの関数やメソッドの引数名や型アノテーションなどに応じたdocstringのテンプレートをVS Code上で生成
-    - Docstring Formatは`numpy`を指定
+TBA
 
 
 ## Appendix: Snapパッケージとは？
@@ -180,73 +164,14 @@ snapパッケージとは, ディストリビューションを問わず利用�
 % sudo apt install snapd
 ```
 
-> VSCodeのインストール
+**snap経由でのVSCodeのインストール**
 
 ```zsh
 % sudo snap install --classic code # or code-insiders
 ```
 
-## Appendix: 文字コード
 
-コンピューター上で文字や記号を扱うために, 1つ1つの文字や記号に与えられた識別用の数字(=バイト表現)を文字コードといいます.
-最も基本的な文字コードととしてASCIIコードがあり, これに日本語の文字コードを加えたものがShift-JIS(SJIS)です.
-
-CP932は「①」などのいわゆる機種依存文字をMicrosoftがSJISに追加した文字コードです. 
-CP932はSJISの文字集合のスーパーセットと考えることができます.
-
-### 符号化方式
-
-文字コードの構成要素は文字集合だけでなく, 符号化方式も含まれます. 
-符号化方式とは, 文字集合を構成する個々の文字の表現方法です. Unicodeという文字集合の表現方法として,
-UTF-8, UTF-16, UTF-32がありますがそれぞれ文字集合の符号化方式がことなるので別の文字コードとして取り扱われています.
-
-|文字| 	コードポイント(Unicode) |UTF-32 |UTF-16 |UTF-8|
-|---|---|---|---|---|
-|a| 	61| 	61 00 00 00| 	61 00| 	61|
-|α| 	3B1| 	B1 03 00 00| 	B1 03| 	CE B1|
-|あ| 	3042| 	42 30 00 00| 	42 30| 	E3 81 82|
-
-### UTF-8がなぜ推奨されるのか
-
-VSCodeではUTF-8がデフォルトエンコーディングとされています. UTF-8の特徴として,
-
-- 既存のASCII文字（いわゆる半角文字）しか使えない通信路やシステムなどでも、大きな変更なしにそのまま使える
-- UTF-8にはエンディアンの問題がない(UTF-16ではBig Endian/Little Endianの区別必要)
-- [Unicode standard](http://www.unicode.org/versions/Unicode5.0.0/ch02.pdf)では, BOMを加えることは非推奨
-
-### ファイルの文字コードを確認する方法
-
-`file -e encoding`とオプションを指定することでファイルの文字コードを確認することができます.
-カレントディレクトリに存在するファイルのエンコーディングを確認したい場合は, `xargs`コマンドを組合せて
-
-```zsh
-% find -maxdepth 1 -type f | xargs -n1 file -e encoding
-./test_utf8.md: UTF-8 Unicode text
-./test_utf8_bom.txt: UTF-8 Unicode (with BOM) text, with no line terminators
-./test_ascii.md: ASCII text
-./test.sh: Bourne-Again shell script executable (binary data)
-./test.pptx: Microsoft PowerPoint 2007+
-```
-
-BOM付UTF-8エンコーディングされたファイルからBOMを外したい場合は, `nkf`コマンドを用いて
-
-```zsh
-% nkf --overwrite --oc=UTF-8 test_utf8_bom.txt   
-```
-
-
-
-
-
-## References
-
-> 関連ポスト
-
-
-> 公式ドキュメント
-
+References
+----------
 - [Visual Studio Code on Linux](https://code.visualstudio.com/docs/setup/linux)
-
-> VSCode Issue
-
 - [vscode > unable to input chinese character](https://github.com/microsoft/vscode/issues/96041)
