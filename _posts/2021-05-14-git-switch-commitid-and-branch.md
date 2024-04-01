@@ -216,3 +216,4 @@ detached HEAD状態のときに, `git branch`を叩くと
 References
 ----------
 - [git-revert](https://git-scm.com/docs/git-revert/2.23.0)
+- [Ryo's Tech Blog > git HEAD: the difference between HEAD~ and HEAD^](https://ryonakagami.github.io/2021/01/10/git-and-HEAD-concept/)

@@ -41,6 +41,7 @@ tags:
 
 </div>
 
+
 ## Type Annotationsの書き方
 
 [Ryo's Tech Blog > Type Annotationsのすすめ](https://ryonakagami.github.io/2024/03/14/robust-python-type-annotations/)にて,
