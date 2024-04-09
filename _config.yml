@@ -34,7 +34,7 @@ anchorjs: true                          # if you want to customize anchor. check
 # make sure you have this gem installed
 # `$ gem install jekyll-paginate`
 #github pagesでsitemap.xmlが自動的に生成される 20230316
-plugins: [jekyll-paginate, jekyll-sitemap, jekyll-archives]
+plugins: [jekyll-paginate, jekyll-sitemap, jekyll-archives, jemoji]
 
 # Markdown settings
 # replace redcarpet to kramdown,
