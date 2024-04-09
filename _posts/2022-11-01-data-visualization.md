@@ -59,7 +59,17 @@ When engaging in data storytelling, it is imperative to adhere to the following 
 
 PlotlyやTableauなどのツールのおかげでデータの可視化は容易くできるようになった一方, 本来求められているものデータの可視化自体ではなく, **データの可視化を通じてストーリーを伝えること**です. 
 
-データの可視化で生成されるグラフやpngファイルにどのように分析ストーリーを組み込んでいくのかをシリーズを通して勉強していきます.
+データの可視化で生成されるグラフやpngファイルにどのように分析ストーリーを組み込んでいくのかをシリーズを通して勉強していきます. 勉強するにあたって個人的に意識しているポイントとして以下です
+
+
+<div style='padding-left: 2em; padding-right: 2em; border-radius: 0em; border-style:solid; border-color:#6495ED; background-color:#F8F8F8'>
+<p class="h4"><ins>可視化お作法を学ぶにあたって</ins></p>
+
+1. 可視化の技法がどのように使えるのか？
+2. それぞれの技法がどのような場合に用いられるか?
+3. なぜ特定の場面でとある手法が有効なのか？
+
+</div>
 
 ## 今回のお題: 人員補充のリクエスト
 
@@ -322,10 +332,5 @@ df.head()
 References
 ----------
 
-> R code
-
 - [GitHub >  adamribaudo/storytelling-with-data-ggplot](https://github.com/adamribaudo/storytelling-with-data-ggplot)
-
-> Plotly
-
 - [Plotly > Shapes in Python](https://plotly.com/python/shapes/)

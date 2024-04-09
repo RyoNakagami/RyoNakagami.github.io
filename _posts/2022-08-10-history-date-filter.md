@@ -28,6 +28,7 @@ tags:
   - [awk commandでのfilter](#awk-command%E3%81%A7%E3%81%AEfilter)
   - [変数定義: `awk -v var=value`](#%E5%A4%89%E6%95%B0%E5%AE%9A%E7%BE%A9-awk--v-varvalue)
   - [unixtime カラムのtimestamp型への変換](#unixtime-%E3%82%AB%E3%83%A9%E3%83%A0%E3%81%AEtimestamp%E5%9E%8B%E3%81%B8%E3%81%AE%E5%A4%89%E6%8F%9B)
+- [Appendix: 直近のzsh履歴をtimestamp付きで表示する場合](#appendix-%E7%9B%B4%E8%BF%91%E3%81%AEzsh%E5%B1%A5%E6%AD%B4%E3%82%92timestamp%E4%BB%98%E3%81%8D%E3%81%A7%E8%A1%A8%E7%A4%BA%E3%81%99%E3%82%8B%E5%A0%B4%E5%90%88)
 - [References](#references)
 
 <!-- END doctoc generated TOC please keep comment here to allow auto update -->
@@ -73,6 +74,20 @@ cat $HISTORYFILE |
         {$2=strftime("%Y-%m-%d %H:%M:%S", $2)";"; print $0}'
 
 ```
+
+<div style='padding-left: 2em; padding-right: 2em; border-radius: 0em; border-style:solid; border-color:#ffa657; background-color:#F8F8F8'>
+<strong style="color:#ffa657">前提条件 !</strong> <br> 
+
+`~/.zsh.d/.zsh_history`に格納されたzsh historyにはunixtimeで実行時刻が格納されていますが, デフォルトの設定では格納されていません.
+
+unixtime付きで履歴を格納する場合には `.zshrc`に以下の設定を書き加えます
+
+```zsh
+setopt extended_history
+```
+
+</div>
+
 
 ## コマンド解説
 ### 日付 から unixtime への変換方法
@@ -163,6 +178,29 @@ awkのプログラムに, 変数を渡すにあたって
 その実行結果を `$2` という形で2カラム目に代入しています.
 
 
+## Appendix: 直近のzsh履歴をtimestamp付きで表示する場合
+
+`history -i`コマンドで以下のように実行時間と一緒に履歴を確認することができます
+
+```zsh
+% history -i -5
+23129  2024-04-09 17:43  ls -lh
+23130  2024-04-09 17:43  cd
+23131  2024-04-09 17:43  ls -a
+23132  2024-04-09 17:58  cd
+23133  2024-04-09 18:00  history -i
+```
+
+一行目は行数をあらわしており, `history [開始行] [終了行]`で範囲を指定して表示することもできます
+
+```zsh
+% history -i 23133 23134
+23133  2024-04-09 18:00  history -i
+23134  2024-04-09 18:00  history -i -5
+```
+
+
 References
 ----------
 - [Ryo's Tech Blog > ファイルリストから日付リストを抽出](https://ryonakagami.github.io/2022/08/08/awk-date-filter/)
+- [Ryo's Tech Blog > Z shell installation and configuration](https://ryonakagami.github.io/2020/12/23/ubuntu-zshsetup/)
