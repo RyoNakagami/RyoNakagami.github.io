@@ -5,7 +5,7 @@ subtitle: "Business communication 1/N"
 author: "Ryo"
 catelog: true
 mathjax: false
-mermaid: true
+mermaid: false
 last_modified_at: 2024-04-09
 header-mask: 0.0
 header-style: text

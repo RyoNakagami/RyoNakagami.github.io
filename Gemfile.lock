@@ -97,6 +97,7 @@ PLATFORMS
   ruby
 
 DEPENDENCIES
+  bundler
   jekyll
   jekyll-archives
   jekyll-paginate
