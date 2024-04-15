@@ -22,12 +22,15 @@ tags:
 <!-- DON'T EDIT THIS SECTION, INSTEAD RE-RUN doctoc TO UPDATE -->
 
 - [Problem Setting 1](#problem-setting-1)
-  - [Solution](#solution)
+  - [解説](#%E8%A7%A3%E8%AA%AC)
+    - [file typeの指定](#file-type%E3%81%AE%E6%8C%87%E5%AE%9A)
+    - [検索PATHの指定: `-path` option](#%E6%A4%9C%E7%B4%A2path%E3%81%AE%E6%8C%87%E5%AE%9A--path-option)
+    - [empty directoryの削除](#empty-directory%E3%81%AE%E5%89%8A%E9%99%A4)
 - [Problem Setting 2: file names could not be uniquely assigned](#problem-setting-2-file-names-could-not-be-uniquely-assigned)
-  - [solution](#solution)
+  - [解説](#%E8%A7%A3%E8%AA%AC-1)
+    - [`-i`, `-l` optionについて](#-i--l-option%E3%81%AB%E3%81%A4%E3%81%84%E3%81%A6)
 - [Appendix: Data Generating Process](#appendix-data-generating-process)
   - [`ptouch` command](#ptouch-command)
-  - [data generating process](#data-generating-process)
 - [References](#references)
 
 <!-- END doctoc generated TOC please keep comment here to allow auto update -->
@@ -128,10 +131,12 @@ tags:
 
 </div>
 
-### Solution
+### 解説
 
-<div style='padding-left: 2em; padding-right: 2em; border-radius: 1em; border-style:solid; border-color:#e6e6fa; background-color:#e6e6fa'>
-<p class="h4"><ins>Solution</ins></p>
+<div style="display: inline-block; background: #6495ED;; border: 1px solid #6495ED; padding: 3px 5px;color:#FFFFFF"><span >Solution</span>
+</div>
+
+<div style="border: 1px solid #6495ED; font-size: 100%; padding: 5px;">
 
 ```zsh
 % mkdir ./dir_a ./dir_b
@@ -144,21 +149,23 @@ tags:
 - `find` commandでファイルリストを取得し, `xargs`を用いて１つずつ`mv`
 - 最後に空になったdirectoryを削除
 
+
 </div>
 
-> file typeの指定
+#### file typeの指定
 
 ```zsh
 find <search-path> -type f -name '*.csv'
 ```
 
----|---
-`-type f`|`f`を指定することでファイルのみを検索対象とする
-`-name '*.csv'`|`-name`は検索ファイル名を指定するコマンドだが, `.hogehoge`というsurfixルールを活かすことで実質的に拡張子限定をすることができる
+|option|説明|
+|---|---|
+|`-type f`|`f`を指定することでファイルのみを検索対象とする|
+|`-name '*.csv'`|`-name`は検索ファイル名を指定するコマンドだが, `.hogehoge`というsurfixルールを活かすこ|とで実質的に拡張子限定をすることができる
 
 なお, UNIX/Linuxでは, 原則としてファイル名に拡張子は必要なく, 基本的にその付与はユーザーやアプリケーションの裁量となることに留意が必要です = `find` commandで拡張子検索はあくまでファイル名検索のパラダイムで実現される.
 
-> 検索PATHの指定: `-path` option
+#### 検索PATHの指定: `-path` option
 
 file nameだけでなく, pathをサーチ条件に含めたい場合は, `-path` optionを利用します. 
 ただし, 次の点に留意が必要です:
@@ -181,7 +188,7 @@ find . -type f -path '*loc_*/dir_a/*.csv'
 but the given pattern contains a directory separator (‘/’)
 ```
 
-> empty directoryの削除
+#### empty directoryの削除
 
 ```zsh
 find <search-path> -type d -empty -delete
@@ -224,7 +231,7 @@ find <search-path> -type d -empty -delete
         └── file_9.csv
 ```
 
-> Goal
+上記の構造から以下の構造へ処理することをゴールとします
 
 ```zsh
 % tree
@@ -269,10 +276,12 @@ find <search-path> -type d -empty -delete
     └── loc_B_file_9.csv
 ```
 
-### solution
+### 解説
 
-<div style='padding-left: 2em; padding-right: 2em; border-radius: 1em; border-style:solid; border-color:#e6e6fa; background-color:#e6e6fa'>
-<p class="h4"><ins>Solution</ins></p>
+<div style="display: inline-block; background: #6495ED;; border: 1px solid #6495ED; padding: 3px 5px;color:#FFFFFF"><span >Solution</span>
+</div>
+
+<div style="border: 1px solid #6495ED; font-size: 100%; padding: 5px;">
 
 ```zsh
 % mkdir ./dir_a ./dir_b
@@ -303,7 +312,7 @@ this is first:a second:b third:c
 this is first:x second:y third:z
 ```
 
-> REMARKS: `-i`, `-l` optionについて
+#### `-i`, `-l` optionについて
 
 Note that 
 
@@ -312,9 +321,6 @@ The -l and -i options appear in the 1997 version of the POSIX standard,
 but  do  not appear in the 2004 version of the standard.  Therefore you
 should use -L and -I instead, respectively.
 ```
-
-
-
 
 
 
@@ -329,7 +335,34 @@ $ cat $(which ptouch)
 
 set -e
 
-mkdir -p "$(dirname "$1")" && touch "$1"
+mkdir -p "$(dirname "$1")" ```zsh
+% mkdir ./dir_a ./dir_b
+% find . -type f -path '*loc_*/dir_a/*' -name '*.csv' |  awk '{X=$1; sub(/\/dir_a\//, "_", X);$1=$1 "\t" X;print $0}' | xargs -L1 bash -c 'mv $0 ./dir_a/$(basename $1)'
+% find . -type f -path '*loc_*/dir_b/*' -name '*.csv' |  awk '{X=$1; sub(/\/dir_b\//, "_", X);$1=$1 "\t" X;print $0}' | xargs -L1 bash -c 'mv $0 ./dir_b/$(basename $1)'
+% find . -type d -empty -delete
+```
+
+- `find` commadでファイルを検索した
+- `awk`でoriginal file nameと名称変更後のfile nameを定義 & 出力
+- `xargs`で`mv`コマンドを実行する```zsh
+% mkdir ./dir_a ./dir_b
+% find . -type f -path '*loc_*/dir_a/*' -name '*.csv' |  awk '{X=$1; sub(/\/dir_a\//, "_", X);$1=$1 "\t" X;print $0}' | xargs -L1 bash -c 'mv $0 ./dir_a/$(basename $1)'
+% find . -type f -path '*loc_*/dir_b/*' -name '*.csv' |  awk '{X=$1; sub(/\/dir_b\//, "_", X);$1=$1 "\t" X;print $0}' | xargs -L1 bash -c 'mv $0 ./dir_b/$(basename $1)'
+% find . -type d -empty -delete
+```
+
+- `find` commadでファイルを検索した
+- `awk`でoriginal file nameと名称変更後のfile nameを定義 & 出力
+- `xargs`で`mv`コマンドを実行する```zsh
+% mkdir ./dir_a ./dir_b
+% find . -type f -path '*loc_*/dir_a/*' -name '*.csv' |  awk '{X=$1; sub(/\/dir_a\//, "_", X);$1=$1 "\t" X;print $0}' | xargs -L1 bash -c 'mv $0 ./dir_a/$(basename $1)'
+% find . -type f -path '*loc_*/dir_b/*' -name '*.csv' |  awk '{X=$1; sub(/\/dir_b\//, "_", X);$1=$1 "\t" X;print $0}' | xargs -L1 bash -c 'mv $0 ./dir_b/$(basename $1)'
+% find . -type d -empty -delete
+```
+
+- `find` commadでファイルを検索した
+- `awk`でoriginal file nameと名称変更後のfile nameを定義 & 出力
+- `xargs`で`mv`コマンドを実行する&& touch "$1"
 ```
 
 ### data generating process
