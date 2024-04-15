@@ -31,6 +31,7 @@ tags:
     - [`-i`, `-l` optionについて](#-i--l-option%E3%81%AB%E3%81%A4%E3%81%84%E3%81%A6)
 - [Appendix: Data Generating Process](#appendix-data-generating-process)
   - [`ptouch` command](#ptouch-command)
+  - [data generating process](#data-generating-process)
 - [References](#references)
 
 <!-- END doctoc generated TOC please keep comment here to allow auto update -->
@@ -86,39 +87,23 @@ tags:
 ├── dir_a
 │   ├── file_A_1.csv
 │   ├── file_A_2.csv
-│   ├── file_A_3.csv
-│   ├── file_A_4.csv
-│   ├── file_A_5.csv
-│   ├── file_A_6.csv
-│   ├── file_A_7.csv
+│   ├── ...
 │   ├── file_A_8.csv
 │   ├── file_A_9.csv
 │   ├── file_B_1.csv
 │   ├── file_B_2.csv
-│   ├── file_B_3.csv
-│   ├── file_B_4.csv
-│   ├── file_B_5.csv
-│   ├── file_B_6.csv
-│   ├── file_B_7.csv
+│   ├── ...
 │   ├── file_B_8.csv
 │   └── file_B_9.csv
 └── dir_b
     ├── file_A_1.csv
     ├── file_A_2.csv
-    ├── file_A_3.csv
-    ├── file_A_4.csv
-    ├── file_A_5.csv
-    ├── file_A_6.csv
-    ├── file_A_7.csv
+    ├── ...
     ├── file_A_8.csv
     ├── file_A_9.csv
     ├── file_B_1.csv
     ├── file_B_2.csv
-    ├── file_B_3.csv
-    ├── file_B_4.csv
-    ├── file_B_5.csv
-    ├── file_B_6.csv
-    ├── file_B_7.csv
+    ├── ...
     ├── file_B_8.csv
     └── file_B_9.csv
 ```
@@ -239,39 +224,23 @@ find <search-path> -type d -empty -delete
 ├── dir_a
 │   ├── loc_A_file_1.csv
 │   ├── loc_A_file_2.csv
-│   ├── loc_A_file_3.csv
-│   ├── loc_A_file_4.csv
-│   ├── loc_A_file_5.csv
-│   ├── loc_A_file_6.csv
-│   ├── loc_A_file_7.csv
+│   ├── ...
 │   ├── loc_A_file_8.csv
 │   ├── loc_A_file_9.csv
 │   ├── loc_B_file_1.csv
 │   ├── loc_B_file_2.csv
-│   ├── loc_B_file_3.csv
-│   ├── loc_B_file_4.csv
-│   ├── loc_B_file_5.csv
-│   ├── loc_B_file_6.csv
-│   ├── loc_B_file_7.csv
+│   ├── ...
 │   ├── loc_B_file_8.csv
 │   └── loc_B_file_9.csv
 └── dir_b
     ├── loc_A_file_1.csv
     ├── loc_A_file_2.csv
-    ├── loc_A_file_3.csv
-    ├── loc_A_file_4.csv
-    ├── loc_A_file_5.csv
-    ├── loc_A_file_6.csv
-    ├── loc_A_file_7.csv
+    ├── ...
     ├── loc_A_file_8.csv
     ├── loc_A_file_9.csv
     ├── loc_B_file_1.csv
     ├── loc_B_file_2.csv
-    ├── loc_B_file_3.csv
-    ├── loc_B_file_4.csv
-    ├── loc_B_file_5.csv
-    ├── loc_B_file_6.csv
-    ├── loc_B_file_7.csv
+    ├── ...
     ├── loc_B_file_8.csv
     └── loc_B_file_9.csv
 ```
@@ -335,34 +304,7 @@ $ cat $(which ptouch)
 
 set -e
 
-mkdir -p "$(dirname "$1")" ```zsh
-% mkdir ./dir_a ./dir_b
-% find . -type f -path '*loc_*/dir_a/*' -name '*.csv' |  awk '{X=$1; sub(/\/dir_a\//, "_", X);$1=$1 "\t" X;print $0}' | xargs -L1 bash -c 'mv $0 ./dir_a/$(basename $1)'
-% find . -type f -path '*loc_*/dir_b/*' -name '*.csv' |  awk '{X=$1; sub(/\/dir_b\//, "_", X);$1=$1 "\t" X;print $0}' | xargs -L1 bash -c 'mv $0 ./dir_b/$(basename $1)'
-% find . -type d -empty -delete
-```
-
-- `find` commadでファイルを検索した
-- `awk`でoriginal file nameと名称変更後のfile nameを定義 & 出力
-- `xargs`で`mv`コマンドを実行する```zsh
-% mkdir ./dir_a ./dir_b
-% find . -type f -path '*loc_*/dir_a/*' -name '*.csv' |  awk '{X=$1; sub(/\/dir_a\//, "_", X);$1=$1 "\t" X;print $0}' | xargs -L1 bash -c 'mv $0 ./dir_a/$(basename $1)'
-% find . -type f -path '*loc_*/dir_b/*' -name '*.csv' |  awk '{X=$1; sub(/\/dir_b\//, "_", X);$1=$1 "\t" X;print $0}' | xargs -L1 bash -c 'mv $0 ./dir_b/$(basename $1)'
-% find . -type d -empty -delete
-```
-
-- `find` commadでファイルを検索した
-- `awk`でoriginal file nameと名称変更後のfile nameを定義 & 出力
-- `xargs`で`mv`コマンドを実行する```zsh
-% mkdir ./dir_a ./dir_b
-% find . -type f -path '*loc_*/dir_a/*' -name '*.csv' |  awk '{X=$1; sub(/\/dir_a\//, "_", X);$1=$1 "\t" X;print $0}' | xargs -L1 bash -c 'mv $0 ./dir_a/$(basename $1)'
-% find . -type f -path '*loc_*/dir_b/*' -name '*.csv' |  awk '{X=$1; sub(/\/dir_b\//, "_", X);$1=$1 "\t" X;print $0}' | xargs -L1 bash -c 'mv $0 ./dir_b/$(basename $1)'
-% find . -type d -empty -delete
-```
-
-- `find` commadでファイルを検索した
-- `awk`でoriginal file nameと名称変更後のfile nameを定義 & 出力
-- `xargs`で`mv`コマンドを実行する&& touch "$1"
+mkdir -p "$(dirname "$1")"
 ```
 
 ### data generating process
