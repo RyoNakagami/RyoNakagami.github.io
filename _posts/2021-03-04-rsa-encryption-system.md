@@ -1,16 +1,16 @@
 ---
 layout: post
-title: "RSA公開鍵暗号方式の仕組み"
-subtitle: "RSAとEuler's totient function"
+title: "公開鍵暗号方式の仕組み: RSAとEuler's totient function"
+subtitle: "ssh series 1/N"
 author: "Ryo"
 header-style: text
 header-mask: 0.0
 catelog: true
 mathjax: true
-last_modified_at: 2023-08-06
+last_modified_at: 2024-04-16
 tags:
 
-- RSA
+- ssh
 - 公開鍵暗号方式
 - 素数
 ---
@@ -80,7 +80,16 @@ Amazon.comで何かしらの商品を注文したいとします. 商品をカ�
 2. 他の人にバレないようにVPNの設定をどのように実施すればよいのか?
 
 という問題が生まれてしまいます. つまり, **見知らぬ人同士の間でオープンな場でどのように「共有された秘密」を確立するのか？**という問題です. 
-この一つの解決方法がRSA公開鍵暗号方式です.
+この一つの解決方法が公開鍵暗号方式です.
+
+<div style='padding-left: 2em; padding-right: 2em; border-radius: 0em; border-style:solid; border-color:#D3D3D3; background-color:#F8F8F8'>
+<p class="h4"><ins>REMARKS: 共通鍵暗号</ins></p>
+
+- 暗号化と復号に同一のキーを用いる暗号通信のことを共通鍵暗号通信と呼ぶ
+- 共通鍵暗号通信は秘密鍵暗号方式 or 対象型暗号方式とも呼ばれたりする
+
+</div>
+
 
 ### RSA公開鍵暗号方式の概要
 
