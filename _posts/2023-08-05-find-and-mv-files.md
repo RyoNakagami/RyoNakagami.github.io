@@ -7,11 +7,11 @@ header-style: text
 header-mask: 0.0
 catelog: true
 mathjax: true
-last_modified_at: 2023-09-16
+last_modified_at: 2024-04-16
 tags:
 
 - Linux
-- shell
+- Shell
 ---
 
 <div style='border-radius: 1em; border-style:solid; border-color:#D3D3D3; background-color:#F8F8F8'>
