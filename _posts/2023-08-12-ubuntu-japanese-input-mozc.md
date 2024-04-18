@@ -6,12 +6,13 @@ author: "Ryo"
 catelog: true
 mathjax: true
 mermaid: false
-last_modified_at: 2024-01-30
+last_modified_at: 2024-04-18
 header-mask: 0.0
 header-style: text
 tags:
 
 - Ubuntu 22.04 LTS
+- Mozc
 ---
 
 <div style='border-radius: 1em; border-style:solid; border-color:#D3D3D3; background-color:#F8F8F8'>
@@ -26,6 +27,7 @@ tags:
 - [Fcitx 5のインストールと設定](#fcitx-5%E3%81%AE%E3%82%A4%E3%83%B3%E3%82%B9%E3%83%88%E3%83%BC%E3%83%AB%E3%81%A8%E8%A8%AD%E5%AE%9A)
   - [`im-config`コマンド](#im-config%E3%82%B3%E3%83%9E%E3%83%B3%E3%83%89)
   - [Input Sourcesで上手くmozc-jpが表示できない場合](#input-sources%E3%81%A7%E4%B8%8A%E6%89%8B%E3%81%8Fmozc-jp%E3%81%8C%E8%A1%A8%E7%A4%BA%E3%81%A7%E3%81%8D%E3%81%AA%E3%81%84%E5%A0%B4%E5%90%88)
+- [ピリカン設定](#%E3%83%94%E3%83%AA%E3%82%AB%E3%83%B3%E8%A8%AD%E5%AE%9A)
 - [References](#references)
 
 <!-- END doctoc generated TOC please keep comment here to allow auto update -->
@@ -135,6 +137,29 @@ ibus        # automatic configuration for most locales
 
 他にもインストールされている可能性がありますが, 一覧を確認したい場合は`apt list --installed | grep "ibus"`
 コマンドで確かめられます. それでも解決できない場合は, `Fcitx5 Configuration`を立ち上げ直接 `Mozc` を指定することで解決できます.
+
+
+## ピリカン設定
+
+<div style='padding-left: 2em; padding-right: 2em; border-radius: 0em; border-style:solid; border-color:#D3D3D3; background-color:#F8F8F8'>
+<p class="h4"><ins>設定内容</ins></p>
+
+- 句読点のデフォルトスタイルをピリカン（`，`, `．`）へ変更
+- `，，`と入力すると`、`と予測変換
+- `．．`と入力すると`。`と予測変換
+
+</div>
+
+設定手順は以下です；
+
+1. Mozc SettingsをConfiguration tool経由で開く
+2. Punctuation styleをピリカンへ変更する（例：下図）
+3. Mozc Dictionary Toolにてユーザー辞書として, 句読点の設定を行う
+
+|Punctuation styleの変更|ユーザー辞書の定義|
+|----------------------|---------------|
+|![mozc_punc_style](https://github.com/ryonakimageserver/omorikaizuka/blob/86b0d530980b79449f1a22365ffb3613154fc05f/Development/Mozc/Mozc_punctuation_style.png?raw=true)|![user_defined_dict](https://github.com/ryonakimageserver/omorikaizuka/blob/master/Development/Mozc/Mozc_user_defined_dict.png?raw=true) |
+
 
 
 
