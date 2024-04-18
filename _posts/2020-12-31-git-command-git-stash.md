@@ -7,7 +7,7 @@ header-style: text
 header-mask: 0.0
 catelog: true
 mathjax: true
-last_modified_at: 2022-08-01
+last_modified_at: 2024-04-20
 tags:
 
 - git
@@ -107,7 +107,5 @@ untacked fileも含めて`git stash`する場合はoptionを付与して以下�
 
 
 ## References
-
-> 公式ドキュメント
 
 - [git > git-stash - Stash the changes in a dirty working directory away](https://git-scm.com/docs/git-stash)
