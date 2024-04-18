@@ -46,7 +46,7 @@ anchorjs: true # if you want to customize anchor. check out line:181 of `post.ht
 # `$ gem install jekyll-paginate`
 #github pagesでsitemap.xmlが自動的に生成される 20230316
 plugins:
-  [jekyll-paginate, jekyll-sitemap, jekyll-archives, jekyll-mentions]
+  [jekyll-paginate, jekyll-sitemap, jekyll-archives]
 
 emoji:
   src: "https://github.githubassets.com/images/icons/"
