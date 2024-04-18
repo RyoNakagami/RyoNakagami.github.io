@@ -63,10 +63,13 @@
   height: 100%;
   padding-bottom: 40px;
   width: 195px;
+  position: fixed;
+  top: 0px;
+  margin-left: 10%;
 }
 .side-catalog.fixed {
   position: fixed; /*fixedから変更*/
-  top: -21px;
+  top: 0px;
   margin-left: 10%;
 }
 .side-catalog.fold .catalog-toggle::before {
