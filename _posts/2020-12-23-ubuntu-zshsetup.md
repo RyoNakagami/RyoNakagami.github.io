@@ -1,13 +1,14 @@
 ---
 layout: post
 title: "Z shell installation and configuration"
-subtitle: "Ubuntu Desktop環境構築 Part 10"
+subtitle: "Shell Environement Set-up 1/N"
 author: "Ryo"
 header-mask: 0.0
 header-style: text
 catelog: true
-mathjax: true
-last_modified_at: 2023-07-27
+mathjax: false
+mermaid: false
+last_modified_at: 2024-04-23
 tags:
 
 - Ubuntu 20.04 LTS

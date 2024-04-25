@@ -1,12 +1,13 @@
 ---
 layout: post
 title: "ターミナル環境の構築: Terminatorのインストール"
-subtitle: "Ubuntu Desktop環境構築 Part 9"
+subtitle: "Shell Environement Set-up 1/N"
 author: "Ryo"
 header-style: text
 header-mask: 0.0
 catelog: true
-mathjax: true
+mathjax: false
+mermaid: false
 last_modified_at: 2023-08-01
 tags:
 
@@ -15,7 +16,10 @@ tags:
 - Shell
 ---
 
-**Table of Contents**
+<div style='border-radius: 1em; border-style:solid; border-color:#D3D3D3; background-color:#F8F8F8'>
+
+<p class="h4">&nbsp;&nbsp;Table of Contents</p>
+
 <!-- START doctoc generated TOC please keep comment here to allow auto update -->
 <!-- DON'T EDIT THIS SECTION, INSTEAD RE-RUN doctoc TO UPDATE -->
 
@@ -30,6 +34,8 @@ tags:
 
 <!-- END doctoc generated TOC please keep comment here to allow auto update -->
 
+
+</div>
 
 ## Overview
 

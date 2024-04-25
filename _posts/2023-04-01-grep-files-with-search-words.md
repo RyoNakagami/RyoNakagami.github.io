@@ -6,18 +6,14 @@ author: "Ryo"
 header-mask: 0.0
 header-style: text
 catelog: true
-mathjax: true
-last_modified_at: 2023-05-29
+mathjax: false
+mermaid: false
+last_modified_at: 2024-04-26
 tags:
 
 - Linux
 - Shell
 ---
-
-
----|---
-Goal|特定のディクトリ以下において, 中身に特定の文字列を含んだ/含まないファイル一覧を表示させたい
-OS|Ubuntu 20.04 LTS
 
 
 <div style='border-radius: 1em; border-style:solid; border-color:#D3D3D3; background-color:#F8F8F8'>
@@ -47,6 +43,30 @@ some other program, for example as it is if you're using Unix pipelines.
 </div>
 
 
+`grep`の実行例を見てみましょう
+
+```zsh
+cat sample.txt
+abcd
+12c3
+4567
+xybz
+```
+
+というファイルが存在するとします．これに対して，`a, b, c`のいずれかの文字を含んだ行を行番号とともに出力したい場合，
+
+```zsh
+% grep -n '[abc]' ./sample.txt
+```
+
+- `[abc]`とすることで，a,b,cのいずれかが含まれている行を検索
+- `-n` optionにより行番号も合わせて出力
+
+という挙動をします．`grep`の歴史を簡単に振り返るには以下の動画がおすすめです．
+
+<br>
+
+
 <iframe width="560" height="315" src="https://www.youtube.com/embed/NTfOnGZUZDk" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
 
 `grep`の名前はText Editor, `ed`の構文に従った `g/regular expression/p` から来ているらしいです.
@@ -54,6 +74,8 @@ globalにregrexに合致するlineをprintするという意味らしいです.
 
 
 ## List up files with match
+
+特定のディクトリ以下において, 中身に特定の文字列を含んだファイル一覧を表示させたい場合は以下のコマンドを用います．
 
 ```zsh
 % grep <search words> -rl <target directory path>
@@ -184,7 +206,8 @@ grep: ./subtest: Is a directory
 ちゃんと検索してくれます. 出力順序はなんか変なのでパイプで`sort`とつなげて出力しても良いかなと思っています.
 
 
-## References
+References
+----------
 
 - [ubuntu manuals > ed](https://manpages.ubuntu.com/manpages/trusty/man1/ed.1plan9.html)
 - [stackoverflow > grep output to show only matching file](https://stackoverflow.com/questions/3908156/grep-output-to-show-only-matching-file)

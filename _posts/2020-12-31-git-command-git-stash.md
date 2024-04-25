@@ -6,8 +6,9 @@ author: "Ryo"
 header-style: text
 header-mask: 0.0
 catelog: true
-mathjax: true
-last_modified_at: 2024-04-20
+mathjax: false
+mermaid: false
+last_modified_at: 2024-04-25
 tags:
 
 - git
@@ -37,8 +38,10 @@ tags:
 `git stash`は現在焼いている途中の肉を皿に退避させて，網を交換（=交換という別作業）をする際に使うコマンドです． 
 より正確には「現在焼いている途中の肉を皿に退避させて」というアクションを実行するのが`git stash`に相当します．
 
-<div style='padding-left: 2em; padding-right: 2em; border-radius: 0em; border-style:solid; border-color:#D3D3D3; background-color:#F8F8F8'>
-<p class="h4"><ins>git stashのユースケース</ins></p>
+<div style="display: inline-block; background: #6495ED;; border: 1px solid #6495ED; padding: 3px 5px;color:#FFFFFF"><span >git stashの活用場面</span>
+</div>
+
+<div style="border: 1px solid #6495ED; font-size: 100%; padding: 5px;">
 
 - gitでtrackされているファイルについて現在作業している
 - このとき, trackされているファイルについてcommitすることなくbranchを変えることはできない
@@ -86,7 +89,6 @@ untacked fileも含めて`git stash`する場合はoptionを付与して以下�
 ```
 
 
-
 ## How to use `git stash drop`
 ### 引数なしでの実行
 
@@ -96,9 +98,32 @@ untacked fileも含めて`git stash`する場合はoptionを付与して以下�
 
 と引数なしで実行すると, 直近のstashが削除されます.
 
-### 複数stashのdrop
+### 複数stashのdrop: 連続index版
 
-連続indexのstashをdropしたい場合は, 
+以下の状況を例とします
+
+```zsh
+% git stash list
+stash@{0}: WIP on main: 1234567 first commit
+stash@{1}: WIP on main: 1234568 update css
+stash@{2}: WIP on main: 1234569 update css.min
+stash@{3}: WIP on main: 1234569 update css.min
+stash@{4}: WIP on main: 1234571 update README.md
+```
+
+このとき，`1~3`の連続indexのstashをdropしたい場合は, 
+
+```bash
+START_INDEX=1
+END_INDEX=3
+
+for i in $(seq $END_INDEX -1 $START_INDEX); do
+        git stash drop stash@{$i}
+    done
+```
+
+とします．`git stash drop`をするたびにindexが変化してしまうため，複数indexを対象に
+stash dropする場合は最新のindex(=index番号が大きい)からdropすることが良いと思います．
 
 
 
@@ -106,6 +131,7 @@ untacked fileも含めて`git stash`する場合はoptionを付与して以下�
 
 
 
-## References
+References
+----------
 
 - [git > git-stash - Stash the changes in a dirty working directory away](https://git-scm.com/docs/git-stash)
