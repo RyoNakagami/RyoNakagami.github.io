@@ -37,6 +37,7 @@ tags:
     - [ユーザーの作成](#%E3%83%A6%E3%83%BC%E3%82%B6%E3%83%BC%E3%81%AE%E4%BD%9C%E6%88%90)
     - [ユーザーをグループに追加する](#%E3%83%A6%E3%83%BC%E3%82%B6%E3%83%BC%E3%82%92%E3%82%B0%E3%83%AB%E3%83%BC%E3%83%97%E3%81%AB%E8%BF%BD%E5%8A%A0%E3%81%99%E3%82%8B)
   - [Tailscale sshの実行](#tailscale-ssh%E3%81%AE%E5%AE%9F%E8%A1%8C)
+    - [VSCodeを介したssh接続](#vscode%E3%82%92%E4%BB%8B%E3%81%97%E3%81%9Fssh%E6%8E%A5%E7%B6%9A)
     - [`.ssh/config`ファイルの設定](#sshconfig%E3%83%95%E3%82%A1%E3%82%A4%E3%83%AB%E3%81%AE%E8%A8%AD%E5%AE%9A)
     - [SSH Agent Forwarding機能](#ssh-agent-forwarding%E6%A9%9F%E8%83%BD)
     - [Access Control Listsを用いたSSHログインユーザーの制限](#access-control-lists%E3%82%92%E7%94%A8%E3%81%84%E3%81%9Fssh%E3%83%AD%E3%82%B0%E3%82%A4%E3%83%B3%E3%83%A6%E3%83%BC%E3%82%B6%E3%83%BC%E3%81%AE%E5%88%B6%E9%99%90)
@@ -395,6 +396,16 @@ Ubuntuでは`adduser`と似た名前のコマンドとして`useradd`コマン�
 - `ctrl` + `D`
 
 のいずれかで抜けることができます．
+
+#### VSCodeを介したssh接続
+
+Remote-ssh機能を利用することでGUI操作でssh接続先を開くことができますが, 以下のようにコマンドでssh先directoryを対象に
+直接workspaceを開くこともできます
+
+
+```zsh
+% code --folder-uri "vscode-remote://ssh-remote+<ssh接続名>/<path>" 
+```
 
 
 #### `.ssh/config`ファイルの設定

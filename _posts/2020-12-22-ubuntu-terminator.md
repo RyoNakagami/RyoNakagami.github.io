@@ -84,7 +84,7 @@ Focus to Next/Previous terminal|`shift`+`ctrl` + `n`/`p`
 
 |Edit 	|Mouse  |Shortcut|
 |---|---|---|
-|Window title| N/A 	|`ctr`l+`alt`+`w`|
+|Window title| N/A 	|`ctrl`+`alt`+`w`|
 |Tab title 	|double-click tab 	|`ctrl`+`alt`+`a`|
 |Terminal title| 	double-click titlebar 	|`ctrl`+`alt`+`x`|
 
@@ -115,6 +115,14 @@ terminator:
         500 http://jp.archive.ubuntu.com/ubuntu jammy/universe i386 Packages
         100 /var/lib/dpkg/status
 ```
+
+インストール後，デフォルトで起動するようになりますがもしならなかった場合は
+
+```zsh
+% sudo update-alternatives --config x-terminal-emulator
+```
+
+を実行してください．
 
 ## Configuration
 
@@ -186,4 +194,4 @@ References
 
 - [Installing Terminator](https://github.com/gnome-terminator/terminator/blob/master/INSTALL.md)
 - [Terminator GitHub Project](https://github.com/gnome-terminator/terminator)
-- [Terminator Document](https://terminator-gtk3.readthedocs.io/en/latest/)|
+- [Terminator Document](https://terminator-gtk3.readthedocs.io/en/latest/)
