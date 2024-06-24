@@ -407,6 +407,51 @@ Remote-ssh機能を利用することでGUI操作でssh接続先を開くこと�
 % code --folder-uri "vscode-remote://ssh-remote+<ssh接続名>/<path>" 
 ```
 
+個人では以下のようなスクリプトを組みました：
+
+```bash
+#!/bin/bash
+## open a directory at the ssh server as a vscode workspace
+## Author: Ryo Nakagami
+## Revised: 2024-06-25
+## REQUIREMENT: code + ssh setup
+
+set -eu
+
+function usage {
+    cat <<EOM
+Usage: $(basename "$0") [OPTION]...
+  -h                   Display help
+  -s sshconfig_name    reference .ssh/config hostname
+  -r directory         relative-path directory
+  -a directory         abolute-path directory
+EOM
+
+    exit 2
+}
+
+while getopts ":s:r:a:h" optKey; do
+    case "$optKey" in
+    s)
+        SSH_CONFIG="${OPTARG}";
+        USER_ROOT=$(ssh -G ${SSH_CONFIG} | grep ^"user "| sed 's/user //')
+        ;;
+    r)
+        RELATIVE_TARGET_DIRECTORY="${OPTARG}"
+        TARGET_DIRECTORY="/home/${USER_ROOT}/${RELATIVE_TARGET_DIRECTORY}/"
+        ;;
+    a) 
+        TARGET_DIRECTORY="${OPTARG}";
+        ;;
+    '-h' | '--help' | *)
+        usage
+        ;;
+    esac
+done
+
+code --folder-uri "vscode-remote://ssh-remote+$SSH_CONFIG$TARGET_DIRECTORY" 
+```
+
 
 #### `.ssh/config`ファイルの設定
 
