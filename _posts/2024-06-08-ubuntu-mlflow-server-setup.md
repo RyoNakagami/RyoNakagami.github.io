@@ -341,10 +341,10 @@ ssh接続を行うためには予めユーザーがホストサーバー側で�
 と`sudo`コマンドを用いて実行してください．誤ったユーザーを作成してしまった場合は
 
 ```zsh
-% iserde; -r <username>
+% sudo deluser -r <username>
 ```
 
-`-r`オプションを付与することで，ユーザー削除時にホームディレクトリも合わせて削除することができます．
+`--remove-home` or `-r`オプションを付与することで，ユーザー削除時にホームディレクトリも合わせて削除することができます．
 
 
 <div style='padding-left: 2em; padding-right: 2em; border-radius: 0em; border-style:solid; border-color:#ffa657; background-color:#F8F8F8'>

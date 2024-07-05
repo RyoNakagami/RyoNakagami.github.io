@@ -1,17 +1,15 @@
 ---
 layout: post
-title: "GitとGitHubの設定"
-subtitle: "Ubuntu Desktop環境構築 Part 13"
+title: "What is Git?"
+subtitle: "GitとGitHubの設定 1/N"
 author: "Ryo"
 catelog: true
 mathjax: true
-last_modified_at: 2023-10-01
+last_modified_at: 2024-07-06
 header-mask: 0.0
 header-style: text
 tags:
 
-- Ubuntu 20.04 LTS
-- Ubuntu 22.04 LTS
 - git
 
 ---
@@ -24,7 +22,6 @@ tags:
 <!-- START doctoc generated TOC please keep comment here to allow auto update -->
 <!-- DON'T EDIT THIS SECTION, INSTEAD RE-RUN doctoc TO UPDATE -->
 
-- [Requirements](#requirements)
 - [What is Git?](#what-is-git)
   - [Local VCS vs Distributed VCS](#local-vcs-vs-distributed-vcs)
   - [What is Git Repository?](#what-is-git-repository)
@@ -53,21 +50,28 @@ tags:
 
 </div>
 
-## Requirements
 
-- GitHubの個人アカウント作成済み
-- Visual Studio Codeインストール済み
+## この記事のスコープ
+
+- Gitを利用するための基礎知識及び各種設定の解説
+
 
 ## What is Git?
 
-Gitとは, ファイルやソースコードの変更を分散型でトラッキングする仕組みです. 
-ファイルやソースコードの変更をトラッキングする仕組みのことをバージョン管理システムと呼んだりします.
+<strong > &#9654;&nbsp; Key Takeaways</strong>
 
-<div style='padding-left: 2em; padding-right: 2em; border-radius: 1em; border-style:solid; border-color:#D3D3D3; background-color:#F8F8F8'>
+- Gitとはファイルやソースコードの変更を分散型でトラッキングする仕組み
+- ファイルやソースコードの変更をトラッキングする仕組みのことをバージョン管理システムと呼ぶ
+- Linux創始者Linux Torvalds氏によって2005年ごろに原型となるプログラムが開発された
+
+<br>
+
+<div style='padding-left: 2em; padding-right: 2em; border-radius: 0em; border-style:solid; border-color:#D3D3D3; background-color:#F8F8F8'>
 <p class="h4"><ins>Def: Version Control System</ins></p>
 
 変更履歴を管理することを通じて, 
 
+- 誰がなんの変更を加えたかの表示
 - 前回差分箇所をハイライト
 - ファイルの特定の段階に戻る
 - ファイルを復活
@@ -122,35 +126,6 @@ Gitは分散型Version管理システムであるため,repositoryは各開発�
 
 このとき, GitHub/GitLab上のリモートサーバーに置かれたrepositoryをremote repository, 
 開発者がlocalにおくrepositoryはlocal repositoryと呼ばれます.
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 
 ### GitによるVersion管理

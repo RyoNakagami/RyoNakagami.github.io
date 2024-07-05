@@ -176,11 +176,11 @@ login_username@host_name ~test
 
 |File|説明|
 |---|---|
-|`.zshenv`| 	Usually run for every zsh.|
-|`.zprofile`| 	Run for login shells.|
-|`.zshrc`| 	Run for interactive shells.|
-|`.zlogin`| 	Run for login shells.|
-|`.zlogout`| 	Run for login shells.(ログアウト時に読み取る)|
+|`.zshenv`| 	Usually run for every zsh|
+|`.zprofile`| 	Run for login shells|
+|`.zshrc`| 	Run for interactive shells|
+|`.zlogin`| 	Run for login shells. 役割は `.zprofile` とほぼ一緒．<br>混乱を避けるため併用しないこと|
+|`.zlogout`| 	Run for login shells|
 
 それぞれのファイルは `/etc/`, `~/`の２つのクラスがあります.
 `/etc/`クラスはthe system administratorによって設定され, すべてのユーザーに対して実行されます.

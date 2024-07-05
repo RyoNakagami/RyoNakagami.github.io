@@ -1,18 +1,18 @@
 ---
 layout: post
 title: "GitHubの設定"
-subtitle: "Ubuntu Desktop環境構築 Part 13.5"
+subtitle: "GitとGitHubの設定 3/N"
 author: "Ryo"
 catelog: true
-mathjax: true
-last_modified_at: 2023-10-01
+mathjax: false
+mermaid: false
+last_modified_at: 2024-07-06
 header-mask: 0.0
 header-style: text
 tags:
 
-- Ubuntu 20.04 LTS
-- Ubuntu 22.04 LTS
 - git
+- ssh
 
 ---
 
@@ -40,16 +40,52 @@ tags:
 
 ---|---
 Git|ファイルやソースコードの変更を分散型でトラッキングする仕組み
-GitHub|Gitで作成したリポジトリをホスティングするためのWebサービス<br>リポジトリ管理機能以外に課題管理やコードレビュー機能も提供
+GitHub|Gitで作成したリポジトリをホスティングするためのWebサービス<br>リポジトリ管理機能以外にDiscussion，Issue Tracking System，コードレビュー機能も提供
+
+GitHubはGitレポジトリを管理する機能がコアなので，Gitの基本的知識がGitHub利用の必要条件となることは忘れないでください．
+Gitの理解及びセットアップは[こちら](https://ryonakagami.github.io/2020/12/28/ubuntu-git-and-github-setup/)の記事を参考にしてください．
 
 
-## GitHubの個人アカウントとの連携(非推奨)
+### GitHub特有の機能
+
+GitHubにはGitにはない特有の機能があります．代表例として以下．
+
+<strong > &#9654;&nbsp; Pull Request</strong>
+
+- GitHub上のGitレポジトリに対して，他の開発者に新たに作成した変更のマージのリクエストするサービス
+- ソースコードとの差分確認(コードレビュー機能)とディスカッションをPull Requestベースで実施できる
+
+<strong > &#9654;&nbsp; Issue</strong>
+
+- １つのタスクやバグを１つのIssueに割り当てて，トラッキングや管理を行えうようにするための機能
+- バグ管理システムやチケット管理サービスとして使用することができる
+- commit messageに `#7` のようにIssue IDを書き加えることでリンクを張ることができる
+
+<strong > &#9654;&nbsp; Organization</strong>
+
+- チームを作成して各チームメンバーの権限の一括管理を可能とする機能
+- チーム内部で共通ダッシュボードの作成も可能
+- 公開レポジトリの範囲であれば無料でOrganizationアカウントを作成することができる
+
+
+<br>
+
+<div style='padding-left: 2em; padding-right: 2em; border-radius: 0em; border-style:solid; border-color:#e6e6fa; background-color:#F8F8F8'>
+<p class="h4"><ins><strong >REMARKS</strong></ins></p>
+
+Pull RequestとIssueどちらも他の開発者へのnotification機能があります．GitHub登場前は「メーリングリスト + 課題管理アプリ + コードレビューアプリ」を組み合わせて開発体制を整える必要が有りましたが，
+GitHub登場によりこれらをまとめることができるようになったのがGitHubが世界中で使われている理由の１つだと思います．
+
+
+</div>
+
+## GitHubの個人アカウントとの連携
 
 SSH プロトコルを利用してGitHubへの接続環境を構築します.SSH をセットアップする際には,SSH キーを生成し,ssh-agent に追加し,それから キーを自分の GitHubアカウントに追加します. SSH キーを ssh-agent に追加することで,パスフレーズの利用を通じて SSH キーに追加のセキュリティのレイヤーを持たせることができます.
 
 > REMARKS
 
-- SSH接続ではなく,アクセストークンを用いた接続設定を推奨です
+- 個人的にはSSH接続ではなく，アクセストークンを用いた接続設定を推奨です
 - アクセストークンを用いた接続設定は[Ryo's Tech Blog > 2021-04-25: Githubパスワード認証廃止への対応](https://ryonakagami.github.io/2021/04/25/github-token-authentication/)にまとめてあります
 
 ### 新しい SSH キーを生成して ssh-agent に追加する
