@@ -1713,3 +1713,29 @@ img::-moz-selection {
   border-bottom:2px solid #000000;
   padding:1px 1px;
 }
+.dropdown-content {
+  display: none;
+  position: absolute;
+  background-color: rgba(70, 83, 111, 0.989);
+  min-width: 160px;
+  z-index: 1;
+}
+
+/* Links inside the dropdown */
+.dropdown-content a {
+  color: black;
+  padding: 12px 16px;
+  text-decoration: none;
+  display: block;
+}
+
+.sub-menu-item{
+  display: none;
+  background-color: rgba(70, 83, 111, 0.989);
+}
+/* Change color of dropdown links on hover */
+.dropdown-content a:hover {background-color: #ddd}
+
+.sub-menu-item a:hover {background-color: #bbb}
+
+/* Show the dropdown menu (use JS to add this class to the .dropdown-content container when the user clicks on the dropdown button) */

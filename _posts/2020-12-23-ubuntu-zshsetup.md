@@ -1,7 +1,7 @@
 ---
 layout: post
 title: "Z shell installation and configuration"
-subtitle: "Shell Environement Set-up 1/N"
+subtitle: "Shell Environement Set-up 2/N"
 author: "Ryo"
 header-mask: 0.0
 header-style: text

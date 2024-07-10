@@ -48,17 +48,6 @@ VSCodeをLinux環境にインストールする方法は大きく３つありま
 
 今回は公式サイトも推奨している(1)「MicrosoftのVSCodeレポジトリを登録し, `apt`経由でインストール」を採用します.
 
-<div style="display: inline-block; background: #D3D3D3;; border: 1px solid #D3D3D3; padding: 3px 10px;color:black"><span >なぜSnap経由インストールをしないのか？</span>
-</div>
-
-<div style="border: 1px solid #D3D3D3; font-size: 100%; padding: 20px;">
-
-Snap経由でインストールすると, SnapデーモンがバックグラウンドでVS Codeの自動アップデートを担当してくれるので
-自動的に最新のVSCodeが使えるというメリットがあります. ただし, 日本語入力ができない, 漢字が入力できないというバグが
-見受けられ, Native Japanese Speakerとして看過できないバグなので今回はお見送りしました.
-
-</div>
-
 なお, 上記の3番目の手法については, `.deb`パッケージをインストールすると, 
 aptリポジトリと署名キーが自動的にインストールされ, システムのパッケージマネージャを使った
 自動更新が可能となります. ですのでこちらの方法でもOKです.
@@ -70,7 +59,14 @@ aptリポジトリと署名キーが自動的にインストールされ, シス
 % sudo apt install ./vscode.deb
 ```
 
-## MicrosoftのVSCodeレポジトリを登録 & インストール
+<strong > &#9654;&nbsp; なぜSnap経由インストールをしないのか？</strong>
+
+Snap経由でインストールすると, SnapデーモンがバックグラウンドでVS Codeの自動アップデートを担当してくれるので
+自動的に最新のVSCodeが使えるというメリットがあります．ただし，日本語入力ができない，漢字が入力できないというバグが
+見受けられ，Native Japanese Speakerとして看過できないバグなので今回はお見送りしました.
+
+
+### MicrosoftのVSCodeレポジトリを登録 & インストール
 
 ```zsh
 % sudo apt-get install wget gpg
@@ -88,7 +84,7 @@ aptリポジトリと署名キーが自動的にインストールされ, シス
 % sudo apt install code
 ```
 
-## 初期設定
+## VSCode初期設定
 ### Telemetry 無効化
 
 VSCodeはデフォルトで, クラッシュ時の情報や使用状況/ErrorのデータをMicrosoftに送信する
@@ -136,6 +132,27 @@ VSCodeを使用しているとき, パッケージインストール直後にMis
         "command": "workbench.action.reloadWindow",
     },
 ```
+
+### Toggle Tab Key Moves Focusの削除
+
+<strong > &#9654;&nbsp; Pain</strong>
+
+- VSCodeではデフォルトで`ctrl + m`ショートカットにToggle Tab Key Moves Focusがアサインされている
+- 誤って`ctrl + m`を押すと，`tab`がインデント挿入として機能せず，focusの移動モードになってしまう(これをTab trappingと呼ぶ)
+
+<strong > &#9654;&nbsp; Solution</strong>
+
+`keybindings.json`にて以下の設定をすることで，Tab trapping ショートカットを無効化する
+
+```json
+  {
+    "key": "ctrl+m",
+    "command": "-editor.action.toggleTabFocusMode"
+  }
+```
+
+参考情報としてこちらの[Issue](https://github.com/microsoft/vscode/issues/128858)は一読の価値あり
+
 
 
 ## 拡張機能設定

@@ -1,14 +1,14 @@
 ---
 layout: post
-title: "git tips: リモートリポジトリの更新後にローカルリポジトリを編集 & commitした場合のエラー対策"
-subtitle: "How to use git command 2/N"
+title: "リモートリポジトリの更新後にローカルリポジトリを編集 & commitした場合のエラー対策"
+subtitle: "git trouble-shooting 1/N"
 author: "Ryo"
 header-mask: 0.0
 header-style: text
 catelog: true
 mathjax: false
 mermaid: false
-last_modified_at: 2024-02-14
+last_modified_at: 2024-07-11
 tags:
 
 - git
@@ -72,15 +72,11 @@ hint: invocation.
 fatal: Need to specify how to reconcile divergent branches.
 ```
 
-<div style="display: inline-block; background: #D3D3D3;; border: 1px solid #D3D3D3; padding: 3px 10px;color:black"><span >どういうとき発生しやすいのか？</span>
-</div>
-
-<div style="border: 1px solid #D3D3D3; font-size: 100%; padding: 20px;">
+<strong > &#9654;&nbsp; どういうとき発生しやすいのか？</strong>
 
 - Remote Repository側でPull requestをmergeした場合
 - Issue TemplateをRemote側で設定してcommitした場合など
 
-</div>
 
 ## How to Solve the Problem
 
@@ -96,7 +92,7 @@ fatal: Need to specify how to reconcile divergent branches.
 
 ### 方針 1.1: `git reset`を使って, Commitを取り消す
 
-> Command
+<strong > &#9654;&nbsp; Commands</strong>
 
 ```zsh
 % git reset --soft <commit-ID>
@@ -117,21 +113,15 @@ Optionによる挙動の違いは以下:
 `git reset --hard`を指定する場合は「変更自体を手元(ワーキングツリー)に残す必要すらないほど」という例外的な状況と認識しています. 昔の環境での挙動を確認したい場合など完全に昔の環境に戻したい場合はあるかもですが, そのような場合は`git checkout`を利用することが推奨されます.
 
 
-
-<div style="display: inline-block; background: #D3D3D3;; border: 1px solid #D3D3D3; padding: 3px 10px;color:black"><span >運用における注意点</span>
-</div>
-
-<div style="border: 1px solid #D3D3D3; font-size: 100%; padding: 20px;">
+<strong > &#9654;&nbsp; 運用における注意点</strong>
 
 - コミットそのものを削除してしまうので, 他の開発者が依拠している親コミットを消してしまうリスクがある
 - **ローカルな変更を取り消して元に戻したいときに限って使用**
 
-</div>
-
 
 ### 方針 1.2: `git revert`を使って, Commitを戻す
 
-> Command
+<strong > &#9654;&nbsp; Commands</strong>
 
 ```zsh
 % git revert <commit-ID>
@@ -140,14 +130,10 @@ Optionによる挙動の違いは以下:
 
 `git reset`と異なり, `git revert`で指定したコミット時点の状態まで作業ツリーを戻す = 逆向きのコミット」の履歴が残るという特徴があります. コミット自体を削除するわけではないので, 安全にコミットを元に戻すことができるというメリットがあります. 
 
-<div style="display: inline-block; background: #D3D3D3;; border: 1px solid #D3D3D3; padding: 3px 10px;color:black"><span >運用における注意点</span>
-</div>
-
-<div style="border: 1px solid #D3D3D3; font-size: 100%; padding: 20px;">
+<strong > &#9654;&nbsp; 運用における注意点</strong>
 
 - conflictを引き起こすCommitが１つだけならば問題ないが, 複数の場合は変更履歴の整理が大変になるので非推奨
 
-</div>
 
 ### 方針2: `git pull --rebase`を使って, 最新のアップストリームブランチを参照先に変更する
 
@@ -169,7 +155,7 @@ logをきれいにしたままconflictを解消することが出来ます.
 
 </div>
 
-> Command
+<strong > &#9654;&nbsp; Commands</strong>
 
 ```zsh
 % git pull origin <branch name> --rebase

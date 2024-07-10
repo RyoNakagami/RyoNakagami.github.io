@@ -1,13 +1,13 @@
 ---
 layout: post
 title: "git commit: commit messageの修正"
-subtitle: "How to use git command 9/N"
+subtitle: "How to use git command 8/N"
 author: "Ryo"
 header-mask: 0.0
 header-style: text
 catelog: true
 mathjax: true
-last_modified_at: 2023-06-16
+last_modified_at: 2024-07-11
 tags:
 
 - git
@@ -22,8 +22,9 @@ tags:
 <!-- DON'T EDIT THIS SECTION, INSTEAD RE-RUN doctoc TO UPDATE -->
 
 - [Commit Guideline](#commit-guideline)
-- [Rewrite the latest commit message](#rewrite-the-latest-commit-message)
-- [Changing the message of older or multiple commit messages](#changing-the-message-of-older-or-multiple-commit-messages)
+- [直前のCommit Messageの修正](#%E7%9B%B4%E5%89%8D%E3%81%AEcommit-message%E3%81%AE%E4%BF%AE%E6%AD%A3)
+- [直前のCommit内容にミスが有り修正したい場合](#%E7%9B%B4%E5%89%8D%E3%81%AEcommit%E5%86%85%E5%AE%B9%E3%81%AB%E3%83%9F%E3%82%B9%E3%81%8C%E6%9C%89%E3%82%8A%E4%BF%AE%E6%AD%A3%E3%81%97%E3%81%9F%E3%81%84%E5%A0%B4%E5%90%88)
+- [過去複数のCommit Messageを修正したい場合](#%E9%81%8E%E5%8E%BB%E8%A4%87%E6%95%B0%E3%81%AEcommit-message%E3%82%92%E4%BF%AE%E6%AD%A3%E3%81%97%E3%81%9F%E3%81%84%E5%A0%B4%E5%90%88)
 - [Appendix: `git summary`コマンド](#appendix-git-summary%E3%82%B3%E3%83%9E%E3%83%B3%E3%83%89)
 - [References](#references)
 
@@ -34,8 +35,9 @@ tags:
 
 ## Commit Guideline
 
-Commit Messageは自分を含むチームメンバーが一目で, そのcommitがどのような変更を加えたものなのか
-理解できるものであるべきです. ルールが複雑だと運用が辛いので, 一旦シンプルに以下のルールで運用しています:
+- Commit Messageは自分を含むチームメンバーが一目で, そのcommitがどのような変更を加えたものなのか理解できるものであるべき 
+
+ルールが複雑だと運用が辛いので, 一旦シンプルに以下のルールで運用しています:
 
 - 作成されたcommitがどのような分野の作業なのか判別するためPrefixを付与する
 - Prefixが2つ以上になる場合は, `ENH/DEPR:` のようにスラッシュを加える
@@ -43,21 +45,22 @@ Commit Messageは自分を含むチームメンバーが一目で, そのcommit�
 - Issue番号が加えられるなら加える
 - `git commit -m`で良い
 
-> Prefix Guideline
+<strong > &#9654;&nbsp; Prefix Guideline</strong>
 
----|---
-`ENH:`| Enhancement, new functionality
-`BUG:`| Bug fix
-`DOC:`| Additions/updates to documentation
-`BLD:`| Updates to the build process/scripts
-`PERF:`| Performance improvement
-`TEST:`| Additions/updates to tests
-`TYP:`| Type annotations
-`CLN:`| Code cleanup, refactoring
-`WIP:`| checkpoint
-`DEPR`|deprecation
+|Prefix|Comments|
+|---|---|
+|`ENH:`| Enhancement, new functionality|
+|`BUG:`| Bug fix|
+|`DOC:`| Additions/updates to documentation|
+|`BLD:`| Updates to the build process/scripts|
+|`PERF:`| Performance improvement|
+|`TEST:`| Additions/updates to tests|
+|`TYP:`| Type annotations|
+|`CLN:`| Code cleanup, refactoring|
+|`WIP:`| checkpoint|
+|`DEPR`|deprecation|
 
-## Rewrite the latest commit message
+## 直前のCommit Messageの修正
 
 `test.txt`の修正後, Commit Guidelineに従って, 「`DOC: updating TOC of test.txt`」と入力するところ,
 誤って以下のようなcommit messageを入力してしまったとします
@@ -82,13 +85,34 @@ Commit Messageは自分を含むチームメンバーが一目で, そのcommit�
 2020-06-21T18:58:45+09:00,1daf2a2,your-email-address,DOC: updating TOC of test.txt
 ```
 
-> REMARKS
+<strong > &#9654;&nbsp; REMARKS</strong>
 
 - 修正前後のcommit-hashが`1d8d1bd`, `1daf2a2`と異なっていることに注意
-- 作業が全てlocalで閉じられる時は問題はないが, すでにremoteへpushしてしまっている場合は非推奨
-- 一度, remoteへpushしてしまっている場合は, `--force`でpushする必要がある
+- 作業が全てlocalで閉じられる時は問題はないが，すでにremoteへpushしてしまっている場合は非推奨
+- 一度remoteへpushしてしまっている場合は，`--force`でpushする必要がある
 
-## Changing the message of older or multiple commit messages
+## 直前のCommit内容にミスが有り修正したい場合
+
+```zsh
+% git add eda.py
+% git commit -m "EDA-phase-1-task-1: histogram on the annual sales amount"
+```
+
+上記のように`eda.py`を編集 & commitした直後に，フォーマッターをかけ忘れていたことに気付き修正したいケースを考えます．
+
+このとき，修正後に再度staging → `git commit --amend --no-edit`とすることで新たにステージングされたファイルの変更履歴は
+直前のcommitに含まれるようになります．
+
+<div style='padding-left: 2em; padding-right: 2em; border-radius: 0em; border-style:solid; border-color:#ffa657; background-color:#F8F8F8'>
+<strong style="color:#ffa657">警告 !</strong> <br> 
+
+- Remote repositoryにpusshされたcommitの修正となるようなケースは避けること
+- あくまでローカルのみに存在するcommitを修正する程度の運用に留めること
+
+</div>
+
+
+## 過去複数のCommit Messageを修正したい場合
 
 複数のcommitや任意の過去の時点のcommitのmessageを変更したい場合は, `git rebase`コマンドを用います.
 
@@ -179,7 +203,9 @@ commit messageが修正されているかどうか確認すると,
 挙動としては以下と同じです:
 
 ```zsh
-% git log --pretty=format:'%Cgreen%cI%Creset,%Cred%h%Creset,%C(bold blue)%ae%Creset,%s' --abbrev-commit --decorate
+% git log \
+  --pretty=format:'%Cgreen%cI%Creset,%Cred%h%Creset,%C(bold blue)%ae%Creset,%s'\
+  --abbrev-commit --decorate
 ```
 
 `~/.gitconfig`における登録例は以下です:

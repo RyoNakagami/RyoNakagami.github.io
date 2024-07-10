@@ -1,7 +1,7 @@
 ---
 layout: post
 title: "xargs: 複数のファイルを別ディレクトリにgit mvしたい"
-subtitle: "How to use git command 4/N"
+subtitle: "How to use git command 3/N"
 author: "Ryo"
 header-mask: 0.0
 header-style: text

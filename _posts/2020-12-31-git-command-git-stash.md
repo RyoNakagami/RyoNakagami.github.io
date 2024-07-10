@@ -1,14 +1,14 @@
 ---
 layout: post
 title: "git stash: 作業途中内容を退避する"
-subtitle: "How to use git command 3/N"
+subtitle: "How to use git command 2/N"
 author: "Ryo"
 header-style: text
 header-mask: 0.0
 catelog: true
 mathjax: false
 mermaid: false
-last_modified_at: 2024-04-25
+last_modified_at: 2024-07-11
 tags:
 
 - git
@@ -23,9 +23,13 @@ tags:
 <!-- DON'T EDIT THIS SECTION, INSTEAD RE-RUN doctoc TO UPDATE -->
 
 - [`git stash`とは？](#git-stash%E3%81%A8%E3%81%AF)
-  - [いつ使うのか？](#%E3%81%84%E3%81%A4%E4%BD%BF%E3%81%86%E3%81%AE%E3%81%8B)
-  - [Syntax](#syntax)
 - [How to use `git stash`](#how-to-use-git-stash)
+  - [git stash untacked file](#git-stash-untacked-file)
+- [How to use `git stash drop`](#how-to-use-git-stash-drop)
+  - [引数なしでの実行](#%E5%BC%95%E6%95%B0%E3%81%AA%E3%81%97%E3%81%A7%E3%81%AE%E5%AE%9F%E8%A1%8C)
+  - [複数stashのdrop: 連続index版](#%E8%A4%87%E6%95%B0stash%E3%81%AEdrop-%E9%80%A3%E7%B6%9Aindex%E7%89%88)
+- [`git stash`のユースケース](#git-stash%E3%81%AE%E3%83%A6%E3%83%BC%E3%82%B9%E3%82%B1%E3%83%BC%E3%82%B9)
+  - [誤って別ブランチにコミットしてしまった場合](#%E8%AA%A4%E3%81%A3%E3%81%A6%E5%88%A5%E3%83%96%E3%83%A9%E3%83%B3%E3%83%81%E3%81%AB%E3%82%B3%E3%83%9F%E3%83%83%E3%83%88%E3%81%97%E3%81%A6%E3%81%97%E3%81%BE%E3%81%A3%E3%81%9F%E5%A0%B4%E5%90%88)
 - [References](#references)
 
 <!-- END doctoc generated TOC please keep comment here to allow auto update -->
@@ -38,10 +42,8 @@ tags:
 `git stash`は現在焼いている途中の肉を皿に退避させて，網を交換（=交換という別作業）をする際に使うコマンドです． 
 より正確には「現在焼いている途中の肉を皿に退避させて」というアクションを実行するのが`git stash`に相当します．
 
-<div style="display: inline-block; background: #6495ED;; border: 1px solid #6495ED; padding: 3px 5px;color:#FFFFFF"><span >git stashの活用場面</span>
-</div>
+<strong > &#9654;&nbsp; git stashの活用場面</strong>
 
-<div style="border: 1px solid #6495ED; font-size: 100%; padding: 5px;">
 
 - gitでtrackされているファイルについて現在作業している
 - このとき, trackされているファイルについてcommitすることなくbranchを変えることはできない
@@ -54,9 +56,6 @@ tags:
 
 > Stashing is handy if you need to quickly switch context and work on something else but you're mid-way through a code change and aren't quite ready to commit
 
-</div>
-
-### コマンド一覧
 
 |コマンド|説明|
 |----|----|
@@ -126,7 +125,41 @@ for i in $(seq $END_INDEX -1 $START_INDEX); do
 stash dropする場合は最新のindex(=index番号が大きい)からdropすることが良いと思います．
 
 
+## `git stash`のユースケース
+### 誤って別ブランチにコミットしてしまった場合
 
+<strong > &#9654;&nbsp; 問題設定</strong>
+
+```zsh
+% % git branch
+* main
+```
+
+という状況で，`touch test_kerneldensity.py`というファイルを作成してstaged & commitしたとします．
+commitしたあとで `test_kerneldensity.py` ファイルは `main`ブランチではなくて `unit_test`ブランチを新規に作成し，そのブランチに対してcommitしたかったことに気づいたケースを想定します．
+
+つまり，
+
+- 新規に作成したファイルを誤ったブランチにcommitしてしまったので，そのブランチをクリーンにしたい
+- 新規に作成したファイルを新しいブランチにcommitしたい
+
+の２つのアクションが必要となります．
+
+<strong > &#9654;&nbsp; Solution</strong>
+
+```zsh
+# main branchをclean + 新規作成ファイルを退避
+% git reset HEAD~ --soft
+% git stash
+
+# 正しいブランチへ移動
+% git switch -c unit_test
+% git stash pop
+% git add . # or add individual files
+% git commit -m "TEST: add kerneldensity test file";
+
+# 修正完了
+```
 
 
 

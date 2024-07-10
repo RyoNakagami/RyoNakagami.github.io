@@ -82,3 +82,13 @@ jQuery(document).ready(function($) {
             });
     }
 });
+
+/* When the user clicks on the button,
+toggle between hiding and showing the dropdown content */
+function mainDropDown() {
+    document.getElementById("myDropdown").classList.toggle("show");
+  }
+  
+  function subMenu(n) {
+    document.getElementById("subMenu" + n).classList.toggle("show");  
+  }

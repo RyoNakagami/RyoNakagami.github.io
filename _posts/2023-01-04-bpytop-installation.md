@@ -38,7 +38,7 @@ tags:
 - process単位でのCPU, memory利用状況を確認できるようにしたい
 - リソースの利用状況に合わせてprocess操作(`kill`コマンド)が可能なモニターが欲しい
 
-> 実行環境
+<strong > &#9654;&nbsp;実行環境</strong>
 
 実行環境
 
@@ -66,7 +66,7 @@ Codename:       focal
 
 <img src="https://github.com/aristocratos/bpytop/raw/master/Imgs/main.png">
 
-> Features
+<strong > &#9654;&nbsp;Features</strong>
 
 - Terminal Appの一種
 - レイアウトの操作がキーボードでもマウスで実行可能
@@ -76,11 +76,11 @@ Codename:       focal
 - process単位のkill, Terminate, Interrupt操作がマウスで実行可能
 - network usage情報が確認可能
 
-> 欠点
+<strong > &#9654;&nbsp;欠点</strong>
 
 - CPU usageの時系列line plotが確認可能だが, x軸のtickが存在しない
 
-> Remarks
+<strong > &#9654;&nbsp;Remarks</strong>
 
 - GitHub repositoryはpoetryでパッケージ管理されている
 
@@ -88,13 +88,13 @@ Codename:       focal
 
 PyPiは本人がメンテしているけれども, メンテしなくなった時ちょっと怖いので Manual installation を今回は実施
 
-> Dependencies 
+<strong > &#9654;&nbsp;Dependencies </strong>
 
 - Python3
 - git
 - psutil(python module)
 
-> Install
+<strong > &#9654;&nbsp;Install</strong>
 
 ```zsh
 git clone https://github.com/aristocratos/bpytop.git
@@ -102,7 +102,7 @@ cd bpytop
 sudo make install
 ```
 
-> Uninstall
+<strong > &#9654;&nbsp;Uninstall</strong>
 
 ```zsh
 cd bpytop
@@ -111,11 +111,11 @@ sudo make uninstall
 
 ## 4. Terminatorでの表示設定
 
-> 完成図
+<strong > &#9654;&nbsp;完成図</strong>
 
 <img src="https://github.com/ryonakimageserver/omorikaizuka/blob/master/20210104_bpytop.png?raw=true">
 
-> 設定
+<strong > &#9654;&nbsp;設定</strong>
 
 1. Terminatorを起動する
 2. `Preference > Layout`で画面分割レイアウトを設定
@@ -150,7 +150,7 @@ enp2s0@  lo@  wlp3s0@
 
 ## Appendix: シェルスクリプトの`&&`の意味
 
-> 基本ルール
+<strong > &#9654;&nbsp;基本ルール</strong>
 
 ```zsh
 % command1; command2   #command1が成功/異常終了にかかわらず, 終了後command2を実行
@@ -158,7 +158,7 @@ enp2s0@  lo@  wlp3s0@
 % command1 || command2 #command1が異常終了したらcommand2を実行
 ```
 
-> 三項演算
+<strong > &#9654;&nbsp;三項演算</strong>
 
 ```zsh
 % true && true || echo "Command Failed"
@@ -179,11 +179,11 @@ boo
 
 ## References
 
-> BPYTOP
+<strong > &#9654;&nbsp;BPYTOP</strong>
 
 - [GitHub >  aristocratos/bpytop](https://github.com/aristocratos/bpytop)
 - [Youtube > STUNNING Linux System Monitor - btop++](https://www.youtube.com/watch?v=YmzBJmpFMpw&t=12s)
 
-> && in a shell command
+<strong > &#9654;&nbsp;&& in a shell command</strong>
 
 - [stackoverflow > What is the purpose of "&&" in a shell command?](https://stackoverflow.com/questions/4510640/what-is-the-purpose-of-in-a-shell-command)

@@ -1,7 +1,7 @@
 ---
 layout: post
 title: "git HEAD: the difference between HEAD~ and HEAD^"
-subtitle: "How to use git command 10/N"
+subtitle: "How to use git command 9/N"
 author: "Ryo"
 header-mask: 0.0
 header-style: text

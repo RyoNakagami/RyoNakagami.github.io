@@ -7,7 +7,7 @@ header-mask: 0.0
 header-style: text
 catelog: true
 mathjax: true
-last_modified_at: 2023-05-29
+last_modified_at: 2024-07-11
 tags:
 
 - git
@@ -56,7 +56,7 @@ tags:
 ## Local Branch Operation
 ### List up Repository Branches
 
-> Local Branch一覧の取得
+<strong > &#9654;&nbsp; Local Branch一覧の取得</strong>
 
 ```zsh
 % git branch
@@ -66,7 +66,7 @@ tags:
   main
 ```
 
-> Remote Branch一覧の表示
+<strong > &#9654;&nbsp; Remote Branch一覧の表示</strong>
 
 - `origin/HEAD`は `clone` した後に作業ディレクトリにチェックアウトするブランチを示したもの
 - `git clone`後のGitHub のデフォルトのブランチの最新位置に基本的に出現する
@@ -81,7 +81,7 @@ tags:
   origin/project/ad_hoc_analysis
 ```
 
-> Local/Remote Branch一覧の表示
+<strong > &#9654;&nbsp; Local/Remote Branch一覧の表示</strong>
 
 ```zsh
 % git branch -a
@@ -135,14 +135,14 @@ Switched to branch 'existing_branch'
 Switched to a new branch 'non_existing_branch'
 ```
 
-> 作成されていないブランチを指定しまった場合
+<strong > &#9654;&nbsp; 作成されていないブランチを指定しまった場合</strong>
 
 ```zsh
 % git switch test
 fatal: invalid reference: test
 ```
 
-> 作成済みのブランチ名を指定して`git switch -c`の場合
+<strong > &#9654;&nbsp; 作成済みのブランチ名を指定して`git switch -c`の場合</strong>
 
 ```zsh
 % git switch -c non_existing_branch
@@ -151,7 +151,7 @@ fatal: a branch named 'non_existing_branch' already exists
 
 ### Create a New Branch Locally from a Specified Branch
 
-> Syntax
+<strong > &#9654;&nbsp; Syntax</strong>
 
 ```zsh
 % git switch -c <new branch> <rerefence branch>
@@ -160,7 +160,7 @@ fatal: a branch named 'non_existing_branch' already exists
 - `<rerefence branch>`はremote branchも指定可能
 
 
-> Example
+<strong > &#9654;&nbsp; Example</strong>
 
 ```zsh
 % git switch -c foo2 foo
@@ -212,19 +212,19 @@ Deleted branch hoge (was eb79802).
 
 ### Restore a branch after its deletion in Git
 
-> What I Want
+<strong > &#9654;&nbsp; What I Want</strong>
 
 - 誤って削除してしまったbranchをlocalで復旧させたい
 - branchを削除してから別ブランチですでに作業を開始してしまっている状況を考える
 - 復元後も, 昔の作業履歴が確認できるようにしたい
 
-> How to Solve the problem
+<strong > &#9654;&nbsp; How to Solve the problem</strong>
 
 - `git reflog`は, すでに消去された履歴自体も確認できるコマンド
 - `git reflog`で消去してしまったbranchからcheckoutした`commit-hash`
 - 上記で取得した`commit-hash`を参照する形で`git switch -c`を実行
 
-> Example
+<strong > &#9654;&nbsp; Example</strong>
 
 `non_existing_branch`というbranchを消去してしまったあと, `main` branchで作業を開始してし
 まった状況を考えます.
@@ -267,11 +267,11 @@ checkoutタイミングの履歴が`9fb60c5`で残っていることがわかり
 
 ### Check the Upstream Branch
 
-> What I Want
+<strong > &#9654;&nbsp; What I Want</strong>
 
 - local repositoryとupstream branchの対応関係を知りたい
 
-> How
+<strong > &#9654;&nbsp; How</strong>
 
 ```zsh
 % git branch -vv
@@ -289,11 +289,11 @@ branch_A            214c991 [origin/branch_A: ahead 1, behind 3] FIX readme
 
 ### Set up an upstream branch to a local branch
 
-> What I Want
+<strong > &#9654;&nbsp; What I Want</strong>
 
 - upstream branchが設定されていないlocal branchに対して, upstream branchを指定したい
 
-> How
+<strong > &#9654;&nbsp; How</strong>
 
 ```zsh
 % git branch -u <remote branch>
@@ -305,12 +305,12 @@ branch_A            214c991 [origin/branch_A: ahead 1, behind 3] FIX readme
 
 ### Check the Nearest Branch
 
-> What I Want
+<strong > &#9654;&nbsp; What I Want</strong>
 
 - カレントブランチの派生元ブランチ名を取得する
 - Merge後は, 直近のMerge元を派生元ブランチとして参照する
 
-> Setup
+<strong > &#9654;&nbsp; Setup</strong>
 
 `.gitconfig`ファイルにてエイリアスを以下のように設定
 
@@ -322,7 +322,7 @@ branch_A            214c991 [origin/branch_A: ahead 1, behind 3] FIX readme
 - `!`はシェルコマンドを入力しますよ, という指示語
 
 
-> How to Use it
+<strong > &#9654;&nbsp; How to Use it</strong>
 
 - `develop`ブランチから派生した`feature_model`ブランチに現在いるとする
 - `feature_model`ブランチの派生元ブランチとして`develop`ブランチ名が出力されてほしい
@@ -341,12 +341,12 @@ develop
 ## Local Branch Operation: Compare and Merge
 ### Compare the current branch with the Selected Branches
 
-> What I Want
+<strong > &#9654;&nbsp; What I Want</strong>
 
 - 選択したブランチと比較した時, conflictを引き起こすファイル及び差分箇所を確認したい
 - コマンド実行中に, ファイルの編集も実現可能
 
-> Requirements
+<strong > &#9654;&nbsp; Requirements</strong>
 
 `.gitconfig`に以下のラインを追記
 
@@ -357,7 +357,7 @@ develop
 	cmd = code --wait --diff $LOCAL $REMOTE
 ```
 
-> How
+<strong > &#9654;&nbsp; How</strong>
 
 ```zsh
 % git difftool <the selected branch> <path>
@@ -370,11 +370,11 @@ develop
 
 ### Undo a Merge Commit
 
-> What I Want
+<strong > &#9654;&nbsp; What I Want</strong>
 
 - merge commitを取り消す
 
-> How
+<strong > &#9654;&nbsp; How</strong>
 
 merge commitを取り消すには2つの方法があります:
 
@@ -403,7 +403,7 @@ part of reverts. Yes, it undoes the data, but no, it doesn't undo history.
 ```
 
 
-> How to do `git reset --merge` in order to undo the merge
+<strong > &#9654;&nbsp; How to do `git reset --merge` in order to undo the merge</strong>
 
 ```zsh
 % git reset --merge <commit-hash>
@@ -425,7 +425,7 @@ documentを確認してみると,
               the current commit in the working tree.
 ```
 
-> Check the difference between `--hard` and `--marge`
+<strong > &#9654;&nbsp; Check the difference between `--hard` and `--marge`</strong>
 
 
 `--hard` と `--marge`はtracked fileのuncommittedな変更について情報を残すか残さないかの違いです.
@@ -476,11 +476,11 @@ documentを確認してみると,
 ## Remote Branch Operation
 ### Get/Switch to a remote branch: `git switch` version
 
-> What I Want to Do
+<strong > &#9654;&nbsp; What I Want to Do</strong>
 
 - リモートブランチ(`project/adhoc_analysis`)をローカルにチェックアウトしたい
 
-> How
+<strong > &#9654;&nbsp; How</strong>
 
 1. リモートの追跡ブランチを更新
 2. `git switch` (リモート側にすでにブランチが存在するので`-c`は必要なし)
@@ -497,18 +497,18 @@ documentを確認してみると,
 % git switch project/adhoc_analysis
 ```
 
-> REMARKS
+<strong > &#9654;&nbsp; REMARKS</strong>
 
 - 内部的にLocal側に新しくリモートと同じブランチ名のブランチが作成, からのswitchとなる
 
 
 ### Get/Switch to a remote branch: `git fetch` version
 
-> What I Want to Do
+<strong > &#9654;&nbsp; What I Want to Do</strong>
 
 - リモートブランチ(`project/adhoc_analysis`)をローカルにbranch nameを指定して取り込みたい
 
-> How
+<strong > &#9654;&nbsp; How</strong>
 
 ```zsh
 % git fetch <remote> <remote-branchname>:<local-branchname>
@@ -526,7 +526,7 @@ documentを確認してみると,
 
 - コロン(=`:`)の前に何も指定しないことで,「空」をpushするという挙動になる
 
-> 複数の場合
+<strong > &#9654;&nbsp; 複数の場合</strong>
 
 ```zsh 
 % git push origin --delete <branch1> <branch2> <branch3>
@@ -534,17 +534,17 @@ documentを確認してみると,
 
 ### Refresh the list of remote branches
 
-> What I Want
+<strong > &#9654;&nbsp; What I Want</strong>
 
 - To update the local list of remote branches
 
-> How: remote updateで実施する場合
+<strong > &#9654;&nbsp; How: remote updateで実施する場合</strong>
 
 ```zsh
 % git remote update origin --prune
 ```
 
-> How: fetchで実施する場合(推奨)
+<strong > &#9654;&nbsp; How: fetchで実施する場合(推奨)</strong>
 
 ```zsh
 % git fetch -p 
@@ -554,14 +554,14 @@ documentを確認してみると,
 
 ### Rename Remote Branch
 
-> Syntax
+<strong > &#9654;&nbsp; Syntax</strong>
 
 ```zsh
 % git switch -c <new_branch_name> <old_branch_name>
 % git push <remote> :<old_branch_name> <new_branch_name>
 ```
 
-> REMARKS
+<strong > &#9654;&nbsp; REMARKS</strong>
 
 - branchのrenameというよりかは, ローカルで別名で作った同一内容ブランチをremoteへ反映し直すという挙動
 - remote branchの消去と新しいbranchのpushを同時に実施しているだけ
@@ -579,7 +579,7 @@ documentを確認してみると,
     - 事前に空フォルダを作成する必要はない
     - パスには絶対パス, 相対パスどちらでも指定可能
 
-> REMARKS
+<strong > &#9654;&nbsp; REMARKS</strong>
 
 `directory`を中身の入ったフォルダを指定すると以下のようなerrorが返ってくる:
 
@@ -622,15 +622,15 @@ Poetry経由の場合は
 
 ## References
 
-> git config
+<strong > &#9654;&nbsp; git config</strong>
 
 - [Stackoverflow > Pipes in a Git alias?](https://stackoverflow.com/questions/19525387/pipes-in-a-git-alias)
 
-> git sparse checkout
+<strong > &#9654;&nbsp; git sparse checkout</strong>
 
 - [Ryo's Tech Blog > GitHub Repositoryの任意のサブディレクトリのみをローカル側で取得する](https://ryonakagami.github.io/2021/04/19/how-to-git-pull-subdirectory/)
 
-> git branch operation tips
+<strong > &#9654;&nbsp; git branch operation tips</strong>
 
 - [stackoverflow > How can I use the new `git switch` syntax to create a new branch?](https://stackoverflow.com/questions/58124219/how-can-i-use-the-new-git-switch-syntax-to-create-a-new-branch)
 - [stackoverflow > Can I recover a branch after its deletion in Git?](https://stackoverflow.com/questions/3640764/can-i-recover-a-branch-after-its-deletion-in-git)

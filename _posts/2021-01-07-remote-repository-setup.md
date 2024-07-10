@@ -1,7 +1,7 @@
 ---
 layout: post
 title: "Remote Repositoryの設定と変更"
-subtitle: "How to use git command 8/N"
+subtitle: "How to use git command 7/N"
 author: "Ryo"
 header-mask: 0.0
 header-style: text

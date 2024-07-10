@@ -120,13 +120,14 @@ merge conflictという形でdiffが警告され強制的な上書きを防止�
 
 ### What is Git Repository?
 
-repositoryとはデータを保存する場所のことです. 
-Gitでは,このrepository単位でデータを管理しており,修正ログもrepository内に保存されています.
-Gitは分散型Version管理システムであるため,repositoryは各開発者側にlocal環境へミラーリングして利用します. 
+Repositoryとはデータを保存する場所のことです. 
+Gitでは，このrepository単位でデータを管理しており，修正ログもrepository内に保存されています．
+Gitは分散型Version管理システムであるため，repositoryは各開発者側にlocal環境へミラーリングして利用します． 
 
-このとき, GitHub/GitLab上のリモートサーバーに置かれたrepositoryをremote repository, 
-開発者がlocalにおくrepositoryはlocal repositoryと呼ばれます.
+<strong > &#9654;&nbsp; Remote repository vs Local repository</strong>
 
+- Remote repository: GitHub/GitLab上のリモートサーバーに置かれたrepositoryのこと 
+- Local repository: 開発者がlocalにおくrepository
 
 ### GitによるVersion管理
 #### Snapshots vs Differences
@@ -152,6 +153,15 @@ Snapshots vs Differencesのイメージは以下のFiguresとなります.
 
 
 ### Gitのバージョン管理の仕組み
+
+
+
+
+
+
+
+
+
 
 ```mermaid
 sequenceDiagram
@@ -207,7 +217,7 @@ sequenceDiagram
 ```
 
 
-> git ls-fles: stagedにインデックスされているファイルの表示
+<strong > &#9654;&nbsp; git ls-fles: stagedにインデックスされているファイルの表示</strong>
 
 `git ls-files`コマンドでステージングエリアに存在するファイルを確認することができます. ただし,gitの監視対象にある,ディレクトリに存在するファイルのみをリスト化するということであって,ディレクトリは確認することができません.
 
@@ -223,15 +233,22 @@ README.md
 ...
 ```
 
-また,オプションを組合せて`git ls-files -io --exclude-standard`と入力するとgitignoreに記載されているファイル=stagedされないファイルのみを表示することもできます.
+オプションを組合せて`git ls-files -io --exclude-standard`と入力するとgitignoreに記載されているファイル=stagedされないファイルのみを表示することもできます.
 
-- `-i`オプションで無視ファイル(ignore)のみを表示
-- `-o`オプションを渡すことで管理対象外のファイルを表示
-- `--exclude-standard` オプションは `.gitignore` 等で無視されているファイルを除外するオプション
+|Option|Comments|
+|---|---|
+|`-i`|無視ファイル(ignore)のみを表示，利用するためには除外パターンの指定が必要|
+|`-o`|管理対象外のファイルを表示|
+|`--exclude-standard`|`.gitignore` 等で指定されているものを除外パターンとしてコマンドに伝えるオプション|
 
 ### Gitはどこにバージョン管理のDBをもっているのか？
 
-`git init`によってGit管理に指定したディレクトリには`.git`というディレクトリが作成されます.Git が保管したり操作したりする対象の,ほとんどすべてがここに格納されます. リポジトリのバックアップやクローンをしたい場合,このディレクトリをどこかへコピーするだけで,ほぼ事足ります.
+新たにGitでバージョン管理を始める際に，Repository初期化から始まります．具体的には`git init`コマンドを
+叩くこととで初期化を実行します．
+
+`git init`によってGit管理に指定したディレクトリには `.git`ディレクトリが作成されます．
+この`.git`ディレクトリにてGitはrepository dataを管理しており，修正ログもこの中に記録されています．
+Repositoryのバックアップやクローンをしたい場合，このディレクトリをどこかへコピーするだけでほぼ事足ります．
 
 `.git` ディレクトリの中は以下のようになっています.
 
@@ -245,7 +262,20 @@ objects/
 refs/
 ```
 
-重要なのは4項目です.具体的には, HEAD ファイル, index ファイル（まだ作成されていない）, objects ディレクトリ, refs ディレクトリです. これらがGitの中核部分になります. objects ディレクトリにはデータベースのすべてのコンテンツが保管されます.refs ディレクトリには,それらコンテンツ内のコミットオブジェクトを指すポインタ（ブランチ）が保管されます.HEAD ファイルは,現在チェックアウトしているブランチを指します.index ファイルには,Git がステージングエリアの情報を保管します.
+特に重要なのは以下の４項目となります
+
+- HEAD ファイル: 現在チェックアウトしているブランチを示すファイル
+- index ファイル（`git init`直後ではまだ作成されていない）: ステージングエリアの情報を保管
+- objects ディレクトリ: データベースのすべてのコンテンツを保管
+- refs ディレクトリ: コンテンツ内のコミットオブジェクトを指すポインタ（ブランチ）を保管
+
+なお，`.git`ディレクトリが存在するディレクトリ以下の特に「**ワークツリー**」と呼びます．とある時点のcommitまで戻したい場合は，
+
+- `.git`ディレクトリに格納されているログデータを参照
+- 対象となるデータの状態をログデータから取得し，ワークツリーに展開
+
+という仕組みになっています．
+
 
 ### Gitはどのように履歴データを取り出しているのか？
 
@@ -301,30 +331,70 @@ Git configファイルの置き場所は３パターンあります：
 
 以下のコマンドでconfig一覧を確認することができます
 
-```
+```zsh
 % git config --list --show-origin
 ```
 
 #### `~/.gitconfig`の設定
 
-configファイルの設定をここから紹介します.Version管理を実現するためには誰がどのファイルをいつ変更したのかのデータが必要です.なのでまずユーザーがだれなのかをgitに教えるため,user nameとemail addressをconfigに設定します.
+<strong > &#9654;&nbsp; User 設定</strong>
 
-```
+
+Version管理を実現するためには誰がどのファイルをいつ変更したのかのデータが必要です．まずユーザーがだれなのかをgitに教えるため，user nameとemail addressをconfigに設定します.
+
+```zsh
 % git config --global user.name "John Doe"
 % git config --global user.email johndoe@example.com
 ```
 
-次にEditorの設定をします.commitメッセージを書くときなどに立ち上がるEditorの設定となります.
+ここで設定した名前とアドレスがコミットログに表示されます．コミット漕ぐに表示される名前としてなので，
+本名やGitHubアカウントネームである必要はありません．
 
-```
-% git config --global core.editor nano
+
+<strong > &#9654;&nbsp; Editor 設定</strong>
+
+次にEditorの設定をします．commitメッセージを書くときなどに立ち上がるEditorの設定となります．
+VSCodeを利用したい場合は以下のように記載します．
+
+```zsh
+% git config --global core.editor "code --wait"
 ```
 
-次に default branch nameを設定します.昔は`master`で最近は`main`と変わってきたところですがこちらは好みなので設定は任意です.
+<strong > &#9654;&nbsp; Default Branch Name 設定</strong>
 
-```
+次に default branch nameを設定します，昔は`master`で最近は`main`と変わってきたところですが，こちらは好みなので設定は任意です．
+
+```zsh
 % git config --global init.defaultBranch main
 ```
+
+<strong > &#9654;&nbsp; color UIの設定</strong>
+
+Gitはカラー化されたターミナル出力をサポートしており，コマンドの出力の視覚的理解向上が期待できます．
+デフォルト設定でもcolorに対応していますが，`~/.gitconfig`に明示的に記載したい場合は以下のコマンドを入力します
+
+```zsh
+% % git config --global color.ui auto
+
+# offにしたい場合は
+% git config --global color.ui false
+```
+
+上記の設定をした場合, `.gitconfig`は以下のようになっているはずです
+
+```zsh
+% cat .gitconfig                
+[user]
+	name = John Doe
+	email = johndoe@example.com
+[core]
+	editor = code --wait
+[color]
+	ui = auto
+[init]
+	defaultBranch = main
+```
+
 
 ### commit templateの作成
 

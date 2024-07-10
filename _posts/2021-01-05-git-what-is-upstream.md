@@ -1,12 +1,13 @@
 ---
 layout: post
 title: "Why Do We Set Upstream Branch and What is it?"
-subtitle: "How to use git command 6/N"
+subtitle: "How to use git command 5/N"
 author: "Ryo"
 header-mask: 0.0
 header-style: text
 catelog: true
 mathjax: true
+mermaid: false
 last_modified_at: 2023-06-13
 tags:
 

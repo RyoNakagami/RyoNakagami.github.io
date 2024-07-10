@@ -1,12 +1,13 @@
 ---
 layout: post
 title: "git fetch and pull"
-subtitle: "How to use git command 5/N"
+subtitle: "How to use git command 4/N"
 author: "Ryo"
 header-mask: 0.0
 header-style: text
 catelog: true
 mathjax: true
+mermaid: true
 last_modified_at: 2023-05-29
 tags:
 

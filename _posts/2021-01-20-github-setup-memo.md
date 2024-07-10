@@ -24,7 +24,8 @@ tags:
 <!-- DON'T EDIT THIS SECTION, INSTEAD RE-RUN doctoc TO UPDATE -->
 
 - [GitとGitHubの違い](#git%E3%81%A8github%E3%81%AE%E9%81%95%E3%81%84)
-- [GitHubの個人アカウントとの連携(非推奨)](#github%E3%81%AE%E5%80%8B%E4%BA%BA%E3%82%A2%E3%82%AB%E3%82%A6%E3%83%B3%E3%83%88%E3%81%A8%E3%81%AE%E9%80%A3%E6%90%BA%E9%9D%9E%E6%8E%A8%E5%A5%A8)
+  - [GitHub特有の機能](#github%E7%89%B9%E6%9C%89%E3%81%AE%E6%A9%9F%E8%83%BD)
+- [Athentication to GitHub Repository](#athentication-to-github-repository)
   - [新しい SSH キーを生成して ssh-agent に追加する](#%E6%96%B0%E3%81%97%E3%81%84-ssh-%E3%82%AD%E3%83%BC%E3%82%92%E7%94%9F%E6%88%90%E3%81%97%E3%81%A6-ssh-agent-%E3%81%AB%E8%BF%BD%E5%8A%A0%E3%81%99%E3%82%8B)
   - [GitHub アカウントへの新しい SSH キーの追加](#github-%E3%82%A2%E3%82%AB%E3%82%A6%E3%83%B3%E3%83%88%E3%81%B8%E3%81%AE%E6%96%B0%E3%81%97%E3%81%84-ssh-%E3%82%AD%E3%83%BC%E3%81%AE%E8%BF%BD%E5%8A%A0)
   - [SSH 接続をテストする](#ssh-%E6%8E%A5%E7%B6%9A%E3%82%92%E3%83%86%E3%82%B9%E3%83%88%E3%81%99%E3%82%8B)
@@ -79,7 +80,53 @@ GitHub登場によりこれらをまとめることができるようになっ�
 
 </div>
 
-## GitHubの個人アカウントとの連携
+## GitHub user情報の取得
+
+GitHubに登録されたユーザー情報は`https://api.github.com/users/<username>`を`curl`コマンドやブラウザで開くことで取得することができます．
+
+Linus Torvalds氏について以下のように取得することができます
+
+```zsh
+% curl https://api.github.com/users/torvalds
+{
+  "login": "torvalds",
+  "id": 1024025,
+  "node_id": "MDQ6VXNlcjEwMjQwMjU=",
+  "avatar_url": "https://avatars.githubusercontent.com/u/1024025?v=4",
+  "gravatar_id": "",
+  "url": "https://api.github.com/users/torvalds",
+  "html_url": "https://github.com/torvalds",
+  "followers_url": "https://api.github.com/users/torvalds/followers",
+  "following_url": "https://api.github.com/users/torvalds/following{/other_user}",
+  "gists_url": "https://api.github.com/users/torvalds/gists{/gist_id}",
+  "starred_url": "https://api.github.com/users/torvalds/starred{/owner}{/repo}",
+  "subscriptions_url": "https://api.github.com/users/torvalds/subscriptions",
+  "organizations_url": "https://api.github.com/users/torvalds/orgs",
+  "repos_url": "https://api.github.com/users/torvalds/repos",
+  "events_url": "https://api.github.com/users/torvalds/events{/privacy}",
+  "received_events_url": "https://api.github.com/users/torvalds/received_events",
+  "type": "User",
+  "site_admin": false,
+  "name": "Linus Torvalds",
+  "company": "Linux Foundation",
+  "blog": "",
+  "location": "Portland, OR",
+  "email": null,
+  "hireable": null,
+  "bio": null,
+  "twitter_username": null,
+  "public_repos": 7,
+  "public_gists": 0,
+  "followers": 210905,
+  "following": 0,
+  "created_at": "2011-09-03T15:26:22Z",
+  "updated_at": "2023-11-12T20:08:30Z"
+}
+
+```
+
+
+## Athentication to GitHub Repository
 
 SSH プロトコルを利用してGitHubへの接続環境を構築します.SSH をセットアップする際には,SSH キーを生成し,ssh-agent に追加し,それから キーを自分の GitHubアカウントに追加します. SSH キーを ssh-agent に追加することで,パスフレーズの利用を通じて SSH キーに追加のセキュリティのレイヤーを持たせることができます.
 
