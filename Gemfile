@@ -1,8 +1,9 @@
 source 'https://rubygems.org'
+gem "jekyll", "~> 4.2"
 gem 'jekyll-paginate'
 gem 'jekyll-sitemap'
 gem 'jekyll-archives'
-gem "jekyll"
 gem "rake"
 gem "github-pages"
 gem "webrick", "~> 1.8"
+gem "bulma-clean-theme"
