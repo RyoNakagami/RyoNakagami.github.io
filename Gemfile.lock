@@ -272,7 +272,7 @@ PLATFORMS
 DEPENDENCIES
   bulma-clean-theme
   github-pages
-  jekyll
+  jekyll (~> 3.9.2)
   jekyll-archives
   jekyll-paginate
   jekyll-sitemap

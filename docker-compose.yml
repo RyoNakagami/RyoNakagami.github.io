@@ -1,6 +1,6 @@
 services:
     site:
-        image: jekyll/jekyll:latest
+        image: jekyll/jekyll:stable
         command: jekyll serve --force_polling
         # command: jekyll serve --watch --incremental
         volumes:
