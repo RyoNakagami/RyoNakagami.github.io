@@ -1,7 +1,7 @@
 ---
 layout: post
 title: "CPUコア数 vs ソケット数"
-subtitle: "Understanding Infrasturacture Engineer 3/N"
+subtitle: "コンピューターの基礎 1/N"
 author: "Ryo"
 header-style: text
 header-mask: 0.0
