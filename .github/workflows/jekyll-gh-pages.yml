@@ -1,0 +1,42 @@
+name: Build and Deploy Jekyll to GitHub Pages
+
+on:
+  push:
+    branches: [main]
+  schedule:
+    - cron: '0 0 * * 0'  # Runs every Sunday at 00:00 UTC
+
+permissions:
+  contents: write  # Required for gh-pages deployment
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: 📥 Checkout code
+      uses: actions/checkout@v4
+
+    - name: 🧰 Install xmllint (libxml2-utils)
+      run: sudo apt-get update && sudo apt-get install -y libxml2-utils
+
+    - name: 🔧 Setup Ruby
+      uses: ruby/setup-ruby@v1
+      with:
+        ruby-version: '3.1'
+        bundler-cache: true
+
+    - name: 📦 Install dependencies
+      run: bundle install
+
+    - name: 🏗️ Build Jekyll site
+      run: bundle exec jekyll build
+    
+    - name: 🔁 Merge external sitemap
+      run: bash script/merge_xml.sh
+
+    - name: 🚀 Deploy to GitHub Pages
+      uses: peaceiris/actions-gh-pages@v4
+      with:
+        github_token: ${{ secrets.GITHUB_TOKEN }}
+        publish_dir: ./_site

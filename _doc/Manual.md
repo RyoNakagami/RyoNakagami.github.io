@@ -158,13 +158,6 @@ sequenceDiagram
     iframe->>iframe: render mermaid
 ```
 
-### LaTexチートシート
-
-|項目|レンダリング|コマンド|
-|---|---|---|
-|ベクトル|$$\pmb x_i$$|`\pmb`|
-
-
 
 ## MathJax設定: LaTex数式のレンダリング用
 
