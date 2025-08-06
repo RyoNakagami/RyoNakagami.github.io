@@ -1,0 +1,2127 @@
+<!DOCTYPE html>
+<html lang="ja">
+
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="google-site-verification" content="gSMaswRY9iRfG4QaQrx6aj481bgr503qEZh-QPsMYNU" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+    <meta name="description" content="元経済学徒, 現在どっかでデータサイエンティストもどきやってる人間の勉強日記">
+    <meta name="keywords"  content="Statistics, Economics, Econometrics, Python, C, Shell, Linux, Data scientist">
+    <meta name="theme-color" content="#000000">
+    
+    <!-- Open Graph -->
+    <meta property="og:title" content="データ設計のいろは - Ryo's Tech Blog">
+    
+    <meta property="og:type" content="article">
+    <meta property="og:description" content="
+  
+    
+       
+      概要
+    
+  
+  
+    
+      目的
+      データ設計のいろは
+    
+    
+      参考
+      - 外部キー関係の作成と管理 -DWHアーキテクチャ作成ツール
+    
+    
+      関連
+       
+    
+  
+
+
+">
+    
+    <meta property="article:published_time" content="2021-09-24T00:00:00Z">
+    
+    
+    <meta property="article:author" content="Ryo">
+    
+    
+    <meta property="article:tag" content="SQL">
+    
+    <meta property="article:tag" content="テーブル設計">
+    
+    
+    <meta property="og:image" content="https://ryonakagami.github.io/img/avatar_rio_cat.jpg">
+    <meta property="og:url" content="https://ryonakagami.github.io/2021/09/24/datamart-design/">
+    <meta property="og:site_name" content="Ryo's Tech Blog">
+    
+    <title>データ設計のいろは - Ryo's Tech Blog</title>
+
+    <!-- Web App Manifest -->
+    <link rel="manifest" href="/pwa/manifest.json">
+
+    <!-- Favicon -->
+    <link rel="shortcut icon" href="/img/favicon.ico">
+    
+    <!-- Canonical URL -->
+    <link rel="canonical" href="https://ryonakagami.github.io/2021/09/24/datamart-design/">
+
+    <!-- Bootstrap Core CSS -->
+    <link rel="stylesheet" href="/css/bootstrap.min.css">
+
+    <!-- Custom CSS -->
+    <link rel="stylesheet" href="/css/ryo-blog.min.css">
+
+    <!-- Custom Fonts -->
+    <!-- <link href="http://maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css" rel="stylesheet" type="text/css"> -->
+    <!-- https://stackoverflow.com/questions/45983301/google-pagespeed-eliminate-render-blocking-resources-above-the-fold-caused-fro -->
+    <!--link href="//cdnjs.cloudflare.com/ajax/libs/font-awesome/4.6.3/css/font-awesome.min.css" rel="stylesheet" type="text/css"-->
+    <!--<link href="https://fonts.googleapis.com/earlyaccess/notosansjapanese.css" rel="stylesheet" type="text/css" media="print" onload="this.media='all'" > -->
+    <link href="https://fonts.googleapis.com/earlyaccess/notosansjapanese.css" rel="preload" type="text/css" media="print" onload="this.media='all'" >
+
+
+    <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
+    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+    <!--[if lt IE 9]>
+        <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+        <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
+    <![endif]-->
+
+    <!-- ga & ba script hoook -->
+    <script></script>
+</head>
+
+
+<!-- hack iOS CSS :active style -->
+<body ontouchstart="">
+
+    <!-- Navigation -->
+
+<nav class="navbar navbar-default navbar-custom navbar-fixed-top invert">
+    
+        <div class="container-fluid">
+            <!-- Brand and toggle get grouped for better mobile display -->
+            <div class="navbar-header page-scroll">
+                <button type="button" class="navbar-toggle">
+                    <span class="sr-only">Toggle navigation</span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
+                <a class="navbar-brand" href="/">Ryo's Tech Blog</a>
+            </div>
+
+            <!-- Collect the nav links, forms, and other content for toggling -->
+            <div id="huxblog_navbar">
+                <div class="navbar-collapse">
+                    <ul class="nav navbar-nav navbar-left">
+                                                <li>
+                            <a href="https://ryonakagami.github.io/statistics-for-regression-monkey/">Statistics for
+                                Regression Monkeys</a>
+                        </li>
+                        <li>
+                            <a href="https://ohgoshgit.github.io/">OhGoshGit!?!</a>
+                        </li>
+                        <!-- <li>
+                            <a><button onclick="mainDropDown()" style="border-color: rgba(70, 83, 111, 0.989); background-color: rgba(70, 83, 111, 0.989)">Dropdown</button></a> 
+                            <div id="myDropdown" class="dropdown-content">
+                              <a href="#" onclick="subMenu(this)">A</a>
+                              <div class="sub-menu-item" id="subMenu1">
+                              <a href="#">A.1</a>
+                              </div>
+                              <a href="#" onclick="subMenu(this)">B</a>
+                              <div class="sub-menu-item" id="subMenu2">
+                              <a href="#">B.1</a>
+                              </div>
+                              <a href="#">C</a>
+                              <a href="#">D</a>
+                              <a href="#">E</a>
+                              <a href="#">F</a>
+                              <a href="#">G</a>
+                            </div>
+                        </li> -->
+                    </ul>
+                    </ul>
+                    <ul class="nav navbar-nav navbar-right">
+                        
+                        
+                        
+                        
+                        <li>
+                            <a href="/about/">About</a>
+                        </li>
+                        
+                        
+                        
+                        <li>
+                            <a href="/archive/">Tag Search</a>
+                        </li>
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        <!--about fa-search see https://stackoverflow.com/questions/41950677/how-to-make-my-search-icon-fixed-->
+                        <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css"
+                            rel="stylesheet" />
+                        <li class="search-icon">
+                            <a href="javascript:void(0)" aria-label="Search" target="_blank">
+                                <i class="fa fa-search"></i>
+                            </a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+            <!-- /.navbar-collapse -->
+        </div>
+        <!-- /.container -->
+    </nav>
+
+    <script>
+        // Drop Bootstarp low-performance Navbar
+        // Use customize navbar with high-quality material design animation
+        // in high-perf jank-free CSS3 implementation
+        var $body = document.body;
+        var $toggle = document.querySelector('.navbar-toggle');
+        var $navbar = document.querySelector('#huxblog_navbar');
+        var $collapse = document.querySelector('.navbar-collapse');
+
+        var __HuxNav__ = {
+            close: function () {
+                $navbar.className = " ";
+                // wait until animation end.
+                setTimeout(function () {
+                    // prevent frequently toggle
+                    if ($navbar.className.indexOf('in') < 0) {
+                        $collapse.style.height = "0px"
+                    }
+                }, 400)
+            },
+            open: function () {
+                $collapse.style.height = "auto"
+                $navbar.className += " in";
+            }
+        }
+
+        // Bind Event
+        $toggle.addEventListener('click', function (e) {
+            if ($navbar.className.indexOf('in') > 0) {
+                __HuxNav__.close()
+            } else {
+                __HuxNav__.open()
+            }
+        })
+
+        /**
+         * Since Fastclick is used to delegate 'touchstart' globally
+         * to hack 300ms delay in iOS by performing a fake 'click',
+         * Using 'e.stopPropagation' to stop 'touchstart' event from 
+         * $toggle/$collapse will break global delegation.
+         * 
+         * Instead, we use a 'e.target' filter to prevent handler
+         * added to document close HuxNav.  
+         *
+         * Also, we use 'click' instead of 'touchstart' as compromise
+         */
+        document.addEventListener('click', function (e) {
+            if (e.target == $toggle) return;
+            if (e.target.className == 'icon-bar') return;
+            __HuxNav__.close();
+        })
+    </script>
+
+    <!-- Search -->
+<div class="search-page">
+  <div class="search-icon-close-container">
+    <span class="search-icon-close">
+      <i class="fa fa-chevron-down"></i>
+    </span>
+  </div>
+  <div class="search-main container">
+    <div class="row">
+      <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+        <form></form>
+        <input type="text" id="search-input" placeholder="$ grep...">
+        </form>
+        <div id="search-results" class="mini-post-list"></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+    <!-- Image to hack wechat -->
+<!-- <img src="/img/icon_wechat.png" width="0" height="0"> -->
+<!-- <img src="/img/home-bg.jpg" width="0" height="0"> -->
+
+<!-- Post Header -->
+
+
+
+<style type="text/css">
+    header.intro-header{
+        position: relative;
+        background-image: url('/img/home-bg.jpg');
+        background: ;
+    }
+
+    
+    header.intro-header .header-mask{
+        width: 100%;
+        height: 100%;
+        position: absolute;
+        background: rgba(0,0,0, 0.0);
+    }
+    
+</style>
+
+
+
+
+<header class="intro-header style-text" >
+
+    <div class="header-mask"></div>
+    
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+                <div class="post-heading">
+                    <div class="tags">
+                        
+                        <a class="tag" href="/archive/?tag=SQL" title="SQL">SQL</a>
+                        
+                        <a class="tag" href="/archive/?tag=%E3%83%86%E3%83%BC%E3%83%96%E3%83%AB%E8%A8%AD%E8%A8%88" title="テーブル設計">テーブル設計</a>
+                        
+                    </div>
+                    <h1>データ設計のいろは</h1>
+                    
+                    <h2 class="subheading">実務で使えるデータ設計のコツ</h2>
+                    <p>
+                        公開日: 2021-09-24
+                        
+                        
+                    </p>
+                </div>
+            </div>
+        </div>
+    </div>
+</header>
+
+
+
+
+
+
+
+<!-- Post Content -->
+<article>
+    <div class="container">
+        <div class="row">
+
+    <!-- Post Container -->
+         <div class="
+                col-lg-8 col-lg-offset-2
+                col-md-10 col-md-offset-1
+                post-container">
+
+                <!-- Multi-Lingual -->
+                
+
+				<table>
+  <thead>
+    <tr>
+      <th> </th>
+      <th>概要</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>目的</td>
+      <td>データ設計のいろは</td>
+    </tr>
+    <tr>
+      <td>参考</td>
+      <td>- <a href="https://cloud.google.com/spanner/docs/foreign-keys/how-to">外部キー関係の作成と管理</a><br /> -<a href="https://app.diagrams.net/?splash=0&amp;libs=gcp">DWHアーキテクチャ作成ツール</a></td>
+    </tr>
+    <tr>
+      <td>関連</td>
+      <td> </td>
+    </tr>
+  </tbody>
+</table>
+
+<!-- START doctoc generated TOC please keep comment here to allow auto update -->
+<!-- DON'T EDIT THIS SECTION, INSTEAD RE-RUN doctoc TO UPDATE -->
+
+<ul>
+  <li><a href="#%E3%81%AF%E3%81%98%E3%82%81%E3%81%AB">はじめに</a></li>
+  <li><a href="#%E3%83%87%E3%83%BC%E3%82%BF%E3%83%A2%E3%83%87%E3%83%AA%E3%83%B3%E3%82%B0%E3%81%AE%E5%9F%BA%E6%9C%AC">データモデリングの基本</a>
+    <ul>
+      <li><a href="#%E3%83%87%E3%83%BC%E3%82%BF%E3%83%A9%E3%82%A4%E3%83%95%E3%82%B5%E3%82%A4%E3%82%AF%E3%83%AB">データライフサイクル</a></li>
+      <li><a href="#%E3%83%87%E3%83%BC%E3%82%BF%E3%83%A2%E3%83%87%E3%83%AA%E3%83%B3%E3%82%B0%E3%81%AE%E3%83%95%E3%82%A7%E3%83%BC%E3%82%BA">データモデリングのフェーズ</a></li>
+      <li><a href="#%E3%83%87%E3%83%BC%E3%82%BF%E3%83%A2%E3%83%87%E3%83%AA%E3%83%B3%E3%82%B0%E3%81%AE%E9%81%93%E5%85%B7%E3%81%A8%E3%81%97%E3%81%A6%E3%81%AEer%E3%83%A2%E3%83%87%E3%83%AB">データモデリングの道具としてのERモデル</a></li>
+    </ul>
+  </li>
+  <li><a href="#%E6%A6%82%E5%BF%B5%E3%83%87%E3%83%BC%E3%82%BF%E3%83%A2%E3%83%87%E3%83%AA%E3%83%B3%E3%82%B0phase">概念データモデリングphase</a></li>
+  <li><a href="#%E8%AB%96%E7%90%86%E3%83%87%E3%83%BC%E3%82%BF%E3%83%A2%E3%83%87%E3%83%AA%E3%83%B3%E3%82%B0phase">論理データモデリングPhase</a>
+    <ul>
+      <li><a href="#%E6%AD%A3%E8%A6%8F%E5%8C%96">正規化</a>
+        <ul>
+          <li><a href="#%E6%AD%A3%E8%A6%8F%E5%8C%96%E3%81%AE%E6%89%8B%E9%A0%86">正規化の手順</a></li>
+          <li><a href="#%E6%A5%AD%E5%8B%99%E8%A6%96%E7%82%B9%E3%81%8B%E3%82%89%E3%81%AE%E6%AD%A3%E8%A6%8F%E5%8C%96">業務視点からの正規化</a></li>
+        </ul>
+      </li>
+      <li><a href="#%E3%83%9E%E3%82%B9%E3%82%BF%E3%83%BC%E3%83%87%E3%83%BC%E3%82%BF%E3%81%A8%E3%83%88%E3%83%A9%E3%83%B3%E3%82%B6%E3%82%AF%E3%82%B7%E3%83%A7%E3%83%B3%E3%83%87%E3%83%BC%E3%82%BF%E3%82%92%E5%8C%BA%E5%88%A5%E3%81%99%E3%82%8B">マスターデータとトランザクションデータを区別する</a>
+        <ul>
+          <li><a href="#%E3%83%88%E3%83%A9%E3%83%B3%E3%82%B6%E3%82%AF%E3%82%B7%E3%83%A7%E3%83%B3%E3%83%87%E3%83%BC%E3%82%BF%E3%81%AE%E5%AE%88%E5%82%99%E7%AF%84%E5%9B%B2">トランザクションデータの守備範囲</a></li>
+        </ul>
+      </li>
+    </ul>
+  </li>
+  <li><a href="#%E7%89%A9%E7%90%86%E3%83%87%E3%83%BC%E3%82%BF%E3%83%A2%E3%83%87%E3%83%AA%E3%83%B3%E3%82%B0">物理データモデリング</a>
+    <ul>
+      <li><a href="#%E3%83%A6%E3%83%BC%E3%82%B9%E3%82%B1%E3%83%BC%E3%82%B9%E3%82%92%E6%84%8F%E8%AD%98%E3%81%97%E3%81%9F%E3%83%86%E3%83%BC%E3%83%96%E3%83%AB%E8%A8%AD%E8%A8%88%E3%82%92%E3%81%99%E3%82%8B">ユースケースを意識したテーブル設計をする</a></li>
+      <li><a href="#null%E3%82%92%E3%81%AA%E3%82%8B%E3%81%B9%E3%81%8F%E9%81%BF%E3%81%91%E3%82%8B">NULLをなるべく避ける</a></li>
+      <li><a href="#%E4%BD%BF%E3%81%86%E3%81%AA%E3%82%89%E3%81%B0%E6%84%8F%E6%80%9D%E3%81%AE%E3%81%82%E3%82%8Bnullable">使うならば意思のあるNULLABLE</a></li>
+      <li><a href="#%E4%BA%88%E5%82%99%E3%82%AB%E3%83%A9%E3%83%A0%E3%82%92%E7%94%A8%E6%84%8F%E3%81%97%E3%81%AA%E3%81%84">予備カラムを用意しない</a></li>
+      <li><a href="#%E7%84%A1%E9%A7%84%E3%81%AA%E3%82%AB%E3%83%A9%E3%83%A0%E3%81%AF%E4%BD%9C%E3%82%89%E3%81%AA%E3%81%84">無駄なカラムは作らない</a></li>
+      <li><a href="#%E3%83%87%E3%83%BC%E3%82%BF%E3%81%AF%E3%81%AA%E3%82%8B%E3%81%B9%E3%81%8F%E7%89%A9%E7%90%86%E5%89%8A%E9%99%A4%E3%82%92%E3%81%99%E3%82%8B">データはなるべく物理削除をする</a></li>
+    </ul>
+  </li>
+</ul>
+
+<!-- END doctoc generated TOC please keep comment here to allow auto update -->
+
+<h2 id="はじめに">はじめに</h2>
+
+<p>「作れるものを使うな、使えるものを作れ」を基本哲学に、データ分析基盤設計における手戻りの少ない(＝効率的な)テーブル設計の作業フローを具体例を交えて以下紹介します.</p>
+
+<h2 id="データモデリングの基本">データモデリングの基本</h2>
+
+<p>モデリングとは一般的に、モノや事象の共通する性質に着目し、ある一定のルールに基づいて分類することです. データモデリングとは、一定のルールと制約に従いデータを整理、調整し構造化する活動を指します.</p>
+
+<p>データモデリングは（データ設計とテーブル設計）はとても重要な業務活動です. 理由として以下の6つが挙げられます:</p>
+
+<ol>
+  <li>DB設計が定まらないと、分析やBI Dashboard開発やその他アプリケーション開発の設計が確定しない</li>
+  <li>DBを参照しているプログラムすべてに影響を及ぼす</li>
+  <li>一度公開すると、気軽には変更できない（変更は恐れてはならない）</li>
+  <li>(1)~(3)より、DB設計者の実力がプロジェクトのボトルネックになりやすい</li>
+  <li>適当に設計してしまうと、データ管理コスト（セキュリティ対応やデータメンテナンス）が上昇する</li>
+  <li>DBへのアクセス量を考えないで設計すると、タイムリーにBI dashboardが表示されないなど不具合のビジネスインパクトがでかい</li>
+</ol>
+
+<h3 id="データライフサイクル">データライフサイクル</h3>
+
+<p>データモデリングという言葉はDB上にテーブルを作るところがゴールと錯覚させますが、データライフサイクルを考えそれをシステムに実装するための計画を策定・実行することがゴールです.
+データというものはじっとしているものではなく、プロセスの中でどんどん変わっていくものです. これを一般にDLC(データライフサイクル)と呼びます. DLCには４つの状態があります.</p>
+
+<table>
+  <tbody>
+    <tr>
+      <td>C</td>
+      <td>CREATE, データが誕生する状態</td>
+    </tr>
+    <tr>
+      <td>R</td>
+      <td>REFERENCE, データが参照される状態（BI dashboard作成時など）</td>
+    </tr>
+    <tr>
+      <td>U</td>
+      <td>UPDATE, データに変化が加わる状態</td>
+    </tr>
+    <tr>
+      <td>D</td>
+      <td>DROP, データを保持する必要がなくなった状態</td>
+    </tr>
+  </tbody>
+</table>
+
+<p>このことを踏まえ目指すべきゴールは、「正確かつ最新化されたデータを、必要な人が、必要なときに、必要な単位で、すぐ取り出して活用できるデータベース」を作ること、と意識することが良いです.</p>
+
+<blockquote>
+  <p>CREATE, REFERENCE, UPUDATEの一般的な流れ</p>
+</blockquote>
+
+<p>実務において多く見られるものに、次のような構成があります:</p>
+
+<ol>
+  <li>AWSのS3からデータをGCS(= Datalake)に日付のバッチ処理で転送する(= EXTRACT phase)</li>
+  <li>GCSからBigQueryへデータをロードする. このとき、raw_data用dataset(例: <code class="language-plaintext highlighter-rouge">raw</code>)にプールする(= LOAD phase)</li>
+  <li>BigQuery内で中間テーブルを作成する. このとき、中間テーブルは中間テーブル用dataset(例: <code class="language-plaintext highlighter-rouge">typed</code>)に格納する( =  TRANSFORM phase)</li>
+  <li>分析用datamartを作成する. このようなELTを終え整備されたデータは、それ専用のdataset(例: <code class="language-plaintext highlighter-rouge">warehouse</code>)に格納する</li>
+  <li>これらワークフローのオーケストレーションをCloud Composerに実行させる(= 自動化 and UPDATE phase)</li>
+  <li>加工されたデータを分析及び予測分類モデル構築に用い、それをマーケター等が事業活動に活用する</li>
+</ol>
+
+<p><img src="https://github.com/ryonakimageserver/omorikaizuka/blob/master/%E3%83%96%E3%83%AD%E3%82%B0%E7%94%A8/20210924-blog-gcp-architecture.png?raw=true" /></p>
+
+<h3 id="データモデリングのフェーズ">データモデリングのフェーズ</h3>
+
+<table>
+  <thead>
+    <tr>
+      <th>システム構築Phase</th>
+      <th>活動</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>企画</td>
+      <td>方針策定, 概念データモデリング</td>
+    </tr>
+    <tr>
+      <td>開発</td>
+      <td>論理データモデリング, 物理データモデリング</td>
+    </tr>
+    <tr>
+      <td>運用/保守</td>
+      <td>データベース構築, 日々のオペレーション</td>
+    </tr>
+  </tbody>
+</table>
+
+<blockquote>
+  <p>概念データモデリング</p>
+</blockquote>
+
+<p>概念データモデリングのフェーズにおけるゴールは、「システム化に必要なデータ項目がすべて洗い出される」ことです. このフェーズでは、ビジネス要件にあったシステム化を行うに当たり、ビジネスニーズの明確化とどのようなシステムが望まれているかの要件定義を行います. ここでシステム化の範囲が定まるためシステム化の準備作業として、対象範囲にある業務プロセスと関連するデータ項目をすべて洗いだし、業務とデータ項目の関係をデータの集合体のレベルでモデル化します(=概念データモデリングの成果物). その例は以下です:</p>
+
+<p><img src="https://github.com/ryonakimageserver/omorikaizuka/blob/master/%E3%83%96%E3%83%AD%E3%82%B0%E7%94%A8/20210924-datamart-design-er-figure-example.png?raw=true" /></p>
+
+<blockquote>
+  <p>論理データモデリング</p>
+</blockquote>
+
+<p>このフェーズでは、「概念データモデリング」で補足したデータ項目をもとに、</p>
+
+<ul>
+  <li>信頼性の高いデータを格納すること</li>
+  <li>将来に渡って一元的にデータを管理できること</li>
+</ul>
+
+<p>以上２点を実現する仕組みを描くことを成果物とします.</p>
+
+<p>信頼性の高いデータを格納することの例として、「データ整理という作業を経て、重複のないデータ構造を作成する」ことが挙げられます. 以下の例では、「顧客名」データを更新する必要が発生したとしても、一箇所だけ変更すれば全てもれなく更新される構成が実現できています.</p>
+
+<p><img src="https://github.com/ryonakimageserver/omorikaizuka/blob/master/%E3%83%96%E3%83%AD%E3%82%B0%E7%94%A8/20210924-datamartdesign-er-figure-002.png?raw=true" /></p>
+
+<blockquote>
+  <p>物理データモデリング</p>
+</blockquote>
+
+<p>物理データモデリングは、論理データモデリングで策定したデータ構造をベースに、実装上のシステム要件を踏まえデータ構造を調整する活動となります. 例えば、検索性能要件に着目しインデックスを定義したり、usabilityを考慮して意図的にデータ重複のある状態にしたりといった作業をします.</p>
+
+<h3 id="データモデリングの道具としてのerモデル">データモデリングの道具としてのERモデル</h3>
+
+<p>ERモデルはビジネス上のデータとその関係を記述するツールのことです. エンティティ, アトリビュート, リレーションシップの三要素で構成されます.</p>
+
+<p><img src="https://github.com/ryonakimageserver/omorikaizuka/blob/master/%E3%83%96%E3%83%AD%E3%82%B0%E7%94%A8/20210924-datamartdesign-er-figure-003.png?raw=true" /></p>
+
+<table>
+  <tbody>
+    <tr>
+      <td>エンティティ</td>
+      <td>データセットのこと, 顧客データセットや商品データセットなど</td>
+    </tr>
+    <tr>
+      <td>アトリビュート</td>
+      <td>エンティティの性質や特徴を示すもののこと, アトリビュートの種類はさらにPK, FK, Non-Keyに分類されます</td>
+    </tr>
+    <tr>
+      <td>リレーションシップ</td>
+      <td>エンティティ間にあるビジネス上の関連を表す</td>
+    </tr>
+  </tbody>
+</table>
+
+<blockquote>
+  <p>アトリビュートの種類</p>
+</blockquote>
+
+<table>
+  <tbody>
+    <tr>
+      <td>PK</td>
+      <td>Primary Key, インスタンス（エンティティで管理するレコード）を一意に識別するアトリビュート, 実体は<code class="language-plaintext highlighter-rouge">NOT NULL</code>のユニークインデックス</td>
+    </tr>
+    <tr>
+      <td>FK</td>
+      <td>Foreign Key, 他のエンティティのPKを参照するアトリビュート</td>
+    </tr>
+    <tr>
+      <td>Non-Key</td>
+      <td>PK以外のすべてのアトリビュート</td>
+    </tr>
+  </tbody>
+</table>
+
+<blockquote>
+  <p>カーディナリティ</p>
+</blockquote>
+
+<p>エンティティ間のデータの対応関係が1:1, 1:n, n:mのいずれなのかを示す概念です.</p>
+
+<p><img src="https://github.com/ryonakimageserver/omorikaizuka/blob/master/%E3%83%96%E3%83%AD%E3%82%B0%E7%94%A8/20210924-datamartdesign-er-figure-004.png?raw=true" /></p>
+
+<h2 id="概念データモデリングphase">概念データモデリングphase</h2>
+
+<blockquote>
+  <p>このフェーズの成果物</p>
+</blockquote>
+
+<ul>
+  <li>プロジェクトスコープの確定</li>
+  <li>プロジェクト体制の確定</li>
+  <li>プロジェクトでの情報共有ルールの合意</li>
+  <li>データ標準化ルールの合意（命名規則など）</li>
+</ul>
+
+<blockquote>
+  <p>プロジェクトスコープ確定のチェックリスト</p>
+</blockquote>
+
+<table>
+  <thead>
+    <tr>
+      <th>check points</th>
+      <th>説明</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>システム化の目的</td>
+      <td>例：KPI dashboard作成, 分析環境整備 etc<br /><br />KPI dashboardリストの定義書も同時に作成する</td>
+    </tr>
+    <tr>
+      <td>対象となる業務範囲</td>
+      <td>どの業務で誰がどのようなデータを利用しているか把握</td>
+    </tr>
+    <tr>
+      <td>対象となる組織と活動とdatasetのリスト化</td>
+      <td>データマートのユースケースリストの作成</td>
+    </tr>
+    <tr>
+      <td>開発スケジュール</td>
+      <td> </td>
+    </tr>
+  </tbody>
+</table>
+
+<blockquote>
+  <p>プロジェクト体制確定のチェックリスト</p>
+</blockquote>
+
+<table>
+  <tbody>
+    <tr>
+      <td>業務担当者の確定</td>
+      <td>対象業務の流れやルール、データ項目の意味を理解している担当者。少なくともヒアリング先は設定</td>
+    </tr>
+    <tr>
+      <td>運用担当者</td>
+      <td>物理データモデリングに入ると領域設計やバックアップのためのデータベース構成を考慮するため、運用担当者との連携が必要</td>
+    </tr>
+  </tbody>
+</table>
+
+<p>データモデリングで必要な人材は規模やその性質のよって異なりますが、「業務担当者」は絶対外せないロールです. データ整理作業を進めるにあたって、業務現場で使われているデータ項目の意味と目的がわからないと何もできないからです. 例えば、既存システムからデータ項目のリストを洗い出した際に、複数のデータセットの中に「顧客」というカラムが存在したとします. データセットAでは「請求先」を意味しており、一方データセットBでは「アプリ顧客」を意味している場合、それぞれにおける「顧客」は別のものとして処理されるべきです. これは業務内容を熟知していないと把握しづらい事象です. そのため「業務担当者」はデータモデリングにおいて必要不可欠のロールとなります.</p>
+
+<blockquote>
+  <p>情報共有ルール合意のチェックリスト</p>
+</blockquote>
+
+<table>
+  <tbody>
+    <tr>
+      <td>定例会議</td>
+      <td>親プロジェクトに対する進捗説明会議と開発メンバー間の定例会議など</td>
+    </tr>
+    <tr>
+      <td>連絡方法</td>
+      <td>Slack 及び channel名の組合せなど</td>
+    </tr>
+    <tr>
+      <td>成果物共有場所</td>
+      <td>Conflue, GitHub, Google Driveなどの組み合わせ</td>
+    </tr>
+    <tr>
+      <td>議事録共有場所</td>
+      <td>Conflue, GitHubなど</td>
+    </tr>
+    <tr>
+      <td>課題管理</td>
+      <td>JIRA, GitHub etc</td>
+    </tr>
+    <tr>
+      <td>モデリングツールの合意</td>
+      <td><a href="https://dbdiagram.io/home">dbdiagram.io</a></td>
+    </tr>
+  </tbody>
+</table>
+
+<blockquote>
+  <p>データ標準化ルールの合意のチェックリスト</p>
+</blockquote>
+
+<ul>
+  <li>データ名称の標準化：同音異義語や異音同義語が頻出するとシステムの開発・保守に混乱を招きます</li>
+</ul>
+
+<table>
+  <thead>
+    <tr>
+      <th>用語区分</th>
+      <th>例</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>修飾語</td>
+      <td>新規, 月間, 平均, xx別</td>
+    </tr>
+    <tr>
+      <td>主要語</td>
+      <td>売上, 注文, 顧客, 商品</td>
+    </tr>
+    <tr>
+      <td>区分語(データの属性を表す)</td>
+      <td>名称, 番号, 数量, 金額</td>
+    </tr>
+  </tbody>
+</table>
+
+<h2 id="論理データモデリングphase">論理データモデリングPhase</h2>
+
+<blockquote>
+  <p>このPhaseのGoal</p>
+</blockquote>
+
+<ul>
+  <li>重複や矛盾が排除され(正規化・最適化され)、ビジネスルールがきちんと反映されたデータ構造の設計書を作成する</li>
+</ul>
+
+<blockquote>
+  <p>成果物リスト</p>
+</blockquote>
+
+<table>
+  <thead>
+    <tr>
+      <th>ドキュメント</th>
+      <th> </th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>エンティティ一覧</td>
+      <td>道外プロジェクトの対象範囲内で管理対象となるすべてのエンティティの意味定義を記したリスト</td>
+    </tr>
+    <tr>
+      <td>アトリビュート一覧</td>
+      <td>当該プロジェクトの対象範囲内で管理対象となるすべてのアトリビュートの意味定義を記したリスト</td>
+    </tr>
+    <tr>
+      <td>エンティティ仕様書</td>
+      <td>エンティティごとに定義したアトリビュートの論理データ属性を定義した仕様書</td>
+    </tr>
+    <tr>
+      <td>用語辞書</td>
+      <td>業務用語とその定義内容</td>
+    </tr>
+  </tbody>
+</table>
+
+<h3 id="正規化">正規化</h3>
+
+<p>データ設計の原則は、「One Fact in One Place」(１つの事実は１つの場所のみに存在する)です. これを実現する手法として「正規化」が存在します. 具体的に正規化がなにを意味をするかというと、「データの重複を排除し、データになにか操作（CREATE, UPDATE, DELETE）しても矛盾がないデータ構造にすること」です.</p>
+
+<h4 id="正規化の手順">正規化の手順</h4>
+
+<p>以下のような伝票データが与えられ、その取引データを格納するテーブルの設計を依頼されたとします.</p>
+
+<p><img src="https://github.com/ryonakimageserver/omorikaizuka/blob/master/%E3%83%96%E3%83%AD%E3%82%B0%E7%94%A8/20210924-datamartdesign-ch01-01.png?raw=true" /></p>
+
+<p>これを何も考えずに一つのテーブルにまずまとめてみます.</p>
+
+<table>
+  <thead>
+    <tr>
+      <th>伝票番号</th>
+      <th>受注日</th>
+      <th>顧客</th>
+      <th>商品</th>
+      <th>単価</th>
+      <th>数量</th>
+      <th>金額</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>101</td>
+      <td>2020-12-01</td>
+      <td>Ryo</td>
+      <td>カレー</td>
+      <td>870</td>
+      <td>1</td>
+      <td>870</td>
+    </tr>
+    <tr>
+      <td>101</td>
+      <td>2020-12-01</td>
+      <td>Ryo</td>
+      <td>いちご</td>
+      <td>300</td>
+      <td>2</td>
+      <td>600</td>
+    </tr>
+    <tr>
+      <td>102</td>
+      <td>2020-12-02</td>
+      <td>Takashi</td>
+      <td>スイカ</td>
+      <td>120</td>
+      <td>1</td>
+      <td>120</td>
+    </tr>
+    <tr>
+      <td>102</td>
+      <td>2020-12-02</td>
+      <td>Takashi</td>
+      <td>カレー</td>
+      <td>870</td>
+      <td>3</td>
+      <td>2,610</td>
+    </tr>
+    <tr>
+      <td>…</td>
+      <td>…</td>
+      <td>…</td>
+      <td>…</td>
+      <td>…</td>
+      <td>…</td>
+      <td>…</td>
+    </tr>
+  </tbody>
+</table>
+
+<p>ここからまず繰り返し項目の排除を試みます. すると<code class="language-plaintext highlighter-rouge">(伝票番号, 受注日, 顧客)</code>の組み合わせと<code class="language-plaintext highlighter-rouge">(商品, 単価)</code>の組合せが繰り返されていることがわかります.
+これを考えると、伝票データを一つにまとめるのではなく、伝票テーブル、伝票明細テーブル、商品マスターを分けて管理したほうが良さそうとなります. これをERDに簡単にまとめると:</p>
+
+<p><img src="https://github.com/ryonakimageserver/omorikaizuka/blob/master/%E3%83%96%E3%83%AD%E3%82%B0%E7%94%A8/20210924-datamartdesign-regularization02.png?raw=true" /></p>
+
+<p>上の図におけるFK(外部参照キー)はそのレコードを参照しているのであって、参照先の値を見ているわけではありません. このような構成にすることで、もし仮に、顧客マスターに顧客ごとの年代・性別を追加することなっても、他の伝票テーブル等との参照関係は変わらないまま、顧客マスターだけを編集すれば対応することができます（＝疎結合の産物）.</p>
+
+<blockquote>
+  <p>ID派 vs コード派</p>
+</blockquote>
+
+<p>「顧客エンティティ」があるとします. 多くの場合、顧客ごとにビジネスロジックで設定された顧客コードをDB上の顧客マスターでPrimary Keyとして設定しているかと思います. コレ自体は問題はありません. しかし、「顧客コード」はシステム都合ではなくビジネス都合で決定されているという背景から、その決め方、不変である保証はいつ変わるともしれないというリスクがあります. 例えば、とある飲食店の来店予約管理システムを変更する時、顧客コードの作成ロジックが変わってしまうことも多々あります.</p>
+
+<p>そのため、リレーショナルデータベースのテーブルの主キーの設計において、</p>
+
+<ul>
+  <li>ID派（あえて別に自動採番のIDを付ける）</li>
+  <li>コード派（ユニークになるものは出来るだけ主キーとする）</li>
+</ul>
+
+<p>の2つに分かれています（ナチュラルキー vs サロゲートキー論争）.</p>
+
+<h4 id="業務視点からの正規化">業務視点からの正規化</h4>
+
+<p>伝票データが以下のようなケースを次は考えます. 伝票番号102のカレーの単価が850円となっています.</p>
+
+<p><img src="https://github.com/ryonakimageserver/omorikaizuka/blob/master/%E3%83%96%E3%83%AD%E3%82%B0%E7%94%A8/20210924-datamartdesign-ch01-02.png?raw=true" /></p>
+
+<p>同じ商品なのに取引ごとに商品単価が変わることは実務ではしばしば見られます. 例として、クーポン利用に伴う商品値引きや、在庫処理目的で実施された限定価格などが契機として考えられます. 当初のテーブル構成だと商品マスターに記載された商品単価を用いて、取引金額を再現しようとすると実際の購入金額合計と伝票明細テーブルから計算された購入金額合計が異なるという不具合が発生します.</p>
+
+<p>ここで思い出すべきは「One Fact in One Place」原則です. 「商品マスターに登録された単価通りに販売される」という事実と「限定価格が適用された後の単価」という事実の２つがあるので、商品マスターというテーブルだけで単価データを管理するのではなく、伝票明細テーブルでも単価データを管理すべきとなります.　</p>
+
+<p><img src="https://github.com/ryonakimageserver/omorikaizuka/blob/master/%E3%83%96%E3%83%AD%E3%82%B0%E7%94%A8/20210924-datamartdesign-regularization03.png?raw=true" /></p>
+
+<h3 id="マスターデータとトランザクションデータを区別する">マスターデータとトランザクションデータを区別する</h3>
+
+<p>マスターデータとトランザクションデータとはエンティティー(データベースとして表現すべき対象物)の種類のことです.</p>
+
+<table>
+  <tbody>
+    <tr>
+      <td>マスターデータ</td>
+      <td>データの中でも基礎になるもので、商品情報や従業員情報など1つ1つのの基礎的な情報を記録します.<br />商品マスターであれば、商品名、型番、仕様など個々の商品の情報を扱います.<br />物理削除で運用されるケースが多い</td>
+    </tr>
+    <tr>
+      <td>トランザクションデータ</td>
+      <td>システム上で発生した取引などの出来事を記録したデータのことで、一般に履歴と呼ばれるものを指します. <br />例として、商品を購買履歴や、従業員への給与支払い履歴などです. <br />基本的に値は更新されず、蓄積されていくデータ(削除を前提とせず、ログとして残す)</td>
+    </tr>
+  </tbody>
+</table>
+
+<p>マスターデータの候補となるものは、資源系（リソース系）と呼ばれるデータで、以下のものが考えられます:</p>
+
+<ul>
+  <li>Who: 顧客、取引先、管理者</li>
+  <li>What: 商品</li>
+  <li>Where: 販売店舗、地域</li>
+</ul>
+
+<p>トランザクションデータは、何かの「行為」を起点に記録されたデータ（イベント系データ）が対象となり、以下のものが考えられます</p>
+
+<ul>
+  <li>How: 販売、購入、出荷</li>
+  <li>When: 注文日</li>
+  <li>How many: 注文数量</li>
+  <li>How much: 金額</li>
+  <li>Why: 売上、返品、値引き</li>
+</ul>
+
+<p>→ <a href="https://docs.google.com/spreadsheets/d/1gtTZV6tvG2SK53cm_UCYGK-lIvQk63bmD3gVL9KUBKo/edit?usp=sharing">マスターデータとトランザクションデータの例</a></p>
+
+<h4 id="トランザクションデータの守備範囲">トランザクションデータの守備範囲</h4>
+
+<p>履歴系のデータを設計したときに、システム運用が始まってからカラムが足りないとか、当時のデータが再現できない等のトラブルが発生することがあります. まずトラブルの一例を紹介します.</p>
+
+<blockquote>
+  <p>ECサイトの購買履歴のデータ管理の失敗事例</p>
+</blockquote>
+
+<p>あるECサイトでユーザーの商品と注文履歴を以下のように管理していました</p>
+
+<p><img src="https://github.com/ryonakimageserver/omorikaizuka/blob/master/%E3%83%96%E3%83%AD%E3%82%B0%E7%94%A8/20210924-datamartdesign-TransactiondataFailure01.png?raw=true" /></p>
+
+<p>この方式で管理してしまうと、商品マスターが更新されたタイミングで過去の取引データが再現できなくなる問題が発生します.</p>
+
+<p><img src="https://github.com/ryonakimageserver/omorikaizuka/blob/master/%E3%83%96%E3%83%AD%E3%82%B0%E7%94%A8/20210924-datamartdesign-TransactiondataFailure02.png?raw=true" /></p>
+
+<blockquote>
+  <p>BEST PRACTICE</p>
+</blockquote>
+
+<p>トランザクションデータに「その時点の行為」をデータとして正確に記録しましょう. 安易に正規化して重複を排除すると、必要なデータまで削ってしまうリスクがあります.</p>
+
+<h2 id="物理データモデリング">物理データモデリング</h2>
+
+<h3 id="ユースケースを意識したテーブル設計をする">ユースケースを意識したテーブル設計をする</h3>
+
+<p>とある企業のECサイトでは取引を以下のような形で注文履歴テーブルと注文明細テーブルに分けて管理していました.</p>
+
+<p><img src="https://github.com/ryonakimageserver/omorikaizuka/blob/master/%E3%83%96%E3%83%AD%E3%82%B0%E7%94%A8/20210924-datamartdesign-TransactiondataFailure03.png.png?raw=true" /></p>
+
+<p>その企業はEC商売の動向を把握するため、毎月の振り返り会で以下のデータを報告することになっています:</p>
+
+<ol>
+  <li>注文日ごとの売上を計算し、日別で売上がどのように変化しているか確認する</li>
+  <li>特定の期間に購入された商品IDとその個数をランキング形式で確認する</li>
+</ol>
+
+<p>これらのデータをSQLを用いてデータ担当者は抽出するようにしました：</p>
+
+<div class="language-sql highlighter-rouge"><div class="highlight"><pre class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
+2
+3
+4
+5
+6
+7
+8
+9
+10
+11
+12
+13
+14
+15
+16
+17
+18
+19
+20
+21
+22
+23
+24
+25
+26
+27
+28
+29
+30
+31
+32
+33
+34
+35
+</pre></td><td class="rouge-code"><pre><span class="cm">/*
+[Table]
+  注文履歴: purchase_history
+  注文履歴明細: purchase_history_detail
+*/</span>
+
+<span class="c1">---1. 注文ごとの売上を計算し、購入価格分布が月ごとにどのように変化しているか確認する</span>
+<span class="k">SELECT</span>
+    <span class="n">ph</span><span class="p">.</span><span class="err">注文日</span><span class="p">,</span>
+    <span class="k">SUM</span><span class="p">(</span><span class="n">phd</span><span class="p">.</span><span class="err">商品単価</span> <span class="o">*</span> <span class="n">phd</span><span class="p">.</span><span class="err">注文個数</span><span class="p">)</span> <span class="k">AS</span> <span class="n">sales_amount</span>
+<span class="k">FROM</span>
+    <span class="n">purchase_history</span> <span class="k">AS</span> <span class="n">ph</span>
+    <span class="k">INNER</span> <span class="k">JOIN</span> <span class="n">purchase_history_detail</span> <span class="k">AS</span> <span class="n">phd</span>
+        <span class="k">ON</span> <span class="n">ph</span><span class="p">.</span><span class="err">注文</span><span class="n">ID</span> <span class="o">=</span> <span class="n">phd</span><span class="p">.</span><span class="err">注文</span><span class="n">ID</span>
+<span class="k">WHERE</span>
+    <span class="n">ph</span><span class="p">.</span><span class="err">注文日</span> <span class="k">BETWEEN</span> <span class="nb">DATE</span><span class="p">(</span><span class="s1">'2019-12-01'</span><span class="p">)</span> <span class="k">AND</span> <span class="nb">DATE</span><span class="p">(</span><span class="s1">'2019-12-31'</span><span class="p">)</span>
+<span class="k">GROUP</span> <span class="k">BY</span>
+    <span class="mi">1</span>
+<span class="k">ORDER</span> <span class="k">BY</span>
+    <span class="mi">1</span>
+
+<span class="c1">---2. 特定の期間に購入された商品IDとその個数をランキング形式で確認する</span>
+<span class="k">SELECT</span>
+    <span class="n">phd</span><span class="p">.</span><span class="err">商品</span><span class="n">ID</span><span class="p">,</span>
+    <span class="k">SUM</span><span class="p">(</span><span class="n">phd</span><span class="p">.</span><span class="err">注文個数</span><span class="p">)</span> <span class="k">AS</span> <span class="n">sales_quantity</span>
+<span class="k">FROM</span>
+    <span class="n">purchase_history</span> <span class="k">AS</span> <span class="n">ph</span>
+    <span class="k">INNER</span> <span class="k">JOIN</span> <span class="n">purchase_history_detail</span> <span class="k">AS</span> <span class="n">phd</span>
+        <span class="k">ON</span> <span class="n">ph</span><span class="p">.</span><span class="err">注文</span><span class="n">ID</span> <span class="o">=</span> <span class="n">phd</span><span class="p">.</span><span class="err">注文</span><span class="n">ID</span>
+<span class="k">WHERE</span>
+    <span class="n">ph</span><span class="p">.</span><span class="err">注文日</span> <span class="k">BETWEEN</span> <span class="nb">DATE</span><span class="p">(</span><span class="s1">'2019-12-01'</span><span class="p">)</span> <span class="k">AND</span> <span class="nb">DATE</span><span class="p">(</span><span class="s1">'2019-12-10'</span><span class="p">)</span>
+<span class="k">GROUP</span> <span class="k">BY</span>
+    <span class="mi">1</span>
+<span class="k">ORDER</span> <span class="k">BY</span>
+    <span class="mi">1</span>
+</pre></td></tr></tbody></table></code></pre></div></div>
+
+<p>これらクエリは、要求された数値を正しく抽出してくれます. 当初は、データ抽出担当者もそのパフォーマンスに満足していました. しかし、時間が立つに連れ、クエリの実行時間が長くなってきていることにその担当者は気づきました. 1) 注文履歴テーブル及び注文明細テーブル両方に日毎に大量のデータが入り、それぞれのテーブルサイズが大きくなってしまったこと, 2) その大きいテーブルふたつを<code class="language-plaintext highlighter-rouge">JOIN</code>句で結合してデータを抽出していること、この２つが理由であると調査の結果わかりました.</p>
+
+<blockquote>
+  <p>BEST PRACTICE</p>
+</blockquote>
+
+<p>テーブル設計の段階から、RDBのデータをどのように活用するかヒアリングし、そのヒアリング結果を基にテーブルを設計すべきだったといえます. 今回のケースでは、1) 注文履歴に「購入金額」というカラムを追加する, 2) 注文明細に、「注文日」というカラムを追加するべきであったとなります. このようにカラムを追加し正規化を崩すことでクエリパフォーマンスを改善することに成功することができます. ただし、正規化を崩すことでデータ<code class="language-plaintext highlighter-rouge">INSERT</code>時に管理しなくてはならない箇所が増えるので、データ管理コストが上昇します. このトレードオフ関係をチーム関係者で合意・判断する能力がデータサイエンティストには求められます.</p>
+
+<h3 id="nullをなるべく避ける">NULLをなるべく避ける</h3>
+
+<ul>
+  <li>テーブルのカラムをなるべく<code class="language-plaintext highlighter-rouge">NULLABLE</code>にしないようします</li>
+  <li><code class="language-plaintext highlighter-rouge">NULLABLE</code>にする場合は、それが本当に必要か考えることが必要です</li>
+</ul>
+
+<p><code class="language-plaintext highlighter-rouge">NULL</code>を許容するとアプリケーション側でNULLを扱う必要が出ます. NULL処理や仕様が必要になり、プログラムの処理が煩雑になる場合があります. 例として、商品ID, 販売開始日、販売終了日のカラムから構成される商品マスターテーブルを考えます. 販売開始日と販売終了日は<code class="language-plaintext highlighter-rouge">NULLABLE</code>とします. 販売開始日が<code class="language-plaintext highlighter-rouge">NULL</code>になるケースは、DBが登場する遥か前から販売しており、販売開始日がわからないケースを想定してます. また、販売終了日が<code class="language-plaintext highlighter-rouge">NULL</code>になるケースは、現在少なくとも販売終了を予定していない商品を想定しています.</p>
+
+<p>この商品マスターを用いて、2020-12-25時点で販売している商品数を抽出したいとします.</p>
+
+<blockquote>
+  <p>AVOID</p>
+</blockquote>
+
+<div class="language-sql highlighter-rouge"><div class="highlight"><pre class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
+2
+3
+4
+5
+6
+7
+8
+9
+10
+11
+12
+13
+14
+15
+</pre></td><td class="rouge-code"><pre><span class="k">WITH</span> <span class="n">test_data</span> <span class="k">AS</span><span class="p">(</span>
+  <span class="k">SELECT</span> <span class="mi">1</span> <span class="k">AS</span> <span class="n">prodict_id</span><span class="p">,</span> <span class="k">NULL</span> <span class="k">AS</span> <span class="n">sale_start_date</span><span class="p">,</span> <span class="k">NULL</span> <span class="k">AS</span> <span class="n">sale_end_date</span> <span class="k">UNION</span> <span class="k">ALL</span>
+  <span class="k">SELECT</span> <span class="mi">2</span><span class="p">,</span> <span class="nb">DATE</span><span class="p">(</span><span class="s1">'2020-12-01'</span><span class="p">),</span> <span class="k">NULL</span> <span class="k">UNION</span> <span class="k">ALL</span>
+  <span class="k">SELECT</span> <span class="mi">3</span><span class="p">,</span> <span class="k">NULL</span><span class="p">,</span> <span class="nb">DATE</span><span class="p">(</span><span class="s1">'2020-12-11'</span><span class="p">)</span> <span class="k">UNION</span> <span class="k">ALL</span>
+  <span class="k">SELECT</span> <span class="mi">4</span><span class="p">,</span> <span class="nb">DATE</span><span class="p">(</span><span class="s1">'2020-12-11'</span><span class="p">),</span> <span class="nb">DATE</span><span class="p">(</span><span class="s1">'2020-12-31'</span><span class="p">)</span> <span class="k">UNION</span> <span class="k">ALL</span>
+  <span class="k">SELECT</span> <span class="mi">5</span><span class="p">,</span> <span class="nb">DATE</span><span class="p">(</span><span class="s1">'2020-12-21'</span><span class="p">),</span> <span class="nb">DATE</span><span class="p">(</span><span class="s1">'2020-12-31'</span><span class="p">))</span>
+<span class="k">SELECT</span>
+    <span class="k">COUNT</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span> <span class="k">AS</span> <span class="n">order_cnt</span>
+<span class="k">FROM</span>
+    <span class="n">test_data</span>
+<span class="k">WHERE</span>
+    <span class="n">sale_start_date</span> <span class="o">&lt;</span> <span class="nb">DATE</span><span class="p">(</span><span class="s1">'2020-12-25'</span><span class="p">)</span>
+<span class="k">AND</span> <span class="n">sale_end_date</span>   <span class="o">&gt;</span> <span class="nb">DATE</span><span class="p">(</span><span class="s1">'2020-12-25'</span><span class="p">);</span>
+
+<span class="o">&gt;&gt;&gt;</span> <span class="mi">2</span>
+</pre></td></tr></tbody></table></code></pre></div></div>
+
+<p>このように本当は4つの商品が2020-12-25時点で販売されているはずなのに、ナイーブにカウントしてしまうと販売商品数は２つとなってしまします.</p>
+
+<blockquote>
+  <p>BETTER</p>
+</blockquote>
+
+<p>Defaultで「遠い過去」と「遠い未来」の日付を設定することで、<code class="language-plaintext highlighter-rouge">NULL</code>に煩わされることなく直感的なクエリで正しい結果を出力することができます.</p>
+
+<div class="language-sql highlighter-rouge"><div class="highlight"><pre class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
+2
+3
+4
+5
+6
+7
+8
+9
+10
+11
+12
+13
+14
+15
+16
+17
+18
+</pre></td><td class="rouge-code"><pre><span class="k">CREATE</span> <span class="k">TEMPORARY</span> <span class="k">FUNCTION</span> <span class="n">sale_start_date_default</span><span class="p">(</span><span class="n">input_date</span> <span class="n">STRING</span><span class="p">)</span> <span class="k">AS</span> <span class="p">(</span><span class="nb">DATE</span><span class="p">(</span><span class="n">COALESCE</span><span class="p">(</span><span class="n">input_date</span><span class="p">,</span> <span class="s1">'1900-01-01'</span><span class="p">)));</span>
+<span class="k">CREATE</span> <span class="k">TEMPORARY</span> <span class="k">FUNCTION</span> <span class="n">sale_end_date_default</span><span class="p">(</span><span class="n">input_date</span> <span class="n">STRING</span><span class="p">)</span> <span class="k">AS</span> <span class="p">(</span><span class="nb">DATE</span><span class="p">(</span><span class="n">COALESCE</span><span class="p">(</span><span class="n">input_date</span><span class="p">,</span> <span class="s1">'2999-12-31'</span><span class="p">)));</span>
+<span class="k">CREATE</span> <span class="k">TEMPORARY</span> <span class="k">FUNCTION</span> <span class="n">reference_date</span><span class="p">()</span> <span class="k">AS</span> <span class="p">(</span><span class="nb">DATE</span><span class="p">(</span><span class="s1">'2020-12-25'</span><span class="p">));</span>
+
+<span class="k">WITH</span> <span class="n">test_data</span> <span class="k">AS</span><span class="p">(</span>
+  <span class="k">SELECT</span> <span class="mi">1</span>  <span class="k">AS</span> <span class="n">prodict_id</span><span class="p">,</span> <span class="n">sale_start_date_default</span><span class="p">(</span><span class="k">NULL</span><span class="p">)</span> <span class="k">AS</span> <span class="n">sale_start_date</span><span class="p">,</span> <span class="n">sale_end_date_default</span><span class="p">(</span><span class="k">NULL</span><span class="p">)</span> <span class="k">AS</span> <span class="n">sale_end_date</span> <span class="k">UNION</span> <span class="k">ALL</span>
+  <span class="k">SELECT</span> <span class="mi">2</span><span class="p">,</span> <span class="n">sale_start_date_default</span><span class="p">(</span><span class="s1">'2020-12-01'</span><span class="p">),</span> <span class="n">sale_end_date_default</span><span class="p">(</span><span class="k">NULL</span><span class="p">)</span> <span class="k">UNION</span> <span class="k">ALL</span>
+  <span class="k">SELECT</span> <span class="mi">3</span><span class="p">,</span> <span class="n">sale_start_date_default</span><span class="p">(</span><span class="k">NULL</span><span class="p">),</span> <span class="n">sale_end_date_default</span><span class="p">(</span><span class="s1">'2020-12-11'</span><span class="p">)</span> <span class="k">UNION</span> <span class="k">ALL</span>
+  <span class="k">SELECT</span> <span class="mi">4</span><span class="p">,</span> <span class="n">sale_start_date_default</span><span class="p">(</span><span class="s1">'2020-12-11'</span><span class="p">),</span> <span class="n">sale_end_date_default</span><span class="p">(</span><span class="s1">'2020-12-31'</span><span class="p">)</span> <span class="k">UNION</span> <span class="k">ALL</span>
+  <span class="k">SELECT</span> <span class="mi">5</span><span class="p">,</span> <span class="n">sale_start_date_default</span><span class="p">(</span><span class="s1">'2020-12-21'</span><span class="p">),</span> <span class="n">sale_end_date_default</span><span class="p">(</span><span class="s1">'2020-12-31'</span><span class="p">))</span>
+<span class="k">SELECT</span>
+    <span class="k">COUNT</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span> <span class="k">AS</span> <span class="n">order_cnt</span>
+<span class="k">FROM</span>
+    <span class="n">test_data</span>
+<span class="k">WHERE</span>
+    <span class="n">sale_start_date</span> <span class="o">&lt;</span> <span class="n">reference_date</span><span class="p">()</span>
+<span class="k">AND</span> <span class="n">sale_end_date</span>   <span class="o">&gt;</span> <span class="n">reference_date</span><span class="p">();</span>
+<span class="o">&gt;&gt;&gt;</span> <span class="mi">4</span>
+</pre></td></tr></tbody></table></code></pre></div></div>
+
+<h3 id="使うならば意思のあるnullable">使うならば意思のあるNULLABLE</h3>
+
+<p>以下のような場合は、NULLABLEを用いたほうが良いとなります:</p>
+
+<ul>
+  <li><code class="language-plaintext highlighter-rouge">Post.publish_at</code>: 記事の公開日
+    <ul>
+      <li><code class="language-plaintext highlighter-rouge">publish_at</code>が<code class="language-plaintext highlighter-rouge">NULL</code>: 下書き中の記事</li>
+      <li><code class="language-plaintext highlighter-rouge">publish_at</code>が未来の日にち: 下書き中で、未来に自動公開される記事</li>
+      <li><code class="language-plaintext highlighter-rouge">publish_at</code>が過去の日にち: すでに公開済みの記事</li>
+    </ul>
+  </li>
+  <li>既存のテーブルにあとから追加したカラム</li>
+</ul>
+
+<h3 id="予備カラムを用意しない">予備カラムを用意しない</h3>
+
+<div class="language-sql highlighter-rouge"><div class="highlight"><pre class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
+2
+3
+4
+5
+6
+7
+8
+9
+10
+11
+12
+13
+14
+15
+16
+</pre></td><td class="rouge-code"><pre><span class="k">DROP</span> <span class="k">TABLE</span> <span class="n">IF</span> <span class="k">EXISTS</span> <span class="n">project_id</span><span class="p">.</span><span class="n">order_history</span><span class="p">;</span>
+<span class="k">CREATE</span> <span class="k">OR</span> <span class="k">REPLACE</span> <span class="k">TABLE</span> <span class="n">project_id</span><span class="p">.</span><span class="n">order_history</span>
+ <span class="p">(</span>
+     <span class="n">order_date</span> <span class="nb">DATE</span> <span class="k">NOT</span> <span class="k">NULL</span> <span class="k">OPTIONS</span><span class="p">(</span><span class="n">description</span><span class="o">=</span><span class="nv">"取引日"</span><span class="p">),</span>
+     <span class="n">order_id</span> <span class="n">STRING</span> <span class="k">NOT</span> <span class="k">NULL</span> <span class="k">OPTIONS</span><span class="p">(</span><span class="n">description</span><span class="o">=</span><span class="nv">"オーダー番号"</span><span class="p">),</span>
+     <span class="n">store_code</span> <span class="n">STRING</span> <span class="k">NOT</span> <span class="k">NULL</span> <span class="k">OPTIONS</span><span class="p">(</span><span class="n">description</span><span class="o">=</span><span class="nv">"店舗コード"</span><span class="p">),</span>
+     <span class="n">store_name</span> <span class="n">STRING</span> <span class="k">NOT</span> <span class="k">NULL</span> <span class="k">OPTIONS</span><span class="p">(</span><span class="n">description</span><span class="o">=</span><span class="nv">"店舗名"</span><span class="p">),</span>
+     <span class="n">member_id</span> <span class="n">STRING</span> <span class="k">OPTIONS</span><span class="p">(</span><span class="n">description</span><span class="o">=</span><span class="nv">"顧客コード"</span><span class="p">),</span>
+     <span class="n">sales_amount_with_tax</span> <span class="n">INT64</span> <span class="k">NOT</span> <span class="k">NULL</span> <span class="k">OPTIONS</span><span class="p">(</span><span class="n">description</span><span class="o">=</span><span class="nv">"税込取引金額"</span><span class="p">),</span>
+     <span class="n">sales_amount</span> <span class="n">INT64</span> <span class="k">NOT</span> <span class="k">NULL</span> <span class="k">OPTIONS</span><span class="p">(</span><span class="n">description</span><span class="o">=</span><span class="nv">"税抜取引金額"</span><span class="p">),</span>
+     <span class="n">yobi_0001</span> <span class="n">STRING</span> <span class="k">OPTIONS</span><span class="p">(</span><span class="n">description</span><span class="o">=</span><span class="nv">"予備1"</span><span class="p">),</span>
+     <span class="n">yobi_0002</span> <span class="n">STRING</span> <span class="k">OPTIONS</span><span class="p">(</span><span class="n">description</span><span class="o">=</span><span class="nv">"予備2"</span><span class="p">),</span>
+     <span class="n">yobi_0003</span> <span class="n">STRING</span> <span class="k">OPTIONS</span><span class="p">(</span><span class="n">description</span><span class="o">=</span><span class="nv">"予備3"</span><span class="p">),</span>
+     <span class="n">update_timestamp_utc</span> <span class="nb">TIMESTAMP</span> <span class="k">NOT</span> <span class="k">NULL</span> <span class="k">OPTIONS</span><span class="p">(</span><span class="n">description</span><span class="o">=</span><span class="nv">"更新日UTC"</span><span class="p">)</span>
+ <span class="p">)</span>
+  <span class="k">PARTITION</span> <span class="k">BY</span> <span class="n">_PARTITIONDATE</span>
+</pre></td></tr></tbody></table></code></pre></div></div>
+
+<p>上は受注履歴データのスキーマ例です. このテーブルでは今後のことを考えて予備カラムを３つ予め用意しています. しかし、このような予備カラムは以下の理由によって推奨されません:</p>
+
+<ul>
+  <li>いざ活用されたときにカラム名がデータの中身を示唆するものにならない
+    <ul>
+      <li><code class="language-plaintext highlighter-rouge">yobi_0001</code>カラムに取引に使用されたクーポンIDを格納する運用になったとしても、分析者はカラム名からその意味を推察することができない</li>
+    </ul>
+  </li>
+  <li>文字列型など事前に決めたデータ型・サイズでしか使えない</li>
+</ul>
+
+<blockquote>
+  <p>BEST PRACTICE</p>
+</blockquote>
+
+<ul>
+  <li>予備カラムを準備する必要はない</li>
+  <li>カラムの追加は、基本的にはアプロケーションには影響を与えません</li>
+  <li>カラムの削除と変更と比べ、カラム追加のほうが容易なオペレーション</li>
+</ul>
+
+<h3 id="無駄なカラムは作らない">無駄なカラムは作らない</h3>
+
+<p>テーブル設計をする時、Booleanを多く使いがちになりますが、日時を使うことでより良い設計にできる場合があります.</p>
+
+<div class="language-sql highlighter-rouge"><div class="highlight"><pre class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
+2
+3
+4
+5
+6
+7
+8
+9
+</pre></td><td class="rouge-code"><pre><span class="k">CREATE</span> <span class="k">OR</span> <span class="k">REPLACE</span> <span class="k">TABLE</span> <span class="n">project_id</span><span class="p">.</span><span class="err">記事マスター</span>
+ <span class="p">(</span>
+     <span class="n">article_id</span> <span class="n">STRING</span> <span class="k">NOT</span> <span class="k">NULL</span> <span class="k">OPTIONS</span><span class="p">(</span><span class="n">description</span><span class="o">=</span><span class="nv">"記事ID"</span><span class="p">),</span>
+     <span class="n">article_name</span> <span class="n">STRING</span> <span class="k">NOT</span> <span class="k">NULL</span> <span class="k">OPTIONS</span><span class="p">(</span><span class="n">description</span><span class="o">=</span><span class="nv">"記事名称"</span><span class="p">),</span>
+     <span class="n">category</span> <span class="n">STRING</span> <span class="k">NOT</span> <span class="k">NULL</span> <span class="k">OPTIONS</span><span class="p">(</span><span class="n">description</span><span class="o">=</span><span class="nv">"記事カテゴリー（例：News, エンタメ, etc）"</span><span class="p">),</span>
+     <span class="n">is_published</span> <span class="nb">BOOLEAN</span> <span class="k">NOT</span> <span class="k">NULL</span> <span class="k">OPTIONS</span><span class="p">(</span><span class="n">description</span><span class="o">=</span><span class="nv">"公開済みフラグ"</span><span class="p">),</span>
+     <span class="n">publish_date</span> <span class="nb">DATE</span> <span class="k">OPTIONS</span><span class="p">(</span><span class="n">description</span><span class="o">=</span><span class="nv">"公開日時"</span><span class="p">),</span>
+     <span class="n">update_timestamp_utc</span> <span class="nb">TIMESTAMP</span> <span class="k">NOT</span> <span class="k">NULL</span> <span class="k">OPTIONS</span><span class="p">(</span><span class="n">description</span><span class="o">=</span><span class="nv">"更新日UTC"</span><span class="p">)</span>
+ <span class="p">)</span>
+</pre></td></tr></tbody></table></code></pre></div></div>
+
+<p>この記事マスターテーブルでは, <code class="language-plaintext highlighter-rouge">is_published</code>カラムで記事が公開されたかされていないかを判定しています. しかし、この役目は <code class="language-plaintext highlighter-rouge">publish_date</code> の値を見れば判定することができるので、<code class="language-plaintext highlighter-rouge">is_published</code>は無駄なカラムと言えます.</p>
+
+<h3 id="データはなるべく物理削除をする">データはなるべく物理削除をする</h3>
+
+<blockquote>
+  <p>論理削除と物理削除</p>
+</blockquote>
+
+<ul>
+  <li>論理削除: 実際にはデータを削除せずに、削除されたと見なすフラッグと呼ばれるカラムを設定することでユーザーには削除しているかのように振る舞うことができることをさします</li>
+  <li>物理削除: 実際にSQLでDeleteされることをさし、データベースからも削除されます。そのため復元したり削除されたデータを参照することはできません</li>
+</ul>
+
+<blockquote>
+  <p>データは物理削除したほうが良いのか？</p>
+</blockquote>
+
+<p>論理削除は誤って削除した場合に簡単に戻せる(システムでのバグも同様)というメリットがありますが、実際にデータが削除されないため、容量の圧迫や性能低下につながり将来的な開発コストや運用コストが大きくなります. また、<code class="language-plaintext highlighter-rouge">is_deleted</code>カラムなどを用いて論理削除されたかどうか管理しなくていけなくなるため、<code class="language-plaintext highlighter-rouge">JOIN</code>して分析するとき常に<code class="language-plaintext highlighter-rouge">WHERE</code>句で<code class="language-plaintext highlighter-rouge">is_deleted = False</code>という条件を入れる必要があったり、また外部キーで参照されているときの論理削除時の挙動も複雑になります.</p>
+
+<p>ただし、業務システムではトランザクションデータは論理削除が選択されます. 理由は、トランザクションデータはログや履歴のデータであり、蓄積されることが前提のデータだからです.</p>
+
+
+                <hr style="visibility: hidden;">
+                <hr/>
+                <b><fontsize="5">Share Buttons</font><br></b>
+                <!--see 
+    https://jekyllcodex.org/without-plugin/share-buttons/ 
+    https://ranvir.xyz/blog/why-and-how-to-add-social-sharing-buttons-on-your-jekyll-blog-using-github-pages/
+-->
+
+
+
+<style>
+#share-buttons {display: inline-block; vertical-align: middle; }
+#share-buttons:after {content: ""; display: block; clear: both;}
+#share-buttons > div {
+    position: relative;
+    text-align: left; 
+    height: 36px; 
+    width: 32px; 
+    float: left; 
+    text-align: center;
+}
+#share-buttons > div > svg {height: 16px; fill: #d5d5d5; margin-top: 10px;}
+#share-buttons > div:hover {cursor: pointer;}
+#share-buttons > div.facebook:hover > svg {fill: #3B5998;}
+#share-buttons > div.twitter:hover > svg {fill: #55ACEE;}
+#share-buttons > div.linkedin:hover > svg {fill: #0077b5;}
+#share-buttons > div.pinterest:hover > svg {fill: #CB2027;}
+#share-buttons > div.gplus:hover > svg {fill: #dd4b39;}
+#share-buttons > div.mail:hover > svg {fill: #7D7D7D;}
+#share-buttons > div.instagram:hover > svg {fill: #C73B92;}
+#share-buttons > div.facebook > svg {height: 18px; margin-top: 9px;}
+#share-buttons > div.twitter > svg {height: 20px; margin-top: 8px;}
+#share-buttons > div.linkedin > svg {height: 19px; margin-top: 7px;}
+#share-buttons > div.pinterest > svg {height: 20px; margin-top: 9px;}
+#share-buttons > div.gplus > svg {height: 17px; margin-top: 9px; position: relative; left: 1px;}
+#share-buttons > div.mail > svg {height: 14px; margin-top: 11px;}
+</style>
+
+<span style="color: black">Share on: </span><div id="share-buttons">
+    <div class="facebook" title="Share this on Facebook" onclick="gtag('event', 'Facebook', {'event_category':'Post Shared','event_label':'Facebook'}); location.href='http://www.facebook.com/share.php?u=https://ryonakagami.github.io/2021/09/24/datamart-design/';"><svg viewBox="0 0 1792 1792" xmlns="http://www.w3.org/2000/svg"><path d="M1343 12v264h-157q-86 0-116 36t-30 108v189h293l-39 296h-254v759h-306v-759h-255v-296h255v-218q0-186 104-288.5t277-102.5q147 0 228 12z"/></svg></div>
+    <div class="twitter" title="Share this on Twitter" onclick="gtag('event', 'Twitter', {'event_category':'Post Shared','event_label':'Twitter'}); location.href='https://twitter.com/intent/tweet?text=データ設計のいろは&url=https://ryonakagami.github.io/2021/09/24/datamart-design/';"><svg viewBox="0 0 1792 1792" xmlns="http://www.w3.org/2000/svg"><path d="M1684 408q-67 98-162 167 1 14 1 42 0 130-38 259.5t-115.5 248.5-184.5 210.5-258 146-323 54.5q-271 0-496-145 35 4 78 4 225 0 401-138-105-2-188-64.5t-114-159.5q33 5 61 5 43 0 85-11-112-23-185.5-111.5t-73.5-205.5v-4q68 38 146 41-66-44-105-115t-39-154q0-88 44-163 121 149 294.5 238.5t371.5 99.5q-8-38-8-74 0-134 94.5-228.5t228.5-94.5q140 0 236 102 109-21 205-78-37 115-142 178 93-10 186-50z"/></svg></div>
+    <div class="linkedin" title="Share this on Linkedin" onclick="gtag('event', 'Linkedin', {'event_category':'Post Shared','event_label':'Linkedin'}); location.href='https://www.linkedin.com/shareArticle?mini=true&url=https://ryonakagami.github.io/2021/09/24/datamart-design/&title=&summary=&source=';"><svg viewBox="0 0 1792 1792" xmlns="http://www.w3.org/2000/svg"><path d="M477 625v991h-330v-991h330zm21-306q1 73-50.5 122t-135.5 49h-2q-82 0-132-49t-50-122q0-74 51.5-122.5t134.5-48.5 133 48.5 51 122.5zm1166 729v568h-329v-530q0-105-40.5-164.5t-126.5-59.5q-63 0-105.5 34.5t-63.5 85.5q-11 30-11 81v553h-329q2-399 2-647t-1-296l-1-48h329v144h-2q20-32 41-56t56.5-52 87-43.5 114.5-15.5q171 0 275 113.5t104 332.5z"/></svg></div>
+    
+    <div class="mail" title="Share this through Email" onclick="gtag('event', 'Email', {'event_category':'Post Shared','event_label':'Email'}); location.href='mailto:?&body=https://ryonakagami.github.io/2021/09/24/datamart-design/';"><svg viewBox="0 0 1792 1792" xmlns="http://www.w3.org/2000/svg"><path d="M1792 710v794q0 66-47 113t-113 47h-1472q-66 0-113-47t-47-113v-794q44 49 101 87 362 246 497 345 57 42 92.5 65.5t94.5 48 110 24.5h2q51 0 110-24.5t94.5-48 92.5-65.5q170-123 498-345 57-39 100-87zm0-294q0 79-49 151t-122 123q-376 261-468 325-10 7-42.5 30.5t-54 38-52 32.5-57.5 27-50 9h-2q-23 0-50-9t-57.5-27-52-32.5-54-38-42.5-30.5q-91-64-262-182.5t-205-142.5q-62-42-117-115.5t-55-136.5q0-78 41.5-130t118.5-52h1472q65 0 112.5 47t47.5 113z"/></svg></div>
+</div>
+
+                
+                <hr/>
+
+                <!-- Featured Tags -->
+                <b><fontsize="5">Feature Tags</b>
+                    <div id="tag_cloud" class="tags tags-sup js-tags" 
+                    style="line-height: 0px !important;">
+                        
+                        
+                        
+                        
+                        
+                                <a data-sort="0288" 
+                                    href="/archive/?tag=%E7%B5%B1%E8%A8%88"
+                                    title="統計"
+                                    style="color: #337ab7 !important;"
+                                    rel="61">統計</a>
+                        
+                                <a data-sort="0298" 
+                                    href="/archive/?tag=Python"
+                                    title="Python"
+                                    style="color: #337ab7 !important;"
+                                    rel="51">Python</a>
+                        
+                                <a data-sort="0300" 
+                                    href="/archive/?tag=math"
+                                    title="math"
+                                    style="color: #337ab7 !important;"
+                                    rel="49">math</a>
+                        
+                                <a data-sort="0303" 
+                                    href="/archive/?tag=Linux"
+                                    title="Linux"
+                                    style="color: #337ab7 !important;"
+                                    rel="46">Linux</a>
+                        
+                                <a data-sort="0316" 
+                                    href="/archive/?tag=Ubuntu+20.04+LTS"
+                                    title="Ubuntu 20.04 LTS"
+                                    style="color: #337ab7 !important;"
+                                    rel="33">Ubuntu 20.04 LTS</a>
+                        
+                                <a data-sort="0319" 
+                                    href="/archive/?tag=Shell"
+                                    title="Shell"
+                                    style="color: #337ab7 !important;"
+                                    rel="30">Shell</a>
+                        
+                                <a data-sort="0321" 
+                                    href="/archive/?tag=English"
+                                    title="English"
+                                    style="color: #337ab7 !important;"
+                                    rel="28">English</a>
+                        
+                                <a data-sort="0324" 
+                                    href="/archive/?tag=git"
+                                    title="git"
+                                    style="color: #337ab7 !important;"
+                                    rel="25">git</a>
+                        
+                                <a data-sort="0329" 
+                                    href="/archive/?tag=%E6%96%B9%E6%B3%95%E8%AB%96"
+                                    title="方法論"
+                                    style="color: #337ab7 !important;"
+                                    rel="20">方法論</a>
+                        
+                                <a data-sort="0333" 
+                                    href="/archive/?tag=Ubuntu+22.04+LTS"
+                                    title="Ubuntu 22.04 LTS"
+                                    style="color: #337ab7 !important;"
+                                    rel="16">Ubuntu 22.04 LTS</a>
+                        
+                                <a data-sort="0337" 
+                                    href="/archive/?tag=%E7%B5%B1%E8%A8%88%E6%A4%9C%E5%AE%9A"
+                                    title="統計検定"
+                                    style="color: #337ab7 !important;"
+                                    rel="12">統計検定</a>
+                        
+                                <a data-sort="0338" 
+                                    href="/archive/?tag=%E7%AB%B6%E6%8A%80%E3%83%97%E3%83%AD%E3%82%B0%E3%83%A9%E3%83%9F%E3%83%B3%E3%82%B0"
+                                    title="競技プログラミング"
+                                    style="color: #337ab7 !important;"
+                                    rel="11">競技プログラミング</a>
+                        
+                                <a data-sort="0339" 
+                                    href="/archive/?tag=%E3%83%95%E3%83%BC%E3%83%AA%E3%82%A8%E8%A7%A3%E6%9E%90"
+                                    title="フーリエ解析"
+                                    style="color: #337ab7 !important;"
+                                    rel="10">フーリエ解析</a>
+                        
+                                <a data-sort="0340" 
+                                    href="/archive/?tag=%E5%89%8D%E5%87%A6%E7%90%86"
+                                    title="前処理"
+                                    style="color: #337ab7 !important;"
+                                    rel="9">前処理</a>
+                        
+                                <a data-sort="0340" 
+                                    href="/archive/?tag=SQL"
+                                    title="SQL"
+                                    style="color: #337ab7 !important;"
+                                    rel="9">SQL</a>
+                        
+                                <a data-sort="0340" 
+                                    href="/archive/?tag=coding"
+                                    title="coding"
+                                    style="color: #337ab7 !important;"
+                                    rel="9">coding</a>
+                        
+                                <a data-sort="0341" 
+                                    href="/archive/?tag=%E3%82%B3%E3%83%9F%E3%83%A5%E3%83%8B%E3%82%B1%E3%83%BC%E3%82%B7%E3%83%A7%E3%83%B3"
+                                    title="コミュニケーション"
+                                    style="color: #337ab7 !important;"
+                                    rel="8">コミュニケーション</a>
+                        
+                                <a data-sort="0342" 
+                                    href="/archive/?tag=Network"
+                                    title="Network"
+                                    style="color: #337ab7 !important;"
+                                    rel="7">Network</a>
+                        
+                                <a data-sort="0342" 
+                                    href="/archive/?tag=ssh"
+                                    title="ssh"
+                                    style="color: #337ab7 !important;"
+                                    rel="7">ssh</a>
+                        
+                                <a data-sort="0343" 
+                                    href="/archive/?tag=%E5%B0%86%E6%A3%8B"
+                                    title="将棋"
+                                    style="color: #337ab7 !important;"
+                                    rel="6">将棋</a>
+                        
+                                <a data-sort="0343" 
+                                    href="/archive/?tag=Data+visualization"
+                                    title="Data visualization"
+                                    style="color: #337ab7 !important;"
+                                    rel="6">Data visualization</a>
+                        
+                                <a data-sort="0343" 
+                                    href="/archive/?tag=Docker"
+                                    title="Docker"
+                                    style="color: #337ab7 !important;"
+                                    rel="6">Docker</a>
+                        
+                                <a data-sort="0343" 
+                                    href="/archive/?tag=Econometrics"
+                                    title="Econometrics"
+                                    style="color: #337ab7 !important;"
+                                    rel="6">Econometrics</a>
+                        
+                                <a data-sort="0343" 
+                                    href="/archive/?tag=VSCode"
+                                    title="VSCode"
+                                    style="color: #337ab7 !important;"
+                                    rel="6">VSCode</a>
+                        
+                                <a data-sort="0343" 
+                                    href="/archive/?tag=statistical+inference"
+                                    title="statistical inference"
+                                    style="color: #337ab7 !important;"
+                                    rel="6">statistical inference</a>
+                        
+                                <a data-sort="0344" 
+                                    href="/archive/?tag=GitHub+Pages"
+                                    title="GitHub Pages"
+                                    style="color: #337ab7 !important;"
+                                    rel="5">GitHub Pages</a>
+                        
+                                <a data-sort="0344" 
+                                    href="/archive/?tag=apt"
+                                    title="apt"
+                                    style="color: #337ab7 !important;"
+                                    rel="5">apt</a>
+                        
+                                <a data-sort="0344" 
+                                    href="/archive/?tag=development"
+                                    title="development"
+                                    style="color: #337ab7 !important;"
+                                    rel="5">development</a>
+                        
+                                <a data-sort="0345" 
+                                    href="/archive/?tag=%E3%82%B7%E3%82%B9%E3%83%86%E3%83%A0%E7%AE%A1%E7%90%86"
+                                    title="システム管理"
+                                    style="color: #337ab7 !important;"
+                                    rel="4">システム管理</a>
+                        
+                                <a data-sort="0345" 
+                                    href="/archive/?tag=Coffee"
+                                    title="Coffee"
+                                    style="color: #337ab7 !important;"
+                                    rel="4">Coffee</a>
+                        
+                                <a data-sort="0345" 
+                                    href="/archive/?tag=cloud"
+                                    title="cloud"
+                                    style="color: #337ab7 !important;"
+                                    rel="4">cloud</a>
+                        
+                                <a data-sort="0346" 
+                                    href="/archive/?tag=%E6%95%B0%E5%80%A4%E8%A8%88%E7%AE%97"
+                                    title="数値計算"
+                                    style="color: #337ab7 !important;"
+                                    rel="3">数値計算</a>
+                        
+                                <a data-sort="0346" 
+                                    href="/archive/?tag=%E7%B4%A0%E6%95%B0"
+                                    title="素数"
+                                    style="color: #337ab7 !important;"
+                                    rel="3">素数</a>
+                        
+                                <a data-sort="0346" 
+                                    href="/archive/?tag=Book"
+                                    title="Book"
+                                    style="color: #337ab7 !important;"
+                                    rel="3">Book</a>
+                        
+                                <a data-sort="0346" 
+                                    href="/archive/?tag=Font"
+                                    title="Font"
+                                    style="color: #337ab7 !important;"
+                                    rel="3">Font</a>
+                        
+                                <a data-sort="0346" 
+                                    href="/archive/?tag=Metrics"
+                                    title="Metrics"
+                                    style="color: #337ab7 !important;"
+                                    rel="3">Metrics</a>
+                        
+                                <a data-sort="0346" 
+                                    href="/archive/?tag=Poetry"
+                                    title="Poetry"
+                                    style="color: #337ab7 !important;"
+                                    rel="3">Poetry</a>
+                        
+                                <a data-sort="0346" 
+                                    href="/archive/?tag=Ubuntu+24.04+LTS"
+                                    title="Ubuntu 24.04 LTS"
+                                    style="color: #337ab7 !important;"
+                                    rel="3">Ubuntu 24.04 LTS</a>
+                        
+                                <a data-sort="0346" 
+                                    href="/archive/?tag=architecture"
+                                    title="architecture"
+                                    style="color: #337ab7 !important;"
+                                    rel="3">architecture</a>
+                        
+                                <a data-sort="0346" 
+                                    href="/archive/?tag=aws"
+                                    title="aws"
+                                    style="color: #337ab7 !important;"
+                                    rel="3">aws</a>
+                        
+                                <a data-sort="0346" 
+                                    href="/archive/?tag=shell"
+                                    title="shell"
+                                    style="color: #337ab7 !important;"
+                                    rel="3">shell</a>
+                        
+                                <a data-sort="0346" 
+                                    href="/archive/?tag=systemctl"
+                                    title="systemctl"
+                                    style="color: #337ab7 !important;"
+                                    rel="3">systemctl</a>
+                        
+                                <a data-sort="0347" 
+                                    href="/archive/?tag=%E3%83%86%E3%83%B3%E3%83%97%E3%83%AC%E3%83%BC%E3%83%88"
+                                    title="テンプレート"
+                                    style="color: #337ab7 !important;"
+                                    rel="2">テンプレート</a>
+                        
+                                <a data-sort="0347" 
+                                    href="/archive/?tag=%E3%83%87%E3%83%BC%E3%82%BF%E6%A7%8B%E9%80%A0"
+                                    title="データ構造"
+                                    style="color: #337ab7 !important;"
+                                    rel="2">データ構造</a>
+                        
+                                <a data-sort="0347" 
+                                    href="/archive/?tag=%E3%83%9D%E3%83%AF%E3%82%BD%E3%83%B3%E5%88%86%E5%B8%83"
+                                    title="ポワソン分布"
+                                    style="color: #337ab7 !important;"
+                                    rel="2">ポワソン分布</a>
+                        
+                                <a data-sort="0347" 
+                                    href="/archive/?tag=%E4%BC%9A%E8%A8%88%E5%88%86%E6%9E%90"
+                                    title="会計分析"
+                                    style="color: #337ab7 !important;"
+                                    rel="2">会計分析</a>
+                        
+                                <a data-sort="0347" 
+                                    href="/archive/?tag=%E6%96%87%E5%AD%97%E3%82%B3%E3%83%BC%E3%83%89"
+                                    title="文字コード"
+                                    style="color: #337ab7 !important;"
+                                    rel="2">文字コード</a>
+                        
+                                <a data-sort="0347" 
+                                    href="/archive/?tag=%E7%92%B0%E5%A2%83%E6%A7%8B%E7%AF%89"
+                                    title="環境構築"
+                                    style="color: #337ab7 !important;"
+                                    rel="2">環境構築</a>
+                        
+                                <a data-sort="0347" 
+                                    href="/archive/?tag=%E8%AB%96%E6%96%87"
+                                    title="論文"
+                                    style="color: #337ab7 !important;"
+                                    rel="2">論文</a>
+                        
+                                <a data-sort="0347" 
+                                    href="/archive/?tag=App"
+                                    title="App"
+                                    style="color: #337ab7 !important;"
+                                    rel="2">App</a>
+                        
+                                <a data-sort="0347" 
+                                    href="/archive/?tag=Bayesian"
+                                    title="Bayesian"
+                                    style="color: #337ab7 !important;"
+                                    rel="2">Bayesian</a>
+                        
+                                <a data-sort="0347" 
+                                    href="/archive/?tag=Dynamic+Programming"
+                                    title="Dynamic Programming"
+                                    style="color: #337ab7 !important;"
+                                    rel="2">Dynamic Programming</a>
+                        
+                                <a data-sort="0347" 
+                                    href="/archive/?tag=Keyboard"
+                                    title="Keyboard"
+                                    style="color: #337ab7 !important;"
+                                    rel="2">Keyboard</a>
+                        
+                                <a data-sort="0347" 
+                                    href="/archive/?tag=Processing"
+                                    title="Processing"
+                                    style="color: #337ab7 !important;"
+                                    rel="2">Processing</a>
+                        
+                                <a data-sort="0347" 
+                                    href="/archive/?tag=R"
+                                    title="R"
+                                    style="color: #337ab7 !important;"
+                                    rel="2">R</a>
+                        
+                                <a data-sort="0347" 
+                                    href="/archive/?tag=Steam"
+                                    title="Steam"
+                                    style="color: #337ab7 !important;"
+                                    rel="2">Steam</a>
+                        
+                                <a data-sort="0347" 
+                                    href="/archive/?tag=filesystem"
+                                    title="filesystem"
+                                    style="color: #337ab7 !important;"
+                                    rel="2">filesystem</a>
+                        
+                                <a data-sort="0347" 
+                                    href="/archive/?tag=quarto"
+                                    title="quarto"
+                                    style="color: #337ab7 !important;"
+                                    rel="2">quarto</a>
+                        
+                                <a data-sort="0347" 
+                                    href="/archive/?tag=regex"
+                                    title="regex"
+                                    style="color: #337ab7 !important;"
+                                    rel="2">regex</a>
+                    </div>
+
+                <br>
+
+                <b><fontsize="5">Leave a Comment</font><br>(注意：GitHub Accountが必要となります）</b>
+                
+                <script src="https://utteranc.es/client.js"
+                    repo="RyoNakagami/RyoNakagami.github.io"
+                    issue-term="url"
+                    theme="github-light"
+                    crossorigin="anonymous"
+                    async>Reduce unused JavaScript
+                
+                </script>
+
+
+            </div>  
+
+    <!-- Side Catalog Container -->
+        
+            <div class="
+                col-lg-1 col-lg-offset-0
+                visible-lg-block
+                sidebar-container
+                catalog-container">
+                <div class="side-catalog fixed" style="margin-top:3%">
+                    <hr class="hidden-sm hidden-xs">
+                    <h5>
+                        <a class="catalog-toggle" href="#">CONTENTS</a>
+                    </h5>
+                    <ul class="catalog-body"></ul>
+                </div>
+            </div>
+        
+    <!-- Sidebar Container -->
+            <!-- <div class="
+                col-lg-10 col-lg-offset-1
+                col-md-10 col-md-offset-1
+                sidebar-container row"> -->
+                <!-- 
+<hr>
+<h5>FRIENDS</h5>
+<ul class="list-inline">
+  
+  <li><a href="https://twitter.com/bluesky0804?ref_src=twsrc%5Egoogle%7Ctwcamp%5Eserp%7Ctwgr%5Eauthor">bluesky0804</a></li>
+  
+</ul>
+
+ -->
+            </div>
+        </div>
+    </div>
+</article>
+
+<!-- add support for mathjax by voleking-->
+
+  <script async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml.js" id="MathJax-script"></script>
+<script>
+  MathJax = {
+    tex: {
+      inlineMath: [['$','$'], ['\\(','\\)']],
+      displayMath: [['$$','$$'], ['\\[','\\]']],
+      processEscapes: true,
+      processEnvironments: true, // for pseudo
+      tags: "ams",
+      autoload: {
+        color: [],
+        colorV2: ['color']
+      },
+      packages: {'[+]': ['noerrors']}
+    },
+    chtml: {
+      matchFontHeight: false,
+      displayAlign: "left",
+      displayIndent: "2em"
+    },
+    options: {
+      renderActions: {
+        /* add a new named action to render <script type="math/tex"> */
+        find_script_mathtex: [10, function (doc) {
+          for (const node of document.querySelectorAll('script[type^="math/tex"]')) {
+            const display = !!node.type.match(/; *mode=display/);
+            const math = new doc.options.MathItem(node.textContent, doc.inputJax[0], display);
+            const text = document.createTextNode('');
+            node.parentNode.replaceChild(text, node);
+            math.start = {node: text, delim: '', n: 0};
+            math.end = {node: text, delim: '', n: 0};
+            doc.math.push(math);
+          }
+        }, '']
+      }
+    },
+    loader: {
+      load: ['[tex]/noerrors']
+    }
+  };
+</script>
+
+
+
+
+
+<!-- async load function -->
+<script>
+    function async(u, c) {
+      var d = document, t = 'script',
+          o = d.createElement(t),
+          s = d.getElementsByTagName(t)[0];
+      o.src = u;
+      if (c) { o.addEventListener('load', function (e) { c(null, e); }, false); }
+      s.parentNode.insertBefore(o, s);
+    }
+</script>
+<!-- anchor-js, Doc:http://bryanbraun.github.io/anchorjs/ -->
+<script>
+    async("//cdnjs.cloudflare.com/ajax/libs/anchor-js/1.1.1/anchor.min.js",function(){
+        anchors.options = {
+          visible: 'hover',
+          placement: 'right',
+          // icon: '#'
+        };
+        anchors.add().remove('.intro-header h1').remove('.subheading').remove('.sidebar-container h5');
+    })
+</script>
+<style>
+    /* place left on bigger screen */
+    @media all and (min-width: 800px) {
+        .anchorjs-link{
+            position: absolute;
+            left: -0.75em;
+            font-size: 1.1em;
+            margin-top : -0.1em;
+        }
+    }
+</style>
+
+
+<body>
+    <!-- enable mermaid language on markdown post -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/mermaid/10.6.1/mermaid.min.js"></script>
+<script>
+   mermaid.initialize({
+       startOnLoad:true,
+       theme: 'default'
+   });
+   window.mermaid.init(undefined, document.querySelectorAll('.language-mermaid'));
+</script>
+
+</body>
+
+    <script>
+    
+    var elements = document.querySelectorAll('p');
+    Array.prototype.forEach.call(elements, function(el, i){
+        if(el.innerHTML=='[expand]') {
+            var parentcontent = el.parentNode.innerHTML.replace('<p>[expand]</p>','<div class="expand" style="display: none; height: 0; overflow: hidden;">').replace('<p>[/expand]</p>','</div>');
+            el.parentNode.innerHTML = parentcontent;
+        }
+    });
+
+    var elements = document.querySelectorAll('div.expand');
+    Array.prototype.forEach.call(elements, function(el, i){
+        el.previousElementSibling.innerHTML = el.previousElementSibling.innerHTML + '<span>..&nbsp; <a href="#" style="cursor: pointer;" onclick="this.parentNode.parentNode.nextElementSibling.style.display = \'block\'; this.parentNode.parentNode.nextElementSibling.style.height = \'auto\'; this.parentNode.style.display = \'none\';">read&nbsp;more&nbsp;&rarr;</a></span>';
+    });
+
+</script>
+
+    <!-- Footer -->
+<footer>
+    <div class="container">
+        <div class="row">
+            <!--<div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1"> -->
+                <!-- SNS Link -->
+            
+
+
+<ul class="list-inline text-center">
+
+
+  
+  
+  
+  
+  <li>
+    <a target="_blank" href="https://github.com/RyoNakagami">
+      <span class="fa-stack fa-lg">
+        <i class="fa fa-circle fa-stack-2x"></i>
+        <i class="fa fa-github fa-stack-1x fa-inverse"></i>
+      </span>
+    </a>
+  </li>
+  
+  
+</ul>
+
+            
+            <p class="copyright text-muted">
+                Copyright &copy; Ryo's Tech Blog 2025
+                <br>
+                Powered by <a href="https://ryonakagami.github.io">Ryo's Tech Blog</a> |
+                <iframe style="margin-left: 2px; margin-bottom:-5px;" frameborder="0" scrolling="0" width="100px"
+                    height="20px"
+                    title="RyoNakagami.github.io github stars"
+                    src="https://ghbtns.com/github-btn.html?user=RyoNakagami&repo=RyoNakagami.github.io&type=star&count=true">
+                </iframe>
+            </p>
+            <!--</div> -->
+        </div>
+    </div>
+</footer>
+
+<!-- jQuery -->
+<script src="/js/jquery.min.js "></script>
+
+<!-- Bootstrap Core JavaScript -->
+<!-- Currently, only navbar scroll-down effect at desktop still depends on this -->
+<script src="/js/bootstrap.min.js "></script>
+
+<!-- Custom Theme JavaScript -->
+<script src="/js/ryo-blog.min.js "></script>
+
+<!-- Simple Jekyll Search -->
+<script src="/js/simple-jekyll-search.min.js"></script>
+
+<!-- Service Worker -->
+
+<script src="/js/snackbar.js "></script>
+<script src="/js/sw-registration.js "></script>
+
+
+<!-- async load function -->
+<script>
+    function async(u, c) {
+        var d = document, t = 'script',
+            o = d.createElement(t),
+            s = d.getElementsByTagName(t)[0];
+        o.src = u;
+        if (c) { o.addEventListener('load', function (e) { c(null, e); }, false); }
+        s.parentNode.insertBefore(o, s);
+    }
+</script>
+
+<!--
+     Because of the native support for backtick-style fenced code blocks
+     right within the Markdown is landed in Github Pages,
+     From V1.6, There is no need for Highlight.js,
+     so Huxblog drops it officially.
+
+     - https://github.com/blog/2100-github-pages-now-faster-and-simpler-with-jekyll-3-0
+     - https://help.github.com/articles/creating-and-highlighting-code-blocks/
+     - https://github.com/jneen/rouge/wiki/list-of-supported-languages-and-lexers
+-->
+<!--
+    <script>
+        async("http://cdn.bootcss.com/highlight.js/8.6/highlight.min.js", function(){
+            hljs.initHighlightingOnLoad();
+        })
+    </script>
+    <link href="http://cdn.bootcss.com/highlight.js/8.6/styles/github.min.css" rel="stylesheet">
+-->
+
+
+
+
+
+
+
+<!--fastClick.js -->
+<script>
+    async("//cdnjs.cloudflare.com/ajax/libs/fastclick/1.0.6/fastclick.min.js", function () {
+        var $nav = document.querySelector("nav");
+        if ($nav) FastClick.attach($nav);
+    })
+</script>
+
+
+<!-- Global site tag (gtag.js) - Google Analytics -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-LVL413SV09"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+  gtag('config', 'G-LVL413SV09');
+</script>
+
+
+
+<!-- Side Catalog -->
+
+<script type="text/javascript">
+    function generateCatalog(selector) {
+
+        // interop with multilangual 
+        if ('' == 'true') {
+            _containerSelector = 'div.post-container.active'
+        } else {
+            _containerSelector = 'div.post-container'
+        }
+
+        // init
+        var P = $(_containerSelector), a, n, t, l, i, c;
+        a = P.find('h1,h2,h3,h4,h5,h6');
+
+        // clean
+        $(selector).html('')
+
+        // appending
+        a.each(function () {
+            n = $(this).prop('tagName').toLowerCase();
+            i = "#" + $(this).prop('id');
+            t = $(this).text();
+            c = $('<a href="' + i + '" rel="nofollow">' + t + '</a>');
+            l = $('<li class="' + n + '_nav"></li>').append(c);
+            $(selector).append(l);
+        });
+        return true;
+    }
+
+    generateCatalog(".catalog-body");
+
+    // toggle side catalog
+    $(".catalog-toggle").click((function (e) {
+        e.preventDefault();
+        $('.side-catalog').toggleClass("fold")
+    }))
+
+    /*
+     * Doc: https://github.com/davist11/jQuery-One-Page-Nav
+     * Fork by Hux to support padding
+     */
+    async("/js/jquery.nav.js", function () {
+        $('.catalog-body').onePageNav({
+            currentClass: "active",
+            changeHash: !1,
+            easing: "swing",
+            filter: "",
+            scrollSpeed: 700,
+            scrollOffset: 0,
+            scrollThreshold: .2,
+            begin: null,
+            end: null,
+            scrollChange: null,
+            padding: 80
+        });
+    });
+</script>
+
+
+
+<!-- Multi-Lingual -->
+
+
+<!-- Simple Jekyll Search -->
+<script>
+    // https://stackoverflow.com/questions/1912501/unescape-html-entities-in-javascript
+    function htmlDecode(input) {
+        var e = document.createElement('textarea');
+        e.innerHTML = input;
+        // handle case of empty input
+        return e.childNodes.length === 0 ? "" : e.childNodes[0].nodeValue;
+    }
+
+    SimpleJekyllSearch({
+        searchInput: document.getElementById('search-input'),
+        resultsContainer: document.getElementById('search-results'),
+        json: '/search.json',
+        searchResultTemplate: '<div class="post-preview item"><a href="{url}"><h2 class="post-title">{title}</h2><h3 class="post-subtitle">{subtitle}</h3><hr></a></div>',
+        noResultsText: 'No results',
+        limit: 50,
+        fuzzy: false,
+        // a hack to get escaped subtitle unescaped. for some reason, 
+        // post.subtitle w/o escape filter nuke entire search.
+        templateMiddleware: function (prop, value, template) {
+            if (prop === 'subtitle' || prop === 'title') {
+                if (value.indexOf("code")) {
+                    return htmlDecode(value);
+                } else {
+                    return value;
+                }
+            }
+        }
+    });
+
+    $(document).ready(function () {
+        var $searchPage = $('.search-page');
+        var $searchOpen = $('.search-icon');
+        var $searchClose = $('.search-icon-close');
+        var $searchInput = $('#search-input');
+        var $body = $('body');
+
+        $searchOpen.on('click', function (e) {
+            e.preventDefault();
+            $searchPage.toggleClass('search-active');
+            var prevClasses = $body.attr('class') || '';
+            setTimeout(function () {
+                $body.addClass('no-scroll');
+            }, 400)
+
+            if ($searchPage.hasClass('search-active')) {
+                $searchClose.on('click', function (e) {
+                    e.preventDefault();
+                    $searchPage.removeClass('search-active');
+                    $body.attr('class', prevClasses);  // from closure 
+                });
+                $searchInput.focus();
+            }
+        });
+    });
+</script>
+
+
+
+<!-- Image to Github 
+<img src="/img/icon_wechat.png" width="0" height="0" />
+<-- Migrate from head to bottom, no longer block render and still work -->
+<script>
+    
+    var elements = document.querySelectorAll('p');
+    Array.prototype.forEach.call(elements, function(el, i){
+        if(el.innerHTML=='[expand]') {
+            var parentcontent = el.parentNode.innerHTML.replace('<p>[expand]</p>','<div class="expand" style="display: none; height: 0; overflow: hidden;">').replace('<p>[/expand]</p>','</div>');
+            el.parentNode.innerHTML = parentcontent;
+        }
+    });
+
+    var elements = document.querySelectorAll('div.expand');
+    Array.prototype.forEach.call(elements, function(el, i){
+        el.previousElementSibling.innerHTML = el.previousElementSibling.innerHTML + '<span>..&nbsp; <a href="#" style="cursor: pointer;" onclick="this.parentNode.parentNode.nextElementSibling.style.display = \'block\'; this.parentNode.parentNode.nextElementSibling.style.height = \'auto\'; this.parentNode.style.display = \'none\';">read&nbsp;more&nbsp;&rarr;</a></span>';
+    });
+
+</script>
+
+</body>
+</html>

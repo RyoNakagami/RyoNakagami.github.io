@@ -1,0 +1,1498 @@
+<!DOCTYPE html>
+<html lang="ja">
+
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="google-site-verification" content="gSMaswRY9iRfG4QaQrx6aj481bgr503qEZh-QPsMYNU" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+    <meta name="description" content="元経済学徒, 現在どっかでデータサイエンティストもどきやってる人間の勉強日記">
+    <meta name="keywords"  content="Statistics, Economics, Econometrics, Python, C, Shell, Linux, Data scientist">
+    <meta name="theme-color" content="#000000">
+    
+    <!-- Open Graph -->
+    <meta property="og:title" content="What happens to your brain as you age - Ryo's Tech Blog">
+    
+    <meta property="og:type" content="article">
+    <meta property="og:description" content="このノートは, The Economist &gt; What happens to your brain as you ageのスクリプトです
+
+">
+    
+    <meta property="article:published_time" content="2023-11-05T00:00:00Z">
+    
+    
+    <meta property="article:author" content="Ryo">
+    
+    
+    <meta property="article:tag" content="English">
+    
+    
+    <meta property="og:image" content="https://ryonakagami.github.io/img/avatar_rio_cat.jpg">
+    <meta property="og:url" content="https://ryonakagami.github.io/2023/11/05/what-happens-toyour-brain-as-you-age/">
+    <meta property="og:site_name" content="Ryo's Tech Blog">
+    
+    <title>What happens to your brain as you age - Ryo's Tech Blog</title>
+
+    <!-- Web App Manifest -->
+    <link rel="manifest" href="/pwa/manifest.json">
+
+    <!-- Favicon -->
+    <link rel="shortcut icon" href="/img/favicon.ico">
+    
+    <!-- Canonical URL -->
+    <link rel="canonical" href="https://ryonakagami.github.io/2023/11/05/what-happens-toyour-brain-as-you-age/">
+
+    <!-- Bootstrap Core CSS -->
+    <link rel="stylesheet" href="/css/bootstrap.min.css">
+
+    <!-- Custom CSS -->
+    <link rel="stylesheet" href="/css/ryo-blog.min.css">
+
+    <!-- Custom Fonts -->
+    <!-- <link href="http://maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css" rel="stylesheet" type="text/css"> -->
+    <!-- https://stackoverflow.com/questions/45983301/google-pagespeed-eliminate-render-blocking-resources-above-the-fold-caused-fro -->
+    <!--link href="//cdnjs.cloudflare.com/ajax/libs/font-awesome/4.6.3/css/font-awesome.min.css" rel="stylesheet" type="text/css"-->
+    <!--<link href="https://fonts.googleapis.com/earlyaccess/notosansjapanese.css" rel="stylesheet" type="text/css" media="print" onload="this.media='all'" > -->
+    <link href="https://fonts.googleapis.com/earlyaccess/notosansjapanese.css" rel="preload" type="text/css" media="print" onload="this.media='all'" >
+
+
+    <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
+    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+    <!--[if lt IE 9]>
+        <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+        <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
+    <![endif]-->
+
+    <!-- ga & ba script hoook -->
+    <script></script>
+</head>
+
+
+<!-- hack iOS CSS :active style -->
+<body ontouchstart="">
+
+    <!-- Navigation -->
+
+<nav class="navbar navbar-default navbar-custom navbar-fixed-top invert">
+    
+        <div class="container-fluid">
+            <!-- Brand and toggle get grouped for better mobile display -->
+            <div class="navbar-header page-scroll">
+                <button type="button" class="navbar-toggle">
+                    <span class="sr-only">Toggle navigation</span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
+                <a class="navbar-brand" href="/">Ryo's Tech Blog</a>
+            </div>
+
+            <!-- Collect the nav links, forms, and other content for toggling -->
+            <div id="huxblog_navbar">
+                <div class="navbar-collapse">
+                    <ul class="nav navbar-nav navbar-left">
+                                                <li>
+                            <a href="https://ryonakagami.github.io/statistics-for-regression-monkey/">Statistics for
+                                Regression Monkeys</a>
+                        </li>
+                        <li>
+                            <a href="https://ohgoshgit.github.io/">OhGoshGit!?!</a>
+                        </li>
+                        <!-- <li>
+                            <a><button onclick="mainDropDown()" style="border-color: rgba(70, 83, 111, 0.989); background-color: rgba(70, 83, 111, 0.989)">Dropdown</button></a> 
+                            <div id="myDropdown" class="dropdown-content">
+                              <a href="#" onclick="subMenu(this)">A</a>
+                              <div class="sub-menu-item" id="subMenu1">
+                              <a href="#">A.1</a>
+                              </div>
+                              <a href="#" onclick="subMenu(this)">B</a>
+                              <div class="sub-menu-item" id="subMenu2">
+                              <a href="#">B.1</a>
+                              </div>
+                              <a href="#">C</a>
+                              <a href="#">D</a>
+                              <a href="#">E</a>
+                              <a href="#">F</a>
+                              <a href="#">G</a>
+                            </div>
+                        </li> -->
+                    </ul>
+                    </ul>
+                    <ul class="nav navbar-nav navbar-right">
+                        
+                        
+                        
+                        
+                        <li>
+                            <a href="/about/">About</a>
+                        </li>
+                        
+                        
+                        
+                        <li>
+                            <a href="/archive/">Tag Search</a>
+                        </li>
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        <!--about fa-search see https://stackoverflow.com/questions/41950677/how-to-make-my-search-icon-fixed-->
+                        <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css"
+                            rel="stylesheet" />
+                        <li class="search-icon">
+                            <a href="javascript:void(0)" aria-label="Search" target="_blank">
+                                <i class="fa fa-search"></i>
+                            </a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+            <!-- /.navbar-collapse -->
+        </div>
+        <!-- /.container -->
+    </nav>
+
+    <script>
+        // Drop Bootstarp low-performance Navbar
+        // Use customize navbar with high-quality material design animation
+        // in high-perf jank-free CSS3 implementation
+        var $body = document.body;
+        var $toggle = document.querySelector('.navbar-toggle');
+        var $navbar = document.querySelector('#huxblog_navbar');
+        var $collapse = document.querySelector('.navbar-collapse');
+
+        var __HuxNav__ = {
+            close: function () {
+                $navbar.className = " ";
+                // wait until animation end.
+                setTimeout(function () {
+                    // prevent frequently toggle
+                    if ($navbar.className.indexOf('in') < 0) {
+                        $collapse.style.height = "0px"
+                    }
+                }, 400)
+            },
+            open: function () {
+                $collapse.style.height = "auto"
+                $navbar.className += " in";
+            }
+        }
+
+        // Bind Event
+        $toggle.addEventListener('click', function (e) {
+            if ($navbar.className.indexOf('in') > 0) {
+                __HuxNav__.close()
+            } else {
+                __HuxNav__.open()
+            }
+        })
+
+        /**
+         * Since Fastclick is used to delegate 'touchstart' globally
+         * to hack 300ms delay in iOS by performing a fake 'click',
+         * Using 'e.stopPropagation' to stop 'touchstart' event from 
+         * $toggle/$collapse will break global delegation.
+         * 
+         * Instead, we use a 'e.target' filter to prevent handler
+         * added to document close HuxNav.  
+         *
+         * Also, we use 'click' instead of 'touchstart' as compromise
+         */
+        document.addEventListener('click', function (e) {
+            if (e.target == $toggle) return;
+            if (e.target.className == 'icon-bar') return;
+            __HuxNav__.close();
+        })
+    </script>
+
+    <!-- Search -->
+<div class="search-page">
+  <div class="search-icon-close-container">
+    <span class="search-icon-close">
+      <i class="fa fa-chevron-down"></i>
+    </span>
+  </div>
+  <div class="search-main container">
+    <div class="row">
+      <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+        <form></form>
+        <input type="text" id="search-input" placeholder="$ grep...">
+        </form>
+        <div id="search-results" class="mini-post-list"></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+    <!-- Image to hack wechat -->
+<!-- <img src="/img/icon_wechat.png" width="0" height="0"> -->
+<!-- <img src="/img/home-bg.jpg" width="0" height="0"> -->
+
+<!-- Post Header -->
+
+
+
+<style type="text/css">
+    header.intro-header{
+        position: relative;
+        background-image: url('/img/home-bg.jpg');
+        background: ;
+    }
+
+    
+    header.intro-header .header-mask{
+        width: 100%;
+        height: 100%;
+        position: absolute;
+        background: rgba(0,0,0, 0.0);
+    }
+    
+</style>
+
+
+
+
+<header class="intro-header style-text" >
+
+    <div class="header-mask"></div>
+    
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+                <div class="post-heading">
+                    <div class="tags">
+                        
+                        <a class="tag" href="/archive/?tag=English" title="English">English</a>
+                        
+                    </div>
+                    <h1>What happens to your brain as you age</h1>
+                    
+                    <h2 class="subheading">Today's words and phrases */N</h2>
+                    <p>
+                        公開日: 2023-11-05
+                        <br>
+                        更新日: 2023-11-10
+                        
+                    </p>
+                </div>
+            </div>
+        </div>
+    </div>
+</header>
+
+
+
+
+
+
+
+<!-- Post Content -->
+<article>
+    <div class="container">
+        <div class="row">
+
+    <!-- Post Container -->
+         <div class="
+                col-lg-8 col-lg-offset-2
+                col-md-10 col-md-offset-1
+                post-container">
+
+                <!-- Multi-Lingual -->
+                
+
+				<p>このノートは, <a href="https://www.youtube.com/watch?v=cMim0uU1yzA">The Economist &gt; What happens to your brain as you age</a>のスクリプトです</p>
+
+<div style="border-radius: 1em; border-style:solid; border-color:#D3D3D3; background-color:#F8F8F8">
+
+  <p class="h4">  Table of Contents</p>
+
+  <!-- START doctoc generated TOC please keep comment here to allow auto update -->
+  <!-- DON'T EDIT THIS SECTION, INSTEAD RE-RUN doctoc TO UPDATE -->
+
+  <ul>
+    <li><a href="#script">Script</a></li>
+    <li><a href="#related-topics">Related Topics</a>
+      <ul>
+        <li><a href="#artists-have-structurally-different-brains-from-bbc-17-april-2014">Artists ‘have structurally different brains’ from BBC 17 April 2014</a></li>
+        <li><a href="#are-artistic-brains-different---6-minute-english">Are artistic brains different? - 6 Minute English</a></li>
+      </ul>
+    </li>
+    <li><a href="#words-and-phrases">Words and phrases</a>
+      <ul>
+        <li><a href="#neuron">Neuron</a></li>
+        <li><a href="#conception">Conception</a></li>
+        <li><a href="#fold">fold</a></li>
+        <li><a href="#shedverb">shed(verb)</a></li>
+        <li><a href="#insulated">insulated</a></li>
+        <li><a href="#excessadjective">excess(adjective)</a></li>
+        <li><a href="#emotion">emotion</a></li>
+        <li><a href="#self-evaluation">self-evaluation</a></li>
+        <li><a href="#susceptible">susceptible</a></li>
+      </ul>
+    </li>
+    <li><a href="#references">References</a></li>
+  </ul>
+
+  <!-- END doctoc generated TOC please keep comment here to allow auto update -->
+
+</div>
+
+<h2 id="script">Script</h2>
+
+<iframe width="560" height="315" src="https://www.youtube.com/embed/cMim0uU1yzA?si=oceWmf3SOlgIWBfb" frameborder="0" allow="autoplay; encrypted-media" allowfullscreen=""></iframe>
+
+<p>Your brain is one of your most important organs, home to billions of neurons, 
+it’s your body’s mission control. As you go through life, your body changes radically. 
+Inside your head, your most complex organ is constantly transforming too, 
+beginning work before you’re born and continuing even after you’ve been declared dead.</p>
+
+<p>This is the life cycle of your brain.</p>
+
+<p>Your brain starts to form about two weeks after conception. On one side of the developing embryo, 
+the cells thicken to form what is called the neural plate. Around week 4, this folds over onto itself forming 
+a tude which ultimately creates the nerveous system. Every minutes, from the time the neural tube closes, your brain is growing hundreds of
+nerve cells called neurons.</p>
+
+<p>At birth, your brain contains about 100,000,000,000 neurons, more than an adult.
+This gives the baby the best chance of developing a healthy brain. The excess neurons are shed
+before you become an adult.</p>
+
+<p>But what you don’t have is a lot of synapses, the point of contact where electronic signals are passed between neurons, 
+which in turn change the behavior of the neurons. Some neurons become insulated by a fatty substance myelin. 
+These neurons, known as White matter, are able to transmit information faster between brain areas, allowing
+more complex processes to take place.</p>
+
+<p>When you’re born, the average number of synapses per neuron is 2,500. But that increases to approximately 15,000 per neuron
+over the first few years of your life, as your neurons mature and create new synapses.</p>
+
+<p>The speed at which they form synapses could be one reason children find it easier to learn things like languages or musical instruments.
+It’s also why children’s experience in this phase can have lasting effects on their development.</p>
+
+<p>From age three until about ten, your brain starts to remove connections it no longer needs. Neuroscientists used to think
+all synapses work at a constant and fixed level, but now they understand synapses can be stregthened and weakened depending on 
+how they are used. This is known as neuroplasticity. It’s essentially your brain’s way of making sure 
+it’s more effecient with experience and absorbs new information.</p>
+
+<p>By the time you become a teenager, your brain has stopped growing but it continues to develop.
+The insulation of the nuerons which begins at birth continues over many years. 
+It starts at the back of the brain and moves forward. So different parts of your brain develop at different rates.
+Area associated with reward, like the ventral striatum, develop faster than the Prefrontal cortex, which is linked to
+self-control and rationality. Teens also experience major changes in their Limbic system, 
+the part of the brain that controls emotions. All this might explain why teenagers experience
+more mood swings than adults. Neuroscientists believe the difference in development between the 
+emotion-driven part of the brain and the rational part may also be the reason teenagers are
+more likely to take risks or experience addiction compared with adults.</p>
+
+<p>Puberty also brings with it increased activity in the Ventromedial prefrontal cortex, 
+the part of the brain that relates to self-evaluation. This change can improve
+teenagers understanding of social interactions and  their ability to form friendships.
+But it might also make them more susceptible to social anxiety.</p>
+
+<p>Post puberty, the brain continues to develop. Brain tissue in the Prefrontal cortex increases connections, joining 
+the emotional and motor centres. Your brain reaches full-development by your 30s 
+and white matter reaches the highest volume at about 40. But it’s not all downhill from there. 
+As you age, plasticity allows your brain to keep changing and adapting.</p>
+
+<p>Research has shown older adults more likely to use both sides of the brain for short-term memory,
+rather than just the left brain hemisphere. Middle-aged brains have also learned to minimize
+the negative. Scientist has found the amygdala, the part of the brain which deals with emotion, lights up
+when younger people look at both positive and negative images, but for the older adults it reacts much less when shown negative images. 
+This might be because as you age, you become more resilient. 
+Decades of experience in dealing with difficult situations activates neural pathways which can be used when you experience a similar situation.</p>
+
+<p>For those who go through menopause, changes to the amount of estrogen affect 
+brain energy consumption, producing symptons like hot flushes and mood swings.
+The volume of white matter also falls and doesn’t recover. but despite this, those
+who are post menopausal have higher structural connectivity between some brain regions than 
+those who don’t go through menopause, meaning that the connections in those regions may become more efficient. 
+The point at which your brain begins to slow down depends on your genes, but on the whole
+studies show that the slowing process begins in your 30s or 40s, before accelerating in your 60s and 70s.</p>
+
+<p>AS you move into later life, your cerebral cortex, which is the outer layer of the brain, thins.
+This is particularly noticeable in the frontal lobe and the Hippocampus, which are important
+for memory, emotions and navigation. Your white matter shrinks and the brain generates
+fewer chemical messengers such as dopamine and serotonin, which leads to slower 
+cognitive processing.</p>
+
+<p>Until very recently, neuroscientists didn’t know what happens to your brain when you die.
+But by chance, doctors were recording brains waves of a patient when he died of a heart attack.
+They found a change in a specific band of brain-waves involved in high cognitive functions,
+such as concentraing, dreaming and memory retrieval, suggesting that just befor you die, your brain may
+recall important life events, which may explain why those who have near-death experiences reports seeing 
+their lives flash before them and your brain doesn’t stop working even when you are dead.</p>
+
+<p>Some stidies have found that brain activity may continue for several minutes
+even after your heart has stopped.</p>
+
+<h2 id="related-topics">Related Topics</h2>
+<h3 id="artists-have-structurally-different-brains-from-bbc-17-april-2014">Artists ‘have structurally different brains’ from BBC 17 April 2014</h3>
+
+<p>Researchers peered into the brains of 21 art students and compared them to 23 non-artists using a scanning method called voxel-based morphometry.
+They found that the people who are better at drawing really seem to have more 
+developed structures in regions of the brain that control for fine motor performance and what we call procedural memory.</p>
+
+<p>Those better at drawing had increased grey and white matter in the cerebellum(小脳) and also in the supplementary motor area - both areas that are involved with fine motor control and performance of routine actions.
+Grey matter is largely composed of nerve cells, while white matter is responsible for communication between the grey matter regions.</p>
+
+<p>But still it is unclear what aspect of artistic talent was innate or learnt.</p>
+
+<h3 id="are-artistic-brains-different---6-minute-english">Are artistic brains different? - 6 Minute English</h3>
+
+<iframe width="560" height="315" src="https://www.youtube.com/embed/Oq2bnLC_DXU?si=iXpoOf2Aw4ImMc7J" frameborder="0" allow="autoplay; encrypted-media" allowfullscreen=""></iframe>
+
+<p>They are wondering why artistic ability comes more naturally to some people than others.
+They have interviews with experts for their opinions.</p>
+
+<p>Dr Rebecca Chamberlain says:</p>
+
+<p>“Artist seems to be processing the visual world in a different wat to non-artists.
+The artists takes a more global approach to looking, so they make bigger saccades, bigger eye movements,
+and firter fixations onm the image.”</p>
+
+<h2 id="words-and-phrases">Words and phrases</h2>
+<h3 id="neuron">Neuron</h3>
+
+<p>A neuron is a specialized cell that is the basic building block of the nervous system, which includes the brain, spinal cord, and peripheral nerves. Neurons are responsible for transmitting information in the form of electrical signals within the nervous system. They play a crucial role in various cognitive functions, sensory perception, motor control, and the regulation of bodily functions.</p>
+
+<h3 id="conception">Conception</h3>
+
+<div style="padding-left: 2em; padding-right: 2em; border-radius: 1em; border-style:solid; border-color:#D3D3D3; background-color:#F8F8F8">
+  <p class="h4"><ins>Def: conception[U, C]</ins></p>
+
+  <p>The process of an egg being fertilized inside a woman’s body so that she becomes pregnant.</p>
+
+</div>
+
+<blockquote>
+  <p>Examples</p>
+</blockquote>
+
+<ul>
+  <li>the moment of conception</li>
+  <li>A child is born about 40 weeks after conception takes place</li>
+</ul>
+
+<h3 id="fold">fold</h3>
+
+<div style="padding-left: 2em; padding-right: 2em; border-radius: 1em; border-style:solid; border-color:#D3D3D3; background-color:#F8F8F8">
+  <p class="h4"><ins>Def: fold</ins></p>
+
+  <p>to end sth, especially paper or cloth, so that one part lies on top of another part.</p>
+
+</div>
+
+<blockquote>
+  <p>Examples</p>
+</blockquote>
+
+<ul>
+  <li>He folded the map up and put it in his pocket.</li>
+  <li>First, fold the paper in half.</li>
+  <li>The bed can be folded away during the day</li>
+  <li>The table folds up when not in use.</li>
+</ul>
+
+<h3 id="shedverb">shed(verb)</h3>
+
+<div style="padding-left: 2em; padding-right: 2em; border-radius: 1em; border-style:solid; border-color:#D3D3D3; background-color:#F8F8F8">
+  <p class="h4"><ins>Def: shed</ins></p>
+
+  <ul>
+    <li>to get rid of sth that is no longer wanted</li>
+    <li>to let something fall; to drop somthing</li>
+  </ul>
+
+</div>
+
+<blockquote>
+  <p>Example</p>
+</blockquote>
+
+<ul>
+  <li>The factory is sheding a large number of jobs</li>
+  <li>Museums have been trying hard to shed stuffy image</li>
+  <li>Luke shed his cloths onto the floor</li>
+</ul>
+
+<blockquote>
+  <p>Idioms</p>
+</blockquote>
+
+<div style="padding-left: 2em; padding-right: 2em; border-radius: 1em; border-style:solid; border-color:#D3D3D3; background-color:#F8F8F8">
+  <p class="h4"><ins>Def: shed light on sth</ins></p>
+
+  <p>to make a problem easier to understand</p>
+
+</div>
+
+<ul>
+  <li>Recent research has shed new light on the causes of the disease.</li>
+</ul>
+
+<h3 id="insulated">insulated</h3>
+
+<div style="padding-left: 2em; padding-right: 2em; border-radius: 1em; border-style:solid; border-color:#D3D3D3; background-color:#F8F8F8">
+  <p class="h4"><ins>Def: insulated</ins></p>
+
+  <p>protected with a material that prevents heat, sound, electricity from passing through</p>
+
+</div>
+
+<ul>
+  <li>HOme owners are being encourraged to insulate their homes to save energy</li>
+</ul>
+
+<h3 id="excessadjective">excess(adjective)</h3>
+
+<div style="padding-left: 2em; padding-right: 2em; border-radius: 1em; border-style:solid; border-color:#D3D3D3; background-color:#F8F8F8">
+  <p class="h4"><ins>Def: excess</ins></p>
+
+  <p>in addition to an amount that is necessary</p>
+
+</div>
+
+<ul>
+  <li>Excess food is stored as fat</li>
+  <li>Driving with  excess alcohol in the blood is a serious offence</li>
+</ul>
+
+<h3 id="emotion">emotion</h3>
+
+<div style="padding-left: 2em; padding-right: 2em; border-radius: 1em; border-style:solid; border-color:#D3D3D3; background-color:#F8F8F8">
+  <p class="h4"><ins>Def: emotion</ins></p>
+
+  <p>a strong feeling such as love, fear or anger; the part of a person’s character that consists of feelings</p>
+
+</div>
+
+<p>“emotion” is generally uncountable, but when you are talking about specific instances or types of emotions, 
+you can use countable nouns.</p>
+
+<blockquote>
+  <p>Example</p>
+</blockquote>
+
+<ul>
+  <li>She experienced a range of emotions during the movie.</li>
+  <li>The painting conveys a sense of emotion</li>
+  <li>He lost control of his emotions</li>
+  <li>They expressed mixed emotions at the news</li>
+</ul>
+
+<h3 id="self-evaluation">self-evaluation</h3>
+
+<div style="padding-left: 2em; padding-right: 2em; border-radius: 1em; border-style:solid; border-color:#D3D3D3; background-color:#F8F8F8">
+  <p class="h4"><ins>Def: self-evaluation</ins></p>
+
+  <p>Self-evaluation is the process of reflecting on one’s own performance, skills, behaviors, 
+and achievements. It involves assessing and critically analyzing one’s strengths, weaknesses, accomplishments, and areas for improvement.</p>
+
+</div>
+
+<p>Self-evaluation plays a crucial role in shaping and developing one’s personality.</p>
+
+<h3 id="susceptible">susceptible</h3>
+
+<div style="padding-left: 2em; padding-right: 2em; border-radius: 1em; border-style:solid; border-color:#D3D3D3; background-color:#F8F8F8">
+  <p class="h4"><ins>Def: susceptible</ins></p>
+
+  <ul>
+    <li>very likely to be influenced, harmed or affected by sb/sth</li>
+    <li>easily influenced by feelings and emotions</li>
+  </ul>
+
+</div>
+
+<ul>
+  <li>He’s highly susceptible to flattery</li>
+  <li>Some of these plants are more susceptible to forst damage than others</li>
+  <li>She was both charming and susceptible</li>
+</ul>
+
+<h2 id="references">References</h2>
+
+<ul>
+  <li><a href="https://www.youtube.com/watch?v=cMim0uU1yzA">The Economist &gt; What happens to your brain as you age</a></li>
+  <li><a href="https://www.bbc.com/news/science-environment-26925271">BBC &gt; Artists ‘have structurally different brains’</a></li>
+</ul>
+
+
+                <hr style="visibility: hidden;">
+                <hr/>
+                <b><fontsize="5">Share Buttons</font><br></b>
+                <!--see 
+    https://jekyllcodex.org/without-plugin/share-buttons/ 
+    https://ranvir.xyz/blog/why-and-how-to-add-social-sharing-buttons-on-your-jekyll-blog-using-github-pages/
+-->
+
+
+
+<style>
+#share-buttons {display: inline-block; vertical-align: middle; }
+#share-buttons:after {content: ""; display: block; clear: both;}
+#share-buttons > div {
+    position: relative;
+    text-align: left; 
+    height: 36px; 
+    width: 32px; 
+    float: left; 
+    text-align: center;
+}
+#share-buttons > div > svg {height: 16px; fill: #d5d5d5; margin-top: 10px;}
+#share-buttons > div:hover {cursor: pointer;}
+#share-buttons > div.facebook:hover > svg {fill: #3B5998;}
+#share-buttons > div.twitter:hover > svg {fill: #55ACEE;}
+#share-buttons > div.linkedin:hover > svg {fill: #0077b5;}
+#share-buttons > div.pinterest:hover > svg {fill: #CB2027;}
+#share-buttons > div.gplus:hover > svg {fill: #dd4b39;}
+#share-buttons > div.mail:hover > svg {fill: #7D7D7D;}
+#share-buttons > div.instagram:hover > svg {fill: #C73B92;}
+#share-buttons > div.facebook > svg {height: 18px; margin-top: 9px;}
+#share-buttons > div.twitter > svg {height: 20px; margin-top: 8px;}
+#share-buttons > div.linkedin > svg {height: 19px; margin-top: 7px;}
+#share-buttons > div.pinterest > svg {height: 20px; margin-top: 9px;}
+#share-buttons > div.gplus > svg {height: 17px; margin-top: 9px; position: relative; left: 1px;}
+#share-buttons > div.mail > svg {height: 14px; margin-top: 11px;}
+</style>
+
+<span style="color: black">Share on: </span><div id="share-buttons">
+    <div class="facebook" title="Share this on Facebook" onclick="gtag('event', 'Facebook', {'event_category':'Post Shared','event_label':'Facebook'}); location.href='http://www.facebook.com/share.php?u=https://ryonakagami.github.io/2023/11/05/what-happens-toyour-brain-as-you-age/';"><svg viewBox="0 0 1792 1792" xmlns="http://www.w3.org/2000/svg"><path d="M1343 12v264h-157q-86 0-116 36t-30 108v189h293l-39 296h-254v759h-306v-759h-255v-296h255v-218q0-186 104-288.5t277-102.5q147 0 228 12z"/></svg></div>
+    <div class="twitter" title="Share this on Twitter" onclick="gtag('event', 'Twitter', {'event_category':'Post Shared','event_label':'Twitter'}); location.href='https://twitter.com/intent/tweet?text=What happens to your brain as you age&url=https://ryonakagami.github.io/2023/11/05/what-happens-toyour-brain-as-you-age/';"><svg viewBox="0 0 1792 1792" xmlns="http://www.w3.org/2000/svg"><path d="M1684 408q-67 98-162 167 1 14 1 42 0 130-38 259.5t-115.5 248.5-184.5 210.5-258 146-323 54.5q-271 0-496-145 35 4 78 4 225 0 401-138-105-2-188-64.5t-114-159.5q33 5 61 5 43 0 85-11-112-23-185.5-111.5t-73.5-205.5v-4q68 38 146 41-66-44-105-115t-39-154q0-88 44-163 121 149 294.5 238.5t371.5 99.5q-8-38-8-74 0-134 94.5-228.5t228.5-94.5q140 0 236 102 109-21 205-78-37 115-142 178 93-10 186-50z"/></svg></div>
+    <div class="linkedin" title="Share this on Linkedin" onclick="gtag('event', 'Linkedin', {'event_category':'Post Shared','event_label':'Linkedin'}); location.href='https://www.linkedin.com/shareArticle?mini=true&url=https://ryonakagami.github.io/2023/11/05/what-happens-toyour-brain-as-you-age/&title=&summary=&source=';"><svg viewBox="0 0 1792 1792" xmlns="http://www.w3.org/2000/svg"><path d="M477 625v991h-330v-991h330zm21-306q1 73-50.5 122t-135.5 49h-2q-82 0-132-49t-50-122q0-74 51.5-122.5t134.5-48.5 133 48.5 51 122.5zm1166 729v568h-329v-530q0-105-40.5-164.5t-126.5-59.5q-63 0-105.5 34.5t-63.5 85.5q-11 30-11 81v553h-329q2-399 2-647t-1-296l-1-48h329v144h-2q20-32 41-56t56.5-52 87-43.5 114.5-15.5q171 0 275 113.5t104 332.5z"/></svg></div>
+    
+    <div class="mail" title="Share this through Email" onclick="gtag('event', 'Email', {'event_category':'Post Shared','event_label':'Email'}); location.href='mailto:?&body=https://ryonakagami.github.io/2023/11/05/what-happens-toyour-brain-as-you-age/';"><svg viewBox="0 0 1792 1792" xmlns="http://www.w3.org/2000/svg"><path d="M1792 710v794q0 66-47 113t-113 47h-1472q-66 0-113-47t-47-113v-794q44 49 101 87 362 246 497 345 57 42 92.5 65.5t94.5 48 110 24.5h2q51 0 110-24.5t94.5-48 92.5-65.5q170-123 498-345 57-39 100-87zm0-294q0 79-49 151t-122 123q-376 261-468 325-10 7-42.5 30.5t-54 38-52 32.5-57.5 27-50 9h-2q-23 0-50-9t-57.5-27-52-32.5-54-38-42.5-30.5q-91-64-262-182.5t-205-142.5q-62-42-117-115.5t-55-136.5q0-78 41.5-130t118.5-52h1472q65 0 112.5 47t47.5 113z"/></svg></div>
+</div>
+
+                
+                <hr/>
+
+                <!-- Featured Tags -->
+                <b><fontsize="5">Feature Tags</b>
+                    <div id="tag_cloud" class="tags tags-sup js-tags" 
+                    style="line-height: 0px !important;">
+                        
+                        
+                        
+                        
+                        
+                                <a data-sort="0288" 
+                                    href="/archive/?tag=%E7%B5%B1%E8%A8%88"
+                                    title="統計"
+                                    style="color: #337ab7 !important;"
+                                    rel="61">統計</a>
+                        
+                                <a data-sort="0298" 
+                                    href="/archive/?tag=Python"
+                                    title="Python"
+                                    style="color: #337ab7 !important;"
+                                    rel="51">Python</a>
+                        
+                                <a data-sort="0300" 
+                                    href="/archive/?tag=math"
+                                    title="math"
+                                    style="color: #337ab7 !important;"
+                                    rel="49">math</a>
+                        
+                                <a data-sort="0303" 
+                                    href="/archive/?tag=Linux"
+                                    title="Linux"
+                                    style="color: #337ab7 !important;"
+                                    rel="46">Linux</a>
+                        
+                                <a data-sort="0316" 
+                                    href="/archive/?tag=Ubuntu+20.04+LTS"
+                                    title="Ubuntu 20.04 LTS"
+                                    style="color: #337ab7 !important;"
+                                    rel="33">Ubuntu 20.04 LTS</a>
+                        
+                                <a data-sort="0319" 
+                                    href="/archive/?tag=Shell"
+                                    title="Shell"
+                                    style="color: #337ab7 !important;"
+                                    rel="30">Shell</a>
+                        
+                                <a data-sort="0321" 
+                                    href="/archive/?tag=English"
+                                    title="English"
+                                    style="color: #337ab7 !important;"
+                                    rel="28">English</a>
+                        
+                                <a data-sort="0324" 
+                                    href="/archive/?tag=git"
+                                    title="git"
+                                    style="color: #337ab7 !important;"
+                                    rel="25">git</a>
+                        
+                                <a data-sort="0329" 
+                                    href="/archive/?tag=%E6%96%B9%E6%B3%95%E8%AB%96"
+                                    title="方法論"
+                                    style="color: #337ab7 !important;"
+                                    rel="20">方法論</a>
+                        
+                                <a data-sort="0333" 
+                                    href="/archive/?tag=Ubuntu+22.04+LTS"
+                                    title="Ubuntu 22.04 LTS"
+                                    style="color: #337ab7 !important;"
+                                    rel="16">Ubuntu 22.04 LTS</a>
+                        
+                                <a data-sort="0337" 
+                                    href="/archive/?tag=%E7%B5%B1%E8%A8%88%E6%A4%9C%E5%AE%9A"
+                                    title="統計検定"
+                                    style="color: #337ab7 !important;"
+                                    rel="12">統計検定</a>
+                        
+                                <a data-sort="0338" 
+                                    href="/archive/?tag=%E7%AB%B6%E6%8A%80%E3%83%97%E3%83%AD%E3%82%B0%E3%83%A9%E3%83%9F%E3%83%B3%E3%82%B0"
+                                    title="競技プログラミング"
+                                    style="color: #337ab7 !important;"
+                                    rel="11">競技プログラミング</a>
+                        
+                                <a data-sort="0339" 
+                                    href="/archive/?tag=%E3%83%95%E3%83%BC%E3%83%AA%E3%82%A8%E8%A7%A3%E6%9E%90"
+                                    title="フーリエ解析"
+                                    style="color: #337ab7 !important;"
+                                    rel="10">フーリエ解析</a>
+                        
+                                <a data-sort="0340" 
+                                    href="/archive/?tag=%E5%89%8D%E5%87%A6%E7%90%86"
+                                    title="前処理"
+                                    style="color: #337ab7 !important;"
+                                    rel="9">前処理</a>
+                        
+                                <a data-sort="0340" 
+                                    href="/archive/?tag=SQL"
+                                    title="SQL"
+                                    style="color: #337ab7 !important;"
+                                    rel="9">SQL</a>
+                        
+                                <a data-sort="0340" 
+                                    href="/archive/?tag=coding"
+                                    title="coding"
+                                    style="color: #337ab7 !important;"
+                                    rel="9">coding</a>
+                        
+                                <a data-sort="0341" 
+                                    href="/archive/?tag=%E3%82%B3%E3%83%9F%E3%83%A5%E3%83%8B%E3%82%B1%E3%83%BC%E3%82%B7%E3%83%A7%E3%83%B3"
+                                    title="コミュニケーション"
+                                    style="color: #337ab7 !important;"
+                                    rel="8">コミュニケーション</a>
+                        
+                                <a data-sort="0342" 
+                                    href="/archive/?tag=Network"
+                                    title="Network"
+                                    style="color: #337ab7 !important;"
+                                    rel="7">Network</a>
+                        
+                                <a data-sort="0342" 
+                                    href="/archive/?tag=ssh"
+                                    title="ssh"
+                                    style="color: #337ab7 !important;"
+                                    rel="7">ssh</a>
+                        
+                                <a data-sort="0343" 
+                                    href="/archive/?tag=%E5%B0%86%E6%A3%8B"
+                                    title="将棋"
+                                    style="color: #337ab7 !important;"
+                                    rel="6">将棋</a>
+                        
+                                <a data-sort="0343" 
+                                    href="/archive/?tag=Data+visualization"
+                                    title="Data visualization"
+                                    style="color: #337ab7 !important;"
+                                    rel="6">Data visualization</a>
+                        
+                                <a data-sort="0343" 
+                                    href="/archive/?tag=Docker"
+                                    title="Docker"
+                                    style="color: #337ab7 !important;"
+                                    rel="6">Docker</a>
+                        
+                                <a data-sort="0343" 
+                                    href="/archive/?tag=Econometrics"
+                                    title="Econometrics"
+                                    style="color: #337ab7 !important;"
+                                    rel="6">Econometrics</a>
+                        
+                                <a data-sort="0343" 
+                                    href="/archive/?tag=VSCode"
+                                    title="VSCode"
+                                    style="color: #337ab7 !important;"
+                                    rel="6">VSCode</a>
+                        
+                                <a data-sort="0343" 
+                                    href="/archive/?tag=statistical+inference"
+                                    title="statistical inference"
+                                    style="color: #337ab7 !important;"
+                                    rel="6">statistical inference</a>
+                        
+                                <a data-sort="0344" 
+                                    href="/archive/?tag=GitHub+Pages"
+                                    title="GitHub Pages"
+                                    style="color: #337ab7 !important;"
+                                    rel="5">GitHub Pages</a>
+                        
+                                <a data-sort="0344" 
+                                    href="/archive/?tag=apt"
+                                    title="apt"
+                                    style="color: #337ab7 !important;"
+                                    rel="5">apt</a>
+                        
+                                <a data-sort="0344" 
+                                    href="/archive/?tag=development"
+                                    title="development"
+                                    style="color: #337ab7 !important;"
+                                    rel="5">development</a>
+                        
+                                <a data-sort="0345" 
+                                    href="/archive/?tag=%E3%82%B7%E3%82%B9%E3%83%86%E3%83%A0%E7%AE%A1%E7%90%86"
+                                    title="システム管理"
+                                    style="color: #337ab7 !important;"
+                                    rel="4">システム管理</a>
+                        
+                                <a data-sort="0345" 
+                                    href="/archive/?tag=Coffee"
+                                    title="Coffee"
+                                    style="color: #337ab7 !important;"
+                                    rel="4">Coffee</a>
+                        
+                                <a data-sort="0345" 
+                                    href="/archive/?tag=cloud"
+                                    title="cloud"
+                                    style="color: #337ab7 !important;"
+                                    rel="4">cloud</a>
+                        
+                                <a data-sort="0346" 
+                                    href="/archive/?tag=%E6%95%B0%E5%80%A4%E8%A8%88%E7%AE%97"
+                                    title="数値計算"
+                                    style="color: #337ab7 !important;"
+                                    rel="3">数値計算</a>
+                        
+                                <a data-sort="0346" 
+                                    href="/archive/?tag=%E7%B4%A0%E6%95%B0"
+                                    title="素数"
+                                    style="color: #337ab7 !important;"
+                                    rel="3">素数</a>
+                        
+                                <a data-sort="0346" 
+                                    href="/archive/?tag=Book"
+                                    title="Book"
+                                    style="color: #337ab7 !important;"
+                                    rel="3">Book</a>
+                        
+                                <a data-sort="0346" 
+                                    href="/archive/?tag=Font"
+                                    title="Font"
+                                    style="color: #337ab7 !important;"
+                                    rel="3">Font</a>
+                        
+                                <a data-sort="0346" 
+                                    href="/archive/?tag=Metrics"
+                                    title="Metrics"
+                                    style="color: #337ab7 !important;"
+                                    rel="3">Metrics</a>
+                        
+                                <a data-sort="0346" 
+                                    href="/archive/?tag=Poetry"
+                                    title="Poetry"
+                                    style="color: #337ab7 !important;"
+                                    rel="3">Poetry</a>
+                        
+                                <a data-sort="0346" 
+                                    href="/archive/?tag=Ubuntu+24.04+LTS"
+                                    title="Ubuntu 24.04 LTS"
+                                    style="color: #337ab7 !important;"
+                                    rel="3">Ubuntu 24.04 LTS</a>
+                        
+                                <a data-sort="0346" 
+                                    href="/archive/?tag=architecture"
+                                    title="architecture"
+                                    style="color: #337ab7 !important;"
+                                    rel="3">architecture</a>
+                        
+                                <a data-sort="0346" 
+                                    href="/archive/?tag=aws"
+                                    title="aws"
+                                    style="color: #337ab7 !important;"
+                                    rel="3">aws</a>
+                        
+                                <a data-sort="0346" 
+                                    href="/archive/?tag=shell"
+                                    title="shell"
+                                    style="color: #337ab7 !important;"
+                                    rel="3">shell</a>
+                        
+                                <a data-sort="0346" 
+                                    href="/archive/?tag=systemctl"
+                                    title="systemctl"
+                                    style="color: #337ab7 !important;"
+                                    rel="3">systemctl</a>
+                        
+                                <a data-sort="0347" 
+                                    href="/archive/?tag=%E3%83%86%E3%83%B3%E3%83%97%E3%83%AC%E3%83%BC%E3%83%88"
+                                    title="テンプレート"
+                                    style="color: #337ab7 !important;"
+                                    rel="2">テンプレート</a>
+                        
+                                <a data-sort="0347" 
+                                    href="/archive/?tag=%E3%83%87%E3%83%BC%E3%82%BF%E6%A7%8B%E9%80%A0"
+                                    title="データ構造"
+                                    style="color: #337ab7 !important;"
+                                    rel="2">データ構造</a>
+                        
+                                <a data-sort="0347" 
+                                    href="/archive/?tag=%E3%83%9D%E3%83%AF%E3%82%BD%E3%83%B3%E5%88%86%E5%B8%83"
+                                    title="ポワソン分布"
+                                    style="color: #337ab7 !important;"
+                                    rel="2">ポワソン分布</a>
+                        
+                                <a data-sort="0347" 
+                                    href="/archive/?tag=%E4%BC%9A%E8%A8%88%E5%88%86%E6%9E%90"
+                                    title="会計分析"
+                                    style="color: #337ab7 !important;"
+                                    rel="2">会計分析</a>
+                        
+                                <a data-sort="0347" 
+                                    href="/archive/?tag=%E6%96%87%E5%AD%97%E3%82%B3%E3%83%BC%E3%83%89"
+                                    title="文字コード"
+                                    style="color: #337ab7 !important;"
+                                    rel="2">文字コード</a>
+                        
+                                <a data-sort="0347" 
+                                    href="/archive/?tag=%E7%92%B0%E5%A2%83%E6%A7%8B%E7%AF%89"
+                                    title="環境構築"
+                                    style="color: #337ab7 !important;"
+                                    rel="2">環境構築</a>
+                        
+                                <a data-sort="0347" 
+                                    href="/archive/?tag=%E8%AB%96%E6%96%87"
+                                    title="論文"
+                                    style="color: #337ab7 !important;"
+                                    rel="2">論文</a>
+                        
+                                <a data-sort="0347" 
+                                    href="/archive/?tag=App"
+                                    title="App"
+                                    style="color: #337ab7 !important;"
+                                    rel="2">App</a>
+                        
+                                <a data-sort="0347" 
+                                    href="/archive/?tag=Bayesian"
+                                    title="Bayesian"
+                                    style="color: #337ab7 !important;"
+                                    rel="2">Bayesian</a>
+                        
+                                <a data-sort="0347" 
+                                    href="/archive/?tag=Dynamic+Programming"
+                                    title="Dynamic Programming"
+                                    style="color: #337ab7 !important;"
+                                    rel="2">Dynamic Programming</a>
+                        
+                                <a data-sort="0347" 
+                                    href="/archive/?tag=Keyboard"
+                                    title="Keyboard"
+                                    style="color: #337ab7 !important;"
+                                    rel="2">Keyboard</a>
+                        
+                                <a data-sort="0347" 
+                                    href="/archive/?tag=Processing"
+                                    title="Processing"
+                                    style="color: #337ab7 !important;"
+                                    rel="2">Processing</a>
+                        
+                                <a data-sort="0347" 
+                                    href="/archive/?tag=R"
+                                    title="R"
+                                    style="color: #337ab7 !important;"
+                                    rel="2">R</a>
+                        
+                                <a data-sort="0347" 
+                                    href="/archive/?tag=Steam"
+                                    title="Steam"
+                                    style="color: #337ab7 !important;"
+                                    rel="2">Steam</a>
+                        
+                                <a data-sort="0347" 
+                                    href="/archive/?tag=filesystem"
+                                    title="filesystem"
+                                    style="color: #337ab7 !important;"
+                                    rel="2">filesystem</a>
+                        
+                                <a data-sort="0347" 
+                                    href="/archive/?tag=quarto"
+                                    title="quarto"
+                                    style="color: #337ab7 !important;"
+                                    rel="2">quarto</a>
+                        
+                                <a data-sort="0347" 
+                                    href="/archive/?tag=regex"
+                                    title="regex"
+                                    style="color: #337ab7 !important;"
+                                    rel="2">regex</a>
+                    </div>
+
+                <br>
+
+                <b><fontsize="5">Leave a Comment</font><br>(注意：GitHub Accountが必要となります）</b>
+                
+                <script src="https://utteranc.es/client.js"
+                    repo="RyoNakagami/RyoNakagami.github.io"
+                    issue-term="url"
+                    theme="github-light"
+                    crossorigin="anonymous"
+                    async>Reduce unused JavaScript
+                
+                </script>
+
+
+            </div>  
+
+    <!-- Side Catalog Container -->
+        
+            <div class="
+                col-lg-1 col-lg-offset-0
+                visible-lg-block
+                sidebar-container
+                catalog-container">
+                <div class="side-catalog fixed" style="margin-top:3%">
+                    <hr class="hidden-sm hidden-xs">
+                    <h5>
+                        <a class="catalog-toggle" href="#">CONTENTS</a>
+                    </h5>
+                    <ul class="catalog-body"></ul>
+                </div>
+            </div>
+        
+    <!-- Sidebar Container -->
+            <!-- <div class="
+                col-lg-10 col-lg-offset-1
+                col-md-10 col-md-offset-1
+                sidebar-container row"> -->
+                <!-- 
+<hr>
+<h5>FRIENDS</h5>
+<ul class="list-inline">
+  
+  <li><a href="https://twitter.com/bluesky0804?ref_src=twsrc%5Egoogle%7Ctwcamp%5Eserp%7Ctwgr%5Eauthor">bluesky0804</a></li>
+  
+</ul>
+
+ -->
+            </div>
+        </div>
+    </div>
+</article>
+
+<!-- add support for mathjax by voleking-->
+
+
+
+
+<!-- async load function -->
+<script>
+    function async(u, c) {
+      var d = document, t = 'script',
+          o = d.createElement(t),
+          s = d.getElementsByTagName(t)[0];
+      o.src = u;
+      if (c) { o.addEventListener('load', function (e) { c(null, e); }, false); }
+      s.parentNode.insertBefore(o, s);
+    }
+</script>
+<!-- anchor-js, Doc:http://bryanbraun.github.io/anchorjs/ -->
+<script>
+    async("//cdnjs.cloudflare.com/ajax/libs/anchor-js/1.1.1/anchor.min.js",function(){
+        anchors.options = {
+          visible: 'hover',
+          placement: 'right',
+          // icon: '#'
+        };
+        anchors.add().remove('.intro-header h1').remove('.subheading').remove('.sidebar-container h5');
+    })
+</script>
+<style>
+    /* place left on bigger screen */
+    @media all and (min-width: 800px) {
+        .anchorjs-link{
+            position: absolute;
+            left: -0.75em;
+            font-size: 1.1em;
+            margin-top : -0.1em;
+        }
+    }
+</style>
+
+
+<body>
+    <!-- enable mermaid language on markdown post -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/mermaid/10.6.1/mermaid.min.js"></script>
+<script>
+   mermaid.initialize({
+       startOnLoad:true,
+       theme: 'default'
+   });
+   window.mermaid.init(undefined, document.querySelectorAll('.language-mermaid'));
+</script>
+
+</body>
+
+    <script>
+    
+    var elements = document.querySelectorAll('p');
+    Array.prototype.forEach.call(elements, function(el, i){
+        if(el.innerHTML=='[expand]') {
+            var parentcontent = el.parentNode.innerHTML.replace('<p>[expand]</p>','<div class="expand" style="display: none; height: 0; overflow: hidden;">').replace('<p>[/expand]</p>','</div>');
+            el.parentNode.innerHTML = parentcontent;
+        }
+    });
+
+    var elements = document.querySelectorAll('div.expand');
+    Array.prototype.forEach.call(elements, function(el, i){
+        el.previousElementSibling.innerHTML = el.previousElementSibling.innerHTML + '<span>..&nbsp; <a href="#" style="cursor: pointer;" onclick="this.parentNode.parentNode.nextElementSibling.style.display = \'block\'; this.parentNode.parentNode.nextElementSibling.style.height = \'auto\'; this.parentNode.style.display = \'none\';">read&nbsp;more&nbsp;&rarr;</a></span>';
+    });
+
+</script>
+
+    <!-- Footer -->
+<footer>
+    <div class="container">
+        <div class="row">
+            <!--<div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1"> -->
+                <!-- SNS Link -->
+            
+
+
+<ul class="list-inline text-center">
+
+
+  
+  
+  
+  
+  <li>
+    <a target="_blank" href="https://github.com/RyoNakagami">
+      <span class="fa-stack fa-lg">
+        <i class="fa fa-circle fa-stack-2x"></i>
+        <i class="fa fa-github fa-stack-1x fa-inverse"></i>
+      </span>
+    </a>
+  </li>
+  
+  
+</ul>
+
+            
+            <p class="copyright text-muted">
+                Copyright &copy; Ryo's Tech Blog 2025
+                <br>
+                Powered by <a href="https://ryonakagami.github.io">Ryo's Tech Blog</a> |
+                <iframe style="margin-left: 2px; margin-bottom:-5px;" frameborder="0" scrolling="0" width="100px"
+                    height="20px"
+                    title="RyoNakagami.github.io github stars"
+                    src="https://ghbtns.com/github-btn.html?user=RyoNakagami&repo=RyoNakagami.github.io&type=star&count=true">
+                </iframe>
+            </p>
+            <!--</div> -->
+        </div>
+    </div>
+</footer>
+
+<!-- jQuery -->
+<script src="/js/jquery.min.js "></script>
+
+<!-- Bootstrap Core JavaScript -->
+<!-- Currently, only navbar scroll-down effect at desktop still depends on this -->
+<script src="/js/bootstrap.min.js "></script>
+
+<!-- Custom Theme JavaScript -->
+<script src="/js/ryo-blog.min.js "></script>
+
+<!-- Simple Jekyll Search -->
+<script src="/js/simple-jekyll-search.min.js"></script>
+
+<!-- Service Worker -->
+
+<script src="/js/snackbar.js "></script>
+<script src="/js/sw-registration.js "></script>
+
+
+<!-- async load function -->
+<script>
+    function async(u, c) {
+        var d = document, t = 'script',
+            o = d.createElement(t),
+            s = d.getElementsByTagName(t)[0];
+        o.src = u;
+        if (c) { o.addEventListener('load', function (e) { c(null, e); }, false); }
+        s.parentNode.insertBefore(o, s);
+    }
+</script>
+
+<!--
+     Because of the native support for backtick-style fenced code blocks
+     right within the Markdown is landed in Github Pages,
+     From V1.6, There is no need for Highlight.js,
+     so Huxblog drops it officially.
+
+     - https://github.com/blog/2100-github-pages-now-faster-and-simpler-with-jekyll-3-0
+     - https://help.github.com/articles/creating-and-highlighting-code-blocks/
+     - https://github.com/jneen/rouge/wiki/list-of-supported-languages-and-lexers
+-->
+<!--
+    <script>
+        async("http://cdn.bootcss.com/highlight.js/8.6/highlight.min.js", function(){
+            hljs.initHighlightingOnLoad();
+        })
+    </script>
+    <link href="http://cdn.bootcss.com/highlight.js/8.6/styles/github.min.css" rel="stylesheet">
+-->
+
+
+
+
+
+
+
+<!--fastClick.js -->
+<script>
+    async("//cdnjs.cloudflare.com/ajax/libs/fastclick/1.0.6/fastclick.min.js", function () {
+        var $nav = document.querySelector("nav");
+        if ($nav) FastClick.attach($nav);
+    })
+</script>
+
+
+<!-- Global site tag (gtag.js) - Google Analytics -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-LVL413SV09"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+  gtag('config', 'G-LVL413SV09');
+</script>
+
+
+
+<!-- Side Catalog -->
+
+<script type="text/javascript">
+    function generateCatalog(selector) {
+
+        // interop with multilangual 
+        if ('' == 'true') {
+            _containerSelector = 'div.post-container.active'
+        } else {
+            _containerSelector = 'div.post-container'
+        }
+
+        // init
+        var P = $(_containerSelector), a, n, t, l, i, c;
+        a = P.find('h1,h2,h3,h4,h5,h6');
+
+        // clean
+        $(selector).html('')
+
+        // appending
+        a.each(function () {
+            n = $(this).prop('tagName').toLowerCase();
+            i = "#" + $(this).prop('id');
+            t = $(this).text();
+            c = $('<a href="' + i + '" rel="nofollow">' + t + '</a>');
+            l = $('<li class="' + n + '_nav"></li>').append(c);
+            $(selector).append(l);
+        });
+        return true;
+    }
+
+    generateCatalog(".catalog-body");
+
+    // toggle side catalog
+    $(".catalog-toggle").click((function (e) {
+        e.preventDefault();
+        $('.side-catalog').toggleClass("fold")
+    }))
+
+    /*
+     * Doc: https://github.com/davist11/jQuery-One-Page-Nav
+     * Fork by Hux to support padding
+     */
+    async("/js/jquery.nav.js", function () {
+        $('.catalog-body').onePageNav({
+            currentClass: "active",
+            changeHash: !1,
+            easing: "swing",
+            filter: "",
+            scrollSpeed: 700,
+            scrollOffset: 0,
+            scrollThreshold: .2,
+            begin: null,
+            end: null,
+            scrollChange: null,
+            padding: 80
+        });
+    });
+</script>
+
+
+
+<!-- Multi-Lingual -->
+
+
+<!-- Simple Jekyll Search -->
+<script>
+    // https://stackoverflow.com/questions/1912501/unescape-html-entities-in-javascript
+    function htmlDecode(input) {
+        var e = document.createElement('textarea');
+        e.innerHTML = input;
+        // handle case of empty input
+        return e.childNodes.length === 0 ? "" : e.childNodes[0].nodeValue;
+    }
+
+    SimpleJekyllSearch({
+        searchInput: document.getElementById('search-input'),
+        resultsContainer: document.getElementById('search-results'),
+        json: '/search.json',
+        searchResultTemplate: '<div class="post-preview item"><a href="{url}"><h2 class="post-title">{title}</h2><h3 class="post-subtitle">{subtitle}</h3><hr></a></div>',
+        noResultsText: 'No results',
+        limit: 50,
+        fuzzy: false,
+        // a hack to get escaped subtitle unescaped. for some reason, 
+        // post.subtitle w/o escape filter nuke entire search.
+        templateMiddleware: function (prop, value, template) {
+            if (prop === 'subtitle' || prop === 'title') {
+                if (value.indexOf("code")) {
+                    return htmlDecode(value);
+                } else {
+                    return value;
+                }
+            }
+        }
+    });
+
+    $(document).ready(function () {
+        var $searchPage = $('.search-page');
+        var $searchOpen = $('.search-icon');
+        var $searchClose = $('.search-icon-close');
+        var $searchInput = $('#search-input');
+        var $body = $('body');
+
+        $searchOpen.on('click', function (e) {
+            e.preventDefault();
+            $searchPage.toggleClass('search-active');
+            var prevClasses = $body.attr('class') || '';
+            setTimeout(function () {
+                $body.addClass('no-scroll');
+            }, 400)
+
+            if ($searchPage.hasClass('search-active')) {
+                $searchClose.on('click', function (e) {
+                    e.preventDefault();
+                    $searchPage.removeClass('search-active');
+                    $body.attr('class', prevClasses);  // from closure 
+                });
+                $searchInput.focus();
+            }
+        });
+    });
+</script>
+
+
+
+<!-- Image to Github 
+<img src="/img/icon_wechat.png" width="0" height="0" />
+<-- Migrate from head to bottom, no longer block render and still work -->
+<script>
+    
+    var elements = document.querySelectorAll('p');
+    Array.prototype.forEach.call(elements, function(el, i){
+        if(el.innerHTML=='[expand]') {
+            var parentcontent = el.parentNode.innerHTML.replace('<p>[expand]</p>','<div class="expand" style="display: none; height: 0; overflow: hidden;">').replace('<p>[/expand]</p>','</div>');
+            el.parentNode.innerHTML = parentcontent;
+        }
+    });
+
+    var elements = document.querySelectorAll('div.expand');
+    Array.prototype.forEach.call(elements, function(el, i){
+        el.previousElementSibling.innerHTML = el.previousElementSibling.innerHTML + '<span>..&nbsp; <a href="#" style="cursor: pointer;" onclick="this.parentNode.parentNode.nextElementSibling.style.display = \'block\'; this.parentNode.parentNode.nextElementSibling.style.height = \'auto\'; this.parentNode.style.display = \'none\';">read&nbsp;more&nbsp;&rarr;</a></span>';
+    });
+
+</script>
+
+</body>
+</html>

@@ -1,0 +1,1658 @@
+<!DOCTYPE html>
+<html lang="ja">
+
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="google-site-verification" content="gSMaswRY9iRfG4QaQrx6aj481bgr503qEZh-QPsMYNU" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+    <meta name="description" content="元経済学徒, 現在どっかでデータサイエンティストもどきやってる人間の勉強日記">
+    <meta name="keywords"  content="Statistics, Economics, Econometrics, Python, C, Shell, Linux, Data scientist">
+    <meta name="theme-color" content="#000000">
+    
+    <!-- Open Graph -->
+    <meta property="og:title" content="素数の分布と素数定理 - Ryo's Tech Blog">
+    
+    <meta property="og:type" content="article">
+    <meta property="og:description" content="
+    Table of Contents
+  
+  
+
+
+">
+    
+    <meta property="article:published_time" content="2021-04-17T00:00:00Z">
+    
+    
+    <meta property="article:author" content="Ryo">
+    
+    
+    <meta property="article:tag" content="math">
+    
+    <meta property="article:tag" content="素数">
+    
+    
+    <meta property="og:image" content="https://ryonakagami.github.io/img/avatar_rio_cat.jpg">
+    <meta property="og:url" content="https://ryonakagami.github.io/2021/04/17/prime-number-theorem/">
+    <meta property="og:site_name" content="Ryo's Tech Blog">
+    
+    <title>素数の分布と素数定理 - Ryo's Tech Blog</title>
+
+    <!-- Web App Manifest -->
+    <link rel="manifest" href="/pwa/manifest.json">
+
+    <!-- Favicon -->
+    <link rel="shortcut icon" href="/img/favicon.ico">
+    
+    <!-- Canonical URL -->
+    <link rel="canonical" href="https://ryonakagami.github.io/2021/04/17/prime-number-theorem/">
+
+    <!-- Bootstrap Core CSS -->
+    <link rel="stylesheet" href="/css/bootstrap.min.css">
+
+    <!-- Custom CSS -->
+    <link rel="stylesheet" href="/css/ryo-blog.min.css">
+
+    <!-- Custom Fonts -->
+    <!-- <link href="http://maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css" rel="stylesheet" type="text/css"> -->
+    <!-- https://stackoverflow.com/questions/45983301/google-pagespeed-eliminate-render-blocking-resources-above-the-fold-caused-fro -->
+    <!--link href="//cdnjs.cloudflare.com/ajax/libs/font-awesome/4.6.3/css/font-awesome.min.css" rel="stylesheet" type="text/css"-->
+    <!--<link href="https://fonts.googleapis.com/earlyaccess/notosansjapanese.css" rel="stylesheet" type="text/css" media="print" onload="this.media='all'" > -->
+    <link href="https://fonts.googleapis.com/earlyaccess/notosansjapanese.css" rel="preload" type="text/css" media="print" onload="this.media='all'" >
+
+
+    <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
+    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+    <!--[if lt IE 9]>
+        <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+        <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
+    <![endif]-->
+
+    <!-- ga & ba script hoook -->
+    <script></script>
+</head>
+
+
+<!-- hack iOS CSS :active style -->
+<body ontouchstart="">
+
+    <!-- Navigation -->
+
+<nav class="navbar navbar-default navbar-custom navbar-fixed-top invert">
+    
+        <div class="container-fluid">
+            <!-- Brand and toggle get grouped for better mobile display -->
+            <div class="navbar-header page-scroll">
+                <button type="button" class="navbar-toggle">
+                    <span class="sr-only">Toggle navigation</span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
+                <a class="navbar-brand" href="/">Ryo's Tech Blog</a>
+            </div>
+
+            <!-- Collect the nav links, forms, and other content for toggling -->
+            <div id="huxblog_navbar">
+                <div class="navbar-collapse">
+                    <ul class="nav navbar-nav navbar-left">
+                                                <li>
+                            <a href="https://ryonakagami.github.io/statistics-for-regression-monkey/">Statistics for
+                                Regression Monkeys</a>
+                        </li>
+                        <li>
+                            <a href="https://ohgoshgit.github.io/">OhGoshGit!?!</a>
+                        </li>
+                        <!-- <li>
+                            <a><button onclick="mainDropDown()" style="border-color: rgba(70, 83, 111, 0.989); background-color: rgba(70, 83, 111, 0.989)">Dropdown</button></a> 
+                            <div id="myDropdown" class="dropdown-content">
+                              <a href="#" onclick="subMenu(this)">A</a>
+                              <div class="sub-menu-item" id="subMenu1">
+                              <a href="#">A.1</a>
+                              </div>
+                              <a href="#" onclick="subMenu(this)">B</a>
+                              <div class="sub-menu-item" id="subMenu2">
+                              <a href="#">B.1</a>
+                              </div>
+                              <a href="#">C</a>
+                              <a href="#">D</a>
+                              <a href="#">E</a>
+                              <a href="#">F</a>
+                              <a href="#">G</a>
+                            </div>
+                        </li> -->
+                    </ul>
+                    </ul>
+                    <ul class="nav navbar-nav navbar-right">
+                        
+                        
+                        
+                        
+                        <li>
+                            <a href="/about/">About</a>
+                        </li>
+                        
+                        
+                        
+                        <li>
+                            <a href="/archive/">Tag Search</a>
+                        </li>
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        <!--about fa-search see https://stackoverflow.com/questions/41950677/how-to-make-my-search-icon-fixed-->
+                        <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css"
+                            rel="stylesheet" />
+                        <li class="search-icon">
+                            <a href="javascript:void(0)" aria-label="Search" target="_blank">
+                                <i class="fa fa-search"></i>
+                            </a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+            <!-- /.navbar-collapse -->
+        </div>
+        <!-- /.container -->
+    </nav>
+
+    <script>
+        // Drop Bootstarp low-performance Navbar
+        // Use customize navbar with high-quality material design animation
+        // in high-perf jank-free CSS3 implementation
+        var $body = document.body;
+        var $toggle = document.querySelector('.navbar-toggle');
+        var $navbar = document.querySelector('#huxblog_navbar');
+        var $collapse = document.querySelector('.navbar-collapse');
+
+        var __HuxNav__ = {
+            close: function () {
+                $navbar.className = " ";
+                // wait until animation end.
+                setTimeout(function () {
+                    // prevent frequently toggle
+                    if ($navbar.className.indexOf('in') < 0) {
+                        $collapse.style.height = "0px"
+                    }
+                }, 400)
+            },
+            open: function () {
+                $collapse.style.height = "auto"
+                $navbar.className += " in";
+            }
+        }
+
+        // Bind Event
+        $toggle.addEventListener('click', function (e) {
+            if ($navbar.className.indexOf('in') > 0) {
+                __HuxNav__.close()
+            } else {
+                __HuxNav__.open()
+            }
+        })
+
+        /**
+         * Since Fastclick is used to delegate 'touchstart' globally
+         * to hack 300ms delay in iOS by performing a fake 'click',
+         * Using 'e.stopPropagation' to stop 'touchstart' event from 
+         * $toggle/$collapse will break global delegation.
+         * 
+         * Instead, we use a 'e.target' filter to prevent handler
+         * added to document close HuxNav.  
+         *
+         * Also, we use 'click' instead of 'touchstart' as compromise
+         */
+        document.addEventListener('click', function (e) {
+            if (e.target == $toggle) return;
+            if (e.target.className == 'icon-bar') return;
+            __HuxNav__.close();
+        })
+    </script>
+
+    <!-- Search -->
+<div class="search-page">
+  <div class="search-icon-close-container">
+    <span class="search-icon-close">
+      <i class="fa fa-chevron-down"></i>
+    </span>
+  </div>
+  <div class="search-main container">
+    <div class="row">
+      <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+        <form></form>
+        <input type="text" id="search-input" placeholder="$ grep...">
+        </form>
+        <div id="search-results" class="mini-post-list"></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+    <!-- Image to hack wechat -->
+<!-- <img src="/img/icon_wechat.png" width="0" height="0"> -->
+<!-- <img src="/img/home-bg.jpg" width="0" height="0"> -->
+
+<!-- Post Header -->
+
+
+
+<style type="text/css">
+    header.intro-header{
+        position: relative;
+        background-image: url('/img/home-bg.jpg');
+        background: ;
+    }
+
+    
+    header.intro-header .header-mask{
+        width: 100%;
+        height: 100%;
+        position: absolute;
+        background: rgba(0,0,0, 0.0);
+    }
+    
+</style>
+
+
+
+
+<header class="intro-header style-text" >
+
+    <div class="header-mask"></div>
+    
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+                <div class="post-heading">
+                    <div class="tags">
+                        
+                        <a class="tag" href="/archive/?tag=math" title="math">math</a>
+                        
+                        <a class="tag" href="/archive/?tag=%E7%B4%A0%E6%95%B0" title="素数">素数</a>
+                        
+                    </div>
+                    <h1>素数の分布と素数定理</h1>
+                    
+                    <h2 class="subheading"></h2>
+                    <p>
+                        公開日: 2021-04-17
+                        <br>
+                        更新日: 2023-01-27
+                        
+                    </p>
+                </div>
+            </div>
+        </div>
+    </div>
+</header>
+
+
+
+
+
+
+
+<!-- Post Content -->
+<article>
+    <div class="container">
+        <div class="row">
+
+    <!-- Post Container -->
+         <div class="
+                col-lg-8 col-lg-offset-2
+                col-md-10 col-md-offset-1
+                post-container">
+
+                <!-- Multi-Lingual -->
+                
+
+				<div style="border-radius: 1em; border-style:solid; border-color:#D3D3D3; background-color:#F8F8F8">
+  <p class="h4">  Table of Contents</p>
+  <!-- START doctoc generated TOC please keep comment here to allow auto update -->
+  <!-- DON'T EDIT THIS SECTION, INSTEAD RE-RUN doctoc TO UPDATE -->
+
+  <ul>
+    <li><a href="#%E7%B4%A0%E6%95%B0%E3%81%AE%E5%AE%9A%E7%BE%A9">素数の定義</a>
+      <ul>
+        <li><a href="#%E5%AE%9A%E7%90%86-%E7%B4%A0%E6%95%B0-n-%E3%81%AE%E5%B9%B3%E6%96%B9%E6%A0%B9%E3%81%AF%E7%84%A1%E7%90%86%E6%95%B0">定理: 素数 $n$ の平方根は無理数</a></li>
+        <li><a href="#%E5%AE%9A%E7%90%86%E7%B4%A0%E6%95%B0%E3%81%AE%E5%80%8B%E6%95%B0%E3%81%AF%E7%84%A1%E9%99%90">定理：素数の個数は無限</a></li>
+      </ul>
+    </li>
+    <li><a href="#%E7%B4%A0%E6%95%B0%E3%81%AE%E5%88%86%E5%B8%83">素数の分布</a>
+      <ul>
+        <li><a href="#%E7%B4%A0%E6%95%B0%E3%81%8C%E7%84%A1%E6%95%B0%E3%81%AB%E3%81%82%E3%82%8B%E3%81%93%E3%81%A8%E3%81%AE%E5%88%A5%E8%A8%BC%E6%98%8E">素数が無数にあることの別証明</a></li>
+        <li><a href="#%E7%B4%A0%E6%95%B0%E3%81%AE%E5%80%8B%E6%95%B0%E3%81%AE%E6%BF%83%E5%BA%A6%E3%81%AE%E4%B8%8A%E9%99%90">素数の個数の濃度の上限</a></li>
+        <li><a href="#%E7%B4%A0%E6%95%B0%E5%AE%9A%E7%90%86">素数定理</a></li>
+      </ul>
+    </li>
+    <li><a href="#%E8%A3%9C%E9%A1%8C-%E4%BA%92%E3%81%84%E3%81%AB%E7%B4%A0%E3%81%AA%E6%95%B4%E6%95%B0%E3%81%AE%E5%80%8B%E6%95%B0">補題: 互いに素な整数の個数</a></li>
+    <li><a href="#%E5%95%8F%E9%A1%8C%E9%9B%86">問題集</a>
+      <ul>
+        <li><a href="#%E5%95%8F%E9%A1%8C-1">問題 1</a></li>
+        <li><a href="#%E5%95%8F%E9%A1%8C-2-%E4%BA%AC%E9%83%BD%E5%A4%A7%E5%AD%A6-2016%E5%B9%B4">問題 2: 京都大学 2016年</a></li>
+      </ul>
+    </li>
+    <li><a href="#references">References</a></li>
+  </ul>
+
+  <!-- END doctoc generated TOC please keep comment here to allow auto update -->
+
+</div>
+
+<h2 id="素数の定義">素数の定義</h2>
+
+<div style="padding-left: 2em; overflow: auto; border-radius: 1em; border-style:solid; border-color:#D3D3D3; background-color:#F8F8F8">
+  <p>\(a&gt;1\) の整数 \(a\) は少なくとも1と \(a\) 自身の二つの約数を持つ． 1および \(a\) 以外の約数を「真の約数」ともいう． \(a&gt;1\) の整数 \(a\) が真の約数を持たないとき \(a\) を 素数 という． 逆に真の約数を持つ整数を 合成数 という</p>
+
+</div>
+
+<p>合成数は素数の積として順序を除けばただ一通りに表すことができます． これが素因数分解の一意性といわれる基本定理です。証明は<a href="https://ryonakagami.github.io/2021/04/16/mathematical-induction/#%E4%BE%8B%E9%A1%8C-%E7%B4%A0%E5%9B%A0%E6%95%B0%E5%88%86%E8%A7%A3%E3%81%AE%E4%B8%80%E6%84%8F%E6%80%A7">こちら</a>参照</p>
+
+<h3 id="定理-素数-n-の平方根は無理数">定理: 素数 $n$ の平方根は無理数</h3>
+
+<div style="padding-left: 2em; overflow: auto; border-radius: 1em; border-style:solid; border-color:#D3D3D3; background-color:#F8F8F8">
+
+  <p>自然数 $n$ が素数であるならば $\sqrt{n}$ は無理数</p>
+
+</div>
+
+<p><strong>証明</strong></p>
+
+<p>$\sqrt{n}$ が無理数でないと仮定すると, 互いに素な整数の比と表せる:</p>
+
+\[\sqrt{n} = \frac{p}{q}\]
+
+<p>Then,</p>
+
+\[\begin{align*}
+&amp;n = \frac{p^2}{q^2}\\
+&amp;\Rightarrow q^2 n = p^2
+\end{align*}\]
+
+<p>$p, q$は互いに素なので, $p^2$は $n$ の倍数となる. また, $p^2$が$n$の倍数なので$p$も$n$の倍数となる.</p>
+
+\[\begin{align*}
+&amp;p = nA \  \ A \text{は適当な定数}\\
+&amp;\Rightarrow q^2n = n^2A^2\\
+&amp;\Rightarrow q^2 = nA^2
+\end{align*}\]
+
+<p>同様に, $q$ も $n$ の倍数となってしまい, 仮定の「$p, q$は互いに素」に矛盾.</p>
+
+<p><strong>証明終了</strong></p>
+
+<hr />
+
+<h3 id="定理素数の個数は無限">定理：素数の個数は無限</h3>
+
+<div class="math display" style="padding-left: 2em; overflow: auto; border-radius: 1em; border-style:solid; border-color:#D3D3D3; background-color:#F8F8F8">
+
+  <p>素数の個数は無限である．</p>
+
+</div>
+
+<p><strong>証明</strong></p>
+
+<p>背理法で示します.まず素数の個数が有限であると仮定します. その個数を\(n\)個とし, \(p_1, p_2, \cdots, p_n\)をそのすべての素数とします.このとき、</p>
+
+\[a = p_1p_2\cdots p_n+1\]
+
+<p>と整数を定義します. 素因数分解の一意性の定理より, \(a\)は素数の積に分解されます.しかし、\(a\)は、\(p_1, p_2, \cdots, p_n\)のいずれで割っても1余ります.
+よって$a$ の素因数分解に現れる素数は \(p_1,\ p_2,\ \cdots,\ p_n\) ではあり得ず， それら以外の素数である． これは \(p_1,\ p_2,\ \cdots,\ p_n\) がすべての素数という仮定と矛盾する． ゆえに素数の数は無限である</p>
+
+<p><strong>証明終了</strong></p>
+
+<hr />
+
+<h2 id="素数の分布">素数の分布</h2>
+
+<p>どのように素数が分布しているのかということを，素数の分布に関する問題といいます．これを考えるために，正の実数\(x\)を越えない素数の個数を\(\pi(x)\)と表すとします．</p>
+
+<blockquote>
+  <p>例</p>
+</blockquote>
+
+\[\pi(100)=24,\ \pi(6000)-\pi(5900)=7\]
+
+<h3 id="素数が無数にあることの別証明">素数が無数にあることの別証明</h3>
+
+<div class="math display" style="padding-left: 2em; overflow: auto; border-radius: 1em; border-style:solid; border-color:#D3D3D3; background-color:#F8F8F8">
+
+\[\lim_{x\to\infty}\pi(x) = \infty\]
+
+</div>
+
+<p><strong>証明</strong></p>
+
+<p>\(x\)以下の素数にわたる積</p>
+
+\[\prod_{p\le x}\dfrac{1}{1-\dfrac{1}{p}}=\prod_{p\le x}\left(1-\dfrac{1}{p}\right)^{-1}\]
+
+<p>を考える．</p>
+
+\[\dfrac{1}{1-\dfrac{1}{p}}=1+\dfrac{1}{p}+\dfrac{1}{p^2}+\dfrac{1}{p^3}+\cdots\]
+
+<p>であるから</p>
+
+\[\prod_{p\le x}\left(1-\dfrac{1}{p} \right)^{-1} =\prod_{p\le x}\left(1+\dfrac{1}{p}+\dfrac{1}{p^2}+\cdots\right)\]
+
+<p>は，\(x\)以下の素数とそのべきのみを因数にもつような数\(k\)全体にわたる和, \(\sum\dfrac{1}{k}\)である．\(x\)以下の正整数\(n\)はもちろん\(x\)以下の素数とそのべきのみを因数にもつような数であるから</p>
+
+\[\prod_{p\le x}\left(1-\dfrac{1}{p} \right)^{-1}\ge \sum_{n\le x}\dfrac{1}{n}\]
+
+<p>\(x\to \infty\)のとき右辺は発散する．もし \(\lim_{x\to \infty}\pi(x)\)が有限であれば，\(x\to \infty\)のとき左辺は 有限個の素数にわたる和となり収束する． これは矛盾なので題意が示された．</p>
+
+<p><strong>証明終了</strong></p>
+
+<hr />
+
+<h3 id="素数の個数の濃度の上限">素数の個数の濃度の上限</h3>
+
+\[\lim_{x\to\infty} \frac{\pi(x)}{x} = 0\]
+
+<blockquote>
+  <p>証明</p>
+</blockquote>
+
+<p>\(p_1=2,\ p_2=3,\ \cdots\)と小さい方から\(r\)個の素数が与えられているとする． これらの素数は\(x\)より小さいものとする． \(x\)以下の素数は，この\(r\)個の素数と \(x\)以下の数でこれら\(r\)個の素数で割り切れない数をあわせた数の一部である． したがって</p>
+
+\[\begin{aligned}
+\pi(x) \leq&amp; r + [x] -\left[\dfrac{x}{p_1}\right]-\left[\dfrac{x}{p_2}\right] -\cdots -\left[\dfrac{x}{p_r}\right]\\ 	 
+&amp; +\left[ \dfrac{x}{p_1p_2}\right]+\left[ \dfrac{x}{p_1p_3}\right]\cdots \left[\frac{x}{p_{r-1}p_r}\right]-\cdots +(-1)^r\left[\dfrac{x}{p_1p_2\cdots p_r}\right]
+\end{aligned}\]
+
+<p>\([x]&lt; x,\ -[x]\le -x+1\)なので，あわせて \(\pm [x]&lt;\pm x+1\)がなりたつ． また、ガウス記号が入った項数は\(2^r\)個あるので</p>
+
+\[\begin{aligned}
+&amp;[x] -\left[\dfrac{x}{p_1}\right]-\left[\dfrac{x}{p_2}\right] -\cdots -\left[\dfrac{x}{p_r}\right]\\ 	 
+&amp; +\left[ \dfrac{x}{p_1p_2}\right]+\left[ \dfrac{x}{p_1p_3}\right]\cdots \left[\frac{x}{p_{r-1}p_r}\right]-\cdots +(-1)^r\left[\dfrac{x}{p_1p_2\cdots p_r}\right]\\
+&amp; 2^r + x -\left[\dfrac{x}{p_1}\right]-\left[\dfrac{x}{p_2}\right] -\cdots -\left[\dfrac{x}{p_r}\right]\\ 	 
+&amp; +\left[ \dfrac{x}{p_1p_2}\right]+\left[ \dfrac{x}{p_1p_3}\right]\cdots \left[\frac{x}{p_{r-1}p_r}\right]-\cdots +(-1)^r\left[\dfrac{x}{p_1p_2\cdots p_r}\right]\\
+&amp;= [x] -\dfrac{x}{p_1}-\dfrac{x}{p_2} -\cdots -\dfrac{x}{p_r}\\ 	 
+&amp; + \dfrac{x}{p_1p_2}+ \dfrac{x}{p_1p_3}\cdots \frac{x}{p_{r-1}p_r}-\cdots +(-1)^r\dfrac{x}{p_1p_2\cdots p_r}\\
+&amp;= 2^r + x\prod^r_{k=1}\left(1 - \frac{1}{r_k}\right)
+\end{aligned}\]
+
+<p>\(r+2^r&lt;2^{r+1}\)であるから</p>
+
+\[\pi(x)&lt;2^{r+1}+x\prod_{k=1}^r\left(1-\dfrac{1}{p_k}\right)\]
+
+\[\therefore\: \dfrac{\pi(x)}{x}&lt;\dfrac{2^{r+1}}{x}+\prod_{k=1}^r\left(1-\dfrac{1}{p_k}\right)\]
+
+<p>ここで\(r\)を \(2^{r+1}\le \sqrt{x}\)である最大のものにとる．このとき</p>
+
+\[\dfrac{\pi(x)}{x}&lt;\dfrac{1}{\sqrt x}+\prod_{k=1}^r\left(1-\dfrac{1}{p_k}\right)\]
+
+<p>\(x\to \infty\)のとき\(r\to \infty\)である．</p>
+
+\[\lim_{x \to \infty}\prod_{k=1}^r\left(1-\dfrac{1}{p_k}\right)^{-1}=\infty\]
+
+<p>つまり</p>
+
+\[\begin{aligned}
+&amp;\lim_{x \to \infty}\prod_{k=1}^r\left(1-\dfrac{1}{p_k}\right)=0\\
+&amp;\lim_{x \to \infty}\dfrac{1}{\sqrt{x}}=0
+\end{aligned}\]
+
+<p>従って、</p>
+
+\[\lim_{x\to \infty}\dfrac{\pi(x)}{x}=0\]
+
+<p>が示された．</p>
+
+<div style="text-align: right;">
+  <p>■</p>
+</div>
+
+<h3 id="素数定理">素数定理</h3>
+
+\[\pi(x)\sim \dfrac{x}{\log x}\]
+
+<p>という関係性が知られており, これを素数定理といいます. まず導入として, 補正対数積分関数, $Li(x)$,の説明をします.
+補正対数積分関数とは以下のような関数として表されます:</p>
+
+\[Li(x) = \int^x_2 \frac{1}{\log(x)}dx\]
+
+<p>そしてこの補正対数積分関数は素数濃度の近似として当てはまりが良いことが知られており, 実際に数を見てみると</p>
+
+<table>
+  <thead>
+    <tr>
+      <th>x</th>
+      <th>$\pi(x)$</th>
+      <th>$Li(x)$</th>
+      <th>$x/\log(x)$</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>$10^1$</td>
+      <td>4</td>
+      <td>5.12</td>
+      <td>4.34</td>
+    </tr>
+    <tr>
+      <td>$10^2$</td>
+      <td>25</td>
+      <td>29.08</td>
+      <td>21.71</td>
+    </tr>
+    <tr>
+      <td>$10^3$</td>
+      <td>168</td>
+      <td>176.56</td>
+      <td>144.76</td>
+    </tr>
+    <tr>
+      <td>$10^4$</td>
+      <td>1229</td>
+      <td>1245.09</td>
+      <td>1085.74</td>
+    </tr>
+    <tr>
+      <td>$10^5$</td>
+      <td>9592</td>
+      <td>9628.76</td>
+      <td>8685.89</td>
+    </tr>
+    <tr>
+      <td>$10^6$</td>
+      <td>78498</td>
+      <td>78626.50</td>
+      <td>72382.41</td>
+    </tr>
+    <tr>
+      <td>$10^7$</td>
+      <td>664579</td>
+      <td>664917.35</td>
+      <td>620420.69</td>
+    </tr>
+    <tr>
+      <td>$10^8$</td>
+      <td>5761455</td>
+      <td>5752208.33</td>
+      <td>5428681.02</td>
+    </tr>
+  </tbody>
+</table>
+
+<p>詳しい説明は割愛しますが, $Li(x)$について以下のような関係式が知られています:</p>
+
+\[Li(x) - \frac{x}{\log(x)} = O\left(\frac{x}{(\log(x))^2}\right)\]
+
+<p>ですので, 補正対数積分関数は素数濃度の近似として当てはまりが良いことがわかれば上記の素数定理の直感的感覚も理解できるようになります.</p>
+
+<blockquote>
+  <p>直感的説明: 自然数$N$が素数である確率</p>
+</blockquote>
+
+<p>十分大きな自然数 $N$ に対し, $N$ が素数である確率を考えてみる．$N$ より小さい素数を $p_1$, …, $p_m$ としたとき, $N$ が素数であることは, $N$ が$p_1$, …, $p_m$ のいずれでも割り切れないことと同じです. その確率をナイーブに表現すると</p>
+
+\[\prod_{i=1}^m \left(1 - \frac{1}{p_i}\right) \approx \frac{1}{\log(N)}\]
+
+<p>よって $N$ 以下の素数の個数 $\pi(N)$ は</p>
+
+<div class="math display" style="overflow: auto">
+  <p>\(\begin{align*}
+\pi(N) &amp;\approx \sum_{x=2}^N\frac{1}{\log(x)}\\
+&amp;\approx Li(N)
+\end{align*}\)</p>
+</div>
+
+<p>なお, $\pi(x)$ と $Li(x)$ のずれは $\sqrt{x}\log(x)$の定数倍より小さいと予想されています. この予想は有名な Riemann 予想と同値です.</p>
+
+<h2 id="補題-互いに素な整数の個数">補題: 互いに素な整数の個数</h2>
+
+<p>\(p_1,\ p_2,\ p_3,\ \cdots,\ p_r\) を相異なる素数とする． 実数 \(x\) を越えない自然数のなかで \(p_1,\ p_2,\ p_3,\ \cdots,\ p_r\) のいずれでも割り切れないものの個数\(N\)は次式で与えられる．</p>
+
+\[\begin{aligned}
+N =&amp; [x] -\left[\dfrac{x}{p_1}\right]-\left[\dfrac{x}{p_2}\right] -\cdots -\left[\dfrac{x}{p_r}\right]\\ 	 
+&amp; +\left[ \dfrac{x}{p_1p_2}\right]+\left[ \dfrac{x}{p_1p_3}\right]\cdots \left[\frac{x}{p_{r-1}p_r}\right]-\cdots +(-1)^r\left[\dfrac{x}{p_1p_2\cdots p_r}\right]
+\end{aligned}\]
+
+<p>ただし \([x]\) は \(x\) を超えない最大の整数を表す．</p>
+
+<blockquote>
+  <p>証明</p>
+</blockquote>
+
+<p>\(r\)に関する数学的帰納法で証明する．</p>
+
+<p>\(r=1\) のときは \(1,\ 2,\ \cdots,\ [x]\) のなかで \(p_1\) の倍数は</p>
+
+\[1\cdot p_1,\ 2\cdot p_1,\ \cdots,\ \left[ \dfrac{x}{p_1}\right]p_1\]
+
+<p>だけある．したがって実数 \(x\) を越えない自然数のなかで \(p_1\) で割り切れないものの個数は</p>
+
+\[[x]-\left[ \dfrac{x}{p_1}\right]\]
+
+<p>となり，等式は成立する．</p>
+
+<p>\(r=k\)のとき、命題が成立するとする． \(r=k+1\)とし，さらに \(p_{k+1}\) が追加されたとする． このときは，さらに \(p_{k+1}\) の倍数</p>
+
+\[yp_{k+1}\ \left(y\le\dfrac{x}{p_{k+1}} \right)\]
+
+<p>を除かなければならない．そのうち \(y\) が \(p_1,\ p_2,\ \cdots,\ p_k\) で割り切れるものは すでに除かれているので，新たに除くべきものの個数は，</p>
+
+\[\dfrac{x}{p_{k+1}}\]
+
+<p>を越えない整数のなかで \(p_1,\ p_2,\ \cdots,\ p_k\) で割り切れないものの個数である．ゆえに求める個数\(N_{k+1}\)は</p>
+
+\[\begin{aligned} 
+N_{k+1}=&amp;[x]-\left[\dfrac{x}{p_1} \right]-\left[\dfrac{x}{p_2} \right]-\cdots + \left[\dfrac{x}{p_1p_2} \right]+ \left[\dfrac{x}{p_1p_3} \right] + \cdots + (-1)^k+ \left[\dfrac{x}{p_1p_2\cdots p_k} \right]\\
+&amp;- \left\{\left[\dfrac{x}{p_{k+1}} \right]- \left[\dfrac{x}{p_1p_{k+1}} \right]- \left[\dfrac{x}{p_1p_{k+1}} \right]-\cdots - (-1)^{k+1}+ \left[\dfrac{x}{p_1p_2\cdots p_{k+1}} \right]\right\}\\
+=&amp; [x] -\left[\dfrac{x}{p_1}\right]-\left[\dfrac{x}{p_2}\right] -\cdots -\left[\dfrac{x}{p_{k+1}}\right]\\ 	 
+&amp; +\left[ \dfrac{x}{p_1p_2}\right]+\left[ \dfrac{x}{p_1p_3}\right]\cdots \left[\frac{x}{p_{k}p_{k+1}}\right]-\cdots +(-1)^{k+1}\left[\dfrac{x}{p_1p_2\cdots p_{k+1}}\right]
+\end{aligned}\]
+
+<p>ゆえに \(k+1\) のときも成立し，題意が示された</p>
+
+<div style="text-align: right;">
+  <p>■</p>
+</div>
+
+<h2 id="問題集">問題集</h2>
+<h3 id="問題-1">問題 1</h3>
+
+<div class="math display" style="padding-left: 2em; overflow: auto; border-radius: 1em; border-style:solid; border-color:#D3D3D3; background-color:#F8F8F8">
+
+  <p>$\sqrt{6}$ が無理数であることを示せ</p>
+
+</div>
+
+<p><strong>証明</strong></p>
+
+<p>$\sqrt{6}$が有理数ならば互いの素な自然数の比, $\sqrt{6} = p/q$と表現できる.</p>
+
+\[\begin{align*}
+6 &amp;= \frac{p^2}{q^2}\\
+\Rightarrow &amp; 6q^2 = p^2\\[8pt]
+\Rightarrow &amp; p^2\text{は2の倍数}\\[8pt]
+\Rightarrow &amp; p\text{は2の倍数}\\[8pt]
+\Rightarrow &amp; 6q^2 = 4y^2\\[8pt]
+\Rightarrow &amp; 3q^2 = 2y^2\\[8pt]
+\Rightarrow &amp; q\text{は2の倍数}
+\end{align*}\]
+
+<p>$p, q$が互いに素という仮定に矛盾</p>
+
+<p><strong>証明終了</strong></p>
+
+<hr />
+
+<h3 id="問題-2-京都大学-2016年">問題 2: 京都大学 2016年</h3>
+
+<div class="math display" style="padding-left: 2em; overflow: auto; border-radius: 1em; border-style:solid; border-color:#D3D3D3; background-color:#F8F8F8">
+
+  <p>素数 \(p, q\)を用いて、\(p^q + q^p\) と表される素数をすべて求めよ.</p>
+
+</div>
+
+<p><strong>解答</strong></p>
+
+<p>一般性を失わずに $p \leq q$ と定義する.</p>
+
+<p>まず、$(p, q)$を(偶数, 偶数), (偶数, 奇数), (奇数, 偶数), (奇数, 奇数)の場合分けで考える.</p>
+
+<p>このとき、偶数の素数は2しか存在しないことに留意すると,
+(偶数, 偶数)は $2^2 + 2^2 = 8$となり不敵, (奇数, 奇数)は$p^q + q^p$が偶数となり不敵.</p>
+
+<p>(奇数, 偶数)は2以下の素数は存在しないので不敵となり、考えるべきは(偶数, 奇数), とくに(2, 奇数)となる.</p>
+
+<p>qが\(3k \pm 1\) (ただし、kは0以上の整数)と表せるとする.このとき、modを3として$p^q + q^p$を考えると</p>
+
+\[2^q + q^2 \equiv 2 + 1 \equiv 0 \: \mathrm{mod } 3\]
+
+<p>よって、\(p^q + q^p\) と表される素数は存在しない.</p>
+
+<p>次に、\(q = 3\), つまり\(3k\)で表せる唯一の素数とすると、</p>
+
+\[2^3 + 3^2 = 17\]
+
+<p>と題意を満たす. よって、17のみ</p>
+
+<p><strong>解答終了</strong></p>
+
+<hr />
+
+<h2 id="references">References</h2>
+
+<ul>
+  <li><a href="http://aozoragakuen.sakura.ne.jp/suuron/node17.html">青空学園: 素数の定義</a></li>
+  <li><a href="https://primes.utm.edu/">The PrimePages: prime number research &amp; records</a></li>
+  <li><a href="http://aozoragakuen.sakura.ne.jp/suuron/node82.html">素数定理の証明</a></li>
+</ul>
+
+<blockquote>
+  <p>関連ブログ記事</p>
+</blockquote>
+
+<ul>
+  <li><a href="https://ryonakagami.github.io/2021/04/16/mathematical-induction/">Ryo’s Tech Blog: 数学的帰納法の原理</a></li>
+</ul>
+
+
+                <hr style="visibility: hidden;">
+                <hr/>
+                <b><fontsize="5">Share Buttons</font><br></b>
+                <!--see 
+    https://jekyllcodex.org/without-plugin/share-buttons/ 
+    https://ranvir.xyz/blog/why-and-how-to-add-social-sharing-buttons-on-your-jekyll-blog-using-github-pages/
+-->
+
+
+
+<style>
+#share-buttons {display: inline-block; vertical-align: middle; }
+#share-buttons:after {content: ""; display: block; clear: both;}
+#share-buttons > div {
+    position: relative;
+    text-align: left; 
+    height: 36px; 
+    width: 32px; 
+    float: left; 
+    text-align: center;
+}
+#share-buttons > div > svg {height: 16px; fill: #d5d5d5; margin-top: 10px;}
+#share-buttons > div:hover {cursor: pointer;}
+#share-buttons > div.facebook:hover > svg {fill: #3B5998;}
+#share-buttons > div.twitter:hover > svg {fill: #55ACEE;}
+#share-buttons > div.linkedin:hover > svg {fill: #0077b5;}
+#share-buttons > div.pinterest:hover > svg {fill: #CB2027;}
+#share-buttons > div.gplus:hover > svg {fill: #dd4b39;}
+#share-buttons > div.mail:hover > svg {fill: #7D7D7D;}
+#share-buttons > div.instagram:hover > svg {fill: #C73B92;}
+#share-buttons > div.facebook > svg {height: 18px; margin-top: 9px;}
+#share-buttons > div.twitter > svg {height: 20px; margin-top: 8px;}
+#share-buttons > div.linkedin > svg {height: 19px; margin-top: 7px;}
+#share-buttons > div.pinterest > svg {height: 20px; margin-top: 9px;}
+#share-buttons > div.gplus > svg {height: 17px; margin-top: 9px; position: relative; left: 1px;}
+#share-buttons > div.mail > svg {height: 14px; margin-top: 11px;}
+</style>
+
+<span style="color: black">Share on: </span><div id="share-buttons">
+    <div class="facebook" title="Share this on Facebook" onclick="gtag('event', 'Facebook', {'event_category':'Post Shared','event_label':'Facebook'}); location.href='http://www.facebook.com/share.php?u=https://ryonakagami.github.io/2021/04/17/prime-number-theorem/';"><svg viewBox="0 0 1792 1792" xmlns="http://www.w3.org/2000/svg"><path d="M1343 12v264h-157q-86 0-116 36t-30 108v189h293l-39 296h-254v759h-306v-759h-255v-296h255v-218q0-186 104-288.5t277-102.5q147 0 228 12z"/></svg></div>
+    <div class="twitter" title="Share this on Twitter" onclick="gtag('event', 'Twitter', {'event_category':'Post Shared','event_label':'Twitter'}); location.href='https://twitter.com/intent/tweet?text=素数の分布と素数定理&url=https://ryonakagami.github.io/2021/04/17/prime-number-theorem/';"><svg viewBox="0 0 1792 1792" xmlns="http://www.w3.org/2000/svg"><path d="M1684 408q-67 98-162 167 1 14 1 42 0 130-38 259.5t-115.5 248.5-184.5 210.5-258 146-323 54.5q-271 0-496-145 35 4 78 4 225 0 401-138-105-2-188-64.5t-114-159.5q33 5 61 5 43 0 85-11-112-23-185.5-111.5t-73.5-205.5v-4q68 38 146 41-66-44-105-115t-39-154q0-88 44-163 121 149 294.5 238.5t371.5 99.5q-8-38-8-74 0-134 94.5-228.5t228.5-94.5q140 0 236 102 109-21 205-78-37 115-142 178 93-10 186-50z"/></svg></div>
+    <div class="linkedin" title="Share this on Linkedin" onclick="gtag('event', 'Linkedin', {'event_category':'Post Shared','event_label':'Linkedin'}); location.href='https://www.linkedin.com/shareArticle?mini=true&url=https://ryonakagami.github.io/2021/04/17/prime-number-theorem/&title=&summary=&source=';"><svg viewBox="0 0 1792 1792" xmlns="http://www.w3.org/2000/svg"><path d="M477 625v991h-330v-991h330zm21-306q1 73-50.5 122t-135.5 49h-2q-82 0-132-49t-50-122q0-74 51.5-122.5t134.5-48.5 133 48.5 51 122.5zm1166 729v568h-329v-530q0-105-40.5-164.5t-126.5-59.5q-63 0-105.5 34.5t-63.5 85.5q-11 30-11 81v553h-329q2-399 2-647t-1-296l-1-48h329v144h-2q20-32 41-56t56.5-52 87-43.5 114.5-15.5q171 0 275 113.5t104 332.5z"/></svg></div>
+    
+    <div class="mail" title="Share this through Email" onclick="gtag('event', 'Email', {'event_category':'Post Shared','event_label':'Email'}); location.href='mailto:?&body=https://ryonakagami.github.io/2021/04/17/prime-number-theorem/';"><svg viewBox="0 0 1792 1792" xmlns="http://www.w3.org/2000/svg"><path d="M1792 710v794q0 66-47 113t-113 47h-1472q-66 0-113-47t-47-113v-794q44 49 101 87 362 246 497 345 57 42 92.5 65.5t94.5 48 110 24.5h2q51 0 110-24.5t94.5-48 92.5-65.5q170-123 498-345 57-39 100-87zm0-294q0 79-49 151t-122 123q-376 261-468 325-10 7-42.5 30.5t-54 38-52 32.5-57.5 27-50 9h-2q-23 0-50-9t-57.5-27-52-32.5-54-38-42.5-30.5q-91-64-262-182.5t-205-142.5q-62-42-117-115.5t-55-136.5q0-78 41.5-130t118.5-52h1472q65 0 112.5 47t47.5 113z"/></svg></div>
+</div>
+
+                
+                <hr/>
+
+                <!-- Featured Tags -->
+                <b><fontsize="5">Feature Tags</b>
+                    <div id="tag_cloud" class="tags tags-sup js-tags" 
+                    style="line-height: 0px !important;">
+                        
+                        
+                        
+                        
+                        
+                                <a data-sort="0288" 
+                                    href="/archive/?tag=%E7%B5%B1%E8%A8%88"
+                                    title="統計"
+                                    style="color: #337ab7 !important;"
+                                    rel="61">統計</a>
+                        
+                                <a data-sort="0298" 
+                                    href="/archive/?tag=Python"
+                                    title="Python"
+                                    style="color: #337ab7 !important;"
+                                    rel="51">Python</a>
+                        
+                                <a data-sort="0300" 
+                                    href="/archive/?tag=math"
+                                    title="math"
+                                    style="color: #337ab7 !important;"
+                                    rel="49">math</a>
+                        
+                                <a data-sort="0303" 
+                                    href="/archive/?tag=Linux"
+                                    title="Linux"
+                                    style="color: #337ab7 !important;"
+                                    rel="46">Linux</a>
+                        
+                                <a data-sort="0316" 
+                                    href="/archive/?tag=Ubuntu+20.04+LTS"
+                                    title="Ubuntu 20.04 LTS"
+                                    style="color: #337ab7 !important;"
+                                    rel="33">Ubuntu 20.04 LTS</a>
+                        
+                                <a data-sort="0319" 
+                                    href="/archive/?tag=Shell"
+                                    title="Shell"
+                                    style="color: #337ab7 !important;"
+                                    rel="30">Shell</a>
+                        
+                                <a data-sort="0321" 
+                                    href="/archive/?tag=English"
+                                    title="English"
+                                    style="color: #337ab7 !important;"
+                                    rel="28">English</a>
+                        
+                                <a data-sort="0324" 
+                                    href="/archive/?tag=git"
+                                    title="git"
+                                    style="color: #337ab7 !important;"
+                                    rel="25">git</a>
+                        
+                                <a data-sort="0329" 
+                                    href="/archive/?tag=%E6%96%B9%E6%B3%95%E8%AB%96"
+                                    title="方法論"
+                                    style="color: #337ab7 !important;"
+                                    rel="20">方法論</a>
+                        
+                                <a data-sort="0333" 
+                                    href="/archive/?tag=Ubuntu+22.04+LTS"
+                                    title="Ubuntu 22.04 LTS"
+                                    style="color: #337ab7 !important;"
+                                    rel="16">Ubuntu 22.04 LTS</a>
+                        
+                                <a data-sort="0337" 
+                                    href="/archive/?tag=%E7%B5%B1%E8%A8%88%E6%A4%9C%E5%AE%9A"
+                                    title="統計検定"
+                                    style="color: #337ab7 !important;"
+                                    rel="12">統計検定</a>
+                        
+                                <a data-sort="0338" 
+                                    href="/archive/?tag=%E7%AB%B6%E6%8A%80%E3%83%97%E3%83%AD%E3%82%B0%E3%83%A9%E3%83%9F%E3%83%B3%E3%82%B0"
+                                    title="競技プログラミング"
+                                    style="color: #337ab7 !important;"
+                                    rel="11">競技プログラミング</a>
+                        
+                                <a data-sort="0339" 
+                                    href="/archive/?tag=%E3%83%95%E3%83%BC%E3%83%AA%E3%82%A8%E8%A7%A3%E6%9E%90"
+                                    title="フーリエ解析"
+                                    style="color: #337ab7 !important;"
+                                    rel="10">フーリエ解析</a>
+                        
+                                <a data-sort="0340" 
+                                    href="/archive/?tag=%E5%89%8D%E5%87%A6%E7%90%86"
+                                    title="前処理"
+                                    style="color: #337ab7 !important;"
+                                    rel="9">前処理</a>
+                        
+                                <a data-sort="0340" 
+                                    href="/archive/?tag=SQL"
+                                    title="SQL"
+                                    style="color: #337ab7 !important;"
+                                    rel="9">SQL</a>
+                        
+                                <a data-sort="0340" 
+                                    href="/archive/?tag=coding"
+                                    title="coding"
+                                    style="color: #337ab7 !important;"
+                                    rel="9">coding</a>
+                        
+                                <a data-sort="0341" 
+                                    href="/archive/?tag=%E3%82%B3%E3%83%9F%E3%83%A5%E3%83%8B%E3%82%B1%E3%83%BC%E3%82%B7%E3%83%A7%E3%83%B3"
+                                    title="コミュニケーション"
+                                    style="color: #337ab7 !important;"
+                                    rel="8">コミュニケーション</a>
+                        
+                                <a data-sort="0342" 
+                                    href="/archive/?tag=Network"
+                                    title="Network"
+                                    style="color: #337ab7 !important;"
+                                    rel="7">Network</a>
+                        
+                                <a data-sort="0342" 
+                                    href="/archive/?tag=ssh"
+                                    title="ssh"
+                                    style="color: #337ab7 !important;"
+                                    rel="7">ssh</a>
+                        
+                                <a data-sort="0343" 
+                                    href="/archive/?tag=%E5%B0%86%E6%A3%8B"
+                                    title="将棋"
+                                    style="color: #337ab7 !important;"
+                                    rel="6">将棋</a>
+                        
+                                <a data-sort="0343" 
+                                    href="/archive/?tag=Data+visualization"
+                                    title="Data visualization"
+                                    style="color: #337ab7 !important;"
+                                    rel="6">Data visualization</a>
+                        
+                                <a data-sort="0343" 
+                                    href="/archive/?tag=Docker"
+                                    title="Docker"
+                                    style="color: #337ab7 !important;"
+                                    rel="6">Docker</a>
+                        
+                                <a data-sort="0343" 
+                                    href="/archive/?tag=Econometrics"
+                                    title="Econometrics"
+                                    style="color: #337ab7 !important;"
+                                    rel="6">Econometrics</a>
+                        
+                                <a data-sort="0343" 
+                                    href="/archive/?tag=VSCode"
+                                    title="VSCode"
+                                    style="color: #337ab7 !important;"
+                                    rel="6">VSCode</a>
+                        
+                                <a data-sort="0343" 
+                                    href="/archive/?tag=statistical+inference"
+                                    title="statistical inference"
+                                    style="color: #337ab7 !important;"
+                                    rel="6">statistical inference</a>
+                        
+                                <a data-sort="0344" 
+                                    href="/archive/?tag=GitHub+Pages"
+                                    title="GitHub Pages"
+                                    style="color: #337ab7 !important;"
+                                    rel="5">GitHub Pages</a>
+                        
+                                <a data-sort="0344" 
+                                    href="/archive/?tag=apt"
+                                    title="apt"
+                                    style="color: #337ab7 !important;"
+                                    rel="5">apt</a>
+                        
+                                <a data-sort="0344" 
+                                    href="/archive/?tag=development"
+                                    title="development"
+                                    style="color: #337ab7 !important;"
+                                    rel="5">development</a>
+                        
+                                <a data-sort="0345" 
+                                    href="/archive/?tag=%E3%82%B7%E3%82%B9%E3%83%86%E3%83%A0%E7%AE%A1%E7%90%86"
+                                    title="システム管理"
+                                    style="color: #337ab7 !important;"
+                                    rel="4">システム管理</a>
+                        
+                                <a data-sort="0345" 
+                                    href="/archive/?tag=Coffee"
+                                    title="Coffee"
+                                    style="color: #337ab7 !important;"
+                                    rel="4">Coffee</a>
+                        
+                                <a data-sort="0345" 
+                                    href="/archive/?tag=cloud"
+                                    title="cloud"
+                                    style="color: #337ab7 !important;"
+                                    rel="4">cloud</a>
+                        
+                                <a data-sort="0346" 
+                                    href="/archive/?tag=%E6%95%B0%E5%80%A4%E8%A8%88%E7%AE%97"
+                                    title="数値計算"
+                                    style="color: #337ab7 !important;"
+                                    rel="3">数値計算</a>
+                        
+                                <a data-sort="0346" 
+                                    href="/archive/?tag=%E7%B4%A0%E6%95%B0"
+                                    title="素数"
+                                    style="color: #337ab7 !important;"
+                                    rel="3">素数</a>
+                        
+                                <a data-sort="0346" 
+                                    href="/archive/?tag=Book"
+                                    title="Book"
+                                    style="color: #337ab7 !important;"
+                                    rel="3">Book</a>
+                        
+                                <a data-sort="0346" 
+                                    href="/archive/?tag=Font"
+                                    title="Font"
+                                    style="color: #337ab7 !important;"
+                                    rel="3">Font</a>
+                        
+                                <a data-sort="0346" 
+                                    href="/archive/?tag=Metrics"
+                                    title="Metrics"
+                                    style="color: #337ab7 !important;"
+                                    rel="3">Metrics</a>
+                        
+                                <a data-sort="0346" 
+                                    href="/archive/?tag=Poetry"
+                                    title="Poetry"
+                                    style="color: #337ab7 !important;"
+                                    rel="3">Poetry</a>
+                        
+                                <a data-sort="0346" 
+                                    href="/archive/?tag=Ubuntu+24.04+LTS"
+                                    title="Ubuntu 24.04 LTS"
+                                    style="color: #337ab7 !important;"
+                                    rel="3">Ubuntu 24.04 LTS</a>
+                        
+                                <a data-sort="0346" 
+                                    href="/archive/?tag=architecture"
+                                    title="architecture"
+                                    style="color: #337ab7 !important;"
+                                    rel="3">architecture</a>
+                        
+                                <a data-sort="0346" 
+                                    href="/archive/?tag=aws"
+                                    title="aws"
+                                    style="color: #337ab7 !important;"
+                                    rel="3">aws</a>
+                        
+                                <a data-sort="0346" 
+                                    href="/archive/?tag=shell"
+                                    title="shell"
+                                    style="color: #337ab7 !important;"
+                                    rel="3">shell</a>
+                        
+                                <a data-sort="0346" 
+                                    href="/archive/?tag=systemctl"
+                                    title="systemctl"
+                                    style="color: #337ab7 !important;"
+                                    rel="3">systemctl</a>
+                        
+                                <a data-sort="0347" 
+                                    href="/archive/?tag=%E3%83%86%E3%83%B3%E3%83%97%E3%83%AC%E3%83%BC%E3%83%88"
+                                    title="テンプレート"
+                                    style="color: #337ab7 !important;"
+                                    rel="2">テンプレート</a>
+                        
+                                <a data-sort="0347" 
+                                    href="/archive/?tag=%E3%83%87%E3%83%BC%E3%82%BF%E6%A7%8B%E9%80%A0"
+                                    title="データ構造"
+                                    style="color: #337ab7 !important;"
+                                    rel="2">データ構造</a>
+                        
+                                <a data-sort="0347" 
+                                    href="/archive/?tag=%E3%83%9D%E3%83%AF%E3%82%BD%E3%83%B3%E5%88%86%E5%B8%83"
+                                    title="ポワソン分布"
+                                    style="color: #337ab7 !important;"
+                                    rel="2">ポワソン分布</a>
+                        
+                                <a data-sort="0347" 
+                                    href="/archive/?tag=%E4%BC%9A%E8%A8%88%E5%88%86%E6%9E%90"
+                                    title="会計分析"
+                                    style="color: #337ab7 !important;"
+                                    rel="2">会計分析</a>
+                        
+                                <a data-sort="0347" 
+                                    href="/archive/?tag=%E6%96%87%E5%AD%97%E3%82%B3%E3%83%BC%E3%83%89"
+                                    title="文字コード"
+                                    style="color: #337ab7 !important;"
+                                    rel="2">文字コード</a>
+                        
+                                <a data-sort="0347" 
+                                    href="/archive/?tag=%E7%92%B0%E5%A2%83%E6%A7%8B%E7%AF%89"
+                                    title="環境構築"
+                                    style="color: #337ab7 !important;"
+                                    rel="2">環境構築</a>
+                        
+                                <a data-sort="0347" 
+                                    href="/archive/?tag=%E8%AB%96%E6%96%87"
+                                    title="論文"
+                                    style="color: #337ab7 !important;"
+                                    rel="2">論文</a>
+                        
+                                <a data-sort="0347" 
+                                    href="/archive/?tag=App"
+                                    title="App"
+                                    style="color: #337ab7 !important;"
+                                    rel="2">App</a>
+                        
+                                <a data-sort="0347" 
+                                    href="/archive/?tag=Bayesian"
+                                    title="Bayesian"
+                                    style="color: #337ab7 !important;"
+                                    rel="2">Bayesian</a>
+                        
+                                <a data-sort="0347" 
+                                    href="/archive/?tag=Dynamic+Programming"
+                                    title="Dynamic Programming"
+                                    style="color: #337ab7 !important;"
+                                    rel="2">Dynamic Programming</a>
+                        
+                                <a data-sort="0347" 
+                                    href="/archive/?tag=Keyboard"
+                                    title="Keyboard"
+                                    style="color: #337ab7 !important;"
+                                    rel="2">Keyboard</a>
+                        
+                                <a data-sort="0347" 
+                                    href="/archive/?tag=Processing"
+                                    title="Processing"
+                                    style="color: #337ab7 !important;"
+                                    rel="2">Processing</a>
+                        
+                                <a data-sort="0347" 
+                                    href="/archive/?tag=R"
+                                    title="R"
+                                    style="color: #337ab7 !important;"
+                                    rel="2">R</a>
+                        
+                                <a data-sort="0347" 
+                                    href="/archive/?tag=Steam"
+                                    title="Steam"
+                                    style="color: #337ab7 !important;"
+                                    rel="2">Steam</a>
+                        
+                                <a data-sort="0347" 
+                                    href="/archive/?tag=filesystem"
+                                    title="filesystem"
+                                    style="color: #337ab7 !important;"
+                                    rel="2">filesystem</a>
+                        
+                                <a data-sort="0347" 
+                                    href="/archive/?tag=quarto"
+                                    title="quarto"
+                                    style="color: #337ab7 !important;"
+                                    rel="2">quarto</a>
+                        
+                                <a data-sort="0347" 
+                                    href="/archive/?tag=regex"
+                                    title="regex"
+                                    style="color: #337ab7 !important;"
+                                    rel="2">regex</a>
+                    </div>
+
+                <br>
+
+                <b><fontsize="5">Leave a Comment</font><br>(注意：GitHub Accountが必要となります）</b>
+                
+                <script src="https://utteranc.es/client.js"
+                    repo="RyoNakagami/RyoNakagami.github.io"
+                    issue-term="url"
+                    theme="github-light"
+                    crossorigin="anonymous"
+                    async>Reduce unused JavaScript
+                
+                </script>
+
+
+            </div>  
+
+    <!-- Side Catalog Container -->
+        
+            <div class="
+                col-lg-1 col-lg-offset-0
+                visible-lg-block
+                sidebar-container
+                catalog-container">
+                <div class="side-catalog fixed" style="margin-top:3%">
+                    <hr class="hidden-sm hidden-xs">
+                    <h5>
+                        <a class="catalog-toggle" href="#">CONTENTS</a>
+                    </h5>
+                    <ul class="catalog-body"></ul>
+                </div>
+            </div>
+        
+    <!-- Sidebar Container -->
+            <!-- <div class="
+                col-lg-10 col-lg-offset-1
+                col-md-10 col-md-offset-1
+                sidebar-container row"> -->
+                <!-- 
+<hr>
+<h5>FRIENDS</h5>
+<ul class="list-inline">
+  
+  <li><a href="https://twitter.com/bluesky0804?ref_src=twsrc%5Egoogle%7Ctwcamp%5Eserp%7Ctwgr%5Eauthor">bluesky0804</a></li>
+  
+</ul>
+
+ -->
+            </div>
+        </div>
+    </div>
+</article>
+
+<!-- add support for mathjax by voleking-->
+
+  <script async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml.js" id="MathJax-script"></script>
+<script>
+  MathJax = {
+    tex: {
+      inlineMath: [['$','$'], ['\\(','\\)']],
+      displayMath: [['$$','$$'], ['\\[','\\]']],
+      processEscapes: true,
+      processEnvironments: true, // for pseudo
+      tags: "ams",
+      autoload: {
+        color: [],
+        colorV2: ['color']
+      },
+      packages: {'[+]': ['noerrors']}
+    },
+    chtml: {
+      matchFontHeight: false,
+      displayAlign: "left",
+      displayIndent: "2em"
+    },
+    options: {
+      renderActions: {
+        /* add a new named action to render <script type="math/tex"> */
+        find_script_mathtex: [10, function (doc) {
+          for (const node of document.querySelectorAll('script[type^="math/tex"]')) {
+            const display = !!node.type.match(/; *mode=display/);
+            const math = new doc.options.MathItem(node.textContent, doc.inputJax[0], display);
+            const text = document.createTextNode('');
+            node.parentNode.replaceChild(text, node);
+            math.start = {node: text, delim: '', n: 0};
+            math.end = {node: text, delim: '', n: 0};
+            doc.math.push(math);
+          }
+        }, '']
+      }
+    },
+    loader: {
+      load: ['[tex]/noerrors']
+    }
+  };
+</script>
+
+
+
+
+
+<!-- async load function -->
+<script>
+    function async(u, c) {
+      var d = document, t = 'script',
+          o = d.createElement(t),
+          s = d.getElementsByTagName(t)[0];
+      o.src = u;
+      if (c) { o.addEventListener('load', function (e) { c(null, e); }, false); }
+      s.parentNode.insertBefore(o, s);
+    }
+</script>
+<!-- anchor-js, Doc:http://bryanbraun.github.io/anchorjs/ -->
+<script>
+    async("//cdnjs.cloudflare.com/ajax/libs/anchor-js/1.1.1/anchor.min.js",function(){
+        anchors.options = {
+          visible: 'hover',
+          placement: 'right',
+          // icon: '#'
+        };
+        anchors.add().remove('.intro-header h1').remove('.subheading').remove('.sidebar-container h5');
+    })
+</script>
+<style>
+    /* place left on bigger screen */
+    @media all and (min-width: 800px) {
+        .anchorjs-link{
+            position: absolute;
+            left: -0.75em;
+            font-size: 1.1em;
+            margin-top : -0.1em;
+        }
+    }
+</style>
+
+
+<body>
+    <!-- enable mermaid language on markdown post -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/mermaid/10.6.1/mermaid.min.js"></script>
+<script>
+   mermaid.initialize({
+       startOnLoad:true,
+       theme: 'default'
+   });
+   window.mermaid.init(undefined, document.querySelectorAll('.language-mermaid'));
+</script>
+
+</body>
+
+    <script>
+    
+    var elements = document.querySelectorAll('p');
+    Array.prototype.forEach.call(elements, function(el, i){
+        if(el.innerHTML=='[expand]') {
+            var parentcontent = el.parentNode.innerHTML.replace('<p>[expand]</p>','<div class="expand" style="display: none; height: 0; overflow: hidden;">').replace('<p>[/expand]</p>','</div>');
+            el.parentNode.innerHTML = parentcontent;
+        }
+    });
+
+    var elements = document.querySelectorAll('div.expand');
+    Array.prototype.forEach.call(elements, function(el, i){
+        el.previousElementSibling.innerHTML = el.previousElementSibling.innerHTML + '<span>..&nbsp; <a href="#" style="cursor: pointer;" onclick="this.parentNode.parentNode.nextElementSibling.style.display = \'block\'; this.parentNode.parentNode.nextElementSibling.style.height = \'auto\'; this.parentNode.style.display = \'none\';">read&nbsp;more&nbsp;&rarr;</a></span>';
+    });
+
+</script>
+
+    <!-- Footer -->
+<footer>
+    <div class="container">
+        <div class="row">
+            <!--<div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1"> -->
+                <!-- SNS Link -->
+            
+
+
+<ul class="list-inline text-center">
+
+
+  
+  
+  
+  
+  <li>
+    <a target="_blank" href="https://github.com/RyoNakagami">
+      <span class="fa-stack fa-lg">
+        <i class="fa fa-circle fa-stack-2x"></i>
+        <i class="fa fa-github fa-stack-1x fa-inverse"></i>
+      </span>
+    </a>
+  </li>
+  
+  
+</ul>
+
+            
+            <p class="copyright text-muted">
+                Copyright &copy; Ryo's Tech Blog 2025
+                <br>
+                Powered by <a href="https://ryonakagami.github.io">Ryo's Tech Blog</a> |
+                <iframe style="margin-left: 2px; margin-bottom:-5px;" frameborder="0" scrolling="0" width="100px"
+                    height="20px"
+                    title="RyoNakagami.github.io github stars"
+                    src="https://ghbtns.com/github-btn.html?user=RyoNakagami&repo=RyoNakagami.github.io&type=star&count=true">
+                </iframe>
+            </p>
+            <!--</div> -->
+        </div>
+    </div>
+</footer>
+
+<!-- jQuery -->
+<script src="/js/jquery.min.js "></script>
+
+<!-- Bootstrap Core JavaScript -->
+<!-- Currently, only navbar scroll-down effect at desktop still depends on this -->
+<script src="/js/bootstrap.min.js "></script>
+
+<!-- Custom Theme JavaScript -->
+<script src="/js/ryo-blog.min.js "></script>
+
+<!-- Simple Jekyll Search -->
+<script src="/js/simple-jekyll-search.min.js"></script>
+
+<!-- Service Worker -->
+
+<script src="/js/snackbar.js "></script>
+<script src="/js/sw-registration.js "></script>
+
+
+<!-- async load function -->
+<script>
+    function async(u, c) {
+        var d = document, t = 'script',
+            o = d.createElement(t),
+            s = d.getElementsByTagName(t)[0];
+        o.src = u;
+        if (c) { o.addEventListener('load', function (e) { c(null, e); }, false); }
+        s.parentNode.insertBefore(o, s);
+    }
+</script>
+
+<!--
+     Because of the native support for backtick-style fenced code blocks
+     right within the Markdown is landed in Github Pages,
+     From V1.6, There is no need for Highlight.js,
+     so Huxblog drops it officially.
+
+     - https://github.com/blog/2100-github-pages-now-faster-and-simpler-with-jekyll-3-0
+     - https://help.github.com/articles/creating-and-highlighting-code-blocks/
+     - https://github.com/jneen/rouge/wiki/list-of-supported-languages-and-lexers
+-->
+<!--
+    <script>
+        async("http://cdn.bootcss.com/highlight.js/8.6/highlight.min.js", function(){
+            hljs.initHighlightingOnLoad();
+        })
+    </script>
+    <link href="http://cdn.bootcss.com/highlight.js/8.6/styles/github.min.css" rel="stylesheet">
+-->
+
+
+
+
+
+
+
+<!--fastClick.js -->
+<script>
+    async("//cdnjs.cloudflare.com/ajax/libs/fastclick/1.0.6/fastclick.min.js", function () {
+        var $nav = document.querySelector("nav");
+        if ($nav) FastClick.attach($nav);
+    })
+</script>
+
+
+<!-- Global site tag (gtag.js) - Google Analytics -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-LVL413SV09"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+  gtag('config', 'G-LVL413SV09');
+</script>
+
+
+
+<!-- Side Catalog -->
+
+<script type="text/javascript">
+    function generateCatalog(selector) {
+
+        // interop with multilangual 
+        if ('' == 'true') {
+            _containerSelector = 'div.post-container.active'
+        } else {
+            _containerSelector = 'div.post-container'
+        }
+
+        // init
+        var P = $(_containerSelector), a, n, t, l, i, c;
+        a = P.find('h1,h2,h3,h4,h5,h6');
+
+        // clean
+        $(selector).html('')
+
+        // appending
+        a.each(function () {
+            n = $(this).prop('tagName').toLowerCase();
+            i = "#" + $(this).prop('id');
+            t = $(this).text();
+            c = $('<a href="' + i + '" rel="nofollow">' + t + '</a>');
+            l = $('<li class="' + n + '_nav"></li>').append(c);
+            $(selector).append(l);
+        });
+        return true;
+    }
+
+    generateCatalog(".catalog-body");
+
+    // toggle side catalog
+    $(".catalog-toggle").click((function (e) {
+        e.preventDefault();
+        $('.side-catalog').toggleClass("fold")
+    }))
+
+    /*
+     * Doc: https://github.com/davist11/jQuery-One-Page-Nav
+     * Fork by Hux to support padding
+     */
+    async("/js/jquery.nav.js", function () {
+        $('.catalog-body').onePageNav({
+            currentClass: "active",
+            changeHash: !1,
+            easing: "swing",
+            filter: "",
+            scrollSpeed: 700,
+            scrollOffset: 0,
+            scrollThreshold: .2,
+            begin: null,
+            end: null,
+            scrollChange: null,
+            padding: 80
+        });
+    });
+</script>
+
+
+
+<!-- Multi-Lingual -->
+
+
+<!-- Simple Jekyll Search -->
+<script>
+    // https://stackoverflow.com/questions/1912501/unescape-html-entities-in-javascript
+    function htmlDecode(input) {
+        var e = document.createElement('textarea');
+        e.innerHTML = input;
+        // handle case of empty input
+        return e.childNodes.length === 0 ? "" : e.childNodes[0].nodeValue;
+    }
+
+    SimpleJekyllSearch({
+        searchInput: document.getElementById('search-input'),
+        resultsContainer: document.getElementById('search-results'),
+        json: '/search.json',
+        searchResultTemplate: '<div class="post-preview item"><a href="{url}"><h2 class="post-title">{title}</h2><h3 class="post-subtitle">{subtitle}</h3><hr></a></div>',
+        noResultsText: 'No results',
+        limit: 50,
+        fuzzy: false,
+        // a hack to get escaped subtitle unescaped. for some reason, 
+        // post.subtitle w/o escape filter nuke entire search.
+        templateMiddleware: function (prop, value, template) {
+            if (prop === 'subtitle' || prop === 'title') {
+                if (value.indexOf("code")) {
+                    return htmlDecode(value);
+                } else {
+                    return value;
+                }
+            }
+        }
+    });
+
+    $(document).ready(function () {
+        var $searchPage = $('.search-page');
+        var $searchOpen = $('.search-icon');
+        var $searchClose = $('.search-icon-close');
+        var $searchInput = $('#search-input');
+        var $body = $('body');
+
+        $searchOpen.on('click', function (e) {
+            e.preventDefault();
+            $searchPage.toggleClass('search-active');
+            var prevClasses = $body.attr('class') || '';
+            setTimeout(function () {
+                $body.addClass('no-scroll');
+            }, 400)
+
+            if ($searchPage.hasClass('search-active')) {
+                $searchClose.on('click', function (e) {
+                    e.preventDefault();
+                    $searchPage.removeClass('search-active');
+                    $body.attr('class', prevClasses);  // from closure 
+                });
+                $searchInput.focus();
+            }
+        });
+    });
+</script>
+
+
+
+<!-- Image to Github 
+<img src="/img/icon_wechat.png" width="0" height="0" />
+<-- Migrate from head to bottom, no longer block render and still work -->
+<script>
+    
+    var elements = document.querySelectorAll('p');
+    Array.prototype.forEach.call(elements, function(el, i){
+        if(el.innerHTML=='[expand]') {
+            var parentcontent = el.parentNode.innerHTML.replace('<p>[expand]</p>','<div class="expand" style="display: none; height: 0; overflow: hidden;">').replace('<p>[/expand]</p>','</div>');
+            el.parentNode.innerHTML = parentcontent;
+        }
+    });
+
+    var elements = document.querySelectorAll('div.expand');
+    Array.prototype.forEach.call(elements, function(el, i){
+        el.previousElementSibling.innerHTML = el.previousElementSibling.innerHTML + '<span>..&nbsp; <a href="#" style="cursor: pointer;" onclick="this.parentNode.parentNode.nextElementSibling.style.display = \'block\'; this.parentNode.parentNode.nextElementSibling.style.height = \'auto\'; this.parentNode.style.display = \'none\';">read&nbsp;more&nbsp;&rarr;</a></span>';
+    });
+
+</script>
+
+</body>
+</html>

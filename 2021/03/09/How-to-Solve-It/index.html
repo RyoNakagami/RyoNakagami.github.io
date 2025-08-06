@@ -1,0 +1,2438 @@
+<!DOCTYPE html>
+<html lang="ja">
+
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="google-site-verification" content="gSMaswRY9iRfG4QaQrx6aj481bgr503qEZh-QPsMYNU" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+    <meta name="description" content="元経済学徒, 現在どっかでデータサイエンティストもどきやってる人間の勉強日記">
+    <meta name="keywords"  content="Statistics, Economics, Econometrics, Python, C, Shell, Linux, Data scientist">
+    <meta name="theme-color" content="#000000">
+    
+    <!-- Open Graph -->
+    <meta property="og:title" content="いかにして問題を解くか - Ryo's Tech Blog">
+    
+    <meta property="og:type" content="article">
+    <meta property="og:description" content="Table of Contents
+
+
+
+">
+    
+    <meta property="article:published_time" content="2021-03-09T00:00:00Z">
+    
+    
+    <meta property="article:author" content="Ryo">
+    
+    
+    <meta property="article:tag" content="方法論">
+    
+    
+    <meta property="og:image" content="https://ryonakagami.github.io/img/avatar_rio_cat.jpg">
+    <meta property="og:url" content="https://ryonakagami.github.io/2021/03/09/How-to-Solve-It/">
+    <meta property="og:site_name" content="Ryo's Tech Blog">
+    
+    <title>いかにして問題を解くか - Ryo's Tech Blog</title>
+
+    <!-- Web App Manifest -->
+    <link rel="manifest" href="/pwa/manifest.json">
+
+    <!-- Favicon -->
+    <link rel="shortcut icon" href="/img/favicon.ico">
+    
+    <!-- Canonical URL -->
+    <link rel="canonical" href="https://ryonakagami.github.io/2021/03/09/How-to-Solve-It/">
+
+    <!-- Bootstrap Core CSS -->
+    <link rel="stylesheet" href="/css/bootstrap.min.css">
+
+    <!-- Custom CSS -->
+    <link rel="stylesheet" href="/css/ryo-blog.min.css">
+
+    <!-- Custom Fonts -->
+    <!-- <link href="http://maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css" rel="stylesheet" type="text/css"> -->
+    <!-- https://stackoverflow.com/questions/45983301/google-pagespeed-eliminate-render-blocking-resources-above-the-fold-caused-fro -->
+    <!--link href="//cdnjs.cloudflare.com/ajax/libs/font-awesome/4.6.3/css/font-awesome.min.css" rel="stylesheet" type="text/css"-->
+    <!--<link href="https://fonts.googleapis.com/earlyaccess/notosansjapanese.css" rel="stylesheet" type="text/css" media="print" onload="this.media='all'" > -->
+    <link href="https://fonts.googleapis.com/earlyaccess/notosansjapanese.css" rel="preload" type="text/css" media="print" onload="this.media='all'" >
+
+
+    <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
+    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+    <!--[if lt IE 9]>
+        <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+        <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
+    <![endif]-->
+
+    <!-- ga & ba script hoook -->
+    <script></script>
+</head>
+
+
+<!-- hack iOS CSS :active style -->
+<body ontouchstart="">
+
+    <!-- Navigation -->
+
+<nav class="navbar navbar-default navbar-custom navbar-fixed-top invert">
+    
+        <div class="container-fluid">
+            <!-- Brand and toggle get grouped for better mobile display -->
+            <div class="navbar-header page-scroll">
+                <button type="button" class="navbar-toggle">
+                    <span class="sr-only">Toggle navigation</span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
+                <a class="navbar-brand" href="/">Ryo's Tech Blog</a>
+            </div>
+
+            <!-- Collect the nav links, forms, and other content for toggling -->
+            <div id="huxblog_navbar">
+                <div class="navbar-collapse">
+                    <ul class="nav navbar-nav navbar-left">
+                                                <li>
+                            <a href="https://ryonakagami.github.io/statistics-for-regression-monkey/">Statistics for
+                                Regression Monkeys</a>
+                        </li>
+                        <li>
+                            <a href="https://ohgoshgit.github.io/">OhGoshGit!?!</a>
+                        </li>
+                        <!-- <li>
+                            <a><button onclick="mainDropDown()" style="border-color: rgba(70, 83, 111, 0.989); background-color: rgba(70, 83, 111, 0.989)">Dropdown</button></a> 
+                            <div id="myDropdown" class="dropdown-content">
+                              <a href="#" onclick="subMenu(this)">A</a>
+                              <div class="sub-menu-item" id="subMenu1">
+                              <a href="#">A.1</a>
+                              </div>
+                              <a href="#" onclick="subMenu(this)">B</a>
+                              <div class="sub-menu-item" id="subMenu2">
+                              <a href="#">B.1</a>
+                              </div>
+                              <a href="#">C</a>
+                              <a href="#">D</a>
+                              <a href="#">E</a>
+                              <a href="#">F</a>
+                              <a href="#">G</a>
+                            </div>
+                        </li> -->
+                    </ul>
+                    </ul>
+                    <ul class="nav navbar-nav navbar-right">
+                        
+                        
+                        
+                        
+                        <li>
+                            <a href="/about/">About</a>
+                        </li>
+                        
+                        
+                        
+                        <li>
+                            <a href="/archive/">Tag Search</a>
+                        </li>
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        <!--about fa-search see https://stackoverflow.com/questions/41950677/how-to-make-my-search-icon-fixed-->
+                        <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css"
+                            rel="stylesheet" />
+                        <li class="search-icon">
+                            <a href="javascript:void(0)" aria-label="Search" target="_blank">
+                                <i class="fa fa-search"></i>
+                            </a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+            <!-- /.navbar-collapse -->
+        </div>
+        <!-- /.container -->
+    </nav>
+
+    <script>
+        // Drop Bootstarp low-performance Navbar
+        // Use customize navbar with high-quality material design animation
+        // in high-perf jank-free CSS3 implementation
+        var $body = document.body;
+        var $toggle = document.querySelector('.navbar-toggle');
+        var $navbar = document.querySelector('#huxblog_navbar');
+        var $collapse = document.querySelector('.navbar-collapse');
+
+        var __HuxNav__ = {
+            close: function () {
+                $navbar.className = " ";
+                // wait until animation end.
+                setTimeout(function () {
+                    // prevent frequently toggle
+                    if ($navbar.className.indexOf('in') < 0) {
+                        $collapse.style.height = "0px"
+                    }
+                }, 400)
+            },
+            open: function () {
+                $collapse.style.height = "auto"
+                $navbar.className += " in";
+            }
+        }
+
+        // Bind Event
+        $toggle.addEventListener('click', function (e) {
+            if ($navbar.className.indexOf('in') > 0) {
+                __HuxNav__.close()
+            } else {
+                __HuxNav__.open()
+            }
+        })
+
+        /**
+         * Since Fastclick is used to delegate 'touchstart' globally
+         * to hack 300ms delay in iOS by performing a fake 'click',
+         * Using 'e.stopPropagation' to stop 'touchstart' event from 
+         * $toggle/$collapse will break global delegation.
+         * 
+         * Instead, we use a 'e.target' filter to prevent handler
+         * added to document close HuxNav.  
+         *
+         * Also, we use 'click' instead of 'touchstart' as compromise
+         */
+        document.addEventListener('click', function (e) {
+            if (e.target == $toggle) return;
+            if (e.target.className == 'icon-bar') return;
+            __HuxNav__.close();
+        })
+    </script>
+
+    <!-- Search -->
+<div class="search-page">
+  <div class="search-icon-close-container">
+    <span class="search-icon-close">
+      <i class="fa fa-chevron-down"></i>
+    </span>
+  </div>
+  <div class="search-main container">
+    <div class="row">
+      <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+        <form></form>
+        <input type="text" id="search-input" placeholder="$ grep...">
+        </form>
+        <div id="search-results" class="mini-post-list"></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+    <!-- Image to hack wechat -->
+<!-- <img src="/img/icon_wechat.png" width="0" height="0"> -->
+<!-- <img src="/img/home-bg.jpg" width="0" height="0"> -->
+
+<!-- Post Header -->
+
+
+
+<style type="text/css">
+    header.intro-header{
+        position: relative;
+        background-image: url('/img/home-bg.jpg');
+        background: ;
+    }
+
+    
+    header.intro-header .header-mask{
+        width: 100%;
+        height: 100%;
+        position: absolute;
+        background: rgba(0,0,0, 0.0);
+    }
+    
+</style>
+
+
+
+
+<header class="intro-header style-text" >
+
+    <div class="header-mask"></div>
+    
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+                <div class="post-heading">
+                    <div class="tags">
+                        
+                        <a class="tag" href="/archive/?tag=%E6%96%B9%E6%B3%95%E8%AB%96" title="方法論">方法論</a>
+                        
+                    </div>
+                    <h1>いかにして問題を解くか</h1>
+                    
+                    <h2 class="subheading">問題を解くときの方法論の紹介</h2>
+                    <p>
+                        公開日: 2021-03-09
+                        <br>
+                        更新日: 2022-04-13
+                        
+                    </p>
+                </div>
+            </div>
+        </div>
+    </div>
+</header>
+
+
+
+
+
+
+
+<!-- Post Content -->
+<article>
+    <div class="container">
+        <div class="row">
+
+    <!-- Post Container -->
+         <div class="
+                col-lg-8 col-lg-offset-2
+                col-md-10 col-md-offset-1
+                post-container">
+
+                <!-- Multi-Lingual -->
+                
+
+				<p><strong>Table of Contents</strong>
+<!-- START doctoc generated TOC please keep comment here to allow auto update -->
+<!-- DON'T EDIT THIS SECTION, INSTEAD RE-RUN doctoc TO UPDATE --></p>
+
+<ul>
+  <li><a href="#1-%E3%81%AA%E3%81%9C%E3%81%93%E3%81%AE%E8%A8%98%E4%BA%8B%E3%82%92%E3%81%BE%E3%81%A8%E3%82%81%E3%81%9F%E3%81%AE%E3%81%8B">1. なぜこの記事をまとめたのか？</a></li>
+  <li><a href="#2-%E8%AA%B2%E9%A1%8C%E8%A7%A3%E6%B1%BA%E3%81%AE%E6%96%B9%E9%87%9D">2. 課題解決の方針</a>
+    <ul>
+      <li><a href="#%E8%AA%B2%E9%A1%8C%E8%A7%A3%E6%B1%BA%E3%81%AE%E9%80%B2%E8%A1%8C">課題解決の進行</a></li>
+      <li><a href="#%E8%AA%B2%E9%A1%8C%E8%A7%A3%E6%B1%BA%E3%81%AE%E3%82%B9%E3%83%86%E3%83%83%E3%83%97">課題解決のステップ</a></li>
+      <li><a href="#%E8%AA%B2%E9%A1%8C%E8%A7%A3%E6%B1%BA%E5%8A%9B%E3%82%92%E8%BA%AB%E3%81%AB%E3%81%A4%E3%81%91%E3%82%8B%E3%81%9F%E3%82%81%E3%81%AB%E3%81%AF">課題解決力を身につけるためには？</a></li>
+    </ul>
+  </li>
+  <li><a href="#3-%E8%AA%B2%E9%A1%8C%E3%82%92%E7%90%86%E8%A7%A3%E3%81%99%E3%82%8B">3. 課題を理解する</a>
+    <ul>
+      <li><a href="#%E3%81%AA%E3%81%AB%E3%82%92%E8%A7%A3%E3%81%8D%E3%81%9F%E3%81%84%E3%81%AE%E3%81%8B%E6%98%8E%E3%82%89%E3%81%8B%E3%81%AB%E3%81%99%E3%82%8B">なにを解きたいのか明らかにする</a></li>
+      <li><a href="#%E5%B1%80%E5%9C%B0%E6%88%A6%E3%81%A7%E3%81%AF%E3%81%AA%E3%81%8F%E5%85%A8%E4%BD%93%E6%88%A6%E3%81%A7%E5%8B%9D%E3%81%A4">局地戦ではなく全体戦で勝つ</a></li>
+      <li><a href="#%E5%95%8F%E9%A1%8C%E3%82%92%E8%A8%80%E8%91%89%E3%81%A7%E8%A1%A8%E7%8F%BE%E3%81%99%E3%82%8B%E3%81%A8%E3%81%8D%E3%81%AE%E3%83%9D%E3%82%A4%E3%83%B3%E3%83%88">問題を言葉で表現するときのポイント</a></li>
+      <li><a href="#%E8%AA%B2%E9%A1%8C%E3%81%AE%E8%A6%8B%E3%81%A4%E3%81%91%E6%96%B9">課題の見つけ方</a></li>
+      <li><a href="#%E5%95%8F%E9%A1%8C%E3%81%AF%E5%90%88%E7%90%86%E7%9A%84%E3%81%8B">問題は合理的か？</a></li>
+      <li><a href="#%E8%A8%98%E5%8F%B7%E3%81%AE%E5%B0%8E%E5%85%A5">記号の導入</a></li>
+    </ul>
+  </li>
+  <li><a href="#4-%E8%A7%A3%E7%AD%94%E6%96%B9%E9%87%9D%E3%82%92%E3%81%9F%E3%81%A6%E3%82%8B">4. 解答方針をたてる</a>
+    <ul>
+      <li><a href="#%E8%A7%A3%E7%AD%94%E3%81%AE%E6%9D%A1%E4%BB%B6">解答の条件</a></li>
+      <li><a href="#%E3%82%B4%E3%83%BC%E3%83%AB%E3%81%8B%E3%82%89%E3%81%9F%E3%81%A9%E3%82%8B">ゴールからたどる</a></li>
+      <li><a href="#%E5%AE%9A%E7%BE%A9%E3%81%AB%E7%AB%8B%E3%81%A1%E3%81%8B%E3%81%88%E3%82%8B">定義に立ちかえる</a></li>
+      <li><a href="#%E8%A3%9C%E5%8A%A9%E5%95%8F%E9%A1%8C%E3%82%92%E6%8E%A2%E3%81%99">補助問題を探す</a></li>
+      <li><a href="#%E7%99%BA%E8%A6%8B%E7%9A%84%E6%8E%A8%E7%90%86%E5%85%B7%E4%BD%93%E4%BE%8B%E3%82%92%E8%A6%B3%E5%AF%9F%E3%81%97%E3%81%A6%E8%A6%8F%E5%89%87%E6%80%A7%E3%82%92%E8%A6%8B%E3%81%A4%E3%81%91%E3%82%8B">発見的推理：具体例を観察して規則性を見つける</a></li>
+      <li><a href="#%E7%B5%84%E7%B9%94%E5%8C%96">組織化</a></li>
+    </ul>
+  </li>
+  <li><a href="#5-%E8%A7%A3%E7%AD%94%E6%96%B9%E9%87%9D%E3%81%AB%E5%9F%BA%E3%81%A5%E3%81%8D%E8%A7%A3%E7%AD%94%E5%AE%9F%E8%A1%8C%E8%A8%88%E7%94%BB%E3%82%92%E3%81%9F%E3%81%A6%E3%82%8B">5. 解答方針に基づき解答実行計画をたてる</a>
+    <ul>
+      <li><a href="#%E3%82%B4%E3%83%BC%E3%83%AB%E3%81%BE%E3%81%A7%E3%81%AE%E9%81%8E%E7%A8%8B%E3%82%92%E3%82%82%E3%82%8C%E3%81%AA%E3%81%8F%E8%A8%98%E8%BF%B0%E3%81%99%E3%82%8B">ゴールまでの過程をもれなく記述する</a></li>
+      <li><a href="#%E5%AE%9F%E8%A1%8C%E8%A8%88%E7%94%BB%E3%82%92%E5%AE%9F%E6%96%BD%E5%89%8D%E3%81%AB%E6%8C%AF%E3%82%8A%E8%BF%94%E3%82%8B">実行計画を実施前に振り返る</a></li>
+      <li><a href="#%E3%83%86%E3%82%B9%E3%83%88%E3%82%B1%E3%83%BC%E3%82%B9%E3%81%AE%E4%BD%9C%E6%88%90">テストケースの作成</a></li>
+      <li><a href="#%E9%80%B2%E6%8D%97%E7%AE%A1%E7%90%86%E6%96%B9%E6%B3%95%E3%81%AE%E4%BD%9C%E6%88%90">進捗管理方法の作成</a></li>
+      <li><a href="#%E5%AE%9F%E8%A1%8C%E3%81%AB%E5%85%A5%E3%82%8B%E5%89%8D%E3%81%AE%E7%A2%BA%E8%AA%8D%E3%83%9D%E3%82%A4%E3%83%B3%E3%83%88">実行に入る前の確認ポイント</a></li>
+      <li><a href="#%E5%88%86%E6%9E%90%E8%A8%88%E7%94%BB%E4%BE%8B">分析計画例</a></li>
+      <li><a href="#%E5%9B%A0%E6%9E%9C%E6%8E%A8%E8%AB%96%E3%81%AB%E3%81%8A%E3%81%91%E3%82%8B%E5%AE%9F%E8%A1%8C%E8%A8%88%E7%94%BB">因果推論における実行計画</a></li>
+      <li><a href="#%E4%BA%8B%E6%A5%AD%E4%BC%9A%E7%A4%BE%E3%81%AB%E3%81%8A%E3%81%91%E3%82%8Bai%E3%82%B7%E3%82%B9%E3%83%86%E3%83%A0%E5%B0%8E%E5%85%A5%E3%81%A8poc">事業会社におけるAIシステム導入とPOC</a></li>
+    </ul>
+  </li>
+  <li><a href="#6-%E8%A8%88%E7%94%BB%E3%82%92%E5%AE%9F%E8%A1%8C%E3%81%99%E3%82%8B">6. 計画を実行する</a>
+    <ul>
+      <li><a href="#%E5%BD%93%E3%81%9F%E3%82%8A%E5%89%8D%E3%81%AE%E3%81%93%E3%81%A8%E3%82%92%E5%BD%93%E3%81%9F%E3%82%8A%E5%89%8D%E3%81%AB%E3%82%84%E3%81%A3%E3%81%A6%E3%81%84%E3%81%8F%E3%81%9F%E3%82%81%E3%81%AB%E3%81%AF">当たり前のことを当たり前にやっていくためには</a></li>
+      <li><a href="#%E5%AE%9F%E8%A1%8C%E3%82%B9%E3%83%94%E3%83%BC%E3%83%89%E3%81%A8%E8%A8%88%E7%94%BB%E4%BF%AE%E6%AD%A3">実行スピードと計画修正</a></li>
+    </ul>
+  </li>
+  <li><a href="#7-%E6%8C%AF%E3%82%8A%E8%BF%94%E3%82%8B">7. 振り返る</a>
+    <ul>
+      <li><a href="#%E7%B5%90%E6%9E%9C%E3%82%92%E5%88%A9%E7%94%A8%E3%81%A7%E3%81%8D%E3%81%AA%E3%81%84%E3%81%8B">結果を利用できないか？</a></li>
+      <li><a href="#%E7%B5%90%E6%9E%9C%E3%82%92%E8%A9%A6%E3%81%99%E3%81%93%E3%81%A8%E3%81%AF%E3%81%A7%E3%81%8D%E3%82%8B%E3%81%8Brobustness-test">結果を試すことはできるか？Robustness test</a></li>
+      <li><a href="#%E6%AC%A1%E3%81%AB%E3%81%A9%E3%81%AE%E3%82%88%E3%81%86%E3%81%AB%E6%B4%BB%E3%81%8B%E3%81%97%E3%81%A6%E3%81%84%E3%81%8F%E3%81%8B">次にどのように活かしていくか？</a></li>
+    </ul>
+  </li>
+  <li><a href="#8-%E5%95%8F%E9%A1%8C%E8%A7%A3%E6%B1%BA%E3%81%AE%E4%BE%8B">8. 問題解決の例</a>
+    <ul>
+      <li><a href="#%E3%83%93%E3%82%B8%E3%83%8D%E3%82%B9%E3%81%AB%E3%81%8A%E3%81%91%E3%82%8B%E6%9C%AC%E8%B3%AA%E7%9A%84%E3%81%AA%E9%81%B8%E6%8A%9E%E8%82%A2%E3%81%AE%E4%BE%8B">ビジネスにおける本質的な選択肢の例</a></li>
+      <li><a href="#%E8%AA%B2%E9%A1%8C%E3%83%99%E3%83%BC%E3%82%B9%E3%81%A7%E3%82%B9%E3%83%88%E3%83%BC%E3%83%AA%E3%83%BC%E3%82%92%E7%B5%84%E3%81%BF%E7%AB%8B%E3%81%A6%E3%82%8B">課題ベースでストーリーを組み立てる</a></li>
+      <li><a href="#%E9%80%9F%E5%BA%A6%E3%81%AE%E5%95%8F%E9%A1%8C">速度の問題</a></li>
+      <li><a href="#%E5%BF%85%E8%A6%81%E5%8D%81%E5%88%86%E6%9D%A1%E4%BB%B6%E3%81%AE%E8%A6%8B%E6%A5%B5%E3%82%81">必要十分条件の見極め</a></li>
+      <li><a href="#%E7%AD%89%E3%81%97%E3%81%84%E3%82%82%E3%81%AE%E3%82%92%E6%96%87%E5%AD%97%E3%81%AB%E7%BD%AE%E3%81%8F">等しいものを文字に置く</a></li>
+      <li><a href="#%E3%81%A9%E3%81%AE%E5%8C%96%E7%B2%A7%E5%93%81%E3%82%92%E8%B2%B7%E3%81%A3%E3%81%A6%E3%81%84%E3%81%84%E3%81%8B%E3%82%8F%E3%81%8B%E3%82%89%E3%81%AA%E3%81%84">どの化粧品を買っていいかわからない</a></li>
+    </ul>
+  </li>
+  <li><a href="#appendix">Appendix</a>
+    <ul>
+      <li><a href="#%E9%96%A2%E4%BF%82%E8%80%85%E3%82%92%E8%AA%AC%E5%BE%97%E3%81%99%E3%82%8B-%E3%83%A1%E3%83%83%E3%82%BB%E3%83%BC%E3%82%B8%E3%83%89%E3%83%AA%E3%83%96%E3%83%B3">関係者を説得する: メッセージドリブン</a></li>
+    </ul>
+  </li>
+  <li><a href="#rerefences">Rerefences</a></li>
+</ul>
+
+<!-- END doctoc generated TOC please keep comment here to allow auto update -->
+
+<h2 id="1-なぜこの記事をまとめたのか">1. なぜこの記事をまとめたのか？</h2>
+
+<p>この記事は G. Polya教授のHow to Solve It（いかにして問題を解くか、柿内賢信訳）を自分なりに振り返り用にまとめたノートです。この本は、数学の問題の解答を読むときに出てくる疑問：</p>
+
+<pre><code class="language-raw">(1) この証明は正しいけど、どうしたらそれを思いつくのだろうか？
+(2) この実験はうまくて事実を示しているが、どうしたらこの実験方法を思いつくのか？
+</code></pre>
+
+<p>このような「数学の問題を解くこと」に関する疑問への答えを「問題を解くとき」の動機や手続きの観点からまとめています。身の回りを振り返ってみると、解答に至るまでのプロセスが詳細に説明されているケースに出会うことは少ないです。一方、データ分析やその他の仕事の場面では、まだ解答が与えられていない問題を解く必要があり、過去問の方法論をマスターしただけでは対応することはできません。そのような場面では「どう解くか？その方法を考える態度」を身につけていることが重要になると考えています。</p>
+
+<h2 id="2-課題解決の方針">2. 課題解決の方針</h2>
+<h3 id="課題解決の進行">課題解決の進行</h3>
+
+<ul>
+  <li>Question: 課題を理解する,何を求めるのか明確にする</li>
+  <li>Plan：課題を解く計画を立てる</li>
+  <li>Do：計画を実行する</li>
+  <li>Review：得られた解のたしからしさを検証する。そして、知識を確立する。</li>
+</ul>
+
+<h3 id="課題解決のステップ">課題解決のステップ</h3>
+
+<table>
+  <thead>
+    <tr>
+      <th> </th>
+      <th>ステップ</th>
+      <th>確認ポイント</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>1</td>
+      <td>Question</td>
+      <td>(1) 課題を言葉で表現する<br /><br />(2) 課題の全体像を把握する<br />- 課題、各論点、アクションまでのストーリーを意識する<br />- 本質的な選択肢であるか<br /><br />(3) 未知のものは何か,求めたいものはなにか<br />- 与えられているもの(データ)は何か<br />- 条件は何か <br />- 所与のもの/未知のものに名前をつけて整理する <br /><br />(4) 条件を満足させることはできるか,問題は合理的か？<br />- 問題自体に矛盾はないか？<br /><br />(5) 条件は未知のものを定めるのに十分であるか、又は不十分であるか、又は余剰であるか、又は矛盾しているか <br /><br />(6) 明らかにしたいものと与えられたデータ/条件それぞれに記号をつけてそれぞれの関係性を整理 <br />- 条件の各部を分離して、整理する<br /><br />(7) 課題の構造と各論点をわかりやすく説明することはできるか？スラスラ言えるか？</td>
+    </tr>
+    <tr>
+      <td>2</td>
+      <td>Plan</td>
+      <td><strong>解答方針の設定</strong><br /><br />(1)ゴールからさかのぼってみる<br /><br />(2) 問題を言い換えることができるか？<br />- 定義に戻って言い換えを試みる<br />- 同値変形<br /><br />(3) 関連した問題は知っているか？<br />- 未知数をよく見て、未知数が同じかまたは似た問題を探す<br />- 未知数が同じかまたは似た問題に関連して役に立ちそうな定理を知っているか考える<br />- 与えられたデータを役立たせるとそれぞれが未知のものの範囲をどのように画定するか類似した問題を手がかりに調べる<br />- 関連した問題を利用するためにうまく補助要素を導入できるか考える<br /><br />(4) まだ問題を解く解答が思いつかないなら、一般的な問題や特殊な問題、類推的な問題を考える<br /><br />(5) 与えられた条件やデータをそのままに未知の対象を変えて、現在直面している問題を解くにあたって役立たせることができる考えるまたは未知のものを固定して、どのような条件とデータがあれば未知のものが定まるか考える<br /><br />(6) 与えられたデータ/条件をすべて使ったか？問題に含まれる本質的な概念はすべて考慮したか？を考える<br /><br /> <strong>実行計画の作成</strong><br /><br />(7)方針と整合的な解答（実行計画）をさだめる<br /><br /> (8)「なにを」「いつ」「どこで」「だれが」「どのように」実行するのかを明確に定義する<br /><br />(9) 余計な労働を生み出さない実行計画を作る<br />- Think more, Do less<br /><br />(10) テストケースを事前に定める<br /><br />(11) 進捗管理方針を定める</td>
+    </tr>
+    <tr>
+      <td>3</td>
+      <td>Do</td>
+      <td>(1) 解答計画を実行する時、各段階を検討して、その段階が正しいか？考える<br /><br />(2) 当たり前のことを当たり前にやる<br /><br />(3) うまく行く/うまく行かない兆候を見逃さない<br /><br />(4) 計画修正を恐れない</td>
+    </tr>
+    <tr>
+      <td>4</td>
+      <td>Review</td>
+      <td>(1) 結果のRobustness check: 同じ結果をちがった仕方で導くことができるか？<br /><br />(2) 得られた結果について、Intuitionを考えて、結果のたしからしさを検証する<br /><br />(3) 得られた結果や方法をなにか別の問題に活かすことはできるか？を考え、知識を深める<br /><br />(4) 解決策の抽象化,モジュール化を実施し、再利用可能性を高める</td>
+    </tr>
+  </tbody>
+</table>
+
+<h3 id="課題解決力を身につけるためには">課題解決力を身につけるためには？</h3>
+
+<p>「問題を解き，疑問を解決し，わかったことをまとめる」方法を身につける練習は、</p>
+
+<ol>
+  <li>問題を解くというプロセスの真似をする</li>
+  <li>真似を通して得た知識を活用して、問題を自力で解く練習を繰り返す</li>
+  <li>問題解決という活動を習慣として確立する</li>
+  <li>課題解決の各ステップで頻繁に周りの人と相談する</li>
+</ol>
+
+<h2 id="3-課題を理解する">3. 課題を理解する</h2>
+
+<p>課題に直面したときはまず、課題の構造を見抜くことに集中します。</p>
+
+<h3 id="なにを解きたいのか明らかにする">なにを解きたいのか明らかにする</h3>
+
+<p>未知のものはなにか？与えられているものはなにか？条件はなにか？を明確にします。大学入試等の数学の問題では、何を解くべきなのかは問題文に明確に記載されているので、それを整理するだけで十分です。一方、実世界においては課題解決方法がわからないという体で分析依頼が入ってきますが、その多くはそもそも課題自体が明確に言語化されていない場合が多いです。なのでまず第一歩は、「何が解決すべき課題なのか？」を相手からうまく引き出して合意することが重要です。(→see <a href="#%E5%AF%BE%E8%A9%B1%E3%81%AB%E8%87%A8%E3%82%80%E9%9A%9B%E3%81%AE%E3%83%9E%E3%82%A4%E3%83%B3%E3%83%89%E3%82%BB%E3%83%83%E3%83%88">対話に臨む際のマインドセット</a>)</p>
+
+<p><strong>例：機械学習をつかっていい感じの成果を出してくれ</strong></p>
+
+<p>「機械学習をつかって企業課題を解決してくれ」という曖昧な指示がクライアントから出たとします。一見、どこから手を出していいかわからないオーダーで途方にくれてしまいそうですが、その背後にある商売の流れ/解決したい事業課題をヒアリングするところから始めるのが重要です。商売の流れを理解することで、その会社が目指す成長計画の障壁はどこにあるのか？どのような課題を解決することでその企業が望む成長を達成することができるか考えることができます。なのでまずヒアリングです。ヒアリングの観点は以下です：</p>
+
+<ul>
+  <li>どのような商品/サービスをどのように売っているのか？</li>
+  <li>どのような成長戦略を描いているのか？</li>
+  <li>どのような課題に直面しているのか？</li>
+  <li>どのような問題/症状になやまされているか？</li>
+  <li>現場から見て、本質的な課題は何か？</li>
+</ul>
+
+<p>このヒアリングと通じて、「どのような課題を解決すべきか？」を明確化し、クライアントと合意します。この段階において、コミュニケーション円滑化の観点から「自分がいままでなにをやってどのような課題を解決してきたのか」「なにができるのか」をクライアントに伝えます。事業課題は多数存在し、またそれをクライアントが認識していない場合もあります。ヒアリングで解決できる解決する価値のある事業課題を聞き出すためには「自分はなにもので,なにができて,他の人とどのように違うのか」を事前に伝えることは有意義です。</p>
+
+<p>次に、「なにをなんのために作るか？」「誰のためになるのか？」という解決方針をクライアントと合意しに行きます。このプロセスを経た後に、具体的に何を作るのか？スケジュール/費用見積もりの話に進みます。解決方針が定まっていないのに具体的な方法論に入ってしまうと、どの具体的な方法が良いのか悪いのかを判断することが難しくなります。最悪手戻りとなる可能性もあるので、一つづつ固められるものは固めていくことは重要です。方針に沿った形で具体的な実行計画候補を複数クライアントに提示し、その中から「世界で最も良い方法」を一緒に探索/合意/実行していきます。その方法が機械学習を用いた方法ならばそれを実施、他に良い方法があるならばそれを実行します。大事なことはあくまでも「事業課題を解決」することです。</p>
+
+<h3 id="局地戦ではなく全体戦で勝つ">局地戦ではなく全体戦で勝つ</h3>
+
+<p>物事は「全体」から入らなければなりません。例えば経営においては、会社の基本的方針（経営理念,商品制作,人事政策 .etc）や長期的ビジョンを理解するすることがすべての前提です。常にまず全体を考え、その上で個別の具体策を決めていく。そういう順序で勧めていくことが必要です。如何に優れた具体策でも、全体の方針にあっていなければ、結局は会社にとってマイナスになります。(→see <a href="#%E8%AA%B2%E9%A1%8C%E3%83%99%E3%83%BC%E3%82%B9%E3%81%A7%E3%82%B9%E3%83%88%E3%83%BC%E3%83%AA%E3%83%BC%E3%82%92%E7%B5%84%E3%81%BF%E7%AB%8B%E3%81%A6%E3%82%8B">here</a>)</p>
+
+<p><strong>アボカドカッターの罠</strong></p>
+
+<p>眼の前の課題に囚われその課題を解決するためだけのツールを導入することを「アボカドカッターの罠」と呼ぶことがあります. 過去の売上から、将来の売上を予測するモデルや、在庫配分を最適化するAIは一見業務改善における即効性が高そうに見えますが、業務全体のフローの意識することなくその課題にフォーカスしたツールを導入してしまうと、1つの部門の特定のニーズにしか使用できなかったりと、特定の課題しか解決できないことにやがて気づくことになります. データ活用戦略で本当に必要なのは、全体的アプローチです。言うなれば、幅広い用途に使えるナイフです。この点を見誤ると、山積みのテクノロジーを管理するために、多くの不必要なテクノロジーやベンダーを使用するはめに陥ることになり、無形固定資産が積み上がり、管理が大変に成るという自体が発生します. 最悪の場合、誰が何を管理しているかわからず、予算のガバナンスを効かせることができなります.</p>
+
+<h3 id="問題を言葉で表現するときのポイント">問題を言葉で表現するときのポイント</h3>
+
+<p><strong>「主語」と「動詞」を入れる</strong></p>
+
+<p>主語と動詞を入れた文章にすると、あいまいさが消え、仮説の精度が高まります。日本語は主語を省略する場面が多いので、進めていくうちにメンバーが違うことを考えていたという問題が発生することがあります。これを予防する観点からも「主語」と「動詞」を入れることは有効です。</p>
+
+<p><strong>「Why」より「Where」「What」「How」</strong></p>
+
+<ul>
+  <li>「Where」: 「どちらか？」「どこを目指すべきか？」</li>
+  <li>「What」: 「何を行うべきか？」「何を避けるべきか？」</li>
+  <li>「How」: 「どう行うべきか？」「どう進めるべきか？」「どれくらいか？(How much)」</li>
+</ul>
+
+<p>「Why = なぜか？」という表現には仮説がなく、何について白黒をはっきりさせようとしているかが明確になっていません。仮説検証するためには問題を「Where」「What」「How」の形で表現することが重要です。</p>
+
+<p><strong>比較表現を入れる</strong></p>
+
+<p>「AかBか」という見極めが必要な問題の場合、「〜はB」というより「Aではなく、むしろB」という表現にする。たとえば、ある新製品開発の方向性が決定すべき課題の場合であれば、「テコ入れすべきは操作性」というより、「テコ入れすべきは、処理能力のようなハードスペックではなく、むしろ操作性」問いしたほうが何と何を対比し、何に答えを出そうとしているのか明確になる。</p>
+
+<p><strong>問題の分類</strong></p>
+
+<table>
+  <thead>
+    <tr>
+      <th>分類</th>
+      <th>明確にすべきこと</th>
+      <th>説明</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>証明問題</td>
+      <td>なにが仮定でなにが証明すべき結論か？</td>
+      <td>数学的な主張を証明することを目的とする問題を証明問題とよびます。証明問題の主要部分は仮定と結論です。証明問題の多くは，「○○○であるとき×××であることを証明せよ」「○○○ならば×××であることを示せ」という形をしています。この○○○の部分が仮定で，×××の部分が結論です。証明問題の目的は，問題の仮定から結論を導き出す論理的な過程を書き下すことです。</td>
+    </tr>
+    <tr>
+      <td>決定問題</td>
+      <td>なにがデータで、なにが条件で、どの未知数を決定すべきかか？</td>
+      <td>決定問題とは「未知なるものを決定せよ」ということです。決定問題の主要部分は，データと条件と未知のものです。まず「未知のもの」とは，その決定問題で求めるべきものです。次に「条件」とは，その未知のものに関する条件です。最後に「データ」とは，未知のものと条件によって結びついているもののことです。決定問題の多くは、解を決定せよ，解の個数を決定せよ，体積を決定せよ，そして条件(単に条件といえば必要十分条件のことである)を決定せよ等です。</td>
+    </tr>
+  </tbody>
+</table>
+
+<h3 id="課題の見つけ方">課題の見つけ方</h3>
+
+<p><strong>良い課題とは？</strong></p>
+
+<p>良い問題は以下の条件が必要条件となります：</p>
+
+<table>
+  <thead>
+    <tr>
+      <th>必要条件</th>
+      <th>説明</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td><code class="language-plaintext highlighter-rouge">本質的な選択肢である</code></td>
+      <td>Actionにつながるか？それに答えが出るとそこから先の検討方向性に大きく影響を与えるか？(→see <a href="#%E3%83%93%E3%82%B8%E3%83%8D%E3%82%B9%E3%81%AB%E3%81%8A%E3%81%91%E3%82%8B%E6%9C%AC%E8%B3%AA%E7%9A%84%E3%81%AA%E9%81%B8%E6%8A%9E%E8%82%A2%E3%81%AE%E4%BE%8B">こちら</a>)</td>
+    </tr>
+    <tr>
+      <td><code class="language-plaintext highlighter-rouge">深い仮説がある</code></td>
+      <td>「常識を覆すような洞察」や「新しい構造の発見」につながるか？</td>
+    </tr>
+    <tr>
+      <td><code class="language-plaintext highlighter-rouge">答えを出せる</code></td>
+      <td>解けない問題を定義しても時間の無駄です(→ see <a href="#%E5%95%8F%E9%A1%8C%E3%81%AF%E5%90%88%E7%90%86%E7%9A%84%E3%81%8B">問題は合理的か？</a>)</td>
+    </tr>
+  </tbody>
+</table>
+
+<p><strong>良い課題の見つけるための質問リスト</strong></p>
+
+<p>「この課題が解けるとなぜ嬉しいのか」という質問に答えられるかどうかにかかってきます。以下の質問を尋ねることは有用です：</p>
+
+<ul>
+  <li>上司や同僚に「この課題が解けるとなぜ嬉しいのか」を伝えられるか実践する</li>
+  <li>(1) 何を目指していて, (2) なにがゴールの障壁になっていて, (3) 今回の問題がその障壁の解決にどのようにつながるのかをストーリーで話せるか？(→see <a href="#%E8%AA%B2%E9%A1%8C%E3%83%99%E3%83%BC%E3%82%B9%E3%81%A7%E3%82%B9%E3%83%88%E3%83%BC%E3%83%AA%E3%83%BC%E3%82%92%E7%B5%84%E3%81%BF%E7%AB%8B%E3%81%A6%E3%82%8B">here</a>)</li>
+  <li>そもそも解けそうか？</li>
+  <li>自分自身にMotivationがあるかないか？</li>
+</ul>
+
+<h3 id="問題は合理的か">問題は合理的か？</h3>
+
+<ul>
+  <li>条件,仮説は、それが余計なものを含んでいるとき余剰といい、また互いに食い違っている時を矛盾といいます</li>
+  <li>条件,Data,仮説が解を出すにあたって十分か否か？</li>
+</ul>
+
+<blockquote>
+  <p>例1: 矛盾する問題</p>
+</blockquote>
+
+<p>三角形ABCについて、辺ABの長さは1で、辺BCの長さは2である。そして、角BCAの大きさは45度である。このとき、三角形ABCの面積を求めよ。</p>
+
+<p>この問題は、与えられた条件を満たす三角形がないので存在しない。</p>
+
+<blockquote>
+  <p>例2: 1次独立</p>
+</blockquote>
+
+\[\begin{aligned}
+&amp;3x + 2y + z = 10\\
+&amp;x + y + z = 6\\
+&amp;2y + z = 4\\
+\end{aligned}\]
+
+<p>と式が与えられたとき、$(x, y, z)$の組を求めよ、という問題が与えられたとする。</p>
+
+<p>この連立方程式は矛盾はないが、三つの式は独立でなく解が決定されません。</p>
+
+<h3 id="記号の導入">記号の導入</h3>
+
+<p>問題を理解するにあたってまず考えるべきことは、問題文を数式等の数学用語に翻訳するためにどのような設定をするか、 つまり、何をどにように置くか、です。問題に対して適切に文字を置き， 式に翻訳できれば三分の一は解けたようなものと言われています。(<a href="http://aozoragakuen.sakura.ne.jp/houhou/houhou01/node29.html">こちら参照</a>)</p>
+
+<ol>
+  <li>複雑な式のなかから共通の形を見いだし， それを別の文字で置き換える．</li>
+  <li>いくつかの式のとる値が等しいとして与えられている条件は， この等しい値を文字で表す．</li>
+  <li>変化する量があればその量を変数で表す． 未知量を求めるときは，方程式として解く．</li>
+  <li>条件が「何々が存在する」とあれば， 存在するものを文字に置き，存在する必要条件を求める．</li>
+  <li>図形を一般性を失わないで， できるだけ単純な式になるように座標平面に置く．</li>
+  <li>考える対象が量の関係なら，変数を導入し， 他の量との関係を調べ，関数形に表す．</li>
+  <li>座標のなかで動きのあるものを， 適当な変数(媒介変数，パラメーター)で表す．</li>
+  <li>自然数 $n$ によって定まる場合の数や確率は $a_n$ など数列におく．そのうえで漸化式を考える．</li>
+</ol>
+
+<p><strong>問題を理解/整理する：文字選びのお作法</strong></p>
+
+<p>問題を理解/整理するにあたって所与のもの/未知のものに名前をつけて管理するのが望ましいとされています。名前をつけるにあたって絶対厳守しなくてはならないルールというのはありませんが、遵守が望ましいお作法はあります。</p>
+
+<table>
+  <thead>
+    <tr>
+      <th> </th>
+      <th>ルール</th>
+      <th>例</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>(1)</td>
+      <td>違う種類の量を表すときはアルファベットやギリシャ文字のように異なる文字を使う</td>
+      <td>三角形の辺をそれぞれa, b, cと表すならば角度はα, β, γと表す。</td>
+    </tr>
+    <tr>
+      <td>(2)</td>
+      <td>同じ種類の量を表すときは、indexをつけた文字で管理する</td>
+      <td>３つの三角形の面積をそれぞれ$S_1, S_2, S_3$で表す</td>
+    </tr>
+    <tr>
+      <td>(3)</td>
+      <td>記号は曖昧であってはならない。同じ問題で同じ記号が違った意味をもつことは許されない</td>
+      <td> </td>
+    </tr>
+    <tr>
+      <td>(4)</td>
+      <td>覚えやすいものでなればならない</td>
+      <td>体積を表す変数はVolumeより$V$を当てるべき</td>
+    </tr>
+  </tbody>
+</table>
+
+<h2 id="4-解答方針をたてる">4. 解答方針をたてる</h2>
+
+<p>解答計画をたてるということは</p>
+
+<ol>
+  <li>解答方針をたてる</li>
+  <li>解答方針に基づき解答実行計画をたてる</li>
+</ol>
+
+<p>という流れになります。</p>
+
+<h3 id="解答の条件">解答の条件</h3>
+
+<p>まず解答の定義がわからなければ解答を書くことはできません。解答とは、</p>
+
+<pre><code class="language-raw">前提の下で，求められた内容を決定し，その根拠を示す．
+</code></pre>
+
+<p>根拠を示すのは論証のそれぞれの段階においても必要であり，解答全体として仮定条件から結論条件を導くことができているか，この両面で確認しなければなりません。例えば確率の問題で「3個のサイコロを振る．和が3の倍数になる確率を求めよ」を解こうとします．このとき</p>
+
+<blockquote>
+  <p>サイコロの目の出方は$6^3$通りあり、そのうち和が３の倍数になるのは・・・</p>
+</blockquote>
+
+<p>と論述を進める人が多いですが、「3個のサイコロを振る$\Rightarrow$目の出方は$6^3$通りある」という流れについて根拠を示す必要があります。</p>
+
+<blockquote>
+  <p>三つのサイコロを区別する．それぞれのサイコロの目の出方は6通りあり，各サイコロの目の出方は独立なので，サイコロの目の出方は$6^3$通りあり、そのうち和が３の倍数になるのは・・・</p>
+</blockquote>
+
+<p>このように前提から一個一個ゴールにたどり着くために必要な要素を根拠とともに示していき、最終的に完成したものが解答となります。</p>
+
+<p>必要条件にまつわる解答の書き方の例は<a href="#%E5%BF%85%E8%A6%81%E5%8D%81%E5%88%86%E6%9D%A1%E4%BB%B6%E3%81%AE%E8%A6%8B%E6%A5%B5%E3%82%81">こちらの問題</a>参照。</p>
+
+<h3 id="ゴールからたどる">ゴールからたどる</h3>
+
+<p>解答方針を考えるにあたって、問題のゴールから逆にたどって、「問題のゴールにたどり着くためには何がわかればよいのか？」をまず考えることは有効です。</p>
+
+<blockquote>
+  <p>問題</p>
+</blockquote>
+
+<p>$0 &lt; x &lt; 1, 0 &lt; y &lt; 1, 0 &lt; z &lt; 1$のとき、次の不等式が成り立つことを証明せよ</p>
+
+\[\begin{aligned}
+(1) &amp; xy + 1 &gt; x + y\\
+(2) &amp; xyz + 2 &gt; x + y + z\\
+(3) &amp; xy^2z + 3 &gt; x + 2y + z
+\end{aligned}\]
+
+<blockquote>
+  <p>解答(1)</p>
+</blockquote>
+
+<p>ゴールを同値変形して解きやすい形に問題を変形します。</p>
+
+<p>$ 0&lt;x&lt;1, 0 &lt;y&lt; 1 $ より $x-1 &lt; 0$, $y-1 &lt; 0$ なので</p>
+
+\[xy + 1 - (x + y) = (x - 1)(y - 1) &gt; 0 \therefore \: \: xy + 1 &gt; x + y\]
+
+<blockquote>
+  <p>解答(2)</p>
+</blockquote>
+
+<p>$0 &lt; xy &lt; 1$なので(1)より</p>
+
+\[xyz + 2 = (xy)z + 1 + 1 &gt; xy + z + 1\]
+
+<p>(1)より $xy + z + 1 &gt; x + y + z$なので、題意が示された。</p>
+
+<blockquote>
+  <p>解答(3)</p>
+</blockquote>
+
+<p>$ 0 &lt; xy &lt; 1$, $ 0 &lt; yz &lt; 1$なので(1)より</p>
+
+\[xy^2z + 3 = (xy)(yz) + 1 + 2 &gt; xy + 1 + yz + 1 &gt; x + y + y + z\]
+
+<p>よって題意が示された．</p>
+
+<div style="text-align: right;">
+  <p>■</p>
+</div>
+
+<h3 id="定義に立ちかえる">定義に立ちかえる</h3>
+
+<p>糸口がわからないとき、まず考えるべきことは、問題文中の言葉および記号の意味がはっきりわかっているか、ということです。そこをおさえることで解決の糸口がつかめることが少なくないです。それを「定義に立ちかえる」とここでいいます。それには二つの側面があります。</p>
+
+<ol>
+  <li>学校で習ったはずの言葉の正確な意味を押さえる</li>
+  <li>出題者が定めた記号の意味を， 自分がわかっている言葉で言い換える</li>
+</ol>
+
+<h3 id="補助問題を探す">補助問題を探す</h3>
+
+<p>解きたい問題が難しい場合には、少し易しい問題に変形して解いてみると、基の問題を解くためのヒントを得られる場合があります。この少し易しい問題のことを補助問題といいます。</p>
+
+<blockquote>
+  <p>例</p>
+</blockquote>
+
+\[x^4 - 13x^2 + 36 = 0\]
+
+<p>という方程式を満たす$x$を求めたいとします。$y = x^2$とおくと</p>
+
+\[y^2 - 13 y + 36 = (y-4)(y-9) = 0\]
+
+<p>と求めやすい問題に変形することができます。よって、$y \in (4, 9)$ Then, $x \in (-3, -2, 2, 3)$$</p>
+
+<div style="text-align: right;">
+  <p>■</p>
+</div>
+
+<p><strong>補助問題の条件</strong></p>
+
+<p>補助問題はあくまでメインの課題を解くために作り出すものです。なので補助問題であるための必要条件として以下が挙げられます：</p>
+
+<ul>
+  <li>補助問題はメインの問題よりも解きやすいものでなければならない</li>
+  <li>補助問題はメインの問題よりも解きやすいと事前に予測できなければならない</li>
+  <li>補助問題はメインの問題を解くにあたって役に立つもの、踏み石的存在でなければならない</li>
+</ul>
+
+<p><strong>補助問題の見つけ方:同値変形</strong></p>
+
+<p>基本的には直面している問題を同値変形することで補助問題を見つけていきます。</p>
+
+<p>$p$が等式や命題(等式も命題だが)であるとき, $p \iff q$と同値関係を保って別の等式や命題 $q$ に変形することを同値変形といいます。例えば</p>
+
+\[\begin{aligned}
+x - \sqrt{x - 1} = 3 &amp;\iff x - 3 = \sqrt{x - 1}\\
+&amp;\iff (x - 3)^2 = x - 1 \:\text{ かつ }\: x\geq 3\\
+&amp;\iff x^2 - 7x + 10 = 0 \:\text{ かつ }\: x\geq 3\\
+&amp;\iff (x - 2)(x - 5) = 0 \:\text{ かつ }\: x\geq 3\\
+&amp;\iff x = 5
+\end{aligned}\]
+
+<p>補助問題は同値変形かどうか確認することは重要です。与えられた条件からもっと狭い条件に変形してしまうと解が減ることになるし、広くしてしまうと不適当な、その問題となんの関係もないでたらめな解を持ち込むことになります。</p>
+
+<p><strong>考える方法としての必要条件</strong></p>
+
+<p>基本的には同値変形を繰り返していけばよいですが、それが簡単ではない場合，「必要条件で絞ったものを個別に確認する」という方針は有効です。つまり、</p>
+
+<ol>
+  <li>問題の条件や仮定を使って、いくつかの候補に絞る</li>
+  <li>その候補を１つずつ調べて答えを探す</li>
+</ol>
+
+<blockquote>
+  <p>例題</p>
+</blockquote>
+
+<p>すべての正の整数 $n$ に対して $5^n+an+b$ が16の倍数となるような16以下の正の整数 $a,\ b$ を求めよ．</p>
+
+<blockquote>
+  <p>解</p>
+</blockquote>
+
+\[f(n) = 5^n + an + b\]
+
+<p>とおきます。すべての正の整数 $n$ に対して$f(n)$は16の倍数なので</p>
+
+\[f(16) = 5^{16} + 16a + b \equiv 1 + b  \: \text{ mod } 16\]
+
+<p>よって、$b = 15$。</p>
+
+<p>同様に</p>
+
+\[f(1) = 5 + a + 15 = 20 + a\equiv 0 \: \text{ mod } 16\]
+
+<p>よって、$a = 12$と必要条件とわかる。</p>
+
+<p>つぎに、$(a, b) = (12, 15)$が十分条件であることを示す。</p>
+
+\[\begin{aligned}
+f(n) &amp; = 5^n + 12n + 15\\
+&amp; = (1 + 4)^n + 12n + 15\\
+&amp; = 16 + 16n + (_nC_{n-2}4^2 + \cdots + 4^n) \because \text{ 二項定理}
+\end{aligned}\]
+
+<p>よって、十分条件であることが確認された。</p>
+
+<div style="text-align: right;">
+  <p>■</p>
+</div>
+
+<h3 id="発見的推理具体例を観察して規則性を見つける">発見的推理：具体例を観察して規則性を見つける</h3>
+
+<p>抽象的な問題，一般的に自然数 $n$ について証明する問題などでは， 例を作って考えることが問題をとらえるうえで有効です。流れとして以下です：</p>
+
+<ol>
+  <li>こうではないかという仮説を立てる</li>
+  <li>それを個別実験で確かめる</li>
+  <li>実験でまちがいないとなると，なぜそれが成り立つのか理論を追求する</li>
+</ol>
+
+<p>ステップ1, 2をクリアした段階で得られた推測を発見的推理といいます。この発見的推理は個別事例では成り立つが、最終的に解きたい問題にはまだ直接適用することはできません。発見的推理は厳密な解答方針の立案には役に立ちますが、あくまで発見的推理は最終的で厳密なものではなく仮のものであり、厳密な解と混同してはなりません。</p>
+
+<p><strong>モーザーの円分割問題：誤った推論</strong></p>
+
+<p>円周上に $n$ 個の頂点を打ち，その全ての2頂点間を線分で結ぶ。このとき，円は $M$ 個の領域に分割されるとする。ただし、円の内側において３本以上の線分が一点に交わることはないようにする。このとき、$M$は$n$によってどのように表されるか？</p>
+
+<blockquote>
+  <p>誤った推論</p>
+</blockquote>
+
+<p>「具体例を観察して規則性を見つける」という方針で考えてみます。点が一個のときは１個の部分に分割、点が2個のときは２個に分割。これで点5個まで調べていくと以下のような関係性になります。</p>
+
+<div class="math display" style="overflow: auto">
+  <p>\(\begin{array}{|c|c|c|c|c|}
+\hline
+n\text{点の個数} &amp; 1 &amp; 2 &amp; 3 &amp; 4 &amp; 5 \\ \hline
+M &amp; 1 &amp; 2 &amp; 4 &amp; 8 &amp; 16  \\ \hline
+\end{array}\)</p>
+</div>
+
+<p>別れた部分の個数は点が1個増えるたびに2倍となる関係性があると推測できます。$M = 2^{n-1}$と予測するのは妥当と思われます。しかし、$n = 6$のとき、$M = 31$となってしまい、予測が正しくないことが確認できます。よって、「いくつかの具体例で正しいからすべての場合に正しい」と推論してはならないとわかります。</p>
+
+<blockquote>
+  <p>正しい解答</p>
+</blockquote>
+
+<p>$k+1$ 個の頂点がある場合について考える。頂点を（時計回りの順番で）$P_0,P_1,\cdots,P_k$とします。$P_1​, \cdots ,P_k​$ たちを結ぶ線分によって領域は $M_k$ 個に分割されているとします。そこに線分 $P_0P_i:(i=1,\cdots,k)$を追加することで領域がいくつ増えるかを考えます。</p>
+
+<p><img src="https://github.com/ryonakimageserver/omorikaizuka/blob/master/%E3%83%96%E3%83%AD%E3%82%B0%E7%94%A8/20210309-Moser-sequence.png?raw=true" /></p>
+
+<p>既存の弦と交わるたびに領域が1個ずつ増えて, 点 $P_i$ に達したときに領域がさらに1個増えます。線分 $P_0P_i$ は $(i−1)(k−i)$ 本の線分とぶつかるので，領域を $(i−1)(k−i)+1$ 個増やします。よって、$P_0$を追加することで</p>
+
+\[\begin{aligned}
+M_{k+1} - M_{k} &amp;= \sum_{i=1}^k\{(i−1)(k−i)+1\} \\
+&amp;= -\frac{k(k+1)(2k+1)}{6} + (k+1)\frac{k(k+1)}{2} + (1 - k)k\\
+&amp;= \frac{1}{6}k^3 - \frac{1}{2}k^2 + \frac{4}{3}k
+\end{aligned}\]
+
+<p>$M_1 = 1$なので, $n \geq 2$について、</p>
+
+\[\begin{aligned}
+M_n &amp;= M_1+\sum_{k = 1}^{n-1}\frac{1}{6}k(k^2-3k+8) \\ 
+&amp;= 1+\frac{1}{6}\sum_{k = 1}^{n-1}(k^3-3k^2+8k) \\ 
+&amp;= 1+\frac{1}{6}\left\{\frac{1}{4}(n-1)^2n^2\right. \\ 
+&amp;\qquad \left.-3\cdot\frac{1}{6}(n-1)n(2n-1)+8\cdot\frac{1}{2}(n-1)n\right\} \\ 
+&amp;= 1+\frac{1}{24}(n-1)n\{ (n-1)n-2(2n-1)+16\} \\ 
+&amp;= 1+\frac{1}{24}(n-1)n(n^2-5n+18) \\ 
+&amp;= \frac{1}{24}(n^4-6n^3+23n^2-18n+24) 
+\end{aligned}\]
+
+<p>が得られる. これは $n=1$ のときも成り立つ. ゆえに, すべての正の整数 $n$ に対して</p>
+
+\[M_n = \frac{1}{24}(n^4-6n^3+23n^2-18n+24)\]
+
+<p>が成り立ちます。</p>
+
+<div style="text-align: right;">
+  <p>■</p>
+</div>
+
+<p><strong>例：次元によるテスト</strong></p>
+
+<p>次元によるテストは幾何学や物理学の問題を試すのによく知られた方法です。単振動、すなわち小さくて思い物体が一定の長さの重さのない紐の先に吊るしてあるものを考えます。</p>
+
+<ul>
+  <li>$l$: 紐の長さ</li>
+  <li>$g$: 重力加速度</li>
+  <li>$T$: 振り子の周期</li>
+</ul>
+
+<p>ここで振り子の周期が紐の長さと重力加速度とどのように関係しているか調べたいとします。力学的推論によって、</p>
+
+\[T = cl^mg^n \: \text{ where } m, n  \text{ is constant}\]
+
+<p>と予測したとします。このとき定数$c, m, n$をどのように定めればいいのかが論点となります。そこで次元に注目します。</p>
+
+<p>$T$は周期だから時間によって表されその単位は $sec$, $l$は長さなので $cm$, $g$は加速度なので $cm/sec^2$. 定数 $c$は $cm^0 = 1$ とします。次元のテストは</p>
+
+\[sec = 1\cdot (cm)^m\cdot (cm/sec^2)^n = (cm)^{m+n} \cdot (sec)^{-2n}\]
+
+<p>左辺と右辺の単位は同じでなければならないので</p>
+
+\[m+n = 0, -2n = 1\]
+
+<p>よって、</p>
+
+\[n = -\frac{1}{2}, m = \frac{1}{2}\]
+
+<p>を得ます。ただし、$c$の値はわかりません。また、この推論が確からしいかどうかはわかりません。</p>
+
+<h3 id="組織化">組織化</h3>
+
+<p>問題を解くにはばらばらの事実を寄せ集めただけでは不十分です。それらの事実を結びつけて、当面の問題に適した形にまとめ上げることが必要です。このまとめ上げる活動をここで知識の「組織化」と呼びます。解答方針を作成することはまさに知識の「組織化」活動です。地道に課題解決を実践していくことで身につけていくものですが、一旦「組織化」を実施したあとに次のことを自問自答することは有効です</p>
+
+<ul>
+  <li>すべてのデータ/条件をつかったか？</li>
+  <li>問題に含まれている大切な概念はすべて考慮にいれたか？</li>
+</ul>
+
+<h2 id="5-解答方針に基づき解答実行計画をたてる">5. 解答方針に基づき解答実行計画をたてる</h2>
+
+<p>実行計画を書くにあたっての基本方針は、</p>
+
+<ol>
+  <li>「最終的に伝えるべきメッセージ（解答）」を考えたとき、じぶんならどういう分析結果があれば納得するのか？</li>
+  <li>その分析結果へ、どのような手順でたどり着くのか？</li>
+  <li>他人が解答の正しさを検討できるようになっているか？</li>
+</ol>
+
+<p>となります。</p>
+
+<h3 id="ゴールまでの過程をもれなく記述する">ゴールまでの過程をもれなく記述する</h3>
+
+<p>実行計画を書くときには、自分と他人が正しさを検討できるように書かなくてはなりません。そのためには、原則として、問題のゴールに至る計算や論理展開の道筋をもれなく記述することが良いです。ただし、読み手が簡単に再現できる過程まで詳しく書いてしまうと、伝えたい本丸のメッセージが埋もれてしまうデメリットがあります。</p>
+
+<p>しかし、答えを短くするのは、一旦計画を記述したあとでもできるので、まず初手では全体の工程をもれなく記述することが重要となります。</p>
+
+<h3 id="実行計画を実施前に振り返る">実行計画を実施前に振り返る</h3>
+
+<p>実行計画を書いた後、すぐに着手するのではなく、その確からしさを検討することは有用です。これについて、以下のポイントを自問自答することがおすすめです</p>
+
+<ul>
+  <li>与えられたデータ/条件をすべて使ったか？</li>
+  <li>問題に含まれる本質的な概念はすべて考慮したか？を考える</li>
+  <li>結果をためすことができるか？</li>
+  <li>わかりやすくするため、無駄な議論を省く</li>
+</ul>
+
+<p>議論の無駄を省くことは特に重要で、議論の流れのわかりやすさを向上させるだけでなく、実行計画の省エネルギー化も効果として期待できます。長ったらしい計画は、議論の方向性があっていても実行時にミスを招くリスクがあります。</p>
+
+<h3 id="テストケースの作成">テストケースの作成</h3>
+
+<p>実行計画作成の段階で、実行後に得られる結果のテストケースを用意します。テストケースを明確化することで、</p>
+
+<ol>
+  <li>最終的に得られる結果が自分たちがもともと意図したものなのか？</li>
+  <li>意図している結果の条件はなんなのか？</li>
+  <li>実行計画作成の段階で、考慮すべき項目をちゃんと考慮しているのか？</li>
+</ol>
+
+<p>を言語で明確化することができます。</p>
+<h3 id="進捗管理方法の作成">進捗管理方法の作成</h3>
+
+<p>進捗管理方法を定めることで、実行段階において、誰がどのステータスにいて、いつまでになにをやらなくてはならないか？を明確化することできます。これの効果は</p>
+
+<ol>
+  <li>問題を解くにあたって迷子になることでモチベーションが下がってしまうことを防止する</li>
+  <li>進捗状況が予定通り行かない場合、もともとの計画が間違っている可能性があり、その兆候を早く見つけることができる</li>
+  <li>その兆候を早く見つけることで、もっと良いやり方に切り替えることを考えることができる</li>
+  <li>無駄なことをやらなくても良くなる</li>
+</ol>
+
+<p>ということが挙げられます。</p>
+
+<h3 id="実行に入る前の確認ポイント">実行に入る前の確認ポイント</h3>
+
+<ol>
+  <li>課題解決策が満たすべき条件の明確化</li>
+  <li>その条件が満たされているかのテストケースの策定</li>
+  <li>進捗管理の文脈における各段階のマイルストーンの明確化</li>
+  <li>計画修正手続きの整備</li>
+</ol>
+
+<p><strong>計画修正手続き: Keep-Problem-Try</strong></p>
+
+<p>計画を実行する段階になると、何かしらの問題が発生して計画通りに事が運ばないことが必ず発生します。常に計画修正の機会は訪れます。なので、定期的に振り返りミーティングを実施する体制を事前に作っておくことは重要です。</p>
+
+<p>振り返りミーティングを実施するにあたって、KPTというフレームワークで問題を整理することは有用です。例えば、iPhoneアプリケーションのビルドのため、CI用マシンにMacを使用し、サーバも同じマシンでビルドを実行していたとき、継続的インテグレーションに使用しているマシンのスペックが見積もりが甘く低すぎたため、ビルドに要する時間が長いというProblemが発生したとします。ここでTryとして、サーバのビルドとスマートフォンアプリケーションのビルドを分離するという案が出るという具合です。</p>
+
+<h3 id="分析計画例">分析計画例</h3>
+
+<p><img src="https://github.com/ryonakimageserver/omorikaizuka/blob/master/%E3%83%96%E3%83%AD%E3%82%B0%E7%94%A8/20210309-analysisplan.png?raw=true" /></p>
+
+<h3 id="因果推論における実行計画">因果推論における実行計画</h3>
+
+<table>
+  <thead>
+    <tr>
+      <th>構成要素</th>
+      <th>説明</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td><code class="language-plaintext highlighter-rouge">Research Question</code></td>
+      <td>the causal relationship of interestはなにか？</td>
+    </tr>
+    <tr>
+      <td><code class="language-plaintext highlighter-rouge">Theory</code></td>
+      <td>参考となる理論モデルはあるか？その理論モデルからどのような仮説が導き出されるか？</td>
+    </tr>
+    <tr>
+      <td><code class="language-plaintext highlighter-rouge">Ideal Experiment</code></td>
+      <td>the causal effect of interestを推定するにあたって理想的な実験はなにか？</td>
+    </tr>
+    <tr>
+      <td><code class="language-plaintext highlighter-rouge">Data Set</code></td>
+      <td>使われているデータセットは何か?<br /><br />the causal relationship of interestを特定するのに役立つ特徴はなにか？<br /><br />Dデータセットには欠点があるか？</td>
+    </tr>
+    <tr>
+      <td><code class="language-plaintext highlighter-rouge">Descriptive Evidence</code></td>
+      <td>対象となる変数の間に関係があることを示唆する記述的証拠（相関関係）は何か？</td>
+    </tr>
+    <tr>
+      <td><code class="language-plaintext highlighter-rouge">Identification Strategy</code></td>
+      <td>An identification strategyとは研究者が観察データ（すなわち、無作為化試験によって生成されていないデータ）を実際の実験に近づけるために使用する方法のことです<br /><br />説明変数の内因性の問題は、論文の中では議論されているか？<br /><br />regressorsのvariationはどのようにして発生しているのか？<br /><br />推定式に含まれていない変数の影響はあるか？<br /><br />missing variableによって発生するバイアスの方向性はどのようなものか？<br /><br />他の潜在的なバイアスの原因は考えられるか？<br /><br />偏りの原因ごとに、データ生成プロセス、推定式、推定量を書く<br /><br />その推定量が偏っている理由を説明する</td>
+    </tr>
+    <tr>
+      <td><code class="language-plaintext highlighter-rouge">Discussion</code></td>
+      <td>さらにどのようなロバストネスチェックを行うことができるか？</td>
+    </tr>
+    <tr>
+      <td><code class="language-plaintext highlighter-rouge">Conclusion</code></td>
+      <td>なぜあなたの結果は重要なのか？どのようなpolicy implicationが考えられるか？</td>
+    </tr>
+  </tbody>
+</table>
+
+<h3 id="事業会社におけるaiシステム導入とpoc">事業会社におけるAIシステム導入とPOC</h3>
+
+<p>業務にAIシステム導入する際、そのシステムが本当に業務改善、ひいては事業PLの改善につながるかをテストするために、構想 → POC → 業務適用という流れで導入が検討されます.</p>
+
+<p><img src="https://github.com/ryonakimageserver/omorikaizuka/blob/master/%E3%83%96%E3%83%AD%E3%82%B0%E7%94%A8/20210309-How-to-Work-POC-01.png?raw=true" /></p>
+
+<p>ただ、「構想」の段階で立ち往生になってしまうプロジェクトも数少なくありません. なぜこのようなことが起こるかはシンプルで、「会社はどのような方向性を目指しているのか」「事業レベルでどのような事が課題なのか」「課題を解決するためにはなにが障壁になっているのか」「技術の力で課題をどのように解決できるのか？」「システムは業務にどのように適用することができるのか？」「効果検証はどのような計画に基づいて実施すべきか？」「開発リソースの確保はどのようなプランに従うのか」という絶対に抑えなくてはならない点を抑えることができてないからです。ではなぜ、抑えることができないかというと (1) 事業課題を理解している人 (2) Technologyを理解している人 (3) Operationを理解している人 (4) プロジェクトをまとめる経験を持っている人 がそのプロジェクトに存在しない、または適切にコミュニケーションできないからです. 事業会社において、(1)と(3)の人材はいると思いますが、(2)と(4)を備えた人は少ない/存在しない場合が多いです. その人材ギャップを埋めるために外部のデータ分析会社を雇い、サポートメンバーとして入ってもらうという形でプロジェクトを進行する場合が多いです.</p>
+
+<p>また、進行方向についても一つの工夫があります. 上で紹介した「構想 → POC → 業務適用」という一方向的な流れを</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
+</pre></td><td class="rouge-code"><pre>構想 → POC → 構想 → POC →　・・・　→　業務適用
+</pre></td></tr></tbody></table></code></pre></div></div>
+
+<p>という形でプロジェクトを回すパターンもあります. POCを行うと、Biz側もシステムに対する理解が深まり、業務フローに関する意見やシステムが課題解決につながるためにどのような変更をしたほうがいいのか？というFBを得ることが多いです. ですので、これら有益なFBをシステムに反映するために、はじめのPOCを「業務的な合理性検証」に絞り、短いサイクルで実施し、構想の修正/方針変更を途中で考えることができるフェーズを用意します。その後、モデル精度/効果検証にフォーカスしたPOCを行うことで、より課題解決と業務適用に適したシステムを構築することができるようになります.</p>
+
+<h2 id="6-計画を実行する">6. 計画を実行する</h2>
+
+<p>計画を実行することは、解答計画を立案するに比べて易しいです。必要なのは「当たり前のことを当たり前にやっていく」精神くらいです。これはただ闇雲に計画を実施していくことではないことに注意してください。あくまで課題解決を目的にその実行計画を実施していくという文脈を忘れないようにしましょう。</p>
+
+<h3 id="当たり前のことを当たり前にやっていくためには">当たり前のことを当たり前にやっていくためには</h3>
+
+<ol>
+  <li>解答方針と解答計画の全体像を理解する</li>
+  <li>忍耐力をもって計画を実行する。</li>
+  <li>失敗してもなぜ失敗したか検証する</li>
+  <li>闇雲に計画を実行するのではなく、形式的論理的に実行計画に矛盾がないか常に確認する</li>
+  <li>解答計画はあくまで大枠。実際の実行によって生まれる成果物たちが、その計画の枠内に収まっているか常に確認する</li>
+  <li>実行計画が複雑な場合は、その計画を大きな段階にわけ、それぞれの段階が矛盾がないか確認する。その後、大きな各段階を更に細かい段階に分け、そこでも矛盾がないか検証する。</li>
+</ol>
+
+<h3 id="実行スピードと計画修正">実行スピードと計画修正</h3>
+
+<p>計画が完璧でも実行スピードが遅ければ仕事の価値はどんどん失われていきます。よく多く見られる症状として、丁寧にやりすぎる、または詳細にこだわるあまり、最終的なアウトプットを出す時間が必要以上にかかってしまうケースがあります。この症状を回避するための指針は以下です：</p>
+
+<ul>
+  <li>「受け手にとっての十分なレベル」を明確化し、やりすぎないように意識する</li>
+  <li>即断即決の弊害として考えられる誤った方針に基づく計画実行は、計画修正によって対応する</li>
+  <li>多くのやり方を準備しておき、一つの方法がうまく行かなければ。別の手法に切り替える</li>
+</ul>
+
+<p>結局の所、計画立案段階で(1) 課題解決策が満たすべき条件の明確化、(2) その条件が満たされているかのテストケースの策定、(3) 進捗管理の文脈における各段階のマイルストーンの明確化、(4) 計画修正手続きの整備ができているかに依存します。</p>
+
+<h2 id="7-振り返る">7. 振り返る</h2>
+
+<p>問題を理解し、計画を立て、各段階を検討した上で、計画を実行したとする。しかし、どんなに慎重にそれぞれのステップをこなしたとしても間違いを完全に防ぐことはできません。そのため、どんなときにも計画を実行して得られた結果を検証・振り返ることは必要です。振り返りというプロセスで重要な指針は以下となります：</p>
+
+<ul>
+  <li>結果や議論を手っ取り早く素早く直感的に試すことができるか？</li>
+  <li>直感的に理解できるか？</li>
+  <li>同じ結果を違った仕方で導くことはできるか？</li>
+  <li>他の事柄との関連で理解できるか？</li>
+  <li>得られた結果を別の事柄に応用できるか？</li>
+</ul>
+
+<h3 id="結果を利用できないか">結果を利用できないか？</h3>
+
+<p>一般化/特殊化/類推/分解と結合を通じて、得られた解決策が他の問題に応用することができるか？と考えることは有用です。一つの問題を解くことで、今まで解けなかった別の問題も解けるようになるケースがあるからです。課題解決をスケールすることは、効率の良い働き方を実現することに繋がります。</p>
+
+<p>また、課題解決方法を抽象化して全員が実践できるレベルで共有し、再現性をもたせる仕組みも整備することも重要です。組織が大きくなるにつれて、個人個人の質の高さをキープするのは難しくなります。課題解決方法のパーツを組織として用意することで、仮に個人レベルでは二流が大半であっても、組織全体として一流に近い仕事ができる集団になれます。</p>
+
+<h3 id="結果を試すことはできるかrobustness-test">結果を試すことはできるか？Robustness test</h3>
+
+<p>課題解決の流れにおいて、手法上の制約などの理由によりなんらかの仮定は必ず存在します。その仮定が正しいかどうかを心配して、</p>
+
+<ol>
+  <li>その仮定が正しいかどうか</li>
+  <li>その仮定が正しくなかった場合に我々の結果が変わるかどうか</li>
+</ol>
+
+<p>をチェックし、得られた結果が偶然の産物じゃないかを確認する必要があります。一般的にはRobustness checkといいます。気をつけるべき点は、あくまで分析の本質的な仮定に関してのみ
+Robustness checkを実施すべきです。すべての仮定に関してテストできるならばいいですが、時間的制約ないしメッセージの理解しやすさの観点から、本質的仮定のみRobustness check実施すれば十分です。</p>
+
+<h3 id="次にどのように活かしていくか">次にどのように活かしていくか？</h3>
+
+<p>もしかしたら課題解決が失敗に終わる場合もありえます。失敗しても、必ず前に戻って、自分達の考え方とか、やり方のどこが間違っていたのか振り返って、次に活かす。そして、再び挑戦する、次の大成功につなげていきます。この環境を作ることも課題解決をデザインすることの重要なポイントとなります。</p>
+
+<h2 id="8-問題解決の例">8. 問題解決の例</h2>
+<h3 id="ビジネスにおける本質的な選択肢の例">ビジネスにおける本質的な選択肢の例</h3>
+
+<p>「ある商品Aが売れない」という理由を検討しているします。まだ仮説が出ていないのでまず仮説を設定します。</p>
+
+<ul>
+  <li>商品Aに商品力がない</li>
+  <li>商品Aに商品力はあるが、マーチャンダイジングに失敗している</li>
+  <li>商品Aに商品力はあるが、マーケティングに失敗している</li>
+</ul>
+
+<p>が考えられます。</p>
+
+<p>全体の売上が下がっているという問題に直面している場合</p>
+
+<ul>
+  <li>会員数が下がっている</li>
+  <li>会員一人あたりの一回の平均購買金額が下がっている</li>
+  <li>会員一人あたりの期間あたりの購入回数が減っている</li>
+</ul>
+
+<p>が考えられます。どの仮説が正しいかに応じてアクションが異なるため、本質的な選択肢といえます。</p>
+
+<h3 id="課題ベースでストーリーを組み立てる">課題ベースでストーリーを組み立てる</h3>
+
+<p>「現在、国内大学が行っている統廃合やコスト削減は財源問題の解決策となるか？」という課題について考えたいと思います。この課題を考えるにあたってのストーリーの一例は以下のようになります：</p>
+
+<table>
+  <thead>
+    <tr>
+      <th>役割</th>
+      <th>内容</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>現状及び課題認識</td>
+      <td>日本の大学の財源問題は存在するか？</td>
+    </tr>
+    <tr>
+      <td>課題発生のメカニズム</td>
+      <td>日本の大学の収入構造はどのようになっているのか？</td>
+    </tr>
+    <tr>
+      <td>ゴールの設定</td>
+      <td>目指すべき財政運営はどのようなものがあるのか？海外大学のモデルの紹介</td>
+    </tr>
+    <tr>
+      <td>現状とゴールのギャップの評価</td>
+      <td>目指すべき財政運営を導入するにあたってどのような問題があるか？</td>
+    </tr>
+    <tr>
+      <td>提案されている策の評価</td>
+      <td>現在提案されている政策が上で挙げた問題を解決することができるか評価する</td>
+    </tr>
+    <tr>
+      <td>結論,提案</td>
+      <td>列挙した問題の解決、及び根本的な課題解決するためにはどのような政策が考えられるか？</td>
+    </tr>
+  </tbody>
+</table>
+
+<h3 id="速度の問題">速度の問題</h3>
+
+<blockquote>
+  <p>問題文</p>
+</blockquote>
+
+<p>水が直角円錐形の容器に速度$r$で注がれている。容器の底は水平であり、頂点が下を向いているとする。底の半径を$a$, 円錐の高さを$b$とする。水の深さが$\gamma$であるときに水面が上昇する速さを求めよ。</p>
+
+<blockquote>
+  <p>解答方針</p>
+</blockquote>
+
+<table>
+  <thead>
+    <tr>
+      <th> </th>
+      <th>検討項目</th>
+      <th>説明</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>(1)</td>
+      <td>求めるものは何か？</td>
+      <td>水面が上昇する速さ。速さとは水の深さが上昇する速度のこと。つまり$\gamma$の変化の速度のこと</td>
+    </tr>
+    <tr>
+      <td>(2)</td>
+      <td>変化の速度とは何か？</td>
+      <td>時間を$t$とおいたとき、$d\gamma/dt$と表される。</td>
+    </tr>
+    <tr>
+      <td>(3)</td>
+      <td>与えられたデータうち速度を表すものはあるか？</td>
+      <td>$r$は水の体積の変化の速度を表しています。</td>
+    </tr>
+    <tr>
+      <td>(4)</td>
+      <td>$r$は水の体積の変化の速度を表しているとは？</td>
+      <td>容器の体積を$V$とするならば、$dV/dt = r$</td>
+    </tr>
+  </tbody>
+</table>
+
+<p>以上のことを踏まえると、まず水の高さ$\gamma$のときの体積の変化率は以下のように表せます：</p>
+
+\[\frac{dV(\gamma)}{dt} = \frac{dV(\gamma)}{d\gamma}\frac{\gamma(t)}{dt} = \frac{\pi a^2\gamma^2}{b^2}\frac{\gamma(t)}{dt} = r\]
+
+<p>よって、</p>
+
+\[\frac{\gamma(t)}{dt} = \frac{rb^2}{\pi a^2\gamma^2}\]
+
+<p>この結果は、高さが高いほど変化の速度が小さくなっていることを示しており、直感的にも理解することができます。</p>
+
+<div style="text-align: right;">
+  <p>■</p>
+</div>
+
+<h3 id="必要十分条件の見極め">必要十分条件の見極め</h3>
+
+<blockquote>
+  <p>問題文</p>
+</blockquote>
+
+<p>$a$は実数の定数とする．</p>
+
+<p>$$
+a_1 = a, a_n = 3^n - 5a_{n-1} (n\geq 2)
+$</p>
+
+<p>で定まる数列${a_n}$について，次の問いに答えよ．</p>
+
+<ol>
+  <li>一般項$a_n$を$a$と$n$の式で表せ．</li>
+  <li>任意の自然数$n$に対し，$a_{n+1}&gt;a_n$が成り立つときの$a$の値を求めよ．</li>
+</ol>
+
+<blockquote>
+  <p>解答(1)</p>
+</blockquote>
+
+<p>与えられた式を次のように変換します：</p>
+
+\[\begin{aligned}
+a_n &amp;= 3^n - 5a_{n-1}\\
+&amp;= 3^n + -5\cdot a_{n-1}
+\end{aligned}\]
+
+<p>両辺に$(-5)^n$を掛けて</p>
+
+\[\frac{a_n}{(-5)^n} = \left(-\frac{3}{5}\right)^n + \frac{a_{n-1}}{(-5)^{n-1}}\]
+
+<p>ここで、</p>
+
+<p>$b_n\equiv \frac{a_n}{(-5)^n}$$</p>
+
+<p>と定義します。</p>
+
+\[\begin{aligned}
+b_n &amp;= b_1 + \sum_{i=2}^n\left(-\frac{3}{5}\right)^i\\
+&amp;= b_1 + \left(\frac{3}{5}\right)^2 \sum_{i=0}^{n-2}\left(-\frac{3}{5}\right)^i\\ 
+&amp;= b_1 + \frac{9}{25}\frac{1 - \left(- \frac{3}{5}\right)^{n-1}}{1 + \frac{3}{5}}\\
+&amp; = b_1 + \frac{9}{40}\left\{1 - \left(- \frac{3}{5}\right)^{n-1} \right\}
+\end{aligned}\]
+
+\[\therefore a_n = (-5)^{n-1}\left(a - \frac{9}{8}\right) + \frac{3^{n+1}}{8}\]
+
+<div style="text-align: right;">
+  <p>■</p>
+</div>
+
+<blockquote>
+  <p>解答(2)</p>
+</blockquote>
+
+<p>解答(1)より</p>
+
+\[\begin{aligned}
+a_{n+1} - a_n &amp;= (-5)\left(a - \frac{9}{8}\right)(-5)^{n-1} + \frac{3^{n+2}}{8} + \left(a - \frac{9}{8}\right)(-5)^{n-1} - \frac{3^{n+1}}{8}\\
+&amp;= \frac{3^{n+1}}{4} -6\left(a - \frac{9}{8}\right)(-5)^{n-1}
+\end{aligned}\]
+
+<p>これより、</p>
+
+\[a - \frac{9}{8} = 0\]
+
+<p>ならば、すべての自然数$n$で$a_{n+1} - a_n &gt; 0$が成立する。よって、$a = \frac{9}{8}$は十分条件である。</p>
+
+<p>次に、$a = \frac{9}{8}$が必要条件でもあることを示す。</p>
+
+\[\frac{3^{n+1}}{4} -6\left(a - \frac{9}{8}\right)(-5)^{n-1}\]
+
+<p>を$n = 2k, 2k+1$に応じて、$(-5)^{n}$で割ると</p>
+
+\[\begin{aligned}
+&amp;-\frac{5}{8}\left(\frac{3}{5}\right)^{2k} &lt; a - \frac{9}{8}\\
+&amp;\frac{5}{8}\left(\frac{3}{5}\right)^{2k+1} &gt; a - \frac{9}{8}\\
+&amp;\Rightarrow -\frac{5}{8}\left(\frac{3}{5}\right)^{2k} &lt; a - \frac{9}{8} &lt; \frac{5}{8}\left(\frac{3}{5}\right)^{2k+1}
+\end{aligned}\]
+
+<p>を得ます。これがすべての自然数$k$で成立するので</p>
+
+\[\left|a - \frac{9}{8}\right| &lt; \frac{5}{8}\left(\frac{3}{5}\right)^{2k}\]
+
+<p>$k$を十分大きくすると、右辺はいくらでも小さくなるので</p>
+
+\[\left|a - \frac{9}{8}\right| = 0\]
+
+<p>よって、$a = \frac{9}{8}$は必要条件でもあります。</p>
+
+<div style="text-align: right;">
+  <p>■</p>
+</div>
+
+<h3 id="等しいものを文字に置く">等しいものを文字に置く</h3>
+
+<p>二つ以上の等号でむすばれた条件などは， その等しいものを別の文字で表すことによって， 論証が簡明になることが多いです。</p>
+
+<blockquote>
+  <p>問題</p>
+</blockquote>
+
+<p>相異なる3数 $a, b, c$ が</p>
+
+\[\frac{a^3+2a}{a+1} = \frac{b^3+2b}{b+1} = \frac{c^3+2c}{c+1}\]
+
+<p>を満たすとき，$a + b + c$ 及び $abc + ab + bc + ca$の値を求めよ．</p>
+
+<blockquote>
+  <p>解答</p>
+</blockquote>
+
+\[\frac{a^3+2a}{a+1} = \frac{b^3+2b}{b+1} = \frac{c^3+2c}{c+1} = k\]
+
+<p>と置きます。すると、</p>
+
+\[\begin{cases}
+a^3 + 2a &amp;= k(a+1)\\
+b^3 + 2b &amp;= k(b+1)\\
+c^3 + 2c &amp;= k(c+1)
+\end{cases}\]
+
+<p>よって三変数a, b, cは３次方程式</p>
+
+\[x^3 + (2 - k)x - k = 0\]
+
+<p>の3解とわかります。 3次方程式の解と係数の関係から、</p>
+
+\[\begin{aligned}
+&amp; a + b + c = 0\\
+&amp; ab + bc + ca = 2 - k\\
+&amp; abc = k
+\end{aligned}\]
+
+\[\therefore a + b + c = 0 \:\text{ and }\: abc + ab + bc + ca\]
+
+<div style="text-align: right;">
+  <p>■</p>
+</div>
+
+<h3 id="どの化粧品を買っていいかわからない">どの化粧品を買っていいかわからない</h3>
+
+<p>「どの化粧品が良いのかわからない」という悩みを持っている人は多いと思います。「どの化粧品が良いのかわからない」という課題に直面しているのは理解できますが、これは本質的なものではありません。化粧品は美しくなるために使用するもので、化粧品を用いて解決したい課題はなにかをまず考える必要があります。考える順番としては、</p>
+
+<ol>
+  <li>今悩んでいる症状はなにか？</li>
+  <li>その症状はなぜ発生するのか</li>
+  <li>課題解決方針はなにか？</li>
+  <li>課題解決方針に適した化粧品はなにか？</li>
+</ol>
+
+<p>この順番はイプサでカウンセリングを受けたときも同様の流れでした。今回は仮にシミを解消したい場合を考えます。</p>
+
+<blockquote>
+  <p>シミのメカニズム</p>
+</blockquote>
+
+<p>シミは肌に黒メラニンが過剰に蓄積し、肌が部分的に茶色に見える状態です。メラニンの発生と蓄積の２つを理解する必要があります。</p>
+
+<p><strong>(1) メラニンの発生と紫外線</strong></p>
+
+<p>メラノサイトという細胞がメラニンを生成します。なぜメラニンを作るかというと、紫外線が原因となって肌が傷つけられたとき肌を守るためメラニンという色素が作られます。このメラニンは日傘の役割をします。この日傘を角化細胞（ケラチノサイト）に渡して紫外線から肌を守っています。</p>
+
+<p><strong>(2) メラニンの過剰蓄積</strong></p>
+
+<p>シミはメラニンが肌に過剰に蓄積されることで発生する症状です。過剰に蓄積される原因として、(1) メラニンが過剰に生産され過剰にケラチノサイトに渡される、(2) メラニンの排出が滞るの２つが考えられます。(1)の過剰に生産されることに関しても、肌センサーがバグって生成の必要がないタイミングでメラノサイトにメラニン生成信号を渡す場合やメラノサイトが過剰にセンサーに反応してしまうという２つのケースが考えられます。</p>
+
+<blockquote>
+  <p>課題解決方針と美容成分</p>
+</blockquote>
+
+<p>以上のシミ発生メカニズムを踏まえるとシミの解決方針は以下となります：</p>
+
+<table>
+  <thead>
+    <tr>
+      <th>方針</th>
+      <th>具体アクション</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>紫外線から肌を守る</td>
+      <td>日焼け止め</td>
+    </tr>
+    <tr>
+      <td>間違ったメラニン生成命令をストップする</td>
+      <td>カモミラET<br />トラネキサム算<br />トラネキサム算セチル塩酸塩</td>
+    </tr>
+    <tr>
+      <td>過剰なメラニンの産生を抑制する</td>
+      <td>ビタミンC誘導体<br />コウジ酸<br />アルプチン<br />エラグ酸<br />4-n-ブチルレゾルシン<br />リノール酸S<br />4-メトキシサリチル酸カリウム塩など</td>
+    </tr>
+    <tr>
+      <td>メラニンの受け渡しをブロックする</td>
+      <td>ニコチン酸アミド</td>
+    </tr>
+    <tr>
+      <td>滞ったメラニン排出促進</td>
+      <td>アデノシン一リン酸二ナトリウムOT<br />デクスパンテノールW</td>
+    </tr>
+  </tbody>
+</table>
+
+<p>これでカタログに記載されてある成分がお肌環境をどう変えるかを理解することがちょっとできるようになります = 自分が欲しい商品が見つかる。</p>
+
+<h2 id="appendix">Appendix</h2>
+<h3 id="関係者を説得する-メッセージドリブン">関係者を説得する: メッセージドリブン</h3>
+
+<p>ビジネスにおける問題解決の最終的なアウトプットは、具体的アクションを関係者を巻き込んでリード/実行し、本丸の事業課題を解決することです。この文脈において、自分が提案する解決策を関係者に周知する工程を経る必要があります。このとき意識すべきポイントとして、</p>
+
+<ul>
+  <li>意味のある課題を扱っていることを理解してもらう</li>
+  <li>最終的な解決策を理解してもらう</li>
+  <li>解決策に納得して、一緒に行動してもらう</li>
+  <li>タイムリーにこれらを実現していく</li>
+</ul>
+
+<p><strong>どのように伝えるべきか</strong></p>
+
+<p>基本的には自分が課題設定で定めたストーリーラインに従って、伝えるべきメッセージを選定します。このとき、</p>
+
+<ul>
+  <li>論理構造は整理されているか？</li>
+  <li>流れが悪いところはないか？前提条件は欠けてないか？</li>
+  <li>結論を端的に説明できるか？</li>
+  <li>エレベーターテストに耐えられるか？</li>
+</ul>
+
+<p>一例として、「今はこういう状況である」「なにもしないとこうなる」「われわれはこういう未来を描いている」「描いた未来を実現するために、今これをやる必要がある」という項目を完結に話せるかどうか、自問してみてください。</p>
+
+<p><strong>Tips</strong></p>
+
+<ol>
+  <li>「や」ができきたらもうちょっと短くできるか疑え</li>
+  <li>受け手にとって曖昧になるような言葉は使わない</li>
+  <li>結論とプログレスをわけろ</li>
+</ol>
+
+<h2 id="rerefences">Rerefences</h2>
+
+<ul>
+  <li><a href="https://www.maruzen-publishing.co.jp/item/b302341.html">いかにして問題を解くか ISBN13:978-4-621-04593-0</a></li>
+  <li><a href="http://www.eijipress.co.jp/book/book.php?epcode=2085">イシューからはじめよ ISBN13:978-4-86276-085-2</a></li>
+  <li><a href="http://aozoragakuen.sakura.ne.jp/houhou/houhou00/node4.html">問題を解く</a></li>
+  <li><a href="https://github.com/ryonakimageserver/lecturenotes/blob/main/others/How-to-Write-a-Research-Paper-in-Economics.pdf">How-to-Write-a-Research-Paper-in-Economics</a></li>
+  <li><a href="http://deryugina.com/some-tips-for-robustness-checks-and-empirical-analysis-in-general/">Some tips for robustness checks and empirical analysis in general</a></li>
+  <li><a href="https://www.nickchk.com/robustness.html">Robustness Tests: What, Why, and How</a></li>
+  <li>
+    <table>
+      <tbody>
+        <tr>
+          <td><a href="https://wkmath.org/diff-seq-f.html">有名問題・定理から学ぶ数学</a></td>
+        </tr>
+      </tbody>
+    </table>
+  </li>
+</ul>
+
+
+                <hr style="visibility: hidden;">
+                <hr/>
+                <b><fontsize="5">Share Buttons</font><br></b>
+                <!--see 
+    https://jekyllcodex.org/without-plugin/share-buttons/ 
+    https://ranvir.xyz/blog/why-and-how-to-add-social-sharing-buttons-on-your-jekyll-blog-using-github-pages/
+-->
+
+
+
+<style>
+#share-buttons {display: inline-block; vertical-align: middle; }
+#share-buttons:after {content: ""; display: block; clear: both;}
+#share-buttons > div {
+    position: relative;
+    text-align: left; 
+    height: 36px; 
+    width: 32px; 
+    float: left; 
+    text-align: center;
+}
+#share-buttons > div > svg {height: 16px; fill: #d5d5d5; margin-top: 10px;}
+#share-buttons > div:hover {cursor: pointer;}
+#share-buttons > div.facebook:hover > svg {fill: #3B5998;}
+#share-buttons > div.twitter:hover > svg {fill: #55ACEE;}
+#share-buttons > div.linkedin:hover > svg {fill: #0077b5;}
+#share-buttons > div.pinterest:hover > svg {fill: #CB2027;}
+#share-buttons > div.gplus:hover > svg {fill: #dd4b39;}
+#share-buttons > div.mail:hover > svg {fill: #7D7D7D;}
+#share-buttons > div.instagram:hover > svg {fill: #C73B92;}
+#share-buttons > div.facebook > svg {height: 18px; margin-top: 9px;}
+#share-buttons > div.twitter > svg {height: 20px; margin-top: 8px;}
+#share-buttons > div.linkedin > svg {height: 19px; margin-top: 7px;}
+#share-buttons > div.pinterest > svg {height: 20px; margin-top: 9px;}
+#share-buttons > div.gplus > svg {height: 17px; margin-top: 9px; position: relative; left: 1px;}
+#share-buttons > div.mail > svg {height: 14px; margin-top: 11px;}
+</style>
+
+<span style="color: black">Share on: </span><div id="share-buttons">
+    <div class="facebook" title="Share this on Facebook" onclick="gtag('event', 'Facebook', {'event_category':'Post Shared','event_label':'Facebook'}); location.href='http://www.facebook.com/share.php?u=https://ryonakagami.github.io/2021/03/09/How-to-Solve-It/';"><svg viewBox="0 0 1792 1792" xmlns="http://www.w3.org/2000/svg"><path d="M1343 12v264h-157q-86 0-116 36t-30 108v189h293l-39 296h-254v759h-306v-759h-255v-296h255v-218q0-186 104-288.5t277-102.5q147 0 228 12z"/></svg></div>
+    <div class="twitter" title="Share this on Twitter" onclick="gtag('event', 'Twitter', {'event_category':'Post Shared','event_label':'Twitter'}); location.href='https://twitter.com/intent/tweet?text=いかにして問題を解くか&url=https://ryonakagami.github.io/2021/03/09/How-to-Solve-It/';"><svg viewBox="0 0 1792 1792" xmlns="http://www.w3.org/2000/svg"><path d="M1684 408q-67 98-162 167 1 14 1 42 0 130-38 259.5t-115.5 248.5-184.5 210.5-258 146-323 54.5q-271 0-496-145 35 4 78 4 225 0 401-138-105-2-188-64.5t-114-159.5q33 5 61 5 43 0 85-11-112-23-185.5-111.5t-73.5-205.5v-4q68 38 146 41-66-44-105-115t-39-154q0-88 44-163 121 149 294.5 238.5t371.5 99.5q-8-38-8-74 0-134 94.5-228.5t228.5-94.5q140 0 236 102 109-21 205-78-37 115-142 178 93-10 186-50z"/></svg></div>
+    <div class="linkedin" title="Share this on Linkedin" onclick="gtag('event', 'Linkedin', {'event_category':'Post Shared','event_label':'Linkedin'}); location.href='https://www.linkedin.com/shareArticle?mini=true&url=https://ryonakagami.github.io/2021/03/09/How-to-Solve-It/&title=&summary=&source=';"><svg viewBox="0 0 1792 1792" xmlns="http://www.w3.org/2000/svg"><path d="M477 625v991h-330v-991h330zm21-306q1 73-50.5 122t-135.5 49h-2q-82 0-132-49t-50-122q0-74 51.5-122.5t134.5-48.5 133 48.5 51 122.5zm1166 729v568h-329v-530q0-105-40.5-164.5t-126.5-59.5q-63 0-105.5 34.5t-63.5 85.5q-11 30-11 81v553h-329q2-399 2-647t-1-296l-1-48h329v144h-2q20-32 41-56t56.5-52 87-43.5 114.5-15.5q171 0 275 113.5t104 332.5z"/></svg></div>
+    
+    <div class="mail" title="Share this through Email" onclick="gtag('event', 'Email', {'event_category':'Post Shared','event_label':'Email'}); location.href='mailto:?&body=https://ryonakagami.github.io/2021/03/09/How-to-Solve-It/';"><svg viewBox="0 0 1792 1792" xmlns="http://www.w3.org/2000/svg"><path d="M1792 710v794q0 66-47 113t-113 47h-1472q-66 0-113-47t-47-113v-794q44 49 101 87 362 246 497 345 57 42 92.5 65.5t94.5 48 110 24.5h2q51 0 110-24.5t94.5-48 92.5-65.5q170-123 498-345 57-39 100-87zm0-294q0 79-49 151t-122 123q-376 261-468 325-10 7-42.5 30.5t-54 38-52 32.5-57.5 27-50 9h-2q-23 0-50-9t-57.5-27-52-32.5-54-38-42.5-30.5q-91-64-262-182.5t-205-142.5q-62-42-117-115.5t-55-136.5q0-78 41.5-130t118.5-52h1472q65 0 112.5 47t47.5 113z"/></svg></div>
+</div>
+
+                
+                <hr/>
+
+                <!-- Featured Tags -->
+                <b><fontsize="5">Feature Tags</b>
+                    <div id="tag_cloud" class="tags tags-sup js-tags" 
+                    style="line-height: 0px !important;">
+                        
+                        
+                        
+                        
+                        
+                                <a data-sort="0288" 
+                                    href="/archive/?tag=%E7%B5%B1%E8%A8%88"
+                                    title="統計"
+                                    style="color: #337ab7 !important;"
+                                    rel="61">統計</a>
+                        
+                                <a data-sort="0298" 
+                                    href="/archive/?tag=Python"
+                                    title="Python"
+                                    style="color: #337ab7 !important;"
+                                    rel="51">Python</a>
+                        
+                                <a data-sort="0300" 
+                                    href="/archive/?tag=math"
+                                    title="math"
+                                    style="color: #337ab7 !important;"
+                                    rel="49">math</a>
+                        
+                                <a data-sort="0303" 
+                                    href="/archive/?tag=Linux"
+                                    title="Linux"
+                                    style="color: #337ab7 !important;"
+                                    rel="46">Linux</a>
+                        
+                                <a data-sort="0316" 
+                                    href="/archive/?tag=Ubuntu+20.04+LTS"
+                                    title="Ubuntu 20.04 LTS"
+                                    style="color: #337ab7 !important;"
+                                    rel="33">Ubuntu 20.04 LTS</a>
+                        
+                                <a data-sort="0319" 
+                                    href="/archive/?tag=Shell"
+                                    title="Shell"
+                                    style="color: #337ab7 !important;"
+                                    rel="30">Shell</a>
+                        
+                                <a data-sort="0321" 
+                                    href="/archive/?tag=English"
+                                    title="English"
+                                    style="color: #337ab7 !important;"
+                                    rel="28">English</a>
+                        
+                                <a data-sort="0324" 
+                                    href="/archive/?tag=git"
+                                    title="git"
+                                    style="color: #337ab7 !important;"
+                                    rel="25">git</a>
+                        
+                                <a data-sort="0329" 
+                                    href="/archive/?tag=%E6%96%B9%E6%B3%95%E8%AB%96"
+                                    title="方法論"
+                                    style="color: #337ab7 !important;"
+                                    rel="20">方法論</a>
+                        
+                                <a data-sort="0333" 
+                                    href="/archive/?tag=Ubuntu+22.04+LTS"
+                                    title="Ubuntu 22.04 LTS"
+                                    style="color: #337ab7 !important;"
+                                    rel="16">Ubuntu 22.04 LTS</a>
+                        
+                                <a data-sort="0337" 
+                                    href="/archive/?tag=%E7%B5%B1%E8%A8%88%E6%A4%9C%E5%AE%9A"
+                                    title="統計検定"
+                                    style="color: #337ab7 !important;"
+                                    rel="12">統計検定</a>
+                        
+                                <a data-sort="0338" 
+                                    href="/archive/?tag=%E7%AB%B6%E6%8A%80%E3%83%97%E3%83%AD%E3%82%B0%E3%83%A9%E3%83%9F%E3%83%B3%E3%82%B0"
+                                    title="競技プログラミング"
+                                    style="color: #337ab7 !important;"
+                                    rel="11">競技プログラミング</a>
+                        
+                                <a data-sort="0339" 
+                                    href="/archive/?tag=%E3%83%95%E3%83%BC%E3%83%AA%E3%82%A8%E8%A7%A3%E6%9E%90"
+                                    title="フーリエ解析"
+                                    style="color: #337ab7 !important;"
+                                    rel="10">フーリエ解析</a>
+                        
+                                <a data-sort="0340" 
+                                    href="/archive/?tag=%E5%89%8D%E5%87%A6%E7%90%86"
+                                    title="前処理"
+                                    style="color: #337ab7 !important;"
+                                    rel="9">前処理</a>
+                        
+                                <a data-sort="0340" 
+                                    href="/archive/?tag=SQL"
+                                    title="SQL"
+                                    style="color: #337ab7 !important;"
+                                    rel="9">SQL</a>
+                        
+                                <a data-sort="0340" 
+                                    href="/archive/?tag=coding"
+                                    title="coding"
+                                    style="color: #337ab7 !important;"
+                                    rel="9">coding</a>
+                        
+                                <a data-sort="0341" 
+                                    href="/archive/?tag=%E3%82%B3%E3%83%9F%E3%83%A5%E3%83%8B%E3%82%B1%E3%83%BC%E3%82%B7%E3%83%A7%E3%83%B3"
+                                    title="コミュニケーション"
+                                    style="color: #337ab7 !important;"
+                                    rel="8">コミュニケーション</a>
+                        
+                                <a data-sort="0342" 
+                                    href="/archive/?tag=Network"
+                                    title="Network"
+                                    style="color: #337ab7 !important;"
+                                    rel="7">Network</a>
+                        
+                                <a data-sort="0342" 
+                                    href="/archive/?tag=ssh"
+                                    title="ssh"
+                                    style="color: #337ab7 !important;"
+                                    rel="7">ssh</a>
+                        
+                                <a data-sort="0343" 
+                                    href="/archive/?tag=%E5%B0%86%E6%A3%8B"
+                                    title="将棋"
+                                    style="color: #337ab7 !important;"
+                                    rel="6">将棋</a>
+                        
+                                <a data-sort="0343" 
+                                    href="/archive/?tag=Data+visualization"
+                                    title="Data visualization"
+                                    style="color: #337ab7 !important;"
+                                    rel="6">Data visualization</a>
+                        
+                                <a data-sort="0343" 
+                                    href="/archive/?tag=Docker"
+                                    title="Docker"
+                                    style="color: #337ab7 !important;"
+                                    rel="6">Docker</a>
+                        
+                                <a data-sort="0343" 
+                                    href="/archive/?tag=Econometrics"
+                                    title="Econometrics"
+                                    style="color: #337ab7 !important;"
+                                    rel="6">Econometrics</a>
+                        
+                                <a data-sort="0343" 
+                                    href="/archive/?tag=VSCode"
+                                    title="VSCode"
+                                    style="color: #337ab7 !important;"
+                                    rel="6">VSCode</a>
+                        
+                                <a data-sort="0343" 
+                                    href="/archive/?tag=statistical+inference"
+                                    title="statistical inference"
+                                    style="color: #337ab7 !important;"
+                                    rel="6">statistical inference</a>
+                        
+                                <a data-sort="0344" 
+                                    href="/archive/?tag=GitHub+Pages"
+                                    title="GitHub Pages"
+                                    style="color: #337ab7 !important;"
+                                    rel="5">GitHub Pages</a>
+                        
+                                <a data-sort="0344" 
+                                    href="/archive/?tag=apt"
+                                    title="apt"
+                                    style="color: #337ab7 !important;"
+                                    rel="5">apt</a>
+                        
+                                <a data-sort="0344" 
+                                    href="/archive/?tag=development"
+                                    title="development"
+                                    style="color: #337ab7 !important;"
+                                    rel="5">development</a>
+                        
+                                <a data-sort="0345" 
+                                    href="/archive/?tag=%E3%82%B7%E3%82%B9%E3%83%86%E3%83%A0%E7%AE%A1%E7%90%86"
+                                    title="システム管理"
+                                    style="color: #337ab7 !important;"
+                                    rel="4">システム管理</a>
+                        
+                                <a data-sort="0345" 
+                                    href="/archive/?tag=Coffee"
+                                    title="Coffee"
+                                    style="color: #337ab7 !important;"
+                                    rel="4">Coffee</a>
+                        
+                                <a data-sort="0345" 
+                                    href="/archive/?tag=cloud"
+                                    title="cloud"
+                                    style="color: #337ab7 !important;"
+                                    rel="4">cloud</a>
+                        
+                                <a data-sort="0346" 
+                                    href="/archive/?tag=%E6%95%B0%E5%80%A4%E8%A8%88%E7%AE%97"
+                                    title="数値計算"
+                                    style="color: #337ab7 !important;"
+                                    rel="3">数値計算</a>
+                        
+                                <a data-sort="0346" 
+                                    href="/archive/?tag=%E7%B4%A0%E6%95%B0"
+                                    title="素数"
+                                    style="color: #337ab7 !important;"
+                                    rel="3">素数</a>
+                        
+                                <a data-sort="0346" 
+                                    href="/archive/?tag=Book"
+                                    title="Book"
+                                    style="color: #337ab7 !important;"
+                                    rel="3">Book</a>
+                        
+                                <a data-sort="0346" 
+                                    href="/archive/?tag=Font"
+                                    title="Font"
+                                    style="color: #337ab7 !important;"
+                                    rel="3">Font</a>
+                        
+                                <a data-sort="0346" 
+                                    href="/archive/?tag=Metrics"
+                                    title="Metrics"
+                                    style="color: #337ab7 !important;"
+                                    rel="3">Metrics</a>
+                        
+                                <a data-sort="0346" 
+                                    href="/archive/?tag=Poetry"
+                                    title="Poetry"
+                                    style="color: #337ab7 !important;"
+                                    rel="3">Poetry</a>
+                        
+                                <a data-sort="0346" 
+                                    href="/archive/?tag=Ubuntu+24.04+LTS"
+                                    title="Ubuntu 24.04 LTS"
+                                    style="color: #337ab7 !important;"
+                                    rel="3">Ubuntu 24.04 LTS</a>
+                        
+                                <a data-sort="0346" 
+                                    href="/archive/?tag=architecture"
+                                    title="architecture"
+                                    style="color: #337ab7 !important;"
+                                    rel="3">architecture</a>
+                        
+                                <a data-sort="0346" 
+                                    href="/archive/?tag=aws"
+                                    title="aws"
+                                    style="color: #337ab7 !important;"
+                                    rel="3">aws</a>
+                        
+                                <a data-sort="0346" 
+                                    href="/archive/?tag=shell"
+                                    title="shell"
+                                    style="color: #337ab7 !important;"
+                                    rel="3">shell</a>
+                        
+                                <a data-sort="0346" 
+                                    href="/archive/?tag=systemctl"
+                                    title="systemctl"
+                                    style="color: #337ab7 !important;"
+                                    rel="3">systemctl</a>
+                        
+                                <a data-sort="0347" 
+                                    href="/archive/?tag=%E3%83%86%E3%83%B3%E3%83%97%E3%83%AC%E3%83%BC%E3%83%88"
+                                    title="テンプレート"
+                                    style="color: #337ab7 !important;"
+                                    rel="2">テンプレート</a>
+                        
+                                <a data-sort="0347" 
+                                    href="/archive/?tag=%E3%83%87%E3%83%BC%E3%82%BF%E6%A7%8B%E9%80%A0"
+                                    title="データ構造"
+                                    style="color: #337ab7 !important;"
+                                    rel="2">データ構造</a>
+                        
+                                <a data-sort="0347" 
+                                    href="/archive/?tag=%E3%83%9D%E3%83%AF%E3%82%BD%E3%83%B3%E5%88%86%E5%B8%83"
+                                    title="ポワソン分布"
+                                    style="color: #337ab7 !important;"
+                                    rel="2">ポワソン分布</a>
+                        
+                                <a data-sort="0347" 
+                                    href="/archive/?tag=%E4%BC%9A%E8%A8%88%E5%88%86%E6%9E%90"
+                                    title="会計分析"
+                                    style="color: #337ab7 !important;"
+                                    rel="2">会計分析</a>
+                        
+                                <a data-sort="0347" 
+                                    href="/archive/?tag=%E6%96%87%E5%AD%97%E3%82%B3%E3%83%BC%E3%83%89"
+                                    title="文字コード"
+                                    style="color: #337ab7 !important;"
+                                    rel="2">文字コード</a>
+                        
+                                <a data-sort="0347" 
+                                    href="/archive/?tag=%E7%92%B0%E5%A2%83%E6%A7%8B%E7%AF%89"
+                                    title="環境構築"
+                                    style="color: #337ab7 !important;"
+                                    rel="2">環境構築</a>
+                        
+                                <a data-sort="0347" 
+                                    href="/archive/?tag=%E8%AB%96%E6%96%87"
+                                    title="論文"
+                                    style="color: #337ab7 !important;"
+                                    rel="2">論文</a>
+                        
+                                <a data-sort="0347" 
+                                    href="/archive/?tag=App"
+                                    title="App"
+                                    style="color: #337ab7 !important;"
+                                    rel="2">App</a>
+                        
+                                <a data-sort="0347" 
+                                    href="/archive/?tag=Bayesian"
+                                    title="Bayesian"
+                                    style="color: #337ab7 !important;"
+                                    rel="2">Bayesian</a>
+                        
+                                <a data-sort="0347" 
+                                    href="/archive/?tag=Dynamic+Programming"
+                                    title="Dynamic Programming"
+                                    style="color: #337ab7 !important;"
+                                    rel="2">Dynamic Programming</a>
+                        
+                                <a data-sort="0347" 
+                                    href="/archive/?tag=Keyboard"
+                                    title="Keyboard"
+                                    style="color: #337ab7 !important;"
+                                    rel="2">Keyboard</a>
+                        
+                                <a data-sort="0347" 
+                                    href="/archive/?tag=Processing"
+                                    title="Processing"
+                                    style="color: #337ab7 !important;"
+                                    rel="2">Processing</a>
+                        
+                                <a data-sort="0347" 
+                                    href="/archive/?tag=R"
+                                    title="R"
+                                    style="color: #337ab7 !important;"
+                                    rel="2">R</a>
+                        
+                                <a data-sort="0347" 
+                                    href="/archive/?tag=Steam"
+                                    title="Steam"
+                                    style="color: #337ab7 !important;"
+                                    rel="2">Steam</a>
+                        
+                                <a data-sort="0347" 
+                                    href="/archive/?tag=filesystem"
+                                    title="filesystem"
+                                    style="color: #337ab7 !important;"
+                                    rel="2">filesystem</a>
+                        
+                                <a data-sort="0347" 
+                                    href="/archive/?tag=quarto"
+                                    title="quarto"
+                                    style="color: #337ab7 !important;"
+                                    rel="2">quarto</a>
+                        
+                                <a data-sort="0347" 
+                                    href="/archive/?tag=regex"
+                                    title="regex"
+                                    style="color: #337ab7 !important;"
+                                    rel="2">regex</a>
+                    </div>
+
+                <br>
+
+                <b><fontsize="5">Leave a Comment</font><br>(注意：GitHub Accountが必要となります）</b>
+                
+                <script src="https://utteranc.es/client.js"
+                    repo="RyoNakagami/RyoNakagami.github.io"
+                    issue-term="url"
+                    theme="github-light"
+                    crossorigin="anonymous"
+                    async>Reduce unused JavaScript
+                
+                </script>
+
+
+            </div>  
+
+    <!-- Side Catalog Container -->
+        
+            <div class="
+                col-lg-1 col-lg-offset-0
+                visible-lg-block
+                sidebar-container
+                catalog-container">
+                <div class="side-catalog fixed" style="margin-top:3%">
+                    <hr class="hidden-sm hidden-xs">
+                    <h5>
+                        <a class="catalog-toggle" href="#">CONTENTS</a>
+                    </h5>
+                    <ul class="catalog-body"></ul>
+                </div>
+            </div>
+        
+    <!-- Sidebar Container -->
+            <!-- <div class="
+                col-lg-10 col-lg-offset-1
+                col-md-10 col-md-offset-1
+                sidebar-container row"> -->
+                <!-- 
+<hr>
+<h5>FRIENDS</h5>
+<ul class="list-inline">
+  
+  <li><a href="https://twitter.com/bluesky0804?ref_src=twsrc%5Egoogle%7Ctwcamp%5Eserp%7Ctwgr%5Eauthor">bluesky0804</a></li>
+  
+</ul>
+
+ -->
+            </div>
+        </div>
+    </div>
+</article>
+
+<!-- add support for mathjax by voleking-->
+
+  <script async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml.js" id="MathJax-script"></script>
+<script>
+  MathJax = {
+    tex: {
+      inlineMath: [['$','$'], ['\\(','\\)']],
+      displayMath: [['$$','$$'], ['\\[','\\]']],
+      processEscapes: true,
+      processEnvironments: true, // for pseudo
+      tags: "ams",
+      autoload: {
+        color: [],
+        colorV2: ['color']
+      },
+      packages: {'[+]': ['noerrors']}
+    },
+    chtml: {
+      matchFontHeight: false,
+      displayAlign: "left",
+      displayIndent: "2em"
+    },
+    options: {
+      renderActions: {
+        /* add a new named action to render <script type="math/tex"> */
+        find_script_mathtex: [10, function (doc) {
+          for (const node of document.querySelectorAll('script[type^="math/tex"]')) {
+            const display = !!node.type.match(/; *mode=display/);
+            const math = new doc.options.MathItem(node.textContent, doc.inputJax[0], display);
+            const text = document.createTextNode('');
+            node.parentNode.replaceChild(text, node);
+            math.start = {node: text, delim: '', n: 0};
+            math.end = {node: text, delim: '', n: 0};
+            doc.math.push(math);
+          }
+        }, '']
+      }
+    },
+    loader: {
+      load: ['[tex]/noerrors']
+    }
+  };
+</script>
+
+
+
+
+
+<!-- async load function -->
+<script>
+    function async(u, c) {
+      var d = document, t = 'script',
+          o = d.createElement(t),
+          s = d.getElementsByTagName(t)[0];
+      o.src = u;
+      if (c) { o.addEventListener('load', function (e) { c(null, e); }, false); }
+      s.parentNode.insertBefore(o, s);
+    }
+</script>
+<!-- anchor-js, Doc:http://bryanbraun.github.io/anchorjs/ -->
+<script>
+    async("//cdnjs.cloudflare.com/ajax/libs/anchor-js/1.1.1/anchor.min.js",function(){
+        anchors.options = {
+          visible: 'hover',
+          placement: 'right',
+          // icon: '#'
+        };
+        anchors.add().remove('.intro-header h1').remove('.subheading').remove('.sidebar-container h5');
+    })
+</script>
+<style>
+    /* place left on bigger screen */
+    @media all and (min-width: 800px) {
+        .anchorjs-link{
+            position: absolute;
+            left: -0.75em;
+            font-size: 1.1em;
+            margin-top : -0.1em;
+        }
+    }
+</style>
+
+
+<body>
+    <!-- enable mermaid language on markdown post -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/mermaid/10.6.1/mermaid.min.js"></script>
+<script>
+   mermaid.initialize({
+       startOnLoad:true,
+       theme: 'default'
+   });
+   window.mermaid.init(undefined, document.querySelectorAll('.language-mermaid'));
+</script>
+
+</body>
+
+    <script>
+    
+    var elements = document.querySelectorAll('p');
+    Array.prototype.forEach.call(elements, function(el, i){
+        if(el.innerHTML=='[expand]') {
+            var parentcontent = el.parentNode.innerHTML.replace('<p>[expand]</p>','<div class="expand" style="display: none; height: 0; overflow: hidden;">').replace('<p>[/expand]</p>','</div>');
+            el.parentNode.innerHTML = parentcontent;
+        }
+    });
+
+    var elements = document.querySelectorAll('div.expand');
+    Array.prototype.forEach.call(elements, function(el, i){
+        el.previousElementSibling.innerHTML = el.previousElementSibling.innerHTML + '<span>..&nbsp; <a href="#" style="cursor: pointer;" onclick="this.parentNode.parentNode.nextElementSibling.style.display = \'block\'; this.parentNode.parentNode.nextElementSibling.style.height = \'auto\'; this.parentNode.style.display = \'none\';">read&nbsp;more&nbsp;&rarr;</a></span>';
+    });
+
+</script>
+
+    <!-- Footer -->
+<footer>
+    <div class="container">
+        <div class="row">
+            <!--<div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1"> -->
+                <!-- SNS Link -->
+            
+
+
+<ul class="list-inline text-center">
+
+
+  
+  
+  
+  
+  <li>
+    <a target="_blank" href="https://github.com/RyoNakagami">
+      <span class="fa-stack fa-lg">
+        <i class="fa fa-circle fa-stack-2x"></i>
+        <i class="fa fa-github fa-stack-1x fa-inverse"></i>
+      </span>
+    </a>
+  </li>
+  
+  
+</ul>
+
+            
+            <p class="copyright text-muted">
+                Copyright &copy; Ryo's Tech Blog 2025
+                <br>
+                Powered by <a href="https://ryonakagami.github.io">Ryo's Tech Blog</a> |
+                <iframe style="margin-left: 2px; margin-bottom:-5px;" frameborder="0" scrolling="0" width="100px"
+                    height="20px"
+                    title="RyoNakagami.github.io github stars"
+                    src="https://ghbtns.com/github-btn.html?user=RyoNakagami&repo=RyoNakagami.github.io&type=star&count=true">
+                </iframe>
+            </p>
+            <!--</div> -->
+        </div>
+    </div>
+</footer>
+
+<!-- jQuery -->
+<script src="/js/jquery.min.js "></script>
+
+<!-- Bootstrap Core JavaScript -->
+<!-- Currently, only navbar scroll-down effect at desktop still depends on this -->
+<script src="/js/bootstrap.min.js "></script>
+
+<!-- Custom Theme JavaScript -->
+<script src="/js/ryo-blog.min.js "></script>
+
+<!-- Simple Jekyll Search -->
+<script src="/js/simple-jekyll-search.min.js"></script>
+
+<!-- Service Worker -->
+
+<script src="/js/snackbar.js "></script>
+<script src="/js/sw-registration.js "></script>
+
+
+<!-- async load function -->
+<script>
+    function async(u, c) {
+        var d = document, t = 'script',
+            o = d.createElement(t),
+            s = d.getElementsByTagName(t)[0];
+        o.src = u;
+        if (c) { o.addEventListener('load', function (e) { c(null, e); }, false); }
+        s.parentNode.insertBefore(o, s);
+    }
+</script>
+
+<!--
+     Because of the native support for backtick-style fenced code blocks
+     right within the Markdown is landed in Github Pages,
+     From V1.6, There is no need for Highlight.js,
+     so Huxblog drops it officially.
+
+     - https://github.com/blog/2100-github-pages-now-faster-and-simpler-with-jekyll-3-0
+     - https://help.github.com/articles/creating-and-highlighting-code-blocks/
+     - https://github.com/jneen/rouge/wiki/list-of-supported-languages-and-lexers
+-->
+<!--
+    <script>
+        async("http://cdn.bootcss.com/highlight.js/8.6/highlight.min.js", function(){
+            hljs.initHighlightingOnLoad();
+        })
+    </script>
+    <link href="http://cdn.bootcss.com/highlight.js/8.6/styles/github.min.css" rel="stylesheet">
+-->
+
+
+
+
+
+
+
+<!--fastClick.js -->
+<script>
+    async("//cdnjs.cloudflare.com/ajax/libs/fastclick/1.0.6/fastclick.min.js", function () {
+        var $nav = document.querySelector("nav");
+        if ($nav) FastClick.attach($nav);
+    })
+</script>
+
+
+<!-- Global site tag (gtag.js) - Google Analytics -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-LVL413SV09"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+  gtag('config', 'G-LVL413SV09');
+</script>
+
+
+
+<!-- Side Catalog -->
+
+<script type="text/javascript">
+    function generateCatalog(selector) {
+
+        // interop with multilangual 
+        if ('' == 'true') {
+            _containerSelector = 'div.post-container.active'
+        } else {
+            _containerSelector = 'div.post-container'
+        }
+
+        // init
+        var P = $(_containerSelector), a, n, t, l, i, c;
+        a = P.find('h1,h2,h3,h4,h5,h6');
+
+        // clean
+        $(selector).html('')
+
+        // appending
+        a.each(function () {
+            n = $(this).prop('tagName').toLowerCase();
+            i = "#" + $(this).prop('id');
+            t = $(this).text();
+            c = $('<a href="' + i + '" rel="nofollow">' + t + '</a>');
+            l = $('<li class="' + n + '_nav"></li>').append(c);
+            $(selector).append(l);
+        });
+        return true;
+    }
+
+    generateCatalog(".catalog-body");
+
+    // toggle side catalog
+    $(".catalog-toggle").click((function (e) {
+        e.preventDefault();
+        $('.side-catalog').toggleClass("fold")
+    }))
+
+    /*
+     * Doc: https://github.com/davist11/jQuery-One-Page-Nav
+     * Fork by Hux to support padding
+     */
+    async("/js/jquery.nav.js", function () {
+        $('.catalog-body').onePageNav({
+            currentClass: "active",
+            changeHash: !1,
+            easing: "swing",
+            filter: "",
+            scrollSpeed: 700,
+            scrollOffset: 0,
+            scrollThreshold: .2,
+            begin: null,
+            end: null,
+            scrollChange: null,
+            padding: 80
+        });
+    });
+</script>
+
+
+
+<!-- Multi-Lingual -->
+
+
+<!-- Simple Jekyll Search -->
+<script>
+    // https://stackoverflow.com/questions/1912501/unescape-html-entities-in-javascript
+    function htmlDecode(input) {
+        var e = document.createElement('textarea');
+        e.innerHTML = input;
+        // handle case of empty input
+        return e.childNodes.length === 0 ? "" : e.childNodes[0].nodeValue;
+    }
+
+    SimpleJekyllSearch({
+        searchInput: document.getElementById('search-input'),
+        resultsContainer: document.getElementById('search-results'),
+        json: '/search.json',
+        searchResultTemplate: '<div class="post-preview item"><a href="{url}"><h2 class="post-title">{title}</h2><h3 class="post-subtitle">{subtitle}</h3><hr></a></div>',
+        noResultsText: 'No results',
+        limit: 50,
+        fuzzy: false,
+        // a hack to get escaped subtitle unescaped. for some reason, 
+        // post.subtitle w/o escape filter nuke entire search.
+        templateMiddleware: function (prop, value, template) {
+            if (prop === 'subtitle' || prop === 'title') {
+                if (value.indexOf("code")) {
+                    return htmlDecode(value);
+                } else {
+                    return value;
+                }
+            }
+        }
+    });
+
+    $(document).ready(function () {
+        var $searchPage = $('.search-page');
+        var $searchOpen = $('.search-icon');
+        var $searchClose = $('.search-icon-close');
+        var $searchInput = $('#search-input');
+        var $body = $('body');
+
+        $searchOpen.on('click', function (e) {
+            e.preventDefault();
+            $searchPage.toggleClass('search-active');
+            var prevClasses = $body.attr('class') || '';
+            setTimeout(function () {
+                $body.addClass('no-scroll');
+            }, 400)
+
+            if ($searchPage.hasClass('search-active')) {
+                $searchClose.on('click', function (e) {
+                    e.preventDefault();
+                    $searchPage.removeClass('search-active');
+                    $body.attr('class', prevClasses);  // from closure 
+                });
+                $searchInput.focus();
+            }
+        });
+    });
+</script>
+
+
+
+<!-- Image to Github 
+<img src="/img/icon_wechat.png" width="0" height="0" />
+<-- Migrate from head to bottom, no longer block render and still work -->
+<script>
+    
+    var elements = document.querySelectorAll('p');
+    Array.prototype.forEach.call(elements, function(el, i){
+        if(el.innerHTML=='[expand]') {
+            var parentcontent = el.parentNode.innerHTML.replace('<p>[expand]</p>','<div class="expand" style="display: none; height: 0; overflow: hidden;">').replace('<p>[/expand]</p>','</div>');
+            el.parentNode.innerHTML = parentcontent;
+        }
+    });
+
+    var elements = document.querySelectorAll('div.expand');
+    Array.prototype.forEach.call(elements, function(el, i){
+        el.previousElementSibling.innerHTML = el.previousElementSibling.innerHTML + '<span>..&nbsp; <a href="#" style="cursor: pointer;" onclick="this.parentNode.parentNode.nextElementSibling.style.display = \'block\'; this.parentNode.parentNode.nextElementSibling.style.height = \'auto\'; this.parentNode.style.display = \'none\';">read&nbsp;more&nbsp;&rarr;</a></span>';
+    });
+
+</script>
+
+</body>
+</html>

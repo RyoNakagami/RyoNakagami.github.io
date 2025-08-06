@@ -1,0 +1,2080 @@
+<!DOCTYPE html>
+<html lang="ja">
+
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="google-site-verification" content="gSMaswRY9iRfG4QaQrx6aj481bgr503qEZh-QPsMYNU" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+    <meta name="description" content="元経済学徒, 現在どっかでデータサイエンティストもどきやってる人間の勉強日記">
+    <meta name="keywords"  content="Statistics, Economics, Econometrics, Python, C, Shell, Linux, Data scientist">
+    <meta name="theme-color" content="#000000">
+    
+    <!-- Open Graph -->
+    <meta property="og:title" content="シェルスクリプトと前処理 Part 2 - Ryo's Tech Blog">
+    
+    <meta property="og:type" content="article">
+    <meta property="og:description" content="
+  
+    
+      概要
+       
+    
+  
+  
+    
+      目的
+      シェルコマンドを用いたデータの取得
+    
+    
+      実行環境
+      Ubuntu 20.04
+    
+    
+      参考
+      Data Science at the Command Line
+    
+  
+
+
+">
+    
+    <meta property="article:published_time" content="2020-12-25T00:00:00Z">
+    
+    
+    <meta property="article:author" content="Ryo">
+    
+    
+    <meta property="article:tag" content="前処理">
+    
+    <meta property="article:tag" content="Shell">
+    
+    
+    <meta property="og:image" content="https://ryonakagami.github.io/img/avatar_rio_cat.jpg">
+    <meta property="og:url" content="https://ryonakagami.github.io/2020/12/25/datascience-in-commandline-part2/">
+    <meta property="og:site_name" content="Ryo's Tech Blog">
+    
+    <title>シェルスクリプトと前処理 Part 2 - Ryo's Tech Blog</title>
+
+    <!-- Web App Manifest -->
+    <link rel="manifest" href="/pwa/manifest.json">
+
+    <!-- Favicon -->
+    <link rel="shortcut icon" href="/img/favicon.ico">
+    
+    <!-- Canonical URL -->
+    <link rel="canonical" href="https://ryonakagami.github.io/2020/12/25/datascience-in-commandline-part2/">
+
+    <!-- Bootstrap Core CSS -->
+    <link rel="stylesheet" href="/css/bootstrap.min.css">
+
+    <!-- Custom CSS -->
+    <link rel="stylesheet" href="/css/ryo-blog.min.css">
+
+    <!-- Custom Fonts -->
+    <!-- <link href="http://maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css" rel="stylesheet" type="text/css"> -->
+    <!-- https://stackoverflow.com/questions/45983301/google-pagespeed-eliminate-render-blocking-resources-above-the-fold-caused-fro -->
+    <!--link href="//cdnjs.cloudflare.com/ajax/libs/font-awesome/4.6.3/css/font-awesome.min.css" rel="stylesheet" type="text/css"-->
+    <!--<link href="https://fonts.googleapis.com/earlyaccess/notosansjapanese.css" rel="stylesheet" type="text/css" media="print" onload="this.media='all'" > -->
+    <link href="https://fonts.googleapis.com/earlyaccess/notosansjapanese.css" rel="preload" type="text/css" media="print" onload="this.media='all'" >
+
+
+    <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
+    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+    <!--[if lt IE 9]>
+        <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+        <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
+    <![endif]-->
+
+    <!-- ga & ba script hoook -->
+    <script></script>
+</head>
+
+
+<!-- hack iOS CSS :active style -->
+<body ontouchstart="">
+
+    <!-- Navigation -->
+
+<nav class="navbar navbar-default navbar-custom navbar-fixed-top invert">
+    
+        <div class="container-fluid">
+            <!-- Brand and toggle get grouped for better mobile display -->
+            <div class="navbar-header page-scroll">
+                <button type="button" class="navbar-toggle">
+                    <span class="sr-only">Toggle navigation</span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
+                <a class="navbar-brand" href="/">Ryo's Tech Blog</a>
+            </div>
+
+            <!-- Collect the nav links, forms, and other content for toggling -->
+            <div id="huxblog_navbar">
+                <div class="navbar-collapse">
+                    <ul class="nav navbar-nav navbar-left">
+                                                <li>
+                            <a href="https://ryonakagami.github.io/statistics-for-regression-monkey/">Statistics for
+                                Regression Monkeys</a>
+                        </li>
+                        <li>
+                            <a href="https://ohgoshgit.github.io/">OhGoshGit!?!</a>
+                        </li>
+                        <!-- <li>
+                            <a><button onclick="mainDropDown()" style="border-color: rgba(70, 83, 111, 0.989); background-color: rgba(70, 83, 111, 0.989)">Dropdown</button></a> 
+                            <div id="myDropdown" class="dropdown-content">
+                              <a href="#" onclick="subMenu(this)">A</a>
+                              <div class="sub-menu-item" id="subMenu1">
+                              <a href="#">A.1</a>
+                              </div>
+                              <a href="#" onclick="subMenu(this)">B</a>
+                              <div class="sub-menu-item" id="subMenu2">
+                              <a href="#">B.1</a>
+                              </div>
+                              <a href="#">C</a>
+                              <a href="#">D</a>
+                              <a href="#">E</a>
+                              <a href="#">F</a>
+                              <a href="#">G</a>
+                            </div>
+                        </li> -->
+                    </ul>
+                    </ul>
+                    <ul class="nav navbar-nav navbar-right">
+                        
+                        
+                        
+                        
+                        <li>
+                            <a href="/about/">About</a>
+                        </li>
+                        
+                        
+                        
+                        <li>
+                            <a href="/archive/">Tag Search</a>
+                        </li>
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        <!--about fa-search see https://stackoverflow.com/questions/41950677/how-to-make-my-search-icon-fixed-->
+                        <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css"
+                            rel="stylesheet" />
+                        <li class="search-icon">
+                            <a href="javascript:void(0)" aria-label="Search" target="_blank">
+                                <i class="fa fa-search"></i>
+                            </a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+            <!-- /.navbar-collapse -->
+        </div>
+        <!-- /.container -->
+    </nav>
+
+    <script>
+        // Drop Bootstarp low-performance Navbar
+        // Use customize navbar with high-quality material design animation
+        // in high-perf jank-free CSS3 implementation
+        var $body = document.body;
+        var $toggle = document.querySelector('.navbar-toggle');
+        var $navbar = document.querySelector('#huxblog_navbar');
+        var $collapse = document.querySelector('.navbar-collapse');
+
+        var __HuxNav__ = {
+            close: function () {
+                $navbar.className = " ";
+                // wait until animation end.
+                setTimeout(function () {
+                    // prevent frequently toggle
+                    if ($navbar.className.indexOf('in') < 0) {
+                        $collapse.style.height = "0px"
+                    }
+                }, 400)
+            },
+            open: function () {
+                $collapse.style.height = "auto"
+                $navbar.className += " in";
+            }
+        }
+
+        // Bind Event
+        $toggle.addEventListener('click', function (e) {
+            if ($navbar.className.indexOf('in') > 0) {
+                __HuxNav__.close()
+            } else {
+                __HuxNav__.open()
+            }
+        })
+
+        /**
+         * Since Fastclick is used to delegate 'touchstart' globally
+         * to hack 300ms delay in iOS by performing a fake 'click',
+         * Using 'e.stopPropagation' to stop 'touchstart' event from 
+         * $toggle/$collapse will break global delegation.
+         * 
+         * Instead, we use a 'e.target' filter to prevent handler
+         * added to document close HuxNav.  
+         *
+         * Also, we use 'click' instead of 'touchstart' as compromise
+         */
+        document.addEventListener('click', function (e) {
+            if (e.target == $toggle) return;
+            if (e.target.className == 'icon-bar') return;
+            __HuxNav__.close();
+        })
+    </script>
+
+    <!-- Search -->
+<div class="search-page">
+  <div class="search-icon-close-container">
+    <span class="search-icon-close">
+      <i class="fa fa-chevron-down"></i>
+    </span>
+  </div>
+  <div class="search-main container">
+    <div class="row">
+      <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+        <form></form>
+        <input type="text" id="search-input" placeholder="$ grep...">
+        </form>
+        <div id="search-results" class="mini-post-list"></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+    <!-- Image to hack wechat -->
+<!-- <img src="/img/icon_wechat.png" width="0" height="0"> -->
+<!-- <img src="/img/home-bg.jpg" width="0" height="0"> -->
+
+<!-- Post Header -->
+
+
+
+<style type="text/css">
+    header.intro-header{
+        position: relative;
+        background-image: url('/img/home-bg.jpg');
+        background: ;
+    }
+
+    
+    header.intro-header .header-mask{
+        width: 100%;
+        height: 100%;
+        position: absolute;
+        background: rgba(0,0,0, 0.0);
+    }
+    
+</style>
+
+
+
+
+<header class="intro-header style-text" >
+
+    <div class="header-mask"></div>
+    
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+                <div class="post-heading">
+                    <div class="tags">
+                        
+                        <a class="tag" href="/archive/?tag=%E5%89%8D%E5%87%A6%E7%90%86" title="前処理">前処理</a>
+                        
+                        <a class="tag" href="/archive/?tag=Shell" title="Shell">Shell</a>
+                        
+                    </div>
+                    <h1>シェルスクリプトと前処理 Part 2</h1>
+                    
+                    <h2 class="subheading">シェルコマンドを用いたデータの取得</h2>
+                    <p>
+                        公開日: 2020-12-25
+                        
+                        
+                    </p>
+                </div>
+            </div>
+        </div>
+    </div>
+</header>
+
+
+
+
+
+
+
+<!-- Post Content -->
+<article>
+    <div class="container">
+        <div class="row">
+
+    <!-- Post Container -->
+         <div class="
+                col-lg-8 col-lg-offset-2
+                col-md-10 col-md-offset-1
+                post-container">
+
+                <!-- Multi-Lingual -->
+                
+
+				<table>
+  <thead>
+    <tr>
+      <th>概要</th>
+      <th> </th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>目的</td>
+      <td>シェルコマンドを用いたデータの取得</td>
+    </tr>
+    <tr>
+      <td>実行環境</td>
+      <td>Ubuntu 20.04</td>
+    </tr>
+    <tr>
+      <td>参考</td>
+      <td><a href="https://www.datascienceatthecommandline.com/1e/chapter-3-obtaining-data.html">Data Science at the Command Line</a></td>
+    </tr>
+  </tbody>
+</table>
+
+<!-- START doctoc generated TOC please keep comment here to allow auto update -->
+<!-- DON'T EDIT THIS SECTION, INSTEAD RE-RUN doctoc TO UPDATE -->
+
+<ul>
+  <li><a href="#1--%E3%81%93%E3%81%AE%E3%83%8E%E3%83%BC%E3%83%88%E3%81%AE%E3%82%B9%E3%82%B3%E3%83%BC%E3%83%97">1.  このノートのスコープ</a>
+    <ul>
+      <li><a href="#%E5%88%A9%E7%94%A8%E3%81%99%E3%82%8B%E3%83%87%E3%83%BC%E3%82%BF%E3%81%AE%E6%BA%96%E5%82%99">利用するデータの準備</a></li>
+    </ul>
+  </li>
+  <li><a href="#2-decompressing-files">2. Decompressing Files</a>
+    <ul>
+      <li><a href="#%E3%83%95%E3%82%A1%E3%82%A4%E3%83%AB%E3%81%AE%E5%9C%A7%E7%B8%AE%E3%83%BB%E5%B1%95%E9%96%8B%E3%82%B3%E3%83%9E%E3%83%B3%E3%83%89">ファイルの圧縮・展開コマンド</a></li>
+      <li><a href="#zip%E3%82%B3%E3%83%9E%E3%83%B3%E3%83%89">zipコマンド</a>
+        <ul>
+          <li><a href="#syntax%E3%81%A8%E3%82%AA%E3%83%97%E3%82%B7%E3%83%A7%E3%83%B3">Syntaxとオプション</a></li>
+        </ul>
+      </li>
+      <li><a href="#gzip%E3%82%B3%E3%83%9E%E3%83%B3%E3%83%89">gzipコマンド</a>
+        <ul>
+          <li><a href="#syntax%E3%81%A8%E3%82%AA%E3%83%97%E3%82%B7%E3%83%A7%E3%83%B3-1">Syntaxとオプション</a></li>
+        </ul>
+      </li>
+      <li><a href="#bzip2%E3%82%B3%E3%83%9E%E3%83%B3%E3%83%89">bzip2コマンド</a>
+        <ul>
+          <li><a href="#syntax%E3%81%A8%E3%82%AA%E3%83%97%E3%82%B7%E3%83%A7%E3%83%B3-2">Syntaxとオプション</a></li>
+        </ul>
+      </li>
+      <li><a href="#xz%E3%82%B3%E3%83%9E%E3%83%B3%E3%83%89">xzコマンド</a>
+        <ul>
+          <li><a href="#syntax%E3%81%A8%E3%82%AA%E3%83%97%E3%82%B7%E3%83%A7%E3%83%B3-3">Syntaxとオプション</a></li>
+        </ul>
+      </li>
+      <li><a href="#%E3%82%A2%E3%83%BC%E3%82%AB%E3%82%A4%E3%83%96%E3%81%AE%E4%BD%9C%E6%88%90%E3%81%A8%E5%B1%95%E9%96%8B">アーカイブの作成と展開</a>
+        <ul>
+          <li><a href="#syntax%E3%81%A8%E3%82%AA%E3%83%97%E3%82%B7%E3%83%A7%E3%83%B3-4">Syntaxとオプション</a></li>
+        </ul>
+      </li>
+    </ul>
+  </li>
+  <li><a href="#3-converting-microsoft-excel-spreadsheets">3. Converting Microsoft Excel Spreadsheets</a>
+    <ul>
+      <li><a href="#%E5%89%8D%E6%8F%90%E6%9D%A1%E4%BB%B6csvkit%E3%81%AE%E3%82%A4%E3%83%B3%E3%82%B9%E3%83%88%E3%83%BC%E3%83%AB">前提条件：<code class="language-plaintext highlighter-rouge">csvkit</code>のインストール</a></li>
+      <li><a href="#xlsx%E3%83%95%E3%82%A1%E3%82%A4%E3%83%AB%E3%82%92csv%E3%83%95%E3%82%A1%E3%82%A4%E3%83%AB%E3%81%AB%E5%A4%89%E6%8F%9B%E3%81%99%E3%82%8B">xlsxファイルをcsvファイルに変換する</a></li>
+    </ul>
+  </li>
+  <li><a href="#4-querying-relational-databases">4. Querying Relational Databases</a>
+    <ul>
+      <li><a href="#sql2csv%E3%81%AEsyntax">sql2csvのSyntax</a></li>
+      <li><a href="#examples">Examples</a></li>
+    </ul>
+  </li>
+  <li><a href="#5-downloading-from-the-internet">5. Downloading from the Internet</a>
+    <ul>
+      <li><a href="#curl%E3%82%B3%E3%83%9E%E3%83%B3%E3%83%89%E3%81%AE%E4%B8%BB%E3%81%AA%E3%82%AA%E3%83%97%E3%82%B7%E3%83%A7%E3%83%B3">curlコマンドの主なオプション</a></li>
+      <li><a href="#%E5%AE%9F%E8%A1%8C%E9%80%B2%E6%8D%97%E7%8A%B6%E6%B3%81%E3%81%AE%E8%A1%A8%E7%A4%BA%E3%81%A8-s">実行進捗状況の表示と<code class="language-plaintext highlighter-rouge">-s</code></a></li>
+      <li><a href="#curl%E5%87%BA%E5%8A%9B%E7%B5%90%E6%9E%9C%E3%82%92%E3%83%95%E3%82%A1%E3%82%A4%E3%83%AB%E3%81%AB%E4%BF%9D%E5%AD%98%E3%81%99%E3%82%8B">curl出力結果をファイルに保存する</a></li>
+      <li><a href="#curl%E3%82%B3%E3%83%9E%E3%83%B3%E3%83%89%E3%82%92%E7%94%A8%E3%81%84%E3%81%9F%E3%83%AC%E3%82%AF%E3%83%81%E3%83%A3%E3%83%BC%E3%83%8E%E3%83%BC%E3%83%88%E3%81%AE%E3%82%A4%E3%83%B3%E3%82%B9%E3%83%88%E3%83%BC%E3%83%AB">curlコマンドを用いたレクチャーノートのインストール</a></li>
+    </ul>
+  </li>
+  <li><a href="#appendix-%E3%83%91%E3%82%A4%E3%83%97">APPENDIX: パイプ</a></li>
+  <li><a href="#appendix-%E3%83%AA%E3%83%80%E3%82%A4%E3%83%AC%E3%82%AF%E3%83%88">APPENDIX: リダイレクト</a></li>
+</ul>
+
+<!-- END doctoc generated TOC please keep comment here to allow auto update -->
+
+<h2 id="1--このノートのスコープ">1.  このノートのスコープ</h2>
+
+<ul>
+  <li>Obtain data from the Internet</li>
+  <li>Query databases</li>
+  <li>Connect to Web APIs</li>
+  <li>Decompress files</li>
+  <li>Convert Microsoft Excel spreadsheets into usable data</li>
+</ul>
+
+<h3 id="利用するデータの準備">利用するデータの準備</h3>
+
+<p>docker imageを立ち上げた後、home directory直下にレポジトリーから関連レポジトリーをgit cloneします。</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
+2
+3
+4
+5
+6
+</pre></td><td class="rouge-code"><pre>$ git clone --no-checkout https://github.com/jeroenjanssens/data-science-at-the-command-line
+$ cd ./data-science-at-the-command-line
+$ git config core.sparsecheckout true
+$ echo book/1e/data/ch03/data/ &gt; .git/info/sparse-checkout
+$ echo book/1e/data/.data/ &gt;&gt; .git/info/sparse-checkout
+$ git read-tree -m -u HEAD
+</pre></td></tr></tbody></table></code></pre></div></div>
+
+<h2 id="2-decompressing-files">2. Decompressing Files</h2>
+
+<p>バイトサイズが大きいファイルを取扱う際、ファイルを圧縮（ディレクトリの場合はアーカイブ）するケースが多いです。そうすることで、記憶領域の節約やfile transfer速度の向上が見込めます。同じ値を繰り返し保有しているファイル（例：the words in a text file や the keys in a JSON file）は圧縮に適しているとされます。圧縮でよく使用される拡張子は<code class="language-plaintext highlighter-rouge">tar.gz</code>, <code class="language-plaintext highlighter-rouge">.zip</code>, や <code class="language-plaintext highlighter-rouge">.rar</code>です。</p>
+
+<h3 id="ファイルの圧縮展開コマンド">ファイルの圧縮・展開コマンド</h3>
+
+<p>Linuxではよく使われるファイルの圧縮形式として４種類あります。</p>
+
+<table>
+  <thead>
+    <tr>
+      <th>拡張子</th>
+      <th>圧縮コマンド</th>
+      <th>展開コマンド</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td><code class="language-plaintext highlighter-rouge">.zip</code></td>
+      <td><code class="language-plaintext highlighter-rouge">zip</code></td>
+      <td><code class="language-plaintext highlighter-rouge">unzip</code></td>
+    </tr>
+    <tr>
+      <td><code class="language-plaintext highlighter-rouge">.gz</code></td>
+      <td><code class="language-plaintext highlighter-rouge">gzip</code></td>
+      <td><code class="language-plaintext highlighter-rouge">gunzip</code></td>
+    </tr>
+    <tr>
+      <td><code class="language-plaintext highlighter-rouge">.bz2</code></td>
+      <td><code class="language-plaintext highlighter-rouge">bzip2</code></td>
+      <td><code class="language-plaintext highlighter-rouge">bunzip2</code></td>
+    </tr>
+    <tr>
+      <td><code class="language-plaintext highlighter-rouge">.xz</code></td>
+      <td><code class="language-plaintext highlighter-rouge">xz</code></td>
+      <td><code class="language-plaintext highlighter-rouge">unxz</code></td>
+    </tr>
+  </tbody>
+</table>
+
+<h3 id="zipコマンド">zipコマンド</h3>
+
+<p>zipはWindows環境で特にポピュラーな圧縮形式で、複数のファイルを圧縮して1つのファイルにすることができます。圧縮スピードや展開スピード、圧縮率はgzipに負けます。</p>
+
+<h4 id="syntaxとオプション">Syntaxとオプション</h4>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
+</pre></td><td class="rouge-code"><pre>$ zip [option] [圧縮後のファイル名] [ファイル名]
+</pre></td></tr></tbody></table></code></pre></div></div>
+
+<table>
+  <thead>
+    <tr>
+      <th>オプション</th>
+      <th>説明</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td><code class="language-plaintext highlighter-rouge">-r</code></td>
+      <td>指定したディレクトリを再帰的に圧縮する</td>
+    </tr>
+    <tr>
+      <td><code class="language-plaintext highlighter-rouge">-x ファイル名</code></td>
+      <td>アーカイブに含めないファイルを指定する</td>
+    </tr>
+    <tr>
+      <td><code class="language-plaintext highlighter-rouge">-e</code></td>
+      <td>暗号化したアーカイブを作成し展開時に必要なパスワードを設定する</td>
+    </tr>
+    <tr>
+      <td><code class="language-plaintext highlighter-rouge">-j</code></td>
+      <td>ディレクトリ名なしで格納する</td>
+    </tr>
+  </tbody>
+</table>
+
+<p>解凍先のディレクトリを指定する場合は、下記のようにします。</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
+</pre></td><td class="rouge-code"><pre>$ unzip hoge.zip -d foo
+</pre></td></tr></tbody></table></code></pre></div></div>
+
+<h3 id="gzipコマンド">gzipコマンド</h3>
+
+<p>複数のファイルをまとめるという“アーカイブ機能”はなく、1つ1つのファイルに対して機能します。gzipコマンドで圧縮されたファイルには、元のファイル名に拡張子「.gz」が追加されます。</p>
+
+<h4 id="syntaxとオプション-1">Syntaxとオプション</h4>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
+</pre></td><td class="rouge-code"><pre>$ gzip [option] [ファイル名]
+</pre></td></tr></tbody></table></code></pre></div></div>
+
+<table>
+  <thead>
+    <tr>
+      <th>オプション</th>
+      <th>説明</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td><code class="language-plaintext highlighter-rouge">-1～-9</code></td>
+      <td>圧縮レベル（「-1」が低圧縮率で高速、「-9」は高圧縮率だが低速）</td>
+    </tr>
+    <tr>
+      <td><code class="language-plaintext highlighter-rouge">-c</code></td>
+      <td>結果をファイルではなく標準出力へ出力する（主にパイプで別コマンドに渡す際に使用）</td>
+    </tr>
+    <tr>
+      <td><code class="language-plaintext highlighter-rouge">-d</code></td>
+      <td>ファイルを展開する（gunzipのデフォルト）</td>
+    </tr>
+    <tr>
+      <td><code class="language-plaintext highlighter-rouge">-f</code></td>
+      <td>すでに圧縮ファイルが存在しても上書きする</td>
+    </tr>
+    <tr>
+      <td><code class="language-plaintext highlighter-rouge">-k</code></td>
+      <td>圧縮後にもとのファイルを削除しない（圧縮前／伸張前のファイルを残す）</td>
+    </tr>
+    <tr>
+      <td><code class="language-plaintext highlighter-rouge">-r</code></td>
+      <td>ディレクトリを再帰的に処理する</td>
+    </tr>
+    <tr>
+      <td><code class="language-plaintext highlighter-rouge">-t</code></td>
+      <td>圧縮ファイルをテストする</td>
+    </tr>
+  </tbody>
+</table>
+
+<h3 id="bzip2コマンド">bzip2コマンド</h3>
+
+<p>gzip/gunzipコマンド同様、1つ1つのファイルに対して機能します。複数のファイルをまとめたい場合は、tarコマンドと組み合わせる手法が一般的です。拡張子には<code class="language-plaintext highlighter-rouge">.bz2</code>を使用します。gzipより新しく、圧縮率も高い形式です。ただし、<code class="language-plaintext highlighter-rouge">xz</code>コマンドのほうが圧縮率は高い。</p>
+
+<h4 id="syntaxとオプション-2">Syntaxとオプション</h4>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
+</pre></td><td class="rouge-code"><pre>$ bzip2 [option] [ファイル名]
+</pre></td></tr></tbody></table></code></pre></div></div>
+
+<table>
+  <thead>
+    <tr>
+      <th>オプション</th>
+      <th>説明</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td><code class="language-plaintext highlighter-rouge">-1～-9</code></td>
+      <td>圧縮レベル（「-1」が低圧縮率で高速、「-9」は高圧縮率だが低速）</td>
+    </tr>
+    <tr>
+      <td><code class="language-plaintext highlighter-rouge">-c</code></td>
+      <td>結果をファイルではなく標準出力へ出力する（主にパイプで別コマンドに渡す際に使用）</td>
+    </tr>
+    <tr>
+      <td><code class="language-plaintext highlighter-rouge">-d</code></td>
+      <td>ファイルを展開する（bunzip2のデフォルト）</td>
+    </tr>
+    <tr>
+      <td><code class="language-plaintext highlighter-rouge">-f</code></td>
+      <td>すでに圧縮ファイルが存在しても上書きする</td>
+    </tr>
+    <tr>
+      <td><code class="language-plaintext highlighter-rouge">-k</code></td>
+      <td>圧縮後にもとのファイルを削除しない（圧縮前／伸張前のファイルを残す）</td>
+    </tr>
+    <tr>
+      <td><code class="language-plaintext highlighter-rouge">-t</code></td>
+      <td>圧縮ファイルをテストする</td>
+    </tr>
+  </tbody>
+</table>
+
+<h3 id="xzコマンド">xzコマンド</h3>
+
+<p>gzipコマンド、gunzipコマンド同様、1つ1つのファイルに対して機能します。複数のファイルをまとめたい場合は、tarコマンドと組み合わせる手法が一般的です。</p>
+
+<h4 id="syntaxとオプション-3">Syntaxとオプション</h4>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
+</pre></td><td class="rouge-code"><pre>$ xz [option] [ファイル名]
+</pre></td></tr></tbody></table></code></pre></div></div>
+
+<table>
+  <thead>
+    <tr>
+      <th>オプション</th>
+      <th>説明</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td><code class="language-plaintext highlighter-rouge">-0～-9</code></td>
+      <td>圧縮レベル（「-0」が低圧縮率で高速、「-9」は高圧縮率だが低速）</td>
+    </tr>
+    <tr>
+      <td><code class="language-plaintext highlighter-rouge">-c</code></td>
+      <td>結果をファイルではなく標準出力へ出力する（主にパイプで別コマンドに渡す際に使用）</td>
+    </tr>
+    <tr>
+      <td><code class="language-plaintext highlighter-rouge">-d</code></td>
+      <td>ファイルを展開する（unxzのデフォルト）</td>
+    </tr>
+    <tr>
+      <td><code class="language-plaintext highlighter-rouge">-f</code></td>
+      <td>すでに圧縮ファイルが存在しても上書きする</td>
+    </tr>
+    <tr>
+      <td><code class="language-plaintext highlighter-rouge">-k</code></td>
+      <td>圧縮後にもとのファイルを削除しない（圧縮前／伸張前のファイルを残す）</td>
+    </tr>
+    <tr>
+      <td><code class="language-plaintext highlighter-rouge">-t</code></td>
+      <td>圧縮ファイルをテストする</td>
+    </tr>
+    <tr>
+      <td><code class="language-plaintext highlighter-rouge">-l</code></td>
+      <td>圧縮ファイル内のファイル一覧を表示する</td>
+    </tr>
+  </tbody>
+</table>
+
+<h3 id="アーカイブの作成と展開">アーカイブの作成と展開</h3>
+
+<p>ディレクトリを圧縮する場合は、予め複数のファイルを一つのファイルにまとめたアーカイブを作成し、そのアーカイブファイルを圧縮します。アーカイブの管理には<code class="language-plaintext highlighter-rouge">tar</code>コマンドを使います。</p>
+
+<h4 id="syntaxとオプション-4">Syntaxとオプション</h4>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
+</pre></td><td class="rouge-code"><pre>$ tar [option] [ファイル名] [ディレクトリ]
+</pre></td></tr></tbody></table></code></pre></div></div>
+
+<table>
+  <thead>
+    <tr>
+      <th>オプション</th>
+      <th>説明</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td><code class="language-plaintext highlighter-rouge">-c</code></td>
+      <td>アーカイブを作成する</td>
+    </tr>
+    <tr>
+      <td><code class="language-plaintext highlighter-rouge">-x</code></td>
+      <td>アーカイブを展開する</td>
+    </tr>
+    <tr>
+      <td><code class="language-plaintext highlighter-rouge">-t</code></td>
+      <td>アーカイブ内をリスト表示する</td>
+    </tr>
+    <tr>
+      <td><code class="language-plaintext highlighter-rouge">-f ファイル名</code></td>
+      <td>アーカイブファイルを指定する</td>
+    </tr>
+    <tr>
+      <td><code class="language-plaintext highlighter-rouge">-z</code></td>
+      <td>gzipを利用して圧縮/展開する</td>
+    </tr>
+    <tr>
+      <td><code class="language-plaintext highlighter-rouge">-j</code></td>
+      <td>bzip2を利用して圧縮/展開する</td>
+    </tr>
+    <tr>
+      <td><code class="language-plaintext highlighter-rouge">-J</code></td>
+      <td>xzを利用して圧縮/展開する</td>
+    </tr>
+    <tr>
+      <td><code class="language-plaintext highlighter-rouge">-v</code></td>
+      <td>処理したファイル名などの詳細情報を表示する</td>
+    </tr>
+    <tr>
+      <td><code class="language-plaintext highlighter-rouge">-r</code></td>
+      <td>アーカイブの最後にファイルを追加する</td>
+    </tr>
+    <tr>
+      <td><code class="language-plaintext highlighter-rouge">-C</code></td>
+      <td>ディレクトリ処理を開始する前に指定したディレクトリに移動する</td>
+    </tr>
+  </tbody>
+</table>
+
+<p>圧縮アーカイブの作成をします。</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
+</pre></td><td class="rouge-code"><pre>$ tar -zcf test_gzip.tar.gz data-science-at-the-command-line/
+</pre></td></tr></tbody></table></code></pre></div></div>
+
+<p>圧縮ファイルの中身のファイル一覧を表示したい場合は</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
+</pre></td><td class="rouge-code"><pre>$ tar -ztf test_gzip.tar.gz
+</pre></td></tr></tbody></table></code></pre></div></div>
+
+<h2 id="3-converting-microsoft-excel-spreadsheets">3. Converting Microsoft Excel Spreadsheets</h2>
+<h3 id="前提条件csvkitのインストール">前提条件：<code class="language-plaintext highlighter-rouge">csvkit</code>のインストール</h3>
+
+<p>最新版は<code class="language-plaintext highlighter-rouge">1.0.5</code>だが、Python経由のインストール環境を整備するのがめんどくさいので<code class="language-plaintext highlighter-rouge">apt package manager</code>経由でインストールする。</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
+2
+3
+4
+5
+6
+7
+8
+9
+10
+</pre></td><td class="rouge-code"><pre>$ apt-cache policy csvkit
+csvkit:
+  Installed: 1.0.2-2
+  Candidate: 1.0.2-2
+  Version table:
+ *** 1.0.2-2 500
+        500 http://jp.archive.ubuntu.com/ubuntu focal/universe amd64 Packages
+        500 http://jp.archive.ubuntu.com/ubuntu focal/universe i386 Packages
+        100 /var/lib/dpkg/status
+$ sudo apt install csvkit
+</pre></td></tr></tbody></table></code></pre></div></div>
+
+<h3 id="xlsxファイルをcsvファイルに変換する">xlsxファイルをcsvファイルに変換する</h3>
+
+<p><code class="language-plaintext highlighter-rouge">imdb-250.xlsx</code>を<code class="language-plaintext highlighter-rouge">imdb-250.csv</code>に変換します。</p>
+
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
+2
+3
+4
+5
+6
+7
+8
+9
+10
+11
+12
+13
+</pre></td><td class="rouge-code"><pre><span class="nv">$ </span><span class="nb">cd</span>
+<span class="nv">$ </span>in2csv /home/dst/data-science-at-the-command-line/book/1e/data/ch03/data/imdb-250.xlsx <span class="o">&gt;</span> imdb-250.csv
+<span class="nv">$ </span><span class="nb">head </span>imdb-250.csv | xsv table
+Title,title trim,Year,Rank,Rank <span class="o">(</span>desc<span class="o">)</span>,Rating,New <span class="k">in </span>2011 from 2010?,2010 rank,Rank Difference,j
+Sherlock Jr. <span class="o">(</span>1924<span class="o">)</span>,SherlockJr.<span class="o">(</span>1924<span class="o">)</span>,1924,221,30,8,True,,,
+The Passion of Joan of Arc <span class="o">(</span>1928<span class="o">)</span>,ThePassionofJoanofArc<span class="o">(</span>1928<span class="o">)</span>,1928,212,39,8,True,,,
+His Girl Friday <span class="o">(</span>1940<span class="o">)</span>,HisGirlFriday<span class="o">(</span>1940<span class="o">)</span>,1940,250,1,8,True,,,
+Tokyo Story <span class="o">(</span>1953<span class="o">)</span>,TokyoStory<span class="o">(</span>1953<span class="o">)</span>,1953,248,3,8,True,,,
+The Man Who Shot Liberty Valance <span class="o">(</span>1962<span class="o">)</span>,TheManWhoShotLibertyValance<span class="o">(</span>1962<span class="o">)</span>,1962,237,14,8,True,,,
+Persona <span class="o">(</span>1966<span class="o">)</span>,Persona<span class="o">(</span>1966<span class="o">)</span>,1966,200,51,8,True,,,
+Stalker <span class="o">(</span>1979<span class="o">)</span>,Stalker<span class="o">(</span>1979<span class="o">)</span>,1979,243,8,8,True,,,
+Fanny and Alexander <span class="o">(</span>1982<span class="o">)</span>,FannyandAlexander<span class="o">(</span>1982<span class="o">)</span>,1982,210,41,8,True,,,
+Beauty and the Beast <span class="o">(</span>1991<span class="o">)</span>,BeautyandtheBeast<span class="o">(</span>1991<span class="o">)</span>,1991,249,2,8,True,,,
+</pre></td></tr></tbody></table></code></pre></div></div>
+
+<p>カラムを絞って表示させます。</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
+2
+3
+4
+5
+6
+7
+8
+9
+10
+11
+12
+13
+</pre></td><td class="rouge-code"><pre>$ head imdb-250.csv | xsv select Title,Year,Rating | csvlook
+| Title                                   |  Year | Rating |
+| --------------------------------------- | ----- | ------ |
+| Sherlock Jr. (1924)                     | 1,924 |      8 |
+| The Passion of Joan of Arc (1928)       | 1,928 |      8 |
+| His Girl Friday (1940)                  | 1,940 |      8 |
+| Tokyo Story (1953)                      | 1,953 |      8 |
+| The Man Who Shot Liberty Valance (1962) | 1,962 |      8 |
+| Persona (1966)                          | 1,966 |      8 |
+| Stalker (1979)                          | 1,979 |      8 |
+| Fanny and Alexander (1982)              | 1,982 |      8 |
+| Beauty and the Beast (1991)             | 1,991 |      8 |
+
+</pre></td></tr></tbody></table></code></pre></div></div>
+
+<h2 id="4-querying-relational-databases">4. Querying Relational Databases</h2>
+
+<p>relational databasesをコマンドラインから簡単に操作可能とすつ関数の一つに<code class="language-plaintext highlighter-rouge">sql2csv</code>があります。これはPython SQLAlchemy packageをベースとしており、MySQL, Oracle, PostgreSQL, SQLite, Microsoft SQL Server, and Sybaseといった様々なデータベースに対応することができます。一例は以下：</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
+</pre></td><td class="rouge-code"><pre>$ sql2csv --db 'sqlite:////home/dst/data-science-at-the-command-line/book/1e/data/ch03/data/iris.db' --query 'SELECT * FROM iris WHERE sepal_length &gt; 7.5'
+</pre></td></tr></tbody></table></code></pre></div></div>
+
+<h3 id="sql2csvのsyntax">sql2csvのSyntax</h3>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
+2
+3
+4
+5
+6
+7
+8
+9
+10
+11
+12
+13
+14
+15
+16
+17
+18
+19
+20
+21
+22
+23
+24
+25
+</pre></td><td class="rouge-code"><pre>usage: sql2csv [-h] [-v] [-l] [-V] [--db CONNECTION_STRING] [--query QUERY]
+               [-e ENCODING] [-H]
+               [FILE]
+
+Execute an SQL query on a database and output the result to a CSV file.
+
+positional arguments:
+  FILE                  The file to use as SQL query. If both FILE and QUERY
+                        are omitted, query will be read from STDIN.
+
+optional arguments:
+  -h, --help            show this help message and exit
+  -v, --verbose         Print detailed tracebacks when errors occur.
+  -l, --linenumbers     Insert a column of line numbers at the front of the
+                        output. Useful when piping to grep or as a simple
+                        primary key.
+  -V, --version         Display version information and exit.
+  --db CONNECTION_STRING
+                        An sqlalchemy connection string to connect to a
+                        database.
+  --query QUERY         The SQL query to execute. If specified, it overrides
+                        FILE and STDIN.
+  -e ENCODING, --encoding ENCODING
+                        Specify the encoding of the input query file.
+  -H, --no-header-row   Do not output column names.
+</pre></td></tr></tbody></table></code></pre></div></div>
+
+<h3 id="examples">Examples</h3>
+
+<p>DBからQUERYでデータを呼び出し、csvに出力する。</p>
+
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
+2
+3
+4
+5
+6
+7
+8
+9
+</pre></td><td class="rouge-code"><pre><span class="nv">$ </span>sql2csv <span class="nt">--db</span> <span class="s1">'sqlite:////home/dst/data-science-at-the-command-line/book/1e/data/ch03/data/iris.db'</span> <span class="nt">--query</span> <span class="s1">'SELECT * FROM iris WHERE sepal_length &gt; 7.5'</span> <span class="o">&gt;&gt;</span> test.csv
+<span class="nv">$ </span><span class="nb">cat </span>test.csv 
+sepal_length,sepal_width,petal_length,petal_width,species
+7.6,3.0,6.6,2.1,Iris-virginica
+7.7,3.8,6.7,2.2,Iris-virginica
+7.7,2.6,6.9,2.3,Iris-virginica
+7.7,2.8,6.7,2.0,Iris-virginica
+7.9,3.8,6.4,2.0,Iris-virginica
+7.7,3.0,6.1,2.3,Iris-virginica
+</pre></td></tr></tbody></table></code></pre></div></div>
+
+<h2 id="5-downloading-from-the-internet">5. Downloading from the Internet</h2>
+
+<p>インターネット経由でデータを取得する際、<code class="language-plaintext highlighter-rouge">curl</code>コマンドを使うケースが多いです。例えば、</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
+2
+3
+4
+5
+6
+7
+8
+9
+</pre></td><td class="rouge-code"><pre>$ curl -s http://www.gutenberg.org/files/76/76-0.txt | head -n 10
+
+The Project Gutenberg EBook of Adventures of Huckleberry Finn, Complete
+by Mark Twain (Samuel Clemens)
+
+This eBook is for the use of anyone anywhere at no cost and with almost
+no restrictions whatsoever. You may copy it, give it away or re-use
+it under the terms of the Project Gutenberg License included with this
+eBook or online at www.gutenberg.net
+</pre></td></tr></tbody></table></code></pre></div></div>
+
+<h3 id="curlコマンドの主なオプション">curlコマンドの主なオプション</h3>
+
+<table>
+  <thead>
+    <tr>
+      <th>短いオプション</th>
+      <th>長いオプション</th>
+      <th>意味</th>
+      <th> </th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>-O</td>
+      <td>–remote-name</td>
+      <td>転送元と同じ名前で保存する（「-O」または「-o」を指定しない場合は標準出力）</td>
+      <td> </td>
+    </tr>
+    <tr>
+      <td>-o</td>
+      <td>–output</td>
+      <td>ファイル名 	保存するファイル名（「-O」または「-o」を指定しない場合は標準出力）</td>
+      <td> </td>
+    </tr>
+    <tr>
+      <td> </td>
+      <td>–create-dirs</td>
+      <td>「-o」でディレクトリを指定した際、そのディレクトリがない場合は作成する</td>
+      <td> </td>
+    </tr>
+    <tr>
+      <td>-#</td>
+      <td>–progress-bar</td>
+      <td>進行状況を「#」文字で表示する</td>
+      <td> </td>
+    </tr>
+    <tr>
+      <td>-f</td>
+      <td>–fail</td>
+      <td>失敗してもエラーメッセージを表示しない</td>
+      <td> </td>
+    </tr>
+    <tr>
+      <td>-s</td>
+      <td>–silent</td>
+      <td>実行中のメッセージを表示しない</td>
+      <td> </td>
+    </tr>
+    <tr>
+      <td>-4</td>
+      <td>–ipv4</td>
+      <td>IPv4だけを使う</td>
+      <td> </td>
+    </tr>
+    <tr>
+      <td>-6</td>
+      <td>–ipv6</td>
+      <td>IPv6だけを使う</td>
+      <td> </td>
+    </tr>
+    <tr>
+      <td>-A</td>
+      <td>–user-agent</td>
+      <td>“Webブラウザ” 	実行時のWebブラウザ名を指定する</td>
+      <td> </td>
+    </tr>
+    <tr>
+      <td>-e</td>
+      <td>–referer</td>
+      <td>URL</td>
+      <td>リンク元のURLを指定する</td>
+    </tr>
+    <tr>
+      <td>-b</td>
+      <td>–cookie</td>
+      <td>“名前=値” 	実行時のクッキーを指定する</td>
+      <td> </td>
+    </tr>
+    <tr>
+      <td>–</td>
+      <td>anyauth</td>
+      <td>複数の認証方法を試す（個別に「–basic」「–digest」「–ntlm」「–negotiate」を指定可）</td>
+      <td> </td>
+    </tr>
+    <tr>
+      <td>-C</td>
+      <td>–continue-at</td>
+      <td>バイト数 	転送の続きから行う際に、何バイト目から再開するか指定する（「-C -」で自動計算）</td>
+      <td> </td>
+    </tr>
+    <tr>
+      <td>-d</td>
+      <td>–data</td>
+      <td>“データ” 	データをPOSTしたのと同じように送る</td>
+      <td> </td>
+    </tr>
+    <tr>
+      <td>-F</td>
+      <td>–form</td>
+      <td>“名前=値” 	指定した内容をフォームから入力したのと同じように送る</td>
+      <td> </td>
+    </tr>
+    <tr>
+      <td> </td>
+      <td>–data-urlencode</td>
+      <td>“データ” 	データをURLエンコードして送る</td>
+      <td> </td>
+    </tr>
+  </tbody>
+</table>
+
+<h3 id="実行進捗状況の表示と-s">実行進捗状況の表示と<code class="language-plaintext highlighter-rouge">-s</code></h3>
+
+<p>curlは実行状況と完了予定時間をデフォルトで表示します。</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
+2
+3
+4
+5
+6
+7
+8
+9
+10
+11
+12
+13
+14
+15
+</pre></td><td class="rouge-code"><pre>$ curl http://www.gutenberg.org/files/76/76-0.txt | head -n 10
+  % Total    % Received % Xferd  Average Speed   Time    Time     Time  Current
+                                 Dload  Upload   Total   Spent    Left  Speed
+  0     0    0     0    0     0      0      0 --:--:-- --:--:-- --:--:--     0﻿
+The Project Gutenberg EBook of Adventures of Huckleberry Finn, Complete
+by Mark Twain (Samuel Clemens)
+
+This eBook is for the use of anyone anywhere at no cost and with almost
+no restrictions whatsoever. You may copy it, give it away or re-use
+it under the terms of the Project Gutenberg License included with this
+eBook or online at www.gutenberg.org
+
+Title: Adventures of Huckleberry Finn, Complete
+  6  601k    6 41870    0     0  30968      0  0:00:19  0:00:01  0:00:18 30968
+curl: (23) Failed writing body (2554 != 16384)
+</pre></td></tr></tbody></table></code></pre></div></div>
+
+<h3 id="curl出力結果をファイルに保存する">curl出力結果をファイルに保存する</h3>
+
+<p>リダイレクトを用いる場合とオプションで指定する場合の２つがあります。リダイレクトを用いる場合は、</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
+2
+3
+4
+5
+6
+7
+8
+9
+10
+11
+12
+13
+14
+15
+16
+17
+18
+</pre></td><td class="rouge-code"><pre>$ curl -s http://www.gutenberg.org/files/76/76-0.txt &gt; finn.txt
+$ less finn.txt
+The Project Gutenberg EBook of Adventures of Huckleberry Finn, Complete
+by Mark Twain (Samuel Clemens)
+
+This eBook is for the use of anyone anywhere at no cost and with almost
+no restrictions whatsoever. You may copy it, give it away or re-use
+it under the terms of the Project Gutenberg License included with this
+eBook or online at www.gutenberg.org
+
+Title: Adventures of Huckleberry Finn, Complete
+
+Author: Mark Twain (Samuel Clemens)
+
+Release Date: August 20, 2006 [EBook #76]
+Last Updated: February 23, 2018
+Language: English
+(略)
+</pre></td></tr></tbody></table></code></pre></div></div>
+
+<p>オプションで指定する場合でかつディクトリ作成を同時に実行したい場合は以下、</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
+</pre></td><td class="rouge-code"><pre>$ curl -s http://www.gutenberg.org/files/76/76-0.txt -o /data/finn.txt --create-dirs 
+</pre></td></tr></tbody></table></code></pre></div></div>
+
+<h3 id="curlコマンドを用いたレクチャーノートのインストール">curlコマンドを用いたレクチャーノートのインストール</h3>
+
+<p>wgetで実行する方法もありますが今回はcurlを用います。<a href="https://ocw.mit.edu/courses/economics/14-382-econometrics-spring-2017/lecture-notes/">MITのEconometrics course 14-382</a>のpdf形式のレクチャーノートをダウンロードします。</p>
+
+<p>レクチャーノートのURLは</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
+</pre></td><td class="rouge-code"><pre>https://ocw.mit.edu/courses/economics/14-382-econometrics-spring-2017/lecture-notes/MIT14_382S17_lec&lt;数字&gt;.pdf
+</pre></td></tr></tbody></table></code></pre></div></div>
+
+<p>という形式になっています。これを<code class="language-plaintext highlighter-rouge">lecturenote_&lt;数字&gt;.pdf</code>という形式でダウンロードする場合は以下のようなコマンドになります。</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
+2
+</pre></td><td class="rouge-code"><pre>$ curl -o lecturenote_#1.pdf "https://ocw.mit.edu/courses/economics/14-382-econometrics-spring-2017/lecture-notes/MIT14_382S17_lec[1-20].pdf"
+$ find ./*.pdf -size -40k | xargs rm
+</pre></td></tr></tbody></table></code></pre></div></div>
+
+<p>最後の<code class="language-plaintext highlighter-rouge">find ./*.pdf -size -40k | xargs rm</code>はゴミファイルを削除するためのコマンドです。</p>
+
+<h2 id="appendix-パイプ">APPENDIX: パイプ</h2>
+
+<p>Linuxでは、パイプ, <code class="language-plaintext highlighter-rouge">|</code>を用いることで、コマンドの出力先を別コマンドへつなぐことができます。</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
+</pre></td><td class="rouge-code"><pre>% コマンド1 | コマンド2
+</pre></td></tr></tbody></table></code></pre></div></div>
+
+<p>一例として,ファイルの数を数えたいときは</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
+</pre></td><td class="rouge-code"><pre>% ls | wc -l
+</pre></td></tr></tbody></table></code></pre></div></div>
+
+<h2 id="appendix-リダイレクト">APPENDIX: リダイレクト</h2>
+
+<p>コマンドの実行結果をファイルに保存したいときに用いるのがリダイレクトです。</p>
+
+<table>
+  <thead>
+    <tr>
+      <th>書式</th>
+      <th>説明</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td><code class="language-plaintext highlighter-rouge">コマンドA &gt; コマンドB</code></td>
+      <td>コマンドAの実行結果をコマンドBで処理する</td>
+    </tr>
+    <tr>
+      <td><code class="language-plaintext highlighter-rouge">コマンド &gt; ファイル</code></td>
+      <td>コマンドの実行結果をファイルに保存する</td>
+    </tr>
+    <tr>
+      <td><code class="language-plaintext highlighter-rouge">コマンド &gt;&gt; ファイル</code></td>
+      <td>コマンドの実行結果をファイルに追記する（ファイル末尾に追加する）</td>
+    </tr>
+    <tr>
+      <td><code class="language-plaintext highlighter-rouge">コマンド &amp;&gt; ファイル</code></td>
+      <td>コマンドの実行結果とエラー表示をファイルに保存する</td>
+    </tr>
+  </tbody>
+</table>
+
+
+                <hr style="visibility: hidden;">
+                <hr/>
+                <b><fontsize="5">Share Buttons</font><br></b>
+                <!--see 
+    https://jekyllcodex.org/without-plugin/share-buttons/ 
+    https://ranvir.xyz/blog/why-and-how-to-add-social-sharing-buttons-on-your-jekyll-blog-using-github-pages/
+-->
+
+
+
+<style>
+#share-buttons {display: inline-block; vertical-align: middle; }
+#share-buttons:after {content: ""; display: block; clear: both;}
+#share-buttons > div {
+    position: relative;
+    text-align: left; 
+    height: 36px; 
+    width: 32px; 
+    float: left; 
+    text-align: center;
+}
+#share-buttons > div > svg {height: 16px; fill: #d5d5d5; margin-top: 10px;}
+#share-buttons > div:hover {cursor: pointer;}
+#share-buttons > div.facebook:hover > svg {fill: #3B5998;}
+#share-buttons > div.twitter:hover > svg {fill: #55ACEE;}
+#share-buttons > div.linkedin:hover > svg {fill: #0077b5;}
+#share-buttons > div.pinterest:hover > svg {fill: #CB2027;}
+#share-buttons > div.gplus:hover > svg {fill: #dd4b39;}
+#share-buttons > div.mail:hover > svg {fill: #7D7D7D;}
+#share-buttons > div.instagram:hover > svg {fill: #C73B92;}
+#share-buttons > div.facebook > svg {height: 18px; margin-top: 9px;}
+#share-buttons > div.twitter > svg {height: 20px; margin-top: 8px;}
+#share-buttons > div.linkedin > svg {height: 19px; margin-top: 7px;}
+#share-buttons > div.pinterest > svg {height: 20px; margin-top: 9px;}
+#share-buttons > div.gplus > svg {height: 17px; margin-top: 9px; position: relative; left: 1px;}
+#share-buttons > div.mail > svg {height: 14px; margin-top: 11px;}
+</style>
+
+<span style="color: black">Share on: </span><div id="share-buttons">
+    <div class="facebook" title="Share this on Facebook" onclick="gtag('event', 'Facebook', {'event_category':'Post Shared','event_label':'Facebook'}); location.href='http://www.facebook.com/share.php?u=https://ryonakagami.github.io/2020/12/25/datascience-in-commandline-part2/';"><svg viewBox="0 0 1792 1792" xmlns="http://www.w3.org/2000/svg"><path d="M1343 12v264h-157q-86 0-116 36t-30 108v189h293l-39 296h-254v759h-306v-759h-255v-296h255v-218q0-186 104-288.5t277-102.5q147 0 228 12z"/></svg></div>
+    <div class="twitter" title="Share this on Twitter" onclick="gtag('event', 'Twitter', {'event_category':'Post Shared','event_label':'Twitter'}); location.href='https://twitter.com/intent/tweet?text=シェルスクリプトと前処理 Part 2&url=https://ryonakagami.github.io/2020/12/25/datascience-in-commandline-part2/';"><svg viewBox="0 0 1792 1792" xmlns="http://www.w3.org/2000/svg"><path d="M1684 408q-67 98-162 167 1 14 1 42 0 130-38 259.5t-115.5 248.5-184.5 210.5-258 146-323 54.5q-271 0-496-145 35 4 78 4 225 0 401-138-105-2-188-64.5t-114-159.5q33 5 61 5 43 0 85-11-112-23-185.5-111.5t-73.5-205.5v-4q68 38 146 41-66-44-105-115t-39-154q0-88 44-163 121 149 294.5 238.5t371.5 99.5q-8-38-8-74 0-134 94.5-228.5t228.5-94.5q140 0 236 102 109-21 205-78-37 115-142 178 93-10 186-50z"/></svg></div>
+    <div class="linkedin" title="Share this on Linkedin" onclick="gtag('event', 'Linkedin', {'event_category':'Post Shared','event_label':'Linkedin'}); location.href='https://www.linkedin.com/shareArticle?mini=true&url=https://ryonakagami.github.io/2020/12/25/datascience-in-commandline-part2/&title=&summary=&source=';"><svg viewBox="0 0 1792 1792" xmlns="http://www.w3.org/2000/svg"><path d="M477 625v991h-330v-991h330zm21-306q1 73-50.5 122t-135.5 49h-2q-82 0-132-49t-50-122q0-74 51.5-122.5t134.5-48.5 133 48.5 51 122.5zm1166 729v568h-329v-530q0-105-40.5-164.5t-126.5-59.5q-63 0-105.5 34.5t-63.5 85.5q-11 30-11 81v553h-329q2-399 2-647t-1-296l-1-48h329v144h-2q20-32 41-56t56.5-52 87-43.5 114.5-15.5q171 0 275 113.5t104 332.5z"/></svg></div>
+    
+    <div class="mail" title="Share this through Email" onclick="gtag('event', 'Email', {'event_category':'Post Shared','event_label':'Email'}); location.href='mailto:?&body=https://ryonakagami.github.io/2020/12/25/datascience-in-commandline-part2/';"><svg viewBox="0 0 1792 1792" xmlns="http://www.w3.org/2000/svg"><path d="M1792 710v794q0 66-47 113t-113 47h-1472q-66 0-113-47t-47-113v-794q44 49 101 87 362 246 497 345 57 42 92.5 65.5t94.5 48 110 24.5h2q51 0 110-24.5t94.5-48 92.5-65.5q170-123 498-345 57-39 100-87zm0-294q0 79-49 151t-122 123q-376 261-468 325-10 7-42.5 30.5t-54 38-52 32.5-57.5 27-50 9h-2q-23 0-50-9t-57.5-27-52-32.5-54-38-42.5-30.5q-91-64-262-182.5t-205-142.5q-62-42-117-115.5t-55-136.5q0-78 41.5-130t118.5-52h1472q65 0 112.5 47t47.5 113z"/></svg></div>
+</div>
+
+                
+                <hr/>
+
+                <!-- Featured Tags -->
+                <b><fontsize="5">Feature Tags</b>
+                    <div id="tag_cloud" class="tags tags-sup js-tags" 
+                    style="line-height: 0px !important;">
+                        
+                        
+                        
+                        
+                        
+                                <a data-sort="0288" 
+                                    href="/archive/?tag=%E7%B5%B1%E8%A8%88"
+                                    title="統計"
+                                    style="color: #337ab7 !important;"
+                                    rel="61">統計</a>
+                        
+                                <a data-sort="0298" 
+                                    href="/archive/?tag=Python"
+                                    title="Python"
+                                    style="color: #337ab7 !important;"
+                                    rel="51">Python</a>
+                        
+                                <a data-sort="0300" 
+                                    href="/archive/?tag=math"
+                                    title="math"
+                                    style="color: #337ab7 !important;"
+                                    rel="49">math</a>
+                        
+                                <a data-sort="0303" 
+                                    href="/archive/?tag=Linux"
+                                    title="Linux"
+                                    style="color: #337ab7 !important;"
+                                    rel="46">Linux</a>
+                        
+                                <a data-sort="0316" 
+                                    href="/archive/?tag=Ubuntu+20.04+LTS"
+                                    title="Ubuntu 20.04 LTS"
+                                    style="color: #337ab7 !important;"
+                                    rel="33">Ubuntu 20.04 LTS</a>
+                        
+                                <a data-sort="0319" 
+                                    href="/archive/?tag=Shell"
+                                    title="Shell"
+                                    style="color: #337ab7 !important;"
+                                    rel="30">Shell</a>
+                        
+                                <a data-sort="0321" 
+                                    href="/archive/?tag=English"
+                                    title="English"
+                                    style="color: #337ab7 !important;"
+                                    rel="28">English</a>
+                        
+                                <a data-sort="0324" 
+                                    href="/archive/?tag=git"
+                                    title="git"
+                                    style="color: #337ab7 !important;"
+                                    rel="25">git</a>
+                        
+                                <a data-sort="0329" 
+                                    href="/archive/?tag=%E6%96%B9%E6%B3%95%E8%AB%96"
+                                    title="方法論"
+                                    style="color: #337ab7 !important;"
+                                    rel="20">方法論</a>
+                        
+                                <a data-sort="0333" 
+                                    href="/archive/?tag=Ubuntu+22.04+LTS"
+                                    title="Ubuntu 22.04 LTS"
+                                    style="color: #337ab7 !important;"
+                                    rel="16">Ubuntu 22.04 LTS</a>
+                        
+                                <a data-sort="0337" 
+                                    href="/archive/?tag=%E7%B5%B1%E8%A8%88%E6%A4%9C%E5%AE%9A"
+                                    title="統計検定"
+                                    style="color: #337ab7 !important;"
+                                    rel="12">統計検定</a>
+                        
+                                <a data-sort="0338" 
+                                    href="/archive/?tag=%E7%AB%B6%E6%8A%80%E3%83%97%E3%83%AD%E3%82%B0%E3%83%A9%E3%83%9F%E3%83%B3%E3%82%B0"
+                                    title="競技プログラミング"
+                                    style="color: #337ab7 !important;"
+                                    rel="11">競技プログラミング</a>
+                        
+                                <a data-sort="0339" 
+                                    href="/archive/?tag=%E3%83%95%E3%83%BC%E3%83%AA%E3%82%A8%E8%A7%A3%E6%9E%90"
+                                    title="フーリエ解析"
+                                    style="color: #337ab7 !important;"
+                                    rel="10">フーリエ解析</a>
+                        
+                                <a data-sort="0340" 
+                                    href="/archive/?tag=%E5%89%8D%E5%87%A6%E7%90%86"
+                                    title="前処理"
+                                    style="color: #337ab7 !important;"
+                                    rel="9">前処理</a>
+                        
+                                <a data-sort="0340" 
+                                    href="/archive/?tag=SQL"
+                                    title="SQL"
+                                    style="color: #337ab7 !important;"
+                                    rel="9">SQL</a>
+                        
+                                <a data-sort="0340" 
+                                    href="/archive/?tag=coding"
+                                    title="coding"
+                                    style="color: #337ab7 !important;"
+                                    rel="9">coding</a>
+                        
+                                <a data-sort="0341" 
+                                    href="/archive/?tag=%E3%82%B3%E3%83%9F%E3%83%A5%E3%83%8B%E3%82%B1%E3%83%BC%E3%82%B7%E3%83%A7%E3%83%B3"
+                                    title="コミュニケーション"
+                                    style="color: #337ab7 !important;"
+                                    rel="8">コミュニケーション</a>
+                        
+                                <a data-sort="0342" 
+                                    href="/archive/?tag=Network"
+                                    title="Network"
+                                    style="color: #337ab7 !important;"
+                                    rel="7">Network</a>
+                        
+                                <a data-sort="0342" 
+                                    href="/archive/?tag=ssh"
+                                    title="ssh"
+                                    style="color: #337ab7 !important;"
+                                    rel="7">ssh</a>
+                        
+                                <a data-sort="0343" 
+                                    href="/archive/?tag=%E5%B0%86%E6%A3%8B"
+                                    title="将棋"
+                                    style="color: #337ab7 !important;"
+                                    rel="6">将棋</a>
+                        
+                                <a data-sort="0343" 
+                                    href="/archive/?tag=Data+visualization"
+                                    title="Data visualization"
+                                    style="color: #337ab7 !important;"
+                                    rel="6">Data visualization</a>
+                        
+                                <a data-sort="0343" 
+                                    href="/archive/?tag=Docker"
+                                    title="Docker"
+                                    style="color: #337ab7 !important;"
+                                    rel="6">Docker</a>
+                        
+                                <a data-sort="0343" 
+                                    href="/archive/?tag=Econometrics"
+                                    title="Econometrics"
+                                    style="color: #337ab7 !important;"
+                                    rel="6">Econometrics</a>
+                        
+                                <a data-sort="0343" 
+                                    href="/archive/?tag=VSCode"
+                                    title="VSCode"
+                                    style="color: #337ab7 !important;"
+                                    rel="6">VSCode</a>
+                        
+                                <a data-sort="0343" 
+                                    href="/archive/?tag=statistical+inference"
+                                    title="statistical inference"
+                                    style="color: #337ab7 !important;"
+                                    rel="6">statistical inference</a>
+                        
+                                <a data-sort="0344" 
+                                    href="/archive/?tag=GitHub+Pages"
+                                    title="GitHub Pages"
+                                    style="color: #337ab7 !important;"
+                                    rel="5">GitHub Pages</a>
+                        
+                                <a data-sort="0344" 
+                                    href="/archive/?tag=apt"
+                                    title="apt"
+                                    style="color: #337ab7 !important;"
+                                    rel="5">apt</a>
+                        
+                                <a data-sort="0344" 
+                                    href="/archive/?tag=development"
+                                    title="development"
+                                    style="color: #337ab7 !important;"
+                                    rel="5">development</a>
+                        
+                                <a data-sort="0345" 
+                                    href="/archive/?tag=%E3%82%B7%E3%82%B9%E3%83%86%E3%83%A0%E7%AE%A1%E7%90%86"
+                                    title="システム管理"
+                                    style="color: #337ab7 !important;"
+                                    rel="4">システム管理</a>
+                        
+                                <a data-sort="0345" 
+                                    href="/archive/?tag=Coffee"
+                                    title="Coffee"
+                                    style="color: #337ab7 !important;"
+                                    rel="4">Coffee</a>
+                        
+                                <a data-sort="0345" 
+                                    href="/archive/?tag=cloud"
+                                    title="cloud"
+                                    style="color: #337ab7 !important;"
+                                    rel="4">cloud</a>
+                        
+                                <a data-sort="0346" 
+                                    href="/archive/?tag=%E6%95%B0%E5%80%A4%E8%A8%88%E7%AE%97"
+                                    title="数値計算"
+                                    style="color: #337ab7 !important;"
+                                    rel="3">数値計算</a>
+                        
+                                <a data-sort="0346" 
+                                    href="/archive/?tag=%E7%B4%A0%E6%95%B0"
+                                    title="素数"
+                                    style="color: #337ab7 !important;"
+                                    rel="3">素数</a>
+                        
+                                <a data-sort="0346" 
+                                    href="/archive/?tag=Book"
+                                    title="Book"
+                                    style="color: #337ab7 !important;"
+                                    rel="3">Book</a>
+                        
+                                <a data-sort="0346" 
+                                    href="/archive/?tag=Font"
+                                    title="Font"
+                                    style="color: #337ab7 !important;"
+                                    rel="3">Font</a>
+                        
+                                <a data-sort="0346" 
+                                    href="/archive/?tag=Metrics"
+                                    title="Metrics"
+                                    style="color: #337ab7 !important;"
+                                    rel="3">Metrics</a>
+                        
+                                <a data-sort="0346" 
+                                    href="/archive/?tag=Poetry"
+                                    title="Poetry"
+                                    style="color: #337ab7 !important;"
+                                    rel="3">Poetry</a>
+                        
+                                <a data-sort="0346" 
+                                    href="/archive/?tag=Ubuntu+24.04+LTS"
+                                    title="Ubuntu 24.04 LTS"
+                                    style="color: #337ab7 !important;"
+                                    rel="3">Ubuntu 24.04 LTS</a>
+                        
+                                <a data-sort="0346" 
+                                    href="/archive/?tag=architecture"
+                                    title="architecture"
+                                    style="color: #337ab7 !important;"
+                                    rel="3">architecture</a>
+                        
+                                <a data-sort="0346" 
+                                    href="/archive/?tag=aws"
+                                    title="aws"
+                                    style="color: #337ab7 !important;"
+                                    rel="3">aws</a>
+                        
+                                <a data-sort="0346" 
+                                    href="/archive/?tag=shell"
+                                    title="shell"
+                                    style="color: #337ab7 !important;"
+                                    rel="3">shell</a>
+                        
+                                <a data-sort="0346" 
+                                    href="/archive/?tag=systemctl"
+                                    title="systemctl"
+                                    style="color: #337ab7 !important;"
+                                    rel="3">systemctl</a>
+                        
+                                <a data-sort="0347" 
+                                    href="/archive/?tag=%E3%83%86%E3%83%B3%E3%83%97%E3%83%AC%E3%83%BC%E3%83%88"
+                                    title="テンプレート"
+                                    style="color: #337ab7 !important;"
+                                    rel="2">テンプレート</a>
+                        
+                                <a data-sort="0347" 
+                                    href="/archive/?tag=%E3%83%87%E3%83%BC%E3%82%BF%E6%A7%8B%E9%80%A0"
+                                    title="データ構造"
+                                    style="color: #337ab7 !important;"
+                                    rel="2">データ構造</a>
+                        
+                                <a data-sort="0347" 
+                                    href="/archive/?tag=%E3%83%9D%E3%83%AF%E3%82%BD%E3%83%B3%E5%88%86%E5%B8%83"
+                                    title="ポワソン分布"
+                                    style="color: #337ab7 !important;"
+                                    rel="2">ポワソン分布</a>
+                        
+                                <a data-sort="0347" 
+                                    href="/archive/?tag=%E4%BC%9A%E8%A8%88%E5%88%86%E6%9E%90"
+                                    title="会計分析"
+                                    style="color: #337ab7 !important;"
+                                    rel="2">会計分析</a>
+                        
+                                <a data-sort="0347" 
+                                    href="/archive/?tag=%E6%96%87%E5%AD%97%E3%82%B3%E3%83%BC%E3%83%89"
+                                    title="文字コード"
+                                    style="color: #337ab7 !important;"
+                                    rel="2">文字コード</a>
+                        
+                                <a data-sort="0347" 
+                                    href="/archive/?tag=%E7%92%B0%E5%A2%83%E6%A7%8B%E7%AF%89"
+                                    title="環境構築"
+                                    style="color: #337ab7 !important;"
+                                    rel="2">環境構築</a>
+                        
+                                <a data-sort="0347" 
+                                    href="/archive/?tag=%E8%AB%96%E6%96%87"
+                                    title="論文"
+                                    style="color: #337ab7 !important;"
+                                    rel="2">論文</a>
+                        
+                                <a data-sort="0347" 
+                                    href="/archive/?tag=App"
+                                    title="App"
+                                    style="color: #337ab7 !important;"
+                                    rel="2">App</a>
+                        
+                                <a data-sort="0347" 
+                                    href="/archive/?tag=Bayesian"
+                                    title="Bayesian"
+                                    style="color: #337ab7 !important;"
+                                    rel="2">Bayesian</a>
+                        
+                                <a data-sort="0347" 
+                                    href="/archive/?tag=Dynamic+Programming"
+                                    title="Dynamic Programming"
+                                    style="color: #337ab7 !important;"
+                                    rel="2">Dynamic Programming</a>
+                        
+                                <a data-sort="0347" 
+                                    href="/archive/?tag=Keyboard"
+                                    title="Keyboard"
+                                    style="color: #337ab7 !important;"
+                                    rel="2">Keyboard</a>
+                        
+                                <a data-sort="0347" 
+                                    href="/archive/?tag=Processing"
+                                    title="Processing"
+                                    style="color: #337ab7 !important;"
+                                    rel="2">Processing</a>
+                        
+                                <a data-sort="0347" 
+                                    href="/archive/?tag=R"
+                                    title="R"
+                                    style="color: #337ab7 !important;"
+                                    rel="2">R</a>
+                        
+                                <a data-sort="0347" 
+                                    href="/archive/?tag=Steam"
+                                    title="Steam"
+                                    style="color: #337ab7 !important;"
+                                    rel="2">Steam</a>
+                        
+                                <a data-sort="0347" 
+                                    href="/archive/?tag=filesystem"
+                                    title="filesystem"
+                                    style="color: #337ab7 !important;"
+                                    rel="2">filesystem</a>
+                        
+                                <a data-sort="0347" 
+                                    href="/archive/?tag=quarto"
+                                    title="quarto"
+                                    style="color: #337ab7 !important;"
+                                    rel="2">quarto</a>
+                        
+                                <a data-sort="0347" 
+                                    href="/archive/?tag=regex"
+                                    title="regex"
+                                    style="color: #337ab7 !important;"
+                                    rel="2">regex</a>
+                    </div>
+
+                <br>
+
+                <b><fontsize="5">Leave a Comment</font><br>(注意：GitHub Accountが必要となります）</b>
+                
+                <script src="https://utteranc.es/client.js"
+                    repo="RyoNakagami/RyoNakagami.github.io"
+                    issue-term="url"
+                    theme="github-light"
+                    crossorigin="anonymous"
+                    async>Reduce unused JavaScript
+                
+                </script>
+
+
+            </div>  
+
+    <!-- Side Catalog Container -->
+        
+            <div class="
+                col-lg-1 col-lg-offset-0
+                visible-lg-block
+                sidebar-container
+                catalog-container">
+                <div class="side-catalog fixed" style="margin-top:3%">
+                    <hr class="hidden-sm hidden-xs">
+                    <h5>
+                        <a class="catalog-toggle" href="#">CONTENTS</a>
+                    </h5>
+                    <ul class="catalog-body"></ul>
+                </div>
+            </div>
+        
+    <!-- Sidebar Container -->
+            <!-- <div class="
+                col-lg-10 col-lg-offset-1
+                col-md-10 col-md-offset-1
+                sidebar-container row"> -->
+                <!-- 
+<hr>
+<h5>FRIENDS</h5>
+<ul class="list-inline">
+  
+  <li><a href="https://twitter.com/bluesky0804?ref_src=twsrc%5Egoogle%7Ctwcamp%5Eserp%7Ctwgr%5Eauthor">bluesky0804</a></li>
+  
+</ul>
+
+ -->
+            </div>
+        </div>
+    </div>
+</article>
+
+<!-- add support for mathjax by voleking-->
+
+
+
+
+<!-- async load function -->
+<script>
+    function async(u, c) {
+      var d = document, t = 'script',
+          o = d.createElement(t),
+          s = d.getElementsByTagName(t)[0];
+      o.src = u;
+      if (c) { o.addEventListener('load', function (e) { c(null, e); }, false); }
+      s.parentNode.insertBefore(o, s);
+    }
+</script>
+<!-- anchor-js, Doc:http://bryanbraun.github.io/anchorjs/ -->
+<script>
+    async("//cdnjs.cloudflare.com/ajax/libs/anchor-js/1.1.1/anchor.min.js",function(){
+        anchors.options = {
+          visible: 'hover',
+          placement: 'right',
+          // icon: '#'
+        };
+        anchors.add().remove('.intro-header h1').remove('.subheading').remove('.sidebar-container h5');
+    })
+</script>
+<style>
+    /* place left on bigger screen */
+    @media all and (min-width: 800px) {
+        .anchorjs-link{
+            position: absolute;
+            left: -0.75em;
+            font-size: 1.1em;
+            margin-top : -0.1em;
+        }
+    }
+</style>
+
+
+<body>
+    <!-- enable mermaid language on markdown post -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/mermaid/10.6.1/mermaid.min.js"></script>
+<script>
+   mermaid.initialize({
+       startOnLoad:true,
+       theme: 'default'
+   });
+   window.mermaid.init(undefined, document.querySelectorAll('.language-mermaid'));
+</script>
+
+</body>
+
+    <script>
+    
+    var elements = document.querySelectorAll('p');
+    Array.prototype.forEach.call(elements, function(el, i){
+        if(el.innerHTML=='[expand]') {
+            var parentcontent = el.parentNode.innerHTML.replace('<p>[expand]</p>','<div class="expand" style="display: none; height: 0; overflow: hidden;">').replace('<p>[/expand]</p>','</div>');
+            el.parentNode.innerHTML = parentcontent;
+        }
+    });
+
+    var elements = document.querySelectorAll('div.expand');
+    Array.prototype.forEach.call(elements, function(el, i){
+        el.previousElementSibling.innerHTML = el.previousElementSibling.innerHTML + '<span>..&nbsp; <a href="#" style="cursor: pointer;" onclick="this.parentNode.parentNode.nextElementSibling.style.display = \'block\'; this.parentNode.parentNode.nextElementSibling.style.height = \'auto\'; this.parentNode.style.display = \'none\';">read&nbsp;more&nbsp;&rarr;</a></span>';
+    });
+
+</script>
+
+    <!-- Footer -->
+<footer>
+    <div class="container">
+        <div class="row">
+            <!--<div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1"> -->
+                <!-- SNS Link -->
+            
+
+
+<ul class="list-inline text-center">
+
+
+  
+  
+  
+  
+  <li>
+    <a target="_blank" href="https://github.com/RyoNakagami">
+      <span class="fa-stack fa-lg">
+        <i class="fa fa-circle fa-stack-2x"></i>
+        <i class="fa fa-github fa-stack-1x fa-inverse"></i>
+      </span>
+    </a>
+  </li>
+  
+  
+</ul>
+
+            
+            <p class="copyright text-muted">
+                Copyright &copy; Ryo's Tech Blog 2025
+                <br>
+                Powered by <a href="https://ryonakagami.github.io">Ryo's Tech Blog</a> |
+                <iframe style="margin-left: 2px; margin-bottom:-5px;" frameborder="0" scrolling="0" width="100px"
+                    height="20px"
+                    title="RyoNakagami.github.io github stars"
+                    src="https://ghbtns.com/github-btn.html?user=RyoNakagami&repo=RyoNakagami.github.io&type=star&count=true">
+                </iframe>
+            </p>
+            <!--</div> -->
+        </div>
+    </div>
+</footer>
+
+<!-- jQuery -->
+<script src="/js/jquery.min.js "></script>
+
+<!-- Bootstrap Core JavaScript -->
+<!-- Currently, only navbar scroll-down effect at desktop still depends on this -->
+<script src="/js/bootstrap.min.js "></script>
+
+<!-- Custom Theme JavaScript -->
+<script src="/js/ryo-blog.min.js "></script>
+
+<!-- Simple Jekyll Search -->
+<script src="/js/simple-jekyll-search.min.js"></script>
+
+<!-- Service Worker -->
+
+<script src="/js/snackbar.js "></script>
+<script src="/js/sw-registration.js "></script>
+
+
+<!-- async load function -->
+<script>
+    function async(u, c) {
+        var d = document, t = 'script',
+            o = d.createElement(t),
+            s = d.getElementsByTagName(t)[0];
+        o.src = u;
+        if (c) { o.addEventListener('load', function (e) { c(null, e); }, false); }
+        s.parentNode.insertBefore(o, s);
+    }
+</script>
+
+<!--
+     Because of the native support for backtick-style fenced code blocks
+     right within the Markdown is landed in Github Pages,
+     From V1.6, There is no need for Highlight.js,
+     so Huxblog drops it officially.
+
+     - https://github.com/blog/2100-github-pages-now-faster-and-simpler-with-jekyll-3-0
+     - https://help.github.com/articles/creating-and-highlighting-code-blocks/
+     - https://github.com/jneen/rouge/wiki/list-of-supported-languages-and-lexers
+-->
+<!--
+    <script>
+        async("http://cdn.bootcss.com/highlight.js/8.6/highlight.min.js", function(){
+            hljs.initHighlightingOnLoad();
+        })
+    </script>
+    <link href="http://cdn.bootcss.com/highlight.js/8.6/styles/github.min.css" rel="stylesheet">
+-->
+
+
+
+
+
+
+
+<!--fastClick.js -->
+<script>
+    async("//cdnjs.cloudflare.com/ajax/libs/fastclick/1.0.6/fastclick.min.js", function () {
+        var $nav = document.querySelector("nav");
+        if ($nav) FastClick.attach($nav);
+    })
+</script>
+
+
+<!-- Global site tag (gtag.js) - Google Analytics -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-LVL413SV09"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+  gtag('config', 'G-LVL413SV09');
+</script>
+
+
+
+<!-- Side Catalog -->
+
+<script type="text/javascript">
+    function generateCatalog(selector) {
+
+        // interop with multilangual 
+        if ('' == 'true') {
+            _containerSelector = 'div.post-container.active'
+        } else {
+            _containerSelector = 'div.post-container'
+        }
+
+        // init
+        var P = $(_containerSelector), a, n, t, l, i, c;
+        a = P.find('h1,h2,h3,h4,h5,h6');
+
+        // clean
+        $(selector).html('')
+
+        // appending
+        a.each(function () {
+            n = $(this).prop('tagName').toLowerCase();
+            i = "#" + $(this).prop('id');
+            t = $(this).text();
+            c = $('<a href="' + i + '" rel="nofollow">' + t + '</a>');
+            l = $('<li class="' + n + '_nav"></li>').append(c);
+            $(selector).append(l);
+        });
+        return true;
+    }
+
+    generateCatalog(".catalog-body");
+
+    // toggle side catalog
+    $(".catalog-toggle").click((function (e) {
+        e.preventDefault();
+        $('.side-catalog').toggleClass("fold")
+    }))
+
+    /*
+     * Doc: https://github.com/davist11/jQuery-One-Page-Nav
+     * Fork by Hux to support padding
+     */
+    async("/js/jquery.nav.js", function () {
+        $('.catalog-body').onePageNav({
+            currentClass: "active",
+            changeHash: !1,
+            easing: "swing",
+            filter: "",
+            scrollSpeed: 700,
+            scrollOffset: 0,
+            scrollThreshold: .2,
+            begin: null,
+            end: null,
+            scrollChange: null,
+            padding: 80
+        });
+    });
+</script>
+
+
+
+<!-- Multi-Lingual -->
+
+
+<!-- Simple Jekyll Search -->
+<script>
+    // https://stackoverflow.com/questions/1912501/unescape-html-entities-in-javascript
+    function htmlDecode(input) {
+        var e = document.createElement('textarea');
+        e.innerHTML = input;
+        // handle case of empty input
+        return e.childNodes.length === 0 ? "" : e.childNodes[0].nodeValue;
+    }
+
+    SimpleJekyllSearch({
+        searchInput: document.getElementById('search-input'),
+        resultsContainer: document.getElementById('search-results'),
+        json: '/search.json',
+        searchResultTemplate: '<div class="post-preview item"><a href="{url}"><h2 class="post-title">{title}</h2><h3 class="post-subtitle">{subtitle}</h3><hr></a></div>',
+        noResultsText: 'No results',
+        limit: 50,
+        fuzzy: false,
+        // a hack to get escaped subtitle unescaped. for some reason, 
+        // post.subtitle w/o escape filter nuke entire search.
+        templateMiddleware: function (prop, value, template) {
+            if (prop === 'subtitle' || prop === 'title') {
+                if (value.indexOf("code")) {
+                    return htmlDecode(value);
+                } else {
+                    return value;
+                }
+            }
+        }
+    });
+
+    $(document).ready(function () {
+        var $searchPage = $('.search-page');
+        var $searchOpen = $('.search-icon');
+        var $searchClose = $('.search-icon-close');
+        var $searchInput = $('#search-input');
+        var $body = $('body');
+
+        $searchOpen.on('click', function (e) {
+            e.preventDefault();
+            $searchPage.toggleClass('search-active');
+            var prevClasses = $body.attr('class') || '';
+            setTimeout(function () {
+                $body.addClass('no-scroll');
+            }, 400)
+
+            if ($searchPage.hasClass('search-active')) {
+                $searchClose.on('click', function (e) {
+                    e.preventDefault();
+                    $searchPage.removeClass('search-active');
+                    $body.attr('class', prevClasses);  // from closure 
+                });
+                $searchInput.focus();
+            }
+        });
+    });
+</script>
+
+
+
+<!-- Image to Github 
+<img src="/img/icon_wechat.png" width="0" height="0" />
+<-- Migrate from head to bottom, no longer block render and still work -->
+<script>
+    
+    var elements = document.querySelectorAll('p');
+    Array.prototype.forEach.call(elements, function(el, i){
+        if(el.innerHTML=='[expand]') {
+            var parentcontent = el.parentNode.innerHTML.replace('<p>[expand]</p>','<div class="expand" style="display: none; height: 0; overflow: hidden;">').replace('<p>[/expand]</p>','</div>');
+            el.parentNode.innerHTML = parentcontent;
+        }
+    });
+
+    var elements = document.querySelectorAll('div.expand');
+    Array.prototype.forEach.call(elements, function(el, i){
+        el.previousElementSibling.innerHTML = el.previousElementSibling.innerHTML + '<span>..&nbsp; <a href="#" style="cursor: pointer;" onclick="this.parentNode.parentNode.nextElementSibling.style.display = \'block\'; this.parentNode.parentNode.nextElementSibling.style.height = \'auto\'; this.parentNode.style.display = \'none\';">read&nbsp;more&nbsp;&rarr;</a></span>';
+    });
+
+</script>
+
+</body>
+</html>

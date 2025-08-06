@@ -1,0 +1,2927 @@
+<!DOCTYPE html>
+<html lang="ja">
+
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="google-site-verification" content="gSMaswRY9iRfG4QaQrx6aj481bgr503qEZh-QPsMYNU" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+    <meta name="description" content="元経済学徒, 現在どっかでデータサイエンティストもどきやってる人間の勉強日記">
+    <meta name="keywords"  content="Statistics, Economics, Econometrics, Python, C, Shell, Linux, Data scientist">
+    <meta name="theme-color" content="#000000">
+    
+    <!-- Open Graph -->
+    <meta property="og:title" content="統計検定：ポワソン分布と条件付き分布 - Ryo's Tech Blog">
+    
+    <meta property="og:type" content="article">
+    <meta property="og:description" content="Table of Contents
+
+
+
+">
+    
+    <meta property="article:published_time" content="2021-12-27T00:00:00Z">
+    
+    
+    <meta property="article:author" content="Ryo">
+    
+    
+    <meta property="article:tag" content="統計">
+    
+    <meta property="article:tag" content="統計検定">
+    
+    <meta property="article:tag" content="Data visualization">
+    
+    <meta property="article:tag" content="ポワソン分布">
+    
+    
+    <meta property="og:image" content="https://ryonakagami.github.io/img/avatar_rio_cat.jpg">
+    <meta property="og:url" content="https://ryonakagami.github.io/2021/12/27/poisson-distribution/">
+    <meta property="og:site_name" content="Ryo's Tech Blog">
+    
+    <title>統計検定：ポワソン分布と条件付き分布 - Ryo's Tech Blog</title>
+
+    <!-- Web App Manifest -->
+    <link rel="manifest" href="/pwa/manifest.json">
+
+    <!-- Favicon -->
+    <link rel="shortcut icon" href="/img/favicon.ico">
+    
+    <!-- Canonical URL -->
+    <link rel="canonical" href="https://ryonakagami.github.io/2021/12/27/poisson-distribution/">
+
+    <!-- Bootstrap Core CSS -->
+    <link rel="stylesheet" href="/css/bootstrap.min.css">
+
+    <!-- Custom CSS -->
+    <link rel="stylesheet" href="/css/ryo-blog.min.css">
+
+    <!-- Custom Fonts -->
+    <!-- <link href="http://maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css" rel="stylesheet" type="text/css"> -->
+    <!-- https://stackoverflow.com/questions/45983301/google-pagespeed-eliminate-render-blocking-resources-above-the-fold-caused-fro -->
+    <!--link href="//cdnjs.cloudflare.com/ajax/libs/font-awesome/4.6.3/css/font-awesome.min.css" rel="stylesheet" type="text/css"-->
+    <!--<link href="https://fonts.googleapis.com/earlyaccess/notosansjapanese.css" rel="stylesheet" type="text/css" media="print" onload="this.media='all'" > -->
+    <link href="https://fonts.googleapis.com/earlyaccess/notosansjapanese.css" rel="preload" type="text/css" media="print" onload="this.media='all'" >
+
+
+    <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
+    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+    <!--[if lt IE 9]>
+        <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+        <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
+    <![endif]-->
+
+    <!-- ga & ba script hoook -->
+    <script></script>
+</head>
+
+
+<!-- hack iOS CSS :active style -->
+<body ontouchstart="">
+
+    <!-- Navigation -->
+
+<nav class="navbar navbar-default navbar-custom navbar-fixed-top invert">
+    
+        <div class="container-fluid">
+            <!-- Brand and toggle get grouped for better mobile display -->
+            <div class="navbar-header page-scroll">
+                <button type="button" class="navbar-toggle">
+                    <span class="sr-only">Toggle navigation</span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
+                <a class="navbar-brand" href="/">Ryo's Tech Blog</a>
+            </div>
+
+            <!-- Collect the nav links, forms, and other content for toggling -->
+            <div id="huxblog_navbar">
+                <div class="navbar-collapse">
+                    <ul class="nav navbar-nav navbar-left">
+                                                <li>
+                            <a href="https://ryonakagami.github.io/statistics-for-regression-monkey/">Statistics for
+                                Regression Monkeys</a>
+                        </li>
+                        <li>
+                            <a href="https://ohgoshgit.github.io/">OhGoshGit!?!</a>
+                        </li>
+                        <!-- <li>
+                            <a><button onclick="mainDropDown()" style="border-color: rgba(70, 83, 111, 0.989); background-color: rgba(70, 83, 111, 0.989)">Dropdown</button></a> 
+                            <div id="myDropdown" class="dropdown-content">
+                              <a href="#" onclick="subMenu(this)">A</a>
+                              <div class="sub-menu-item" id="subMenu1">
+                              <a href="#">A.1</a>
+                              </div>
+                              <a href="#" onclick="subMenu(this)">B</a>
+                              <div class="sub-menu-item" id="subMenu2">
+                              <a href="#">B.1</a>
+                              </div>
+                              <a href="#">C</a>
+                              <a href="#">D</a>
+                              <a href="#">E</a>
+                              <a href="#">F</a>
+                              <a href="#">G</a>
+                            </div>
+                        </li> -->
+                    </ul>
+                    </ul>
+                    <ul class="nav navbar-nav navbar-right">
+                        
+                        
+                        
+                        
+                        <li>
+                            <a href="/about/">About</a>
+                        </li>
+                        
+                        
+                        
+                        <li>
+                            <a href="/archive/">Tag Search</a>
+                        </li>
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        <!--about fa-search see https://stackoverflow.com/questions/41950677/how-to-make-my-search-icon-fixed-->
+                        <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css"
+                            rel="stylesheet" />
+                        <li class="search-icon">
+                            <a href="javascript:void(0)" aria-label="Search" target="_blank">
+                                <i class="fa fa-search"></i>
+                            </a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+            <!-- /.navbar-collapse -->
+        </div>
+        <!-- /.container -->
+    </nav>
+
+    <script>
+        // Drop Bootstarp low-performance Navbar
+        // Use customize navbar with high-quality material design animation
+        // in high-perf jank-free CSS3 implementation
+        var $body = document.body;
+        var $toggle = document.querySelector('.navbar-toggle');
+        var $navbar = document.querySelector('#huxblog_navbar');
+        var $collapse = document.querySelector('.navbar-collapse');
+
+        var __HuxNav__ = {
+            close: function () {
+                $navbar.className = " ";
+                // wait until animation end.
+                setTimeout(function () {
+                    // prevent frequently toggle
+                    if ($navbar.className.indexOf('in') < 0) {
+                        $collapse.style.height = "0px"
+                    }
+                }, 400)
+            },
+            open: function () {
+                $collapse.style.height = "auto"
+                $navbar.className += " in";
+            }
+        }
+
+        // Bind Event
+        $toggle.addEventListener('click', function (e) {
+            if ($navbar.className.indexOf('in') > 0) {
+                __HuxNav__.close()
+            } else {
+                __HuxNav__.open()
+            }
+        })
+
+        /**
+         * Since Fastclick is used to delegate 'touchstart' globally
+         * to hack 300ms delay in iOS by performing a fake 'click',
+         * Using 'e.stopPropagation' to stop 'touchstart' event from 
+         * $toggle/$collapse will break global delegation.
+         * 
+         * Instead, we use a 'e.target' filter to prevent handler
+         * added to document close HuxNav.  
+         *
+         * Also, we use 'click' instead of 'touchstart' as compromise
+         */
+        document.addEventListener('click', function (e) {
+            if (e.target == $toggle) return;
+            if (e.target.className == 'icon-bar') return;
+            __HuxNav__.close();
+        })
+    </script>
+
+    <!-- Search -->
+<div class="search-page">
+  <div class="search-icon-close-container">
+    <span class="search-icon-close">
+      <i class="fa fa-chevron-down"></i>
+    </span>
+  </div>
+  <div class="search-main container">
+    <div class="row">
+      <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+        <form></form>
+        <input type="text" id="search-input" placeholder="$ grep...">
+        </form>
+        <div id="search-results" class="mini-post-list"></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+    <!-- Image to hack wechat -->
+<!-- <img src="/img/icon_wechat.png" width="0" height="0"> -->
+<!-- <img src="/img/home-bg.jpg" width="0" height="0"> -->
+
+<!-- Post Header -->
+
+
+
+<style type="text/css">
+    header.intro-header{
+        position: relative;
+        background-image: url('/img/home-bg.jpg');
+        background: ;
+    }
+
+    
+    header.intro-header .header-mask{
+        width: 100%;
+        height: 100%;
+        position: absolute;
+        background: rgba(0,0,0, 0.0);
+    }
+    
+</style>
+
+
+
+
+<header class="intro-header style-text" >
+
+    <div class="header-mask"></div>
+    
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+                <div class="post-heading">
+                    <div class="tags">
+                        
+                        <a class="tag" href="/archive/?tag=%E7%B5%B1%E8%A8%88" title="統計">統計</a>
+                        
+                        <a class="tag" href="/archive/?tag=%E7%B5%B1%E8%A8%88%E6%A4%9C%E5%AE%9A" title="統計検定">統計検定</a>
+                        
+                        <a class="tag" href="/archive/?tag=Data+visualization" title="Data visualization">Data visualization</a>
+                        
+                        <a class="tag" href="/archive/?tag=%E3%83%9D%E3%83%AF%E3%82%BD%E3%83%B3%E5%88%86%E5%B8%83" title="ポワソン分布">ポワソン分布</a>
+                        
+                    </div>
+                    <h1>統計検定：ポワソン分布と条件付き分布</h1>
+                    
+                    <h2 class="subheading">MLE, Method of Moment, EMアルゴリズムによるパラメータ推定</h2>
+                    <p>
+                        公開日: 2021-12-27
+                        
+                        
+                    </p>
+                </div>
+            </div>
+        </div>
+    </div>
+</header>
+
+
+
+
+
+
+
+<!-- Post Content -->
+<article>
+    <div class="container">
+        <div class="row">
+
+    <!-- Post Container -->
+         <div class="
+                col-lg-8 col-lg-offset-2
+                col-md-10 col-md-offset-1
+                post-container">
+
+                <!-- Multi-Lingual -->
+                
+
+				<p><strong>Table of Contents</strong>
+<!-- START doctoc generated TOC please keep comment here to allow auto update -->
+<!-- DON'T EDIT THIS SECTION, INSTEAD RE-RUN doctoc TO UPDATE --></p>
+
+<ul>
+  <li><a href="#1-%E3%83%9D%E3%83%AF%E3%82%BD%E3%83%B3%E5%88%86%E5%B8%83%E3%81%AE%E6%80%A7%E8%B3%AA">1. ポワソン分布の性質</a>
+    <ul>
+      <li><a href="#%E3%83%9D%E3%82%A2%E3%82%BD%E3%83%B3%E5%88%86%E5%B8%83%E3%81%8C%E7%A2%BA%E7%8E%87%E5%88%86%E5%B8%83%E3%81%A7%E3%81%82%E3%82%8B%E3%81%93%E3%81%A8%E3%81%AE%E7%A2%BA%E8%AA%8D">ポアソン分布が確率分布であることの確認</a></li>
+      <li><a href="#%E3%83%9D%E3%82%A2%E3%82%BD%E3%83%B3%E5%88%86%E5%B8%83%E3%81%AE%E5%B9%B3%E5%9D%87%E3%81%A8%E5%88%86%E6%95%A3%E3%81%AE%E5%B0%8E%E5%87%BA">ポアソン分布の平均と分散の導出</a>
+        <ul>
+          <li><a href="#%E3%83%A2%E3%83%BC%E3%83%A1%E3%83%B3%E3%83%88%E6%AF%8D%E9%96%A2%E6%95%B0%E3%81%8B%E3%82%89%E3%81%AE%E6%9C%9F%E5%BE%85%E5%80%A4%E3%81%A8%E5%88%86%E6%95%A3%E3%81%AE%E5%B0%8E%E5%87%BA">モーメント母関数からの期待値と分散の導出</a></li>
+        </ul>
+      </li>
+      <li><a href="#%E3%83%9D%E3%83%AF%E3%82%BD%E3%83%B3%E5%88%86%E5%B8%83%E3%81%AE%E5%86%8D%E7%94%9F%E6%80%A7">ポワソン分布の再生性</a></li>
+      <li><a href="#%E3%83%9D%E3%83%AF%E3%82%BD%E3%83%B3%E3%83%91%E3%83%A9%E3%83%A1%E3%83%BC%E3%82%BF%E3%83%BC-%5Clambda%E3%81%AE%E6%8E%A8%E5%AE%9A">ポワソンパラメーター $\lambda$の推定</a></li>
+      <li><a href="#%E3%83%9D%E3%83%AF%E3%82%BD%E3%83%B3%E5%88%86%E5%B8%83%E3%81%AE%E6%9C%80%E9%A0%BB%E5%80%A4%E3%81%AE%E5%B0%8E%E5%87%BA">ポワソン分布の最頻値の導出</a></li>
+      <li><a href="#%E4%BB%96%E3%81%AE%E7%A2%BA%E7%8E%87%E5%A4%89%E6%95%B0%E5%88%86%E5%B8%83%E3%81%A8%E3%81%AE%E9%96%A2%E9%80%A3">他の確率変数分布との関連</a>
+        <ul>
+          <li><a href="#%E4%BA%8C%E9%A0%85%E5%88%86%E5%B8%83%E3%81%A8%E3%81%AE%E3%81%A4%E3%81%AA%E3%81%8C%E3%82%8A">二項分布とのつながり</a></li>
+          <li><a href="#%E6%A8%99%E6%BA%96%E6%AD%A3%E8%A6%8F%E5%88%86%E5%B8%83%E3%81%B8%E3%81%AE%E5%8F%8E%E6%9D%9F-2017%E5%B9%B4%E7%B5%B1%E8%A8%88%E6%A4%9C%E5%AE%9A%EF%BC%91%E7%B4%9A%E7%B5%B1%E8%A8%88%E6%95%B0%E7%90%86%EF%BC%93%E5%95%8F">標準正規分布への収束: 2017年統計検定１級統計数理３問</a></li>
+        </ul>
+      </li>
+    </ul>
+  </li>
+  <li><a href="#2-%E6%9D%A1%E4%BB%B6%E4%BB%98%E3%81%8D%E3%83%9D%E3%83%AF%E3%82%BD%E3%83%B3%E5%88%86%E5%B8%83">2. 条件付きポワソン分布</a>
+    <ul>
+      <li><a href="#2016%E5%B9%B4%E7%B5%B1%E8%A8%88%E6%A4%9C%E5%AE%9A%EF%BC%91%E7%B4%9A%E8%A9%A6%E9%A8%93%E7%B5%B1%E8%A8%88%E5%BF%9C%E7%94%A8%E7%90%86%E5%B7%A5%E5%AD%A6%E5%95%8F%EF%BC%94%E6%94%B9%E9%A1%8C">2016年統計検定１級試験統計応用（理工学）問４改題</a>
+        <ul>
+          <li><a href="#%E8%A7%A3%E7%AD%941%E3%83%A2%E3%83%BC%E3%83%A1%E3%83%B3%E3%83%88%E6%AF%8D%E9%96%A2%E6%95%B0%E3%81%A8%E6%9D%A1%E4%BB%B6%E4%BB%98%E3%81%8D%E6%9C%9F%E5%BE%85%E5%80%A4">解答(1)：モーメント母関数と条件付き期待値</a></li>
+          <li><a href="#%E8%A7%A3%E7%AD%942-%E6%95%B0%E5%80%A4%E8%A7%A3%E3%82%92%E4%BA%8C%E5%88%86%E6%8E%A2%E7%B4%A2%E6%B3%95%E3%81%A7%E8%A8%88%E7%AE%97%E3%81%99%E3%82%8B">解答(2): 数値解を二分探索法で計算する</a></li>
+          <li><a href="#%E8%A7%A3%E7%AD%943-mle%E3%82%92%E7%94%A8%E3%81%84%E3%81%9F%E3%83%91%E3%83%A9%E3%83%A1%E3%83%BC%E3%82%BF%E3%83%BC%E3%81%AE%E6%95%B0%E5%80%A4%E8%A8%88%E7%AE%97%E6%8E%A8%E5%AE%9A">解答(3): MLEを用いたパラメーターの数値計算推定</a></li>
+          <li><a href="#%E5%8F%82%E8%80%83-%E3%83%A2%E3%83%BC%E3%83%A1%E3%83%B3%E3%83%88%E6%B3%95%E3%81%AB%E5%9F%BA%E3%81%A5%E3%81%8F%E5%88%86%E6%95%A3%E3%81%AE%E5%B0%8E%E5%87%BA">参考： モーメント法に基づく分散の導出</a></li>
+        </ul>
+      </li>
+      <li><a href="#2019%E5%B9%B4%E7%B5%B1%E8%A8%88%E6%A4%9C%E5%AE%9A%E6%BA%96%EF%BC%91%E7%B4%9A%E8%A9%A6%E9%A8%93">2019年統計検定準１級試験</a>
+        <ul>
+          <li><a href="#%E8%A7%A3%E7%AD%941%E3%83%9D%E3%83%AF%E3%82%BD%E3%83%B3%E5%88%86%E5%B8%83%E3%81%AE%E9%83%A8%E5%88%86%E5%92%8C">解答(1)：ポワソン分布の部分和</a></li>
+          <li><a href="#%E8%A7%A3%E7%AD%942-%E6%9D%A1%E4%BB%B6%E4%BB%98%E3%81%8D%E5%88%86%E5%B8%83%E3%81%A8%E4%BA%8C%E9%A0%85%E5%88%86%E5%B8%83">解答(2): 条件付き分布と二項分布</a></li>
+        </ul>
+      </li>
+    </ul>
+  </li>
+  <li><a href="#3-%E3%83%9D%E3%83%AF%E3%82%BD%E3%83%B3%E5%88%86%E5%B8%83%E3%81%AE%E9%81%A9%E5%90%88%E5%BA%A6%E6%A4%9C%E5%AE%9A">3. ポワソン分布の適合度検定</a>
+    <ul>
+      <li><a href="#%E3%82%AB%E3%82%A4%E4%BA%8C%E4%B9%97%E9%81%A9%E5%90%88%E5%BA%A6%E6%A4%9C%E5%AE%9A">カイ二乗適合度検定</a></li>
+      <li><a href="#%E7%B7%B4%E7%BF%92%E5%95%8F%E9%A1%8C2019%E5%B9%B4%E7%B5%B1%E8%A8%88%E6%A4%9C%E5%AE%9A%EF%BC%91%E7%B4%9A%E8%A9%A6%E9%A8%93%E6%94%B9%E9%A1%8C">練習問題：2019年統計検定１級試験改題</a></li>
+    </ul>
+  </li>
+  <li><a href="#4-zero-inflated-poisson-model">4. Zero-inflated Poisson Model</a>
+    <ul>
+      <li><a href="#%E3%83%A2%E3%83%BC%E3%83%A1%E3%83%B3%E3%83%88%E6%B3%95%E3%81%AB%E3%82%88%E3%82%8B%E6%8E%A8%E5%AE%9A">モーメント法による推定</a></li>
+      <li><a href="#mle%E3%81%AB%E3%82%88%E3%82%8B%E6%8E%A8%E5%AE%9A%E3%81%9D%E3%81%AE%EF%BC%91">MLEによる推定その１</a></li>
+      <li><a href="#mle%E3%81%AB%E3%82%88%E3%82%8B%E6%8E%A8%E5%AE%9A%E3%81%9D%E3%81%AE2-em%E3%82%A2%E3%83%AB%E3%82%B4%E3%83%AA%E3%82%BA%E3%83%A0">MLEによる推定その2: EMアルゴリズム</a></li>
+    </ul>
+  </li>
+  <li><a href="#appendix-mle-vs-mle-with-em-vs-method-of-moment">Appendix: MLE vs MLE with EM vs Method of Moment</a></li>
+  <li><a href="#reference">Reference</a></li>
+</ul>
+
+<!-- END doctoc generated TOC please keep comment here to allow auto update -->
+
+<h2 id="1-ポワソン分布の性質">1. ポワソン分布の性質</h2>
+<h3 id="ポアソン分布が確率分布であることの確認">ポアソン分布が確率分布であることの確認</h3>
+
+\[p_x(x) = \exp(-\lambda_x)\frac{\lambda_x^x}{x!}, \ \ x = 0, 1, 2, 3,\cdots\]
+
+<p>という形でポワソン分布に従う確率変数の密度関数を表現することができます. ここで $\sum_{x=0}^\infty p_x(x)=1$を確認します.</p>
+
+<div class="math display" style="overflow: auto">
+  <p>\(\begin{align*}
+\sum_{x=0}^\infty p_x(x) &amp; = \sum_{x=0}^\infty \exp(-\lambda_x)\frac{\lambda_x^x}{x!}\\
+&amp;= \exp(-\lambda_x) \sum_{x=0}^\infty \frac{\lambda_x^x}{x!}\\
+&amp;= \exp(-\lambda_x)\left(1 + \lambda_x + \frac{\lambda_x^2}{2!}+\cdots \right)\\
+&amp;= \exp(-\lambda_x) \exp(\lambda_x) \because \text{ マクローリン展開より}\\
+&amp;= 1
+\end{align*}\)</p>
+</div>
+
+<h3 id="ポアソン分布の平均と分散の導出">ポアソン分布の平均と分散の導出</h3>
+
+<blockquote>
+  <p>ポアソン分布の平均</p>
+</blockquote>
+
+<div class="math display" style="overflow: auto">
+  <p>\(\begin{align*}
+\sum_{x=0}^\infty \exp(-\lambda)\frac{\lambda^x}{x!}x &amp;= \exp(-\lambda)\lambda\sum_{x=1}^\infty \frac{\lambda^{x-1}}{(x-1)!}\\
+&amp;= \exp(-\lambda)\lambda\sum_{x=1}^\infty \frac{\lambda^{x-1}}{(x-1)!}\\
+&amp;= \exp(-\lambda)\lambda\sum_{k=0}^\infty \frac{\lambda^{k}}{(k)!}\\
+&amp;= \exp(-\lambda)\lambda\exp(\lambda)\\
+&amp;= \lambda
+\end{align*}\)</p>
+</div>
+
+<blockquote>
+  <p>ポアソン分布の分散</p>
+</blockquote>
+
+<div class="math display" style="overflow: auto">
+  <p>\(\begin{align*}
+\sum_{x=0}^\infty \exp(-\lambda)\frac{\lambda^x}{x!}x^2 &amp;= \exp(-\lambda)\lambda\sum_{x=1}^\infty \frac{\lambda^{x-1}}{(x-1)!}x\\
+&amp;= \exp(-\lambda)\lambda\sum_{x=1}^\infty \frac{\lambda^{x-1}}{(x-1)!}(x-1 + 1)\\
+&amp;= \exp(-\lambda)\lambda \left(\lambda\sum_{x=2}^\infty \frac{\lambda^{x-2}}{(x-2)!}+\sum_{x=1}^\infty \frac{\lambda^{x-1}}{(x-1)!}\right)\\
+&amp;= \exp(-\lambda)\lambda (\lambda \exp(\lambda) + \exp(\lambda))\\[8pt]
+&amp;= \lambda^2 + \lambda
+\end{align*}\)</p>
+</div>
+
+<p>従って、</p>
+
+\[E[X^2] - E[X]^2 = \lambda^2 + \lambda - \lambda^2 = \lambda\]
+
+<h4 id="モーメント母関数からの期待値と分散の導出">モーメント母関数からの期待値と分散の導出</h4>
+
+<blockquote>
+  <p>モーメント母関数の導出</p>
+</blockquote>
+
+<p>モーメント母関数は（存在するならば）、$M_X(t) = \mathbf E[\exp(tX)]$と定義されます. 従って、</p>
+
+\[\begin{align*}
+M_X(t) &amp;= \sum_{x=0}^\infty \exp(tx)\exp(-\lambda)\frac{\lambda^x}{x!}\\
+&amp;= \exp(-\lambda) \sum \frac{(\exp(t)\lambda)^x}{x!}\\[8pt]
+&amp;= \exp(-\lambda)\exp(\exp(t)\lambda)\\[8pt]
+&amp;= \exp(\lambda(\exp(t) - 1))
+\end{align*}\]
+
+<p>従って、期待値と分散は</p>
+
+\[\begin{align*}
+E[X] &amp;= M_X'(0)\\[8pt]
+&amp;= \lambda\exp(t)[\exp(\lambda(\exp(t)-1))]|_{t=0}\\[8pt]
+&amp;= \lambda
+\end{align*}\]
+
+<div class="math display" style="overflow: auto">
+  <p>\(\begin{align*}
+E[X^2] &amp;= M_X^{''}(0)\\[8pt]
+&amp;= \{\lambda\exp(t)[\exp(\lambda(\exp(t)-1))] + (\lambda\exp(t))^2[\exp(\lambda(\exp(t)-1))]\}|_{t=0}\\[8pt]
+&amp;= \lambda + \lambda^2
+\end{align*}\)</p>
+</div>
+
+<p>従って、$V(X) = E[X^2] - E[X]^2 = \lambda$</p>
+
+<h3 id="ポワソン分布の再生性">ポワソン分布の再生性</h3>
+
+<p>$X, Y$がそれぞれ独立にパラメータ$\lambda_X, \lambda_Y$のポワソン分布に従っている時、$Z= X+Y$もポワソン分布に従います.</p>
+
+<blockquote>
+  <p>証明</p>
+</blockquote>
+
+<p>$Z$のMGFがポワソン分布のMGFであることを示せば十分です.</p>
+
+\[\begin{align*}
+M_Z(t) &amp;= E\exp(tZ)]\\[8pt]
+&amp;= E\exp(tX)\exp(tY)]\\[8pt]
+&amp;= E\exp(tX)]E\exp(tY)] \ \ \because \text{独立性より}\\[8pt]
+&amp;= \exp[\lambda_X(\exp(t) - 1)]\exp[\lambda_Y(\exp(t) - 1)]\\[8pt]
+&amp;= \exp[(\lambda_X + \lambda_Y)(\exp(t) - 1)]
+\end{align*}\]
+
+<p>従って, $Z$はパラメーター$\lambda_X+\lambda_Y$に従うポワソン分布であることがわかります.</p>
+
+<h3 id="ポワソンパラメーター-lambdaの推定">ポワソンパラメーター $\lambda$の推定</h3>
+
+<p>まずLikelihood関数を定義します</p>
+
+<div class="math display" style="overflow: auto">
+  <p>\(L(\lambda) = \prod \exp(-\lambda)\frac{\lambda^x}{x!}\)</p>
+</div>
+
+<p>これをlog-likelihood関数に変換し</p>
+
+<div class="math display" style="overflow: auto">
+  <p>\(\log L(\lambda) = -n\lambda + \sum (x\log(\lambda) - \log(x!)) \tag{1.1}\)</p>
+</div>
+
+<p>(1.1)を$\lambda$で微分して０とおくと、</p>
+
+\[\frac{\partial\log(L(\lambda))}{\partial\lambda}|_{\lambda = \lambda^*} = -n + \sum\frac{x}{\lambda^*} = 0\]
+
+<p>従って</p>
+
+\[\lambda^* = \frac{\sum x}{n}\]
+
+<p>よって、標本平均によって、$\lambda$が推定できることがわかる.</p>
+
+<h3 id="ポワソン分布の最頻値の導出">ポワソン分布の最頻値の導出</h3>
+
+\[\begin{align*}
+\frac{p(x+1)}{p(x)} &amp;= \frac{\exp(-\lambda)\lambda^{x+1}/(x+1)!}{\exp(-\lambda)\lambda^{x}/x!}\\
+&amp;= \frac{\lambda}{x+1} \tag{A}
+\end{align*}\]
+
+<p>(A)は$x$について単調減少関数なので</p>
+
+\[\begin{align*}
+&amp;\frac{\lambda}{x+1} \leq 1\\
+&amp;\Rightarrow x \geq \lambda - 1
+\end{align*}\]
+
+<p>を満たす$x$の最小値が最頻値となる. ただし、$\lambda$が整数値を取る場合は $x = \lambda-1$, $x= \lambda$が最頻値となる.</p>
+
+<blockquote>
+  <p>Python</p>
+</blockquote>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
+2
+3
+4
+5
+6
+7
+8
+9
+10
+11
+12
+13
+14
+15
+16
+17
+18
+19
+20
+21
+22
+23
+24
+25
+26
+27
+28
+29
+30
+31
+32
+33
+34
+35
+36
+37
+38
+39
+40
+41
+42
+43
+44
+45
+46
+47
+48
+49
+50
+</pre></td><td class="rouge-code"><pre><span class="k">def</span> <span class="nf">select_most_frequent_point</span><span class="p">(</span><span class="n">lambda_mu</span><span class="p">):</span>
+    <span class="s">""" 
+    Description
+        return the tuple of the most frequent datapoint and lambda_mu
+        
+        Note:
+          When the most frequent datapoint are more than one datapoint, it returns the smaller integer datapoint
+      
+    INPUT
+        lambda_mu:
+            poisson lambda
+    
+    Returns:
+        x: integer
+            the most frequent datapoint based on the poisson distribution with the input lambda.
+
+        x_theory: integer
+           the analytical solution of the most frequent datapoint
+
+        x_hacked: integer
+           the datapoint which is caucluated by an easy way
+           max(np.int64(np.ceil(lambda_mu - eps)) - 1, 0)
+
+        lambda: float
+            the poisson parameter.
+            
+    """</span>
+    <span class="n">eps</span> <span class="o">=</span> <span class="mf">1e-18</span>
+
+    <span class="n">x_range</span> <span class="o">=</span> <span class="n">np</span><span class="p">.</span><span class="n">arange</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">100</span><span class="p">)</span>
+    <span class="n">x_index</span> <span class="o">=</span> <span class="n">np</span><span class="p">.</span><span class="n">argmax</span><span class="p">(</span><span class="n">np</span><span class="p">.</span><span class="n">around</span><span class="p">(</span><span class="n">poisson</span><span class="p">.</span><span class="n">pmf</span><span class="p">(</span><span class="n">x_range</span><span class="p">,</span> <span class="n">lambda_mu</span><span class="p">),</span> <span class="n">decimals</span><span class="o">=</span><span class="mi">8</span><span class="p">))</span> <span class="c1">##HACK: 有効桁は小数点以下8桁
+</span>    <span class="n">x_theory</span> <span class="o">=</span> <span class="n">np</span><span class="p">.</span><span class="nb">min</span><span class="p">(</span><span class="n">x_range</span><span class="p">[</span><span class="n">x_range</span> <span class="o">&gt;=</span> <span class="n">lambda_mu</span> <span class="o">-</span> <span class="mi">1</span><span class="p">])</span>
+    <span class="n">x_tips</span> <span class="o">=</span> <span class="nb">max</span><span class="p">(</span><span class="n">np</span><span class="p">.</span><span class="n">int64</span><span class="p">(</span><span class="n">np</span><span class="p">.</span><span class="n">ceil</span><span class="p">(</span><span class="n">lambda_mu</span> <span class="o">-</span> <span class="n">eps</span><span class="p">))</span> <span class="o">-</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">0</span><span class="p">)</span>
+
+    <span class="k">return</span> <span class="n">x_range</span><span class="p">[</span><span class="n">x_index</span><span class="p">],</span> <span class="n">x_theory</span><span class="p">,</span> <span class="n">x_tips</span><span class="p">,</span> <span class="n">lambda_mu</span>
+
+<span class="c1">### simulation lambda_range
+</span><span class="n">lambda_range</span> <span class="o">=</span> <span class="n">np</span><span class="p">.</span><span class="n">linspace</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">50</span><span class="p">,</span> <span class="mi">201</span><span class="p">)</span>
+
+<span class="c1">### create the object which can calculate the most frequent datapoint and compute vectorization
+</span><span class="n">vectorized_select_most_frequent_point</span> <span class="o">=</span> <span class="n">np</span><span class="p">.</span><span class="n">vectorize</span><span class="p">(</span><span class="n">select_most_frequent_point</span><span class="p">)</span>
+
+<span class="c1">### caculate the simulation
+</span><span class="n">x_simulated</span><span class="p">,</span> <span class="n">x_theory</span><span class="p">,</span> <span class="n">x_hacked</span><span class="p">,</span> <span class="n">lambda_param</span> <span class="o">=</span> <span class="n">vectorized_select_most_frequent_point</span><span class="p">(</span><span class="n">lambda_range</span><span class="p">)</span>
+
+<span class="c1">### compare x_simulated with x_theory
+</span><span class="k">print</span><span class="p">(</span><span class="n">np</span><span class="p">.</span><span class="n">array_equal</span><span class="p">(</span><span class="n">x_simulated</span><span class="p">,</span> <span class="n">x_theory</span><span class="p">,</span> <span class="n">equal_nan</span><span class="o">=</span><span class="bp">True</span><span class="p">))</span>
+
+<span class="c1">### compare x_theory with x_hacked
+</span><span class="k">print</span><span class="p">(</span><span class="n">np</span><span class="p">.</span><span class="n">array_equal</span><span class="p">(</span><span class="n">x_theory</span><span class="p">,</span> <span class="n">x_hacked</span><span class="p">,</span> <span class="n">equal_nan</span><span class="o">=</span><span class="bp">True</span><span class="p">))</span>
+</pre></td></tr></tbody></table></code></pre></div></div>
+
+<h3 id="他の確率変数分布との関連">他の確率変数分布との関連</h3>
+<h4 id="二項分布とのつながり">二項分布とのつながり</h4>
+
+<p>２項分布 $Bin(n, p)$に従う確率変数を$X_n$とし、$np = \lambda$のもとで $n\to\infty, p\to 0$とするとポワソン分布$Po(\lambda)$に収束することが知られています.</p>
+
+<blockquote>
+  <p>確率関数を用いた導出</p>
+</blockquote>
+
+<p>$f(\cdot)$を二項分布$Bin(n, p)$に従う確率変数の確率関数とするとき</p>
+
+<div class="math display" style="overflow: auto">
+  <p>\(\begin{align*}
+f(x) &amp;= \frac{n!}{(n-x)!x!}p^{x}(1 - p)^{n-x}\\
+&amp;= \frac{n!}{(n-x)!x!}\left(1 - \frac{\lambda}{n}\right)^{n}\left(\frac{n}{n - \lambda}\right)^k\left(\frac{\lambda}{n}\right)^k\\
+&amp;= \left(1 - \frac{\lambda}{n}\right)^{n}\frac{\lambda^k}{k!}\left(\frac{n}{n-\lambda}\right)\left(\frac{n-1}{n-\lambda}\right)\cdots\left(\frac{n-k+1}{n-\lambda}\right)\\
+&amp;\to \exp(-\lambda)\frac{\lambda^k}{k!}
+\end{align*}\)</p>
+</div>
+
+<p>よってポワソン分布の確率関数が導出されます.</p>
+
+<blockquote>
+  <p>特性関数を用いた導出</p>
+</blockquote>
+
+<p>二項分布$Bin(n, p)$に従う確率変数の特性関数は</p>
+
+\[\phi(t) = (p\exp(it) + 1 - p)^n\]
+
+<p>これを$np = \lambda$と合わせると</p>
+
+\[\begin{align*}
+\phi(t) &amp;= (p\exp(it) + 1 - p)^n\\
+&amp;= \left(\frac{\lambda}{n}\exp(it) + 1 - \frac{\lambda}{n}\right)^n\\
+&amp;= \left(1 - \frac{\lambda(\exp(it) - 1)}{n}\right)\\
+&amp;\to \exp[(\exp(it)-1)\lambda]
+\end{align*}\]
+
+<p>以上のように、極限値がポワソン分布の特性関数に収束することがわかります.</p>
+
+<h4 id="標準正規分布への収束-2017年統計検定１級統計数理３問">標準正規分布への収束: 2017年統計検定１級統計数理３問</h4>
+
+<p>$X$をパラメーター$\lambda$のポワソン分布に従う確率変数のとき、以下の変数変換を考えます</p>
+
+\[Z \equiv \frac{X - \lambda}{\sqrt{\lambda}}\]
+
+<p>$\lambda \to \infty$に収束するとき、$Z$が標準正規分布に収束することを示します.</p>
+
+<p>なお証明にあたってテイラー展開$\exp(x) = 1 + x + x^2/2 + o(x^2)$を用いて良いとする</p>
+
+<blockquote>
+  <p>証明</p>
+</blockquote>
+
+\[\begin{align*}
+M_Z(t) &amp;= E[\exp(tZ)]\\
+&amp;= \exp(-t\sqrt\lambda) E\left[\exp\left(t\frac{X}{\sqrt{\lambda}}\right)\right]\\
+&amp;= \exp(-t\sqrt\lambda) \exp(\lambda(\exp(t/\sqrt{\lambda})-1))\\
+\end{align*}\]
+
+<p>ここで対数を取ると</p>
+
+\[\begin{align*}
+\log M_Z(t) &amp;= -t\sqrt\lambda + \lambda(\exp(t/\sqrt{\lambda})-1)\\[8pt]
+&amp;= -t\sqrt\lambda + \lambda(1 + t/\sqrt{\lambda} + t^2/(2\lambda) + o(\lambda^{-1}) -1)\\[8pt]
+&amp;= \lambda(t^2/(2\lambda) + o(\lambda^{-1}))\\
+&amp;= \frac{t^2}{2} + o(1)\\
+&amp;\to \frac{t^2}{2}
+\end{align*}\]
+
+<p>従って、</p>
+
+\[plim_{\lambda\to\infty}M_Z(t) = \exp \left(\frac{t^2}{2}\right)\]
+
+<p>これは標準正規分布のMGFと一致する.</p>
+
+<h2 id="2-条件付きポワソン分布">2. 条件付きポワソン分布</h2>
+
+<h3 id="2016年統計検定１級試験統計応用理工学問４改題">2016年統計検定１級試験統計応用（理工学）問４改題</h3>
+
+<p>ある会社のCS部門では業務の一つとして、お客様からの商品に関するクレーム対応をしています. 一日に発生したクレーム件数は長年の経験によりポワソン分布に従っていると事前に知られていたとします.
+一日に発生したクレーム件数を確率変数$X$として、過去のクレーム件数のデータをCS部門へのヒアリングによって収集したところ以下の結果となりました.</p>
+
+<table>
+  <thead>
+    <tr>
+      <th>1日単位のクレーム発生件数</th>
+      <th>頻度(観測された日数)</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>0件</td>
+      <td>不明</td>
+    </tr>
+    <tr>
+      <td>1件</td>
+      <td>15日</td>
+    </tr>
+    <tr>
+      <td>2件</td>
+      <td>12日</td>
+    </tr>
+    <tr>
+      <td>3件</td>
+      <td>10日</td>
+    </tr>
+    <tr>
+      <td>4件</td>
+      <td>3日</td>
+    </tr>
+    <tr>
+      <td>5件</td>
+      <td>2日</td>
+    </tr>
+    <tr>
+      <td>6件以上</td>
+      <td>なし</td>
+    </tr>
+  </tbody>
+</table>
+
+<p>クレーム件数が０件の日にちはCS部門で把握しておらず、また過去何日の調査なのかも現在わかっていないため上記のデータとなったとCS部門から説明がありました. 
+このデータを用いて、一日あたりのクレーム発生件数のポワソンパラメータを識別したいとします.</p>
+
+<h4 id="解答1モーメント母関数と条件付き期待値">解答(1)：モーメント母関数と条件付き期待値</h4>
+
+<p>$Y\sim {X|X\geq 1}$とします. この時、確率変数$Y$の確率密度関数$f(y)$は</p>
+
+\[f(y) = \frac{1}{1 - \exp(-\lambda)}\frac{\lambda^y\exp(-\lambda)}{y!}\]
+
+<p>このとき、$Y$についてのモーメント母関数は</p>
+
+<div class="math display" style="overflow: auto">
+  <p>\(\begin{align*}
+M_y(t) &amp;= E[\exp(tY)]\\
+&amp;= \sum_{y=1}^\infty \frac{1}{1 - \exp(-\lambda)}\frac{\lambda^y\exp(-\lambda)}{y!} \exp(ty)\\
+&amp;= \frac{\exp(-\lambda)}{1 - \exp(-\lambda)}\sum \frac{(\exp(t)\lambda)^y}{y!}\\
+&amp;= \frac{\exp(-\lambda)}{1 - \exp(-\lambda)}(\exp[\exp(t)\lambda]-1)\quad\quad\tag{2.1}
+\end{align*}\)</p>
+</div>
+
+<p>モーメント母関数が表現できると期待値を解析的に表現することができます.</p>
+
+\[\begin{align*}
+E[Y] &amp;= M_y'(0)\\
+&amp;= \frac{\exp(-\lambda)}{1 - \exp(-\lambda)} \exp[\exp(0)\lambda]\exp(0)\lambda\\
+&amp;= \frac{\lambda}{1 - \exp(-\lambda)}
+\end{align*}\]
+
+<p>従って、これの標本対応を考えると</p>
+
+\[\bar Y = \frac{\hat\lambda}{1 - \exp(-\hat\lambda)} \tag{2.2}\]
+
+<p>RHSは$\hat\lambda$について（定義域内ならば）狭義増加関数なので$\hat\lambda = F(\bar Y)$となるような逆関数が存在します.</p>
+
+<p>$\hat\lambda &gt; 0, \bar Y &gt; 0$を満たすことは自明なので、</p>
+
+<div class="math display" style="overflow: auto">
+  <p>\(\begin{align*}
+&amp;\frac{1}{\bar Y} = \frac{1 - \exp(-\hat\lambda)}{\hat\lambda}\\ 
+&amp;\Rightarrow \hat\lambda = (1 - \exp(-\hat\lambda))\bar Y\\
+&amp;\Rightarrow \hat\lambda\exp(\hat\lambda) = \frac{\exp(\hat\lambda) - 1}{1/\bar Y}\\
+&amp;\Rightarrow (\hat\lambda - \bar Y)\exp(\hat\lambda) = -\bar Y\\
+&amp;\Rightarrow (\hat\lambda - \bar Y)\exp(\hat\lambda)\exp(\bar Y) = -\bar Y\exp(-\bar Y)\\
+&amp;\Rightarrow (\hat\lambda - \bar Y)\exp(\hat\lambda - \bar Y) = -\bar Y\exp(-\bar Y)\tag{2.3}
+\end{align*}\)</p>
+</div>
+
+<p>(2.3)の両辺にランベルトの$W_0$関数(i.e., $y = x\exp(x)$の逆関数)を適用したいとします.</p>
+
+<ul>
+  <li>$-\bar Y &lt; -1$であること</li>
+  <li>$\hat\lambda - \bar Y = \hat\lambda(1 - 1/(1 - \exp(-\hat\lambda))) &gt; -1$ s.t. $\hat\lambda &gt; 0$</li>
+</ul>
+
+<p>以上に注意すると、</p>
+
+\[(\hat\lambda - \bar Y) = W_0\left(-\bar Y\exp(-\bar Y)\right)\]
+
+<p>従って、</p>
+
+\[\hat\lambda = W_0\left(- \frac{\bar Y}{\exp(\bar Y)} \right) + \bar Y\]
+
+<blockquote>
+  <p>Pythonでパラメータを計算</p>
+</blockquote>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
+2
+3
+4
+5
+6
+7
+8
+9
+10
+11
+</pre></td><td class="rouge-code"><pre><span class="kn">from</span> <span class="nn">scipy.special</span> <span class="kn">import</span> <span class="n">lambertw</span>
+
+<span class="c1">## Generating Data
+</span><span class="n">y</span> <span class="o">=</span> <span class="n">np</span><span class="p">.</span><span class="n">array</span><span class="p">([</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">4</span><span class="p">,</span> <span class="mi">5</span><span class="p">])</span>
+<span class="n">freq</span> <span class="o">=</span> <span class="n">np</span><span class="p">.</span><span class="n">array</span><span class="p">([</span><span class="mi">15</span><span class="p">,</span> <span class="mi">12</span><span class="p">,</span> <span class="mi">10</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">2</span><span class="p">])</span>
+
+<span class="c1">## Estimation
+</span><span class="n">lambert_w</span> <span class="o">=</span> <span class="n">np</span><span class="p">.</span><span class="n">average</span><span class="p">(</span><span class="n">y</span><span class="p">,</span> <span class="n">weights</span> <span class="o">=</span> <span class="n">freq</span><span class="p">)</span>
+<span class="n">estimated_lambda</span> <span class="o">=</span> <span class="n">lambertw</span><span class="p">(</span><span class="o">-</span><span class="n">lambert_w</span><span class="o">/</span><span class="n">np</span><span class="p">.</span><span class="n">exp</span><span class="p">(</span><span class="n">lambert_w</span><span class="p">))</span> <span class="o">+</span> <span class="n">lambert_w</span>
+<span class="k">print</span><span class="p">(</span><span class="n">estimated_lambda</span><span class="p">)</span>
+<span class="o">&gt;&gt;&gt;</span> <span class="mf">1.813224064133259</span> <span class="o">+</span> <span class="mf">0j</span>
+</pre></td></tr></tbody></table></code></pre></div></div>
+
+<p>従って $\lambda \simeq 1.813$.</p>
+
+<h4 id="解答2-数値解を二分探索法で計算する">解答(2): 数値解を二分探索法で計算する</h4>
+
+<p>ランベルトのW関数を用いずにナイーブに二分探索法で数値計算してみます.
+二分探索法を用いる根拠としては、今回の関数</p>
+
+\[\frac{\hat\lambda}{1 - \exp(-\hat\lambda)}\]
+
+<p>が$\hat\lambda$について定義域を上手く定めれば、連続かつ単調増加関数である性質に準拠しています（see 中間値の定理）.</p>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
+2
+3
+4
+5
+6
+7
+8
+9
+10
+11
+12
+13
+14
+15
+16
+17
+18
+19
+20
+21
+22
+23
+24
+25
+</pre></td><td class="rouge-code"><pre><span class="k">def</span> <span class="nf">binary_search</span><span class="p">(</span><span class="n">func</span><span class="p">,</span> <span class="n">y_min</span><span class="p">,</span> <span class="n">y_max</span><span class="p">,</span> <span class="n">value</span><span class="p">,</span> <span class="n">eps</span><span class="p">):</span>
+    <span class="n">left</span> <span class="o">=</span> <span class="n">y_min</span>             <span class="c1"># left seach area
+</span>    <span class="n">right</span> <span class="o">=</span> <span class="n">y_max</span>            <span class="c1"># right seach area
+</span>    <span class="k">while</span> <span class="n">left</span> <span class="o">&lt;=</span> <span class="n">right</span><span class="p">:</span>
+        <span class="n">mid</span> <span class="o">=</span> <span class="p">(</span><span class="n">left</span> <span class="o">+</span> <span class="n">right</span><span class="p">)</span> <span class="o">/</span> <span class="mi">2</span>            <span class="c1"># calculate the mid
+</span>        <span class="k">if</span> <span class="nb">abs</span><span class="p">(</span><span class="n">func</span><span class="p">(</span><span class="n">mid</span><span class="p">)</span> <span class="o">-</span> <span class="n">value</span><span class="p">)</span> <span class="o">&lt;</span> <span class="n">eps</span><span class="p">:</span>
+            <span class="c1"># return the numerical solution
+</span>            <span class="k">return</span> <span class="n">mid</span>
+        <span class="k">elif</span> <span class="n">func</span><span class="p">(</span><span class="n">mid</span><span class="p">)</span> <span class="o">&lt;</span> <span class="n">value</span><span class="p">:</span>
+            <span class="c1"># set the left at the mid beacuse the objective function is a strictly increasing function
+</span>            <span class="n">left</span> <span class="o">=</span> <span class="n">mid</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="c1"># set the right at the mid
+</span>            <span class="n">right</span> <span class="o">=</span> <span class="n">mid</span> 
+    <span class="k">return</span> <span class="bp">None</span>            <span class="c1"># cannot compute
+</span>
+<span class="k">def</span> <span class="nf">objective_function</span><span class="p">(</span><span class="n">x</span><span class="p">):</span>
+    <span class="k">return</span> <span class="n">x</span><span class="o">/</span><span class="p">(</span><span class="mi">1</span> <span class="o">-</span> <span class="n">np</span><span class="p">.</span><span class="n">exp</span><span class="p">(</span><span class="o">-</span><span class="n">x</span><span class="p">))</span>
+
+<span class="n">y</span> <span class="o">=</span> <span class="n">np</span><span class="p">.</span><span class="n">array</span><span class="p">([</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">4</span><span class="p">,</span> <span class="mi">5</span><span class="p">])</span>
+<span class="n">freq</span> <span class="o">=</span> <span class="n">np</span><span class="p">.</span><span class="n">array</span><span class="p">([</span><span class="mi">15</span><span class="p">,</span> <span class="mi">12</span><span class="p">,</span> <span class="mi">10</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">2</span><span class="p">])</span>
+<span class="n">bar_y</span> <span class="o">=</span> <span class="n">np</span><span class="p">.</span><span class="n">average</span><span class="p">(</span><span class="n">y</span><span class="p">,</span> <span class="n">weights</span> <span class="o">=</span> <span class="n">freq</span><span class="p">)</span>
+
+<span class="k">print</span><span class="p">(</span><span class="n">binary_search</span><span class="p">(</span><span class="n">func</span><span class="o">=</span><span class="n">objective_function</span><span class="p">,</span> <span class="n">y_min</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="n">y_max</span> <span class="o">=</span><span class="mi">6</span><span class="p">,</span> <span class="n">value</span> <span class="o">=</span> <span class="n">bar_y</span><span class="p">,</span> <span class="n">eps</span> <span class="o">=</span> <span class="mf">1e-8</span><span class="p">))</span>
+<span class="o">&gt;&gt;&gt;</span> <span class="mf">1.8132240548729897</span>
+</pre></td></tr></tbody></table></code></pre></div></div>
+
+<p>ランベルトのW関数を用いた計算結果と近しい結果を得ることができます.</p>
+
+<h4 id="解答3-mleを用いたパラメーターの数値計算推定">解答(3): MLEを用いたパラメーターの数値計算推定</h4>
+
+<p>基本に忠実にMaximum Likelihood Estimationでパラメーター$\lambda$を推定します.</p>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
+2
+3
+4
+5
+6
+7
+8
+9
+10
+11
+12
+13
+14
+15
+16
+17
+18
+19
+20
+21
+22
+23
+24
+25
+26
+27
+28
+29
+</pre></td><td class="rouge-code"><pre><span class="kn">from</span> <span class="nn">scipy.optimize</span> <span class="kn">import</span> <span class="n">minimize</span>
+<span class="kn">import</span> <span class="nn">math</span>
+<span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="n">np</span>
+
+<span class="k">class</span> <span class="nc">ConditionalPoissonRegression</span><span class="p">:</span>
+
+    <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">data</span><span class="p">):</span>
+        <span class="bp">self</span><span class="p">.</span><span class="n">data</span> <span class="o">=</span> <span class="n">data</span>
+
+    <span class="o">@</span><span class="nb">staticmethod</span>
+    <span class="k">def</span> <span class="nf">conditiona_poisson_pmf</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">theta</span><span class="p">):</span>
+        <span class="n">vec_factorial</span> <span class="o">=</span> <span class="n">np</span><span class="p">.</span><span class="n">vectorize</span><span class="p">(</span><span class="n">math</span><span class="p">.</span><span class="n">factorial</span><span class="p">)</span>
+        <span class="k">return</span> <span class="p">(</span><span class="n">theta</span><span class="o">**</span><span class="n">x</span> <span class="o">*</span> <span class="n">np</span><span class="p">.</span><span class="n">exp</span><span class="p">(</span><span class="o">-</span><span class="n">theta</span><span class="p">)</span> <span class="o">/</span> <span class="n">vec_factorial</span><span class="p">(</span><span class="n">x</span><span class="p">))</span> <span class="o">/</span> <span class="p">(</span><span class="mi">1</span> <span class="o">-</span> <span class="n">np</span><span class="p">.</span><span class="n">exp</span><span class="p">(</span><span class="o">-</span><span class="n">theta</span><span class="p">))</span>
+    
+    <span class="k">def</span> <span class="nf">neg_loglike</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">theta</span><span class="p">,</span> <span class="n">_data</span><span class="p">):</span>
+        <span class="k">return</span> <span class="n">np</span><span class="p">.</span><span class="nb">sum</span><span class="p">(</span><span class="n">np</span><span class="p">.</span><span class="n">log</span><span class="p">(</span><span class="bp">self</span><span class="p">.</span><span class="n">conditiona_poisson_pmf</span><span class="p">(</span><span class="n">x</span> <span class="o">=</span> <span class="n">_data</span><span class="p">,</span> <span class="n">theta</span> <span class="o">=</span> <span class="n">theta</span><span class="p">)))</span>
+
+    <span class="k">def</span> <span class="nf">fit</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="n">observed_mean</span> <span class="o">=</span> <span class="n">np</span><span class="p">.</span><span class="n">mean</span><span class="p">(</span><span class="bp">self</span><span class="p">.</span><span class="n">data</span><span class="p">)</span>
+        <span class="n">f</span> <span class="o">=</span> <span class="k">lambda</span> <span class="n">theta</span><span class="p">:</span> <span class="o">-</span><span class="bp">self</span><span class="p">.</span><span class="n">neg_loglike</span><span class="p">(</span><span class="n">theta</span> <span class="o">=</span> <span class="n">theta</span><span class="p">,</span> <span class="n">_data</span> <span class="o">=</span> <span class="bp">self</span><span class="p">.</span><span class="n">data</span><span class="p">)</span>
+        <span class="k">return</span> <span class="n">minimize</span><span class="p">(</span><span class="n">f</span><span class="p">,</span> <span class="n">observed_mean</span><span class="p">,</span> <span class="n">method</span> <span class="o">=</span> <span class="s">'Nelder-Mead'</span><span class="p">,</span> <span class="n">options</span><span class="o">=</span><span class="p">{</span><span class="s">'disp'</span><span class="p">:</span> <span class="bp">True</span><span class="p">})</span>
+<span class="c1">## Generating Data
+</span><span class="n">y</span> <span class="o">=</span> <span class="n">np</span><span class="p">.</span><span class="n">array</span><span class="p">([</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">4</span><span class="p">,</span> <span class="mi">5</span><span class="p">])</span>
+<span class="n">freq</span> <span class="o">=</span> <span class="n">np</span><span class="p">.</span><span class="n">array</span><span class="p">([</span><span class="mi">15</span><span class="p">,</span> <span class="mi">12</span><span class="p">,</span> <span class="mi">10</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">2</span><span class="p">])</span>
+<span class="n">data</span> <span class="o">=</span> <span class="n">np</span><span class="p">.</span><span class="n">repeat</span><span class="p">(</span><span class="n">y</span><span class="p">,</span> <span class="n">freq</span><span class="p">,</span> <span class="n">axis</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span>
+
+<span class="n">poisson_mle</span> <span class="o">=</span> <span class="n">ConditionalPoissonRegression</span><span class="p">(</span><span class="n">data</span><span class="o">=</span><span class="n">data</span><span class="p">)</span>
+
+<span class="n">poisson_mle</span><span class="p">.</span><span class="n">fit</span><span class="p">()</span>
+</pre></td></tr></tbody></table></code></pre></div></div>
+
+<p>Then,</p>
+
+<pre><code class="language-raw">Optimization terminated successfully.
+         Current function value: 59.865722
+         Iterations: 15
+         Function evaluations: 30
+ final_simplex: (array([[1.81320801],
+       [1.8132609 ]]), array([59.86572216, 59.86572217]))
+           fun: 59.86572215563589
+       message: 'Optimization terminated successfully.'
+          nfev: 30
+           nit: 15
+        status: 0
+       success: True
+             x: array([1.81320801])
+</code></pre>
+
+<p>MLEでも<code class="language-plaintext highlighter-rouge">1.813</code>とランベルトのW関数を用いた計算方法と近似の値が計算することができます.</p>
+
+<h4 id="参考-モーメント法に基づく分散の導出">参考： モーメント法に基づく分散の導出</h4>
+
+<p>(2.1)の内容をもとに更に計算すると</p>
+
+<div class="math display" style="overflow: auto">
+  <p>\(\begin{align*}
+M_y(t)     &amp;= \frac{\exp(-\lambda)}{1 - \exp(-\lambda)}(\exp[\exp(t)\lambda]-1)\\
+M_y'(t)    &amp;= \frac{\exp(-\lambda)}{1 - \exp(-\lambda)} \exp[\exp(t)\lambda]\exp(t)\lambda\\
+M_y^{''}(t)&amp;= \frac{\exp(-\lambda)}{1 - \exp(-\lambda)} \exp[\exp(t)\lambda]\exp(t)\lambda(\lambda\exp(t)+1)
+\end{align*}\)</p>
+</div>
+
+<p>従って、</p>
+
+\[\begin{align*}
+M_y^{''}(0) = \frac{\lambda(\lambda+1)}{1 - \exp(-\lambda)} \quad\quad\tag{2.4}
+\end{align*}\]
+
+<p>$V(X) = E[X^2] - E[X]^2$なので(2.2)と(2.4)を組み合わせると</p>
+
+\[V(Y|Y&gt;1)= \frac{\lambda - \lambda(\lambda+1)\exp(-\lambda)}{(1 - \exp(-\lambda))^2}\]
+
+<blockquote>
+  <p>Python</p>
+</blockquote>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
+2
+3
+4
+5
+6
+7
+8
+9
+10
+11
+12
+13
+14
+15
+16
+17
+</pre></td><td class="rouge-code"><pre><span class="n">y</span> <span class="o">=</span> <span class="n">np</span><span class="p">.</span><span class="n">array</span><span class="p">([</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">4</span><span class="p">,</span> <span class="mi">5</span><span class="p">])</span>
+<span class="n">freq</span> <span class="o">=</span> <span class="n">np</span><span class="p">.</span><span class="n">array</span><span class="p">([</span><span class="mi">15</span><span class="p">,</span> <span class="mi">12</span><span class="p">,</span> <span class="mi">10</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">2</span><span class="p">])</span>
+
+<span class="c1">## MoM var
+</span><span class="k">def</span> <span class="nf">calculate_conditionalvar</span><span class="p">(</span><span class="n">x</span><span class="p">):</span>
+    <span class="n">denominator</span> <span class="o">=</span> <span class="p">(</span><span class="mi">1</span> <span class="o">-</span> <span class="n">np</span><span class="p">.</span><span class="n">exp</span><span class="p">(</span><span class="o">-</span><span class="n">x</span><span class="p">))</span><span class="o">**</span><span class="mi">2</span>
+    <span class="n">numerator</span> <span class="o">=</span> <span class="n">x</span> <span class="o">-</span> <span class="n">x</span><span class="o">*</span><span class="p">(</span><span class="n">x</span><span class="o">+</span><span class="mi">1</span><span class="p">)</span><span class="o">*</span><span class="n">np</span><span class="p">.</span><span class="n">exp</span><span class="p">(</span><span class="o">-</span><span class="n">x</span><span class="p">)</span>
+
+    <span class="k">return</span> <span class="n">numerator</span><span class="o">/</span><span class="n">denominator</span>
+
+<span class="n">theory_var</span> <span class="o">=</span> <span class="n">calculate_conditionalvar</span><span class="p">(</span><span class="n">x</span> <span class="o">=</span> <span class="n">lambert_w</span><span class="p">)</span>
+
+<span class="c1">## 不偏分散
+</span><span class="n">data_var</span> <span class="o">=</span> <span class="n">np</span><span class="p">.</span><span class="n">average</span><span class="p">((</span><span class="n">y</span> <span class="o">-</span> <span class="n">lambert_w</span><span class="p">)</span><span class="o">**</span><span class="mi">2</span><span class="p">,</span> <span class="n">weights</span> <span class="o">=</span> <span class="n">freq</span><span class="p">)</span><span class="o">*</span><span class="n">np</span><span class="p">.</span><span class="nb">sum</span><span class="p">(</span><span class="n">freq</span><span class="p">)</span><span class="o">/</span><span class="p">(</span><span class="n">np</span><span class="p">.</span><span class="nb">sum</span><span class="p">(</span><span class="n">freq</span><span class="p">)</span> <span class="o">-</span> <span class="mi">1</span><span class="p">)</span>
+
+<span class="k">print</span><span class="p">(</span><span class="n">data_var</span><span class="p">,</span> <span class="n">theory_var</span><span class="p">)</span>
+<span class="o">&gt;&gt;&gt;</span> <span class="mf">1.3130081300813008</span> <span class="mf">1.7610396317212755</span>
+</pre></td></tr></tbody></table></code></pre></div></div>
+
+<ul>
+  <li>Poisson分布によるFitが良い訳ではなさそう</li>
+</ul>
+
+<h3 id="2019年統計検定準１級試験">2019年統計検定準１級試験</h3>
+
+<p>２つの確率変数 $X, Y$を考える. それぞれで独立に $\lambda = 3, 2$のポワソン分布に従うものとする.</p>
+
+\[p_x(x) = \exp(-\lambda_x)\frac{\lambda_x^x}{x!}\]
+
+<ol>
+  <li>$X +Y$の従う分布を求めよ</li>
+  <li>$X + Y = 4$という条件のもと$X$が従う分布を求めよ</li>
+</ol>
+
+<h4 id="解答1ポワソン分布の部分和">解答(1)：ポワソン分布の部分和</h4>
+
+<p>叩き込みによって$X+Y$が$\lambda = 5$のポワソン分布に従うことを示す.</p>
+
+\[\begin{align*}
+A &amp;= X + Y\\
+B &amp; = X
+\end{align*}\]
+
+<p>という変数変換を考える. このとき$P(A, B)$は</p>
+
+\[\begin{align*}
+P(A, B) &amp;= p_x(B)p_y(A-B)\\
+&amp;= \exp(-\lambda_x)\frac{\lambda_x^B}{B!}\exp(-\lambda_y)\frac{\lambda_y^{A-B}}{(A-B)!}\\
+&amp;= \exp(-\lambda_x-\lambda_y)\frac{\lambda_x^B\lambda_y^{A+B}}{B!(A-B)!}
+\end{align*}\]
+
+<p>次に</p>
+
+<div class="math display" style="overflow: auto">
+  <p>\(\begin{align*}
+P(A) &amp;= \sum_{b\in B}p_x(B)p_y(A-B)\\
+&amp;= \exp(-\lambda_x-\lambda_y)\sum_{b=0}^a\frac{\lambda_x^b\lambda_y^{A-b}}{b!(A-b)!}\\
+&amp;= \exp(-\lambda_x-\lambda_y)\left(\frac{\lambda_y^A}{A!} + \frac{\lambda_y^{A-1}\lambda_x}{(A-1)!}+ \frac{\lambda_y^{A-2}\lambda_x^2}{2!(A-2)!}\cdots +  \frac{\lambda_x^{A}}{A!}\right)\\
+&amp;= \exp(-\lambda_x-\lambda_y)\frac{(\lambda_x+\lambda_y)^A}{A!} \because \text{二項定理}\\
+&amp;= \exp(-5)\frac{5^A}{A!}
+\end{align*}\)</p>
+</div>
+
+<p>したがって、$X+Y$は$\lambda = 5$のポワソン分布に従うことがわかる。
+なお平均、分散ともに5である.</p>
+
+<blockquote>
+  <p>Python</p>
+</blockquote>
+
+<p>まずシミュレーション用データを作成します</p>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
+2
+3
+4
+5
+6
+7
+8
+9
+10
+11
+12
+13
+14
+15
+16
+17
+</pre></td><td class="rouge-code"><pre><span class="c1">## Library
+</span><span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="n">np</span>
+<span class="kn">import</span> <span class="nn">pandas</span> <span class="k">as</span> <span class="n">pd</span>
+<span class="kn">from</span> <span class="nn">scipy</span> <span class="kn">import</span> <span class="n">stats</span>
+<span class="kn">from</span> <span class="nn">scipy.stats</span> <span class="kn">import</span> <span class="n">poisson</span>
+<span class="kn">from</span> <span class="nn">scipy.stats</span> <span class="kn">import</span> <span class="n">binom</span>
+<span class="kn">from</span> <span class="nn">statsmodels.distributions.empirical_distribution</span> <span class="kn">import</span> <span class="n">ECDF</span>
+<span class="kn">from</span> <span class="nn">itertools</span> <span class="kn">import</span> <span class="n">chain</span>
+<span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="k">as</span> <span class="n">plt</span>
+
+<span class="c1">## Generating Data
+</span><span class="n">np</span><span class="p">.</span><span class="n">random</span><span class="p">.</span><span class="n">seed</span><span class="p">(</span><span class="n">seed</span><span class="o">=</span><span class="mi">42</span><span class="p">)</span>
+<span class="n">mu_x</span><span class="p">,</span> <span class="n">mu_y</span> <span class="o">=</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">2</span>
+<span class="n">N</span> <span class="o">=</span> <span class="mi">1000</span>
+
+<span class="n">x</span><span class="p">,</span> <span class="n">y</span> <span class="o">=</span> <span class="n">poisson</span><span class="p">.</span><span class="n">rvs</span><span class="p">(</span><span class="n">mu_x</span><span class="p">,</span> <span class="n">size</span><span class="o">=</span><span class="n">N</span><span class="p">),</span> <span class="n">poisson</span><span class="p">.</span><span class="n">rvs</span><span class="p">(</span><span class="n">mu_y</span><span class="p">,</span> <span class="n">size</span><span class="o">=</span><span class="n">N</span><span class="p">)</span>
+<span class="n">z</span> <span class="o">=</span> <span class="n">poisson</span><span class="p">.</span><span class="n">rvs</span><span class="p">(</span><span class="n">mu_x</span> <span class="o">+</span> <span class="n">mu_y</span><span class="p">,</span> <span class="n">size</span><span class="o">=</span><span class="n">N</span><span class="p">)</span>
+</pre></td></tr></tbody></table></code></pre></div></div>
+
+<p>つぎに、生成した各ポワソン分布とポワソン確率変数の和のヒストグラムを確認する</p>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
+2
+3
+4
+5
+6
+7
+8
+9
+</pre></td><td class="rouge-code"><pre><span class="n">fig</span><span class="p">,</span> <span class="n">ax</span> <span class="o">=</span> <span class="n">plt</span><span class="p">.</span><span class="n">subplots</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">10</span><span class="p">,</span> <span class="mi">7</span><span class="p">))</span>
+<span class="n">bins_range</span> <span class="o">=</span> <span class="n">np</span><span class="p">.</span><span class="n">arange</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="nb">max</span><span class="p">(</span><span class="n">chain</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">)),</span> <span class="mi">1</span><span class="p">)</span>
+
+<span class="n">ax</span><span class="p">.</span><span class="n">hist</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">density</span> <span class="o">=</span> <span class="bp">True</span><span class="p">,</span> <span class="n">bins</span> <span class="o">=</span> <span class="n">bins_range</span><span class="p">,</span> <span class="n">alpha</span> <span class="o">=</span> <span class="mf">0.5</span><span class="p">,</span> <span class="n">label</span> <span class="o">=</span> <span class="s">'$\lambda = 3$'</span><span class="p">)</span>
+<span class="n">ax</span><span class="p">.</span><span class="n">hist</span><span class="p">(</span><span class="n">y</span><span class="p">,</span> <span class="n">density</span> <span class="o">=</span> <span class="bp">True</span><span class="p">,</span> <span class="n">bins</span> <span class="o">=</span> <span class="n">bins_range</span><span class="p">,</span> <span class="n">alpha</span> <span class="o">=</span> <span class="mf">0.5</span><span class="p">,</span> <span class="n">label</span> <span class="o">=</span> <span class="s">'$\lambda = 2$'</span><span class="p">)</span>
+<span class="n">ax</span><span class="p">.</span><span class="n">set_title</span><span class="p">(</span><span class="s">'random sampling from poisson'</span><span class="p">,</span> <span class="n">fontsize</span><span class="o">=</span><span class="mi">15</span><span class="p">)</span>
+<span class="n">ax</span><span class="p">.</span><span class="n">set_xlabel</span><span class="p">(</span><span class="s">'score'</span><span class="p">,</span> <span class="n">fontsize</span><span class="o">=</span><span class="mi">12</span><span class="p">)</span>
+<span class="n">ax</span><span class="p">.</span><span class="n">set_ylabel</span><span class="p">(</span><span class="s">'density'</span><span class="p">,</span> <span class="n">fontsize</span><span class="o">=</span><span class="mi">12</span><span class="p">)</span>
+<span class="n">plt</span><span class="p">.</span><span class="n">legend</span><span class="p">();</span>
+</pre></td></tr></tbody></table></code></pre></div></div>
+
+<p><img src="https://github.com/ryonakimageserver/omorikaizuka/blob/master/%E3%83%96%E3%83%AD%E3%82%B0%E7%94%A8/20211227-01.png?raw=true" /></p>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
+2
+3
+4
+5
+6
+7
+8
+9
+</pre></td><td class="rouge-code"><pre><span class="n">fig</span><span class="p">,</span> <span class="n">ax</span> <span class="o">=</span> <span class="n">plt</span><span class="p">.</span><span class="n">subplots</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">10</span><span class="p">,</span> <span class="mi">7</span><span class="p">))</span>
+<span class="n">bins_range</span> <span class="o">=</span> <span class="n">np</span><span class="p">.</span><span class="n">arange</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="nb">max</span><span class="p">(</span><span class="n">x</span> <span class="o">+</span> <span class="n">y</span><span class="p">),</span> <span class="mi">1</span><span class="p">)</span>
+
+<span class="n">ax</span><span class="p">.</span><span class="n">hist</span><span class="p">(</span><span class="n">x</span> <span class="o">+</span> <span class="n">y</span><span class="p">,</span> <span class="n">density</span> <span class="o">=</span> <span class="bp">True</span><span class="p">,</span> <span class="n">bins</span> <span class="o">=</span> <span class="n">bins_range</span><span class="p">,</span> <span class="n">alpha</span> <span class="o">=</span> <span class="mf">0.5</span><span class="p">,</span> <span class="n">label</span> <span class="o">=</span> <span class="s">'$x + y$'</span><span class="p">)</span>
+<span class="n">ax</span><span class="p">.</span><span class="n">hist</span><span class="p">(</span><span class="n">z</span><span class="p">,</span> <span class="n">density</span> <span class="o">=</span> <span class="bp">True</span><span class="p">,</span> <span class="n">bins</span> <span class="o">=</span> <span class="n">bins_range</span><span class="p">,</span> <span class="n">alpha</span> <span class="o">=</span> <span class="mf">0.5</span><span class="p">,</span> <span class="n">label</span> <span class="o">=</span> <span class="s">'$\lambda = 5$'</span><span class="p">)</span>
+<span class="n">ax</span><span class="p">.</span><span class="n">set_title</span><span class="p">(</span><span class="s">'random sampling from poisson'</span><span class="p">,</span> <span class="n">fontsize</span><span class="o">=</span><span class="mi">15</span><span class="p">)</span>
+<span class="n">ax</span><span class="p">.</span><span class="n">set_xlabel</span><span class="p">(</span><span class="s">'score'</span><span class="p">,</span> <span class="n">fontsize</span><span class="o">=</span><span class="mi">12</span><span class="p">)</span>
+<span class="n">ax</span><span class="p">.</span><span class="n">set_ylabel</span><span class="p">(</span><span class="s">'density'</span><span class="p">,</span> <span class="n">fontsize</span><span class="o">=</span><span class="mi">12</span><span class="p">)</span>
+<span class="n">plt</span><span class="p">.</span><span class="n">legend</span><span class="p">();</span>
+</pre></td></tr></tbody></table></code></pre></div></div>
+
+<p><img src="https://github.com/ryonakimageserver/omorikaizuka/blob/master/%E3%83%96%E3%83%AD%E3%82%B0%E7%94%A8/20211227-02.png?raw=true" /></p>
+
+<p>一見、$X+Y$と$\lambda = 5$のポワソン分布間には差があるように見えるが、KS-testとQQ-plotで比較してみる.
+なお、QQ-plotはx軸, y軸共に分位点で評価している(quantile(x) = 0.5に相当するxはyにおいてどの分位点として表れるか).</p>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
+2
+3
+4
+5
+6
+7
+8
+9
+10
+11
+12
+13
+14
+15
+16
+17
+18
+19
+20
+21
+22
+23
+24
+25
+26
+27
+28
+29
+30
+31
+32
+33
+34
+35
+</pre></td><td class="rouge-code"><pre><span class="k">def</span> <span class="nf">qqplot</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">,</span> <span class="n">title</span> <span class="o">=</span> <span class="bp">None</span><span class="p">,</span> <span class="n">xlabel</span> <span class="o">=</span> <span class="bp">None</span><span class="p">,</span> <span class="n">ylabel</span> <span class="o">=</span> <span class="bp">None</span><span class="p">,</span> <span class="n">plot</span> <span class="o">=</span> <span class="bp">False</span><span class="p">,</span> <span class="n">ax</span> <span class="o">=</span> <span class="bp">None</span><span class="p">):</span>
+    <span class="s">""" 
+    INPUT
+        x, y : array_like, 1-Dimensional
+            Two arrays of sample observations
+    
+    Returns:
+        statistic: float
+            KS statistic.
+        pvalue: float
+            One-tailed or two-tailed p-value.
+        Figure:
+            QQ-plot
+            x-axis and y-axis is normalized between 0 and 1
+    """</span>
+    
+    <span class="n">sorted_x</span> <span class="o">=</span> <span class="nb">sorted</span><span class="p">(</span><span class="n">x</span><span class="p">)</span>
+    <span class="n">x_xdf</span><span class="p">,</span> <span class="n">y_cdf</span> <span class="o">=</span> <span class="n">ECDF</span><span class="p">(</span><span class="n">x</span><span class="p">),</span> <span class="n">ECDF</span><span class="p">(</span><span class="n">y</span><span class="p">)</span>
+    <span class="n">ks_test</span> <span class="o">=</span> <span class="n">stats</span><span class="p">.</span><span class="n">ks_2samp</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">)</span>
+
+    <span class="k">print</span><span class="p">(</span><span class="n">ks_test</span><span class="p">)</span>
+
+    <span class="k">if</span> <span class="n">ax</span> <span class="ow">is</span> <span class="bp">None</span><span class="p">:</span>
+        <span class="n">fig</span><span class="p">,</span> <span class="n">ax</span> <span class="o">=</span> <span class="n">plt</span><span class="p">.</span><span class="n">subplots</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">9</span><span class="p">,</span> <span class="mi">9</span><span class="p">))</span>
+    
+    <span class="k">if</span> <span class="n">plot</span><span class="p">:</span>
+        <span class="n">ax</span><span class="p">.</span><span class="n">plot</span><span class="p">(</span><span class="n">x_xdf</span><span class="p">(</span><span class="n">sorted_x</span><span class="p">),</span> <span class="n">y_cdf</span><span class="p">(</span><span class="n">sorted_x</span><span class="p">),</span><span class="n">lw</span><span class="o">=</span><span class="mi">2</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s">'#0485d1'</span><span class="p">)</span>
+    <span class="k">else</span><span class="p">:</span>
+        <span class="n">ax</span><span class="p">.</span><span class="n">scatter</span><span class="p">(</span><span class="n">x_xdf</span><span class="p">(</span><span class="n">sorted_x</span><span class="p">),</span> <span class="n">y_cdf</span><span class="p">(</span><span class="n">sorted_x</span><span class="p">),</span><span class="n">lw</span><span class="o">=</span><span class="mi">2</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s">'#0485d1'</span><span class="p">)</span>
+    
+    <span class="n">ax</span><span class="p">.</span><span class="n">axline</span><span class="p">([</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">],</span> <span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">],</span><span class="n">lw</span><span class="o">=</span><span class="mi">4</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s">'#A60628'</span><span class="p">)</span>
+    <span class="n">ax</span><span class="p">.</span><span class="n">set_title</span><span class="p">(</span><span class="n">title</span>  <span class="o">+</span> <span class="s">'  (ks-test p-value: %.3f )'</span><span class="o">%</span><span class="n">ks_test</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="p">,</span> <span class="n">fontsize</span><span class="o">=</span><span class="mi">15</span><span class="p">)</span>
+    <span class="n">ax</span><span class="p">.</span><span class="n">set_xlabel</span><span class="p">(</span><span class="n">xlabel</span><span class="p">,</span> <span class="n">fontsize</span><span class="o">=</span><span class="mi">13</span><span class="p">)</span>
+    <span class="n">ax</span><span class="p">.</span><span class="n">set_ylabel</span><span class="p">(</span><span class="n">ylabel</span><span class="p">,</span> <span class="n">fontsize</span><span class="o">=</span><span class="mi">13</span><span class="p">)</span>
+    <span class="n">plt</span><span class="p">.</span><span class="n">legend</span><span class="p">()</span>
+</pre></td></tr></tbody></table></code></pre></div></div>
+
+<p>このqq-plot関数を用いると</p>
+
+<p><img src="https://github.com/ryonakimageserver/omorikaizuka/blob/master/%E3%83%96%E3%83%AD%E3%82%B0%E7%94%A8/20211227-03.png?raw=true" /></p>
+
+<p>qq-plot及びKS testによると、$X+Y$は$\lambda = 5$のポワソン分布と異なっていると帰結することが難しいことがわかります (あくまで、帰無仮説は棄却できなかった).</p>
+
+<h4 id="解答2-条件付き分布と二項分布">解答(2): 条件付き分布と二項分布</h4>
+
+<div class="math display" style="overflow: auto">
+  <p>\(\begin{align*}
+P(X, Y|X+Y=4) &amp;= \frac{P(X, Y)}{P(X + Y = 4)}\\
+&amp;= \left(\frac{\lambda_x}{\lambda_x + \lambda_y}\right)^x\left(\frac{\lambda_y}{\lambda_x + \lambda_y}\right)^y\frac{(x+y)!}{x!y!}
+\end{align*}\)</p>
+</div>
+
+\[p = \frac{\lambda_x}{\lambda_x + \lambda_y}\]
+
+<p>とおくと</p>
+
+\[1 - p = \frac{\lambda_y}{\lambda_x + \lambda_y}\]
+
+<p>であることに注意すると</p>
+
+\[X\sim B\left(4, \frac{\lambda_x}{\lambda_x + \lambda_y}\right)\]
+
+<p>に従っていることがわかる.</p>
+
+<blockquote>
+  <p>Python</p>
+</blockquote>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
+2
+3
+4
+5
+6
+7
+8
+9
+10
+11
+12
+13
+</pre></td><td class="rouge-code"><pre><span class="c1">## Generating Data
+</span><span class="n">w</span> <span class="o">=</span> <span class="n">np</span><span class="p">.</span><span class="n">vstack</span><span class="p">([</span><span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">,</span> <span class="n">x</span><span class="o">+</span><span class="n">y</span><span class="p">])</span>
+<span class="n">x_2</span><span class="p">,</span> <span class="n">y_2</span><span class="p">,</span> <span class="n">z_2</span> <span class="o">=</span> <span class="n">w</span><span class="p">[:,</span> <span class="n">w</span><span class="p">[</span><span class="mi">2</span><span class="p">,:]</span> <span class="o">==</span> <span class="mi">4</span><span class="p">]</span>
+
+<span class="c1">## plot histogram
+</span><span class="n">fig</span><span class="p">,</span> <span class="n">ax</span> <span class="o">=</span> <span class="n">plt</span><span class="p">.</span><span class="n">subplots</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">10</span><span class="p">,</span> <span class="mi">7</span><span class="p">))</span>
+<span class="n">bins_range</span> <span class="o">=</span> <span class="n">np</span><span class="p">.</span><span class="n">arange</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="nb">max</span><span class="p">(</span><span class="n">chain</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">)),</span> <span class="mi">1</span><span class="p">)</span>
+
+<span class="n">ax</span><span class="p">.</span><span class="n">hist</span><span class="p">(</span><span class="n">x_2</span><span class="p">,</span> <span class="n">density</span> <span class="o">=</span> <span class="bp">True</span><span class="p">,</span> <span class="n">bins</span> <span class="o">=</span> <span class="n">bins_range</span><span class="p">,</span> <span class="n">alpha</span> <span class="o">=</span> <span class="mf">0.5</span><span class="p">,</span> <span class="n">label</span> <span class="o">=</span> <span class="s">'$X_2\sim (X|x+y =4)$'</span><span class="p">)</span>
+<span class="n">ax</span><span class="p">.</span><span class="n">set_title</span><span class="p">(</span><span class="s">'random sampling from trunctaed poisson'</span><span class="p">,</span> <span class="n">fontsize</span><span class="o">=</span><span class="mi">15</span><span class="p">)</span>
+<span class="n">ax</span><span class="p">.</span><span class="n">set_xlabel</span><span class="p">(</span><span class="s">'$X_2$ sampling'</span><span class="p">,</span> <span class="n">fontsize</span><span class="o">=</span><span class="mi">12</span><span class="p">)</span>
+<span class="n">ax</span><span class="p">.</span><span class="n">set_ylabel</span><span class="p">(</span><span class="s">'density'</span><span class="p">,</span> <span class="n">fontsize</span><span class="o">=</span><span class="mi">12</span><span class="p">)</span>
+<span class="n">plt</span><span class="p">.</span><span class="n">legend</span><span class="p">();</span>
+</pre></td></tr></tbody></table></code></pre></div></div>
+
+<p><img src="https://github.com/ryonakimageserver/omorikaizuka/blob/master/%E3%83%96%E3%83%AD%E3%82%B0%E7%94%A8/20211227-04.png?raw=true" /></p>
+
+<p>QQ plotで二項分布$B(4, 0.6)$と比較してみると</p>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
+2
+3
+4
+5
+6
+</pre></td><td class="rouge-code"><pre><span class="n">r_x</span> <span class="o">=</span> <span class="n">binom</span><span class="p">.</span><span class="n">rvs</span><span class="p">(</span><span class="n">n</span><span class="o">=</span><span class="mi">4</span><span class="p">,</span> <span class="n">p</span><span class="o">=</span><span class="n">mu_x</span><span class="o">/</span><span class="p">(</span><span class="n">mu_x</span> <span class="o">+</span> <span class="n">mu_y</span><span class="p">),</span> <span class="n">size</span><span class="o">=</span><span class="mi">1000</span><span class="p">)</span>
+<span class="n">qqplot</span><span class="p">(</span><span class="n">x_2</span><span class="p">,</span> <span class="n">r_x</span><span class="p">,</span> 
+        <span class="n">title</span> <span class="o">=</span> <span class="s">'QQ-plot between two poisson'</span><span class="p">,</span>
+        <span class="n">xlabel</span> <span class="o">=</span> <span class="s">'$X_2$ from truncated X'</span><span class="p">,</span>
+        <span class="n">ylabel</span> <span class="o">=</span> <span class="s">'binomial distribution $n = 4, p = 0.6$'</span><span class="p">,</span>
+        <span class="n">ax</span> <span class="o">=</span> <span class="bp">None</span><span class="p">)</span>
+</pre></td></tr></tbody></table></code></pre></div></div>
+
+<p><img src="https://github.com/ryonakimageserver/omorikaizuka/blob/master/%E3%83%96%E3%83%AD%E3%82%B0%E7%94%A8/20211227-05.png?raw=true" /></p>
+
+<h2 id="3-ポワソン分布の適合度検定">3. ポワソン分布の適合度検定</h2>
+<h3 id="カイ二乗適合度検定">カイ二乗適合度検定</h3>
+
+<p>全体でn個のデータが$C_1, C_2, \cdots, C_K$のK個のカテゴリーデータに分類されそれぞれ、$X_1, \cdots X_K$個観測されたとします.
+観測結果より推定されるそれぞれのカテゴリーに入る確率を$p_1, \cdots, p_K$とすると</p>
+
+<div class="math display" style="overflow: auto">
+  <p>\(\begin{align*}
+p_1 + p_2 + \cdots + p_K &amp;= 1\\
+X_1 + X_2 + \cdots + X_K &amp;= n
+\end{align*}\)</p>
+</div>
+
+<p>が成り立ちます. このとき、各カテゴリーに入る理論確率を$\pi_1, \cdots, \pi_K$としたとき、観測データに基づいた確率分布が理論分布に等しいか否かを検定する問題は</p>
+
+<div class="math display" style="overflow: auto">
+  <p>\(\begin{align*}
+H_0&amp; : p_1 = \pi_1, \cdots, p_K = \pi_K\\ 
+H_1&amp; : \exists i \in K \text{ s.t } p_i \neq \pi_i
+\end{align*}\)</p>
+</div>
+
+<p>と定式化できます. この検定問題の一つとしてカイ二乗適合度検定があります. 検定統計量は</p>
+
+<div class="math display" style="overflow: auto">
+  <p>\(\begin{align*}
+&amp;\chi^2 = \sum\frac{(\text{観測度数} - \text{理論度数})^2}{\text{理論度数}}\\
+&amp;\chi^2(X, K, \pi)= \sum_{i=1}^K\frac{(X_i - n\pi_i)^2}{n\pi_i}
+\end{align*}\)</p>
+</div>
+
+<p>これをピアソンのカイ二乗検定統計量といい、$H_0$のもとで $\chi^2(X, K, \pi) \to_d \chi^2_{K-1}$に収束することが知られています. この検定量の棄却域は</p>
+
+\[R = \{x\in \chi|\chi^2(X, K, \pi) &gt; \chi^2_{K-1, \alpha} \}\]
+
+<p>と一般には定義されます.</p>
+
+<h3 id="練習問題2019年統計検定１級試験改題">練習問題：2019年統計検定１級試験改題</h3>
+
+<table>
+  <thead>
+    <tr>
+      <th>クレーム件数</th>
+      <th>0</th>
+      <th>1</th>
+      <th>2</th>
+      <th>3</th>
+      <th>4</th>
+      <th>5</th>
+      <th>6</th>
+      <th>7</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>度数</td>
+      <td>22</td>
+      <td>23</td>
+      <td>26</td>
+      <td>18</td>
+      <td>6</td>
+      <td>4</td>
+      <td>1</td>
+      <td>0</td>
+    </tr>
+  </tbody>
+</table>
+
+<p>というクレーム件数データが与えられたとします. クレーム発生件数がポワソン分布に適合するか否かをピアソンのカイ二乗検定統計量を用いて検定せよ</p>
+
+<blockquote>
+  <p>解答</p>
+</blockquote>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
+2
+3
+4
+5
+6
+7
+8
+9
+10
+11
+12
+13
+14
+15
+16
+17
+18
+19
+</pre></td><td class="rouge-code"><pre><span class="c1">## setting model parameter
+</span><span class="n">N</span> <span class="o">=</span> <span class="mi">100</span>
+<span class="n">observed_lambda</span> <span class="o">=</span> <span class="mf">1.79</span>
+
+<span class="c1">## geenrating data
+</span><span class="n">x_range</span> <span class="o">=</span> <span class="n">np</span><span class="p">.</span><span class="n">arange</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">8</span><span class="p">)</span>
+<span class="n">x</span> <span class="o">=</span> <span class="n">np</span><span class="p">.</span><span class="n">array</span><span class="p">([</span><span class="mi">22</span><span class="p">,</span> <span class="mi">23</span><span class="p">,</span> <span class="mi">26</span><span class="p">,</span> <span class="mi">18</span><span class="p">,</span> <span class="mi">6</span><span class="p">,</span> <span class="mi">4</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">0</span><span class="p">])</span>
+
+<span class="c1">## poisson object
+</span><span class="n">poisson_rv</span> <span class="o">=</span> <span class="n">poisson</span><span class="p">(</span><span class="n">observed_lambda</span><span class="p">)</span>
+
+<span class="c1">## plot
+</span><span class="n">fig</span><span class="p">,</span> <span class="n">ax</span> <span class="o">=</span> <span class="n">plt</span><span class="p">.</span><span class="n">subplots</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">10</span><span class="p">,</span> <span class="mi">7</span><span class="p">))</span>
+<span class="n">ax</span><span class="p">.</span><span class="n">bar</span><span class="p">(</span><span class="n">x_range</span><span class="p">,</span> <span class="n">x</span><span class="p">,</span> <span class="n">alpha</span> <span class="o">=</span> <span class="mf">0.5</span><span class="p">)</span>
+<span class="n">ax</span><span class="p">.</span><span class="n">plot</span><span class="p">(</span><span class="n">x_range</span><span class="p">,</span> <span class="n">poisson_rv</span><span class="p">.</span><span class="n">pmf</span><span class="p">(</span><span class="n">x_range</span><span class="p">)</span><span class="o">*</span><span class="n">N</span><span class="p">)</span>
+<span class="n">ax</span><span class="p">.</span><span class="n">set_xlabel</span><span class="p">(</span><span class="s">'outcome'</span><span class="p">)</span>
+<span class="n">ax</span><span class="p">.</span><span class="n">set_ylabel</span><span class="p">(</span><span class="s">'Frequency'</span><span class="p">)</span>
+<span class="n">ax</span><span class="p">.</span><span class="n">set_title</span><span class="p">(</span><span class="s">'compare the observed data and a theoretical distirbution'</span><span class="p">)</span>
+<span class="p">;</span>
+</pre></td></tr></tbody></table></code></pre></div></div>
+
+<p><img src="https://github.com/ryonakimageserver/omorikaizuka/blob/master/%E3%83%96%E3%83%AD%E3%82%B0%E7%94%A8/20211227_3_1.png?raw=true" /></p>
+
+<p>つぎにピアソンのカイ二乗検定統計量を確かめてみます.</p>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
+2
+3
+4
+5
+6
+7
+</pre></td><td class="rouge-code"><pre><span class="kn">from</span> <span class="nn">scipy.stats</span> <span class="kn">import</span> <span class="n">chisquare</span>
+
+<span class="n">chisquare_poisson_pmf</span> <span class="o">=</span> <span class="k">lambda</span> <span class="n">x</span><span class="p">:</span> <span class="n">np</span><span class="p">.</span><span class="n">where</span><span class="p">(</span><span class="n">x</span> <span class="o">&lt;</span> <span class="mi">7</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">0</span><span class="p">)</span> <span class="o">*</span> <span class="n">poisson_rv</span><span class="p">.</span><span class="n">pmf</span><span class="p">(</span><span class="n">x</span><span class="p">)</span> <span class="o">+</span> <span class="p">(</span><span class="mi">1</span> <span class="o">-</span> <span class="n">np</span><span class="p">.</span><span class="n">where</span><span class="p">(</span><span class="n">x</span> <span class="o">&lt;</span> <span class="mi">7</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">0</span><span class="p">))</span> <span class="o">*</span> <span class="p">(</span><span class="mi">1</span> <span class="o">-</span> <span class="n">poisson_rv</span><span class="p">.</span><span class="n">cdf</span><span class="p">(</span><span class="n">x</span><span class="o">-</span><span class="mi">1</span><span class="p">))</span>
+<span class="n">theoretical_x</span> <span class="o">=</span> <span class="n">chisquare_poisson_pmf</span><span class="p">(</span><span class="n">x_range</span><span class="p">)</span><span class="o">*</span><span class="n">N</span>
+
+<span class="n">chisquare</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">f_exp</span><span class="o">=</span><span class="n">theoretical_x</span><span class="p">)</span>
+<span class="o">&gt;&gt;&gt;</span> <span class="n">Power_divergenceResult</span><span class="p">(</span><span class="n">statistic</span><span class="o">=</span><span class="mf">4.873492084753685</span><span class="p">,</span> <span class="n">pvalue</span><span class="o">=</span><span class="mf">0.6753982780281518</span><span class="p">)</span>
+</pre></td></tr></tbody></table></code></pre></div></div>
+
+<p>カイ二乗検定統計量によると、帰無仮説は棄却されないことになります. ただし、元データの分散は2.03と計算され、平均の1.79とは大きく異なっていると思われます(ポワソン分布ならば、平均と分散は等しいはず). なのでカイ二乗検定統計量で帰無仮説が棄却されないとしても、必ずしも理論分布に従っていると結論付けることは難しいです.</p>
+
+<h2 id="4-zero-inflated-poisson-model">4. Zero-inflated Poisson Model</h2>
+
+<p>特定の交差点における自動車事故の１日ごとの発生回数や、とある店舗の一日のクレーム発生件数は、ポワソン回帰モデルを適用することが妥当であるとされていますが、これらのデータは０を多く含んでいると考えられ、その頻度はポアソン分布よりおおくなることがあります. 0が過剰に含まれたままポワソン回帰してしまうと、過分散が起こる可能性があります.</p>
+
+<p>このようば場合には、ゼロ過剰ポアソン分布(Zero-inflated Poisson Model, ZIP)を用いて対処することが考えられます.</p>
+
+<p>ZIP分布の確率関数は以下です:</p>
+
+\[\begin{align*}
+f(Y_i = y) = \begin{cases}Pr(Y_i = 0)&amp;= w + (1 - w)\exp(-\lambda)\frac{\lambda^0}{0!}\\
+Pr(Y_i \geq 1)&amp;= (1 - w)\exp(-\lambda)\frac{\lambda^y_i}{y_i!}\end{cases}
+\end{align*}\]
+
+<p>これは目的変数の従う分布が確率$w$で値0をとり、確率$1-w$でポワソン分布に従うことを示しています. 実際に $\sum_{y=0}f(y) = 1$は自明です.</p>
+
+<p>ZIPのパラメータ $(\lambda, w)$の推定方法はモーメント法と（EMアルゴリズムをもちいた）MLEが考えられます.</p>
+
+<h3 id="モーメント法による推定">モーメント法による推定</h3>
+
+<ul>
+  <li>モーメント法は後述するMLEに対して、closed-formでパラメーターを表すことができるメリットがあります</li>
+  <li>モーメント法もMLEと比べasymptotically equallt efficientと知られています</li>
+</ul>
+
+<p>ただし、infrequent with large samples but not so infrequent with small samplesという特徴を持つデータに対してモーメント法を用いると、推定されたパラメーターがパラメータースペース外に陥るリスクがあります 
+　</p>
+
+<div class="math display" style="overflow: auto">
+  <p>\(M_Y(t) = E[\exp(tY)] =  w + (1 - w)\exp(-\lambda)\exp(\exp(t)\lambda)\)</p>
+</div>
+
+<p>従って、</p>
+
+<div class="math display" style="overflow: auto">
+  <p>\(\begin{align*}
+M_Y'(t) &amp;= (1 - w)\lambda\exp(-\lambda)\exp(t)\exp(\exp(t)\lambda)\\
+M_Y^{''}(t) &amp;= (1 - w)\lambda\exp(-\lambda)\exp(t)\exp(\exp(t)\lambda)[1 + \lambda\exp(t)]
+\end{align*}\)</p>
+</div>
+
+<p>従って、</p>
+
+<div class="math display" style="overflow: auto">
+\[\begin{align*}
+M_Y'(0) &amp;= E[Y] = (1 - w)\lambda\\
+M_Y^{''}(0) &amp;= E[Y^2] = (1 - w)\lambda(1 + \lambda)
+\end{align*}\]
+
+  <p>を得ます. これを連立させると</p>
+
+\[\begin{align*}
+\lambda &amp; = \frac{E[Y^2]}{E[Y]} - 1\\
+w &amp; = 1 - \frac{E[Y]^2}{E[Y^2] - E[Y]}
+\end{align*}\]
+
+  <p>よってこれを標本対応によって推定します. 上述の<a href="#%E7%B7%B4%E7%BF%92%E5%95%8F%E9%A1%8C2019%E5%B9%B4%E7%B5%B1%E8%A8%88%E6%A4%9C%E5%AE%9A%EF%BC%91%E7%B4%9A%E8%A9%A6%E9%A8%93%E6%94%B9%E9%A1%8C">練習問題：2019年統計検定１級試験改題</a>を例に推定すると</p>
+
+  <div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
+2
+3
+4
+5
+6
+7
+8
+9
+10
+11
+12
+</pre></td><td class="rouge-code"><pre><span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="n">np</span>
+<span class="kn">from</span> <span class="nn">scipy.optimize</span> <span class="kn">import</span> <span class="n">minimize</span>
+<span class="kn">import</span> <span class="nn">math</span>
+<span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="k">as</span> <span class="n">plt</span>
+
+<span class="n">data</span> <span class="o">=</span> <span class="n">np</span><span class="p">.</span><span class="n">repeat</span><span class="p">(</span><span class="n">np</span><span class="p">.</span><span class="n">arange</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">7</span><span class="p">),</span> <span class="n">np</span><span class="p">.</span><span class="n">array</span><span class="p">([</span><span class="mi">22</span><span class="p">,</span> <span class="mi">23</span><span class="p">,</span> <span class="mi">26</span><span class="p">,</span> <span class="mi">18</span><span class="p">,</span> <span class="mi">6</span><span class="p">,</span> <span class="mi">4</span><span class="p">,</span> <span class="mi">1</span><span class="p">]))</span>
+<span class="n">sample_mean</span> <span class="o">=</span> <span class="n">np</span><span class="p">.</span><span class="n">mean</span><span class="p">(</span><span class="n">data</span><span class="p">)</span>
+<span class="n">sample_second_moment</span> <span class="o">=</span> <span class="n">np</span><span class="p">.</span><span class="n">mean</span><span class="p">(</span><span class="n">data</span><span class="o">**</span><span class="mi">2</span><span class="p">)</span>
+
+<span class="n">theta_moment</span> <span class="o">=</span> <span class="n">sample_second_moment</span> <span class="o">/</span> <span class="n">sample_mean</span> <span class="o">-</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">1</span> <span class="o">-</span> <span class="n">sample_mean</span> <span class="o">**</span><span class="mi">2</span> <span class="o">/</span> <span class="p">(</span><span class="n">sample_second_moment</span> <span class="o">-</span> <span class="n">sample_mean</span><span class="p">)</span>
+<span class="k">print</span><span class="p">(</span><span class="n">theta_moment</span><span class="p">)</span>
+<span class="o">&gt;&gt;</span> <span class="p">(</span><span class="mf">1.910614525139665</span><span class="p">,</span> <span class="mf">0.06312865497076026</span><span class="p">)</span>
+</pre></td></tr></tbody></table></code></pre></div>  </div>
+
+  <blockquote>
+    <p>REMARKS</p>
+  </blockquote>
+
+  <ul>
+    <li>後述するMLE手法の推定値とは結構ズレがある(MLE手法による推定値の方がLog-lossの観点からは好ましい結果となっている)</li>
+    <li>おそらくN = 100というsmall sample dataを用いて推定してしまったためかと思われる</li>
+  </ul>
+
+  <h3 id="mle">MLEによる推定その１</h3>
+
+  <p>まずLikelihood functionを定義します:</p>
+
+  <div class="math display" style="overflow: auto">
+    <p>\(\begin{align*}
+L(\lambda, w|Y) = \prod_{y_i} \left[w + (1 - w)\exp(-\lambda)\right]^{1(y_i=0)}\left((1 - w)\exp(-\lambda)\frac{\lambda^{y_i}}{y_i!}\right)^{1 - 1(y_i=0)}\quad\quad\tag{4.1}
+\end{align*}\)</p>
+  </div>
+
+  <p>(4.1)にはclosed form solutionは存在しないので数値計算解をlog-lossの最小化によって計算します</p>
+
+  <div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
+2
+3
+4
+5
+6
+7
+8
+9
+10
+11
+12
+13
+14
+15
+16
+17
+18
+19
+20
+21
+22
+23
+24
+25
+26
+27
+28
+29
+30
+31
+32
+33
+34
+35
+36
+37
+38
+39
+40
+</pre></td><td class="rouge-code"><pre><span class="kn">from</span> <span class="nn">scipy.optimize</span> <span class="kn">import</span> <span class="n">minimize</span>
+<span class="kn">import</span> <span class="nn">math</span>
+<span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="n">np</span>
+
+<span class="k">class</span> <span class="nc">ZeroInflatedPoissonRegression</span><span class="p">:</span>
+
+    <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">data</span><span class="p">):</span>
+        <span class="bp">self</span><span class="p">.</span><span class="n">data</span> <span class="o">=</span> <span class="n">data</span>
+        <span class="bp">self</span><span class="p">.</span><span class="n">init_value</span> <span class="o">=</span> <span class="bp">None</span>
+
+    <span class="o">@</span><span class="nb">staticmethod</span>
+    <span class="k">def</span> <span class="nf">zip_pmf</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">theta</span><span class="p">):</span>
+        <span class="n">vec_factorial</span> <span class="o">=</span> <span class="n">np</span><span class="p">.</span><span class="n">vectorize</span><span class="p">(</span><span class="n">math</span><span class="p">.</span><span class="n">factorial</span><span class="p">)</span>
+        <span class="k">return</span> <span class="p">(</span><span class="n">theta</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="o">+</span> <span class="p">(</span><span class="mi">1</span> <span class="o">-</span> <span class="n">theta</span><span class="p">[</span><span class="mi">1</span><span class="p">])</span><span class="o">*</span><span class="n">np</span><span class="p">.</span><span class="n">exp</span><span class="p">(</span><span class="o">-</span><span class="n">theta</span><span class="p">[</span><span class="mi">0</span><span class="p">]))</span><span class="o">**</span><span class="n">np</span><span class="p">.</span><span class="n">where</span><span class="p">(</span><span class="n">x</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">)</span> <span class="o">*</span> <span class="p">((</span><span class="mi">1</span> <span class="o">-</span> <span class="n">theta</span><span class="p">[</span><span class="mi">1</span><span class="p">])</span> <span class="o">*</span> <span class="n">np</span><span class="p">.</span><span class="n">exp</span><span class="p">(</span><span class="o">-</span><span class="n">theta</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span> <span class="o">*</span> <span class="n">theta</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">**</span><span class="n">x</span> <span class="o">/</span> <span class="n">vec_factorial</span><span class="p">(</span><span class="n">x</span><span class="p">))</span> <span class="o">**</span><span class="n">np</span><span class="p">.</span><span class="n">where</span><span class="p">(</span><span class="n">x</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">0</span><span class="p">)</span>
+
+    <span class="k">def</span> <span class="nf">estimate_initial_value</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="n">sample_first_moment</span> <span class="o">=</span> <span class="n">np</span><span class="p">.</span><span class="n">mean</span><span class="p">(</span><span class="bp">self</span><span class="p">.</span><span class="n">data</span><span class="p">)</span>
+        <span class="n">sample_second_moment</span> <span class="o">=</span> <span class="n">np</span><span class="p">.</span><span class="n">mean</span><span class="p">(</span><span class="bp">self</span><span class="p">.</span><span class="n">data</span><span class="o">**</span><span class="mi">2</span><span class="p">)</span>
+
+        <span class="n">theta_moment</span> <span class="o">=</span> <span class="n">sample_second_moment</span> <span class="o">/</span> <span class="n">sample_first_moment</span> <span class="o">-</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">1</span> <span class="o">-</span> <span class="n">sample_first_moment</span> <span class="o">**</span><span class="mi">2</span> <span class="o">/</span> <span class="p">(</span><span class="n">sample_second_moment</span> <span class="o">-</span> <span class="n">sample_first_moment</span><span class="p">)</span>
+        <span class="k">return</span> <span class="n">theta_moment</span>
+    
+    <span class="k">def</span> <span class="nf">neg_loglike</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">theta</span><span class="p">,</span> <span class="n">_data</span><span class="p">):</span>
+        <span class="k">return</span> <span class="n">np</span><span class="p">.</span><span class="nb">sum</span><span class="p">(</span><span class="n">np</span><span class="p">.</span><span class="n">log</span><span class="p">(</span><span class="bp">self</span><span class="p">.</span><span class="n">zip_pmf</span><span class="p">(</span><span class="n">x</span> <span class="o">=</span> <span class="n">_data</span><span class="p">,</span> <span class="n">theta</span> <span class="o">=</span> <span class="n">theta</span><span class="p">)))</span>
+
+    <span class="k">def</span> <span class="nf">fit</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="n">f</span> <span class="o">=</span> <span class="k">lambda</span> <span class="n">theta</span><span class="p">:</span> <span class="o">-</span><span class="bp">self</span><span class="p">.</span><span class="n">neg_loglike</span><span class="p">(</span><span class="n">theta</span> <span class="o">=</span> <span class="n">theta</span><span class="p">,</span> <span class="n">_data</span> <span class="o">=</span> <span class="bp">self</span><span class="p">.</span><span class="n">data</span><span class="p">)</span>
+        <span class="bp">self</span><span class="p">.</span><span class="n">init_value</span> <span class="o">=</span> <span class="bp">self</span><span class="p">.</span><span class="n">estimate_initial_value</span><span class="p">()</span>
+
+        <span class="k">return</span> <span class="n">minimize</span><span class="p">(</span><span class="n">fun</span> <span class="o">=</span> <span class="n">f</span><span class="p">,</span> <span class="n">x0</span><span class="o">=</span><span class="bp">self</span><span class="p">.</span><span class="n">init_value</span><span class="p">,</span> <span class="n">method</span> <span class="o">=</span> <span class="s">'Nelder-Mead'</span><span class="p">,</span> <span class="n">options</span><span class="o">=</span><span class="p">{</span><span class="s">'disp'</span><span class="p">:</span> <span class="bp">True</span><span class="p">})</span>
+
+
+<span class="c1">## Generating Data
+</span><span class="n">data</span> <span class="o">=</span> <span class="n">np</span><span class="p">.</span><span class="n">repeat</span><span class="p">(</span><span class="n">np</span><span class="p">.</span><span class="n">arange</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">7</span><span class="p">),</span> <span class="n">np</span><span class="p">.</span><span class="n">array</span><span class="p">([</span><span class="mi">22</span><span class="p">,</span> <span class="mi">23</span><span class="p">,</span> <span class="mi">26</span><span class="p">,</span> <span class="mi">18</span><span class="p">,</span> <span class="mi">6</span><span class="p">,</span> <span class="mi">4</span><span class="p">,</span> <span class="mi">1</span><span class="p">]))</span>
+
+<span class="c1">## Create the instance
+</span><span class="n">poisson_mle</span> <span class="o">=</span> <span class="n">ZeroInflatedPoissonRegression</span><span class="p">(</span><span class="n">data</span><span class="o">=</span><span class="n">data</span><span class="p">)</span>
+
+<span class="c1">## fit
+</span><span class="n">poisson_mle</span><span class="p">.</span><span class="n">fit</span><span class="p">()</span>
+</pre></td></tr></tbody></table></code></pre></div>  </div>
+
+  <p>Then,</p>
+
+  <pre><code class="language-raw">Optimization terminated successfully.
+         Current function value: 168.338102
+         Iterations: 30
+         Function evaluations: 58
+ final_simplex: (array([[1.97707489, 0.09462929],
+       [1.977147  , 0.09463945],
+       [1.97714908, 0.0946238 ]]), array([168.33810206, 168.33810208, 168.33810215]))
+           fun: 168.33810205717472
+       message: 'Optimization terminated successfully.'
+          nfev: 58
+           nit: 30
+        status: 0
+       success: True
+             x: array([1.97707489, 0.09462929])
+</code></pre>
+
+  <h3 id="mle2-em">MLEによる推定その2: EMアルゴリズム</h3>
+
+  <p>sample size $N$のうち, mがゼロ過剰部分、つまり値0をとり、残りの$N-m$がポワソン分布に従うとまず仮定します. この仮定の下、Likelihood functionを定義すると</p>
+
+  <div class="math display" style="overflow: auto">
+    <p>\(L(\lambda, w) = w^m\prod(1-w)\exp(-\lambda)\frac{\lambda^{y_i}}{y_i!}\quad\quad\tag{4.2}\)</p>
+  </div>
+
+  <p>(4.2)をLog-Likelihoodへ変換すると</p>
+
+  <div class="math display" style="overflow: auto">
+    <p>\(\begin{align*}
+l(\lambda, w)= m\log(w) + (N-m)\log(1-w) - (N-m)\lambda + \log(\lambda)\sum y_i - \sum\log(y_i) \quad\quad\tag{4.3}
+\end{align*}\)</p>
+  </div>
+
+  <p>(4.3)のFOCsをとると</p>
+
+\[\begin{align*}
+\lambda &amp;= \sum \frac{y_i}{N-m}\\
+w &amp;= \frac{m}{N}
+\end{align*}\]
+
+  <p>を得ます. $f_0$を$y_i=0$となる観測度数とすると、$y_i \neq 0$となる観測数の期待値は</p>
+
+\[N - f_0 = N - m - N(1 - w)\exp(-\lambda)\]
+
+  <p>この式を変形すると</p>
+
+\[m = \frac{f_0 - N \exp(-\lambda)}{1 - \exp(-\lambda)} \quad\quad\tag{4.4}\]
+
+  <p>よって、$\lambda, m$に関して以下のupdate functionを得ます.</p>
+
+  <div class="math display" style="overflow: auto">
+    <p>\(\begin{align*}
+m_(t+1) &amp;= \frac{f_0 - N \exp(-\lambda_t)}{1 - \exp(-\lambda_t)}\\
+\lambda_{t+1} &amp;= \sum \frac{y_i}{N-m_{t+1}}
+\end{align*}\)</p>
+  </div>
+
+  <p>このupdate ruleに基づいたパラメーターの推定はEMアルゴリズムと言われます.</p>
+
+  <blockquote>
+    <p>REMARKS</p>
+  </blockquote>
+
+  <ul>
+    <li>この問題に関しては、初期値の$\lambda_0$は条件付きポワソンで推定すれば良い</li>
+  </ul>
+
+  <h2 id="appendix-mle-vs-mle-with-em-vs-method-of-moment">Appendix: MLE vs MLE with EM vs Method of Moment</h2>
+
+  <ul>
+    <li>コードだけ紹介します</li>
+    <li>サンプルサイズや$w,\lambda$を変化させて推定量の分布を確認することができます</li>
+    <li>Method of Momentは若干、推定量の分散が大きいように思われる</li>
+  </ul>
+
+  <div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
+2
+3
+4
+5
+6
+7
+8
+9
+10
+11
+12
+13
+14
+15
+16
+17
+18
+19
+20
+21
+22
+23
+24
+25
+26
+27
+28
+29
+30
+31
+32
+33
+34
+35
+36
+37
+38
+39
+40
+41
+42
+43
+44
+45
+46
+47
+48
+49
+50
+51
+52
+53
+54
+55
+56
+57
+58
+59
+60
+61
+62
+63
+64
+65
+66
+67
+68
+69
+70
+71
+72
+73
+74
+75
+76
+77
+78
+79
+80
+81
+82
+83
+84
+85
+86
+87
+88
+89
+90
+91
+92
+93
+94
+95
+96
+97
+98
+99
+100
+101
+102
+103
+104
+105
+106
+107
+108
+109
+110
+111
+112
+113
+114
+115
+116
+117
+118
+119
+120
+121
+122
+123
+124
+125
+126
+127
+</pre></td><td class="rouge-code"><pre><span class="kn">from</span> <span class="nn">scipy.optimize</span> <span class="kn">import</span> <span class="n">minimize</span>
+<span class="kn">import</span> <span class="nn">math</span>
+<span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="n">np</span>
+<span class="kn">from</span> <span class="nn">scipy.special</span> <span class="kn">import</span> <span class="n">lambertw</span>
+<span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="k">as</span> <span class="n">plt</span>
+
+<span class="k">class</span> <span class="nc">ZeroInflatedPoissonRegression</span><span class="p">:</span>
+
+    <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">data</span><span class="p">):</span>
+        <span class="bp">self</span><span class="p">.</span><span class="n">data</span> <span class="o">=</span> <span class="n">data</span>
+        <span class="bp">self</span><span class="p">.</span><span class="n">init_value</span> <span class="o">=</span> <span class="bp">None</span>
+
+    <span class="o">@</span><span class="nb">staticmethod</span>
+    <span class="k">def</span> <span class="nf">zip_pmf</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">theta</span><span class="p">):</span>
+        <span class="n">vec_factorial</span> <span class="o">=</span> <span class="n">np</span><span class="p">.</span><span class="n">vectorize</span><span class="p">(</span><span class="n">math</span><span class="p">.</span><span class="n">factorial</span><span class="p">)</span>
+        <span class="k">return</span> <span class="p">(</span><span class="n">theta</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="o">+</span> <span class="p">(</span><span class="mi">1</span> <span class="o">-</span> <span class="n">theta</span><span class="p">[</span><span class="mi">1</span><span class="p">])</span><span class="o">*</span><span class="n">np</span><span class="p">.</span><span class="n">exp</span><span class="p">(</span><span class="o">-</span><span class="n">theta</span><span class="p">[</span><span class="mi">0</span><span class="p">]))</span><span class="o">**</span><span class="n">np</span><span class="p">.</span><span class="n">where</span><span class="p">(</span><span class="n">x</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">)</span> <span class="o">*</span> <span class="p">((</span><span class="mi">1</span> <span class="o">-</span> <span class="n">theta</span><span class="p">[</span><span class="mi">1</span><span class="p">])</span> <span class="o">*</span> <span class="n">np</span><span class="p">.</span><span class="n">exp</span><span class="p">(</span><span class="o">-</span><span class="n">theta</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span> <span class="o">*</span> <span class="n">theta</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">**</span><span class="n">x</span> <span class="o">/</span> <span class="n">vec_factorial</span><span class="p">(</span><span class="n">x</span><span class="p">))</span> <span class="o">**</span><span class="n">np</span><span class="p">.</span><span class="n">where</span><span class="p">(</span><span class="n">x</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">0</span><span class="p">)</span>
+    
+    <span class="o">@</span><span class="nb">staticmethod</span>
+    <span class="k">def</span> <span class="nf">em_update</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">theta</span><span class="p">):</span>    
+        <span class="n">next_theta_1</span> <span class="o">=</span> <span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">x</span><span class="p">[</span><span class="n">x</span> <span class="o">&lt;</span> <span class="mi">1</span><span class="p">])</span> <span class="o">-</span> <span class="nb">len</span><span class="p">(</span><span class="n">x</span><span class="p">)</span> <span class="o">*</span> <span class="n">np</span><span class="p">.</span><span class="n">exp</span><span class="p">(</span><span class="o">-</span><span class="n">theta</span><span class="p">[</span><span class="mi">0</span><span class="p">]))</span><span class="o">/</span> <span class="p">(</span><span class="mi">1</span> <span class="o">-</span> <span class="n">np</span><span class="p">.</span><span class="n">exp</span><span class="p">(</span><span class="o">-</span><span class="n">theta</span><span class="p">[</span><span class="mi">0</span><span class="p">]))</span> 
+        <span class="n">next_theta_0</span> <span class="o">=</span> <span class="n">np</span><span class="p">.</span><span class="nb">sum</span><span class="p">(</span><span class="n">x</span><span class="p">)</span><span class="o">/</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">x</span><span class="p">)</span> <span class="o">-</span> <span class="n">next_theta_1</span><span class="p">)</span>
+
+        <span class="k">return</span> <span class="p">[</span><span class="n">next_theta_0</span><span class="p">,</span> <span class="n">next_theta_1</span><span class="p">]</span>
+
+    <span class="k">def</span> <span class="nf">estimate_conditional_poisson</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="n">lambert_w</span> <span class="o">=</span> <span class="n">np</span><span class="p">.</span><span class="n">mean</span><span class="p">(</span><span class="bp">self</span><span class="p">.</span><span class="n">data</span><span class="p">[</span><span class="bp">self</span><span class="p">.</span><span class="n">data</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="p">])</span>
+        <span class="n">estimated_lambda</span> <span class="o">=</span> <span class="n">lambertw</span><span class="p">(</span><span class="o">-</span><span class="n">lambert_w</span><span class="o">/</span><span class="n">np</span><span class="p">.</span><span class="n">exp</span><span class="p">(</span><span class="n">lambert_w</span><span class="p">),</span> <span class="mi">0</span><span class="p">)</span> <span class="o">+</span> <span class="n">lambert_w</span>
+        
+        <span class="k">return</span> <span class="n">estimated_lambda</span><span class="p">.</span><span class="n">real</span>
+
+    <span class="k">def</span> <span class="nf">method_of_moment</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="n">sample_mean</span> <span class="o">=</span> <span class="n">np</span><span class="p">.</span><span class="n">mean</span><span class="p">(</span><span class="bp">self</span><span class="p">.</span><span class="n">data</span><span class="p">)</span>
+        <span class="n">sample_second_moment</span> <span class="o">=</span> <span class="n">np</span><span class="p">.</span><span class="n">mean</span><span class="p">(</span><span class="bp">self</span><span class="p">.</span><span class="n">data</span><span class="o">**</span><span class="mi">2</span><span class="p">)</span>
+
+        <span class="n">theta_moment</span> <span class="o">=</span> <span class="p">[</span><span class="n">sample_second_moment</span> <span class="o">/</span> <span class="n">sample_mean</span> <span class="o">-</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">1</span> <span class="o">-</span> <span class="n">sample_mean</span> <span class="o">**</span><span class="mi">2</span> <span class="o">/</span> <span class="p">(</span><span class="n">sample_second_moment</span> <span class="o">-</span> <span class="n">sample_mean</span><span class="p">)]</span>
+        <span class="k">return</span> <span class="n">theta_moment</span>
+    
+    <span class="k">def</span> <span class="nf">neg_loglike</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">theta</span><span class="p">,</span> <span class="n">_data</span><span class="p">,</span> <span class="n">normalize</span> <span class="o">=</span> <span class="bp">False</span><span class="p">):</span>
+        <span class="k">if</span> <span class="n">normalize</span><span class="p">:</span>
+            <span class="n">theta</span> <span class="o">=</span> <span class="n">theta</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="n">theta</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="o">/</span><span class="nb">len</span><span class="p">(</span><span class="n">_data</span><span class="p">)</span>
+
+        <span class="k">return</span> <span class="n">np</span><span class="p">.</span><span class="nb">sum</span><span class="p">(</span><span class="n">np</span><span class="p">.</span><span class="n">log</span><span class="p">(</span><span class="bp">self</span><span class="p">.</span><span class="n">zip_pmf</span><span class="p">(</span><span class="n">x</span> <span class="o">=</span> <span class="n">_data</span><span class="p">,</span> <span class="n">theta</span> <span class="o">=</span> <span class="n">theta</span><span class="p">)))</span>
+
+    <span class="k">def</span> <span class="nf">fit</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="n">f</span> <span class="o">=</span> <span class="k">lambda</span> <span class="n">theta</span><span class="p">:</span> <span class="o">-</span><span class="bp">self</span><span class="p">.</span><span class="n">neg_loglike</span><span class="p">(</span><span class="n">theta</span> <span class="o">=</span> <span class="n">theta</span><span class="p">,</span> <span class="n">_data</span> <span class="o">=</span> <span class="bp">self</span><span class="p">.</span><span class="n">data</span><span class="p">)</span>
+        <span class="bp">self</span><span class="p">.</span><span class="n">init_value</span> <span class="o">=</span> <span class="bp">self</span><span class="p">.</span><span class="n">method_of_moment</span><span class="p">()</span>
+
+        <span class="k">return</span> <span class="n">minimize</span><span class="p">(</span><span class="n">fun</span> <span class="o">=</span> <span class="n">f</span><span class="p">,</span> <span class="n">x0</span><span class="o">=</span><span class="bp">self</span><span class="p">.</span><span class="n">init_value</span><span class="p">,</span> <span class="n">method</span> <span class="o">=</span> <span class="s">'Nelder-Mead'</span><span class="p">,</span> <span class="n">options</span><span class="o">=</span><span class="p">{</span><span class="s">'disp'</span><span class="p">:</span> <span class="bp">True</span><span class="p">})</span>
+
+    <span class="k">def</span> <span class="nf">em_fit</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">eps</span> <span class="o">=</span> <span class="mf">1e-10</span><span class="p">):</span>
+        <span class="n">lambda_t</span> <span class="o">=</span> <span class="bp">self</span><span class="p">.</span><span class="n">estimate_conditional_poisson</span><span class="p">()</span>
+        <span class="n">m_t</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="bp">self</span><span class="p">.</span><span class="n">data</span><span class="p">[</span><span class="bp">self</span><span class="p">.</span><span class="n">data</span> <span class="o">&lt;</span> <span class="mi">1</span><span class="p">])</span>
+        <span class="n">theta</span> <span class="o">=</span> <span class="p">[</span><span class="n">lambda_t</span><span class="p">,</span> <span class="n">m_t</span><span class="p">]</span>
+        <span class="n">next_theta</span> <span class="o">=</span> <span class="bp">self</span><span class="p">.</span><span class="n">em_update</span><span class="p">(</span><span class="bp">self</span><span class="p">.</span><span class="n">data</span><span class="p">,</span> <span class="n">theta</span><span class="p">)</span>
+
+        <span class="k">while</span> <span class="nb">abs</span><span class="p">(</span><span class="bp">self</span><span class="p">.</span><span class="n">neg_loglike</span><span class="p">(</span><span class="n">theta</span> <span class="o">=</span> <span class="n">next_theta</span><span class="p">,</span> <span class="n">_data</span> <span class="o">=</span> <span class="bp">self</span><span class="p">.</span><span class="n">data</span><span class="p">,</span> <span class="n">normalize</span><span class="o">=</span><span class="bp">True</span><span class="p">)</span> <span class="o">-</span> <span class="bp">self</span><span class="p">.</span><span class="n">neg_loglike</span><span class="p">(</span><span class="n">theta</span> <span class="o">=</span> <span class="n">theta</span><span class="p">,</span> <span class="n">_data</span> <span class="o">=</span> <span class="bp">self</span><span class="p">.</span><span class="n">data</span><span class="p">,</span> <span class="n">normalize</span><span class="o">=</span><span class="bp">True</span><span class="p">))</span> <span class="o">&gt;</span> <span class="n">eps</span><span class="p">:</span>
+            <span class="n">theta</span> <span class="o">=</span> <span class="n">next_theta</span>
+            <span class="n">next_theta</span> <span class="o">=</span> <span class="bp">self</span><span class="p">.</span><span class="n">em_update</span><span class="p">(</span><span class="bp">self</span><span class="p">.</span><span class="n">data</span><span class="p">,</span> <span class="n">theta</span><span class="p">)</span>
+        
+        <span class="n">next_theta</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="o">=</span> <span class="n">next_theta</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="o">/</span><span class="nb">len</span><span class="p">(</span><span class="bp">self</span><span class="p">.</span><span class="n">data</span><span class="p">)</span>
+
+        <span class="k">return</span> <span class="n">next_theta</span>
+        
+
+<span class="c1">## Generating Data
+#data = np.repeat(np.arange(0, 7), np.array([22, 23, 26, 18, 6, 4, 1]))
+#
+## Create the instance
+#poisson_mle = ZeroInflatedPoissonRegression(data=data)
+#
+## fit
+#res_mle = poisson_mle.fit().x
+#res_em = poisson_mle.em_fit()
+#res_mom = poisson_mle.method_of_moment()
+#
+#print(res_mle, res_em, res_mom)
+</span>
+<span class="n">N</span> <span class="o">=</span> <span class="mi">100</span>
+<span class="n">w</span> <span class="o">=</span> <span class="mf">0.2</span>
+<span class="n">poisson_lambda</span> <span class="o">=</span> <span class="mf">2.5</span>
+<span class="n">iter_num</span> <span class="o">=</span> <span class="mi">0</span>
+
+<span class="n">mle</span> <span class="o">=</span> <span class="p">[]</span>
+<span class="n">mle_em</span> <span class="o">=</span> <span class="p">[]</span>
+<span class="n">mom</span> <span class="o">=</span> <span class="p">[]</span>
+
+
+<span class="k">while</span> <span class="n">iter_num</span> <span class="o">&lt;</span> <span class="mi">1000</span><span class="p">:</span>
+    <span class="n">data</span> <span class="o">=</span> <span class="n">poisson</span><span class="p">.</span><span class="n">rvs</span><span class="p">(</span><span class="n">poisson_lambda</span> <span class="p">,</span> <span class="n">size</span><span class="o">=</span><span class="n">N</span><span class="p">)</span>
+    <span class="n">lottery</span> <span class="o">=</span> <span class="n">np</span><span class="p">.</span><span class="n">random</span><span class="p">.</span><span class="n">uniform</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="n">N</span><span class="p">)</span>
+    <span class="n">data</span> <span class="o">=</span> <span class="n">np</span><span class="p">.</span><span class="n">where</span><span class="p">(</span><span class="n">lottery</span> <span class="o">&gt;</span> <span class="n">w</span><span class="p">,</span> <span class="n">data</span><span class="p">,</span> <span class="mi">0</span><span class="p">)</span>
+
+    <span class="c1">## Create the instance
+</span>    <span class="n">poisson_mle</span> <span class="o">=</span> <span class="n">ZeroInflatedPoissonRegression</span><span class="p">(</span><span class="n">data</span><span class="o">=</span><span class="n">data</span><span class="p">)</span>
+
+    <span class="c1">## fit
+</span>    <span class="n">res_mle</span> <span class="o">=</span> <span class="nb">list</span><span class="p">(</span><span class="n">poisson_mle</span><span class="p">.</span><span class="n">fit</span><span class="p">().</span><span class="n">x</span><span class="p">)</span>
+    <span class="n">res_em</span> <span class="o">=</span> <span class="n">poisson_mle</span><span class="p">.</span><span class="n">em_fit</span><span class="p">()</span>
+    <span class="n">res_mom</span> <span class="o">=</span> <span class="n">poisson_mle</span><span class="p">.</span><span class="n">method_of_moment</span><span class="p">()</span>
+
+    <span class="n">mle</span><span class="p">.</span><span class="n">append</span><span class="p">(</span><span class="n">res_mle</span><span class="p">)</span>
+    <span class="n">mle_em</span><span class="p">.</span><span class="n">append</span><span class="p">(</span><span class="n">res_em</span><span class="p">)</span>
+    <span class="n">mom</span><span class="p">.</span><span class="n">append</span><span class="p">(</span><span class="n">res_mom</span><span class="p">)</span>
+
+    <span class="n">iter_num</span> <span class="o">+=</span> <span class="mi">1</span>
+
+
+<span class="n">fig</span><span class="p">,</span> <span class="n">ax</span> <span class="o">=</span> <span class="n">plt</span><span class="p">.</span><span class="n">subplots</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="n">sharex</span><span class="o">=</span><span class="bp">True</span><span class="p">,</span> <span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">21</span><span class="p">,</span> <span class="mi">9</span><span class="p">))</span>
+<span class="n">index</span> <span class="o">=</span> <span class="mi">0</span>
+<span class="n">bin_width</span> <span class="o">=</span> <span class="mf">0.1</span>
+
+<span class="n">_bin</span> <span class="o">=</span> <span class="n">np</span><span class="p">.</span><span class="n">arange</span><span class="p">(</span><span class="nb">min</span><span class="p">(</span><span class="n">np</span><span class="p">.</span><span class="n">array</span><span class="p">(</span><span class="n">mom</span><span class="p">)[:,</span><span class="n">index</span><span class="p">])</span><span class="o">*</span><span class="mf">0.7</span><span class="p">,</span> <span class="nb">max</span><span class="p">(</span><span class="n">np</span><span class="p">.</span><span class="n">array</span><span class="p">(</span><span class="n">mom</span><span class="p">)[:,</span><span class="n">index</span><span class="p">])</span><span class="o">*</span><span class="mf">1.2</span><span class="p">,</span> <span class="n">bin_width</span><span class="p">)</span>
+
+<span class="n">ax</span><span class="p">[</span><span class="mi">0</span><span class="p">].</span><span class="n">hist</span><span class="p">(</span><span class="n">np</span><span class="p">.</span><span class="n">array</span><span class="p">(</span><span class="n">mom</span><span class="p">)[:,</span><span class="n">index</span><span class="p">],</span> <span class="n">bins</span><span class="o">=</span><span class="n">_bin</span><span class="p">,</span>
+             <span class="n">color</span><span class="o">=</span><span class="s">'r'</span><span class="p">,</span>
+             <span class="n">alpha</span><span class="o">=</span><span class="mf">0.5</span><span class="p">)</span>
+<span class="n">ax</span><span class="p">[</span><span class="mi">0</span><span class="p">].</span><span class="n">set_title</span><span class="p">(</span><span class="s">'Method of Moment: Mean = {:.2f}, Var= {:.2f}'</span><span class="p">.</span><span class="nb">format</span><span class="p">(</span><span class="n">np</span><span class="p">.</span><span class="n">mean</span><span class="p">(</span><span class="n">np</span><span class="p">.</span><span class="n">array</span><span class="p">(</span><span class="n">mom</span><span class="p">)[:,</span><span class="n">index</span><span class="p">]),</span><span class="n">np</span><span class="p">.</span><span class="n">var</span><span class="p">(</span><span class="n">np</span><span class="p">.</span><span class="n">array</span><span class="p">(</span><span class="n">mom</span><span class="p">)[:,</span><span class="n">index</span><span class="p">])))</span>
+
+<span class="n">ax</span><span class="p">[</span><span class="mi">1</span><span class="p">].</span><span class="n">hist</span><span class="p">(</span><span class="n">np</span><span class="p">.</span><span class="n">array</span><span class="p">(</span><span class="n">mle</span><span class="p">)[:,</span><span class="n">index</span><span class="p">],</span> <span class="n">bins</span><span class="o">=</span><span class="n">_bin</span><span class="p">,</span>
+             <span class="n">color</span><span class="o">=</span><span class="s">'g'</span><span class="p">,</span>
+             <span class="n">alpha</span><span class="o">=</span><span class="mf">0.5</span><span class="p">)</span>
+<span class="n">ax</span><span class="p">[</span><span class="mi">1</span><span class="p">].</span><span class="n">set_title</span><span class="p">(</span><span class="s">'MLE: Mean = {:.2f}, Var= {:.2f}'</span><span class="p">.</span><span class="nb">format</span><span class="p">(</span><span class="n">np</span><span class="p">.</span><span class="n">mean</span><span class="p">(</span><span class="n">np</span><span class="p">.</span><span class="n">array</span><span class="p">(</span><span class="n">mle</span><span class="p">)[:,</span><span class="n">index</span><span class="p">]),</span><span class="n">np</span><span class="p">.</span><span class="n">var</span><span class="p">(</span><span class="n">np</span><span class="p">.</span><span class="n">array</span><span class="p">(</span><span class="n">mle</span><span class="p">)[:,</span><span class="n">index</span><span class="p">])))</span>
+
+<span class="n">ax</span><span class="p">[</span><span class="mi">2</span><span class="p">].</span><span class="n">hist</span><span class="p">(</span><span class="n">np</span><span class="p">.</span><span class="n">array</span><span class="p">(</span><span class="n">mle_em</span><span class="p">)[:,</span><span class="n">index</span><span class="p">],</span> <span class="n">bins</span><span class="o">=</span><span class="n">_bin</span><span class="p">,</span>
+             <span class="n">color</span><span class="o">=</span><span class="s">'b'</span><span class="p">,</span>
+             <span class="n">alpha</span><span class="o">=</span><span class="mf">0.5</span><span class="p">)</span>
+<span class="n">ax</span><span class="p">[</span><span class="mi">2</span><span class="p">].</span><span class="n">set_title</span><span class="p">(</span><span class="s">'MLE with EM: Mean = {:.2f}, Var= {:.2f}'</span><span class="p">.</span><span class="nb">format</span><span class="p">(</span><span class="n">np</span><span class="p">.</span><span class="n">mean</span><span class="p">(</span><span class="n">np</span><span class="p">.</span><span class="n">array</span><span class="p">(</span><span class="n">mle_em</span><span class="p">)[:,</span><span class="n">index</span><span class="p">]),</span><span class="n">np</span><span class="p">.</span><span class="n">var</span><span class="p">(</span><span class="n">np</span><span class="p">.</span><span class="n">array</span><span class="p">(</span><span class="n">mle_em</span><span class="p">)[:,</span><span class="n">index</span><span class="p">])));</span>
+</pre></td></tr></tbody></table></code></pre></div>  </div>
+
+  <h2 id="reference">Reference</h2>
+
+  <ul>
+    <li><a href="https://www.kinokuniya.co.jp/f/dsg-01-9784254116335">統計学のための数学入門３０講</a></li>
+    <li><a href="https://manabitimes.jp/math/924">高校数学の美しい物語&gt;ポアソン分布の意味と平均・分散</a></li>
+    <li><a href="https://docs.scipy.org/doc/scipy/reference/generated/scipy.stats.ks_2samp.html">scipy.stats.ks_2samp</a></li>
+    <li><a href="https://docs.scipy.org/doc/scipy/reference/generated/scipy.stats.chisquare.html">scipy.stats.chisquare</a></li>
+    <li><a href="https://stats.oarc.ucla.edu/stata/dae/zero-inflated-poisson-regression/">UCLA Statistical Methods and Data Analysis &gt; Zero-inflated Poisson Regression</a></li>
+    <li><a href="https://ja.wikipedia.org/wiki/%E3%83%A9%E3%83%B3%E3%83%99%E3%83%AB%E3%83%88%E3%81%AEW%E9%96%A2%E6%95%B0">Wikipedia &gt; ランベルトのW関数</a></li>
+  </ul>
+</div>
+
+
+                <hr style="visibility: hidden;">
+                <hr/>
+                <b><fontsize="5">Share Buttons</font><br></b>
+                <!--see 
+    https://jekyllcodex.org/without-plugin/share-buttons/ 
+    https://ranvir.xyz/blog/why-and-how-to-add-social-sharing-buttons-on-your-jekyll-blog-using-github-pages/
+-->
+
+
+
+<style>
+#share-buttons {display: inline-block; vertical-align: middle; }
+#share-buttons:after {content: ""; display: block; clear: both;}
+#share-buttons > div {
+    position: relative;
+    text-align: left; 
+    height: 36px; 
+    width: 32px; 
+    float: left; 
+    text-align: center;
+}
+#share-buttons > div > svg {height: 16px; fill: #d5d5d5; margin-top: 10px;}
+#share-buttons > div:hover {cursor: pointer;}
+#share-buttons > div.facebook:hover > svg {fill: #3B5998;}
+#share-buttons > div.twitter:hover > svg {fill: #55ACEE;}
+#share-buttons > div.linkedin:hover > svg {fill: #0077b5;}
+#share-buttons > div.pinterest:hover > svg {fill: #CB2027;}
+#share-buttons > div.gplus:hover > svg {fill: #dd4b39;}
+#share-buttons > div.mail:hover > svg {fill: #7D7D7D;}
+#share-buttons > div.instagram:hover > svg {fill: #C73B92;}
+#share-buttons > div.facebook > svg {height: 18px; margin-top: 9px;}
+#share-buttons > div.twitter > svg {height: 20px; margin-top: 8px;}
+#share-buttons > div.linkedin > svg {height: 19px; margin-top: 7px;}
+#share-buttons > div.pinterest > svg {height: 20px; margin-top: 9px;}
+#share-buttons > div.gplus > svg {height: 17px; margin-top: 9px; position: relative; left: 1px;}
+#share-buttons > div.mail > svg {height: 14px; margin-top: 11px;}
+</style>
+
+<span style="color: black">Share on: </span><div id="share-buttons">
+    <div class="facebook" title="Share this on Facebook" onclick="gtag('event', 'Facebook', {'event_category':'Post Shared','event_label':'Facebook'}); location.href='http://www.facebook.com/share.php?u=https://ryonakagami.github.io/2021/12/27/poisson-distribution/';"><svg viewBox="0 0 1792 1792" xmlns="http://www.w3.org/2000/svg"><path d="M1343 12v264h-157q-86 0-116 36t-30 108v189h293l-39 296h-254v759h-306v-759h-255v-296h255v-218q0-186 104-288.5t277-102.5q147 0 228 12z"/></svg></div>
+    <div class="twitter" title="Share this on Twitter" onclick="gtag('event', 'Twitter', {'event_category':'Post Shared','event_label':'Twitter'}); location.href='https://twitter.com/intent/tweet?text=統計検定：ポワソン分布と条件付き分布&url=https://ryonakagami.github.io/2021/12/27/poisson-distribution/';"><svg viewBox="0 0 1792 1792" xmlns="http://www.w3.org/2000/svg"><path d="M1684 408q-67 98-162 167 1 14 1 42 0 130-38 259.5t-115.5 248.5-184.5 210.5-258 146-323 54.5q-271 0-496-145 35 4 78 4 225 0 401-138-105-2-188-64.5t-114-159.5q33 5 61 5 43 0 85-11-112-23-185.5-111.5t-73.5-205.5v-4q68 38 146 41-66-44-105-115t-39-154q0-88 44-163 121 149 294.5 238.5t371.5 99.5q-8-38-8-74 0-134 94.5-228.5t228.5-94.5q140 0 236 102 109-21 205-78-37 115-142 178 93-10 186-50z"/></svg></div>
+    <div class="linkedin" title="Share this on Linkedin" onclick="gtag('event', 'Linkedin', {'event_category':'Post Shared','event_label':'Linkedin'}); location.href='https://www.linkedin.com/shareArticle?mini=true&url=https://ryonakagami.github.io/2021/12/27/poisson-distribution/&title=&summary=&source=';"><svg viewBox="0 0 1792 1792" xmlns="http://www.w3.org/2000/svg"><path d="M477 625v991h-330v-991h330zm21-306q1 73-50.5 122t-135.5 49h-2q-82 0-132-49t-50-122q0-74 51.5-122.5t134.5-48.5 133 48.5 51 122.5zm1166 729v568h-329v-530q0-105-40.5-164.5t-126.5-59.5q-63 0-105.5 34.5t-63.5 85.5q-11 30-11 81v553h-329q2-399 2-647t-1-296l-1-48h329v144h-2q20-32 41-56t56.5-52 87-43.5 114.5-15.5q171 0 275 113.5t104 332.5z"/></svg></div>
+    
+    <div class="mail" title="Share this through Email" onclick="gtag('event', 'Email', {'event_category':'Post Shared','event_label':'Email'}); location.href='mailto:?&body=https://ryonakagami.github.io/2021/12/27/poisson-distribution/';"><svg viewBox="0 0 1792 1792" xmlns="http://www.w3.org/2000/svg"><path d="M1792 710v794q0 66-47 113t-113 47h-1472q-66 0-113-47t-47-113v-794q44 49 101 87 362 246 497 345 57 42 92.5 65.5t94.5 48 110 24.5h2q51 0 110-24.5t94.5-48 92.5-65.5q170-123 498-345 57-39 100-87zm0-294q0 79-49 151t-122 123q-376 261-468 325-10 7-42.5 30.5t-54 38-52 32.5-57.5 27-50 9h-2q-23 0-50-9t-57.5-27-52-32.5-54-38-42.5-30.5q-91-64-262-182.5t-205-142.5q-62-42-117-115.5t-55-136.5q0-78 41.5-130t118.5-52h1472q65 0 112.5 47t47.5 113z"/></svg></div>
+</div>
+
+                
+                <hr/>
+
+                <!-- Featured Tags -->
+                <b><fontsize="5">Feature Tags</b>
+                    <div id="tag_cloud" class="tags tags-sup js-tags" 
+                    style="line-height: 0px !important;">
+                        
+                        
+                        
+                        
+                        
+                                <a data-sort="0288" 
+                                    href="/archive/?tag=%E7%B5%B1%E8%A8%88"
+                                    title="統計"
+                                    style="color: #337ab7 !important;"
+                                    rel="61">統計</a>
+                        
+                                <a data-sort="0298" 
+                                    href="/archive/?tag=Python"
+                                    title="Python"
+                                    style="color: #337ab7 !important;"
+                                    rel="51">Python</a>
+                        
+                                <a data-sort="0300" 
+                                    href="/archive/?tag=math"
+                                    title="math"
+                                    style="color: #337ab7 !important;"
+                                    rel="49">math</a>
+                        
+                                <a data-sort="0303" 
+                                    href="/archive/?tag=Linux"
+                                    title="Linux"
+                                    style="color: #337ab7 !important;"
+                                    rel="46">Linux</a>
+                        
+                                <a data-sort="0316" 
+                                    href="/archive/?tag=Ubuntu+20.04+LTS"
+                                    title="Ubuntu 20.04 LTS"
+                                    style="color: #337ab7 !important;"
+                                    rel="33">Ubuntu 20.04 LTS</a>
+                        
+                                <a data-sort="0319" 
+                                    href="/archive/?tag=Shell"
+                                    title="Shell"
+                                    style="color: #337ab7 !important;"
+                                    rel="30">Shell</a>
+                        
+                                <a data-sort="0321" 
+                                    href="/archive/?tag=English"
+                                    title="English"
+                                    style="color: #337ab7 !important;"
+                                    rel="28">English</a>
+                        
+                                <a data-sort="0324" 
+                                    href="/archive/?tag=git"
+                                    title="git"
+                                    style="color: #337ab7 !important;"
+                                    rel="25">git</a>
+                        
+                                <a data-sort="0329" 
+                                    href="/archive/?tag=%E6%96%B9%E6%B3%95%E8%AB%96"
+                                    title="方法論"
+                                    style="color: #337ab7 !important;"
+                                    rel="20">方法論</a>
+                        
+                                <a data-sort="0333" 
+                                    href="/archive/?tag=Ubuntu+22.04+LTS"
+                                    title="Ubuntu 22.04 LTS"
+                                    style="color: #337ab7 !important;"
+                                    rel="16">Ubuntu 22.04 LTS</a>
+                        
+                                <a data-sort="0337" 
+                                    href="/archive/?tag=%E7%B5%B1%E8%A8%88%E6%A4%9C%E5%AE%9A"
+                                    title="統計検定"
+                                    style="color: #337ab7 !important;"
+                                    rel="12">統計検定</a>
+                        
+                                <a data-sort="0338" 
+                                    href="/archive/?tag=%E7%AB%B6%E6%8A%80%E3%83%97%E3%83%AD%E3%82%B0%E3%83%A9%E3%83%9F%E3%83%B3%E3%82%B0"
+                                    title="競技プログラミング"
+                                    style="color: #337ab7 !important;"
+                                    rel="11">競技プログラミング</a>
+                        
+                                <a data-sort="0339" 
+                                    href="/archive/?tag=%E3%83%95%E3%83%BC%E3%83%AA%E3%82%A8%E8%A7%A3%E6%9E%90"
+                                    title="フーリエ解析"
+                                    style="color: #337ab7 !important;"
+                                    rel="10">フーリエ解析</a>
+                        
+                                <a data-sort="0340" 
+                                    href="/archive/?tag=%E5%89%8D%E5%87%A6%E7%90%86"
+                                    title="前処理"
+                                    style="color: #337ab7 !important;"
+                                    rel="9">前処理</a>
+                        
+                                <a data-sort="0340" 
+                                    href="/archive/?tag=SQL"
+                                    title="SQL"
+                                    style="color: #337ab7 !important;"
+                                    rel="9">SQL</a>
+                        
+                                <a data-sort="0340" 
+                                    href="/archive/?tag=coding"
+                                    title="coding"
+                                    style="color: #337ab7 !important;"
+                                    rel="9">coding</a>
+                        
+                                <a data-sort="0341" 
+                                    href="/archive/?tag=%E3%82%B3%E3%83%9F%E3%83%A5%E3%83%8B%E3%82%B1%E3%83%BC%E3%82%B7%E3%83%A7%E3%83%B3"
+                                    title="コミュニケーション"
+                                    style="color: #337ab7 !important;"
+                                    rel="8">コミュニケーション</a>
+                        
+                                <a data-sort="0342" 
+                                    href="/archive/?tag=Network"
+                                    title="Network"
+                                    style="color: #337ab7 !important;"
+                                    rel="7">Network</a>
+                        
+                                <a data-sort="0342" 
+                                    href="/archive/?tag=ssh"
+                                    title="ssh"
+                                    style="color: #337ab7 !important;"
+                                    rel="7">ssh</a>
+                        
+                                <a data-sort="0343" 
+                                    href="/archive/?tag=%E5%B0%86%E6%A3%8B"
+                                    title="将棋"
+                                    style="color: #337ab7 !important;"
+                                    rel="6">将棋</a>
+                        
+                                <a data-sort="0343" 
+                                    href="/archive/?tag=Data+visualization"
+                                    title="Data visualization"
+                                    style="color: #337ab7 !important;"
+                                    rel="6">Data visualization</a>
+                        
+                                <a data-sort="0343" 
+                                    href="/archive/?tag=Docker"
+                                    title="Docker"
+                                    style="color: #337ab7 !important;"
+                                    rel="6">Docker</a>
+                        
+                                <a data-sort="0343" 
+                                    href="/archive/?tag=Econometrics"
+                                    title="Econometrics"
+                                    style="color: #337ab7 !important;"
+                                    rel="6">Econometrics</a>
+                        
+                                <a data-sort="0343" 
+                                    href="/archive/?tag=VSCode"
+                                    title="VSCode"
+                                    style="color: #337ab7 !important;"
+                                    rel="6">VSCode</a>
+                        
+                                <a data-sort="0343" 
+                                    href="/archive/?tag=statistical+inference"
+                                    title="statistical inference"
+                                    style="color: #337ab7 !important;"
+                                    rel="6">statistical inference</a>
+                        
+                                <a data-sort="0344" 
+                                    href="/archive/?tag=GitHub+Pages"
+                                    title="GitHub Pages"
+                                    style="color: #337ab7 !important;"
+                                    rel="5">GitHub Pages</a>
+                        
+                                <a data-sort="0344" 
+                                    href="/archive/?tag=apt"
+                                    title="apt"
+                                    style="color: #337ab7 !important;"
+                                    rel="5">apt</a>
+                        
+                                <a data-sort="0344" 
+                                    href="/archive/?tag=development"
+                                    title="development"
+                                    style="color: #337ab7 !important;"
+                                    rel="5">development</a>
+                        
+                                <a data-sort="0345" 
+                                    href="/archive/?tag=%E3%82%B7%E3%82%B9%E3%83%86%E3%83%A0%E7%AE%A1%E7%90%86"
+                                    title="システム管理"
+                                    style="color: #337ab7 !important;"
+                                    rel="4">システム管理</a>
+                        
+                                <a data-sort="0345" 
+                                    href="/archive/?tag=Coffee"
+                                    title="Coffee"
+                                    style="color: #337ab7 !important;"
+                                    rel="4">Coffee</a>
+                        
+                                <a data-sort="0345" 
+                                    href="/archive/?tag=cloud"
+                                    title="cloud"
+                                    style="color: #337ab7 !important;"
+                                    rel="4">cloud</a>
+                        
+                                <a data-sort="0346" 
+                                    href="/archive/?tag=%E6%95%B0%E5%80%A4%E8%A8%88%E7%AE%97"
+                                    title="数値計算"
+                                    style="color: #337ab7 !important;"
+                                    rel="3">数値計算</a>
+                        
+                                <a data-sort="0346" 
+                                    href="/archive/?tag=%E7%B4%A0%E6%95%B0"
+                                    title="素数"
+                                    style="color: #337ab7 !important;"
+                                    rel="3">素数</a>
+                        
+                                <a data-sort="0346" 
+                                    href="/archive/?tag=Book"
+                                    title="Book"
+                                    style="color: #337ab7 !important;"
+                                    rel="3">Book</a>
+                        
+                                <a data-sort="0346" 
+                                    href="/archive/?tag=Font"
+                                    title="Font"
+                                    style="color: #337ab7 !important;"
+                                    rel="3">Font</a>
+                        
+                                <a data-sort="0346" 
+                                    href="/archive/?tag=Metrics"
+                                    title="Metrics"
+                                    style="color: #337ab7 !important;"
+                                    rel="3">Metrics</a>
+                        
+                                <a data-sort="0346" 
+                                    href="/archive/?tag=Poetry"
+                                    title="Poetry"
+                                    style="color: #337ab7 !important;"
+                                    rel="3">Poetry</a>
+                        
+                                <a data-sort="0346" 
+                                    href="/archive/?tag=Ubuntu+24.04+LTS"
+                                    title="Ubuntu 24.04 LTS"
+                                    style="color: #337ab7 !important;"
+                                    rel="3">Ubuntu 24.04 LTS</a>
+                        
+                                <a data-sort="0346" 
+                                    href="/archive/?tag=architecture"
+                                    title="architecture"
+                                    style="color: #337ab7 !important;"
+                                    rel="3">architecture</a>
+                        
+                                <a data-sort="0346" 
+                                    href="/archive/?tag=aws"
+                                    title="aws"
+                                    style="color: #337ab7 !important;"
+                                    rel="3">aws</a>
+                        
+                                <a data-sort="0346" 
+                                    href="/archive/?tag=shell"
+                                    title="shell"
+                                    style="color: #337ab7 !important;"
+                                    rel="3">shell</a>
+                        
+                                <a data-sort="0346" 
+                                    href="/archive/?tag=systemctl"
+                                    title="systemctl"
+                                    style="color: #337ab7 !important;"
+                                    rel="3">systemctl</a>
+                        
+                                <a data-sort="0347" 
+                                    href="/archive/?tag=%E3%83%86%E3%83%B3%E3%83%97%E3%83%AC%E3%83%BC%E3%83%88"
+                                    title="テンプレート"
+                                    style="color: #337ab7 !important;"
+                                    rel="2">テンプレート</a>
+                        
+                                <a data-sort="0347" 
+                                    href="/archive/?tag=%E3%83%87%E3%83%BC%E3%82%BF%E6%A7%8B%E9%80%A0"
+                                    title="データ構造"
+                                    style="color: #337ab7 !important;"
+                                    rel="2">データ構造</a>
+                        
+                                <a data-sort="0347" 
+                                    href="/archive/?tag=%E3%83%9D%E3%83%AF%E3%82%BD%E3%83%B3%E5%88%86%E5%B8%83"
+                                    title="ポワソン分布"
+                                    style="color: #337ab7 !important;"
+                                    rel="2">ポワソン分布</a>
+                        
+                                <a data-sort="0347" 
+                                    href="/archive/?tag=%E4%BC%9A%E8%A8%88%E5%88%86%E6%9E%90"
+                                    title="会計分析"
+                                    style="color: #337ab7 !important;"
+                                    rel="2">会計分析</a>
+                        
+                                <a data-sort="0347" 
+                                    href="/archive/?tag=%E6%96%87%E5%AD%97%E3%82%B3%E3%83%BC%E3%83%89"
+                                    title="文字コード"
+                                    style="color: #337ab7 !important;"
+                                    rel="2">文字コード</a>
+                        
+                                <a data-sort="0347" 
+                                    href="/archive/?tag=%E7%92%B0%E5%A2%83%E6%A7%8B%E7%AF%89"
+                                    title="環境構築"
+                                    style="color: #337ab7 !important;"
+                                    rel="2">環境構築</a>
+                        
+                                <a data-sort="0347" 
+                                    href="/archive/?tag=%E8%AB%96%E6%96%87"
+                                    title="論文"
+                                    style="color: #337ab7 !important;"
+                                    rel="2">論文</a>
+                        
+                                <a data-sort="0347" 
+                                    href="/archive/?tag=App"
+                                    title="App"
+                                    style="color: #337ab7 !important;"
+                                    rel="2">App</a>
+                        
+                                <a data-sort="0347" 
+                                    href="/archive/?tag=Bayesian"
+                                    title="Bayesian"
+                                    style="color: #337ab7 !important;"
+                                    rel="2">Bayesian</a>
+                        
+                                <a data-sort="0347" 
+                                    href="/archive/?tag=Dynamic+Programming"
+                                    title="Dynamic Programming"
+                                    style="color: #337ab7 !important;"
+                                    rel="2">Dynamic Programming</a>
+                        
+                                <a data-sort="0347" 
+                                    href="/archive/?tag=Keyboard"
+                                    title="Keyboard"
+                                    style="color: #337ab7 !important;"
+                                    rel="2">Keyboard</a>
+                        
+                                <a data-sort="0347" 
+                                    href="/archive/?tag=Processing"
+                                    title="Processing"
+                                    style="color: #337ab7 !important;"
+                                    rel="2">Processing</a>
+                        
+                                <a data-sort="0347" 
+                                    href="/archive/?tag=R"
+                                    title="R"
+                                    style="color: #337ab7 !important;"
+                                    rel="2">R</a>
+                        
+                                <a data-sort="0347" 
+                                    href="/archive/?tag=Steam"
+                                    title="Steam"
+                                    style="color: #337ab7 !important;"
+                                    rel="2">Steam</a>
+                        
+                                <a data-sort="0347" 
+                                    href="/archive/?tag=filesystem"
+                                    title="filesystem"
+                                    style="color: #337ab7 !important;"
+                                    rel="2">filesystem</a>
+                        
+                                <a data-sort="0347" 
+                                    href="/archive/?tag=quarto"
+                                    title="quarto"
+                                    style="color: #337ab7 !important;"
+                                    rel="2">quarto</a>
+                        
+                                <a data-sort="0347" 
+                                    href="/archive/?tag=regex"
+                                    title="regex"
+                                    style="color: #337ab7 !important;"
+                                    rel="2">regex</a>
+                    </div>
+
+                <br>
+
+                <b><fontsize="5">Leave a Comment</font><br>(注意：GitHub Accountが必要となります）</b>
+                
+                <script src="https://utteranc.es/client.js"
+                    repo="RyoNakagami/RyoNakagami.github.io"
+                    issue-term="url"
+                    theme="github-light"
+                    crossorigin="anonymous"
+                    async>Reduce unused JavaScript
+                
+                </script>
+
+
+            </div>  
+
+    <!-- Side Catalog Container -->
+        
+            <div class="
+                col-lg-1 col-lg-offset-0
+                visible-lg-block
+                sidebar-container
+                catalog-container">
+                <div class="side-catalog fixed" style="margin-top:3%">
+                    <hr class="hidden-sm hidden-xs">
+                    <h5>
+                        <a class="catalog-toggle" href="#">CONTENTS</a>
+                    </h5>
+                    <ul class="catalog-body"></ul>
+                </div>
+            </div>
+        
+    <!-- Sidebar Container -->
+            <!-- <div class="
+                col-lg-10 col-lg-offset-1
+                col-md-10 col-md-offset-1
+                sidebar-container row"> -->
+                <!-- 
+<hr>
+<h5>FRIENDS</h5>
+<ul class="list-inline">
+  
+  <li><a href="https://twitter.com/bluesky0804?ref_src=twsrc%5Egoogle%7Ctwcamp%5Eserp%7Ctwgr%5Eauthor">bluesky0804</a></li>
+  
+</ul>
+
+ -->
+            </div>
+        </div>
+    </div>
+</article>
+
+<!-- add support for mathjax by voleking-->
+
+  <script async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml.js" id="MathJax-script"></script>
+<script>
+  MathJax = {
+    tex: {
+      inlineMath: [['$','$'], ['\\(','\\)']],
+      displayMath: [['$$','$$'], ['\\[','\\]']],
+      processEscapes: true,
+      processEnvironments: true, // for pseudo
+      tags: "ams",
+      autoload: {
+        color: [],
+        colorV2: ['color']
+      },
+      packages: {'[+]': ['noerrors']}
+    },
+    chtml: {
+      matchFontHeight: false,
+      displayAlign: "left",
+      displayIndent: "2em"
+    },
+    options: {
+      renderActions: {
+        /* add a new named action to render <script type="math/tex"> */
+        find_script_mathtex: [10, function (doc) {
+          for (const node of document.querySelectorAll('script[type^="math/tex"]')) {
+            const display = !!node.type.match(/; *mode=display/);
+            const math = new doc.options.MathItem(node.textContent, doc.inputJax[0], display);
+            const text = document.createTextNode('');
+            node.parentNode.replaceChild(text, node);
+            math.start = {node: text, delim: '', n: 0};
+            math.end = {node: text, delim: '', n: 0};
+            doc.math.push(math);
+          }
+        }, '']
+      }
+    },
+    loader: {
+      load: ['[tex]/noerrors']
+    }
+  };
+</script>
+
+
+
+
+
+<!-- async load function -->
+<script>
+    function async(u, c) {
+      var d = document, t = 'script',
+          o = d.createElement(t),
+          s = d.getElementsByTagName(t)[0];
+      o.src = u;
+      if (c) { o.addEventListener('load', function (e) { c(null, e); }, false); }
+      s.parentNode.insertBefore(o, s);
+    }
+</script>
+<!-- anchor-js, Doc:http://bryanbraun.github.io/anchorjs/ -->
+<script>
+    async("//cdnjs.cloudflare.com/ajax/libs/anchor-js/1.1.1/anchor.min.js",function(){
+        anchors.options = {
+          visible: 'hover',
+          placement: 'right',
+          // icon: '#'
+        };
+        anchors.add().remove('.intro-header h1').remove('.subheading').remove('.sidebar-container h5');
+    })
+</script>
+<style>
+    /* place left on bigger screen */
+    @media all and (min-width: 800px) {
+        .anchorjs-link{
+            position: absolute;
+            left: -0.75em;
+            font-size: 1.1em;
+            margin-top : -0.1em;
+        }
+    }
+</style>
+
+
+<body>
+    <!-- enable mermaid language on markdown post -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/mermaid/10.6.1/mermaid.min.js"></script>
+<script>
+   mermaid.initialize({
+       startOnLoad:true,
+       theme: 'default'
+   });
+   window.mermaid.init(undefined, document.querySelectorAll('.language-mermaid'));
+</script>
+
+</body>
+
+    <script>
+    
+    var elements = document.querySelectorAll('p');
+    Array.prototype.forEach.call(elements, function(el, i){
+        if(el.innerHTML=='[expand]') {
+            var parentcontent = el.parentNode.innerHTML.replace('<p>[expand]</p>','<div class="expand" style="display: none; height: 0; overflow: hidden;">').replace('<p>[/expand]</p>','</div>');
+            el.parentNode.innerHTML = parentcontent;
+        }
+    });
+
+    var elements = document.querySelectorAll('div.expand');
+    Array.prototype.forEach.call(elements, function(el, i){
+        el.previousElementSibling.innerHTML = el.previousElementSibling.innerHTML + '<span>..&nbsp; <a href="#" style="cursor: pointer;" onclick="this.parentNode.parentNode.nextElementSibling.style.display = \'block\'; this.parentNode.parentNode.nextElementSibling.style.height = \'auto\'; this.parentNode.style.display = \'none\';">read&nbsp;more&nbsp;&rarr;</a></span>';
+    });
+
+</script>
+
+    <!-- Footer -->
+<footer>
+    <div class="container">
+        <div class="row">
+            <!--<div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1"> -->
+                <!-- SNS Link -->
+            
+
+
+<ul class="list-inline text-center">
+
+
+  
+  
+  
+  
+  <li>
+    <a target="_blank" href="https://github.com/RyoNakagami">
+      <span class="fa-stack fa-lg">
+        <i class="fa fa-circle fa-stack-2x"></i>
+        <i class="fa fa-github fa-stack-1x fa-inverse"></i>
+      </span>
+    </a>
+  </li>
+  
+  
+</ul>
+
+            
+            <p class="copyright text-muted">
+                Copyright &copy; Ryo's Tech Blog 2025
+                <br>
+                Powered by <a href="https://ryonakagami.github.io">Ryo's Tech Blog</a> |
+                <iframe style="margin-left: 2px; margin-bottom:-5px;" frameborder="0" scrolling="0" width="100px"
+                    height="20px"
+                    title="RyoNakagami.github.io github stars"
+                    src="https://ghbtns.com/github-btn.html?user=RyoNakagami&repo=RyoNakagami.github.io&type=star&count=true">
+                </iframe>
+            </p>
+            <!--</div> -->
+        </div>
+    </div>
+</footer>
+
+<!-- jQuery -->
+<script src="/js/jquery.min.js "></script>
+
+<!-- Bootstrap Core JavaScript -->
+<!-- Currently, only navbar scroll-down effect at desktop still depends on this -->
+<script src="/js/bootstrap.min.js "></script>
+
+<!-- Custom Theme JavaScript -->
+<script src="/js/ryo-blog.min.js "></script>
+
+<!-- Simple Jekyll Search -->
+<script src="/js/simple-jekyll-search.min.js"></script>
+
+<!-- Service Worker -->
+
+<script src="/js/snackbar.js "></script>
+<script src="/js/sw-registration.js "></script>
+
+
+<!-- async load function -->
+<script>
+    function async(u, c) {
+        var d = document, t = 'script',
+            o = d.createElement(t),
+            s = d.getElementsByTagName(t)[0];
+        o.src = u;
+        if (c) { o.addEventListener('load', function (e) { c(null, e); }, false); }
+        s.parentNode.insertBefore(o, s);
+    }
+</script>
+
+<!--
+     Because of the native support for backtick-style fenced code blocks
+     right within the Markdown is landed in Github Pages,
+     From V1.6, There is no need for Highlight.js,
+     so Huxblog drops it officially.
+
+     - https://github.com/blog/2100-github-pages-now-faster-and-simpler-with-jekyll-3-0
+     - https://help.github.com/articles/creating-and-highlighting-code-blocks/
+     - https://github.com/jneen/rouge/wiki/list-of-supported-languages-and-lexers
+-->
+<!--
+    <script>
+        async("http://cdn.bootcss.com/highlight.js/8.6/highlight.min.js", function(){
+            hljs.initHighlightingOnLoad();
+        })
+    </script>
+    <link href="http://cdn.bootcss.com/highlight.js/8.6/styles/github.min.css" rel="stylesheet">
+-->
+
+
+
+
+
+
+
+<!--fastClick.js -->
+<script>
+    async("//cdnjs.cloudflare.com/ajax/libs/fastclick/1.0.6/fastclick.min.js", function () {
+        var $nav = document.querySelector("nav");
+        if ($nav) FastClick.attach($nav);
+    })
+</script>
+
+
+<!-- Global site tag (gtag.js) - Google Analytics -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-LVL413SV09"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+  gtag('config', 'G-LVL413SV09');
+</script>
+
+
+
+<!-- Side Catalog -->
+
+<script type="text/javascript">
+    function generateCatalog(selector) {
+
+        // interop with multilangual 
+        if ('' == 'true') {
+            _containerSelector = 'div.post-container.active'
+        } else {
+            _containerSelector = 'div.post-container'
+        }
+
+        // init
+        var P = $(_containerSelector), a, n, t, l, i, c;
+        a = P.find('h1,h2,h3,h4,h5,h6');
+
+        // clean
+        $(selector).html('')
+
+        // appending
+        a.each(function () {
+            n = $(this).prop('tagName').toLowerCase();
+            i = "#" + $(this).prop('id');
+            t = $(this).text();
+            c = $('<a href="' + i + '" rel="nofollow">' + t + '</a>');
+            l = $('<li class="' + n + '_nav"></li>').append(c);
+            $(selector).append(l);
+        });
+        return true;
+    }
+
+    generateCatalog(".catalog-body");
+
+    // toggle side catalog
+    $(".catalog-toggle").click((function (e) {
+        e.preventDefault();
+        $('.side-catalog').toggleClass("fold")
+    }))
+
+    /*
+     * Doc: https://github.com/davist11/jQuery-One-Page-Nav
+     * Fork by Hux to support padding
+     */
+    async("/js/jquery.nav.js", function () {
+        $('.catalog-body').onePageNav({
+            currentClass: "active",
+            changeHash: !1,
+            easing: "swing",
+            filter: "",
+            scrollSpeed: 700,
+            scrollOffset: 0,
+            scrollThreshold: .2,
+            begin: null,
+            end: null,
+            scrollChange: null,
+            padding: 80
+        });
+    });
+</script>
+
+
+
+<!-- Multi-Lingual -->
+
+
+<!-- Simple Jekyll Search -->
+<script>
+    // https://stackoverflow.com/questions/1912501/unescape-html-entities-in-javascript
+    function htmlDecode(input) {
+        var e = document.createElement('textarea');
+        e.innerHTML = input;
+        // handle case of empty input
+        return e.childNodes.length === 0 ? "" : e.childNodes[0].nodeValue;
+    }
+
+    SimpleJekyllSearch({
+        searchInput: document.getElementById('search-input'),
+        resultsContainer: document.getElementById('search-results'),
+        json: '/search.json',
+        searchResultTemplate: '<div class="post-preview item"><a href="{url}"><h2 class="post-title">{title}</h2><h3 class="post-subtitle">{subtitle}</h3><hr></a></div>',
+        noResultsText: 'No results',
+        limit: 50,
+        fuzzy: false,
+        // a hack to get escaped subtitle unescaped. for some reason, 
+        // post.subtitle w/o escape filter nuke entire search.
+        templateMiddleware: function (prop, value, template) {
+            if (prop === 'subtitle' || prop === 'title') {
+                if (value.indexOf("code")) {
+                    return htmlDecode(value);
+                } else {
+                    return value;
+                }
+            }
+        }
+    });
+
+    $(document).ready(function () {
+        var $searchPage = $('.search-page');
+        var $searchOpen = $('.search-icon');
+        var $searchClose = $('.search-icon-close');
+        var $searchInput = $('#search-input');
+        var $body = $('body');
+
+        $searchOpen.on('click', function (e) {
+            e.preventDefault();
+            $searchPage.toggleClass('search-active');
+            var prevClasses = $body.attr('class') || '';
+            setTimeout(function () {
+                $body.addClass('no-scroll');
+            }, 400)
+
+            if ($searchPage.hasClass('search-active')) {
+                $searchClose.on('click', function (e) {
+                    e.preventDefault();
+                    $searchPage.removeClass('search-active');
+                    $body.attr('class', prevClasses);  // from closure 
+                });
+                $searchInput.focus();
+            }
+        });
+    });
+</script>
+
+
+
+<!-- Image to Github 
+<img src="/img/icon_wechat.png" width="0" height="0" />
+<-- Migrate from head to bottom, no longer block render and still work -->
+<script>
+    
+    var elements = document.querySelectorAll('p');
+    Array.prototype.forEach.call(elements, function(el, i){
+        if(el.innerHTML=='[expand]') {
+            var parentcontent = el.parentNode.innerHTML.replace('<p>[expand]</p>','<div class="expand" style="display: none; height: 0; overflow: hidden;">').replace('<p>[/expand]</p>','</div>');
+            el.parentNode.innerHTML = parentcontent;
+        }
+    });
+
+    var elements = document.querySelectorAll('div.expand');
+    Array.prototype.forEach.call(elements, function(el, i){
+        el.previousElementSibling.innerHTML = el.previousElementSibling.innerHTML + '<span>..&nbsp; <a href="#" style="cursor: pointer;" onclick="this.parentNode.parentNode.nextElementSibling.style.display = \'block\'; this.parentNode.parentNode.nextElementSibling.style.height = \'auto\'; this.parentNode.style.display = \'none\';">read&nbsp;more&nbsp;&rarr;</a></span>';
+    });
+
+</script>
+
+</body>
+</html>

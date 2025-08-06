@@ -1,0 +1,1848 @@
+<!DOCTYPE html>
+<html lang="ja">
+
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="google-site-verification" content="gSMaswRY9iRfG4QaQrx6aj481bgr503qEZh-QPsMYNU" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+    <meta name="description" content="元経済学徒, 現在どっかでデータサイエンティストもどきやってる人間の勉強日記">
+    <meta name="keywords"  content="Statistics, Economics, Econometrics, Python, C, Shell, Linux, Data scientist">
+    <meta name="theme-color" content="#000000">
+    
+    <!-- Open Graph -->
+    <meta property="og:title" content="巴戦の確率 - Ryo's Tech Blog">
+    
+    <meta property="og:type" content="article">
+    <meta property="og:description" content="
+  
+    
+       
+      概要
+    
+  
+  
+    
+      目的
+      巴戦の勝利確率と公平な巴戦の検討
+    
+    
+      参考
+      -高校数学の美しい物語-28年東大前期理数学.pdf
+    
+  
+
+
+">
+    
+    <meta property="article:published_time" content="2021-04-14T00:00:00Z">
+    
+    
+    <meta property="article:author" content="Ryo">
+    
+    
+    <meta property="article:tag" content="math">
+    
+    <meta property="article:tag" content="統計">
+    
+    <meta property="article:tag" content="Python">
+    
+    
+    <meta property="og:image" content="https://ryonakagami.github.io/img/avatar_rio_cat.jpg">
+    <meta property="og:url" content="https://ryonakagami.github.io/2021/04/14/tomoesen-problem/">
+    <meta property="og:site_name" content="Ryo's Tech Blog">
+    
+    <title>巴戦の確率 - Ryo's Tech Blog</title>
+
+    <!-- Web App Manifest -->
+    <link rel="manifest" href="/pwa/manifest.json">
+
+    <!-- Favicon -->
+    <link rel="shortcut icon" href="/img/favicon.ico">
+    
+    <!-- Canonical URL -->
+    <link rel="canonical" href="https://ryonakagami.github.io/2021/04/14/tomoesen-problem/">
+
+    <!-- Bootstrap Core CSS -->
+    <link rel="stylesheet" href="/css/bootstrap.min.css">
+
+    <!-- Custom CSS -->
+    <link rel="stylesheet" href="/css/ryo-blog.min.css">
+
+    <!-- Custom Fonts -->
+    <!-- <link href="http://maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css" rel="stylesheet" type="text/css"> -->
+    <!-- https://stackoverflow.com/questions/45983301/google-pagespeed-eliminate-render-blocking-resources-above-the-fold-caused-fro -->
+    <!--link href="//cdnjs.cloudflare.com/ajax/libs/font-awesome/4.6.3/css/font-awesome.min.css" rel="stylesheet" type="text/css"-->
+    <!--<link href="https://fonts.googleapis.com/earlyaccess/notosansjapanese.css" rel="stylesheet" type="text/css" media="print" onload="this.media='all'" > -->
+    <link href="https://fonts.googleapis.com/earlyaccess/notosansjapanese.css" rel="preload" type="text/css" media="print" onload="this.media='all'" >
+
+
+    <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
+    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+    <!--[if lt IE 9]>
+        <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+        <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
+    <![endif]-->
+
+    <!-- ga & ba script hoook -->
+    <script></script>
+</head>
+
+
+<!-- hack iOS CSS :active style -->
+<body ontouchstart="">
+
+    <!-- Navigation -->
+
+<nav class="navbar navbar-default navbar-custom navbar-fixed-top invert">
+    
+        <div class="container-fluid">
+            <!-- Brand and toggle get grouped for better mobile display -->
+            <div class="navbar-header page-scroll">
+                <button type="button" class="navbar-toggle">
+                    <span class="sr-only">Toggle navigation</span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
+                <a class="navbar-brand" href="/">Ryo's Tech Blog</a>
+            </div>
+
+            <!-- Collect the nav links, forms, and other content for toggling -->
+            <div id="huxblog_navbar">
+                <div class="navbar-collapse">
+                    <ul class="nav navbar-nav navbar-left">
+                                                <li>
+                            <a href="https://ryonakagami.github.io/statistics-for-regression-monkey/">Statistics for
+                                Regression Monkeys</a>
+                        </li>
+                        <li>
+                            <a href="https://ohgoshgit.github.io/">OhGoshGit!?!</a>
+                        </li>
+                        <!-- <li>
+                            <a><button onclick="mainDropDown()" style="border-color: rgba(70, 83, 111, 0.989); background-color: rgba(70, 83, 111, 0.989)">Dropdown</button></a> 
+                            <div id="myDropdown" class="dropdown-content">
+                              <a href="#" onclick="subMenu(this)">A</a>
+                              <div class="sub-menu-item" id="subMenu1">
+                              <a href="#">A.1</a>
+                              </div>
+                              <a href="#" onclick="subMenu(this)">B</a>
+                              <div class="sub-menu-item" id="subMenu2">
+                              <a href="#">B.1</a>
+                              </div>
+                              <a href="#">C</a>
+                              <a href="#">D</a>
+                              <a href="#">E</a>
+                              <a href="#">F</a>
+                              <a href="#">G</a>
+                            </div>
+                        </li> -->
+                    </ul>
+                    </ul>
+                    <ul class="nav navbar-nav navbar-right">
+                        
+                        
+                        
+                        
+                        <li>
+                            <a href="/about/">About</a>
+                        </li>
+                        
+                        
+                        
+                        <li>
+                            <a href="/archive/">Tag Search</a>
+                        </li>
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        <!--about fa-search see https://stackoverflow.com/questions/41950677/how-to-make-my-search-icon-fixed-->
+                        <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css"
+                            rel="stylesheet" />
+                        <li class="search-icon">
+                            <a href="javascript:void(0)" aria-label="Search" target="_blank">
+                                <i class="fa fa-search"></i>
+                            </a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+            <!-- /.navbar-collapse -->
+        </div>
+        <!-- /.container -->
+    </nav>
+
+    <script>
+        // Drop Bootstarp low-performance Navbar
+        // Use customize navbar with high-quality material design animation
+        // in high-perf jank-free CSS3 implementation
+        var $body = document.body;
+        var $toggle = document.querySelector('.navbar-toggle');
+        var $navbar = document.querySelector('#huxblog_navbar');
+        var $collapse = document.querySelector('.navbar-collapse');
+
+        var __HuxNav__ = {
+            close: function () {
+                $navbar.className = " ";
+                // wait until animation end.
+                setTimeout(function () {
+                    // prevent frequently toggle
+                    if ($navbar.className.indexOf('in') < 0) {
+                        $collapse.style.height = "0px"
+                    }
+                }, 400)
+            },
+            open: function () {
+                $collapse.style.height = "auto"
+                $navbar.className += " in";
+            }
+        }
+
+        // Bind Event
+        $toggle.addEventListener('click', function (e) {
+            if ($navbar.className.indexOf('in') > 0) {
+                __HuxNav__.close()
+            } else {
+                __HuxNav__.open()
+            }
+        })
+
+        /**
+         * Since Fastclick is used to delegate 'touchstart' globally
+         * to hack 300ms delay in iOS by performing a fake 'click',
+         * Using 'e.stopPropagation' to stop 'touchstart' event from 
+         * $toggle/$collapse will break global delegation.
+         * 
+         * Instead, we use a 'e.target' filter to prevent handler
+         * added to document close HuxNav.  
+         *
+         * Also, we use 'click' instead of 'touchstart' as compromise
+         */
+        document.addEventListener('click', function (e) {
+            if (e.target == $toggle) return;
+            if (e.target.className == 'icon-bar') return;
+            __HuxNav__.close();
+        })
+    </script>
+
+    <!-- Search -->
+<div class="search-page">
+  <div class="search-icon-close-container">
+    <span class="search-icon-close">
+      <i class="fa fa-chevron-down"></i>
+    </span>
+  </div>
+  <div class="search-main container">
+    <div class="row">
+      <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+        <form></form>
+        <input type="text" id="search-input" placeholder="$ grep...">
+        </form>
+        <div id="search-results" class="mini-post-list"></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+    <!-- Image to hack wechat -->
+<!-- <img src="/img/icon_wechat.png" width="0" height="0"> -->
+<!-- <img src="/img/home-bg.jpg" width="0" height="0"> -->
+
+<!-- Post Header -->
+
+
+
+<style type="text/css">
+    header.intro-header{
+        position: relative;
+        background-image: url('/img/home-bg.jpg');
+        background: ;
+    }
+
+    
+    header.intro-header .header-mask{
+        width: 100%;
+        height: 100%;
+        position: absolute;
+        background: rgba(0,0,0, 0.0);
+    }
+    
+</style>
+
+
+
+
+<header class="intro-header style-text" >
+
+    <div class="header-mask"></div>
+    
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+                <div class="post-heading">
+                    <div class="tags">
+                        
+                        <a class="tag" href="/archive/?tag=math" title="math">math</a>
+                        
+                        <a class="tag" href="/archive/?tag=%E7%B5%B1%E8%A8%88" title="統計">統計</a>
+                        
+                        <a class="tag" href="/archive/?tag=Python" title="Python">Python</a>
+                        
+                    </div>
+                    <h1>巴戦の確率</h1>
+                    
+                    <h2 class="subheading">巴戦の勝利確率と公平な巴戦の検討</h2>
+                    <p>
+                        公開日: 2021-04-14
+                        
+                        
+                    </p>
+                </div>
+            </div>
+        </div>
+    </div>
+</header>
+
+
+
+
+
+
+
+<!-- Post Content -->
+<article>
+    <div class="container">
+        <div class="row">
+
+    <!-- Post Container -->
+         <div class="
+                col-lg-8 col-lg-offset-2
+                col-md-10 col-md-offset-1
+                post-container">
+
+                <!-- Multi-Lingual -->
+                
+
+				<table>
+  <thead>
+    <tr>
+      <th> </th>
+      <th>概要</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>目的</td>
+      <td>巴戦の勝利確率と公平な巴戦の検討</td>
+    </tr>
+    <tr>
+      <td>参考</td>
+      <td>-<a href="https://manabitimes.jp/math/1360">高校数学の美しい物語</a><br />-<a href="https://github.com/ryonakimageserver/lecturenotes/blob/main/%E5%A4%A7%E5%AD%A6%E5%85%A5%E8%A9%A6/28%E5%B9%B4%E6%9D%B1%E5%A4%A7%E5%89%8D%E6%9C%9F%E7%90%86%E6%95%B0%E5%AD%A6.pdf">28年東大前期理数学.pdf</a></td>
+    </tr>
+  </tbody>
+</table>
+
+<!-- START doctoc generated TOC please keep comment here to allow auto update -->
+<!-- DON'T EDIT THIS SECTION, INSTEAD RE-RUN doctoc TO UPDATE -->
+
+<ul>
+  <li><a href="#%E5%B7%B4%E6%88%A6%E3%81%AE%E5%95%8F%E9%A1%8C">巴戦の問題</a>
+    <ul>
+      <li><a href="#%E8%A7%A3%E7%AD%941">解答(1)</a></li>
+      <li><a href="#%E8%A7%A3%E7%AD%941%E5%88%A5%E8%A7%A3">解答(1)別解</a></li>
+      <li><a href="#%E8%A7%A3%E7%AD%942">解答(2)</a></li>
+      <li><a href="#%E8%A7%A3%E7%AD%943">解答(3)</a></li>
+      <li><a href="#%E8%A7%A3%E7%AD%943%E5%88%A5%E8%A7%A3">解答(3)別解</a></li>
+      <li><a href="#%E8%A7%A3%E7%AD%944">解答(4)</a></li>
+      <li><a href="#%E8%A7%A3%E7%AD%945">解答(5)</a></li>
+    </ul>
+  </li>
+  <li><a href="#python%E3%81%A7simution">PythonでSimution</a></li>
+  <li><a href="#%E5%85%AC%E5%B9%B3%E3%81%AA%E5%B7%B4%E6%88%A6%E3%81%AE%E6%A4%9C%E8%A8%8E">公平な巴戦の検討</a>
+    <ul>
+      <li><a href="#%E5%95%8F%E9%A1%8C%E8%A8%AD%E5%AE%9A">問題設定</a></li>
+      <li><a href="#x-%E3%81%AE%E5%B0%8E%E5%87%BA">\(x\) の導出</a></li>
+    </ul>
+  </li>
+  <li><a href="#4%E4%BA%BA%E3%81%AE%E5%B7%B4%E6%88%A6">4人の巴戦</a></li>
+</ul>
+
+<!-- END doctoc generated TOC please keep comment here to allow auto update -->
+
+<h2 id="巴戦の問題">巴戦の問題</h2>
+
+<p>Ａ、Ｂ、Ｃの３人の力士で試合を行う。１試合目は、Ａ対Ｂで行い、次の試合からは、勝者が待機していた残りの１人と試合を行う。２回連続して勝てば優勝であり、誰かが優勝するまで繰り返す。Ａ、Ｂ、Ｃのいずれも、各試合で勝つ確率が５割であるとする。</p>
+
+<p>(1) A, B, Cのそれぞれの優勝確率を求めよ<br />
+(2) \(n\) を 2以上の整数とする。ちょうど \(n\) 試合目でAが優勝する確率を求めよ。<br />
+(3) 優勝が決定するまで必要な試合数の期待値を求めよ<br />
+(4) \(m\) を正の整数とする。総試合数が \(3m\) 回以下でAが優勝したとき、Aの最後の対戦相手がBである条件付確率を求めよ<br />
+(5) 優勝が決定するまで必要な試合数の分散を求めよ</p>
+
+<h3 id="解答1">解答(1)</h3>
+
+<p>対戦して負けた力士が優勝する確率を\(p\)とおく。</p>
+
+<blockquote>
+  <p>A, Bが優勝する確率</p>
+</blockquote>
+
+<ul>
+  <li>最初の2試合で連続して勝利して優勝するパターン</li>
+  <li>最初の試合で勝利し、2試合目に負けて、それ以降で優勝するパターン</li>
+  <li>最初の試合に負けて, それ以降で優勝するパターン</li>
+</ul>
+
+\[\frac{1}{2}\times \frac{1}{2} + \frac{1}{2}\times p + \frac{1}{2}\times \frac{1}{2} \times p = \frac{1}{4} + \frac{3}{4}p\]
+
+<blockquote>
+  <p>Cが優勝する確率</p>
+</blockquote>
+
+<ul>
+  <li>2試合目と3試合目に連続して勝利して優勝するパターン</li>
+  <li>2試合目に勝って,3試合目に負けて、3試合目の勝者が4試合目に負けるという条件のもとそれ以降で優勝するパターン</li>
+</ul>
+
+\[\frac{1}{2}\times \frac{1}{2} + \frac{1}{2}\times \frac{1}{2}\times　p = \frac{1}{4} + \frac{1}{4}p\]
+
+<p>各力士が優勝する事象の和集合は全事象、かつ排反事象なので、A, B, Cのそれぞれの優勝する確率を合計すると1になる。</p>
+
+\[\frac{3}{4} + \frac{7}{4}p = 1\]
+
+\[\therefore p = \frac{1}{7}\]
+
+<p>よって、</p>
+
+\[\begin{aligned}
+Pr(\text{Aが優勝する確率}) &amp;= \frac{5}{14}\\
+Pr(\text{Bが優勝する確率}) &amp;= \frac{5}{14}\\
+Pr(\text{Cが優勝する確率}) &amp;= \frac{2}{7}\\
+\end{aligned}\]
+
+<div style="text-align: right;">
+  <p>■</p>
+</div>
+
+<h3 id="解答1別解">解答(1)別解</h3>
+
+<p>Aが \(n\) 試合目に優勝する確率を \(a_n\)​ とする。 \(a_1=0\) ，\(a_2=\frac{1}{4}\)​ ，\(a_3=0\), \(a_4 = \frac{1}{16}\). これを\(n\geq 2\)について整理すると</p>
+
+<ul>
+  <li>初戦に勝った場合、\(n=  3k+2 (k = 0, 1, 2, ....)\)回目に優勝する. また、B, Cがそれまで2連勝しない場合に限るので, \(a_n = \frac{1}{2^n}\)</li>
+  <li>初戦に負けた場合、\(n=  3k+1 (k = 1, 2, ....)\)回目に優勝する. また、B, Cがそれまで2連勝しない場合に限るので, \(a_n = \frac{1}{2^n}\)</li>
+  <li>\(3k\) 回目の試合には出ることはないので\(a_{n} = 0 \text{ s.t. } n = 3\)</li>
+</ul>
+
+<p>よって、Aの優勝する確率は</p>
+
+\[\sum_{n=2}^\infty a_n = \frac{\frac{1}{4}}{1 - \frac{1}{2}} - \frac{\frac{1}{8}}{1 - \frac{1}{8}} = \frac{5}{14}\]
+
+<p>Bの優勝確率も同様に計算できる。</p>
+
+<p>Cがn回目に優勝する確率を\(c_n\)とする。</p>
+
+<ul>
+  <li>\(n=  3k+1 (k = 0, 1, 2, ....)\)回目に優勝することはできない, そもそも出番がない</li>
+  <li>\(n=  3k+2 (k = 0, 1, 2, ....)\)回目に優勝することはできない, 試合をしたとしてもそれは1戦目</li>
+  <li>\(n = 3k (k = 1, 2, ....)\)回目に優勝する確率は\(a_n = \frac{1}{2^{n-1}}\)</li>
+</ul>
+
+<p>よって、Cの優勝する確率は</p>
+
+\[\sum_{n=1}^\infty c_n = \frac{\frac{1}{4}}{1 - \frac{1}{8}} = \frac{2}{7}\]
+
+<p>もちろん、</p>
+
+\[\sum_{n=1}^\infty c_n = 1 - 2\sum_{n=1}^\infty a_n\]
+
+<p>で計算しても良い.</p>
+
+<div style="text-align: right;">
+  <p>■</p>
+</div>
+
+<h3 id="解答2">解答(2)</h3>
+
+<p><a href="#%E8%A7%A3%E7%AD%941%E5%88%A5%E8%A7%A3">解答(1)の別解</a>を参照。</p>
+
+<div style="text-align: right;">
+  <p>■</p>
+</div>
+
+<h3 id="解答3">解答(3)</h3>
+
+<ul>
+  <li>優勝に要する試合数の確率変数を\(X\).</li>
+  <li>A, B, Cがそれぞれ優勝する事象は排反</li>
+  <li>\(a_n, b_n, c_n\)は \(n\)回目の試合でA, B, Cが優勝する確率</li>
+  <li>
+\[a_n = b_n\]
+  </li>
+</ul>
+
+<p>このとき、優勝に要する試合数の期待値は</p>
+
+\[\mathbf E[X] = \sum_{n = 2}^{\infty}n(a_n + b_n + c_n) = \sum_{n = 2}^{\infty}n(2a_n + c_n)\]
+
+<p>と表せる。</p>
+
+<p>このとき、<a href="#%E8%A7%A3%E7%AD%941%E5%88%A5%E8%A7%A3">解答(1)の別解</a>より</p>
+
+\[2a_n = 
+\begin{cases}
+\frac{1}{2^{n-1}} &amp;\text{ if } n \text{ は３の倍数ではない}\\[8pt]
+0 &amp;\text{ if } n \text{ は３の倍数}
+\end{cases}\]
+
+<p>かつ</p>
+
+\[c_n =
+\begin{cases}
+\frac{1}{2^{n-1}} &amp;\text{if } n \text{ は３の倍数}\\[8pt]
+0 &amp;\text{if } n \text{ は３の倍数ではない}
+\end{cases}\]
+
+<p>なので、</p>
+
+<p>\(d_n = \frac{1}{2^{n-1}}\)とすると</p>
+
+\[\therefore \mathbf E[X] = \sum_{n = 2}^{\infty}nd_n = \sum_{n = 1}^{\infty}n\frac{1}{2^{n-1}}- 1 = 3\]
+
+<div style="text-align: right;">
+  <p>■</p>
+</div>
+
+<h3 id="解答3別解">解答(3)別解</h3>
+
+<p>A対CでAが勝てばチャンピオンが決まるし，Cが勝ってもA，B，Cの立場が入れ替わるだけで状況は変わらないことを考えると，これから先の何戦目くらいでチャンピオンが決まるかという数値を\(r\)とすれば</p>
+
+\[r＝1＋r/2\]
+
+<p>が成り立つ. 従って,\(r＝2\)が求まる。結局，これに最初にA，B，Cが決まるまでの1戦を加えて対戦回数の期待値は3。</p>
+
+<div style="text-align: right;">
+  <p>■</p>
+</div>
+
+<h3 id="解答4">解答(4)</h3>
+
+<p>解答(1)別解より、Aが優勝するときにBが対戦相手のときは、\(n=  3k+1 \:(k = 1, 2, ....)\)のときのみ。</p>
+
+<p>求めたいものは</p>
+
+\[\text{Pr(Bが対戦相手|3m回以内にAが優勝)} = \frac{\text{Pr(3m回以内にAが優勝, Bが対戦相手)}}{\text{Pr(3m回以内にAが優勝)}}\]
+
+<p>各項について、</p>
+
+\[\begin{aligned}
+\text{Pr(3m回以内にAが優勝)} &amp;= \sum_{m=1}^{3m}a_n\\
+&amp;= \sum_{m=2}^{3m}\frac{1}{2^m} - \sum_{m=1}^{m}\frac{1}{2^{3m}}\\
+&amp;= \frac{1}{2} - \frac{1}{2^{3m}} - \frac{1}{7}\left(1 - \frac{1}{8^m}\right)\\
+&amp;= \frac{5}{14} - \frac{6}{7}\frac{1}{8^m}
+\end{aligned}\]
+
+<p>および</p>
+
+\[\begin{aligned}
+\text{Pr(3m回以内にAが優勝, Bが対戦相手)} &amp;= \sum_{m=1}^{m-1} a_{3m+1}\\
+&amp;= \sum_{m=1}^{m-1} \frac{1}{2^{3m+1}}\\
+&amp;= \frac{1}{14} - \frac{4}{7}\frac{1}{8^m}
+\end{aligned}\]
+
+<p>総試合数が \(3m\) 回以下でAが優勝したとき,Bが対戦相手である確率を \(B_m\)とすると</p>
+
+\[\begin{aligned}
+\therefore B_m  &amp;= \frac{ \frac{1}{14} -\frac{4}{7\cdot 8^m} }{ \frac{5}{14} -\frac{6}{7\cdot 8^m} } \\[8pt]
+&amp;= \frac{ 8^m -8 }{ 5\cdot 8^m -12 } 
+\end{aligned}\]
+
+<div style="text-align: right;">
+  <p>■</p>
+</div>
+
+<h3 id="解答5">解答(5)</h3>
+
+<p>\(p \in (0, 1)\)のとき、</p>
+
+\[\frac{1}{(1-p)^2}=\sum_{x=1}^\infty xp^{x-1}\]
+
+<p>この両辺を\(p\)で微分すると</p>
+
+\[\frac{2}{(1-p)^3}=\sum_{x=2}^\infty x(x-1)p^{x-2}\]
+
+<p>両辺に\(p\)を掛けると</p>
+
+\[\frac{2p}{(1-p)^3}=\sum_{x=2}^\infty x(x-1)p^{x-1}\]
+
+<p>優勝に要する試合数の確率変数を\(X\)をしたとき</p>
+
+\[\mathbf V(X) = \mathbf E[X(X - 1)] + E(X) - E(X)^2\]
+
+<p>従って、</p>
+
+\[\begin{aligned}
+\mathbf V(X) &amp;= \sum_{x=2}^\infty x(x-1)\frac{1}{2^{x-1}} + 3 - 9\\
+&amp;= \frac{1}{(1/2)^3} - 6\\[8pt]
+&amp;= 2
+\end{aligned}\]
+
+<div style="text-align: right;">
+  <p>■</p>
+</div>
+
+<h2 id="pythonでsimution">PythonでSimution</h2>
+
+<p>実行ファイルは<a href="https://colab.research.google.com/drive/1-eFP82pm-Xeynr72_JHlGRGyVa6eh9vu?usp=sharing">こちら</a></p>
+
+<blockquote>
+  <p>modules</p>
+</blockquote>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
+2
+3
+</pre></td><td class="rouge-code"><pre><span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="n">np</span>
+<span class="kn">import</span> <span class="nn">random</span>
+<span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="k">as</span> <span class="n">plt</span>
+</pre></td></tr></tbody></table></code></pre></div></div>
+
+<blockquote>
+  <p>関数定義</p>
+</blockquote>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
+2
+3
+4
+5
+6
+7
+8
+9
+10
+11
+12
+13
+14
+15
+16
+17
+18
+19
+20
+21
+22
+23
+24
+25
+26
+27
+28
+29
+30
+31
+32
+33
+34
+35
+36
+</pre></td><td class="rouge-code"><pre><span class="k">def</span> <span class="nf">tomoesen</span><span class="p">(</span><span class="n">player_list</span><span class="p">,</span> <span class="n">iter_num</span><span class="p">,</span> <span class="n">seed</span> <span class="o">=</span> <span class="mi">42</span><span class="p">):</span>
+    
+    <span class="c1">## set seed
+</span>    <span class="n">random</span><span class="p">.</span><span class="n">seed</span><span class="p">(</span><span class="n">seed</span><span class="p">)</span>
+
+    <span class="c1">## set object
+</span>    <span class="n">winner_cnt</span> <span class="o">=</span> <span class="p">{</span><span class="n">player</span><span class="p">:[</span><span class="mi">0</span><span class="p">]</span> <span class="k">for</span> <span class="n">player</span> <span class="ow">in</span> <span class="n">player_list</span><span class="p">}</span>
+    <span class="n">max_win</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">player_list</span><span class="p">)</span> <span class="o">-</span> <span class="mi">1</span>
+
+    <span class="k">for</span> <span class="n">trial</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">iter_num</span><span class="p">):</span>
+        <span class="n">winner</span> <span class="o">=</span> <span class="s">""</span>
+        <span class="n">battle</span> <span class="o">=</span> <span class="n">player_list</span><span class="p">[:</span><span class="mi">2</span><span class="p">]</span>
+        <span class="n">waiting_list</span> <span class="o">=</span> <span class="n">player_list</span><span class="p">[</span><span class="mi">2</span><span class="p">:]</span>
+        <span class="n">win_cnt</span> <span class="o">=</span> <span class="mi">0</span>
+
+        <span class="k">while</span> <span class="n">win_cnt</span> <span class="o">&lt;</span> <span class="n">max_win</span><span class="p">:</span>
+          <span class="n">_winner</span><span class="p">,</span> <span class="n">_loser</span> <span class="o">=</span> <span class="n">random</span><span class="p">.</span><span class="n">sample</span><span class="p">(</span><span class="n">battle</span><span class="p">,</span> <span class="mi">2</span><span class="p">)</span>
+
+          <span class="k">if</span> <span class="n">winner</span> <span class="o">==</span> <span class="n">_winner</span><span class="p">:</span>
+            <span class="n">win_cnt</span> <span class="o">+=</span> <span class="mi">1</span>
+
+          <span class="k">else</span><span class="p">:</span>
+            <span class="n">win_cnt</span> <span class="o">=</span> <span class="mi">1</span>
+            <span class="n">winner</span> <span class="o">=</span> <span class="n">_winner</span>
+          
+          <span class="n">waiting_list</span><span class="p">.</span><span class="n">append</span><span class="p">(</span><span class="n">_loser</span><span class="p">)</span>
+          <span class="n">battle</span> <span class="o">=</span> <span class="p">[</span><span class="n">winner</span><span class="p">,</span> <span class="n">waiting_list</span><span class="p">.</span><span class="n">pop</span><span class="p">(</span><span class="mi">0</span><span class="p">)]</span>
+        
+        <span class="n">other_set</span> <span class="o">=</span> <span class="nb">set</span><span class="p">(</span><span class="n">player_list</span><span class="p">)</span> <span class="o">-</span> <span class="nb">set</span><span class="p">(</span><span class="n">winner</span><span class="p">)</span>
+
+        <span class="c1">## updateting the result
+</span>        <span class="n">winner_cnt</span><span class="p">[</span><span class="n">winner</span><span class="p">].</span><span class="n">append</span><span class="p">(</span><span class="n">winner_cnt</span><span class="p">[</span><span class="n">winner</span><span class="p">][</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span> <span class="o">+</span> <span class="mi">1</span><span class="p">)</span>
+        <span class="k">for</span> <span class="n">other</span> <span class="ow">in</span> <span class="n">other_set</span><span class="p">:</span>
+          <span class="n">winner_cnt</span><span class="p">[</span><span class="n">other</span><span class="p">].</span><span class="n">append</span><span class="p">(</span><span class="n">winner_cnt</span><span class="p">[</span><span class="n">other</span><span class="p">][</span><span class="o">-</span><span class="mi">1</span><span class="p">])</span>
+    
+    <span class="k">return</span> <span class="n">winner_cnt</span>
+</pre></td></tr></tbody></table></code></pre></div></div>
+
+<blockquote>
+  <p>Simulation</p>
+</blockquote>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
+2
+3
+4
+5
+6
+7
+8
+9
+10
+11
+12
+13
+14
+15
+</pre></td><td class="rouge-code"><pre><span class="c1">## simulation回数
+</span><span class="n">N</span> <span class="o">=</span> <span class="mi">100000</span>
+<span class="n">result</span> <span class="o">=</span> <span class="n">tomoesen</span><span class="p">(</span><span class="n">player_list</span> <span class="o">=</span> <span class="nb">list</span><span class="p">(</span><span class="s">'ABC'</span><span class="p">),</span> <span class="n">iter_num</span><span class="o">=</span><span class="n">N</span><span class="p">)</span>
+
+<span class="n">fig</span><span class="p">,</span> <span class="n">ax</span> <span class="o">=</span> <span class="n">plt</span><span class="p">.</span><span class="n">subplots</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">15</span><span class="p">,</span> <span class="mi">10</span><span class="p">))</span>
+<span class="n">trial_range</span> <span class="o">=</span> <span class="n">np</span><span class="p">.</span><span class="n">arange</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="n">N</span><span class="o">+</span><span class="mi">1</span><span class="p">)</span>
+
+<span class="k">for</span> <span class="n">player</span> <span class="ow">in</span> <span class="nb">sorted</span><span class="p">(</span><span class="n">result</span><span class="p">.</span><span class="n">keys</span><span class="p">()):</span>
+  <span class="n">win_prob</span> <span class="o">=</span> <span class="n">result</span><span class="p">[</span><span class="n">player</span><span class="p">][</span><span class="mi">1</span><span class="p">:]</span><span class="o">/</span><span class="n">trial_range</span>
+  <span class="n">ax</span><span class="p">.</span><span class="n">plot</span><span class="p">(</span><span class="n">win_prob</span><span class="p">,</span><span class="n">label</span> <span class="o">=</span> <span class="p">(</span><span class="n">player</span> <span class="o">+</span> <span class="s">'`s converged win prob: {} %'</span><span class="p">).</span><span class="nb">format</span><span class="p">(</span><span class="nb">round</span><span class="p">(</span><span class="n">win_prob</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span><span class="o">*</span><span class="mi">100</span><span class="p">,</span> <span class="mi">2</span><span class="p">)))</span>
+
+<span class="n">ax</span><span class="p">.</span><span class="n">set_title</span><span class="p">(</span><span class="s">'Tomoesen: the cumulative win probability'</span><span class="p">,</span> <span class="n">fontsize</span><span class="o">=</span><span class="mi">15</span><span class="p">)</span>
+<span class="n">ax</span><span class="p">.</span><span class="n">set_xlabel</span><span class="p">(</span><span class="s">'Trial'</span><span class="p">,</span> <span class="n">fontsize</span><span class="o">=</span><span class="mi">12</span><span class="p">)</span>
+<span class="n">ax</span><span class="p">.</span><span class="n">set_xlim</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1000</span><span class="p">)</span>
+<span class="n">ax</span><span class="p">.</span><span class="n">legend</span><span class="p">();</span>
+</pre></td></tr></tbody></table></code></pre></div></div>
+
+<p><img src="https://github.com/ryonakimageserver/omorikaizuka/blob/master/%E3%83%96%E3%83%AD%E3%82%B0%E7%94%A8/20210414_tomoesen_python.png?raw=true" /></p>
+
+<h2 id="公平な巴戦の検討">公平な巴戦の検討</h2>
+
+<p>上では実力が均等な場合の巴戦を検討しました. ここでは、巴戦による優勝確率が３プレーヤーとも公平, つまり \(\frac{1}{3}\)になるための条件を検討します.</p>
+
+<h3 id="問題設定">問題設定</h3>
+
+<ul>
+  <li>３人のプレイヤーをA, B, Cとする</li>
+  <li>まず最初にA, Bが土俵に上がり、その後、その勝者とCが戦い、優勝が決定する（だれかが2連勝する）までゲームを続ける</li>
+  <li>A, Bの実力は均等とする</li>
+</ul>
+
+<p>２つ目までの条件は上で検討した設定と同様です. ３つ目の条件をもう少し説明すると</p>
+
+\[\begin{aligned}
+Pr(\text{AがBと戦い勝利する}) &amp;= \frac{1}{2}\\
+Pr(\text{BがAと戦い勝利する}) &amp;= \frac{1}{2}\\
+Pr(\text{AがCと戦い勝利する}) &amp;= Pr(\text{BがCと戦い勝利する}) = x
+\end{aligned}\]
+
+<p>今回求めたいのは 巴戦で優勝する確率が各プレイヤー公平になるためには \(x\) がどのような水準でなければならないのか？です.</p>
+
+<h3 id="x-の導出">\(x\) の導出</h3>
+
+<p>問題設定より、</p>
+
+<div class="math display" style="overflow: auto">
+  <p>\(Pr(\text{Aが優勝する}) = Pr(\text{Bが優勝する}) = Pr(\text{Cが優勝する}) = \frac{1}{3}\)</p>
+</div>
+
+<p><a href="#%E8%A7%A3%E7%AD%941%E5%88%A5%E8%A7%A3">解答(1)の別解</a>を応用して、</p>
+
+<ul>
+  <li>Aが初戦勝って、優勝する確率</li>
+  <li>Aが初戦負けて、優勝する確率</li>
+</ul>
+
+<p>をそれぞれ検討し、その後 \(Pr(\text{Aが優勝する})\)を導出したいと思います.</p>
+
+<blockquote>
+  <p>Aが初戦勝って、優勝する確率</p>
+</blockquote>
+
+<p>\(a_n\) をAが初戦勝って、\(n\)戦目に優勝する確率とします. (i, j)を i と j が対戦して, iが勝った事象を表すとします.</p>
+
+<ul>
+  <li>\(a_2\): (A, B) (A, C)</li>
+  <li>\(a_5\): (A, B) (C, A) (B, C) (A, B) (A, C)</li>
+  <li>\(a_8\): (A, B) (C, A) (B, C) (A, B) (C, A) (B, C) (A, B)(A, C)</li>
+</ul>
+
+<p>なので、</p>
+
+\[a_{3k-1} = \left\{\frac{(1-x) x}{2}\right\}^{k-1} \frac{1}{2} \times x \: \text{ where } \:(k \geq 1)\]
+
+<blockquote>
+  <p>Aが初戦負けて、優勝する確率</p>
+</blockquote>
+
+<p>\(b_n\) をAが初戦勝って、\(n\)戦目に優勝する確率とします.</p>
+
+<ul>
+  <li>\(b_4\): (B, A) (C, B) (A, C) (A, B)</li>
+  <li>\(b_7\): (B, A) (C, B) (A, C) (B, A) (C, B) (A, C) (A, B)</li>
+  <li>\(b_{10}\): (B, A) (C, B) (A, C) (B, A) (C, B) (A, C) (B, A) (C, B) (A, C) (A, B)</li>
+</ul>
+
+<p>なので、</p>
+
+\[\begin{aligned}
+b_{3k+1} &amp;= \frac{1}{2} \left\{(1 - x) x \frac{1}{2}\right\}^{k-1} (1 - x) x \frac{1}{2}\\
+&amp;= \frac{ (1 - x) x }{4}\left\{\frac{(1 - x) x}{2}\right\}^{k-1} \: \text{ where } \: (k \geq 1)
+\end{aligned}\]
+
+<blockquote>
+  <p>Aが優勝する確率</p>
+</blockquote>
+
+\[\begin{aligned}
+Pr(\text{Aが優勝する}) = \sum^{\infty}_{n = 1} a_{3n - 1} + b_{3n + 1}
+\end{aligned}\]
+
+<p>なので</p>
+
+\[Pr(\text{Aが優勝する}) = \frac{1}{2}\left(\frac{x}{1 - \frac{1}{2}(1 - x)x} + \frac{(1-x)x}{2(1 - \frac{1}{2}(1 - x)x)}\right)= \frac{1}{3}\]
+
+<p>これを<a href="https://www.wolframalpha.com/input/?i=1%2F3+%3D+0.5*%28x%2F%281+-+0.5*%281+-+x%29*x%29+%2B+%281-x%29*0.5*x%2F%281+-+0.5*%281+-+x%29*x%29">整理</a>すると</p>
+
+\[0 = 5x^2 - 11x +4\]
+
+<p>を得るので、\((0, 1)\)区間に収まるほうが \(x\)となり得るので</p>
+
+\[x = \frac{11 - \sqrt{41}}{10}\]
+
+<p>この値を用いて、PythonでSimulationを実施した結果は以下：</p>
+
+<p><img src="https://github.com/ryonakimageserver/omorikaizuka/blob/master/%E3%83%96%E3%83%AD%E3%82%B0%E7%94%A8/20210422_fair_tomoesen_python.png?raw=true" /></p>
+
+<div style="text-align: right;">
+  <p>■</p>
+</div>
+
+<h2 id="4人の巴戦">4人の巴戦</h2>
+<blockquote>
+  <p>問題</p>
+</blockquote>
+
+<p>\(n \:(n = 4)\)人が巴戦を行う時、それぞれの優勝する確率を求めよ. \(n\) 人が一列に並んでいて、先頭の二人が勝負をして勝った方が先頭に残る．負けた方は列の最後につく．これを繰り返して \(n - 1\) 連勝したとき優勝するとします.</p>
+
+<blockquote>
+  <p>解</p>
+</blockquote>
+
+<p>\(k\) 連勝している人が先頭にいるときの \(m\) 番目にいる人の優勝する確率を \(P_{k;m}とおきます．\)P_{0; 1},P_{0; 2}, \cdots, P_{0; 4}$$を求めることが最終目標です</p>
+
+<p>\(k=3\) のときは先頭の人がすでに3連勝しているので</p>
+
+\[\begin{aligned}
+P_{3; 1} &amp;= 1\\
+P_{3; 2} &amp;= P_{3; 3} = P_{3; 4} = 0
+\end{aligned}\]
+
+<p>また、先頭の2人は実力が拮抗しており、試合チャンスも同じなので、\(P_{0, 1} = P_{0, 2}\).</p>
+
+<p>\(k \: (0\leq k\leq 2)\) 連勝しているとき、先頭の2人は</p>
+
+\[\begin{aligned}
+P_{k; 1} &amp;= \frac{1}{2}(P_{k+1; 1} + P_{1; n})\\[8pt]
+P_{k; 2} &amp;= \frac{1}{2}(P_{1; 1} + P_{k+1; n})
+\end{aligned}\]
+
+<p>3番目以降の人は</p>
+
+\[P_{k; m} = \frac{1}{2}(P_{k+1; m-1} + P_{1; m-1})\]
+
+<p>漸化式を整理すると、</p>
+
+\[\begin{aligned}
+P_{k;1} &amp;=  2P_{k-1;1} - P_{1; n}\\[8pt]
+P_{k;m} &amp;= 2P_{k-1; m+1} - P_{1;m} \: (2 \leq m \leq n-1)\\[8pt]
+P_{k;n} &amp;=  2P_{k-1;2} - P_{1; 1}
+\end{aligned}\]
+
+<p>今回は \(n=4\) なので上の漸化式を利用すると</p>
+
+\[\begin{aligned}
+P_{1;1} &amp;=  \frac{3}{4}P_{1;4} + \frac{1}{4}\\
+P_{1;2} &amp;= \frac{1}{2}(P_{1;1} + P_{1;3})\\
+P_{1;3} &amp;=  \frac{1}{2}P_{1;2} + \frac{1}{4}P_{1;1}\\
+P_{1;4} &amp;=  \frac{1}{2}P_{1;3} + \frac{1}{4}P_{1;2}
+\end{aligned}\]
+
+<p>この<a href="https://ja.wolframalpha.com/input/?i=a+%3D+%5Cfrac%7B3%7D%7B4%7Dd+%2B+%5Cfrac%7B1%7D%7B4%7D%2C+b+%3D+%5Cfrac%7B1%7D%7B2%7Da+%2B+%5Cfrac%7B1%7D%7B4%7Dc%2C+c+%3D+%5Cfrac%7B1%7D%7B2%7Db+%2B+%5Cfrac%7B1%7D%7B4%7Da%2C+d+%3D+%5Cfrac%7B1%7D%7B2%7Dc+%2B+%5Cfrac%7B1%7D%7B4%7Db">連立方程式</a>を解くと</p>
+
+\[\begin{aligned}
+P_{1;1} &amp;=  \frac{56}{149}\\
+P_{1;2} &amp;= \frac{36}{149}\\
+P_{1;3} &amp;=  \frac{32}{149}\\
+P_{1;4} &amp;=  \frac{25}{149}
+\end{aligned}\]
+
+<p>従って、</p>
+
+\[\begin{aligned}
+P_{0;1} &amp;= P_{0;2} =  \frac{81}{298}\\
+P_{0;3} &amp;=  \frac{36}{149}\\
+P_{0;4} &amp;=  \frac{32}{149}\
+\end{aligned}\]
+
+<div style="text-align: right;">
+  <p>■</p>
+</div>
+
+<blockquote>
+  <p>PythonでのSimulation</p>
+</blockquote>
+
+<p><img src="https://github.com/ryonakimageserver/omorikaizuka/blob/master/%E3%83%96%E3%83%AD%E3%82%B0%E7%94%A8/20210414_tomoesen_four_player_python.png?raw=true" /></p>
+
+<blockquote>
+  <p>一般解</p>
+</blockquote>
+
+<p>\(n \: (n\geq 3)\) 人で巴戦を実施する場合の各プレイヤーの優勝確率は</p>
+
+\[\begin{aligned}
+P_{0, 1} &amp;= P_{0, 2}\\[8pt]
+P_{0, m} &amp;= \frac{2^{(n-1)(m-2)}(2^{n-1}+1)^{n-m}}{2(2^{n-2}+1)(2^{n-1}+1)^{n-2} - 2^{(n-1)^2}}\: \text{ where }\: (2 \leq m \leq n)\\[8pt]
+\sum_{i=1}^n P_{0, i} &amp;= 1
+\end{aligned}\]
+
+<p>となります. 考え方は上で紹介した確率漸化式を解くのですが、余因子行列をコネコネする必要があるので解説は後日とします.</p>
+
+<p>また優勝がきまるまでの試合数 \(T\) の期待値は</p>
+
+\[\mathbf E[T] = 2^{n-1} - 1\]
+
+<p>となります.</p>
+
+
+                <hr style="visibility: hidden;">
+                <hr/>
+                <b><fontsize="5">Share Buttons</font><br></b>
+                <!--see 
+    https://jekyllcodex.org/without-plugin/share-buttons/ 
+    https://ranvir.xyz/blog/why-and-how-to-add-social-sharing-buttons-on-your-jekyll-blog-using-github-pages/
+-->
+
+
+
+<style>
+#share-buttons {display: inline-block; vertical-align: middle; }
+#share-buttons:after {content: ""; display: block; clear: both;}
+#share-buttons > div {
+    position: relative;
+    text-align: left; 
+    height: 36px; 
+    width: 32px; 
+    float: left; 
+    text-align: center;
+}
+#share-buttons > div > svg {height: 16px; fill: #d5d5d5; margin-top: 10px;}
+#share-buttons > div:hover {cursor: pointer;}
+#share-buttons > div.facebook:hover > svg {fill: #3B5998;}
+#share-buttons > div.twitter:hover > svg {fill: #55ACEE;}
+#share-buttons > div.linkedin:hover > svg {fill: #0077b5;}
+#share-buttons > div.pinterest:hover > svg {fill: #CB2027;}
+#share-buttons > div.gplus:hover > svg {fill: #dd4b39;}
+#share-buttons > div.mail:hover > svg {fill: #7D7D7D;}
+#share-buttons > div.instagram:hover > svg {fill: #C73B92;}
+#share-buttons > div.facebook > svg {height: 18px; margin-top: 9px;}
+#share-buttons > div.twitter > svg {height: 20px; margin-top: 8px;}
+#share-buttons > div.linkedin > svg {height: 19px; margin-top: 7px;}
+#share-buttons > div.pinterest > svg {height: 20px; margin-top: 9px;}
+#share-buttons > div.gplus > svg {height: 17px; margin-top: 9px; position: relative; left: 1px;}
+#share-buttons > div.mail > svg {height: 14px; margin-top: 11px;}
+</style>
+
+<span style="color: black">Share on: </span><div id="share-buttons">
+    <div class="facebook" title="Share this on Facebook" onclick="gtag('event', 'Facebook', {'event_category':'Post Shared','event_label':'Facebook'}); location.href='http://www.facebook.com/share.php?u=https://ryonakagami.github.io/2021/04/14/tomoesen-problem/';"><svg viewBox="0 0 1792 1792" xmlns="http://www.w3.org/2000/svg"><path d="M1343 12v264h-157q-86 0-116 36t-30 108v189h293l-39 296h-254v759h-306v-759h-255v-296h255v-218q0-186 104-288.5t277-102.5q147 0 228 12z"/></svg></div>
+    <div class="twitter" title="Share this on Twitter" onclick="gtag('event', 'Twitter', {'event_category':'Post Shared','event_label':'Twitter'}); location.href='https://twitter.com/intent/tweet?text=巴戦の確率&url=https://ryonakagami.github.io/2021/04/14/tomoesen-problem/';"><svg viewBox="0 0 1792 1792" xmlns="http://www.w3.org/2000/svg"><path d="M1684 408q-67 98-162 167 1 14 1 42 0 130-38 259.5t-115.5 248.5-184.5 210.5-258 146-323 54.5q-271 0-496-145 35 4 78 4 225 0 401-138-105-2-188-64.5t-114-159.5q33 5 61 5 43 0 85-11-112-23-185.5-111.5t-73.5-205.5v-4q68 38 146 41-66-44-105-115t-39-154q0-88 44-163 121 149 294.5 238.5t371.5 99.5q-8-38-8-74 0-134 94.5-228.5t228.5-94.5q140 0 236 102 109-21 205-78-37 115-142 178 93-10 186-50z"/></svg></div>
+    <div class="linkedin" title="Share this on Linkedin" onclick="gtag('event', 'Linkedin', {'event_category':'Post Shared','event_label':'Linkedin'}); location.href='https://www.linkedin.com/shareArticle?mini=true&url=https://ryonakagami.github.io/2021/04/14/tomoesen-problem/&title=&summary=&source=';"><svg viewBox="0 0 1792 1792" xmlns="http://www.w3.org/2000/svg"><path d="M477 625v991h-330v-991h330zm21-306q1 73-50.5 122t-135.5 49h-2q-82 0-132-49t-50-122q0-74 51.5-122.5t134.5-48.5 133 48.5 51 122.5zm1166 729v568h-329v-530q0-105-40.5-164.5t-126.5-59.5q-63 0-105.5 34.5t-63.5 85.5q-11 30-11 81v553h-329q2-399 2-647t-1-296l-1-48h329v144h-2q20-32 41-56t56.5-52 87-43.5 114.5-15.5q171 0 275 113.5t104 332.5z"/></svg></div>
+    
+    <div class="mail" title="Share this through Email" onclick="gtag('event', 'Email', {'event_category':'Post Shared','event_label':'Email'}); location.href='mailto:?&body=https://ryonakagami.github.io/2021/04/14/tomoesen-problem/';"><svg viewBox="0 0 1792 1792" xmlns="http://www.w3.org/2000/svg"><path d="M1792 710v794q0 66-47 113t-113 47h-1472q-66 0-113-47t-47-113v-794q44 49 101 87 362 246 497 345 57 42 92.5 65.5t94.5 48 110 24.5h2q51 0 110-24.5t94.5-48 92.5-65.5q170-123 498-345 57-39 100-87zm0-294q0 79-49 151t-122 123q-376 261-468 325-10 7-42.5 30.5t-54 38-52 32.5-57.5 27-50 9h-2q-23 0-50-9t-57.5-27-52-32.5-54-38-42.5-30.5q-91-64-262-182.5t-205-142.5q-62-42-117-115.5t-55-136.5q0-78 41.5-130t118.5-52h1472q65 0 112.5 47t47.5 113z"/></svg></div>
+</div>
+
+                
+                <hr/>
+
+                <!-- Featured Tags -->
+                <b><fontsize="5">Feature Tags</b>
+                    <div id="tag_cloud" class="tags tags-sup js-tags" 
+                    style="line-height: 0px !important;">
+                        
+                        
+                        
+                        
+                        
+                                <a data-sort="0288" 
+                                    href="/archive/?tag=%E7%B5%B1%E8%A8%88"
+                                    title="統計"
+                                    style="color: #337ab7 !important;"
+                                    rel="61">統計</a>
+                        
+                                <a data-sort="0298" 
+                                    href="/archive/?tag=Python"
+                                    title="Python"
+                                    style="color: #337ab7 !important;"
+                                    rel="51">Python</a>
+                        
+                                <a data-sort="0300" 
+                                    href="/archive/?tag=math"
+                                    title="math"
+                                    style="color: #337ab7 !important;"
+                                    rel="49">math</a>
+                        
+                                <a data-sort="0303" 
+                                    href="/archive/?tag=Linux"
+                                    title="Linux"
+                                    style="color: #337ab7 !important;"
+                                    rel="46">Linux</a>
+                        
+                                <a data-sort="0316" 
+                                    href="/archive/?tag=Ubuntu+20.04+LTS"
+                                    title="Ubuntu 20.04 LTS"
+                                    style="color: #337ab7 !important;"
+                                    rel="33">Ubuntu 20.04 LTS</a>
+                        
+                                <a data-sort="0319" 
+                                    href="/archive/?tag=Shell"
+                                    title="Shell"
+                                    style="color: #337ab7 !important;"
+                                    rel="30">Shell</a>
+                        
+                                <a data-sort="0321" 
+                                    href="/archive/?tag=English"
+                                    title="English"
+                                    style="color: #337ab7 !important;"
+                                    rel="28">English</a>
+                        
+                                <a data-sort="0324" 
+                                    href="/archive/?tag=git"
+                                    title="git"
+                                    style="color: #337ab7 !important;"
+                                    rel="25">git</a>
+                        
+                                <a data-sort="0329" 
+                                    href="/archive/?tag=%E6%96%B9%E6%B3%95%E8%AB%96"
+                                    title="方法論"
+                                    style="color: #337ab7 !important;"
+                                    rel="20">方法論</a>
+                        
+                                <a data-sort="0333" 
+                                    href="/archive/?tag=Ubuntu+22.04+LTS"
+                                    title="Ubuntu 22.04 LTS"
+                                    style="color: #337ab7 !important;"
+                                    rel="16">Ubuntu 22.04 LTS</a>
+                        
+                                <a data-sort="0337" 
+                                    href="/archive/?tag=%E7%B5%B1%E8%A8%88%E6%A4%9C%E5%AE%9A"
+                                    title="統計検定"
+                                    style="color: #337ab7 !important;"
+                                    rel="12">統計検定</a>
+                        
+                                <a data-sort="0338" 
+                                    href="/archive/?tag=%E7%AB%B6%E6%8A%80%E3%83%97%E3%83%AD%E3%82%B0%E3%83%A9%E3%83%9F%E3%83%B3%E3%82%B0"
+                                    title="競技プログラミング"
+                                    style="color: #337ab7 !important;"
+                                    rel="11">競技プログラミング</a>
+                        
+                                <a data-sort="0339" 
+                                    href="/archive/?tag=%E3%83%95%E3%83%BC%E3%83%AA%E3%82%A8%E8%A7%A3%E6%9E%90"
+                                    title="フーリエ解析"
+                                    style="color: #337ab7 !important;"
+                                    rel="10">フーリエ解析</a>
+                        
+                                <a data-sort="0340" 
+                                    href="/archive/?tag=%E5%89%8D%E5%87%A6%E7%90%86"
+                                    title="前処理"
+                                    style="color: #337ab7 !important;"
+                                    rel="9">前処理</a>
+                        
+                                <a data-sort="0340" 
+                                    href="/archive/?tag=SQL"
+                                    title="SQL"
+                                    style="color: #337ab7 !important;"
+                                    rel="9">SQL</a>
+                        
+                                <a data-sort="0340" 
+                                    href="/archive/?tag=coding"
+                                    title="coding"
+                                    style="color: #337ab7 !important;"
+                                    rel="9">coding</a>
+                        
+                                <a data-sort="0341" 
+                                    href="/archive/?tag=%E3%82%B3%E3%83%9F%E3%83%A5%E3%83%8B%E3%82%B1%E3%83%BC%E3%82%B7%E3%83%A7%E3%83%B3"
+                                    title="コミュニケーション"
+                                    style="color: #337ab7 !important;"
+                                    rel="8">コミュニケーション</a>
+                        
+                                <a data-sort="0342" 
+                                    href="/archive/?tag=Network"
+                                    title="Network"
+                                    style="color: #337ab7 !important;"
+                                    rel="7">Network</a>
+                        
+                                <a data-sort="0342" 
+                                    href="/archive/?tag=ssh"
+                                    title="ssh"
+                                    style="color: #337ab7 !important;"
+                                    rel="7">ssh</a>
+                        
+                                <a data-sort="0343" 
+                                    href="/archive/?tag=%E5%B0%86%E6%A3%8B"
+                                    title="将棋"
+                                    style="color: #337ab7 !important;"
+                                    rel="6">将棋</a>
+                        
+                                <a data-sort="0343" 
+                                    href="/archive/?tag=Data+visualization"
+                                    title="Data visualization"
+                                    style="color: #337ab7 !important;"
+                                    rel="6">Data visualization</a>
+                        
+                                <a data-sort="0343" 
+                                    href="/archive/?tag=Docker"
+                                    title="Docker"
+                                    style="color: #337ab7 !important;"
+                                    rel="6">Docker</a>
+                        
+                                <a data-sort="0343" 
+                                    href="/archive/?tag=Econometrics"
+                                    title="Econometrics"
+                                    style="color: #337ab7 !important;"
+                                    rel="6">Econometrics</a>
+                        
+                                <a data-sort="0343" 
+                                    href="/archive/?tag=VSCode"
+                                    title="VSCode"
+                                    style="color: #337ab7 !important;"
+                                    rel="6">VSCode</a>
+                        
+                                <a data-sort="0343" 
+                                    href="/archive/?tag=statistical+inference"
+                                    title="statistical inference"
+                                    style="color: #337ab7 !important;"
+                                    rel="6">statistical inference</a>
+                        
+                                <a data-sort="0344" 
+                                    href="/archive/?tag=GitHub+Pages"
+                                    title="GitHub Pages"
+                                    style="color: #337ab7 !important;"
+                                    rel="5">GitHub Pages</a>
+                        
+                                <a data-sort="0344" 
+                                    href="/archive/?tag=apt"
+                                    title="apt"
+                                    style="color: #337ab7 !important;"
+                                    rel="5">apt</a>
+                        
+                                <a data-sort="0344" 
+                                    href="/archive/?tag=development"
+                                    title="development"
+                                    style="color: #337ab7 !important;"
+                                    rel="5">development</a>
+                        
+                                <a data-sort="0345" 
+                                    href="/archive/?tag=%E3%82%B7%E3%82%B9%E3%83%86%E3%83%A0%E7%AE%A1%E7%90%86"
+                                    title="システム管理"
+                                    style="color: #337ab7 !important;"
+                                    rel="4">システム管理</a>
+                        
+                                <a data-sort="0345" 
+                                    href="/archive/?tag=Coffee"
+                                    title="Coffee"
+                                    style="color: #337ab7 !important;"
+                                    rel="4">Coffee</a>
+                        
+                                <a data-sort="0345" 
+                                    href="/archive/?tag=cloud"
+                                    title="cloud"
+                                    style="color: #337ab7 !important;"
+                                    rel="4">cloud</a>
+                        
+                                <a data-sort="0346" 
+                                    href="/archive/?tag=%E6%95%B0%E5%80%A4%E8%A8%88%E7%AE%97"
+                                    title="数値計算"
+                                    style="color: #337ab7 !important;"
+                                    rel="3">数値計算</a>
+                        
+                                <a data-sort="0346" 
+                                    href="/archive/?tag=%E7%B4%A0%E6%95%B0"
+                                    title="素数"
+                                    style="color: #337ab7 !important;"
+                                    rel="3">素数</a>
+                        
+                                <a data-sort="0346" 
+                                    href="/archive/?tag=Book"
+                                    title="Book"
+                                    style="color: #337ab7 !important;"
+                                    rel="3">Book</a>
+                        
+                                <a data-sort="0346" 
+                                    href="/archive/?tag=Font"
+                                    title="Font"
+                                    style="color: #337ab7 !important;"
+                                    rel="3">Font</a>
+                        
+                                <a data-sort="0346" 
+                                    href="/archive/?tag=Metrics"
+                                    title="Metrics"
+                                    style="color: #337ab7 !important;"
+                                    rel="3">Metrics</a>
+                        
+                                <a data-sort="0346" 
+                                    href="/archive/?tag=Poetry"
+                                    title="Poetry"
+                                    style="color: #337ab7 !important;"
+                                    rel="3">Poetry</a>
+                        
+                                <a data-sort="0346" 
+                                    href="/archive/?tag=Ubuntu+24.04+LTS"
+                                    title="Ubuntu 24.04 LTS"
+                                    style="color: #337ab7 !important;"
+                                    rel="3">Ubuntu 24.04 LTS</a>
+                        
+                                <a data-sort="0346" 
+                                    href="/archive/?tag=architecture"
+                                    title="architecture"
+                                    style="color: #337ab7 !important;"
+                                    rel="3">architecture</a>
+                        
+                                <a data-sort="0346" 
+                                    href="/archive/?tag=aws"
+                                    title="aws"
+                                    style="color: #337ab7 !important;"
+                                    rel="3">aws</a>
+                        
+                                <a data-sort="0346" 
+                                    href="/archive/?tag=shell"
+                                    title="shell"
+                                    style="color: #337ab7 !important;"
+                                    rel="3">shell</a>
+                        
+                                <a data-sort="0346" 
+                                    href="/archive/?tag=systemctl"
+                                    title="systemctl"
+                                    style="color: #337ab7 !important;"
+                                    rel="3">systemctl</a>
+                        
+                                <a data-sort="0347" 
+                                    href="/archive/?tag=%E3%83%86%E3%83%B3%E3%83%97%E3%83%AC%E3%83%BC%E3%83%88"
+                                    title="テンプレート"
+                                    style="color: #337ab7 !important;"
+                                    rel="2">テンプレート</a>
+                        
+                                <a data-sort="0347" 
+                                    href="/archive/?tag=%E3%83%87%E3%83%BC%E3%82%BF%E6%A7%8B%E9%80%A0"
+                                    title="データ構造"
+                                    style="color: #337ab7 !important;"
+                                    rel="2">データ構造</a>
+                        
+                                <a data-sort="0347" 
+                                    href="/archive/?tag=%E3%83%9D%E3%83%AF%E3%82%BD%E3%83%B3%E5%88%86%E5%B8%83"
+                                    title="ポワソン分布"
+                                    style="color: #337ab7 !important;"
+                                    rel="2">ポワソン分布</a>
+                        
+                                <a data-sort="0347" 
+                                    href="/archive/?tag=%E4%BC%9A%E8%A8%88%E5%88%86%E6%9E%90"
+                                    title="会計分析"
+                                    style="color: #337ab7 !important;"
+                                    rel="2">会計分析</a>
+                        
+                                <a data-sort="0347" 
+                                    href="/archive/?tag=%E6%96%87%E5%AD%97%E3%82%B3%E3%83%BC%E3%83%89"
+                                    title="文字コード"
+                                    style="color: #337ab7 !important;"
+                                    rel="2">文字コード</a>
+                        
+                                <a data-sort="0347" 
+                                    href="/archive/?tag=%E7%92%B0%E5%A2%83%E6%A7%8B%E7%AF%89"
+                                    title="環境構築"
+                                    style="color: #337ab7 !important;"
+                                    rel="2">環境構築</a>
+                        
+                                <a data-sort="0347" 
+                                    href="/archive/?tag=%E8%AB%96%E6%96%87"
+                                    title="論文"
+                                    style="color: #337ab7 !important;"
+                                    rel="2">論文</a>
+                        
+                                <a data-sort="0347" 
+                                    href="/archive/?tag=App"
+                                    title="App"
+                                    style="color: #337ab7 !important;"
+                                    rel="2">App</a>
+                        
+                                <a data-sort="0347" 
+                                    href="/archive/?tag=Bayesian"
+                                    title="Bayesian"
+                                    style="color: #337ab7 !important;"
+                                    rel="2">Bayesian</a>
+                        
+                                <a data-sort="0347" 
+                                    href="/archive/?tag=Dynamic+Programming"
+                                    title="Dynamic Programming"
+                                    style="color: #337ab7 !important;"
+                                    rel="2">Dynamic Programming</a>
+                        
+                                <a data-sort="0347" 
+                                    href="/archive/?tag=Keyboard"
+                                    title="Keyboard"
+                                    style="color: #337ab7 !important;"
+                                    rel="2">Keyboard</a>
+                        
+                                <a data-sort="0347" 
+                                    href="/archive/?tag=Processing"
+                                    title="Processing"
+                                    style="color: #337ab7 !important;"
+                                    rel="2">Processing</a>
+                        
+                                <a data-sort="0347" 
+                                    href="/archive/?tag=R"
+                                    title="R"
+                                    style="color: #337ab7 !important;"
+                                    rel="2">R</a>
+                        
+                                <a data-sort="0347" 
+                                    href="/archive/?tag=Steam"
+                                    title="Steam"
+                                    style="color: #337ab7 !important;"
+                                    rel="2">Steam</a>
+                        
+                                <a data-sort="0347" 
+                                    href="/archive/?tag=filesystem"
+                                    title="filesystem"
+                                    style="color: #337ab7 !important;"
+                                    rel="2">filesystem</a>
+                        
+                                <a data-sort="0347" 
+                                    href="/archive/?tag=quarto"
+                                    title="quarto"
+                                    style="color: #337ab7 !important;"
+                                    rel="2">quarto</a>
+                        
+                                <a data-sort="0347" 
+                                    href="/archive/?tag=regex"
+                                    title="regex"
+                                    style="color: #337ab7 !important;"
+                                    rel="2">regex</a>
+                    </div>
+
+                <br>
+
+                <b><fontsize="5">Leave a Comment</font><br>(注意：GitHub Accountが必要となります）</b>
+                
+                <script src="https://utteranc.es/client.js"
+                    repo="RyoNakagami/RyoNakagami.github.io"
+                    issue-term="url"
+                    theme="github-light"
+                    crossorigin="anonymous"
+                    async>Reduce unused JavaScript
+                
+                </script>
+
+
+            </div>  
+
+    <!-- Side Catalog Container -->
+        
+            <div class="
+                col-lg-1 col-lg-offset-0
+                visible-lg-block
+                sidebar-container
+                catalog-container">
+                <div class="side-catalog fixed" style="margin-top:3%">
+                    <hr class="hidden-sm hidden-xs">
+                    <h5>
+                        <a class="catalog-toggle" href="#">CONTENTS</a>
+                    </h5>
+                    <ul class="catalog-body"></ul>
+                </div>
+            </div>
+        
+    <!-- Sidebar Container -->
+            <!-- <div class="
+                col-lg-10 col-lg-offset-1
+                col-md-10 col-md-offset-1
+                sidebar-container row"> -->
+                <!-- 
+<hr>
+<h5>FRIENDS</h5>
+<ul class="list-inline">
+  
+  <li><a href="https://twitter.com/bluesky0804?ref_src=twsrc%5Egoogle%7Ctwcamp%5Eserp%7Ctwgr%5Eauthor">bluesky0804</a></li>
+  
+</ul>
+
+ -->
+            </div>
+        </div>
+    </div>
+</article>
+
+<!-- add support for mathjax by voleking-->
+
+  <script async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml.js" id="MathJax-script"></script>
+<script>
+  MathJax = {
+    tex: {
+      inlineMath: [['$','$'], ['\\(','\\)']],
+      displayMath: [['$$','$$'], ['\\[','\\]']],
+      processEscapes: true,
+      processEnvironments: true, // for pseudo
+      tags: "ams",
+      autoload: {
+        color: [],
+        colorV2: ['color']
+      },
+      packages: {'[+]': ['noerrors']}
+    },
+    chtml: {
+      matchFontHeight: false,
+      displayAlign: "left",
+      displayIndent: "2em"
+    },
+    options: {
+      renderActions: {
+        /* add a new named action to render <script type="math/tex"> */
+        find_script_mathtex: [10, function (doc) {
+          for (const node of document.querySelectorAll('script[type^="math/tex"]')) {
+            const display = !!node.type.match(/; *mode=display/);
+            const math = new doc.options.MathItem(node.textContent, doc.inputJax[0], display);
+            const text = document.createTextNode('');
+            node.parentNode.replaceChild(text, node);
+            math.start = {node: text, delim: '', n: 0};
+            math.end = {node: text, delim: '', n: 0};
+            doc.math.push(math);
+          }
+        }, '']
+      }
+    },
+    loader: {
+      load: ['[tex]/noerrors']
+    }
+  };
+</script>
+
+
+
+
+
+<!-- async load function -->
+<script>
+    function async(u, c) {
+      var d = document, t = 'script',
+          o = d.createElement(t),
+          s = d.getElementsByTagName(t)[0];
+      o.src = u;
+      if (c) { o.addEventListener('load', function (e) { c(null, e); }, false); }
+      s.parentNode.insertBefore(o, s);
+    }
+</script>
+<!-- anchor-js, Doc:http://bryanbraun.github.io/anchorjs/ -->
+<script>
+    async("//cdnjs.cloudflare.com/ajax/libs/anchor-js/1.1.1/anchor.min.js",function(){
+        anchors.options = {
+          visible: 'hover',
+          placement: 'right',
+          // icon: '#'
+        };
+        anchors.add().remove('.intro-header h1').remove('.subheading').remove('.sidebar-container h5');
+    })
+</script>
+<style>
+    /* place left on bigger screen */
+    @media all and (min-width: 800px) {
+        .anchorjs-link{
+            position: absolute;
+            left: -0.75em;
+            font-size: 1.1em;
+            margin-top : -0.1em;
+        }
+    }
+</style>
+
+
+<body>
+    <!-- enable mermaid language on markdown post -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/mermaid/10.6.1/mermaid.min.js"></script>
+<script>
+   mermaid.initialize({
+       startOnLoad:true,
+       theme: 'default'
+   });
+   window.mermaid.init(undefined, document.querySelectorAll('.language-mermaid'));
+</script>
+
+</body>
+
+    <script>
+    
+    var elements = document.querySelectorAll('p');
+    Array.prototype.forEach.call(elements, function(el, i){
+        if(el.innerHTML=='[expand]') {
+            var parentcontent = el.parentNode.innerHTML.replace('<p>[expand]</p>','<div class="expand" style="display: none; height: 0; overflow: hidden;">').replace('<p>[/expand]</p>','</div>');
+            el.parentNode.innerHTML = parentcontent;
+        }
+    });
+
+    var elements = document.querySelectorAll('div.expand');
+    Array.prototype.forEach.call(elements, function(el, i){
+        el.previousElementSibling.innerHTML = el.previousElementSibling.innerHTML + '<span>..&nbsp; <a href="#" style="cursor: pointer;" onclick="this.parentNode.parentNode.nextElementSibling.style.display = \'block\'; this.parentNode.parentNode.nextElementSibling.style.height = \'auto\'; this.parentNode.style.display = \'none\';">read&nbsp;more&nbsp;&rarr;</a></span>';
+    });
+
+</script>
+
+    <!-- Footer -->
+<footer>
+    <div class="container">
+        <div class="row">
+            <!--<div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1"> -->
+                <!-- SNS Link -->
+            
+
+
+<ul class="list-inline text-center">
+
+
+  
+  
+  
+  
+  <li>
+    <a target="_blank" href="https://github.com/RyoNakagami">
+      <span class="fa-stack fa-lg">
+        <i class="fa fa-circle fa-stack-2x"></i>
+        <i class="fa fa-github fa-stack-1x fa-inverse"></i>
+      </span>
+    </a>
+  </li>
+  
+  
+</ul>
+
+            
+            <p class="copyright text-muted">
+                Copyright &copy; Ryo's Tech Blog 2025
+                <br>
+                Powered by <a href="https://ryonakagami.github.io">Ryo's Tech Blog</a> |
+                <iframe style="margin-left: 2px; margin-bottom:-5px;" frameborder="0" scrolling="0" width="100px"
+                    height="20px"
+                    title="RyoNakagami.github.io github stars"
+                    src="https://ghbtns.com/github-btn.html?user=RyoNakagami&repo=RyoNakagami.github.io&type=star&count=true">
+                </iframe>
+            </p>
+            <!--</div> -->
+        </div>
+    </div>
+</footer>
+
+<!-- jQuery -->
+<script src="/js/jquery.min.js "></script>
+
+<!-- Bootstrap Core JavaScript -->
+<!-- Currently, only navbar scroll-down effect at desktop still depends on this -->
+<script src="/js/bootstrap.min.js "></script>
+
+<!-- Custom Theme JavaScript -->
+<script src="/js/ryo-blog.min.js "></script>
+
+<!-- Simple Jekyll Search -->
+<script src="/js/simple-jekyll-search.min.js"></script>
+
+<!-- Service Worker -->
+
+<script src="/js/snackbar.js "></script>
+<script src="/js/sw-registration.js "></script>
+
+
+<!-- async load function -->
+<script>
+    function async(u, c) {
+        var d = document, t = 'script',
+            o = d.createElement(t),
+            s = d.getElementsByTagName(t)[0];
+        o.src = u;
+        if (c) { o.addEventListener('load', function (e) { c(null, e); }, false); }
+        s.parentNode.insertBefore(o, s);
+    }
+</script>
+
+<!--
+     Because of the native support for backtick-style fenced code blocks
+     right within the Markdown is landed in Github Pages,
+     From V1.6, There is no need for Highlight.js,
+     so Huxblog drops it officially.
+
+     - https://github.com/blog/2100-github-pages-now-faster-and-simpler-with-jekyll-3-0
+     - https://help.github.com/articles/creating-and-highlighting-code-blocks/
+     - https://github.com/jneen/rouge/wiki/list-of-supported-languages-and-lexers
+-->
+<!--
+    <script>
+        async("http://cdn.bootcss.com/highlight.js/8.6/highlight.min.js", function(){
+            hljs.initHighlightingOnLoad();
+        })
+    </script>
+    <link href="http://cdn.bootcss.com/highlight.js/8.6/styles/github.min.css" rel="stylesheet">
+-->
+
+
+
+
+
+
+
+<!--fastClick.js -->
+<script>
+    async("//cdnjs.cloudflare.com/ajax/libs/fastclick/1.0.6/fastclick.min.js", function () {
+        var $nav = document.querySelector("nav");
+        if ($nav) FastClick.attach($nav);
+    })
+</script>
+
+
+<!-- Global site tag (gtag.js) - Google Analytics -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-LVL413SV09"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+  gtag('config', 'G-LVL413SV09');
+</script>
+
+
+
+<!-- Side Catalog -->
+
+<script type="text/javascript">
+    function generateCatalog(selector) {
+
+        // interop with multilangual 
+        if ('' == 'true') {
+            _containerSelector = 'div.post-container.active'
+        } else {
+            _containerSelector = 'div.post-container'
+        }
+
+        // init
+        var P = $(_containerSelector), a, n, t, l, i, c;
+        a = P.find('h1,h2,h3,h4,h5,h6');
+
+        // clean
+        $(selector).html('')
+
+        // appending
+        a.each(function () {
+            n = $(this).prop('tagName').toLowerCase();
+            i = "#" + $(this).prop('id');
+            t = $(this).text();
+            c = $('<a href="' + i + '" rel="nofollow">' + t + '</a>');
+            l = $('<li class="' + n + '_nav"></li>').append(c);
+            $(selector).append(l);
+        });
+        return true;
+    }
+
+    generateCatalog(".catalog-body");
+
+    // toggle side catalog
+    $(".catalog-toggle").click((function (e) {
+        e.preventDefault();
+        $('.side-catalog').toggleClass("fold")
+    }))
+
+    /*
+     * Doc: https://github.com/davist11/jQuery-One-Page-Nav
+     * Fork by Hux to support padding
+     */
+    async("/js/jquery.nav.js", function () {
+        $('.catalog-body').onePageNav({
+            currentClass: "active",
+            changeHash: !1,
+            easing: "swing",
+            filter: "",
+            scrollSpeed: 700,
+            scrollOffset: 0,
+            scrollThreshold: .2,
+            begin: null,
+            end: null,
+            scrollChange: null,
+            padding: 80
+        });
+    });
+</script>
+
+
+
+<!-- Multi-Lingual -->
+
+
+<!-- Simple Jekyll Search -->
+<script>
+    // https://stackoverflow.com/questions/1912501/unescape-html-entities-in-javascript
+    function htmlDecode(input) {
+        var e = document.createElement('textarea');
+        e.innerHTML = input;
+        // handle case of empty input
+        return e.childNodes.length === 0 ? "" : e.childNodes[0].nodeValue;
+    }
+
+    SimpleJekyllSearch({
+        searchInput: document.getElementById('search-input'),
+        resultsContainer: document.getElementById('search-results'),
+        json: '/search.json',
+        searchResultTemplate: '<div class="post-preview item"><a href="{url}"><h2 class="post-title">{title}</h2><h3 class="post-subtitle">{subtitle}</h3><hr></a></div>',
+        noResultsText: 'No results',
+        limit: 50,
+        fuzzy: false,
+        // a hack to get escaped subtitle unescaped. for some reason, 
+        // post.subtitle w/o escape filter nuke entire search.
+        templateMiddleware: function (prop, value, template) {
+            if (prop === 'subtitle' || prop === 'title') {
+                if (value.indexOf("code")) {
+                    return htmlDecode(value);
+                } else {
+                    return value;
+                }
+            }
+        }
+    });
+
+    $(document).ready(function () {
+        var $searchPage = $('.search-page');
+        var $searchOpen = $('.search-icon');
+        var $searchClose = $('.search-icon-close');
+        var $searchInput = $('#search-input');
+        var $body = $('body');
+
+        $searchOpen.on('click', function (e) {
+            e.preventDefault();
+            $searchPage.toggleClass('search-active');
+            var prevClasses = $body.attr('class') || '';
+            setTimeout(function () {
+                $body.addClass('no-scroll');
+            }, 400)
+
+            if ($searchPage.hasClass('search-active')) {
+                $searchClose.on('click', function (e) {
+                    e.preventDefault();
+                    $searchPage.removeClass('search-active');
+                    $body.attr('class', prevClasses);  // from closure 
+                });
+                $searchInput.focus();
+            }
+        });
+    });
+</script>
+
+
+
+<!-- Image to Github 
+<img src="/img/icon_wechat.png" width="0" height="0" />
+<-- Migrate from head to bottom, no longer block render and still work -->
+<script>
+    
+    var elements = document.querySelectorAll('p');
+    Array.prototype.forEach.call(elements, function(el, i){
+        if(el.innerHTML=='[expand]') {
+            var parentcontent = el.parentNode.innerHTML.replace('<p>[expand]</p>','<div class="expand" style="display: none; height: 0; overflow: hidden;">').replace('<p>[/expand]</p>','</div>');
+            el.parentNode.innerHTML = parentcontent;
+        }
+    });
+
+    var elements = document.querySelectorAll('div.expand');
+    Array.prototype.forEach.call(elements, function(el, i){
+        el.previousElementSibling.innerHTML = el.previousElementSibling.innerHTML + '<span>..&nbsp; <a href="#" style="cursor: pointer;" onclick="this.parentNode.parentNode.nextElementSibling.style.display = \'block\'; this.parentNode.parentNode.nextElementSibling.style.height = \'auto\'; this.parentNode.style.display = \'none\';">read&nbsp;more&nbsp;&rarr;</a></span>';
+    });
+
+</script>
+
+</body>
+</html>

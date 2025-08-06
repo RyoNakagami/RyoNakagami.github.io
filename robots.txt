@@ -1,0 +1,5 @@
+Sitemap: https://ryonakagami.github.io/sitemap.xml
+
+Sitemap: https://ryonakagami.github.io/regmonkey-datascience-blog/sitemap.xml
+
+Sitemap: https://ryonakagami.github.io/statistics-for-regression-monkey/sitemap.xml

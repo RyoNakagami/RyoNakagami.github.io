@@ -1,0 +1,1862 @@
+<!DOCTYPE html>
+<html lang="ja">
+
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="google-site-verification" content="gSMaswRY9iRfG4QaQrx6aj481bgr503qEZh-QPsMYNU" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+    <meta name="description" content="元経済学徒, 現在どっかでデータサイエンティストもどきやってる人間の勉強日記">
+    <meta name="keywords"  content="Statistics, Economics, Econometrics, Python, C, Shell, Linux, Data scientist">
+    <meta name="theme-color" content="#000000">
+    
+    <!-- Open Graph -->
+    <meta property="og:title" content="電子メールの仕組み - Ryo's Tech Blog">
+    
+    <meta property="og:type" content="article">
+    <meta property="og:description" content="
+    Table of Contents
+  
+  
+
+
+">
+    
+    <meta property="article:published_time" content="2020-10-15T00:00:00Z">
+    
+    
+    <meta property="article:author" content="Ryo">
+    
+    
+    <meta property="article:tag" content="Network">
+    
+    
+    <meta property="og:image" content="https://ryonakagami.github.io/img/avatar_rio_cat.jpg">
+    <meta property="og:url" content="https://ryonakagami.github.io/2020/10/15/Mail-system-basic/">
+    <meta property="og:site_name" content="Ryo's Tech Blog">
+    
+    <title>電子メールの仕組み - Ryo's Tech Blog</title>
+
+    <!-- Web App Manifest -->
+    <link rel="manifest" href="/pwa/manifest.json">
+
+    <!-- Favicon -->
+    <link rel="shortcut icon" href="/img/favicon.ico">
+    
+    <!-- Canonical URL -->
+    <link rel="canonical" href="https://ryonakagami.github.io/2020/10/15/Mail-system-basic/">
+
+    <!-- Bootstrap Core CSS -->
+    <link rel="stylesheet" href="/css/bootstrap.min.css">
+
+    <!-- Custom CSS -->
+    <link rel="stylesheet" href="/css/ryo-blog.min.css">
+
+    <!-- Custom Fonts -->
+    <!-- <link href="http://maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css" rel="stylesheet" type="text/css"> -->
+    <!-- https://stackoverflow.com/questions/45983301/google-pagespeed-eliminate-render-blocking-resources-above-the-fold-caused-fro -->
+    <!--link href="//cdnjs.cloudflare.com/ajax/libs/font-awesome/4.6.3/css/font-awesome.min.css" rel="stylesheet" type="text/css"-->
+    <!--<link href="https://fonts.googleapis.com/earlyaccess/notosansjapanese.css" rel="stylesheet" type="text/css" media="print" onload="this.media='all'" > -->
+    <link href="https://fonts.googleapis.com/earlyaccess/notosansjapanese.css" rel="preload" type="text/css" media="print" onload="this.media='all'" >
+
+
+    <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
+    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+    <!--[if lt IE 9]>
+        <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+        <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
+    <![endif]-->
+
+    <!-- ga & ba script hoook -->
+    <script></script>
+</head>
+
+
+<!-- hack iOS CSS :active style -->
+<body ontouchstart="">
+
+    <!-- Navigation -->
+
+<nav class="navbar navbar-default navbar-custom navbar-fixed-top invert">
+    
+        <div class="container-fluid">
+            <!-- Brand and toggle get grouped for better mobile display -->
+            <div class="navbar-header page-scroll">
+                <button type="button" class="navbar-toggle">
+                    <span class="sr-only">Toggle navigation</span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
+                <a class="navbar-brand" href="/">Ryo's Tech Blog</a>
+            </div>
+
+            <!-- Collect the nav links, forms, and other content for toggling -->
+            <div id="huxblog_navbar">
+                <div class="navbar-collapse">
+                    <ul class="nav navbar-nav navbar-left">
+                                                <li>
+                            <a href="https://ryonakagami.github.io/statistics-for-regression-monkey/">Statistics for
+                                Regression Monkeys</a>
+                        </li>
+                        <li>
+                            <a href="https://ohgoshgit.github.io/">OhGoshGit!?!</a>
+                        </li>
+                        <!-- <li>
+                            <a><button onclick="mainDropDown()" style="border-color: rgba(70, 83, 111, 0.989); background-color: rgba(70, 83, 111, 0.989)">Dropdown</button></a> 
+                            <div id="myDropdown" class="dropdown-content">
+                              <a href="#" onclick="subMenu(this)">A</a>
+                              <div class="sub-menu-item" id="subMenu1">
+                              <a href="#">A.1</a>
+                              </div>
+                              <a href="#" onclick="subMenu(this)">B</a>
+                              <div class="sub-menu-item" id="subMenu2">
+                              <a href="#">B.1</a>
+                              </div>
+                              <a href="#">C</a>
+                              <a href="#">D</a>
+                              <a href="#">E</a>
+                              <a href="#">F</a>
+                              <a href="#">G</a>
+                            </div>
+                        </li> -->
+                    </ul>
+                    </ul>
+                    <ul class="nav navbar-nav navbar-right">
+                        
+                        
+                        
+                        
+                        <li>
+                            <a href="/about/">About</a>
+                        </li>
+                        
+                        
+                        
+                        <li>
+                            <a href="/archive/">Tag Search</a>
+                        </li>
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        <!--about fa-search see https://stackoverflow.com/questions/41950677/how-to-make-my-search-icon-fixed-->
+                        <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css"
+                            rel="stylesheet" />
+                        <li class="search-icon">
+                            <a href="javascript:void(0)" aria-label="Search" target="_blank">
+                                <i class="fa fa-search"></i>
+                            </a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+            <!-- /.navbar-collapse -->
+        </div>
+        <!-- /.container -->
+    </nav>
+
+    <script>
+        // Drop Bootstarp low-performance Navbar
+        // Use customize navbar with high-quality material design animation
+        // in high-perf jank-free CSS3 implementation
+        var $body = document.body;
+        var $toggle = document.querySelector('.navbar-toggle');
+        var $navbar = document.querySelector('#huxblog_navbar');
+        var $collapse = document.querySelector('.navbar-collapse');
+
+        var __HuxNav__ = {
+            close: function () {
+                $navbar.className = " ";
+                // wait until animation end.
+                setTimeout(function () {
+                    // prevent frequently toggle
+                    if ($navbar.className.indexOf('in') < 0) {
+                        $collapse.style.height = "0px"
+                    }
+                }, 400)
+            },
+            open: function () {
+                $collapse.style.height = "auto"
+                $navbar.className += " in";
+            }
+        }
+
+        // Bind Event
+        $toggle.addEventListener('click', function (e) {
+            if ($navbar.className.indexOf('in') > 0) {
+                __HuxNav__.close()
+            } else {
+                __HuxNav__.open()
+            }
+        })
+
+        /**
+         * Since Fastclick is used to delegate 'touchstart' globally
+         * to hack 300ms delay in iOS by performing a fake 'click',
+         * Using 'e.stopPropagation' to stop 'touchstart' event from 
+         * $toggle/$collapse will break global delegation.
+         * 
+         * Instead, we use a 'e.target' filter to prevent handler
+         * added to document close HuxNav.  
+         *
+         * Also, we use 'click' instead of 'touchstart' as compromise
+         */
+        document.addEventListener('click', function (e) {
+            if (e.target == $toggle) return;
+            if (e.target.className == 'icon-bar') return;
+            __HuxNav__.close();
+        })
+    </script>
+
+    <!-- Search -->
+<div class="search-page">
+  <div class="search-icon-close-container">
+    <span class="search-icon-close">
+      <i class="fa fa-chevron-down"></i>
+    </span>
+  </div>
+  <div class="search-main container">
+    <div class="row">
+      <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+        <form></form>
+        <input type="text" id="search-input" placeholder="$ grep...">
+        </form>
+        <div id="search-results" class="mini-post-list"></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+    <!-- Image to hack wechat -->
+<!-- <img src="/img/icon_wechat.png" width="0" height="0"> -->
+<!-- <img src="/img/home-bg.jpg" width="0" height="0"> -->
+
+<!-- Post Header -->
+
+
+
+<style type="text/css">
+    header.intro-header{
+        position: relative;
+        background-image: url('/img/home-bg.jpg');
+        background: ;
+    }
+
+    
+    header.intro-header .header-mask{
+        width: 100%;
+        height: 100%;
+        position: absolute;
+        background: rgba(0,0,0, 0.0);
+    }
+    
+</style>
+
+
+
+
+<header class="intro-header style-text" >
+
+    <div class="header-mask"></div>
+    
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+                <div class="post-heading">
+                    <div class="tags">
+                        
+                        <a class="tag" href="/archive/?tag=Network" title="Network">Network</a>
+                        
+                    </div>
+                    <h1>電子メールの仕組み</h1>
+                    
+                    <h2 class="subheading">ネットワークを学ぶ 2/N</h2>
+                    <p>
+                        公開日: 2020-10-15
+                        <br>
+                        更新日: 2023-04-07
+                        
+                    </p>
+                </div>
+            </div>
+        </div>
+    </div>
+</header>
+
+
+
+
+
+
+
+<!-- Post Content -->
+<article>
+    <div class="container">
+        <div class="row">
+
+    <!-- Post Container -->
+         <div class="
+                col-lg-8 col-lg-offset-2
+                col-md-10 col-md-offset-1
+                post-container">
+
+                <!-- Multi-Lingual -->
+                
+
+				<div style="border-radius: 1em; border-style:solid; border-color:#D3D3D3; background-color:#F8F8F8">
+  <p class="h4">  Table of Contents</p>
+  <!-- START doctoc generated TOC please keep comment here to allow auto update -->
+  <!-- DON'T EDIT THIS SECTION, INSTEAD RE-RUN doctoc TO UPDATE -->
+
+  <ul>
+    <li><a href="#%E9%9B%BB%E5%AD%90%E3%83%A1%E3%83%BC%E3%83%AB%E3%82%B5%E3%83%BC%E3%83%93%E3%82%B9">電子メールサービス</a>
+      <ul>
+        <li><a href="#%E9%9B%BB%E5%AD%90%E3%83%A1%E3%83%BC%E3%83%AB%E3%82%84%E3%82%8A%E5%8F%96%E3%82%8A%E3%81%AE%E6%A6%82%E8%A6%81">電子メールやり取りの概要</a></li>
+        <li><a href="#%E3%82%A8%E3%83%BC%E3%82%B8%E3%82%A7%E3%83%B3%E3%83%88">エージェント</a></li>
+      </ul>
+    </li>
+    <li><a href="#%E9%9B%BB%E5%AD%90%E3%83%A1%E3%83%BC%E3%83%AB%E3%81%A7%E3%82%84%E3%82%8A%E5%8F%96%E3%82%8A%E3%81%95%E3%82%8C%E3%82%8B%E6%83%85%E5%A0%B1">電子メールでやり取りされる情報</a>
+      <ul>
+        <li><a href="#%E3%83%87%E3%83%BC%E3%82%BF%E3%81%A8%E3%81%97%E3%81%A6%E3%81%AE%E9%9B%BB%E5%AD%90%E3%83%A1%E3%83%BC%E3%83%AB">データとしての電子メール</a></li>
+        <li><a href="#%E3%82%A8%E3%83%B3%E3%83%99%E3%83%AD%E3%83%BC%E3%83%97%E3%81%A8%E3%83%98%E3%83%83%E3%83%80%E3%81%8C%E5%88%86%E3%81%8B%E3%82%8C%E3%81%A6%E3%81%84%E3%82%8B%E3%83%A1%E3%83%AA%E3%83%83%E3%83%88%E3%83%87%E3%83%A1%E3%83%AA%E3%83%83%E3%83%88">エンベロープとヘッダが分かれているメリット/デメリット</a></li>
+        <li><a href="#%E3%83%A1%E3%83%BC%E3%83%AB%E3%83%98%E3%83%83%E3%83%80%E6%83%85%E5%A0%B1">メールヘッダ情報</a></li>
+      </ul>
+    </li>
+    <li><a href="#%E9%9B%BB%E5%AD%90%E3%83%A1%E3%83%BC%E3%83%AB%E3%81%A7%E7%94%A8%E3%81%84%E3%82%89%E3%82%8C%E3%82%8B%E3%83%97%E3%83%AD%E3%83%88%E3%82%B3%E3%83%AB">電子メールで用いられるプロトコル</a>
+      <ul>
+        <li><a href="#%E3%82%B3%E3%83%9E%E3%83%B3%E3%83%89%E3%81%A8%E3%83%AC%E3%82%B9%E3%83%9D%E3%83%B3%E3%82%B9">コマンドとレスポンス</a></li>
+        <li><a href="#smtp-%E3%83%97%E3%83%AD%E3%83%88%E3%82%B3%E3%83%AB">SMTP プロトコル</a>
+          <ul>
+            <li><a href="#%E3%83%A1%E3%83%BC%E3%83%AB%E3%83%9E%E3%82%AC%E3%82%B8%E3%83%B3%E3%82%92%E5%AE%9F%E7%8F%BE%E3%81%99%E3%82%8B%E4%BB%95%E7%B5%84%E3%81%BF">メールマガジンを実現する仕組み</a></li>
+          </ul>
+        </li>
+        <li><a href="#pop%E3%83%97%E3%83%AD%E3%83%88%E3%82%B3%E3%83%AB">POPプロトコル</a>
+          <ul>
+            <li><a href="#apop%E3%81%AF%E5%8D%B1%E9%99%BA">APOPは危険？</a></li>
+          </ul>
+        </li>
+      </ul>
+    </li>
+    <li><a href="#%E3%82%A4%E3%83%B3%E3%82%BF%E3%83%BC%E3%83%8D%E3%83%83%E3%83%88%E3%83%A1%E3%83%BC%E3%83%AB%E3%81%AE%E3%83%95%E3%82%A9%E3%83%BC%E3%83%9E%E3%83%83%E3%83%88-mime">インターネットメールのフォーマット: MIME</a>
+      <ul>
+        <li><a href="#%E9%9B%BB%E5%AD%90%E3%83%A1%E3%83%BC%E3%83%AB%E3%81%AE%E5%88%B6%E7%B4%84">電子メールの制約</a></li>
+        <li><a href="#mime">MIME</a></li>
+      </ul>
+    </li>
+    <li><a href="#appendix-%E7%89%B9%E5%AE%9A%E9%9B%BB%E5%AD%90%E3%83%A1%E3%83%BC%E3%83%AB%E6%B3%95%E3%81%AB%E3%81%8A%E3%81%91%E3%82%8B%E8%A6%8F%E5%88%B6%E3%81%AE%E5%AF%BE%E8%B1%A1">Appendix: 特定電子メール法における規制の対象</a>
+      <ul>
+        <li><a href="#%E4%BC%81%E6%A5%AD%E3%81%8C%E5%BA%83%E5%91%8A%E5%AE%A3%E4%BC%9D%E3%83%A1%E3%83%BC%E3%83%AB%E3%82%92%E9%80%81%E4%BF%A1%E3%81%99%E3%82%8B%E5%A0%B4%E9%9D%A2%E3%81%AB%E3%81%8A%E3%81%91%E3%82%8B%E3%82%AA%E3%83%97%E3%83%88%E3%82%A4%E3%83%B3%E6%96%B9%E5%BC%8F">企業が広告宣伝メールを送信する場面におけるオプトイン方式</a></li>
+        <li><a href="#%E7%89%B9%E5%AE%9A%E9%9B%BB%E5%AD%90%E3%83%A1%E3%83%BC%E3%83%AB%E6%B3%95%E3%81%AE%E6%B3%A8%E6%84%8F%E7%82%B9">特定電子メール法の注意点</a></li>
+      </ul>
+    </li>
+    <li><a href="#references">References</a></li>
+  </ul>
+
+  <!-- END doctoc generated TOC please keep comment here to allow auto update -->
+
+</div>
+
+<h2 id="電子メールサービス">電子メールサービス</h2>
+
+<p>ユーザー同士が文字やファイルをやり取りできるサービスの一種として電子メールサービスがあります.
+電子メールのやり取りは「<strong>メールボックス</strong>」を介して行われます. 電子メールを送る際には, 
+送り先のメールボックスを指定するためにメールアドレスを使います. 電子メールのアドレスは, 一般的に以下のように表記されます.</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
+</pre></td><td class="rouge-code"><pre>&lt;user mail account&gt;@&lt;domain&gt;
+</pre></td></tr></tbody></table></code></pre></div></div>
+
+<ul>
+  <li><code class="language-plaintext highlighter-rouge">user mail account</code>: ユーザー固有の文字列</li>
+  <li><code class="language-plaintext highlighter-rouge">domain</code>: メールボックスのあるサーバーの住所</li>
+</ul>
+
+<p>メールアドレスはIPアドレスやMACアドレスなどと同じ識別子なので, 重複してはいけません.</p>
+
+<blockquote>
+  <p>特別なメールアドレス: MAILER-DAEMON</p>
+</blockquote>
+
+<p>IPアドレスやMACアドレスにブロードキャストアドレスのような特殊用途のアドレスがあるように, メールアドレスにも特別な用途で使われるものがあります.
+その一例が <code class="language-plaintext highlighter-rouge">MAILER-DAEMON</code> です. 形式は<code class="language-plaintext highlighter-rouge">MAILER-DAEMON@ドメイン</code>, Gmail利用している場合は <code class="language-plaintext highlighter-rouge">mailer-daemon@googlemail.com</code>
+となります.</p>
+
+<ul>
+  <li>宛先のメールボックスが見つからない（User unknown）</li>
+  <li>ドメインに該当するメールサーバが見当たらない（Host unknown）</li>
+  <li>相手のメールボックスがいっぱい（over quota）</li>
+</ul>
+
+<p>上述のように, メールを中継している間に何らかのエラーが見つかった場合に利用されるメールアドレスです.</p>
+
+<h3 id="電子メールやり取りの概要">電子メールやり取りの概要</h3>
+
+<p><img src="https://raw.githubusercontent.com/ryonakimageserver/omorikaizuka/22f41290645f0b27bb2ddf251ebe7fe79bb9aaed/%E6%8A%80%E8%A1%93%E8%80%85%E8%A9%A6%E9%A8%93/20201015_email_system.png" /></p>
+
+<p>電子メールサービスは, メーラーとメールサーバーとのやり取りで成り立っています. 
+メールサーバーとは, 送信されたメールアドレスの情報に基づいてメールデータの転送処理などをするサーバーのことです. やり取りに用いられるプロトコルは送信用と受信用に分けられています(=<strong>現在のメールシステムにおいて, 送信と受信の機能が独立している</strong>).</p>
+
+<p>送信用プロトコルはSMTP(Simple Mail Transfer Protocol), 受信用はPOP(Post Office Protocol)またはIMAP(Internet Message Access Protocol)です.</p>
+
+<p>なお, TCP/IPでの通信では,「ポート番号」というものを用いており, ポート番号はプロトコルごとに決まった番号になっています.
+ノード同士はポート番号を目印にして, どのプロトコルで通信するかを判別しています.</p>
+
+<div style="padding-left: 2em; padding-right: 2em; border-radius: 1em; border-style:solid; border-color:gray; background-color:gray; color:white">
+  <p class="h4"><ins>Column: 電子メールで用いるプロトコル</ins></p>
+
+  <table>
+    <thead>
+      <tr>
+        <th style="text-align: center">Protocol</th>
+        <th style="text-align: left">役割</th>
+        <th style="text-align: left">説明</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td style="text-align: center">STMP</td>
+        <td style="text-align: left">メール送信プロトコル</td>
+        <td style="text-align: left">メーラーで作ったメールを自社のメールサーバーに送信する時や自社のメールサーバーが相手先のメールサーバーへメールを配送する時に用いられる</td>
+      </tr>
+      <tr>
+        <td style="text-align: center">POP</td>
+        <td style="text-align: left">メール受信プロトコル</td>
+        <td style="text-align: left">メーラーが存在するパソコン側にデータがダウンロードされる<br /><br />過去に受信したメールはインターネット上に接続していないオフライン状態でも閲覧が可能<br /><br />メールサーバーからはデータが消える</td>
+      </tr>
+      <tr>
+        <td style="text-align: center">IMAP</td>
+        <td style="text-align: left">メール受信プロトコル</td>
+        <td style="text-align: left">メールサーバー上にメールを保管・保存しておき, メーラーがインターネットを通じてメールデータを読み込んでメールを閲覧</td>
+      </tr>
+      <tr>
+        <td style="text-align: center">APOP</td>
+        <td style="text-align: left">メール受信プロトコル</td>
+        <td style="text-align: left">AUthenticated Post Office Protocol<br /><br />POPのユーザー認証の際にパスワードを暗号化するプロトコル</td>
+      </tr>
+      <tr>
+        <td style="text-align: center">IMAP4</td>
+        <td style="text-align: left">メール受信プロトコル</td>
+        <td style="text-align: left">SMTPとPOPの機能を併せ持つプロトコル.<br /><br />選択したメールだけを利用者端末へ転送する機能, サーバ上のメールを検索する機能, メールのヘッダだけを取り出す機能を持っている(=POPと異なりメールサーバ内のメールを選択して受信できる)</td>
+      </tr>
+    </tbody>
+  </table>
+
+</div>
+
+<h3 id="エージェント">エージェント</h3>
+
+<p>電子メールサービスでは, <strong>Agent（エージェント）</strong>という概念がでてきます. これはメールシステムにおいて必要とされる機能を役割という視点表現する際に使用する概念です. 例として, ユーザーインターフェイスを提供するMUA（Mail User Agent）, メールの転送経路を決定するMTA（Mail Transfer Agent）, メールを配送（転送）するMDA（Mail Delivery Agent）, POPやIMAPのメール受信のための部分はMRA（Mail Retrieval Agent ）がAgentとして存在します.</p>
+
+<div style="padding-left: 2em; padding-right: 2em; border-radius: 1em; border-style:solid; border-color:gray; background-color:gray; color:white">
+  <p class="h4"><ins>Column: 電子メールで用いるプロトコル</ins></p>
+
+  <table>
+    <thead>
+      <tr>
+        <th style="text-align: center">Agent</th>
+        <th style="text-align: left">説明</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td style="text-align: center">MUA</td>
+        <td style="text-align: left">メールの確認や作成を行うユーザインタフェース</td>
+      </tr>
+      <tr>
+        <td style="text-align: center">MTA</td>
+        <td style="text-align: left">SMTP によるメールリレー（メール転送）の機能. Linux の <code class="language-plaintext highlighter-rouge">postfix</code> やWindowsの <code class="language-plaintext highlighter-rouge">Exchange</code></td>
+      </tr>
+      <tr>
+        <td style="text-align: center">MDA</td>
+        <td style="text-align: left">メール転送エージェント(MTA)によって受け取った電子メールをメールサーバ―にあるメールボックス（メールスプール）への保存する機能</td>
+      </tr>
+      <tr>
+        <td style="text-align: center">MSA</td>
+        <td style="text-align: left">Mail Submission Agent. メールサーバ―に含まれるメールの発信受付, ユーザ認証の機能</td>
+      </tr>
+      <tr>
+        <td style="text-align: center">MRA</td>
+        <td style="text-align: left">Mail Retrieval Agent. ユーザ認証, メールボックス（メールスプール）からのメールの取り出しの機能</td>
+      </tr>
+    </tbody>
+  </table>
+
+</div>
+
+<blockquote>
+  <p>Agentベースでメールの送受信の流れ</p>
+</blockquote>
+
+<figure style="text-align: center;">
+
+  <pre><code class="language-mermaid">graph LR;
+    A[MUA&lt;br&gt;送信者メーラー]--&gt;B[MSA&lt;br&gt;認証];
+    B--&gt;C[MTA];
+    C--&gt;D[MDA&lt;br&gt;配送];
+    D--&gt;E[MRA];
+    E--&gt;F[MUA&lt;br&gt;受信者メーラー];
+</code></pre>
+</figure>
+
+<ol>
+  <li>まずユーザーがMUA（メールクライアント）でメールを送信し, メールサーバはMTAでメールを受け取る.</li>
+  <li>MTAはメールの配送先を決定し, 配送先がローカルであればローカルMDAにメールを渡し, ローカルメールボックスにメールを入れる. 他のメールサーバへ配送する場合は出力MDAにメールを渡し, SMTPで外部のメールサーバにメールを配送する.</li>
+  <li>ユーザーが受信メールを読む場合はMUAからMRAにアクセスし, メールボックスに到着したメールを読み出す.</li>
+</ol>
+
+<h2 id="電子メールでやり取りされる情報">電子メールでやり取りされる情報</h2>
+<h3 id="データとしての電子メール">データとしての電子メール</h3>
+
+<p><img src="https://raw.githubusercontent.com/ryonakimageserver/omorikaizuka/3cff4e8b1da2be5bf9c1b32cde251b90868a8bf9/%E6%8A%80%E8%A1%93%E8%80%85%E8%A9%A6%E9%A8%93/20201015_mail_envelope_header_body.png" /></p>
+
+<p>注意点として, SMTP通信において郵便サービスにおける封筒の役割を果たしているのは<strong>エンベロープ</strong>です. STMPプロトコルでは, この<strong>エンベロープ</strong>を対象にコマンド &amp; レスポンスのやり取りがされ, ヘッダーとメッセージ本文はデータとしてSMTPでは扱われます.</p>
+
+<h3 id="エンベロープとヘッダが分かれているメリットデメリット">エンベロープとヘッダが分かれているメリット/デメリット</h3>
+
+<blockquote>
+  <p>メリット</p>
+</blockquote>
+
+<ul>
+  <li>Bcc機能が使える:Bccの仕組みは, BCCで送信する宛先をエンベロープToのみに設定し, メールメッセージのBccヘッダフィールドはSMTPサーバでエンベロープを展開するとヘッダ情報から削除されます</li>
+  <li>転送や代理送信など, 柔軟なメール配信が可能になる</li>
+</ul>
+
+<blockquote>
+  <p>デメリット</p>
+</blockquote>
+
+<ul>
+  <li>なりすましメール: ヘッダFromを偽装し送信することで, 送信元を偽るメール配信が可能となってしまう</li>
+</ul>
+
+<h3 id="メールヘッダ情報">メールヘッダ情報</h3>
+
+<table>
+  <thead>
+    <tr>
+      <th style="text-align: left">項目</th>
+      <th style="text-align: left">内容</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td style="text-align: left"><code class="language-plaintext highlighter-rouge">Date:</code></td>
+      <td style="text-align: left">メールの発信日時</td>
+    </tr>
+    <tr>
+      <td style="text-align: left"><code class="language-plaintext highlighter-rouge">From:</code></td>
+      <td style="text-align: left">メールの発信元アドレス</td>
+    </tr>
+    <tr>
+      <td style="text-align: left"><code class="language-plaintext highlighter-rouge">Sender:</code></td>
+      <td style="text-align: left">メールの送信者のアドレス. <br /><br />From:はメール原稿の作成者を表し, 共著した場合には, From:に複数のアドレスを指定することができます.</td>
+    </tr>
+    <tr>
+      <td style="text-align: left"><code class="language-plaintext highlighter-rouge">To:</code></td>
+      <td style="text-align: left">メールの送信先アドレス</td>
+    </tr>
+    <tr>
+      <td style="text-align: left"><code class="language-plaintext highlighter-rouge">Cc:</code></td>
+      <td style="text-align: left">メールの共同送信先アドレス</td>
+    </tr>
+    <tr>
+      <td style="text-align: left"><code class="language-plaintext highlighter-rouge">Bcc:</code></td>
+      <td style="text-align: left">同上, SMTPでメッセージが転送される過程で削除される（=受信者のメール上では削除される）</td>
+    </tr>
+    <tr>
+      <td style="text-align: left"><code class="language-plaintext highlighter-rouge">Subject:</code></td>
+      <td style="text-align: left">メールの表題</td>
+    </tr>
+    <tr>
+      <td style="text-align: left"><code class="language-plaintext highlighter-rouge">Message-Id:</code></td>
+      <td style="text-align: left">電子メールの識別ID. ネットワークで唯一の値が割り与えられる.</td>
+    </tr>
+    <tr>
+      <td style="text-align: left"><code class="language-plaintext highlighter-rouge">Received:</code></td>
+      <td style="text-align: left">電子メールの配信経路での受信したサーバ名. 各MTAごとに追加され, 経路追跡に利用される.</td>
+    </tr>
+    <tr>
+      <td style="text-align: left"><code class="language-plaintext highlighter-rouge">Reply-to:</code></td>
+      <td style="text-align: left">送信元と違う電子メールアドレスへの返信を要求する場合に付け加えられる. エンベロープのMAIL FROM:の内容.</td>
+    </tr>
+    <tr>
+      <td style="text-align: left"><code class="language-plaintext highlighter-rouge">In-Reply-To:</code></td>
+      <td style="text-align: left">返信時にどのメールへの返信かを示すヘッダ. 通常はMessage-IDが引用される.</td>
+    </tr>
+    <tr>
+      <td style="text-align: left"><code class="language-plaintext highlighter-rouge">References:</code></td>
+      <td style="text-align: left">返信時に使用されるヘッダ. References:とMessage-Id:が引用される. 多くのメーラーは, この値を用いてスレッド表示を行う.</td>
+    </tr>
+    <tr>
+      <td style="text-align: left"><code class="language-plaintext highlighter-rouge">Return-path:</code></td>
+      <td style="text-align: left">メールが宛先に届かない場合のエラー通知を行うためのアドレス.</td>
+    </tr>
+    <tr>
+      <td style="text-align: left"><code class="language-plaintext highlighter-rouge">Mime-Version:</code></td>
+      <td style="text-align: left">MIMEのバージョンを示す.</td>
+    </tr>
+    <tr>
+      <td style="text-align: left"><code class="language-plaintext highlighter-rouge">Content-Transfer-Encording:</code></td>
+      <td style="text-align: left">エンコードタイプを示す.</td>
+    </tr>
+  </tbody>
+</table>
+
+<h2 id="電子メールで用いられるプロトコル">電子メールで用いられるプロトコル</h2>
+<h3 id="コマンドとレスポンス">コマンドとレスポンス</h3>
+
+<p>電子メールの送受信の際, クライアントとサーバーは細かい連絡を取り合います. この連絡の内,</p>
+
+<ul>
+  <li>コマンド: クライアントからサーバーへの呼びかけ</li>
+  <li>レスポンス: サーバーからクライアントへの返答. レスポンスの先頭には3ケタの「<strong>リプライコード</strong>」が含まれ, このコードによって, 成功／不成功が判別できるようになっている</li>
+</ul>
+
+<p><img src="https://raw.githubusercontent.com/ryonakimageserver/omorikaizuka/77e6b1c862e2dac99a883348befb3da44f720ff2/%E6%8A%80%E8%A1%93%E8%80%85%E8%A9%A6%E9%A8%93/20201015_command_response_segment.png" /></p>
+
+<blockquote>
+  <p><code class="language-plaintext highlighter-rouge">telnet</code>コマンドを用いたメールサーバーとのコマンド &amp; レスポンス</p>
+</blockquote>
+
+<p><img src="https://raw.githubusercontent.com/ryonakimageserver/omorikaizuka/77e6b1c862e2dac99a883348befb3da44f720ff2/%E6%8A%80%E8%A1%93%E8%80%85%E8%A9%A6%E9%A8%93/20201015_command_response_figure.png" /></p>
+
+<blockquote>
+  <p>クライアントとサーバー</p>
+</blockquote>
+
+<p>サーバー間でメールを転送する場合, メールを送る側がクライアント, 受け取る側がサーバーになります</p>
+
+<p><img src="https://raw.githubusercontent.com/ryonakimageserver/omorikaizuka/d03155d500494c740ad99e2bbfa8370590dd4ae5/%E6%8A%80%E8%A1%93%E8%80%85%E8%A9%A6%E9%A8%93/20201015_client_server.png" /></p>
+
+<h3 id="smtp-プロトコル">SMTP プロトコル</h3>
+
+<p>SMTPプロトコルでは, コマンド &amp; レスポンスについて以下のような特徴があります:</p>
+
+<ul>
+  <li>コマンド: 4文字のアルファベット</li>
+  <li>レスポンス: ３桁の数字</li>
+</ul>
+
+<figure style="text-align: center;">
+
+  <pre><code class="language-mermaid">sequenceDiagram
+
+  participant A as クライアント&lt;br&gt;user1@example.co.jp
+  participant B as サーバー&lt;br&gt;example.co.jp
+
+  Note over A, B: TCP通信の確立 
+  B-&gt;&gt;A: 220&lt;br&gt;サービス準備できました
+  A-&gt;&gt;B: HELO &lt;example.co.jp&gt;&lt;br&gt;こんにちは!
+  B-&gt;&gt;A: 250&lt;br&gt;ご用件をどうぞ
+
+  A-&gt;&gt;B: MAIL FROM:&lt;user1@example.co.jp&gt;&lt;br&gt;メールを送りたいです
+  B-&gt;&gt;B: エンベロープに以下を書き込む&lt;br&gt;FROM:&lt;user1@example.co.jp&gt;
+  B-&gt;&gt;A: 250&lt;br&gt;了解です
+  A-&gt;&gt;B: RCPT TO:&lt;receiver@hoge.co.jp&gt;&lt;br&gt;receiverさんに届けてください
+  B-&gt;&gt;B: エンベロープに以下を書き込む&lt;br&gt;RCPT TO:&lt;receiver@hoge.co.jp&gt;
+  B-&gt;&gt;A: 250&lt;br&gt;了解です
+
+  A-&gt;&gt;B: DATA&lt;br&gt;メッセージの送信始めます
+  B-&gt;&gt;A: 354&lt;br&gt;了解です
+  A-&gt;&gt;B: 「改行+ピリオド」で終わるメッセージを渡す
+  B-&gt;&gt;A: 250&lt;br&gt;受け取りました
+
+  A-&gt;&gt;B: QUIT&lt;br&gt;通信切断しましょ
+  B-&gt;&gt;A: 221&lt;br&gt;了解
+  Note over A, B: TCP通信の切断 
+</code></pre>
+
+</figure>
+
+<p>エンベロープで通知される差出人および宛先はメールメッセージのヘッダから得ています. メールメッセージのヘッダには差出人情報がFromフィールドに, 宛先情報がToフィールドにあります. そのほか宛先を示すヘッダフィールドにはCc, Bccがあります. FromフィールドはSMTPのMAIL TOコマンドで, そのほかに宛先を示すTo, Cc, BccのフィールドはすべてSMTPのRCPT TOコマンドで通知されています.</p>
+
+<h4 id="メールマガジンを実現する仕組み">メールマガジンを実現する仕組み</h4>
+
+<p>複数の宛先にメールを一斉に送信するメールマガジンは, メールサーバの「<strong>エイリアス</strong>」という仕組みを用いて実現しています.
+メールサーバーにて, <code class="language-plaintext highlighter-rouge">parametric-club</code>というエイリアスを作成すると, このエイリアスと複数のメールアドレスを対応づけたリストを作ることができます.このリストが, いわゆるメーリングリストと呼ばれているものになります.</p>
+
+<p>この<code class="language-plaintext highlighter-rouge">parametric-club</code>というメーリングリスト宛にメールを送信すると, 受信したメールサーバは登録されているエイリアスのリストを読み出し, リストに登録されているメールアドレスへメールを送信します.</p>
+
+<h3 id="popプロトコル">POPプロトコル</h3>
+
+<p>POPプロトコルとは, 自分宛ての電子メールを受取るときに使うプロトコルです. 現在はPOP3が主流.</p>
+
+<p>POP3プロトコルでは, コマンド &amp; レスポンスについて以下のような特徴があります:</p>
+
+<ul>
+  <li>コマンド: 4文字のアルファベット</li>
+  <li>レスポンス: <code class="language-plaintext highlighter-rouge">+OK</code>, <code class="language-plaintext highlighter-rouge">- ERR</code>で表す</li>
+</ul>
+
+<figure style="text-align: center; width:100%;">
+
+  <pre><code class="language-mermaid">sequenceDiagram
+
+  participant A as クライアント&lt;br&gt;receiver_1@hoge.co.jp
+  participant B as サーバー&lt;br&gt;hoge.co.jp
+
+  Note over A, B: TCP通信の確立 
+  B-&gt;&gt;A: +OK QPOP hoge.co.jp&lt;br&gt;あなたは誰ですか？
+  A-&gt;&gt;B: USER receiver_1&lt;br&gt;私はreceiver_1です
+  B-&gt;&gt;A: +OK password required for receiver_1&lt;br&gt;パスワードおなしゃす
+  A-&gt;&gt;B: PASS xxxxx&lt;br&gt;パスワードはxxxxxです
+  
+  B-&gt;&gt;A: +OK receiver_1 has 3 message(3000octet)
+
+  A-&gt;&gt;B: STAT&lt;br&gt;メールボックスの状態は?
+  B-&gt;&gt;A: +OK 3 3000&lt;br&gt;3通, 3000 byteです
+  A-&gt;&gt;B: LIST&lt;br&gt;メール一覧を見せてください
+  B-&gt;&gt;A: +OK 3 3000&lt;br&gt;1 1000&lt;br&gt;2 1000&lt;br&gt;3 1000
+
+  loop メールの数だけ繰り返す
+    A-&gt;&gt;B: RETR 1&lt;br&gt;1をください
+    B-&gt;&gt;A: +ok 1000 octets&lt;br&gt;FROM:&lt;user@example.co.jp&gt;&lt;br&gt;To: &lt;receiver_1@hoge.co.jp&gt;&lt;br&gt;Subject:Good Morning&lt;br&gt;...
+    A-&gt;&gt;B: DELE 1&lt;br&gt;1をすててください
+    B-&gt;&gt;A: +OK message 1 has been deleted&lt;br&gt;この段階では削除フラグをつけるのみ. 通信終了後削除する.
+  end
+
+  A-&gt;&gt;B: QUIT&lt;br&gt;通信を終了しましょう
+  B-&gt;&gt;A: +OK pop server at hoge.co.jp&lt;br&gt;了解
+  Note over A, B: TCP通信の切断 
+</code></pre>
+
+</figure>
+
+<p>もちろんサーバ側のメールを削除せずに残して置くこともできます. メールクライアントのオプション設定で「サーバにメッセージを残す」を選択すれば, メールクライアントは<code class="language-plaintext highlighter-rouge">DELE</code>コマンドをPOP3サーバに送りません.</p>
+
+<blockquote>
+  <p>POP3とIMAP4の違い</p>
+</blockquote>
+
+<p>POP3とIMAP4の最大の違いはメールの管理方法です.</p>
+
+<table>
+  <tbody>
+    <tr>
+      <td>POP3</td>
+      <td>POP3ではメールをクライアント側のPCにダウンロードし, クライアント側でメールを管理</td>
+    </tr>
+    <tr>
+      <td>IMAP4</td>
+      <td>IMAP4はサーバ上にメールを保存しておく. メールクライアントはサーバ側の様子を表示している</td>
+    </tr>
+  </tbody>
+</table>
+
+<p>IMAP4ではサーバ側にメールを保存しているため, サーバと常に通信できる環境が前提となっています. メリットとして, メールの実体が離れた場所(=サーバー)にあるためPCの故障などでデータが消滅するリスクを回避できます.</p>
+
+<h4 id="apopは危険">APOPは危険？</h4>
+
+<p>メール受信プロトコルであるPOP3は, 本人認証時のパスワードを平分で送信するため, 暗号化したパスワードを使用するAPOPの実装が進んでいる
+と紹介されることがありますが, 現在では嘘です.</p>
+
+<div style="padding-left: 2em; padding-right: 2em; border-radius: 1em; border-style:solid; border-color:#D3D3D3; background-color:#F8F8F8">
+  <p class="h4"><ins>Def: APOP</ins></p>
+
+  <p>APOPは, ユーザー認証に必要なユーザーIDと, パスワードをサーバー側から提供されるチャレンジ文字列と一緒にしてMD5でハッシュしたものを送り返すという一種のchallenge-responseによる認証方法のこと. ただし, メール本文は暗号化されません.</p>
+
+</div>
+
+<p>APOPの方式は, ハッシュに使われているMD5の脆弱性のためチャレンジ文字列とハッシュされた文字列のペアが沢山集まるとパスワードが復元されてしまう脆弱性が指摘されています. そもそも, 「<strong>MD5は暗号的には使ってはいけない</strong>」ハッシュ関数です.</p>
+
+<p>APOPの問題点として, ユーザー名やメール本体は平文のまま送受信されるため, 経路途上での盗み見や改竄, すり替えなどを防ぐことはできないことも挙げられます.
+そのため, SSL/TLSを併用してPOPによるやり取りを丸ごと暗号化する「<strong>POP3S</strong>」（POP3 over SSL/TLS）などを用いることが推奨されています.</p>
+
+<h2 id="インターネットメールのフォーマット-mime">インターネットメールのフォーマット: MIME</h2>
+
+<p>MIME(Multipurpose Internet Mail Extension)は, ASCII文字しか使用できないSMTPを利用したメールで, ヘッダフィールドの拡張を行うことで日本語の2バイトコードや静止画, 動画, 音声などデータを送信できるようにした仕組みのことです.</p>
+
+<p>ASCII文字以外のデータを<code class="language-plaintext highlighter-rouge">Quoted-Printable</code>や<code class="language-plaintext highlighter-rouge">base64</code>などを用いてエンコードすることで, SMTPプロトコル上で送受信できるようにしています.</p>
+
+<p>MIMEに暗号化とディジタル署名の機能を付け電子メールの機密性と完全性を高めたものをS/MIME(Secure MIME)といいます.</p>
+
+<h3 id="電子メールの制約">電子メールの制約</h3>
+
+<div style="padding-left: 2em; padding-right: 2em; border-radius: 1em; border-style:solid; border-color:#D3D3D3; background-color:#F8F8F8">
+  <p class="h4"><ins>制約 1: SubjectはUS-ASCIIのみ </ins></p>
+
+  <p>電子メールのヘッダで使える文字コードはUS-ASCIIだけ. そのため, Subjectフィールドでは, そのままでは日本語を使うことは出来ない.</p>
+
+</div>
+
+<p>ASCIIコードは8ビット中の下位7ビット(=128文字)までしか使用していないため, 「7ビットコード」とも呼ばれてます.</p>
+
+<blockquote>
+  <p>REMARKS</p>
+</blockquote>
+
+<ul>
+  <li>本文の日本語はMIMEの機能がなくても, ISO-2022-JPという7ビットJISコードに符号化することですべてのバイトを7ビットに収めてやり取りできます(=MIMEがなくても本文では日本語が使える)</li>
+</ul>
+
+<div style="padding-left: 2em; padding-right: 2em; border-radius: 1em; border-style:solid; border-color:#D3D3D3; background-color:#F8F8F8">
+  <p class="h4"><ins>制約 2: テキストしか送れない </ins></p>
+
+  <p>本文がテキストに限定されており, 画像や音声データを電子メールで送信することができない.</p>
+
+</div>
+
+<h3 id="mime">MIME</h3>
+
+<p>MIMEは, 決められた原則に従ってファイルをUS_ASCIIの文字列にエンコードし, どのようにエンコードしたかという情報を添付して宛先に送ることで, 受け取った側が正しい方法でデコードできるようにする仕組みです. より詳細に説明すると</p>
+
+<ul>
+  <li>バイナリや8ビットコード・データなどの「コンテンツ」を, 7ビットに変換する「可視コード化」の仕様（符号化）</li>
+  <li>コンテンツをアプリケーションや言語と関連付けて格納する仕組み（構造化）</li>
+</ul>
+
+<p>この「符号化」と「構造化」を用いることで, あらゆるデータをUS-ASCIIテキストに変換して送受信しようとしている仕組みがMIMEとなります.</p>
+
+<p><img src="https://raw.githubusercontent.com/ryonakimageserver/omorikaizuka/ac636077186fd724d46276ef201b6d4edecb3e20/%E6%8A%80%E8%A1%93%E8%80%85%E8%A9%A6%E9%A8%93/20201015_MIME.png" /></p>
+
+<p>SubjectのMIME拡張によって, 日本語で書かれた件名ヘッダ情報は下記のようなASCII文字の羅列になっています.</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
+</pre></td><td class="rouge-code"><pre>Subject: =?ISO-2022-JP?B?GyRCJV4layVBJVEhPCVIJE5OYyRHJDkbKEI=?=
+</pre></td></tr></tbody></table></code></pre></div></div>
+
+<p>英語以外の文字が使われている場合には, 件名の最初に文字コードの記述があります. 
+日本語で書かれている場合は、<code class="language-plaintext highlighter-rouge">ISO-2022-JP</code> という文字コードの情報がSubjectの中に埋め込まれています.</p>
+
+<blockquote>
+  <p>ヘッダでのエンコーディング</p>
+</blockquote>
+
+<table>
+  <tbody>
+    <tr>
+      <td><code class="language-plaintext highlighter-rouge">=?</code></td>
+      <td>エンコードの開始</td>
+    </tr>
+    <tr>
+      <td><code class="language-plaintext highlighter-rouge">?=</code></td>
+      <td>エンコードの終了</td>
+    </tr>
+    <tr>
+      <td><code class="language-plaintext highlighter-rouge">?</code></td>
+      <td>文字コードやエンコード方式やデータの区切り</td>
+    </tr>
+  </tbody>
+</table>
+
+<p><code class="language-plaintext highlighter-rouge">=?ISO-2022-JP?B?GyRCJV4layVBJVEhPCVIJE5OYyRHJDkbKEI=?=</code>をみてみると, <code class="language-plaintext highlighter-rouge">ISO-2022-JP?B?</code>があります.
+これは<code class="language-plaintext highlighter-rouge">ISO-2022-JP</code>という文字コードを用いる宣言と, <code class="language-plaintext highlighter-rouge">B</code>によって<code class="language-plaintext highlighter-rouge">Base64</code>エンコード方式を用いる宣言をしています.
+<code class="language-plaintext highlighter-rouge">Q</code>の場合は, <code class="language-plaintext highlighter-rouge">Quoted Printable</code>形式を用いるという宣言になります.</p>
+
+<div style="padding-left: 2em; padding-right: 2em; border-radius: 1em; border-style:solid; border-color:#D3D3D3; background-color:#F8F8F8">
+  <p class="h4"><ins>Problem: ネットワークスペシャリスト試験平成25年秋期　問16</ins></p>
+
+  <p>“情報太郎”はMIMEで<code class="language-plaintext highlighter-rouge">=?ISO-2011-JP?B?GyRCPnBKc0JATzobKEI=?=</code>と表される. 
+情報太郎のメールアドレスを taro@example.jp とするとき, メールアドレスと表示名(情報太郎)を指定する
+メールヘッダのFromフィールドを書け.</p>
+
+</div>
+
+<p><strong>解答</strong></p>
+
+<p>メールヘッダーの「From」は「差出人のメールアドレス」を指定するフィールドで、次の形式になっています.</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
+</pre></td><td class="rouge-code"><pre>From: 差出人名 &lt;差出人のメールアドレス&gt;
+</pre></td></tr></tbody></table></code></pre></div></div>
+
+<p>従って,</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
+</pre></td><td class="rouge-code"><pre>From:=?ISO-2011-JP?B?GyRCPnBKc0JATzobKEI=?=&lt;taro@example.jp&gt;
+</pre></td></tr></tbody></table></code></pre></div></div>
+
+<p><strong>解答終了</strong></p>
+
+<hr />
+
+<h2 id="appendix-特定電子メール法における規制の対象">Appendix: 特定電子メール法における規制の対象</h2>
+<h3 id="企業が広告宣伝メールを送信する場面におけるオプトイン方式">企業が広告宣伝メールを送信する場面におけるオプトイン方式</h3>
+
+<table>
+  <tbody>
+    <tr>
+      <td>オプトイン方式</td>
+      <td>事前に同意を得た相手だけにメールを送信する</td>
+    </tr>
+    <tr>
+      <td>オプトアウト方式</td>
+      <td>メールの送信は原則自由で, 受け取りたくない受信者は個別に受信拒否通知を行う</td>
+    </tr>
+  </tbody>
+</table>
+
+<p>平成20年（2008年）に施行された改正特定電子メール法（特定電子メールの送信の適正化等に関する法律）では, 無差別かつ大量に短時間の内に送信される迷惑メールを規制するために, 取引関係者などの一部の例外を除いて同意者以外の者への広告／迷惑メール送信を禁じています. 事業者が広告メールの配信を行う際は, <strong>オプトイン方式</strong>（=メール配信に先だって相手に承諾を求め, 同意を得なければならない）が定められています.</p>
+
+<p>オプトイン方式を保証するための仕組みとして, 同法第3条2項において, 「<strong>特定電子メールの送信をするように求めがあったこと又は送信をすることに同意があったことを証する記録を保存しなければならない</strong>」と送信者に義務を課しています.</p>
+
+<div style="padding-left: 2em; padding-right: 2em; border-radius: 1em; border-style:solid; border-color:#D3D3D3; background-color:#F8F8F8">
+  <p class="h4"><ins>特定電子メールの送信の適正化等に関する法律第3条2項</ins></p>
+
+  <p>前項第一号の通知を受けた者は, 総務省令で定めるところにより特定電子メールの送信をするように求めがあったこと又は送信をすることに同意があったことを証する記録を保存しなければならない.</p>
+
+</div>
+
+<p>なお, 広告への誘導がなければ, 事業者が送信する「取引上の条件を案内する事務連絡や料金請求のお知らせなど取引関係に係る通知」は, 広告・宣伝のための手段として送信されたものとは考えられないため, 特定電子メールに当たらないとされます.</p>
+
+<h3 id="特定電子メール法の注意点">特定電子メール法の注意点</h3>
+
+<blockquote>
+  <p>(1) 海外の電気通信設備からの電子メールも規制対象</p>
+</blockquote>
+
+<p>特定電子メール法では特定電子メールの範囲を, 国内にある電気通信設備からの送信, または国内にある電気通信設備への送信としています. 
+よって, 海外から国内の電気通信設備に送信される電子メールも本法の規制の対象となります.</p>
+
+<blockquote>
+  <p>(2) 非営利団体が送信する電子メールは, 特定電子メールにはあたらない</p>
+</blockquote>
+
+<p>「特定電子メール」を, <strong>営利目的の団体または営業を営む個人から, 自己または他人の営業について広告・宣伝目的で送信される電子メール</strong>と規定しています. そのため, 政治団体・宗教団体・NPO法人・労働組合等の非営利団体が送信する電子メールは規制の対象外となります.</p>
+
+<h2 id="references">References</h2>
+
+<blockquote>
+  <p>書籍</p>
+</blockquote>
+
+<ul>
+  <li><a href="https://www.shoeisha.co.jp/book/detail/9784798155159">TCP/IPの絵本 第2版 ネットワークを学ぶ新しい9つの扉, 株式会社アンク 著</a></li>
+</ul>
+
+<blockquote>
+  <p>オンラインマテリアル</p>
+</blockquote>
+
+<ul>
+  <li><a href="https://www.ap-siken.com/kakomon/03_haru/q79.html">応用情報技術者令和3年春期 午前問79</a></li>
+  <li><a href="https://www.ap-siken.com/kakomon/03_aki/q79.html">応用情報技術者令和3年秋期 午前問79</a></li>
+  <li><a href="https://php-mania.com/term/285">日々の忘備録とリファレンス PHPマニア &gt; メールサーバー</a></li>
+  <li><a href="https://ascii.jp/serialarticles/433055/">ASCII.jp × TECH &gt; 電子メールの秘密</a></li>
+</ul>
+
+
+                <hr style="visibility: hidden;">
+                <hr/>
+                <b><fontsize="5">Share Buttons</font><br></b>
+                <!--see 
+    https://jekyllcodex.org/without-plugin/share-buttons/ 
+    https://ranvir.xyz/blog/why-and-how-to-add-social-sharing-buttons-on-your-jekyll-blog-using-github-pages/
+-->
+
+
+
+<style>
+#share-buttons {display: inline-block; vertical-align: middle; }
+#share-buttons:after {content: ""; display: block; clear: both;}
+#share-buttons > div {
+    position: relative;
+    text-align: left; 
+    height: 36px; 
+    width: 32px; 
+    float: left; 
+    text-align: center;
+}
+#share-buttons > div > svg {height: 16px; fill: #d5d5d5; margin-top: 10px;}
+#share-buttons > div:hover {cursor: pointer;}
+#share-buttons > div.facebook:hover > svg {fill: #3B5998;}
+#share-buttons > div.twitter:hover > svg {fill: #55ACEE;}
+#share-buttons > div.linkedin:hover > svg {fill: #0077b5;}
+#share-buttons > div.pinterest:hover > svg {fill: #CB2027;}
+#share-buttons > div.gplus:hover > svg {fill: #dd4b39;}
+#share-buttons > div.mail:hover > svg {fill: #7D7D7D;}
+#share-buttons > div.instagram:hover > svg {fill: #C73B92;}
+#share-buttons > div.facebook > svg {height: 18px; margin-top: 9px;}
+#share-buttons > div.twitter > svg {height: 20px; margin-top: 8px;}
+#share-buttons > div.linkedin > svg {height: 19px; margin-top: 7px;}
+#share-buttons > div.pinterest > svg {height: 20px; margin-top: 9px;}
+#share-buttons > div.gplus > svg {height: 17px; margin-top: 9px; position: relative; left: 1px;}
+#share-buttons > div.mail > svg {height: 14px; margin-top: 11px;}
+</style>
+
+<span style="color: black">Share on: </span><div id="share-buttons">
+    <div class="facebook" title="Share this on Facebook" onclick="gtag('event', 'Facebook', {'event_category':'Post Shared','event_label':'Facebook'}); location.href='http://www.facebook.com/share.php?u=https://ryonakagami.github.io/2020/10/15/Mail-system-basic/';"><svg viewBox="0 0 1792 1792" xmlns="http://www.w3.org/2000/svg"><path d="M1343 12v264h-157q-86 0-116 36t-30 108v189h293l-39 296h-254v759h-306v-759h-255v-296h255v-218q0-186 104-288.5t277-102.5q147 0 228 12z"/></svg></div>
+    <div class="twitter" title="Share this on Twitter" onclick="gtag('event', 'Twitter', {'event_category':'Post Shared','event_label':'Twitter'}); location.href='https://twitter.com/intent/tweet?text=電子メールの仕組み&url=https://ryonakagami.github.io/2020/10/15/Mail-system-basic/';"><svg viewBox="0 0 1792 1792" xmlns="http://www.w3.org/2000/svg"><path d="M1684 408q-67 98-162 167 1 14 1 42 0 130-38 259.5t-115.5 248.5-184.5 210.5-258 146-323 54.5q-271 0-496-145 35 4 78 4 225 0 401-138-105-2-188-64.5t-114-159.5q33 5 61 5 43 0 85-11-112-23-185.5-111.5t-73.5-205.5v-4q68 38 146 41-66-44-105-115t-39-154q0-88 44-163 121 149 294.5 238.5t371.5 99.5q-8-38-8-74 0-134 94.5-228.5t228.5-94.5q140 0 236 102 109-21 205-78-37 115-142 178 93-10 186-50z"/></svg></div>
+    <div class="linkedin" title="Share this on Linkedin" onclick="gtag('event', 'Linkedin', {'event_category':'Post Shared','event_label':'Linkedin'}); location.href='https://www.linkedin.com/shareArticle?mini=true&url=https://ryonakagami.github.io/2020/10/15/Mail-system-basic/&title=&summary=&source=';"><svg viewBox="0 0 1792 1792" xmlns="http://www.w3.org/2000/svg"><path d="M477 625v991h-330v-991h330zm21-306q1 73-50.5 122t-135.5 49h-2q-82 0-132-49t-50-122q0-74 51.5-122.5t134.5-48.5 133 48.5 51 122.5zm1166 729v568h-329v-530q0-105-40.5-164.5t-126.5-59.5q-63 0-105.5 34.5t-63.5 85.5q-11 30-11 81v553h-329q2-399 2-647t-1-296l-1-48h329v144h-2q20-32 41-56t56.5-52 87-43.5 114.5-15.5q171 0 275 113.5t104 332.5z"/></svg></div>
+    
+    <div class="mail" title="Share this through Email" onclick="gtag('event', 'Email', {'event_category':'Post Shared','event_label':'Email'}); location.href='mailto:?&body=https://ryonakagami.github.io/2020/10/15/Mail-system-basic/';"><svg viewBox="0 0 1792 1792" xmlns="http://www.w3.org/2000/svg"><path d="M1792 710v794q0 66-47 113t-113 47h-1472q-66 0-113-47t-47-113v-794q44 49 101 87 362 246 497 345 57 42 92.5 65.5t94.5 48 110 24.5h2q51 0 110-24.5t94.5-48 92.5-65.5q170-123 498-345 57-39 100-87zm0-294q0 79-49 151t-122 123q-376 261-468 325-10 7-42.5 30.5t-54 38-52 32.5-57.5 27-50 9h-2q-23 0-50-9t-57.5-27-52-32.5-54-38-42.5-30.5q-91-64-262-182.5t-205-142.5q-62-42-117-115.5t-55-136.5q0-78 41.5-130t118.5-52h1472q65 0 112.5 47t47.5 113z"/></svg></div>
+</div>
+
+                
+                <hr/>
+
+                <!-- Featured Tags -->
+                <b><fontsize="5">Feature Tags</b>
+                    <div id="tag_cloud" class="tags tags-sup js-tags" 
+                    style="line-height: 0px !important;">
+                        
+                        
+                        
+                        
+                        
+                                <a data-sort="0288" 
+                                    href="/archive/?tag=%E7%B5%B1%E8%A8%88"
+                                    title="統計"
+                                    style="color: #337ab7 !important;"
+                                    rel="61">統計</a>
+                        
+                                <a data-sort="0298" 
+                                    href="/archive/?tag=Python"
+                                    title="Python"
+                                    style="color: #337ab7 !important;"
+                                    rel="51">Python</a>
+                        
+                                <a data-sort="0300" 
+                                    href="/archive/?tag=math"
+                                    title="math"
+                                    style="color: #337ab7 !important;"
+                                    rel="49">math</a>
+                        
+                                <a data-sort="0303" 
+                                    href="/archive/?tag=Linux"
+                                    title="Linux"
+                                    style="color: #337ab7 !important;"
+                                    rel="46">Linux</a>
+                        
+                                <a data-sort="0316" 
+                                    href="/archive/?tag=Ubuntu+20.04+LTS"
+                                    title="Ubuntu 20.04 LTS"
+                                    style="color: #337ab7 !important;"
+                                    rel="33">Ubuntu 20.04 LTS</a>
+                        
+                                <a data-sort="0319" 
+                                    href="/archive/?tag=Shell"
+                                    title="Shell"
+                                    style="color: #337ab7 !important;"
+                                    rel="30">Shell</a>
+                        
+                                <a data-sort="0321" 
+                                    href="/archive/?tag=English"
+                                    title="English"
+                                    style="color: #337ab7 !important;"
+                                    rel="28">English</a>
+                        
+                                <a data-sort="0324" 
+                                    href="/archive/?tag=git"
+                                    title="git"
+                                    style="color: #337ab7 !important;"
+                                    rel="25">git</a>
+                        
+                                <a data-sort="0329" 
+                                    href="/archive/?tag=%E6%96%B9%E6%B3%95%E8%AB%96"
+                                    title="方法論"
+                                    style="color: #337ab7 !important;"
+                                    rel="20">方法論</a>
+                        
+                                <a data-sort="0333" 
+                                    href="/archive/?tag=Ubuntu+22.04+LTS"
+                                    title="Ubuntu 22.04 LTS"
+                                    style="color: #337ab7 !important;"
+                                    rel="16">Ubuntu 22.04 LTS</a>
+                        
+                                <a data-sort="0337" 
+                                    href="/archive/?tag=%E7%B5%B1%E8%A8%88%E6%A4%9C%E5%AE%9A"
+                                    title="統計検定"
+                                    style="color: #337ab7 !important;"
+                                    rel="12">統計検定</a>
+                        
+                                <a data-sort="0338" 
+                                    href="/archive/?tag=%E7%AB%B6%E6%8A%80%E3%83%97%E3%83%AD%E3%82%B0%E3%83%A9%E3%83%9F%E3%83%B3%E3%82%B0"
+                                    title="競技プログラミング"
+                                    style="color: #337ab7 !important;"
+                                    rel="11">競技プログラミング</a>
+                        
+                                <a data-sort="0339" 
+                                    href="/archive/?tag=%E3%83%95%E3%83%BC%E3%83%AA%E3%82%A8%E8%A7%A3%E6%9E%90"
+                                    title="フーリエ解析"
+                                    style="color: #337ab7 !important;"
+                                    rel="10">フーリエ解析</a>
+                        
+                                <a data-sort="0340" 
+                                    href="/archive/?tag=%E5%89%8D%E5%87%A6%E7%90%86"
+                                    title="前処理"
+                                    style="color: #337ab7 !important;"
+                                    rel="9">前処理</a>
+                        
+                                <a data-sort="0340" 
+                                    href="/archive/?tag=SQL"
+                                    title="SQL"
+                                    style="color: #337ab7 !important;"
+                                    rel="9">SQL</a>
+                        
+                                <a data-sort="0340" 
+                                    href="/archive/?tag=coding"
+                                    title="coding"
+                                    style="color: #337ab7 !important;"
+                                    rel="9">coding</a>
+                        
+                                <a data-sort="0341" 
+                                    href="/archive/?tag=%E3%82%B3%E3%83%9F%E3%83%A5%E3%83%8B%E3%82%B1%E3%83%BC%E3%82%B7%E3%83%A7%E3%83%B3"
+                                    title="コミュニケーション"
+                                    style="color: #337ab7 !important;"
+                                    rel="8">コミュニケーション</a>
+                        
+                                <a data-sort="0342" 
+                                    href="/archive/?tag=Network"
+                                    title="Network"
+                                    style="color: #337ab7 !important;"
+                                    rel="7">Network</a>
+                        
+                                <a data-sort="0342" 
+                                    href="/archive/?tag=ssh"
+                                    title="ssh"
+                                    style="color: #337ab7 !important;"
+                                    rel="7">ssh</a>
+                        
+                                <a data-sort="0343" 
+                                    href="/archive/?tag=%E5%B0%86%E6%A3%8B"
+                                    title="将棋"
+                                    style="color: #337ab7 !important;"
+                                    rel="6">将棋</a>
+                        
+                                <a data-sort="0343" 
+                                    href="/archive/?tag=Data+visualization"
+                                    title="Data visualization"
+                                    style="color: #337ab7 !important;"
+                                    rel="6">Data visualization</a>
+                        
+                                <a data-sort="0343" 
+                                    href="/archive/?tag=Docker"
+                                    title="Docker"
+                                    style="color: #337ab7 !important;"
+                                    rel="6">Docker</a>
+                        
+                                <a data-sort="0343" 
+                                    href="/archive/?tag=Econometrics"
+                                    title="Econometrics"
+                                    style="color: #337ab7 !important;"
+                                    rel="6">Econometrics</a>
+                        
+                                <a data-sort="0343" 
+                                    href="/archive/?tag=VSCode"
+                                    title="VSCode"
+                                    style="color: #337ab7 !important;"
+                                    rel="6">VSCode</a>
+                        
+                                <a data-sort="0343" 
+                                    href="/archive/?tag=statistical+inference"
+                                    title="statistical inference"
+                                    style="color: #337ab7 !important;"
+                                    rel="6">statistical inference</a>
+                        
+                                <a data-sort="0344" 
+                                    href="/archive/?tag=GitHub+Pages"
+                                    title="GitHub Pages"
+                                    style="color: #337ab7 !important;"
+                                    rel="5">GitHub Pages</a>
+                        
+                                <a data-sort="0344" 
+                                    href="/archive/?tag=apt"
+                                    title="apt"
+                                    style="color: #337ab7 !important;"
+                                    rel="5">apt</a>
+                        
+                                <a data-sort="0344" 
+                                    href="/archive/?tag=development"
+                                    title="development"
+                                    style="color: #337ab7 !important;"
+                                    rel="5">development</a>
+                        
+                                <a data-sort="0345" 
+                                    href="/archive/?tag=%E3%82%B7%E3%82%B9%E3%83%86%E3%83%A0%E7%AE%A1%E7%90%86"
+                                    title="システム管理"
+                                    style="color: #337ab7 !important;"
+                                    rel="4">システム管理</a>
+                        
+                                <a data-sort="0345" 
+                                    href="/archive/?tag=Coffee"
+                                    title="Coffee"
+                                    style="color: #337ab7 !important;"
+                                    rel="4">Coffee</a>
+                        
+                                <a data-sort="0345" 
+                                    href="/archive/?tag=cloud"
+                                    title="cloud"
+                                    style="color: #337ab7 !important;"
+                                    rel="4">cloud</a>
+                        
+                                <a data-sort="0346" 
+                                    href="/archive/?tag=%E6%95%B0%E5%80%A4%E8%A8%88%E7%AE%97"
+                                    title="数値計算"
+                                    style="color: #337ab7 !important;"
+                                    rel="3">数値計算</a>
+                        
+                                <a data-sort="0346" 
+                                    href="/archive/?tag=%E7%B4%A0%E6%95%B0"
+                                    title="素数"
+                                    style="color: #337ab7 !important;"
+                                    rel="3">素数</a>
+                        
+                                <a data-sort="0346" 
+                                    href="/archive/?tag=Book"
+                                    title="Book"
+                                    style="color: #337ab7 !important;"
+                                    rel="3">Book</a>
+                        
+                                <a data-sort="0346" 
+                                    href="/archive/?tag=Font"
+                                    title="Font"
+                                    style="color: #337ab7 !important;"
+                                    rel="3">Font</a>
+                        
+                                <a data-sort="0346" 
+                                    href="/archive/?tag=Metrics"
+                                    title="Metrics"
+                                    style="color: #337ab7 !important;"
+                                    rel="3">Metrics</a>
+                        
+                                <a data-sort="0346" 
+                                    href="/archive/?tag=Poetry"
+                                    title="Poetry"
+                                    style="color: #337ab7 !important;"
+                                    rel="3">Poetry</a>
+                        
+                                <a data-sort="0346" 
+                                    href="/archive/?tag=Ubuntu+24.04+LTS"
+                                    title="Ubuntu 24.04 LTS"
+                                    style="color: #337ab7 !important;"
+                                    rel="3">Ubuntu 24.04 LTS</a>
+                        
+                                <a data-sort="0346" 
+                                    href="/archive/?tag=architecture"
+                                    title="architecture"
+                                    style="color: #337ab7 !important;"
+                                    rel="3">architecture</a>
+                        
+                                <a data-sort="0346" 
+                                    href="/archive/?tag=aws"
+                                    title="aws"
+                                    style="color: #337ab7 !important;"
+                                    rel="3">aws</a>
+                        
+                                <a data-sort="0346" 
+                                    href="/archive/?tag=shell"
+                                    title="shell"
+                                    style="color: #337ab7 !important;"
+                                    rel="3">shell</a>
+                        
+                                <a data-sort="0346" 
+                                    href="/archive/?tag=systemctl"
+                                    title="systemctl"
+                                    style="color: #337ab7 !important;"
+                                    rel="3">systemctl</a>
+                        
+                                <a data-sort="0347" 
+                                    href="/archive/?tag=%E3%83%86%E3%83%B3%E3%83%97%E3%83%AC%E3%83%BC%E3%83%88"
+                                    title="テンプレート"
+                                    style="color: #337ab7 !important;"
+                                    rel="2">テンプレート</a>
+                        
+                                <a data-sort="0347" 
+                                    href="/archive/?tag=%E3%83%87%E3%83%BC%E3%82%BF%E6%A7%8B%E9%80%A0"
+                                    title="データ構造"
+                                    style="color: #337ab7 !important;"
+                                    rel="2">データ構造</a>
+                        
+                                <a data-sort="0347" 
+                                    href="/archive/?tag=%E3%83%9D%E3%83%AF%E3%82%BD%E3%83%B3%E5%88%86%E5%B8%83"
+                                    title="ポワソン分布"
+                                    style="color: #337ab7 !important;"
+                                    rel="2">ポワソン分布</a>
+                        
+                                <a data-sort="0347" 
+                                    href="/archive/?tag=%E4%BC%9A%E8%A8%88%E5%88%86%E6%9E%90"
+                                    title="会計分析"
+                                    style="color: #337ab7 !important;"
+                                    rel="2">会計分析</a>
+                        
+                                <a data-sort="0347" 
+                                    href="/archive/?tag=%E6%96%87%E5%AD%97%E3%82%B3%E3%83%BC%E3%83%89"
+                                    title="文字コード"
+                                    style="color: #337ab7 !important;"
+                                    rel="2">文字コード</a>
+                        
+                                <a data-sort="0347" 
+                                    href="/archive/?tag=%E7%92%B0%E5%A2%83%E6%A7%8B%E7%AF%89"
+                                    title="環境構築"
+                                    style="color: #337ab7 !important;"
+                                    rel="2">環境構築</a>
+                        
+                                <a data-sort="0347" 
+                                    href="/archive/?tag=%E8%AB%96%E6%96%87"
+                                    title="論文"
+                                    style="color: #337ab7 !important;"
+                                    rel="2">論文</a>
+                        
+                                <a data-sort="0347" 
+                                    href="/archive/?tag=App"
+                                    title="App"
+                                    style="color: #337ab7 !important;"
+                                    rel="2">App</a>
+                        
+                                <a data-sort="0347" 
+                                    href="/archive/?tag=Bayesian"
+                                    title="Bayesian"
+                                    style="color: #337ab7 !important;"
+                                    rel="2">Bayesian</a>
+                        
+                                <a data-sort="0347" 
+                                    href="/archive/?tag=Dynamic+Programming"
+                                    title="Dynamic Programming"
+                                    style="color: #337ab7 !important;"
+                                    rel="2">Dynamic Programming</a>
+                        
+                                <a data-sort="0347" 
+                                    href="/archive/?tag=Keyboard"
+                                    title="Keyboard"
+                                    style="color: #337ab7 !important;"
+                                    rel="2">Keyboard</a>
+                        
+                                <a data-sort="0347" 
+                                    href="/archive/?tag=Processing"
+                                    title="Processing"
+                                    style="color: #337ab7 !important;"
+                                    rel="2">Processing</a>
+                        
+                                <a data-sort="0347" 
+                                    href="/archive/?tag=R"
+                                    title="R"
+                                    style="color: #337ab7 !important;"
+                                    rel="2">R</a>
+                        
+                                <a data-sort="0347" 
+                                    href="/archive/?tag=Steam"
+                                    title="Steam"
+                                    style="color: #337ab7 !important;"
+                                    rel="2">Steam</a>
+                        
+                                <a data-sort="0347" 
+                                    href="/archive/?tag=filesystem"
+                                    title="filesystem"
+                                    style="color: #337ab7 !important;"
+                                    rel="2">filesystem</a>
+                        
+                                <a data-sort="0347" 
+                                    href="/archive/?tag=quarto"
+                                    title="quarto"
+                                    style="color: #337ab7 !important;"
+                                    rel="2">quarto</a>
+                        
+                                <a data-sort="0347" 
+                                    href="/archive/?tag=regex"
+                                    title="regex"
+                                    style="color: #337ab7 !important;"
+                                    rel="2">regex</a>
+                    </div>
+
+                <br>
+
+                <b><fontsize="5">Leave a Comment</font><br>(注意：GitHub Accountが必要となります）</b>
+                
+                <script src="https://utteranc.es/client.js"
+                    repo="RyoNakagami/RyoNakagami.github.io"
+                    issue-term="url"
+                    theme="github-light"
+                    crossorigin="anonymous"
+                    async>Reduce unused JavaScript
+                
+                </script>
+
+
+            </div>  
+
+    <!-- Side Catalog Container -->
+        
+            <div class="
+                col-lg-1 col-lg-offset-0
+                visible-lg-block
+                sidebar-container
+                catalog-container">
+                <div class="side-catalog fixed" style="margin-top:3%">
+                    <hr class="hidden-sm hidden-xs">
+                    <h5>
+                        <a class="catalog-toggle" href="#">CONTENTS</a>
+                    </h5>
+                    <ul class="catalog-body"></ul>
+                </div>
+            </div>
+        
+    <!-- Sidebar Container -->
+            <!-- <div class="
+                col-lg-10 col-lg-offset-1
+                col-md-10 col-md-offset-1
+                sidebar-container row"> -->
+                <!-- 
+<hr>
+<h5>FRIENDS</h5>
+<ul class="list-inline">
+  
+  <li><a href="https://twitter.com/bluesky0804?ref_src=twsrc%5Egoogle%7Ctwcamp%5Eserp%7Ctwgr%5Eauthor">bluesky0804</a></li>
+  
+</ul>
+
+ -->
+            </div>
+        </div>
+    </div>
+</article>
+
+<!-- add support for mathjax by voleking-->
+
+  <script async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml.js" id="MathJax-script"></script>
+<script>
+  MathJax = {
+    tex: {
+      inlineMath: [['$','$'], ['\\(','\\)']],
+      displayMath: [['$$','$$'], ['\\[','\\]']],
+      processEscapes: true,
+      processEnvironments: true, // for pseudo
+      tags: "ams",
+      autoload: {
+        color: [],
+        colorV2: ['color']
+      },
+      packages: {'[+]': ['noerrors']}
+    },
+    chtml: {
+      matchFontHeight: false,
+      displayAlign: "left",
+      displayIndent: "2em"
+    },
+    options: {
+      renderActions: {
+        /* add a new named action to render <script type="math/tex"> */
+        find_script_mathtex: [10, function (doc) {
+          for (const node of document.querySelectorAll('script[type^="math/tex"]')) {
+            const display = !!node.type.match(/; *mode=display/);
+            const math = new doc.options.MathItem(node.textContent, doc.inputJax[0], display);
+            const text = document.createTextNode('');
+            node.parentNode.replaceChild(text, node);
+            math.start = {node: text, delim: '', n: 0};
+            math.end = {node: text, delim: '', n: 0};
+            doc.math.push(math);
+          }
+        }, '']
+      }
+    },
+    loader: {
+      load: ['[tex]/noerrors']
+    }
+  };
+</script>
+
+
+
+
+
+<!-- async load function -->
+<script>
+    function async(u, c) {
+      var d = document, t = 'script',
+          o = d.createElement(t),
+          s = d.getElementsByTagName(t)[0];
+      o.src = u;
+      if (c) { o.addEventListener('load', function (e) { c(null, e); }, false); }
+      s.parentNode.insertBefore(o, s);
+    }
+</script>
+<!-- anchor-js, Doc:http://bryanbraun.github.io/anchorjs/ -->
+<script>
+    async("//cdnjs.cloudflare.com/ajax/libs/anchor-js/1.1.1/anchor.min.js",function(){
+        anchors.options = {
+          visible: 'hover',
+          placement: 'right',
+          // icon: '#'
+        };
+        anchors.add().remove('.intro-header h1').remove('.subheading').remove('.sidebar-container h5');
+    })
+</script>
+<style>
+    /* place left on bigger screen */
+    @media all and (min-width: 800px) {
+        .anchorjs-link{
+            position: absolute;
+            left: -0.75em;
+            font-size: 1.1em;
+            margin-top : -0.1em;
+        }
+    }
+</style>
+
+
+<body>
+    <!-- enable mermaid language on markdown post -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/mermaid/10.6.1/mermaid.min.js"></script>
+<script>
+   mermaid.initialize({
+       startOnLoad:true,
+       theme: 'default'
+   });
+   window.mermaid.init(undefined, document.querySelectorAll('.language-mermaid'));
+</script>
+
+</body>
+
+    <script>
+    
+    var elements = document.querySelectorAll('p');
+    Array.prototype.forEach.call(elements, function(el, i){
+        if(el.innerHTML=='[expand]') {
+            var parentcontent = el.parentNode.innerHTML.replace('<p>[expand]</p>','<div class="expand" style="display: none; height: 0; overflow: hidden;">').replace('<p>[/expand]</p>','</div>');
+            el.parentNode.innerHTML = parentcontent;
+        }
+    });
+
+    var elements = document.querySelectorAll('div.expand');
+    Array.prototype.forEach.call(elements, function(el, i){
+        el.previousElementSibling.innerHTML = el.previousElementSibling.innerHTML + '<span>..&nbsp; <a href="#" style="cursor: pointer;" onclick="this.parentNode.parentNode.nextElementSibling.style.display = \'block\'; this.parentNode.parentNode.nextElementSibling.style.height = \'auto\'; this.parentNode.style.display = \'none\';">read&nbsp;more&nbsp;&rarr;</a></span>';
+    });
+
+</script>
+
+    <!-- Footer -->
+<footer>
+    <div class="container">
+        <div class="row">
+            <!--<div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1"> -->
+                <!-- SNS Link -->
+            
+
+
+<ul class="list-inline text-center">
+
+
+  
+  
+  
+  
+  <li>
+    <a target="_blank" href="https://github.com/RyoNakagami">
+      <span class="fa-stack fa-lg">
+        <i class="fa fa-circle fa-stack-2x"></i>
+        <i class="fa fa-github fa-stack-1x fa-inverse"></i>
+      </span>
+    </a>
+  </li>
+  
+  
+</ul>
+
+            
+            <p class="copyright text-muted">
+                Copyright &copy; Ryo's Tech Blog 2025
+                <br>
+                Powered by <a href="https://ryonakagami.github.io">Ryo's Tech Blog</a> |
+                <iframe style="margin-left: 2px; margin-bottom:-5px;" frameborder="0" scrolling="0" width="100px"
+                    height="20px"
+                    title="RyoNakagami.github.io github stars"
+                    src="https://ghbtns.com/github-btn.html?user=RyoNakagami&repo=RyoNakagami.github.io&type=star&count=true">
+                </iframe>
+            </p>
+            <!--</div> -->
+        </div>
+    </div>
+</footer>
+
+<!-- jQuery -->
+<script src="/js/jquery.min.js "></script>
+
+<!-- Bootstrap Core JavaScript -->
+<!-- Currently, only navbar scroll-down effect at desktop still depends on this -->
+<script src="/js/bootstrap.min.js "></script>
+
+<!-- Custom Theme JavaScript -->
+<script src="/js/ryo-blog.min.js "></script>
+
+<!-- Simple Jekyll Search -->
+<script src="/js/simple-jekyll-search.min.js"></script>
+
+<!-- Service Worker -->
+
+<script src="/js/snackbar.js "></script>
+<script src="/js/sw-registration.js "></script>
+
+
+<!-- async load function -->
+<script>
+    function async(u, c) {
+        var d = document, t = 'script',
+            o = d.createElement(t),
+            s = d.getElementsByTagName(t)[0];
+        o.src = u;
+        if (c) { o.addEventListener('load', function (e) { c(null, e); }, false); }
+        s.parentNode.insertBefore(o, s);
+    }
+</script>
+
+<!--
+     Because of the native support for backtick-style fenced code blocks
+     right within the Markdown is landed in Github Pages,
+     From V1.6, There is no need for Highlight.js,
+     so Huxblog drops it officially.
+
+     - https://github.com/blog/2100-github-pages-now-faster-and-simpler-with-jekyll-3-0
+     - https://help.github.com/articles/creating-and-highlighting-code-blocks/
+     - https://github.com/jneen/rouge/wiki/list-of-supported-languages-and-lexers
+-->
+<!--
+    <script>
+        async("http://cdn.bootcss.com/highlight.js/8.6/highlight.min.js", function(){
+            hljs.initHighlightingOnLoad();
+        })
+    </script>
+    <link href="http://cdn.bootcss.com/highlight.js/8.6/styles/github.min.css" rel="stylesheet">
+-->
+
+
+
+
+
+
+
+<!--fastClick.js -->
+<script>
+    async("//cdnjs.cloudflare.com/ajax/libs/fastclick/1.0.6/fastclick.min.js", function () {
+        var $nav = document.querySelector("nav");
+        if ($nav) FastClick.attach($nav);
+    })
+</script>
+
+
+<!-- Global site tag (gtag.js) - Google Analytics -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-LVL413SV09"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+  gtag('config', 'G-LVL413SV09');
+</script>
+
+
+
+<!-- Side Catalog -->
+
+<script type="text/javascript">
+    function generateCatalog(selector) {
+
+        // interop with multilangual 
+        if ('' == 'true') {
+            _containerSelector = 'div.post-container.active'
+        } else {
+            _containerSelector = 'div.post-container'
+        }
+
+        // init
+        var P = $(_containerSelector), a, n, t, l, i, c;
+        a = P.find('h1,h2,h3,h4,h5,h6');
+
+        // clean
+        $(selector).html('')
+
+        // appending
+        a.each(function () {
+            n = $(this).prop('tagName').toLowerCase();
+            i = "#" + $(this).prop('id');
+            t = $(this).text();
+            c = $('<a href="' + i + '" rel="nofollow">' + t + '</a>');
+            l = $('<li class="' + n + '_nav"></li>').append(c);
+            $(selector).append(l);
+        });
+        return true;
+    }
+
+    generateCatalog(".catalog-body");
+
+    // toggle side catalog
+    $(".catalog-toggle").click((function (e) {
+        e.preventDefault();
+        $('.side-catalog').toggleClass("fold")
+    }))
+
+    /*
+     * Doc: https://github.com/davist11/jQuery-One-Page-Nav
+     * Fork by Hux to support padding
+     */
+    async("/js/jquery.nav.js", function () {
+        $('.catalog-body').onePageNav({
+            currentClass: "active",
+            changeHash: !1,
+            easing: "swing",
+            filter: "",
+            scrollSpeed: 700,
+            scrollOffset: 0,
+            scrollThreshold: .2,
+            begin: null,
+            end: null,
+            scrollChange: null,
+            padding: 80
+        });
+    });
+</script>
+
+
+
+<!-- Multi-Lingual -->
+
+
+<!-- Simple Jekyll Search -->
+<script>
+    // https://stackoverflow.com/questions/1912501/unescape-html-entities-in-javascript
+    function htmlDecode(input) {
+        var e = document.createElement('textarea');
+        e.innerHTML = input;
+        // handle case of empty input
+        return e.childNodes.length === 0 ? "" : e.childNodes[0].nodeValue;
+    }
+
+    SimpleJekyllSearch({
+        searchInput: document.getElementById('search-input'),
+        resultsContainer: document.getElementById('search-results'),
+        json: '/search.json',
+        searchResultTemplate: '<div class="post-preview item"><a href="{url}"><h2 class="post-title">{title}</h2><h3 class="post-subtitle">{subtitle}</h3><hr></a></div>',
+        noResultsText: 'No results',
+        limit: 50,
+        fuzzy: false,
+        // a hack to get escaped subtitle unescaped. for some reason, 
+        // post.subtitle w/o escape filter nuke entire search.
+        templateMiddleware: function (prop, value, template) {
+            if (prop === 'subtitle' || prop === 'title') {
+                if (value.indexOf("code")) {
+                    return htmlDecode(value);
+                } else {
+                    return value;
+                }
+            }
+        }
+    });
+
+    $(document).ready(function () {
+        var $searchPage = $('.search-page');
+        var $searchOpen = $('.search-icon');
+        var $searchClose = $('.search-icon-close');
+        var $searchInput = $('#search-input');
+        var $body = $('body');
+
+        $searchOpen.on('click', function (e) {
+            e.preventDefault();
+            $searchPage.toggleClass('search-active');
+            var prevClasses = $body.attr('class') || '';
+            setTimeout(function () {
+                $body.addClass('no-scroll');
+            }, 400)
+
+            if ($searchPage.hasClass('search-active')) {
+                $searchClose.on('click', function (e) {
+                    e.preventDefault();
+                    $searchPage.removeClass('search-active');
+                    $body.attr('class', prevClasses);  // from closure 
+                });
+                $searchInput.focus();
+            }
+        });
+    });
+</script>
+
+
+
+<!-- Image to Github 
+<img src="/img/icon_wechat.png" width="0" height="0" />
+<-- Migrate from head to bottom, no longer block render and still work -->
+<script>
+    
+    var elements = document.querySelectorAll('p');
+    Array.prototype.forEach.call(elements, function(el, i){
+        if(el.innerHTML=='[expand]') {
+            var parentcontent = el.parentNode.innerHTML.replace('<p>[expand]</p>','<div class="expand" style="display: none; height: 0; overflow: hidden;">').replace('<p>[/expand]</p>','</div>');
+            el.parentNode.innerHTML = parentcontent;
+        }
+    });
+
+    var elements = document.querySelectorAll('div.expand');
+    Array.prototype.forEach.call(elements, function(el, i){
+        el.previousElementSibling.innerHTML = el.previousElementSibling.innerHTML + '<span>..&nbsp; <a href="#" style="cursor: pointer;" onclick="this.parentNode.parentNode.nextElementSibling.style.display = \'block\'; this.parentNode.parentNode.nextElementSibling.style.height = \'auto\'; this.parentNode.style.display = \'none\';">read&nbsp;more&nbsp;&rarr;</a></span>';
+    });
+
+</script>
+
+</body>
+</html>

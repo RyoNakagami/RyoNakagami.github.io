@@ -1,0 +1,2185 @@
+<!DOCTYPE html>
+<html lang="ja">
+
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="google-site-verification" content="gSMaswRY9iRfG4QaQrx6aj481bgr503qEZh-QPsMYNU" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+    <meta name="description" content="元経済学徒, 現在どっかでデータサイエンティストもどきやってる人間の勉強日記">
+    <meta name="keywords"  content="Statistics, Economics, Econometrics, Python, C, Shell, Linux, Data scientist">
+    <meta name="theme-color" content="#000000">
+    
+    <!-- Open Graph -->
+    <meta property="og:title" content="Keychron K6 Wireless Mechanical Keyboardとショートカットの整理 - Ryo's Tech Blog">
+    
+    <meta property="og:type" content="article">
+    <meta property="og:description" content="
+
+
+">
+    
+    <meta property="article:published_time" content="2021-12-08T00:00:00Z">
+    
+    
+    <meta property="article:author" content="Ryo">
+    
+    
+    <meta property="article:tag" content="Ubuntu 20.04 LTS">
+    
+    <meta property="article:tag" content="VSCode">
+    
+    <meta property="article:tag" content="Keyboard">
+    
+    
+    <meta property="og:image" content="https://ryonakagami.github.io/img/avatar_rio_cat.jpg">
+    <meta property="og:url" content="https://ryonakagami.github.io/2021/12/08/ubuntu-keyboard-setting/">
+    <meta property="og:site_name" content="Ryo's Tech Blog">
+    
+    <title>Keychron K6 Wireless Mechanical Keyboardとショートカットの整理 - Ryo's Tech Blog</title>
+
+    <!-- Web App Manifest -->
+    <link rel="manifest" href="/pwa/manifest.json">
+
+    <!-- Favicon -->
+    <link rel="shortcut icon" href="/img/favicon.ico">
+    
+    <!-- Canonical URL -->
+    <link rel="canonical" href="https://ryonakagami.github.io/2021/12/08/ubuntu-keyboard-setting/">
+
+    <!-- Bootstrap Core CSS -->
+    <link rel="stylesheet" href="/css/bootstrap.min.css">
+
+    <!-- Custom CSS -->
+    <link rel="stylesheet" href="/css/ryo-blog.min.css">
+
+    <!-- Custom Fonts -->
+    <!-- <link href="http://maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css" rel="stylesheet" type="text/css"> -->
+    <!-- https://stackoverflow.com/questions/45983301/google-pagespeed-eliminate-render-blocking-resources-above-the-fold-caused-fro -->
+    <!--link href="//cdnjs.cloudflare.com/ajax/libs/font-awesome/4.6.3/css/font-awesome.min.css" rel="stylesheet" type="text/css"-->
+    <!--<link href="https://fonts.googleapis.com/earlyaccess/notosansjapanese.css" rel="stylesheet" type="text/css" media="print" onload="this.media='all'" > -->
+    <link href="https://fonts.googleapis.com/earlyaccess/notosansjapanese.css" rel="preload" type="text/css" media="print" onload="this.media='all'" >
+
+
+    <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
+    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+    <!--[if lt IE 9]>
+        <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+        <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
+    <![endif]-->
+
+    <!-- ga & ba script hoook -->
+    <script></script>
+</head>
+
+
+<!-- hack iOS CSS :active style -->
+<body ontouchstart="">
+
+    <!-- Navigation -->
+
+    <nav class="navbar navbar-default navbar-custom navbar-fixed-top">
+        
+        <div class="container-fluid">
+            <!-- Brand and toggle get grouped for better mobile display -->
+            <div class="navbar-header page-scroll">
+                <button type="button" class="navbar-toggle">
+                    <span class="sr-only">Toggle navigation</span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
+                <a class="navbar-brand" href="/">Ryo's Tech Blog</a>
+            </div>
+
+            <!-- Collect the nav links, forms, and other content for toggling -->
+            <div id="huxblog_navbar">
+                <div class="navbar-collapse">
+                    <ul class="nav navbar-nav navbar-left">
+                                                <li>
+                            <a href="https://ryonakagami.github.io/statistics-for-regression-monkey/">Statistics for
+                                Regression Monkeys</a>
+                        </li>
+                        <li>
+                            <a href="https://ohgoshgit.github.io/">OhGoshGit!?!</a>
+                        </li>
+                        <!-- <li>
+                            <a><button onclick="mainDropDown()" style="border-color: rgba(70, 83, 111, 0.989); background-color: rgba(70, 83, 111, 0.989)">Dropdown</button></a> 
+                            <div id="myDropdown" class="dropdown-content">
+                              <a href="#" onclick="subMenu(this)">A</a>
+                              <div class="sub-menu-item" id="subMenu1">
+                              <a href="#">A.1</a>
+                              </div>
+                              <a href="#" onclick="subMenu(this)">B</a>
+                              <div class="sub-menu-item" id="subMenu2">
+                              <a href="#">B.1</a>
+                              </div>
+                              <a href="#">C</a>
+                              <a href="#">D</a>
+                              <a href="#">E</a>
+                              <a href="#">F</a>
+                              <a href="#">G</a>
+                            </div>
+                        </li> -->
+                    </ul>
+                    </ul>
+                    <ul class="nav navbar-nav navbar-right">
+                        
+                        
+                        
+                        
+                        <li>
+                            <a href="/about/">About</a>
+                        </li>
+                        
+                        
+                        
+                        <li>
+                            <a href="/archive/">Tag Search</a>
+                        </li>
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        <!--about fa-search see https://stackoverflow.com/questions/41950677/how-to-make-my-search-icon-fixed-->
+                        <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css"
+                            rel="stylesheet" />
+                        <li class="search-icon">
+                            <a href="javascript:void(0)" aria-label="Search" target="_blank">
+                                <i class="fa fa-search"></i>
+                            </a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+            <!-- /.navbar-collapse -->
+        </div>
+        <!-- /.container -->
+    </nav>
+
+    <script>
+        // Drop Bootstarp low-performance Navbar
+        // Use customize navbar with high-quality material design animation
+        // in high-perf jank-free CSS3 implementation
+        var $body = document.body;
+        var $toggle = document.querySelector('.navbar-toggle');
+        var $navbar = document.querySelector('#huxblog_navbar');
+        var $collapse = document.querySelector('.navbar-collapse');
+
+        var __HuxNav__ = {
+            close: function () {
+                $navbar.className = " ";
+                // wait until animation end.
+                setTimeout(function () {
+                    // prevent frequently toggle
+                    if ($navbar.className.indexOf('in') < 0) {
+                        $collapse.style.height = "0px"
+                    }
+                }, 400)
+            },
+            open: function () {
+                $collapse.style.height = "auto"
+                $navbar.className += " in";
+            }
+        }
+
+        // Bind Event
+        $toggle.addEventListener('click', function (e) {
+            if ($navbar.className.indexOf('in') > 0) {
+                __HuxNav__.close()
+            } else {
+                __HuxNav__.open()
+            }
+        })
+
+        /**
+         * Since Fastclick is used to delegate 'touchstart' globally
+         * to hack 300ms delay in iOS by performing a fake 'click',
+         * Using 'e.stopPropagation' to stop 'touchstart' event from 
+         * $toggle/$collapse will break global delegation.
+         * 
+         * Instead, we use a 'e.target' filter to prevent handler
+         * added to document close HuxNav.  
+         *
+         * Also, we use 'click' instead of 'touchstart' as compromise
+         */
+        document.addEventListener('click', function (e) {
+            if (e.target == $toggle) return;
+            if (e.target.className == 'icon-bar') return;
+            __HuxNav__.close();
+        })
+    </script>
+
+    <!-- Search -->
+<div class="search-page">
+  <div class="search-icon-close-container">
+    <span class="search-icon-close">
+      <i class="fa fa-chevron-down"></i>
+    </span>
+  </div>
+  <div class="search-main container">
+    <div class="row">
+      <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+        <form></form>
+        <input type="text" id="search-input" placeholder="$ grep...">
+        </form>
+        <div id="search-results" class="mini-post-list"></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+    <!-- Image to hack wechat -->
+<!-- <img src="/img/icon_wechat.png" width="0" height="0"> -->
+<!-- <img src="/img/home-bg.jpg" width="0" height="0"> -->
+
+<!-- Post Header -->
+
+
+
+<style type="text/css">
+    header.intro-header{
+        position: relative;
+        background-image: url('/img/home-bg.jpg');
+        background: ;
+    }
+
+    
+    header.intro-header .header-mask{
+        width: 100%;
+        height: 100%;
+        position: absolute;
+        background: rgba(0,0,0, 0.0);
+    }
+    
+</style>
+
+
+
+
+<header class="intro-header" >
+
+    <div class="header-mask"></div>
+    
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+                <div class="post-heading">
+                    <div class="tags">
+                        
+                        <a class="tag" href="/archive/?tag=Ubuntu+20.04+LTS" title="Ubuntu 20.04 LTS">Ubuntu 20.04 LTS</a>
+                        
+                        <a class="tag" href="/archive/?tag=VSCode" title="VSCode">VSCode</a>
+                        
+                        <a class="tag" href="/archive/?tag=Keyboard" title="Keyboard">Keyboard</a>
+                        
+                    </div>
+                    <h1>Keychron K6 Wireless Mechanical Keyboardとショートカットの整理</h1>
+                    
+                    <h2 class="subheading">Ubuntu Desktop環境構築 Part 24</h2>
+                    <p>
+                        公開日: 2021-12-08
+                        
+                        <br>
+                        所要時間: 6 min 
+                    </p>
+                </div>
+            </div>
+        </div>
+    </div>
+</header>
+
+
+
+
+
+
+
+<!-- Post Content -->
+<article>
+    <div class="container">
+        <div class="row">
+
+    <!-- Post Container -->
+         <div class="
+                col-lg-8 col-lg-offset-2
+                col-md-10 col-md-offset-1
+                post-container">
+
+                <!-- Multi-Lingual -->
+                
+
+				<div style="border-radius: 1em; border-style:solid; border-color:#D3D3D3; background-color:#F8F8F8">
+
+  <p class="h4">  Table of Contents</p>
+
+  <!-- START doctoc generated TOC please keep comment here to allow auto update -->
+  <!-- DON'T EDIT THIS SECTION, INSTEAD RE-RUN doctoc TO UPDATE -->
+
+  <ul>
+    <li><a href="#1-%E6%8A%80%E8%A1%93%E3%82%B9%E3%83%9A%E3%83%83%E3%82%AF">1. 技術スペック</a>
+      <ul>
+        <li><a href="#%E5%AE%9F%E8%A1%8C%E7%92%B0%E5%A2%83">実行環境</a></li>
+        <li><a href="#keyboard%E3%82%B9%E3%83%9A%E3%83%83%E3%82%AF">Keyboardスペック</a></li>
+        <li><a href="#%E3%82%BD%E3%83%95%E3%83%88%E3%82%A6%E3%82%A7%E3%82%A2">ソフトウェア</a></li>
+      </ul>
+    </li>
+    <li><a href="#2-keychron-k6%E5%88%9D%E6%9C%9F%E8%A8%AD%E5%AE%9A">2. Keychron K6初期設定</a>
+      <ul>
+        <li><a href="#function-key%E3%81%AE%E8%A8%AD%E5%AE%9A">Function keyの設定</a></li>
+        <li><a href="#keyboard-backlight%E3%81%AE%E8%A8%AD%E5%AE%9A">Keyboard Backlightの設定</a></li>
+        <li><a href="#keyboard-%E9%85%8D%E5%88%97%E3%81%AE%E8%A8%AD%E5%AE%9A">Keyboard 配列の設定</a></li>
+      </ul>
+    </li>
+    <li><a href="#3-keyboard-cheatsheet">3. Keyboard cheatsheet</a>
+      <ul>
+        <li><a href="#ubuntu">Ubuntu</a></li>
+        <li><a href="#browser">Browser</a></li>
+        <li><a href="#vscode">VSCode</a></li>
+      </ul>
+    </li>
+    <li><a href="#4-ubuntukeyboard%E3%82%B7%E3%83%A7%E3%83%BC%E3%83%88%E3%82%AB%E3%83%83%E3%83%88%E5%A4%89%E6%9B%B4">4. UbuntuKeyboardショートカット変更</a>
+      <ul>
+        <li><a href="#ubuntu-keyboard-shortcut%E3%81%AE%E5%A4%89%E6%9B%B4">Ubuntu Keyboard Shortcutの変更</a>
+          <ul>
+            <li><a href="#super--p-%E3%82%B7%E3%83%A7%E3%83%BC%E3%83%88%E3%82%AB%E3%83%83%E3%83%88%E3%81%AE%E8%A7%A3%E9%99%A4%E3%81%A8screenshot%E3%82%B3%E3%83%9E%E3%83%B3%E3%83%89%E3%81%AE%E8%A8%AD%E5%AE%9A"><code class="language-plaintext highlighter-rouge">Super</code> + <code class="language-plaintext highlighter-rouge">P</code> ショートカットの解除とscreenshotコマンドの設定</a></li>
+            <li><a href="#caps-lock-%E3%82%AD%E3%83%BC%E3%82%92%E7%84%A1%E5%8A%B9%E5%8C%96%E3%81%99%E3%82%8B">Caps Lock キーを無効化する</a></li>
+          </ul>
+        </li>
+      </ul>
+    </li>
+    <li><a href="#5-vscode-keyboard-shortcut%E3%81%AE%E5%A4%89%E6%9B%B4">5. VSCode Keyboard Shortcutの変更</a>
+      <ul>
+        <li><a href="#%E5%88%86%E5%89%B2%E5%85%88%E3%81%B8active-editor%E3%82%92%E7%A7%BB%E5%8B%95%E3%81%99%E3%82%8B%E3%82%B7%E3%83%A7%E3%83%BC%E3%83%88%E3%82%AB%E3%83%83%E3%83%88%E3%81%AE%E8%A8%AD%E5%AE%9A">分割先へActive Editorを移動するショートカットの設定</a></li>
+        <li><a href="#split-terminal-tab%E9%96%93%E3%81%AE%E7%A7%BB%E5%8B%95">split terminal tab間の移動</a></li>
+        <li><a href="#git-active-file%E3%81%AE%E5%89%8D%E5%9B%9Ecommit%E6%99%82%E3%81%A8%E3%81%AE%E5%A4%89%E6%9B%B4%E5%B7%AE%E5%88%86%E7%A2%BA%E8%AA%8D"><code class="language-plaintext highlighter-rouge">git</code>: Active Fileの前回commit時との変更差分確認</a></li>
+      </ul>
+    </li>
+    <li><a href="#references">References</a></li>
+  </ul>
+
+  <!-- END doctoc generated TOC please keep comment here to allow auto update -->
+
+</div>
+
+<h2 id="1-技術スペック">1. 技術スペック</h2>
+
+<h3 id="実行環境">実行環境</h3>
+
+<table>
+  <thead>
+    <tr>
+      <th>項目</th>
+      <th> </th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>マシン</td>
+      <td>HP ENVY TE01-0xxx</td>
+    </tr>
+    <tr>
+      <td>OS</td>
+      <td>ubuntu 20.04 LTS Focal Fossa</td>
+    </tr>
+    <tr>
+      <td>CPU</td>
+      <td>Intel Core i7-9700 CPU 3.00 GHz</td>
+    </tr>
+    <tr>
+      <td>RAM</td>
+      <td>32.0 GB</td>
+    </tr>
+    <tr>
+      <td>GPU</td>
+      <td>NVIDIA GeForce RTX 2060 SUPER</td>
+    </tr>
+  </tbody>
+</table>
+
+<div class="language-zsh highlighter-rouge"><div class="highlight"><pre class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
+2
+3
+4
+5
+6
+7
+8
+</pre></td><td class="rouge-code"><pre>% lsb_release <span class="nt">-a</span>
+No LSB modules are available.
+Distributor ID: Ubuntu
+Description:    Ubuntu 20.04.3 LTS
+Release:        20.04
+Codename:       focal
+% <span class="nb">uname</span> <span class="nt">-srvmpio</span>
+Linux 5.13.0-27-generic <span class="c">#29~20.04.1-Ubuntu SMP Fri Jan 14 00:32:30 UTC 2022 x86_64 x86_64 x86_64 GNU/Linux</span>
+</pre></td></tr></tbody></table></code></pre></div></div>
+
+<h3 id="keyboardスペック">Keyboardスペック</h3>
+
+<table>
+  <tbody>
+    <tr>
+      <td>機種</td>
+      <td><a href="https://www.keychron.com/products/keychron-k6-wireless-mechanical-keyboard">Keychron K6 Wireless Mechanical Keyboard</a></td>
+    </tr>
+    <tr>
+      <td>接続方法</td>
+      <td>有線接続(UBS 3.1 Gen 1)</td>
+    </tr>
+    <tr>
+      <td>mode</td>
+      <td>Windows</td>
+    </tr>
+  </tbody>
+</table>
+
+<h3 id="ソフトウェア">ソフトウェア</h3>
+
+<blockquote>
+  <p>Ubuntu</p>
+</blockquote>
+
+<table>
+  <thead>
+    <tr>
+      <th>ソフトウェア名</th>
+      <th>説明</th>
+      <th>インストール</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>dcof-editor</td>
+      <td>Ubuntuの設定管理ツール</td>
+      <td><code class="language-plaintext highlighter-rouge">sudo apt install dconf-editor</code></td>
+    </tr>
+    <tr>
+      <td>gnome-tweaks</td>
+      <td>Gnome設定を調整する<br />Ubuntuアプリケーション</td>
+      <td><code class="language-plaintext highlighter-rouge">sudo add-apt-repository universe</code><br /><code class="language-plaintext highlighter-rouge">sudo apt update</code><br /><code class="language-plaintext highlighter-rouge">sudo apt install gnome-tweak-tool</code></td>
+    </tr>
+    <tr>
+      <td>SimpleScreenRecorder</td>
+      <td>画面録画アプリ</td>
+      <td><code class="language-plaintext highlighter-rouge">sudo apt install simplescreenrecorder</code></td>
+    </tr>
+  </tbody>
+</table>
+
+<blockquote>
+  <p>VSCode</p>
+</blockquote>
+
+<table>
+  <thead>
+    <tr>
+      <th>Extension名</th>
+      <th>説明</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>FontSize Shortcuts</td>
+      <td>Editor画面のZoom in/outのショートカット</td>
+    </tr>
+  </tbody>
+</table>
+
+<h2 id="2-keychron-k6初期設定">2. Keychron K6初期設定</h2>
+<h3 id="function-keyの設定">Function keyの設定</h3>
+<p><strong>問題</strong></p>
+
+<ul>
+  <li>Defaultでは <code class="language-plaintext highlighter-rouge">f1-f12</code>ファンクションキー(<code class="language-plaintext highlighter-rouge">fn2</code> + 数字)が認識されない</li>
+  <li>Windows modeで使用していても、function keyはApple keyboardの設定を参照していると思われる</li>
+  <li><code class="language-plaintext highlighter-rouge">/sys/module/hid_apple/parameters/fnmode</code>のApple keyboardのfuction keyの設定を変更する</li>
+</ul>
+
+<p><strong>解決方針</strong></p>
+
+<ul>
+  <li>カーネルモジュールの設定を変更する</li>
+</ul>
+
+<blockquote>
+  <p>Step 1</p>
+</blockquote>
+
+<div class="language-zsh highlighter-rouge"><div class="highlight"><pre class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
+</pre></td><td class="rouge-code"><pre>% <span class="nb">sudo </span>nano /etc/systemd/system/keychron.service
+</pre></td></tr></tbody></table></code></pre></div></div>
+
+<blockquote>
+  <p>Step 2: カーネルモジュールの設定を変更する</p>
+</blockquote>
+
+<p>keychron.serviceを以下のように設定し、保存する</p>
+
+<div class="language-zsh highlighter-rouge"><div class="highlight"><pre class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
+2
+3
+4
+5
+6
+7
+8
+9
+</pre></td><td class="rouge-code"><pre><span class="o">[</span>Unit]
+<span class="nv">Description</span><span class="o">=</span>The <span class="nb">command </span>to make the Keychron K2 work
+
+<span class="o">[</span>Service]
+<span class="nv">Type</span><span class="o">=</span>oneshot
+<span class="nv">ExecStart</span><span class="o">=</span>/bin/bash <span class="nt">-c</span> <span class="s2">"echo 0 &gt; /sys/module/hid_apple/parameters/fnmode"</span>
+
+<span class="o">[</span>Install]
+<span class="nv">WantedBy</span><span class="o">=</span>multi-user.target
+</pre></td></tr></tbody></table></code></pre></div></div>
+
+<blockquote>
+  <p>Step 3:</p>
+</blockquote>
+
+<div class="language-zsh highlighter-rouge"><div class="highlight"><pre class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
+</pre></td><td class="rouge-code"><pre>% systemctl <span class="nb">enable </span>keychron
+</pre></td></tr></tbody></table></code></pre></div></div>
+
+<blockquote>
+  <p>Step 4: reboot</p>
+</blockquote>
+
+<div class="language-zsh highlighter-rouge"><div class="highlight"><pre class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
+</pre></td><td class="rouge-code"><pre>% reboot
+</pre></td></tr></tbody></table></code></pre></div></div>
+
+<p><strong>解説</strong></p>
+
+<p>Defaultでは<code class="language-plaintext highlighter-rouge">/sys/module/hid_apple/parameters/fnmode</code>は2と設定されているためspecial key扱いとなってしまっている</p>
+
+<ul>
+  <li>0 = disabled : Disable the ‘fn’ key. Pressing ‘fn’+’F8’ will behave like you only press ‘F8’</li>
+  <li>1 = fkeyslast : Function keys are used as last key. Pressing ‘F8’ key will act as a special key. Pressing ‘fn’+’F8’ will behave like a F8.</li>
+  <li>2 = fkeysfirst : Function keys are used as first key. Pressing ‘F8’ key will behave like a F8. Pressing ‘fn’+’F8’ will act as special key</li>
+</ul>
+
+<h3 id="keyboard-backlightの設定">Keyboard Backlightの設定</h3>
+
+<table>
+  <thead>
+    <tr>
+      <th>動作</th>
+      <th>コマンド</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>backlightのOn/Offの設定</td>
+      <td><code class="language-plaintext highlighter-rouge">fn1</code> + <code class="language-plaintext highlighter-rouge">電球ボタン</code></td>
+    </tr>
+    <tr>
+      <td>backlight設定の固定</td>
+      <td><code class="language-plaintext highlighter-rouge">fn1</code> + <code class="language-plaintext highlighter-rouge">L</code> + <code class="language-plaintext highlighter-rouge">電球ボタン</code>(４秒以上長押し, キーボードが点滅したら設定完了)</td>
+    </tr>
+  </tbody>
+</table>
+
+<h3 id="keyboard-配列の設定">Keyboard 配列の設定</h3>
+
+<blockquote>
+  <p>右Controlと右Altキーを入れ替える</p>
+</blockquote>
+
+<ul>
+  <li><code class="language-plaintext highlighter-rouge">fn1</code> + <code class="language-plaintext highlighter-rouge">K</code> + <code class="language-plaintext highlighter-rouge">R</code>を４秒以上長押し, キーボードが点滅したら設定完了</li>
+</ul>
+
+<h2 id="3-keyboard-cheatsheet">3. Keyboard cheatsheet</h2>
+<h3 id="ubuntu">Ubuntu</h3>
+<p><strong>General</strong></p>
+
+<table>
+  <thead>
+    <tr>
+      <th>Shortcut</th>
+      <th>動作</th>
+      <th>独自設定</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td><code class="language-plaintext highlighter-rouge">Ctrl</code> + <code class="language-plaintext highlighter-rouge">Alt</code> + <code class="language-plaintext highlighter-rouge">T</code></td>
+      <td>Terminalを立ち上げる</td>
+      <td>Default</td>
+    </tr>
+    <tr>
+      <td><code class="language-plaintext highlighter-rouge">Ctrl</code> +<code class="language-plaintext highlighter-rouge">Space</code></td>
+      <td>入力言語の切り替え</td>
+      <td>Default</td>
+    </tr>
+    <tr>
+      <td><code class="language-plaintext highlighter-rouge">Super</code> then <code class="language-plaintext highlighter-rouge">Ctrl</code> + <code class="language-plaintext highlighter-rouge">L</code></td>
+      <td>任意のアプリケーションの立ち上げ, <br /><code class="language-plaintext highlighter-rouge">Super</code>はWindowsキーのこと</td>
+      <td>Default</td>
+    </tr>
+    <tr>
+      <td><code class="language-plaintext highlighter-rouge">Super</code> + <code class="language-plaintext highlighter-rouge">A</code></td>
+      <td>アプリケーション一覧を開く</td>
+      <td>Default</td>
+    </tr>
+    <tr>
+      <td><code class="language-plaintext highlighter-rouge">Ctrl</code>+<code class="language-plaintext highlighter-rouge">P</code></td>
+      <td>選択したエリアのスクリーンショットを取る &amp; Clipboardへ保存</td>
+      <td>新規設定</td>
+    </tr>
+    <tr>
+      <td><code class="language-plaintext highlighter-rouge">Ctrl</code>+ <code class="language-plaintext highlighter-rouge">Shift</code> + <code class="language-plaintext highlighter-rouge">P</code></td>
+      <td>選択したエリアのスクリーンショットを取る &amp; Picturesへ保存</td>
+      <td>新規設定</td>
+    </tr>
+    <tr>
+      <td><code class="language-plaintext highlighter-rouge">alt</code> + <code class="language-plaintext highlighter-rouge">F4</code></td>
+      <td>ウィンドウを閉じる</td>
+      <td>Default</td>
+    </tr>
+    <tr>
+      <td><code class="language-plaintext highlighter-rouge">Super</code> + <code class="language-plaintext highlighter-rouge">F</code></td>
+      <td>Launch the Firefox(the deflaut web browser)</td>
+      <td>新規設定</td>
+    </tr>
+    <tr>
+      <td><code class="language-plaintext highlighter-rouge">Super</code> + <code class="language-plaintext highlighter-rouge">S</code></td>
+      <td>Search</td>
+      <td>Default</td>
+    </tr>
+    <tr>
+      <td><code class="language-plaintext highlighter-rouge">alt</code> + <code class="language-plaintext highlighter-rouge">F10</code></td>
+      <td>Windowの最大化</td>
+      <td>Default</td>
+    </tr>
+    <tr>
+      <td><code class="language-plaintext highlighter-rouge">Super</code> + <code class="language-plaintext highlighter-rouge">Shift</code> + <code class="language-plaintext highlighter-rouge">←/→</code></td>
+      <td>現在のウィンドウを一つ左/右のモニターに移動</td>
+      <td>Default</td>
+    </tr>
+    <tr>
+      <td><code class="language-plaintext highlighter-rouge">Super</code> + <code class="language-plaintext highlighter-rouge">移動キー</code></td>
+      <td>Windowの最大化(↑/↓)、右寄せ左寄せ(←/→)を設定</td>
+      <td>Default</td>
+    </tr>
+    <tr>
+      <td><code class="language-plaintext highlighter-rouge">Super</code> + <code class="language-plaintext highlighter-rouge">数字キー</code></td>
+      <td>番号が対応しているFavaroite上のアプリを起動する</td>
+      <td>Default</td>
+    </tr>
+    <tr>
+      <td><code class="language-plaintext highlighter-rouge">Ctrl</code>+ <code class="language-plaintext highlighter-rouge">Shift</code> + <code class="language-plaintext highlighter-rouge">alt</code> + <code class="language-plaintext highlighter-rouge">R</code></td>
+      <td>SimpleScreenRecorderを起動した状態で画面録画の開始と停止</td>
+      <td>新規設定</td>
+    </tr>
+  </tbody>
+</table>
+
+<p><strong>Ubuntu Termianl</strong></p>
+
+<table>
+  <thead>
+    <tr>
+      <th>Shortcut</th>
+      <th>動作</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td><code class="language-plaintext highlighter-rouge">Ctrl</code> + <code class="language-plaintext highlighter-rouge">L</code></td>
+      <td>clear console</td>
+    </tr>
+    <tr>
+      <td><code class="language-plaintext highlighter-rouge">Ctrl</code> + <code class="language-plaintext highlighter-rouge">Shift</code> + <code class="language-plaintext highlighter-rouge">C</code></td>
+      <td>Copy</td>
+    </tr>
+    <tr>
+      <td><code class="language-plaintext highlighter-rouge">Ctrl</code> + <code class="language-plaintext highlighter-rouge">Shift</code> + <code class="language-plaintext highlighter-rouge">V</code></td>
+      <td>Paste</td>
+    </tr>
+    <tr>
+      <td><code class="language-plaintext highlighter-rouge">esc</code> + <code class="language-plaintext highlighter-rouge">.</code></td>
+      <td>直前の実行引数を出力</td>
+    </tr>
+    <tr>
+      <td><code class="language-plaintext highlighter-rouge">Alt</code>+<code class="language-plaintext highlighter-rouge">F</code></td>
+      <td>move forward</td>
+    </tr>
+    <tr>
+      <td><code class="language-plaintext highlighter-rouge">Alt</code>+<code class="language-plaintext highlighter-rouge">B</code></td>
+      <td>move backward</td>
+    </tr>
+    <tr>
+      <td><code class="language-plaintext highlighter-rouge">home</code></td>
+      <td>行頭へカーソルを移動</td>
+    </tr>
+    <tr>
+      <td><code class="language-plaintext highlighter-rouge">end</code></td>
+      <td>文末へカーソルを移動</td>
+    </tr>
+    <tr>
+      <td><code class="language-plaintext highlighter-rouge">Shift</code> + <code class="language-plaintext highlighter-rouge">Ctrl</code>+<code class="language-plaintext highlighter-rouge">W</code></td>
+      <td>termial tabを閉じる</td>
+    </tr>
+    <tr>
+      <td><code class="language-plaintext highlighter-rouge">Ctrl</code>+<code class="language-plaintext highlighter-rouge">D</code></td>
+      <td>terminalを閉じる</td>
+    </tr>
+    <tr>
+      <td><code class="language-plaintext highlighter-rouge">Ctrl</code>+<code class="language-plaintext highlighter-rouge">U</code></td>
+      <td>terminalの入力行をすべて削除する</td>
+    </tr>
+    <tr>
+      <td><code class="language-plaintext highlighter-rouge">Ctrl</code>+<code class="language-plaintext highlighter-rouge">backspace</code></td>
+      <td>terminalの入力行についてカーソルの左側すべてを削除する</td>
+    </tr>
+    <tr>
+      <td><code class="language-plaintext highlighter-rouge">Ctrl</code>+<code class="language-plaintext highlighter-rouge">del</code></td>
+      <td>terminalの入力行についてカーソルの右側すべてを削除する</td>
+    </tr>
+  </tbody>
+</table>
+
+<h3 id="browser">Browser</h3>
+<p><strong>Firefox</strong></p>
+
+<table>
+  <thead>
+    <tr>
+      <th>Shortcut</th>
+      <th>動作</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td><code class="language-plaintext highlighter-rouge">Super</code> + <code class="language-plaintext highlighter-rouge">F</code></td>
+      <td>Firefoxの起動</td>
+    </tr>
+    <tr>
+      <td><code class="language-plaintext highlighter-rouge">Alt</code> + <code class="language-plaintext highlighter-rouge">←</code>/<code class="language-plaintext highlighter-rouge">→</code></td>
+      <td>戻る, 進む</td>
+    </tr>
+    <tr>
+      <td><code class="language-plaintext highlighter-rouge">Ctrl</code> + <code class="language-plaintext highlighter-rouge">tab</code> ( + <code class="language-plaintext highlighter-rouge">Shift</code>)</td>
+      <td>tabを切り替える(逆向き)</td>
+    </tr>
+    <tr>
+      <td><code class="language-plaintext highlighter-rouge">Ctrl</code> + <code class="language-plaintext highlighter-rouge">pageup/pagedown</code></td>
+      <td>tabを切り替える(逆向き)</td>
+    </tr>
+    <tr>
+      <td><code class="language-plaintext highlighter-rouge">Ctrl</code> + <code class="language-plaintext highlighter-rouge">Shift</code> + <code class="language-plaintext highlighter-rouge">R</code></td>
+      <td>再読み込み (キャッシュ上書き)</td>
+    </tr>
+    <tr>
+      <td><code class="language-plaintext highlighter-rouge">Ctrl</code> + <code class="language-plaintext highlighter-rouge">↑/↓</code></td>
+      <td>ページ先端/終端へ移動</td>
+    </tr>
+    <tr>
+      <td><code class="language-plaintext highlighter-rouge">Ctrl</code> + <code class="language-plaintext highlighter-rouge">F</code></td>
+      <td>ページ検索</td>
+    </tr>
+    <tr>
+      <td><code class="language-plaintext highlighter-rouge">Esc</code></td>
+      <td>ページ検索バーを閉じる</td>
+    </tr>
+    <tr>
+      <td><code class="language-plaintext highlighter-rouge">Ctrl</code> + <code class="language-plaintext highlighter-rouge">D</code></td>
+      <td>ブックマークへの追加/解除</td>
+    </tr>
+    <tr>
+      <td><code class="language-plaintext highlighter-rouge">Ctrl</code> + <code class="language-plaintext highlighter-rouge">B</code></td>
+      <td>ブックマークへの一覧の表示</td>
+    </tr>
+    <tr>
+      <td><code class="language-plaintext highlighter-rouge">Ctrl</code> + <code class="language-plaintext highlighter-rouge">I</code></td>
+      <td>ページ情報の表示</td>
+    </tr>
+    <tr>
+      <td><code class="language-plaintext highlighter-rouge">Ctrl</code> + <code class="language-plaintext highlighter-rouge">alt</code> + <code class="language-plaintext highlighter-rouge">G</code></td>
+      <td>PDF viwer時にページ番号の入力</td>
+    </tr>
+    <tr>
+      <td><code class="language-plaintext highlighter-rouge">/</code></td>
+      <td>Youtube/GitHubなどで検索ボックスへ移動</td>
+    </tr>
+  </tbody>
+</table>
+
+<h3 id="vscode">VSCode</h3>
+<p><strong>General</strong></p>
+
+<table>
+  <thead>
+    <tr>
+      <th>Shortcut</th>
+      <th>動作</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td><code class="language-plaintext highlighter-rouge">Ctrl</code> + <code class="language-plaintext highlighter-rouge">Shift</code> + <code class="language-plaintext highlighter-rouge">P</code></td>
+      <td>コマンドパレットを表示</td>
+    </tr>
+    <tr>
+      <td><code class="language-plaintext highlighter-rouge">Ctrl</code> + <code class="language-plaintext highlighter-rouge">Shift</code> + <code class="language-plaintext highlighter-rouge">N</code></td>
+      <td>新しいウィンドウを開く</td>
+    </tr>
+    <tr>
+      <td><code class="language-plaintext highlighter-rouge">Ctrl</code> + <code class="language-plaintext highlighter-rouge">Shift</code> + <code class="language-plaintext highlighter-rouge">T</code></td>
+      <td>直前閉じたtabを再び開く</td>
+    </tr>
+    <tr>
+      <td><code class="language-plaintext highlighter-rouge">Super</code> + <code class="language-plaintext highlighter-rouge">K</code></td>
+      <td>ショートカット一覧を開く</td>
+    </tr>
+    <tr>
+      <td><code class="language-plaintext highlighter-rouge">Ctrl</code> + <code class="language-plaintext highlighter-rouge">page up/page down</code></td>
+      <td>tab移動</td>
+    </tr>
+    <tr>
+      <td><code class="language-plaintext highlighter-rouge">Ctrl</code> + <code class="language-plaintext highlighter-rouge">K</code> <code class="language-plaintext highlighter-rouge">Z</code></td>
+      <td>禅モード</td>
+    </tr>
+    <tr>
+      <td><code class="language-plaintext highlighter-rouge">Ctrl</code> + <code class="language-plaintext highlighter-rouge">\</code></td>
+      <td>Editorを分割する</td>
+    </tr>
+    <tr>
+      <td><code class="language-plaintext highlighter-rouge">Ctrl</code> + <code class="language-plaintext highlighter-rouge">Super</code> + <code class="language-plaintext highlighter-rouge">[</code></td>
+      <td>Active Editorを左に移動する</td>
+    </tr>
+    <tr>
+      <td><code class="language-plaintext highlighter-rouge">Ctrl</code> + <code class="language-plaintext highlighter-rouge">Super</code> + <code class="language-plaintext highlighter-rouge">]</code></td>
+      <td>Active Editorを右に移動する</td>
+    </tr>
+    <tr>
+      <td><code class="language-plaintext highlighter-rouge">Ctrl</code> + <code class="language-plaintext highlighter-rouge">O</code></td>
+      <td>Fileを開く</td>
+    </tr>
+    <tr>
+      <td><code class="language-plaintext highlighter-rouge">Ctrl</code> + <code class="language-plaintext highlighter-rouge">+/-</code></td>
+      <td>Editor画面のzoom in/out</td>
+    </tr>
+  </tbody>
+</table>
+
+<p><strong>Terminal</strong></p>
+
+<table>
+  <thead>
+    <tr>
+      <th>Shortcut</th>
+      <th>動作</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td><code class="language-plaintext highlighter-rouge">Ctrl</code> + `</td>
+      <td>Terminalを開く、Editorから開いてあるTerminalへ移動する</td>
+    </tr>
+    <tr>
+      <td><code class="language-plaintext highlighter-rouge">Ctrl</code> + <code class="language-plaintext highlighter-rouge">Shift</code> + <code class="language-plaintext highlighter-rouge">5</code></td>
+      <td>Terminalを分割する</td>
+    </tr>
+    <tr>
+      <td><code class="language-plaintext highlighter-rouge">Ctrl</code> + <code class="language-plaintext highlighter-rouge">D</code></td>
+      <td>Terminalを閉じる</td>
+    </tr>
+    <tr>
+      <td><code class="language-plaintext highlighter-rouge">Ctrl</code> + <code class="language-plaintext highlighter-rouge">1/2</code></td>
+      <td>TerminalからEditorへ移動する（1なら左、２なら右）</td>
+    </tr>
+    <tr>
+      <td><code class="language-plaintext highlighter-rouge">Ctrl</code> + <code class="language-plaintext highlighter-rouge">pageup/pagedown</code></td>
+      <td>Split terminalの間をスイッチする</td>
+    </tr>
+  </tbody>
+</table>
+
+<p><strong>Navigation</strong></p>
+
+<table>
+  <thead>
+    <tr>
+      <th>Shortcut</th>
+      <th>動作</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td><code class="language-plaintext highlighter-rouge">Ctrl</code> + <code class="language-plaintext highlighter-rouge">page up/page down</code></td>
+      <td>tab移動</td>
+    </tr>
+    <tr>
+      <td><code class="language-plaintext highlighter-rouge">Ctrl</code> + <code class="language-plaintext highlighter-rouge">tab</code></td>
+      <td>tab移動(選択式)</td>
+    </tr>
+    <tr>
+      <td><code class="language-plaintext highlighter-rouge">Ctrl</code> + <code class="language-plaintext highlighter-rouge">G</code></td>
+      <td>指定した行への移動</td>
+    </tr>
+    <tr>
+      <td><code class="language-plaintext highlighter-rouge">page up/page down</code>	/画面上の先頭/最後の行</td>
+      <td> </td>
+    </tr>
+    <tr>
+      <td><code class="language-plaintext highlighter-rouge">Ctrl</code> + <code class="language-plaintext highlighter-rouge">Shift</code> + <code class="language-plaintext highlighter-rouge">O</code></td>
+      <td>指定したindexへ移動</td>
+    </tr>
+    <tr>
+      <td><code class="language-plaintext highlighter-rouge">Ctrl</code> + <code class="language-plaintext highlighter-rouge">U</code></td>
+      <td>直前にいたカーソルまで移動</td>
+    </tr>
+    <tr>
+      <td><code class="language-plaintext highlighter-rouge">home/end</code></td>
+      <td>行頭/行末まで移動</td>
+    </tr>
+    <tr>
+      <td><code class="language-plaintext highlighter-rouge">Ctrl</code> + <code class="language-plaintext highlighter-rouge">home/end</code></td>
+      <td>文頭/文末まで移動</td>
+    </tr>
+  </tbody>
+</table>
+
+<p><strong>Basic editing</strong></p>
+
+<table>
+  <thead>
+    <tr>
+      <th>Shortcut</th>
+      <th>動作</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td><code class="language-plaintext highlighter-rouge">Ctrl</code> + <code class="language-plaintext highlighter-rouge">Enter</code></td>
+      <td>下に行追加</td>
+    </tr>
+    <tr>
+      <td><code class="language-plaintext highlighter-rouge">Ctrl</code> + <code class="language-plaintext highlighter-rouge">Shift</code> + <code class="language-plaintext highlighter-rouge">Enter</code></td>
+      <td>上に行追加</td>
+    </tr>
+    <tr>
+      <td><code class="language-plaintext highlighter-rouge">Ctrl</code> + <code class="language-plaintext highlighter-rouge">Shift</code> + <code class="language-plaintext highlighter-rouge">\</code></td>
+      <td>次の対応する括弧に移動</td>
+    </tr>
+    <tr>
+      <td><code class="language-plaintext highlighter-rouge">Ctrl</code> + <code class="language-plaintext highlighter-rouge">/</code></td>
+      <td>コメントアウト(Toggle)</td>
+    </tr>
+    <tr>
+      <td><code class="language-plaintext highlighter-rouge">Ctrl</code> + <code class="language-plaintext highlighter-rouge">Shift</code> + <code class="language-plaintext highlighter-rouge">A</code></td>
+      <td>ブロックコメントアウト(Toggle)</td>
+    </tr>
+    <tr>
+      <td><code class="language-plaintext highlighter-rouge">Ctrl</code> + <code class="language-plaintext highlighter-rouge">]/[</code></td>
+      <td>インデントの追加/削除 Toggle</td>
+    </tr>
+    <tr>
+      <td><code class="language-plaintext highlighter-rouge">Ctrl</code> + <code class="language-plaintext highlighter-rouge">Shift</code> + <code class="language-plaintext highlighter-rouge">]/[</code></td>
+      <td>ブロック単位の展開/折りたたみ Toggle</td>
+    </tr>
+    <tr>
+      <td><code class="language-plaintext highlighter-rouge">Ctrl</code> + <code class="language-plaintext highlighter-rouge">backspace</code></td>
+      <td>単語の部分削除（カーソル位置より左側）</td>
+    </tr>
+    <tr>
+      <td><code class="language-plaintext highlighter-rouge">Ctrl</code> + <code class="language-plaintext highlighter-rouge">delete</code></td>
+      <td>単語の部分削除（カーソル位置より右側）</td>
+    </tr>
+    <tr>
+      <td><code class="language-plaintext highlighter-rouge">alt</code> + <code class="language-plaintext highlighter-rouge">↑/↓</code></td>
+      <td>カーソル行／選択行を移動(複数行対応)</td>
+    </tr>
+    <tr>
+      <td><code class="language-plaintext highlighter-rouge">Ctrl</code> + <code class="language-plaintext highlighter-rouge">I</code></td>
+      <td>単語補完(前方検索)</td>
+    </tr>
+    <tr>
+      <td><code class="language-plaintext highlighter-rouge">Ctrl</code> + <code class="language-plaintext highlighter-rouge">C</code></td>
+      <td>行コピー（選択なしの状態）</td>
+    </tr>
+    <tr>
+      <td><code class="language-plaintext highlighter-rouge">Ctrl</code> + <code class="language-plaintext highlighter-rouge">L</code></td>
+      <td>現在の行を選択</td>
+    </tr>
+    <tr>
+      <td><code class="language-plaintext highlighter-rouge">Ctrl</code> + <code class="language-plaintext highlighter-rouge">Shift</code> +<code class="language-plaintext highlighter-rouge">alt</code> + <code class="language-plaintext highlighter-rouge">↑/↓</code></td>
+      <td>行を上方/下方に複製</td>
+    </tr>
+  </tbody>
+</table>
+
+<p><strong>マルチカーソルと検索/置換</strong></p>
+
+<table>
+  <thead>
+    <tr>
+      <th>Shortcut</th>
+      <th>動作</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td><code class="language-plaintext highlighter-rouge">alt</code> + <code class="language-plaintext highlighter-rouge">Shift</code> + <code class="language-plaintext highlighter-rouge">↑/↓</code></td>
+      <td>マルチカーソルを展開</td>
+    </tr>
+    <tr>
+      <td><code class="language-plaintext highlighter-rouge">Ctrl</code> + <code class="language-plaintext highlighter-rouge">Shift</code> + <code class="language-plaintext highlighter-rouge">L</code></td>
+      <td>選択箇所にマッチする箇所全てにカーソルを展開</td>
+    </tr>
+    <tr>
+      <td><code class="language-plaintext highlighter-rouge">Ctrl</code> + <code class="language-plaintext highlighter-rouge">H</code></td>
+      <td>置換</td>
+    </tr>
+    <tr>
+      <td><code class="language-plaintext highlighter-rouge">alt</code> + <code class="language-plaintext highlighter-rouge">R</code></td>
+      <td>置換モードで正規表現利用のtoggle</td>
+    </tr>
+    <tr>
+      <td><code class="language-plaintext highlighter-rouge">alt</code> + <code class="language-plaintext highlighter-rouge">l</code></td>
+      <td>置換モードで予め選択した範囲内のみを対象とする</td>
+    </tr>
+    <tr>
+      <td><code class="language-plaintext highlighter-rouge">Ctrl</code> + <code class="language-plaintext highlighter-rouge">alt</code> + <code class="language-plaintext highlighter-rouge">Enter</code></td>
+      <td>一括置換</td>
+    </tr>
+  </tbody>
+</table>
+
+<h2 id="4-ubuntukeyboardショートカット変更">4. UbuntuKeyboardショートカット変更</h2>
+<h3 id="ubuntu-keyboard-shortcutの変更">Ubuntu Keyboard Shortcutの変更</h3>
+
+<h4 id="super--p-ショートカットの解除とscreenshotコマンドの設定"><code class="language-plaintext highlighter-rouge">Super</code> + <code class="language-plaintext highlighter-rouge">P</code> ショートカットの解除とscreenshotコマンドの設定</h4>
+
+<p>Defaultではモニター設定のキーが割り当てられているのでそれを解除する。</p>
+
+<blockquote>
+  <p>方針</p>
+</blockquote>
+
+<ol>
+  <li>Defaultで設定されている<code class="language-plaintext highlighter-rouge">Super</code> + <code class="language-plaintext highlighter-rouge">P</code> ショートカットを解除する</li>
+  <li>Screenshotへ<code class="language-plaintext highlighter-rouge">Super</code> + <code class="language-plaintext highlighter-rouge">P</code> ショートカットを割り当てる</li>
+</ol>
+
+<blockquote>
+  <p>実行 1. Defaultで設定されている<code class="language-plaintext highlighter-rouge">Super</code> + <code class="language-plaintext highlighter-rouge">P</code> ショートカットを解除する</p>
+</blockquote>
+
+<p>まずdconf-editorを開く. Terminalで</p>
+
+<div class="language-zsh highlighter-rouge"><div class="highlight"><pre class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
+</pre></td><td class="rouge-code"><pre>% dconf-editor
+</pre></td></tr></tbody></table></code></pre></div></div>
+
+<p>を実行. 次に、</p>
+
+<ol>
+  <li><code class="language-plaintext highlighter-rouge">/org/gnome/mutter/keybindings/switch-monitor</code>まで移動</li>
+  <li>“Custom value” field に <code class="language-plaintext highlighter-rouge">['&lt;Super&gt;p', 'XF86Display']</code>と設定してあることを確認する</li>
+  <li>Disable “Use default value”</li>
+  <li>“Custom value” fieldを <code class="language-plaintext highlighter-rouge">[]</code>と設定する</li>
+  <li><code class="language-plaintext highlighter-rouge">/org/gnome/settings-daemon/plugins/media-keys/video-out</code>に移動する</li>
+  <li>工程(3), (4)を実行する</li>
+  <li>解除完了</li>
+</ol>
+
+<blockquote>
+  <ol>
+    <li>実行 2. Screenshotへ<code class="language-plaintext highlighter-rouge">Super</code> + <code class="language-plaintext highlighter-rouge">P</code> ショートカットを割り当てる</li>
+  </ol>
+</blockquote>
+
+<ol>
+  <li>Settingを開く</li>
+  <li>Keyboard shortcutsを開く</li>
+  <li>Screenshotsのグループまで行く</li>
+  <li>ショートカットキーを入力し設定完了</li>
+</ol>
+
+<p><img src="https://github.com/ryonakimageserver/omorikaizuka/blob/master/%E3%83%96%E3%83%AD%E3%82%B0%E7%94%A8/20211208_keyboardshortcuts_screenshots.png?raw=true" /></p>
+
+<p>なお、同じ方法でDefault Web browserのショートカットキーの設定をすることができます.</p>
+
+<h4 id="caps-lock-キーを無効化する">Caps Lock キーを無効化する</h4>
+
+<blockquote>
+  <p>目的</p>
+</blockquote>
+
+<ul>
+  <li>現時点ではCaps Lockの恩恵はゼロ &amp; むしろ押し間違いによる不利益しかない</li>
+</ul>
+
+<blockquote>
+  <p>実行</p>
+</blockquote>
+
+<ol>
+  <li>GNOME Tweaks を起動する．</li>
+  <li>Keyboard &amp; Mouseをクリック</li>
+  <li>Additional Layout Optionsをクリック</li>
+  <li>Caps Lock behavior &gt; Caps Lock is disabledを選択</li>
+  <li>Reboot</li>
+</ol>
+
+<h2 id="5-vscode-keyboard-shortcutの変更">5. VSCode Keyboard Shortcutの変更</h2>
+
+<blockquote>
+  <p>方針</p>
+</blockquote>
+
+<ul>
+  <li><code class="language-plaintext highlighter-rouge">keybindings.json</code>ファイルに新たなキーボートショートカットを追記する</li>
+</ul>
+
+<h3 id="分割先へactive-editorを移動するショートカットの設定">分割先へActive Editorを移動するショートカットの設定</h3>
+
+<blockquote>
+  <p>設定</p>
+</blockquote>
+
+<ul>
+  <li><code class="language-plaintext highlighter-rouge">meta</code>とは<code class="language-plaintext highlighter-rouge">Super</code>のこと</li>
+</ul>
+
+<div class="language-json highlighter-rouge"><div class="highlight"><pre class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
+2
+3
+4
+5
+6
+7
+8
+9
+10
+</pre></td><td class="rouge-code"><pre><span class="w">    </span><span class="p">{</span><span class="w">
+      </span><span class="nl">"key"</span><span class="p">:</span><span class="w"> </span><span class="s2">"ctrl+meta+["</span><span class="p">,</span><span class="w">
+      </span><span class="nl">"command"</span><span class="p">:</span><span class="w"> </span><span class="s2">"workbench.action.splitEditorToPreviousGroup"</span><span class="p">,</span><span class="w">
+      </span><span class="nl">"when"</span><span class="p">:</span><span class="w"> </span><span class="s2">"editorTextFocus"</span><span class="w">
+    </span><span class="p">}</span><span class="err">,</span><span class="w">
+    </span><span class="p">{</span><span class="w">
+      </span><span class="nl">"key"</span><span class="p">:</span><span class="w"> </span><span class="s2">"ctrl+meta+]"</span><span class="p">,</span><span class="w">
+      </span><span class="nl">"command"</span><span class="p">:</span><span class="w"> </span><span class="s2">"workbench.action.splitEditorToNextGroup"</span><span class="p">,</span><span class="w">
+      </span><span class="nl">"when"</span><span class="p">:</span><span class="w"> </span><span class="s2">"editorTextFocus"</span><span class="w">
+    </span><span class="p">}</span><span class="w">
+</span></pre></td></tr></tbody></table></code></pre></div></div>
+
+<h3 id="split-terminal-tab間の移動">split terminal tab間の移動</h3>
+
+<blockquote>
+  <p>設定</p>
+</blockquote>
+
+<div class="language-json highlighter-rouge"><div class="highlight"><pre class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
+2
+3
+4
+5
+6
+7
+8
+9
+10
+</pre></td><td class="rouge-code"><pre><span class="w">    </span><span class="p">{</span><span class="w">
+        </span><span class="nl">"key"</span><span class="p">:</span><span class="w"> </span><span class="s2">"ctrl+pageup"</span><span class="p">,</span><span class="w">
+        </span><span class="nl">"command"</span><span class="p">:</span><span class="w"> </span><span class="s2">"workbench.action.terminal.focusNextPane"</span><span class="p">,</span><span class="w">
+        </span><span class="nl">"when"</span><span class="p">:</span><span class="w"> </span><span class="s2">"terminalFocus"</span><span class="w">
+    </span><span class="p">}</span><span class="err">,</span><span class="w">
+    </span><span class="p">{</span><span class="w">
+        </span><span class="nl">"key"</span><span class="p">:</span><span class="w"> </span><span class="s2">"ctrl+pagedown"</span><span class="p">,</span><span class="w">
+        </span><span class="nl">"command"</span><span class="p">:</span><span class="w"> </span><span class="s2">"workbench.action.terminal.focusPreviousPane"</span><span class="p">,</span><span class="w">
+        </span><span class="nl">"when"</span><span class="p">:</span><span class="w"> </span><span class="s2">"terminalFocus"</span><span class="w">
+    </span><span class="p">}</span><span class="w">
+</span></pre></td></tr></tbody></table></code></pre></div></div>
+
+<h3 id="git-active-fileの前回commit時との変更差分確認"><code class="language-plaintext highlighter-rouge">git</code>: Active Fileの前回commit時との変更差分確認</h3>
+
+<blockquote>
+  <p>機能</p>
+</blockquote>
+
+<ul>
+  <li>現在編集中のファイルについて, 前回commit時との変更差分確認(=<code class="language-plaintext highlighter-rouge">Viewing diffs</code>)する</li>
+  <li><code class="language-plaintext highlighter-rouge">Viewing diffs</code>を閉じる</li>
+</ul>
+
+<blockquote>
+  <p>設定</p>
+</blockquote>
+
+<div class="language-json highlighter-rouge"><div class="highlight"><pre class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
+2
+3
+4
+5
+6
+7
+8
+9
+10
+11
+12
+13
+14
+</pre></td><td class="rouge-code"><pre><span class="w">    </span><span class="err">//-----------------------------------------------------------</span><span class="w">
+    </span><span class="err">//</span><span class="w">  </span><span class="err">Git</span><span class="w"> </span><span class="err">Settings</span><span class="w">
+    </span><span class="err">//-----------------------------------------------------------</span><span class="w">
+    </span><span class="p">{</span><span class="w">
+        </span><span class="nl">"key"</span><span class="p">:</span><span class="w"> </span><span class="s2">"ctrl+alt+h"</span><span class="p">,</span><span class="w">
+        </span><span class="nl">"command"</span><span class="p">:</span><span class="w"> </span><span class="s2">"git.openChange"</span><span class="p">,</span><span class="w">
+        </span><span class="nl">"when"</span><span class="p">:</span><span class="w"> </span><span class="s2">"editorTextFocus"</span><span class="w">
+    </span><span class="p">}</span><span class="err">,</span><span class="w">
+    </span><span class="p">{</span><span class="w">
+        </span><span class="nl">"key"</span><span class="p">:</span><span class="w"> </span><span class="s2">"ctrl+alt+h"</span><span class="p">,</span><span class="w">
+        </span><span class="nl">"command"</span><span class="p">:</span><span class="w"> </span><span class="s2">"git.openFile"</span><span class="p">,</span><span class="w">
+        </span><span class="nl">"when"</span><span class="p">:</span><span class="w"> </span><span class="s2">"isInDiffEditor"</span><span class="p">,</span><span class="w">
+        </span><span class="nl">"description"</span><span class="p">:</span><span class="w"> </span><span class="s2">"git.OpenChangeを閉じる"</span><span class="w">
+    </span><span class="p">}</span><span class="err">,</span><span class="w">
+</span></pre></td></tr></tbody></table></code></pre></div></div>
+
+<h2 id="references">References</h2>
+
+<ul>
+  <li><a href="https://wiki.archlinux.org/title/Apple_Keyboard#Function_keys_do_not_work">Archlinux: Function keys do not work</a></li>
+  <li><a href="https://askubuntu.com/questions/68463/how-to-disable-global-super-p-shortcut">How to disable global Super-p shortcut?</a></li>
+</ul>
+
+<blockquote>
+  <p>VSCode関連</p>
+</blockquote>
+
+<ul>
+  <li><a href="https://code.visualstudio.com/docs/sourcecontrol/overview#_viewing-diffs">VSCode &gt; Using Git source control in VS Code &gt; Viewing diffs</a></li>
+  <li><a href="https://stackoverflow.com/questions/48440673/how-to-switch-between-terminals-in-visual-studio-code/60224585">stackoverflow:How to switch between terminals in Visual Studio Code</a></li>
+</ul>
+
+
+                <hr style="visibility: hidden;">
+                <hr/>
+                <b><fontsize="5">Share Buttons</font><br></b>
+                <!--see 
+    https://jekyllcodex.org/without-plugin/share-buttons/ 
+    https://ranvir.xyz/blog/why-and-how-to-add-social-sharing-buttons-on-your-jekyll-blog-using-github-pages/
+-->
+
+
+
+<style>
+#share-buttons {display: inline-block; vertical-align: middle; }
+#share-buttons:after {content: ""; display: block; clear: both;}
+#share-buttons > div {
+    position: relative;
+    text-align: left; 
+    height: 36px; 
+    width: 32px; 
+    float: left; 
+    text-align: center;
+}
+#share-buttons > div > svg {height: 16px; fill: #d5d5d5; margin-top: 10px;}
+#share-buttons > div:hover {cursor: pointer;}
+#share-buttons > div.facebook:hover > svg {fill: #3B5998;}
+#share-buttons > div.twitter:hover > svg {fill: #55ACEE;}
+#share-buttons > div.linkedin:hover > svg {fill: #0077b5;}
+#share-buttons > div.pinterest:hover > svg {fill: #CB2027;}
+#share-buttons > div.gplus:hover > svg {fill: #dd4b39;}
+#share-buttons > div.mail:hover > svg {fill: #7D7D7D;}
+#share-buttons > div.instagram:hover > svg {fill: #C73B92;}
+#share-buttons > div.facebook > svg {height: 18px; margin-top: 9px;}
+#share-buttons > div.twitter > svg {height: 20px; margin-top: 8px;}
+#share-buttons > div.linkedin > svg {height: 19px; margin-top: 7px;}
+#share-buttons > div.pinterest > svg {height: 20px; margin-top: 9px;}
+#share-buttons > div.gplus > svg {height: 17px; margin-top: 9px; position: relative; left: 1px;}
+#share-buttons > div.mail > svg {height: 14px; margin-top: 11px;}
+</style>
+
+<span style="color: black">Share on: </span><div id="share-buttons">
+    <div class="facebook" title="Share this on Facebook" onclick="gtag('event', 'Facebook', {'event_category':'Post Shared','event_label':'Facebook'}); location.href='http://www.facebook.com/share.php?u=https://ryonakagami.github.io/2021/12/08/ubuntu-keyboard-setting/';"><svg viewBox="0 0 1792 1792" xmlns="http://www.w3.org/2000/svg"><path d="M1343 12v264h-157q-86 0-116 36t-30 108v189h293l-39 296h-254v759h-306v-759h-255v-296h255v-218q0-186 104-288.5t277-102.5q147 0 228 12z"/></svg></div>
+    <div class="twitter" title="Share this on Twitter" onclick="gtag('event', 'Twitter', {'event_category':'Post Shared','event_label':'Twitter'}); location.href='https://twitter.com/intent/tweet?text=Keychron K6 Wireless Mechanical Keyboardとショートカットの整理&url=https://ryonakagami.github.io/2021/12/08/ubuntu-keyboard-setting/';"><svg viewBox="0 0 1792 1792" xmlns="http://www.w3.org/2000/svg"><path d="M1684 408q-67 98-162 167 1 14 1 42 0 130-38 259.5t-115.5 248.5-184.5 210.5-258 146-323 54.5q-271 0-496-145 35 4 78 4 225 0 401-138-105-2-188-64.5t-114-159.5q33 5 61 5 43 0 85-11-112-23-185.5-111.5t-73.5-205.5v-4q68 38 146 41-66-44-105-115t-39-154q0-88 44-163 121 149 294.5 238.5t371.5 99.5q-8-38-8-74 0-134 94.5-228.5t228.5-94.5q140 0 236 102 109-21 205-78-37 115-142 178 93-10 186-50z"/></svg></div>
+    <div class="linkedin" title="Share this on Linkedin" onclick="gtag('event', 'Linkedin', {'event_category':'Post Shared','event_label':'Linkedin'}); location.href='https://www.linkedin.com/shareArticle?mini=true&url=https://ryonakagami.github.io/2021/12/08/ubuntu-keyboard-setting/&title=&summary=&source=';"><svg viewBox="0 0 1792 1792" xmlns="http://www.w3.org/2000/svg"><path d="M477 625v991h-330v-991h330zm21-306q1 73-50.5 122t-135.5 49h-2q-82 0-132-49t-50-122q0-74 51.5-122.5t134.5-48.5 133 48.5 51 122.5zm1166 729v568h-329v-530q0-105-40.5-164.5t-126.5-59.5q-63 0-105.5 34.5t-63.5 85.5q-11 30-11 81v553h-329q2-399 2-647t-1-296l-1-48h329v144h-2q20-32 41-56t56.5-52 87-43.5 114.5-15.5q171 0 275 113.5t104 332.5z"/></svg></div>
+    
+    <div class="mail" title="Share this through Email" onclick="gtag('event', 'Email', {'event_category':'Post Shared','event_label':'Email'}); location.href='mailto:?&body=https://ryonakagami.github.io/2021/12/08/ubuntu-keyboard-setting/';"><svg viewBox="0 0 1792 1792" xmlns="http://www.w3.org/2000/svg"><path d="M1792 710v794q0 66-47 113t-113 47h-1472q-66 0-113-47t-47-113v-794q44 49 101 87 362 246 497 345 57 42 92.5 65.5t94.5 48 110 24.5h2q51 0 110-24.5t94.5-48 92.5-65.5q170-123 498-345 57-39 100-87zm0-294q0 79-49 151t-122 123q-376 261-468 325-10 7-42.5 30.5t-54 38-52 32.5-57.5 27-50 9h-2q-23 0-50-9t-57.5-27-52-32.5-54-38-42.5-30.5q-91-64-262-182.5t-205-142.5q-62-42-117-115.5t-55-136.5q0-78 41.5-130t118.5-52h1472q65 0 112.5 47t47.5 113z"/></svg></div>
+</div>
+
+                
+                <hr/>
+
+                <!-- Featured Tags -->
+                <b><fontsize="5">Feature Tags</b>
+                    <div id="tag_cloud" class="tags tags-sup js-tags" 
+                    style="line-height: 0px !important;">
+                        
+                        
+                        
+                        
+                        
+                                <a data-sort="0288" 
+                                    href="/archive/?tag=%E7%B5%B1%E8%A8%88"
+                                    title="統計"
+                                    style="color: #337ab7 !important;"
+                                    rel="61">統計</a>
+                        
+                                <a data-sort="0298" 
+                                    href="/archive/?tag=Python"
+                                    title="Python"
+                                    style="color: #337ab7 !important;"
+                                    rel="51">Python</a>
+                        
+                                <a data-sort="0300" 
+                                    href="/archive/?tag=math"
+                                    title="math"
+                                    style="color: #337ab7 !important;"
+                                    rel="49">math</a>
+                        
+                                <a data-sort="0303" 
+                                    href="/archive/?tag=Linux"
+                                    title="Linux"
+                                    style="color: #337ab7 !important;"
+                                    rel="46">Linux</a>
+                        
+                                <a data-sort="0316" 
+                                    href="/archive/?tag=Ubuntu+20.04+LTS"
+                                    title="Ubuntu 20.04 LTS"
+                                    style="color: #337ab7 !important;"
+                                    rel="33">Ubuntu 20.04 LTS</a>
+                        
+                                <a data-sort="0319" 
+                                    href="/archive/?tag=Shell"
+                                    title="Shell"
+                                    style="color: #337ab7 !important;"
+                                    rel="30">Shell</a>
+                        
+                                <a data-sort="0321" 
+                                    href="/archive/?tag=English"
+                                    title="English"
+                                    style="color: #337ab7 !important;"
+                                    rel="28">English</a>
+                        
+                                <a data-sort="0324" 
+                                    href="/archive/?tag=git"
+                                    title="git"
+                                    style="color: #337ab7 !important;"
+                                    rel="25">git</a>
+                        
+                                <a data-sort="0329" 
+                                    href="/archive/?tag=%E6%96%B9%E6%B3%95%E8%AB%96"
+                                    title="方法論"
+                                    style="color: #337ab7 !important;"
+                                    rel="20">方法論</a>
+                        
+                                <a data-sort="0333" 
+                                    href="/archive/?tag=Ubuntu+22.04+LTS"
+                                    title="Ubuntu 22.04 LTS"
+                                    style="color: #337ab7 !important;"
+                                    rel="16">Ubuntu 22.04 LTS</a>
+                        
+                                <a data-sort="0337" 
+                                    href="/archive/?tag=%E7%B5%B1%E8%A8%88%E6%A4%9C%E5%AE%9A"
+                                    title="統計検定"
+                                    style="color: #337ab7 !important;"
+                                    rel="12">統計検定</a>
+                        
+                                <a data-sort="0338" 
+                                    href="/archive/?tag=%E7%AB%B6%E6%8A%80%E3%83%97%E3%83%AD%E3%82%B0%E3%83%A9%E3%83%9F%E3%83%B3%E3%82%B0"
+                                    title="競技プログラミング"
+                                    style="color: #337ab7 !important;"
+                                    rel="11">競技プログラミング</a>
+                        
+                                <a data-sort="0339" 
+                                    href="/archive/?tag=%E3%83%95%E3%83%BC%E3%83%AA%E3%82%A8%E8%A7%A3%E6%9E%90"
+                                    title="フーリエ解析"
+                                    style="color: #337ab7 !important;"
+                                    rel="10">フーリエ解析</a>
+                        
+                                <a data-sort="0340" 
+                                    href="/archive/?tag=%E5%89%8D%E5%87%A6%E7%90%86"
+                                    title="前処理"
+                                    style="color: #337ab7 !important;"
+                                    rel="9">前処理</a>
+                        
+                                <a data-sort="0340" 
+                                    href="/archive/?tag=SQL"
+                                    title="SQL"
+                                    style="color: #337ab7 !important;"
+                                    rel="9">SQL</a>
+                        
+                                <a data-sort="0340" 
+                                    href="/archive/?tag=coding"
+                                    title="coding"
+                                    style="color: #337ab7 !important;"
+                                    rel="9">coding</a>
+                        
+                                <a data-sort="0341" 
+                                    href="/archive/?tag=%E3%82%B3%E3%83%9F%E3%83%A5%E3%83%8B%E3%82%B1%E3%83%BC%E3%82%B7%E3%83%A7%E3%83%B3"
+                                    title="コミュニケーション"
+                                    style="color: #337ab7 !important;"
+                                    rel="8">コミュニケーション</a>
+                        
+                                <a data-sort="0342" 
+                                    href="/archive/?tag=Network"
+                                    title="Network"
+                                    style="color: #337ab7 !important;"
+                                    rel="7">Network</a>
+                        
+                                <a data-sort="0342" 
+                                    href="/archive/?tag=ssh"
+                                    title="ssh"
+                                    style="color: #337ab7 !important;"
+                                    rel="7">ssh</a>
+                        
+                                <a data-sort="0343" 
+                                    href="/archive/?tag=%E5%B0%86%E6%A3%8B"
+                                    title="将棋"
+                                    style="color: #337ab7 !important;"
+                                    rel="6">将棋</a>
+                        
+                                <a data-sort="0343" 
+                                    href="/archive/?tag=Data+visualization"
+                                    title="Data visualization"
+                                    style="color: #337ab7 !important;"
+                                    rel="6">Data visualization</a>
+                        
+                                <a data-sort="0343" 
+                                    href="/archive/?tag=Docker"
+                                    title="Docker"
+                                    style="color: #337ab7 !important;"
+                                    rel="6">Docker</a>
+                        
+                                <a data-sort="0343" 
+                                    href="/archive/?tag=Econometrics"
+                                    title="Econometrics"
+                                    style="color: #337ab7 !important;"
+                                    rel="6">Econometrics</a>
+                        
+                                <a data-sort="0343" 
+                                    href="/archive/?tag=VSCode"
+                                    title="VSCode"
+                                    style="color: #337ab7 !important;"
+                                    rel="6">VSCode</a>
+                        
+                                <a data-sort="0343" 
+                                    href="/archive/?tag=statistical+inference"
+                                    title="statistical inference"
+                                    style="color: #337ab7 !important;"
+                                    rel="6">statistical inference</a>
+                        
+                                <a data-sort="0344" 
+                                    href="/archive/?tag=GitHub+Pages"
+                                    title="GitHub Pages"
+                                    style="color: #337ab7 !important;"
+                                    rel="5">GitHub Pages</a>
+                        
+                                <a data-sort="0344" 
+                                    href="/archive/?tag=apt"
+                                    title="apt"
+                                    style="color: #337ab7 !important;"
+                                    rel="5">apt</a>
+                        
+                                <a data-sort="0344" 
+                                    href="/archive/?tag=development"
+                                    title="development"
+                                    style="color: #337ab7 !important;"
+                                    rel="5">development</a>
+                        
+                                <a data-sort="0345" 
+                                    href="/archive/?tag=%E3%82%B7%E3%82%B9%E3%83%86%E3%83%A0%E7%AE%A1%E7%90%86"
+                                    title="システム管理"
+                                    style="color: #337ab7 !important;"
+                                    rel="4">システム管理</a>
+                        
+                                <a data-sort="0345" 
+                                    href="/archive/?tag=Coffee"
+                                    title="Coffee"
+                                    style="color: #337ab7 !important;"
+                                    rel="4">Coffee</a>
+                        
+                                <a data-sort="0345" 
+                                    href="/archive/?tag=cloud"
+                                    title="cloud"
+                                    style="color: #337ab7 !important;"
+                                    rel="4">cloud</a>
+                        
+                                <a data-sort="0346" 
+                                    href="/archive/?tag=%E6%95%B0%E5%80%A4%E8%A8%88%E7%AE%97"
+                                    title="数値計算"
+                                    style="color: #337ab7 !important;"
+                                    rel="3">数値計算</a>
+                        
+                                <a data-sort="0346" 
+                                    href="/archive/?tag=%E7%B4%A0%E6%95%B0"
+                                    title="素数"
+                                    style="color: #337ab7 !important;"
+                                    rel="3">素数</a>
+                        
+                                <a data-sort="0346" 
+                                    href="/archive/?tag=Book"
+                                    title="Book"
+                                    style="color: #337ab7 !important;"
+                                    rel="3">Book</a>
+                        
+                                <a data-sort="0346" 
+                                    href="/archive/?tag=Font"
+                                    title="Font"
+                                    style="color: #337ab7 !important;"
+                                    rel="3">Font</a>
+                        
+                                <a data-sort="0346" 
+                                    href="/archive/?tag=Metrics"
+                                    title="Metrics"
+                                    style="color: #337ab7 !important;"
+                                    rel="3">Metrics</a>
+                        
+                                <a data-sort="0346" 
+                                    href="/archive/?tag=Poetry"
+                                    title="Poetry"
+                                    style="color: #337ab7 !important;"
+                                    rel="3">Poetry</a>
+                        
+                                <a data-sort="0346" 
+                                    href="/archive/?tag=Ubuntu+24.04+LTS"
+                                    title="Ubuntu 24.04 LTS"
+                                    style="color: #337ab7 !important;"
+                                    rel="3">Ubuntu 24.04 LTS</a>
+                        
+                                <a data-sort="0346" 
+                                    href="/archive/?tag=architecture"
+                                    title="architecture"
+                                    style="color: #337ab7 !important;"
+                                    rel="3">architecture</a>
+                        
+                                <a data-sort="0346" 
+                                    href="/archive/?tag=aws"
+                                    title="aws"
+                                    style="color: #337ab7 !important;"
+                                    rel="3">aws</a>
+                        
+                                <a data-sort="0346" 
+                                    href="/archive/?tag=shell"
+                                    title="shell"
+                                    style="color: #337ab7 !important;"
+                                    rel="3">shell</a>
+                        
+                                <a data-sort="0346" 
+                                    href="/archive/?tag=systemctl"
+                                    title="systemctl"
+                                    style="color: #337ab7 !important;"
+                                    rel="3">systemctl</a>
+                        
+                                <a data-sort="0347" 
+                                    href="/archive/?tag=%E3%83%86%E3%83%B3%E3%83%97%E3%83%AC%E3%83%BC%E3%83%88"
+                                    title="テンプレート"
+                                    style="color: #337ab7 !important;"
+                                    rel="2">テンプレート</a>
+                        
+                                <a data-sort="0347" 
+                                    href="/archive/?tag=%E3%83%87%E3%83%BC%E3%82%BF%E6%A7%8B%E9%80%A0"
+                                    title="データ構造"
+                                    style="color: #337ab7 !important;"
+                                    rel="2">データ構造</a>
+                        
+                                <a data-sort="0347" 
+                                    href="/archive/?tag=%E3%83%9D%E3%83%AF%E3%82%BD%E3%83%B3%E5%88%86%E5%B8%83"
+                                    title="ポワソン分布"
+                                    style="color: #337ab7 !important;"
+                                    rel="2">ポワソン分布</a>
+                        
+                                <a data-sort="0347" 
+                                    href="/archive/?tag=%E4%BC%9A%E8%A8%88%E5%88%86%E6%9E%90"
+                                    title="会計分析"
+                                    style="color: #337ab7 !important;"
+                                    rel="2">会計分析</a>
+                        
+                                <a data-sort="0347" 
+                                    href="/archive/?tag=%E6%96%87%E5%AD%97%E3%82%B3%E3%83%BC%E3%83%89"
+                                    title="文字コード"
+                                    style="color: #337ab7 !important;"
+                                    rel="2">文字コード</a>
+                        
+                                <a data-sort="0347" 
+                                    href="/archive/?tag=%E7%92%B0%E5%A2%83%E6%A7%8B%E7%AF%89"
+                                    title="環境構築"
+                                    style="color: #337ab7 !important;"
+                                    rel="2">環境構築</a>
+                        
+                                <a data-sort="0347" 
+                                    href="/archive/?tag=%E8%AB%96%E6%96%87"
+                                    title="論文"
+                                    style="color: #337ab7 !important;"
+                                    rel="2">論文</a>
+                        
+                                <a data-sort="0347" 
+                                    href="/archive/?tag=App"
+                                    title="App"
+                                    style="color: #337ab7 !important;"
+                                    rel="2">App</a>
+                        
+                                <a data-sort="0347" 
+                                    href="/archive/?tag=Bayesian"
+                                    title="Bayesian"
+                                    style="color: #337ab7 !important;"
+                                    rel="2">Bayesian</a>
+                        
+                                <a data-sort="0347" 
+                                    href="/archive/?tag=Dynamic+Programming"
+                                    title="Dynamic Programming"
+                                    style="color: #337ab7 !important;"
+                                    rel="2">Dynamic Programming</a>
+                        
+                                <a data-sort="0347" 
+                                    href="/archive/?tag=Keyboard"
+                                    title="Keyboard"
+                                    style="color: #337ab7 !important;"
+                                    rel="2">Keyboard</a>
+                        
+                                <a data-sort="0347" 
+                                    href="/archive/?tag=Processing"
+                                    title="Processing"
+                                    style="color: #337ab7 !important;"
+                                    rel="2">Processing</a>
+                        
+                                <a data-sort="0347" 
+                                    href="/archive/?tag=R"
+                                    title="R"
+                                    style="color: #337ab7 !important;"
+                                    rel="2">R</a>
+                        
+                                <a data-sort="0347" 
+                                    href="/archive/?tag=Steam"
+                                    title="Steam"
+                                    style="color: #337ab7 !important;"
+                                    rel="2">Steam</a>
+                        
+                                <a data-sort="0347" 
+                                    href="/archive/?tag=filesystem"
+                                    title="filesystem"
+                                    style="color: #337ab7 !important;"
+                                    rel="2">filesystem</a>
+                        
+                                <a data-sort="0347" 
+                                    href="/archive/?tag=quarto"
+                                    title="quarto"
+                                    style="color: #337ab7 !important;"
+                                    rel="2">quarto</a>
+                        
+                                <a data-sort="0347" 
+                                    href="/archive/?tag=regex"
+                                    title="regex"
+                                    style="color: #337ab7 !important;"
+                                    rel="2">regex</a>
+                    </div>
+
+                <br>
+
+                <b><fontsize="5">Leave a Comment</font><br>(注意：GitHub Accountが必要となります）</b>
+                
+                <script src="https://utteranc.es/client.js"
+                    repo="RyoNakagami/RyoNakagami.github.io"
+                    issue-term="url"
+                    theme="github-light"
+                    crossorigin="anonymous"
+                    async>Reduce unused JavaScript
+                
+                </script>
+
+
+            </div>  
+
+    <!-- Side Catalog Container -->
+        
+            <div class="
+                col-lg-1 col-lg-offset-0
+                visible-lg-block
+                sidebar-container
+                catalog-container">
+                <div class="side-catalog fixed" style="margin-top:3%">
+                    <hr class="hidden-sm hidden-xs">
+                    <h5>
+                        <a class="catalog-toggle" href="#">CONTENTS</a>
+                    </h5>
+                    <ul class="catalog-body"></ul>
+                </div>
+            </div>
+        
+    <!-- Sidebar Container -->
+            <!-- <div class="
+                col-lg-10 col-lg-offset-1
+                col-md-10 col-md-offset-1
+                sidebar-container row"> -->
+                <!-- 
+<hr>
+<h5>FRIENDS</h5>
+<ul class="list-inline">
+  
+  <li><a href="https://twitter.com/bluesky0804?ref_src=twsrc%5Egoogle%7Ctwcamp%5Eserp%7Ctwgr%5Eauthor">bluesky0804</a></li>
+  
+</ul>
+
+ -->
+            </div>
+        </div>
+    </div>
+</article>
+
+<!-- add support for mathjax by voleking-->
+
+  <script async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml.js" id="MathJax-script"></script>
+<script>
+  MathJax = {
+    tex: {
+      inlineMath: [['$','$'], ['\\(','\\)']],
+      displayMath: [['$$','$$'], ['\\[','\\]']],
+      processEscapes: true,
+      processEnvironments: true, // for pseudo
+      tags: "ams",
+      autoload: {
+        color: [],
+        colorV2: ['color']
+      },
+      packages: {'[+]': ['noerrors']}
+    },
+    chtml: {
+      matchFontHeight: false,
+      displayAlign: "left",
+      displayIndent: "2em"
+    },
+    options: {
+      renderActions: {
+        /* add a new named action to render <script type="math/tex"> */
+        find_script_mathtex: [10, function (doc) {
+          for (const node of document.querySelectorAll('script[type^="math/tex"]')) {
+            const display = !!node.type.match(/; *mode=display/);
+            const math = new doc.options.MathItem(node.textContent, doc.inputJax[0], display);
+            const text = document.createTextNode('');
+            node.parentNode.replaceChild(text, node);
+            math.start = {node: text, delim: '', n: 0};
+            math.end = {node: text, delim: '', n: 0};
+            doc.math.push(math);
+          }
+        }, '']
+      }
+    },
+    loader: {
+      load: ['[tex]/noerrors']
+    }
+  };
+</script>
+
+
+
+
+
+<!-- async load function -->
+<script>
+    function async(u, c) {
+      var d = document, t = 'script',
+          o = d.createElement(t),
+          s = d.getElementsByTagName(t)[0];
+      o.src = u;
+      if (c) { o.addEventListener('load', function (e) { c(null, e); }, false); }
+      s.parentNode.insertBefore(o, s);
+    }
+</script>
+<!-- anchor-js, Doc:http://bryanbraun.github.io/anchorjs/ -->
+<script>
+    async("//cdnjs.cloudflare.com/ajax/libs/anchor-js/1.1.1/anchor.min.js",function(){
+        anchors.options = {
+          visible: 'hover',
+          placement: 'right',
+          // icon: '#'
+        };
+        anchors.add().remove('.intro-header h1').remove('.subheading').remove('.sidebar-container h5');
+    })
+</script>
+<style>
+    /* place left on bigger screen */
+    @media all and (min-width: 800px) {
+        .anchorjs-link{
+            position: absolute;
+            left: -0.75em;
+            font-size: 1.1em;
+            margin-top : -0.1em;
+        }
+    }
+</style>
+
+
+<body>
+    <!-- enable mermaid language on markdown post -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/mermaid/10.6.1/mermaid.min.js"></script>
+<script>
+   mermaid.initialize({
+       startOnLoad:true,
+       theme: 'default'
+   });
+   window.mermaid.init(undefined, document.querySelectorAll('.language-mermaid'));
+</script>
+
+</body>
+
+    <script>
+    
+    var elements = document.querySelectorAll('p');
+    Array.prototype.forEach.call(elements, function(el, i){
+        if(el.innerHTML=='[expand]') {
+            var parentcontent = el.parentNode.innerHTML.replace('<p>[expand]</p>','<div class="expand" style="display: none; height: 0; overflow: hidden;">').replace('<p>[/expand]</p>','</div>');
+            el.parentNode.innerHTML = parentcontent;
+        }
+    });
+
+    var elements = document.querySelectorAll('div.expand');
+    Array.prototype.forEach.call(elements, function(el, i){
+        el.previousElementSibling.innerHTML = el.previousElementSibling.innerHTML + '<span>..&nbsp; <a href="#" style="cursor: pointer;" onclick="this.parentNode.parentNode.nextElementSibling.style.display = \'block\'; this.parentNode.parentNode.nextElementSibling.style.height = \'auto\'; this.parentNode.style.display = \'none\';">read&nbsp;more&nbsp;&rarr;</a></span>';
+    });
+
+</script>
+
+    <!-- Footer -->
+<footer>
+    <div class="container">
+        <div class="row">
+            <!--<div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1"> -->
+                <!-- SNS Link -->
+            
+
+
+<ul class="list-inline text-center">
+
+
+  
+  
+  
+  
+  <li>
+    <a target="_blank" href="https://github.com/RyoNakagami">
+      <span class="fa-stack fa-lg">
+        <i class="fa fa-circle fa-stack-2x"></i>
+        <i class="fa fa-github fa-stack-1x fa-inverse"></i>
+      </span>
+    </a>
+  </li>
+  
+  
+</ul>
+
+            
+            <p class="copyright text-muted">
+                Copyright &copy; Ryo's Tech Blog 2025
+                <br>
+                Powered by <a href="https://ryonakagami.github.io">Ryo's Tech Blog</a> |
+                <iframe style="margin-left: 2px; margin-bottom:-5px;" frameborder="0" scrolling="0" width="100px"
+                    height="20px"
+                    title="RyoNakagami.github.io github stars"
+                    src="https://ghbtns.com/github-btn.html?user=RyoNakagami&repo=RyoNakagami.github.io&type=star&count=true">
+                </iframe>
+            </p>
+            <!--</div> -->
+        </div>
+    </div>
+</footer>
+
+<!-- jQuery -->
+<script src="/js/jquery.min.js "></script>
+
+<!-- Bootstrap Core JavaScript -->
+<!-- Currently, only navbar scroll-down effect at desktop still depends on this -->
+<script src="/js/bootstrap.min.js "></script>
+
+<!-- Custom Theme JavaScript -->
+<script src="/js/ryo-blog.min.js "></script>
+
+<!-- Simple Jekyll Search -->
+<script src="/js/simple-jekyll-search.min.js"></script>
+
+<!-- Service Worker -->
+
+<script src="/js/snackbar.js "></script>
+<script src="/js/sw-registration.js "></script>
+
+
+<!-- async load function -->
+<script>
+    function async(u, c) {
+        var d = document, t = 'script',
+            o = d.createElement(t),
+            s = d.getElementsByTagName(t)[0];
+        o.src = u;
+        if (c) { o.addEventListener('load', function (e) { c(null, e); }, false); }
+        s.parentNode.insertBefore(o, s);
+    }
+</script>
+
+<!--
+     Because of the native support for backtick-style fenced code blocks
+     right within the Markdown is landed in Github Pages,
+     From V1.6, There is no need for Highlight.js,
+     so Huxblog drops it officially.
+
+     - https://github.com/blog/2100-github-pages-now-faster-and-simpler-with-jekyll-3-0
+     - https://help.github.com/articles/creating-and-highlighting-code-blocks/
+     - https://github.com/jneen/rouge/wiki/list-of-supported-languages-and-lexers
+-->
+<!--
+    <script>
+        async("http://cdn.bootcss.com/highlight.js/8.6/highlight.min.js", function(){
+            hljs.initHighlightingOnLoad();
+        })
+    </script>
+    <link href="http://cdn.bootcss.com/highlight.js/8.6/styles/github.min.css" rel="stylesheet">
+-->
+
+
+
+
+
+
+
+<!--fastClick.js -->
+<script>
+    async("//cdnjs.cloudflare.com/ajax/libs/fastclick/1.0.6/fastclick.min.js", function () {
+        var $nav = document.querySelector("nav");
+        if ($nav) FastClick.attach($nav);
+    })
+</script>
+
+
+<!-- Global site tag (gtag.js) - Google Analytics -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-LVL413SV09"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+  gtag('config', 'G-LVL413SV09');
+</script>
+
+
+
+<!-- Side Catalog -->
+
+<script type="text/javascript">
+    function generateCatalog(selector) {
+
+        // interop with multilangual 
+        if ('' == 'true') {
+            _containerSelector = 'div.post-container.active'
+        } else {
+            _containerSelector = 'div.post-container'
+        }
+
+        // init
+        var P = $(_containerSelector), a, n, t, l, i, c;
+        a = P.find('h1,h2,h3,h4,h5,h6');
+
+        // clean
+        $(selector).html('')
+
+        // appending
+        a.each(function () {
+            n = $(this).prop('tagName').toLowerCase();
+            i = "#" + $(this).prop('id');
+            t = $(this).text();
+            c = $('<a href="' + i + '" rel="nofollow">' + t + '</a>');
+            l = $('<li class="' + n + '_nav"></li>').append(c);
+            $(selector).append(l);
+        });
+        return true;
+    }
+
+    generateCatalog(".catalog-body");
+
+    // toggle side catalog
+    $(".catalog-toggle").click((function (e) {
+        e.preventDefault();
+        $('.side-catalog').toggleClass("fold")
+    }))
+
+    /*
+     * Doc: https://github.com/davist11/jQuery-One-Page-Nav
+     * Fork by Hux to support padding
+     */
+    async("/js/jquery.nav.js", function () {
+        $('.catalog-body').onePageNav({
+            currentClass: "active",
+            changeHash: !1,
+            easing: "swing",
+            filter: "",
+            scrollSpeed: 700,
+            scrollOffset: 0,
+            scrollThreshold: .2,
+            begin: null,
+            end: null,
+            scrollChange: null,
+            padding: 80
+        });
+    });
+</script>
+
+
+
+<!-- Multi-Lingual -->
+
+
+<!-- Simple Jekyll Search -->
+<script>
+    // https://stackoverflow.com/questions/1912501/unescape-html-entities-in-javascript
+    function htmlDecode(input) {
+        var e = document.createElement('textarea');
+        e.innerHTML = input;
+        // handle case of empty input
+        return e.childNodes.length === 0 ? "" : e.childNodes[0].nodeValue;
+    }
+
+    SimpleJekyllSearch({
+        searchInput: document.getElementById('search-input'),
+        resultsContainer: document.getElementById('search-results'),
+        json: '/search.json',
+        searchResultTemplate: '<div class="post-preview item"><a href="{url}"><h2 class="post-title">{title}</h2><h3 class="post-subtitle">{subtitle}</h3><hr></a></div>',
+        noResultsText: 'No results',
+        limit: 50,
+        fuzzy: false,
+        // a hack to get escaped subtitle unescaped. for some reason, 
+        // post.subtitle w/o escape filter nuke entire search.
+        templateMiddleware: function (prop, value, template) {
+            if (prop === 'subtitle' || prop === 'title') {
+                if (value.indexOf("code")) {
+                    return htmlDecode(value);
+                } else {
+                    return value;
+                }
+            }
+        }
+    });
+
+    $(document).ready(function () {
+        var $searchPage = $('.search-page');
+        var $searchOpen = $('.search-icon');
+        var $searchClose = $('.search-icon-close');
+        var $searchInput = $('#search-input');
+        var $body = $('body');
+
+        $searchOpen.on('click', function (e) {
+            e.preventDefault();
+            $searchPage.toggleClass('search-active');
+            var prevClasses = $body.attr('class') || '';
+            setTimeout(function () {
+                $body.addClass('no-scroll');
+            }, 400)
+
+            if ($searchPage.hasClass('search-active')) {
+                $searchClose.on('click', function (e) {
+                    e.preventDefault();
+                    $searchPage.removeClass('search-active');
+                    $body.attr('class', prevClasses);  // from closure 
+                });
+                $searchInput.focus();
+            }
+        });
+    });
+</script>
+
+
+
+<!-- Image to Github 
+<img src="/img/icon_wechat.png" width="0" height="0" />
+<-- Migrate from head to bottom, no longer block render and still work -->
+<script>
+    
+    var elements = document.querySelectorAll('p');
+    Array.prototype.forEach.call(elements, function(el, i){
+        if(el.innerHTML=='[expand]') {
+            var parentcontent = el.parentNode.innerHTML.replace('<p>[expand]</p>','<div class="expand" style="display: none; height: 0; overflow: hidden;">').replace('<p>[/expand]</p>','</div>');
+            el.parentNode.innerHTML = parentcontent;
+        }
+    });
+
+    var elements = document.querySelectorAll('div.expand');
+    Array.prototype.forEach.call(elements, function(el, i){
+        el.previousElementSibling.innerHTML = el.previousElementSibling.innerHTML + '<span>..&nbsp; <a href="#" style="cursor: pointer;" onclick="this.parentNode.parentNode.nextElementSibling.style.display = \'block\'; this.parentNode.parentNode.nextElementSibling.style.height = \'auto\'; this.parentNode.style.display = \'none\';">read&nbsp;more&nbsp;&rarr;</a></span>';
+    });
+
+</script>
+
+</body>
+</html>

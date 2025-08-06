@@ -1,0 +1,2116 @@
+<!DOCTYPE html>
+<html lang="ja">
+
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="google-site-verification" content="gSMaswRY9iRfG4QaQrx6aj481bgr503qEZh-QPsMYNU" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+    <meta name="description" content="元経済学徒, 現在どっかでデータサイエンティストもどきやってる人間の勉強日記">
+    <meta name="keywords"  content="Statistics, Economics, Econometrics, Python, C, Shell, Linux, Data scientist">
+    <meta name="theme-color" content="#000000">
+    
+    <!-- Open Graph -->
+    <meta property="og:title" content="EDA CookBook - 生存分析とKaplanMeier推定量 - Ryo's Tech Blog">
+    
+    <meta property="og:type" content="article">
+    <meta property="og:description" content="Table of Contents
+
+
+
+">
+    
+    <meta property="article:published_time" content="2022-08-07T00:00:00Z">
+    
+    
+    <meta property="article:author" content="Ryo">
+    
+    
+    <meta property="article:tag" content="Python">
+    
+    <meta property="article:tag" content="統計">
+    
+    <meta property="article:tag" content="統計検定">
+    
+    
+    <meta property="og:image" content="https://ryonakagami.github.io/img/avatar_rio_cat.jpg">
+    <meta property="og:url" content="https://ryonakagami.github.io/2022/08/07/eda-kaplanmeier/">
+    <meta property="og:site_name" content="Ryo's Tech Blog">
+    
+    <title>EDA CookBook - 生存分析とKaplanMeier推定量 - Ryo's Tech Blog</title>
+
+    <!-- Web App Manifest -->
+    <link rel="manifest" href="/pwa/manifest.json">
+
+    <!-- Favicon -->
+    <link rel="shortcut icon" href="/img/favicon.ico">
+    
+    <!-- Canonical URL -->
+    <link rel="canonical" href="https://ryonakagami.github.io/2022/08/07/eda-kaplanmeier/">
+
+    <!-- Bootstrap Core CSS -->
+    <link rel="stylesheet" href="/css/bootstrap.min.css">
+
+    <!-- Custom CSS -->
+    <link rel="stylesheet" href="/css/ryo-blog.min.css">
+
+    <!-- Custom Fonts -->
+    <!-- <link href="http://maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css" rel="stylesheet" type="text/css"> -->
+    <!-- https://stackoverflow.com/questions/45983301/google-pagespeed-eliminate-render-blocking-resources-above-the-fold-caused-fro -->
+    <!--link href="//cdnjs.cloudflare.com/ajax/libs/font-awesome/4.6.3/css/font-awesome.min.css" rel="stylesheet" type="text/css"-->
+    <!--<link href="https://fonts.googleapis.com/earlyaccess/notosansjapanese.css" rel="stylesheet" type="text/css" media="print" onload="this.media='all'" > -->
+    <link href="https://fonts.googleapis.com/earlyaccess/notosansjapanese.css" rel="preload" type="text/css" media="print" onload="this.media='all'" >
+
+
+    <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
+    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+    <!--[if lt IE 9]>
+        <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+        <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
+    <![endif]-->
+
+    <!-- ga & ba script hoook -->
+    <script></script>
+</head>
+
+
+<!-- hack iOS CSS :active style -->
+<body ontouchstart="">
+
+    <!-- Navigation -->
+
+<nav class="navbar navbar-default navbar-custom navbar-fixed-top invert">
+    
+        <div class="container-fluid">
+            <!-- Brand and toggle get grouped for better mobile display -->
+            <div class="navbar-header page-scroll">
+                <button type="button" class="navbar-toggle">
+                    <span class="sr-only">Toggle navigation</span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
+                <a class="navbar-brand" href="/">Ryo's Tech Blog</a>
+            </div>
+
+            <!-- Collect the nav links, forms, and other content for toggling -->
+            <div id="huxblog_navbar">
+                <div class="navbar-collapse">
+                    <ul class="nav navbar-nav navbar-left">
+                                                <li>
+                            <a href="https://ryonakagami.github.io/statistics-for-regression-monkey/">Statistics for
+                                Regression Monkeys</a>
+                        </li>
+                        <li>
+                            <a href="https://ohgoshgit.github.io/">OhGoshGit!?!</a>
+                        </li>
+                        <!-- <li>
+                            <a><button onclick="mainDropDown()" style="border-color: rgba(70, 83, 111, 0.989); background-color: rgba(70, 83, 111, 0.989)">Dropdown</button></a> 
+                            <div id="myDropdown" class="dropdown-content">
+                              <a href="#" onclick="subMenu(this)">A</a>
+                              <div class="sub-menu-item" id="subMenu1">
+                              <a href="#">A.1</a>
+                              </div>
+                              <a href="#" onclick="subMenu(this)">B</a>
+                              <div class="sub-menu-item" id="subMenu2">
+                              <a href="#">B.1</a>
+                              </div>
+                              <a href="#">C</a>
+                              <a href="#">D</a>
+                              <a href="#">E</a>
+                              <a href="#">F</a>
+                              <a href="#">G</a>
+                            </div>
+                        </li> -->
+                    </ul>
+                    </ul>
+                    <ul class="nav navbar-nav navbar-right">
+                        
+                        
+                        
+                        
+                        <li>
+                            <a href="/about/">About</a>
+                        </li>
+                        
+                        
+                        
+                        <li>
+                            <a href="/archive/">Tag Search</a>
+                        </li>
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        <!--about fa-search see https://stackoverflow.com/questions/41950677/how-to-make-my-search-icon-fixed-->
+                        <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css"
+                            rel="stylesheet" />
+                        <li class="search-icon">
+                            <a href="javascript:void(0)" aria-label="Search" target="_blank">
+                                <i class="fa fa-search"></i>
+                            </a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+            <!-- /.navbar-collapse -->
+        </div>
+        <!-- /.container -->
+    </nav>
+
+    <script>
+        // Drop Bootstarp low-performance Navbar
+        // Use customize navbar with high-quality material design animation
+        // in high-perf jank-free CSS3 implementation
+        var $body = document.body;
+        var $toggle = document.querySelector('.navbar-toggle');
+        var $navbar = document.querySelector('#huxblog_navbar');
+        var $collapse = document.querySelector('.navbar-collapse');
+
+        var __HuxNav__ = {
+            close: function () {
+                $navbar.className = " ";
+                // wait until animation end.
+                setTimeout(function () {
+                    // prevent frequently toggle
+                    if ($navbar.className.indexOf('in') < 0) {
+                        $collapse.style.height = "0px"
+                    }
+                }, 400)
+            },
+            open: function () {
+                $collapse.style.height = "auto"
+                $navbar.className += " in";
+            }
+        }
+
+        // Bind Event
+        $toggle.addEventListener('click', function (e) {
+            if ($navbar.className.indexOf('in') > 0) {
+                __HuxNav__.close()
+            } else {
+                __HuxNav__.open()
+            }
+        })
+
+        /**
+         * Since Fastclick is used to delegate 'touchstart' globally
+         * to hack 300ms delay in iOS by performing a fake 'click',
+         * Using 'e.stopPropagation' to stop 'touchstart' event from 
+         * $toggle/$collapse will break global delegation.
+         * 
+         * Instead, we use a 'e.target' filter to prevent handler
+         * added to document close HuxNav.  
+         *
+         * Also, we use 'click' instead of 'touchstart' as compromise
+         */
+        document.addEventListener('click', function (e) {
+            if (e.target == $toggle) return;
+            if (e.target.className == 'icon-bar') return;
+            __HuxNav__.close();
+        })
+    </script>
+
+    <!-- Search -->
+<div class="search-page">
+  <div class="search-icon-close-container">
+    <span class="search-icon-close">
+      <i class="fa fa-chevron-down"></i>
+    </span>
+  </div>
+  <div class="search-main container">
+    <div class="row">
+      <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+        <form></form>
+        <input type="text" id="search-input" placeholder="$ grep...">
+        </form>
+        <div id="search-results" class="mini-post-list"></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+    <!-- Image to hack wechat -->
+<!-- <img src="/img/icon_wechat.png" width="0" height="0"> -->
+<!-- <img src="/img/home-bg.jpg" width="0" height="0"> -->
+
+<!-- Post Header -->
+
+
+
+<style type="text/css">
+    header.intro-header{
+        position: relative;
+        background-image: url('/img/home-bg.jpg');
+        background: ;
+    }
+
+    
+    header.intro-header .header-mask{
+        width: 100%;
+        height: 100%;
+        position: absolute;
+        background: rgba(0,0,0, 0.0);
+    }
+    
+</style>
+
+
+
+
+<header class="intro-header style-text" >
+
+    <div class="header-mask"></div>
+    
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+                <div class="post-heading">
+                    <div class="tags">
+                        
+                        <a class="tag" href="/archive/?tag=Python" title="Python">Python</a>
+                        
+                        <a class="tag" href="/archive/?tag=%E7%B5%B1%E8%A8%88" title="統計">統計</a>
+                        
+                        <a class="tag" href="/archive/?tag=%E7%B5%B1%E8%A8%88%E6%A4%9C%E5%AE%9A" title="統計検定">統計検定</a>
+                        
+                    </div>
+                    <h1>EDA CookBook - 生存分析とKaplanMeier推定量</h1>
+                    
+                    <h2 class="subheading">生存分析 1/N</h2>
+                    <p>
+                        公開日: 2022-08-07
+                        <br>
+                        更新日: 2022-10-06
+                        
+                    </p>
+                </div>
+            </div>
+        </div>
+    </div>
+</header>
+
+
+
+
+
+
+
+<!-- Post Content -->
+<article>
+    <div class="container">
+        <div class="row">
+
+    <!-- Post Container -->
+         <div class="
+                col-lg-8 col-lg-offset-2
+                col-md-10 col-md-offset-1
+                post-container">
+
+                <!-- Multi-Lingual -->
+                
+
+				<p><strong>Table of Contents</strong>
+<!-- START doctoc generated TOC please keep comment here to allow auto update -->
+<!-- DON'T EDIT THIS SECTION, INSTEAD RE-RUN doctoc TO UPDATE --></p>
+
+<ul>
+  <li><a href="#%E5%95%8F%E9%A1%8C%E6%84%8F%E8%AD%98">問題意識</a>
+    <ul>
+      <li><a href="#%E7%94%9F%E5%AD%98%E5%88%86%E6%9E%90%E3%81%AE%E7%89%B9%E5%BE%B4">生存分析の特徴</a></li>
+      <li><a href="#censoring%E3%81%AE%E7%A8%AE%E9%A1%9E">censoringの種類</a></li>
+      <li><a href="#notation-and-terminology">Notation and Terminology</a></li>
+    </ul>
+  </li>
+  <li><a href="#kaplan-meier%E6%8E%A8%E5%AE%9A%E9%87%8F">Kaplan-Meier推定量</a>
+    <ul>
+      <li><a href="#survival-data%E3%81%AE%E5%BD%A2%E5%BC%8F">Survival Dataの形式</a></li>
+      <li><a href="#kaplan-meier%E6%8E%A8%E5%AE%9A%E9%87%8F-1">Kaplan-Meier推定量</a></li>
+      <li><a href="#confidence-interval%E3%81%AE%E5%B0%8E%E5%87%BA">Confidence Intervalの導出</a></li>
+      <li><a href="#%E3%83%8D%E3%83%AB%E3%82%BD%E3%83%B3%E3%82%A2%E3%83%BC%E3%83%AC%E3%83%B3%E6%8E%A8%E5%AE%9A%E9%87%8F%E3%81%A8%E3%81%AE%E9%96%A2%E4%BF%82">ネルソンアーレン推定量との関係</a>
+        <ul>
+          <li><a href="#standard-errors-for-the-nelson-aalen-estimator">Standard errors for the Nelson-Aalen estimator</a></li>
+        </ul>
+      </li>
+      <li><a href="#median%E3%81%AE%E8%A9%95%E4%BE%A1">Medianの評価</a></li>
+    </ul>
+  </li>
+  <li><a href="#the-log-rank-test">The log-rank test</a>
+    <ul>
+      <li><a href="#%E5%95%8F%E9%A1%8C%E8%A8%AD%E5%AE%9A">問題設定</a></li>
+      <li><a href="#%E6%A4%9C%E5%AE%9A%E7%B5%B1%E8%A8%88%E9%87%8F%E3%81%AE%E5%B0%8E%E5%87%BA">検定統計量の導出</a></li>
+      <li><a href="#multiple-groups%E3%81%B8%E3%81%AE%E6%8B%A1%E5%BC%B5">Multiple groupsへの拡張</a></li>
+      <li><a href="#python%E3%81%A7%E6%A4%9C%E5%AE%9A%E9%96%A2%E6%95%B0%E3%82%92%E6%9B%B8%E3%81%84%E3%81%A6%E3%81%BF%E3%82%8B">Pythonで検定関数を書いてみる</a></li>
+    </ul>
+  </li>
+  <li><a href="#references">References</a></li>
+</ul>
+
+<!-- END doctoc generated TOC please keep comment here to allow auto update -->
+
+<h2 id="問題意識">問題意識</h2>
+
+<ul>
+  <li>とある属性や処置が顧客の生存時間にどのように影響するのかを分析する機会は多い</li>
+  <li>生存分析に置いて, 分析データの制約より, 顧客がchurnする前に観測期間が終了時点を迎えたり, study dropoutという問題に直面することが多い</li>
+  <li>いわゆるtime-to-event data, failure-time dataの分析手法を身につけたい</li>
+</ul>
+
+<h3 id="生存分析の特徴">生存分析の特徴</h3>
+
+<ul>
+  <li>連続時間をベースに分析, 時間は正の実数</li>
+  <li>subjectに応じて, exactな生存時間がわかったり, 打ち切りを迎えたりする(partially right-censored data)</li>
+  <li>打ち切りデータ(= partially observed data)の存在のため, meanやvarianceといったmomentの計算が困難</li>
+</ul>
+
+<h3 id="censoringの種類">censoringの種類</h3>
+
+<p>打ち切り(Censoring)の種類はおもに３つに区分されます:</p>
+
+<ul>
+  <li>Fixed type I censoring</li>
+  <li>Random type I censoring</li>
+  <li>Type II censoring</li>
+</ul>
+
+<blockquote>
+  <p>Fixed type I censoring</p>
+</blockquote>
+
+<p>分析期間が$C$時間経過後に, すべてのsubjectについて終了となる場合に発生するCensoringです.
+故障分析を例にするならば, 100日を $C$ としたとき, 100日以内に故障を迎えた機会については<code class="language-plaintext highlighter-rouge">故障フラグ=True</code>と故障までの日数 <code class="language-plaintext highlighter-rouge">T = 78</code>　と観察されるが, 100日以内に故障しなかったものについては, <code class="language-plaintext highlighter-rouge">故障フラグ=False</code>と<code class="language-plaintext highlighter-rouge">T = 100</code>という形で打ち切りとなった生存時間しか観察できません.</p>
+
+<blockquote>
+  <p>Random type I censoring</p>
+</blockquote>
+
+<p>分析期間が$C_i$時間経過後に終了という形でデザインされているが, $C_i$がsubject毎に異なる場合のCensoringのことです.</p>
+
+<blockquote>
+  <p>Type II censoring</p>
+</blockquote>
+
+<p>観察期間が事前に定めたCensring time, $C$, 時間経過することなく打ち切りを迎えてしまった場合のことです.
+実験プロトコルからの逸脱などが例としてあります.</p>
+
+<h3 id="notation-and-terminology">Notation and Terminology</h3>
+
+<blockquote>
+  <p>Survival Function</p>
+</blockquote>
+
+<p>Survival Functionは以下のようによく表現されます</p>
+
+\[S(t) = Pr(T &gt; t) = 1 - F(t)\]
+
+<ul>
+  <li>$T$: event発生までの生存時間</li>
+  <li>$S(t)$: $t$まで生存している確率, non-increasing w.r.t Time</li>
+  <li>$F(t)$: $t$まで死亡している確率, increasing w.r.t Time</li>
+  <li>$f(t)$: $t$時点での死亡についての確率密度関数</li>
+</ul>
+
+<blockquote>
+  <p>Hazard Function</p>
+</blockquote>
+
+<p>t時間まで生存している条件のもとで瞬間的に死亡する確率密度を表現したものをHazard関数, $h(t)$, といいます.
+80歳と100歳の老人を考えた時, 後者のほうが死亡リスクが高いですが, 平均寿命的には多くの人は80歳近傍で死を迎えるのでdensity function的には前者近傍のほうが大きい値が出ます.
+ただ, density functionが80歳近傍のほうが100歳近傍と比べ大きいため前者のほうが死亡リスクが高いというのは解釈がおかしくなってしまいます. そこでそれぞれの年齢における死亡リスクを表現した関数がHazard関数です.</p>
+
+<div class="math display" style="overflow: auto">
+  <p>\(\begin{align*}
+h(t) &amp;= \lim_{\Delta t \to 0} \frac{Pr(t &lt; T \leq t + \Delta t| T &gt;t)}{\Delta t}\\
+&amp;= \frac{f(t)}{S(t)}
+\end{align*}\)</p>
+</div>
+
+<ul>
+  <li>なお$F(t) = 1 - \exp(-\lambda t)$という指数分布を仮定するとhazard関数は時間$t$には無関係に$h(t)=\lambda$となります.</li>
+</ul>
+
+<p>hazard関数を積分してcumulative hazard関数を以下のように定義します:</p>
+
+\[H(t) = \int^t_0 h(u)du\]
+
+<p>このとき, hazard関数の定義に注意すると</p>
+
+\[\begin{align*}
+H(t) &amp;= \int^t_0 h(u)du\\
+&amp;= \int^t_0\frac{f(u)}{1 - F(u)}du\\
+&amp; = \left[-\log (1 - F(u))\right]_0^t
+\end{align*}\]
+
+<p>よって, 以下の関係式を得ることができます</p>
+
+\[\begin{align*}
+F(t) &amp;= 1 - \exp\left(-\int^t_0h(u)du\right)\\
+f(t) &amp;= h(t)\exp\left(-\int^t_0h(u)du\right)
+\end{align*}\]
+
+<ul>
+  <li>生存時間が指数分布従う場合, hazard関数が時間に無関係の定数であることから確率密度関数, 累積分布関数の導出が可能となります</li>
+</ul>
+
+<h2 id="kaplan-meier推定量">Kaplan-Meier推定量</h2>
+
+<p>KM推定量はnonparametricな生存関数の推定量です. Parametricに指数分布やワイブル分布を仮定しMLEで推定する方法もありますが,
+Parametric推定量では用いる分布形状から要請される仮定(harzard関数はコンスタントなど)を現実のものと適合させる, or 仮定の妥当性について分析者間で合意する事が困難のため,
+基本的にはnonparametric(or semiparametric)アプローチが生存分析では推奨されます.</p>
+
+<h3 id="survival-dataの形式">Survival Dataの形式</h3>
+
+<ul>
+  <li>$T_i$: the eventを迎えた時の潜在的生存時間 for the $i$th subject, 分析者には見えない場合がある</li>
+  <li>$C_i$: the censoring time for the $i$th subject</li>
+  <li>$\delta_i$: the event indicator</li>
+</ul>
+
+\[\delta_i = \begin{cases}1 &amp; \text{ if the eventが観察された場合, } T_i \leq C_i\\ 
+0 &amp; \text{ if the censoring timeを迎えた場合, }  T_i &gt; C_i\end{cases}\]
+
+<ul>
+  <li>$Y_i$: 観察された生存時間</li>
+</ul>
+
+\[Y_i = \min(C_i, T_i)\]
+
+<blockquote>
+  <p>データ例: <code class="language-plaintext highlighter-rouge">sksurv.datasets</code>より</p>
+</blockquote>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
+2
+3
+4
+5
+6
+7
+</pre></td><td class="rouge-code"><pre><span class="kn">import</span> <span class="nn">pandas</span> <span class="k">as</span> <span class="n">pd</span>
+<span class="kn">from</span> <span class="nn">sksurv.datasets</span> <span class="kn">import</span> <span class="n">load_veterans_lung_cancer</span>
+
+<span class="n">df_x</span><span class="p">,</span> <span class="n">array_y</span>  <span class="o">=</span> <span class="n">load_veterans_lung_cancer</span><span class="p">()</span>
+<span class="n">df_y</span> <span class="o">=</span> <span class="n">pd</span><span class="p">.</span><span class="n">DataFrame</span><span class="p">(</span><span class="n">array_y</span><span class="p">)</span>
+<span class="n">df</span> <span class="o">=</span> <span class="n">pd</span><span class="p">.</span><span class="n">concat</span><span class="p">([</span><span class="n">df_y</span><span class="p">,</span> <span class="n">df_x</span><span class="p">],</span> <span class="n">axis</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
+<span class="n">df</span><span class="p">.</span><span class="n">head</span><span class="p">()</span>
+</pre></td></tr></tbody></table></code></pre></div></div>
+
+<p>Then,</p>
+
+<table>
+  <thead>
+    <tr>
+      <th>Status</th>
+      <th>Survival_in_days</th>
+      <th>Age_in_years</th>
+      <th>Celltype</th>
+      <th>Karnofsky_score</th>
+      <th>Months_from_Diagnosis</th>
+      <th>Prior_therapy</th>
+      <th>Treatment</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>True</td>
+      <td>72.0</td>
+      <td>69.0</td>
+      <td>squamous</td>
+      <td>60.0</td>
+      <td>7.0</td>
+      <td>no</td>
+      <td>standard</td>
+    </tr>
+    <tr>
+      <td>True</td>
+      <td>411.0</td>
+      <td>64.0</td>
+      <td>squamous</td>
+      <td>70.0</td>
+      <td>5.0</td>
+      <td>yes</td>
+      <td>standard</td>
+    </tr>
+    <tr>
+      <td>True</td>
+      <td>228.0</td>
+      <td>38.0</td>
+      <td>squamous</td>
+      <td>60.0</td>
+      <td>3.0</td>
+      <td>no</td>
+      <td>standard</td>
+    </tr>
+    <tr>
+      <td>True</td>
+      <td>126.0</td>
+      <td>63.0</td>
+      <td>squamous</td>
+      <td>60.0</td>
+      <td>9.0</td>
+      <td>yes</td>
+      <td>standard</td>
+    </tr>
+    <tr>
+      <td>True</td>
+      <td>118.0</td>
+      <td>65.0</td>
+      <td>squamous</td>
+      <td>70.0</td>
+      <td>11.0</td>
+      <td>yes</td>
+      <td>standard</td>
+    </tr>
+  </tbody>
+</table>
+
+<ul>
+  <li><code class="language-plaintext highlighter-rouge">Status</code>: the eventを迎えた場合<code class="language-plaintext highlighter-rouge">True</code>, $\delta_i$</li>
+  <li><code class="language-plaintext highlighter-rouge">Survival_in_days</code>: 観察された生存時間, $Y_i$</li>
+  <li><code class="language-plaintext highlighter-rouge">Age_in_years</code>: 年齢</li>
+</ul>
+
+<p>データ型が<code class="language-plaintext highlighter-rouge">np.float64</code>以外のカラムのvalueを確認して見る場合は以下:</p>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
+2
+3
+4
+5
+6
+7
+</pre></td><td class="rouge-code"><pre><span class="n">cat_cols</span> <span class="o">=</span> <span class="n">df</span><span class="p">.</span><span class="n">select_dtypes</span><span class="p">(</span><span class="n">exclude</span><span class="o">=</span><span class="n">np</span><span class="p">.</span><span class="n">float64</span><span class="p">).</span><span class="n">columns</span><span class="p">.</span><span class="n">tolist</span><span class="p">()</span>
+<span class="p">(</span><span class="n">pd</span><span class="p">.</span><span class="n">DataFrame</span><span class="p">(</span>
+            <span class="n">df</span><span class="p">[</span><span class="n">cat_cols</span><span class="p">].</span><span class="n">melt</span><span class="p">(</span><span class="n">var_name</span><span class="o">=</span><span class="s">'column'</span><span class="p">,</span> 
+                              <span class="n">value_name</span><span class="o">=</span><span class="s">'value'</span>
+                             <span class="p">).</span><span class="n">value_counts</span><span class="p">())</span>
+            <span class="p">.</span><span class="n">rename</span><span class="p">(</span><span class="n">columns</span><span class="o">=</span><span class="p">{</span><span class="mi">0</span><span class="p">:</span> <span class="s">'counts'</span><span class="p">})</span>
+            <span class="p">.</span><span class="n">sort_values</span><span class="p">(</span><span class="n">by</span><span class="o">=</span><span class="p">[</span><span class="s">'column'</span><span class="p">,</span> <span class="s">'counts'</span><span class="p">]))</span>
+</pre></td></tr></tbody></table></code></pre></div></div>
+
+<p>Then,</p>
+
+<table>
+  <thead>
+    <tr>
+      <th>column</th>
+      <th>value</th>
+      <th>counts</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>Celltype</td>
+      <td>adeno</td>
+      <td>27</td>
+    </tr>
+    <tr>
+      <td> </td>
+      <td>large</td>
+      <td>27</td>
+    </tr>
+    <tr>
+      <td> </td>
+      <td>squamous</td>
+      <td>35</td>
+    </tr>
+    <tr>
+      <td> </td>
+      <td>smallcell</td>
+      <td>48</td>
+    </tr>
+    <tr>
+      <td>Prior_therapy</td>
+      <td>yes</td>
+      <td>40</td>
+    </tr>
+    <tr>
+      <td> </td>
+      <td>no</td>
+      <td>97</td>
+    </tr>
+    <tr>
+      <td>Status</td>
+      <td>False</td>
+      <td>9</td>
+    </tr>
+    <tr>
+      <td> </td>
+      <td>True</td>
+      <td>128</td>
+    </tr>
+    <tr>
+      <td>Treatment</td>
+      <td>test</td>
+      <td>68</td>
+    </tr>
+    <tr>
+      <td> </td>
+      <td>standard</td>
+      <td>69</td>
+    </tr>
+  </tbody>
+</table>
+
+<h3 id="kaplan-meier推定量-1">Kaplan-Meier推定量</h3>
+
+<blockquote>
+  <p>基本方針</p>
+</blockquote>
+
+<ul>
+  <li>subjectが同じ生存分布関数に従う仮定の下でKaplan-Meier推定量というnonparametric推定量を用いることができます</li>
+  <li>the empirical cumulative distribution function, $F_n(t)$を計算し $S(t) \equiv 1 - F_n(t)$で推定</li>
+</ul>
+
+<blockquote>
+  <p>推定量</p>
+</blockquote>
+
+\[\hat{S}(t) = \prod_{j \lt t} \frac{n_j - d_j}{n_j}\]
+
+<ul>
+  <li>$n_j$: the total number of observations at time $j$, $j-1$期末時点で生存 &amp; 今期censoredされていないsubject</li>
+  <li>$d_j$: $j$期に死亡した人数</li>
+</ul>
+
+<blockquote>
+  <p><code class="language-plaintext highlighter-rouge">sksurv.nonparametric</code>を用いた推定</p>
+</blockquote>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
+2
+3
+4
+5
+6
+7
+8
+9
+10
+11
+</pre></td><td class="rouge-code"><pre><span class="n">is_therapy</span> <span class="o">=</span> <span class="n">df</span><span class="p">[</span><span class="s">'Prior_therapy'</span><span class="p">]</span> <span class="o">==</span> <span class="s">'yes'</span>
+<span class="n">event</span> <span class="o">=</span> <span class="n">df</span><span class="p">[</span><span class="s">'Status'</span><span class="p">].</span><span class="n">values</span>
+<span class="n">time</span> <span class="o">=</span> <span class="n">df</span><span class="p">[</span><span class="s">'Survival_in_days'</span><span class="p">].</span><span class="n">values</span>
+<span class="n">x_total</span><span class="p">,</span> <span class="n">y_total</span> <span class="o">=</span> <span class="n">kaplan_meier_estimator</span><span class="p">(</span><span class="n">event</span><span class="p">,</span> <span class="n">time</span><span class="p">)</span>
+<span class="n">x_treated</span><span class="p">,</span> <span class="n">y_treated</span> <span class="o">=</span> <span class="n">kaplan_meier_estimator</span><span class="p">(</span><span class="n">event</span><span class="p">[</span><span class="n">is_therapy</span><span class="p">],</span> <span class="n">time</span><span class="p">[</span><span class="n">is_therapy</span><span class="p">])</span>
+<span class="n">x_control</span><span class="p">,</span> <span class="n">y_control</span> <span class="o">=</span> <span class="n">kaplan_meier_estimator</span><span class="p">(</span><span class="n">event</span><span class="p">[</span><span class="o">~</span><span class="n">is_therapy</span><span class="p">],</span> <span class="n">time</span><span class="p">[</span><span class="o">~</span><span class="n">is_therapy</span><span class="p">])</span>
+
+<span class="n">plt</span><span class="p">.</span><span class="n">step</span><span class="p">(</span><span class="n">x_treated</span><span class="p">,</span> <span class="n">y_treated</span><span class="p">,</span> <span class="n">where</span><span class="o">=</span><span class="s">"post"</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s">'treated'</span><span class="p">)</span>
+<span class="n">plt</span><span class="p">.</span><span class="n">step</span><span class="p">(</span><span class="n">x_control</span><span class="p">,</span> <span class="n">y_control</span><span class="p">,</span> <span class="n">where</span><span class="o">=</span><span class="s">"post"</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s">'controled'</span><span class="p">)</span>
+<span class="n">plt</span><span class="p">.</span><span class="n">ylim</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">)</span>
+<span class="n">plt</span><span class="p">.</span><span class="n">legend</span><span class="p">();</span>
+</pre></td></tr></tbody></table></code></pre></div></div>
+
+<blockquote>
+  <p>pandasとnumpyを用いて再現したい場合</p>
+</blockquote>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
+2
+3
+4
+5
+6
+7
+8
+9
+10
+11
+12
+13
+14
+15
+16
+17
+18
+19
+20
+21
+</pre></td><td class="rouge-code"><pre><span class="c1">## x_total, y_totalの再現のみ
+</span><span class="n">km_idx</span><span class="p">,</span> <span class="n">km_freq</span> <span class="o">=</span> <span class="n">np</span><span class="p">.</span><span class="n">unique</span><span class="p">(</span><span class="n">time</span><span class="p">,</span> <span class="n">return_counts</span><span class="o">=</span><span class="bp">True</span><span class="p">)</span>
+<span class="n">km_freq</span> <span class="o">=</span> <span class="n">np</span><span class="p">.</span><span class="n">cumsum</span><span class="p">(</span><span class="n">km_freq</span><span class="p">[::</span><span class="o">-</span><span class="mi">1</span><span class="p">])[::</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span>
+<span class="n">death_idx</span><span class="p">,</span> <span class="n">death_freq</span> <span class="o">=</span> <span class="n">np</span><span class="p">.</span><span class="n">unique</span><span class="p">(</span><span class="n">time</span><span class="p">[</span><span class="n">event</span><span class="p">],</span> <span class="n">return_counts</span><span class="o">=</span><span class="bp">True</span><span class="p">)</span>
+
+<span class="n">df_left</span> <span class="o">=</span> <span class="n">pd</span><span class="p">.</span><span class="n">DataFrame</span><span class="p">(</span><span class="n">np</span><span class="p">.</span><span class="n">array</span><span class="p">([</span><span class="n">km_idx</span><span class="p">,</span> <span class="n">km_freq</span><span class="p">],</span><span class="n">dtype</span><span class="o">=</span><span class="n">np</span><span class="p">.</span><span class="n">int64</span><span class="p">).</span><span class="n">T</span><span class="p">,</span><span class="n">columns</span><span class="o">=</span><span class="p">[</span><span class="s">'time'</span><span class="p">,</span> <span class="s">'obs'</span><span class="p">])</span>
+<span class="n">df_right</span> <span class="o">=</span> <span class="n">pd</span><span class="p">.</span><span class="n">DataFrame</span><span class="p">(</span><span class="n">np</span><span class="p">.</span><span class="n">array</span><span class="p">([</span><span class="n">death_idx</span><span class="p">,</span> <span class="n">death_freq</span><span class="p">],</span><span class="n">dtype</span><span class="o">=</span><span class="n">np</span><span class="p">.</span><span class="n">int64</span><span class="p">).</span><span class="n">T</span><span class="p">,</span><span class="n">columns</span><span class="o">=</span><span class="p">[</span><span class="s">'time'</span><span class="p">,</span> <span class="s">'death'</span><span class="p">])</span>
+<span class="n">df_merge</span> <span class="o">=</span> <span class="p">(</span><span class="n">pd</span><span class="p">.</span><span class="n">merge</span><span class="p">(</span><span class="n">df_left</span><span class="p">,</span> <span class="n">df_right</span><span class="p">,</span> <span class="n">how</span><span class="o">=</span><span class="s">'left'</span><span class="p">,</span> <span class="n">on</span><span class="o">=</span><span class="s">'time'</span><span class="p">)).</span><span class="n">fillna</span><span class="p">(</span><span class="mi">0</span><span class="p">)</span>
+<span class="n">df_merge</span><span class="p">[</span><span class="s">'ratio'</span><span class="p">]</span> <span class="o">=</span> <span class="n">np</span><span class="p">.</span><span class="n">cumprod</span><span class="p">(</span><span class="mi">1</span> <span class="o">-</span> <span class="n">df_merge</span><span class="p">[</span><span class="s">'death'</span><span class="p">]</span><span class="o">/</span><span class="n">df_merge</span><span class="p">[</span><span class="s">'obs'</span><span class="p">])</span>
+
+<span class="c1">## 95% confidence intervalの計算
+</span><span class="n">df_merge</span><span class="p">[</span><span class="s">'std_err'</span><span class="p">]</span> <span class="o">=</span> <span class="n">np</span><span class="p">.</span><span class="n">sqrt</span><span class="p">(</span><span class="n">np</span><span class="p">.</span><span class="n">cumsum</span><span class="p">(</span><span class="n">df_merge</span><span class="p">[</span><span class="s">'death'</span><span class="p">]</span><span class="o">/</span><span class="p">(</span><span class="n">df_merge</span><span class="p">[</span><span class="s">'obs'</span><span class="p">]</span> <span class="o">*</span> <span class="p">(</span><span class="n">df_merge</span><span class="p">[</span><span class="s">'obs'</span><span class="p">]</span> <span class="o">-</span> <span class="n">df_merge</span><span class="p">[</span><span class="s">'death'</span><span class="p">]))))</span>
+<span class="n">df_merge</span><span class="p">[</span><span class="s">'CI_lower'</span><span class="p">]</span> <span class="o">=</span> <span class="n">np</span><span class="p">.</span><span class="n">clip</span><span class="p">(</span><span class="n">df_merge</span><span class="p">[</span><span class="s">'ratio'</span><span class="p">]</span> <span class="o">*</span> <span class="n">np</span><span class="p">.</span><span class="n">exp</span><span class="p">(</span><span class="o">-</span><span class="mf">1.96</span> <span class="o">*</span> <span class="n">df_merge</span><span class="p">[</span><span class="s">'std_err'</span><span class="p">]),</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">)</span>
+<span class="n">df_merge</span><span class="p">[</span><span class="s">'CI_upper'</span><span class="p">]</span> <span class="o">=</span> <span class="n">np</span><span class="p">.</span><span class="n">clip</span><span class="p">(</span><span class="n">df_merge</span><span class="p">[</span><span class="s">'ratio'</span><span class="p">]</span> <span class="o">*</span> <span class="n">np</span><span class="p">.</span><span class="n">exp</span><span class="p">(</span><span class="mf">1.96</span> <span class="o">*</span> <span class="n">df_merge</span><span class="p">[</span><span class="s">'std_err'</span><span class="p">]),</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">)</span>
+
+<span class="c1">## plotの再現
+</span><span class="n">plt</span><span class="p">.</span><span class="n">step</span><span class="p">(</span><span class="n">df_merge</span><span class="p">[</span><span class="s">'time'</span><span class="p">].</span><span class="n">values</span><span class="p">,</span> <span class="n">df_merge</span><span class="p">[</span><span class="s">'ratio'</span><span class="p">].</span><span class="n">values</span><span class="p">,</span><span class="n">where</span><span class="o">=</span><span class="s">"post"</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s">'survival'</span><span class="p">)</span>
+<span class="n">plt</span><span class="p">.</span><span class="n">fill_between</span><span class="p">(</span><span class="n">df_merge</span><span class="p">[</span><span class="s">'time'</span><span class="p">].</span><span class="n">values</span><span class="p">,</span> <span class="n">df_merge</span><span class="p">[</span><span class="s">'CI_lower'</span><span class="p">].</span><span class="n">values</span><span class="p">,</span><span class="n">df_merge</span><span class="p">[</span><span class="s">'CI_upper'</span><span class="p">].</span><span class="n">values</span><span class="p">,</span> <span class="n">color</span> <span class="o">=</span> <span class="s">'b'</span><span class="p">,</span> <span class="n">alpha</span> <span class="o">=</span> <span class="mf">0.2</span><span class="p">,</span> <span class="n">step</span><span class="o">=</span><span class="s">"post"</span><span class="p">)</span>
+
+
+<span class="n">plt</span><span class="p">.</span><span class="n">legend</span><span class="p">();</span>
+</pre></td></tr></tbody></table></code></pre></div></div>
+
+<h3 id="confidence-intervalの導出">Confidence Intervalの導出</h3>
+
+<p>Nonparametricに推定したとはいえ, 推定値がどれほどreliableか？という問題はデータ分析の解釈において重要となります.
+推定値のreliablityを評価する際よく用いられるのが,推定値のstandard errorとConfidence Intervalです.</p>
+
+<p>なお, Notationとして $\hat f(t)$はKM推定量から得られた確率密度関数とします.</p>
+
+\[\hat f(t) \equiv \frac{d_t}{n_t}\]
+
+<blockquote>
+  <p>Central Limit Theorem for $\hat f(t)$</p>
+</blockquote>
+
+<p>$\hat f(t)$はbinomial likelihoodに基づき計算されるので,</p>
+
+\[\sqrt{n_t}(\hat f(t) - f(t)) \xrightarrow{d}N(0, f(t)(1 - f(t)))\]
+
+<p>言い換えると, $\hat f(t)$はapproximately normal with mean $f(t)$ and variance $f(t)(1 - f(t))/n_t$なので</p>
+
+\[Var(\hat f(t)) = \frac{d_t(n_t - d_t)}{n_t^3}\]
+
+<blockquote>
+  <p>Log transformation &amp; Delta Method</p>
+</blockquote>
+
+<p>Log transformationしたSurvival Functionを考えます</p>
+
+\[\log S(t) = \sum_{j \leq t}\log(1 - f(j))\]
+
+<p>$f(t)$が互いにindependentであるという仮定の下で$\log S(t)$のVarianceはDelta Methodを用いて以下のように計算することができます.</p>
+
+\[Var(log(1 - \hat f(t)) = \frac{Var(\hat f(t))}{(1 - \hat f(t))^2}\]
+
+<p>従って, $Var(\log \hat S(t))$の推定量を$\hat s^2(t)$としたとき,</p>
+
+\[\hat s^2(t) = \sum_{j\leq t} \frac{d_j}{n_j(n_j - d_j)}\]
+
+<p>よって, Confidence Intervalは</p>
+
+\[\begin{align*}
+CI &amp;= \exp(\log \hat S(t) \pm 1.96 \hat s(t))\\
+&amp;= \hat S(t)\exp(\pm 1.96 \hat s(t))
+\end{align*}\]
+
+<blockquote>
+  <p>どのような仮定下正当化されるのか？</p>
+</blockquote>
+
+<ul>
+  <li>確率変数としての生存日数が各$t_j$ポイントで評価される離散分布に従っている場合</li>
+  <li>各$t_j$ポイントで評価される$f(t_j)$が互いに独立</li>
+  <li>生存日数がcontinuousの場合は, 別の切り口が必要</li>
+  <li>なおここでは紹介はしないがlog-log approachでのCI導出が良いとされている(Rでは上記のCIがデフォルトで出力される)</li>
+</ul>
+
+<h3 id="ネルソンアーレン推定量との関係">ネルソンアーレン推定量との関係</h3>
+
+<p>累積ハザード関数がその瞬間瞬間ごとのリスクの合計値に着目し, イベント発生者数/リスク集合の和で評価したものをネルソンアーレン推定量といいます:</p>
+
+\[\tilde H(t) = \sum_{j=1}^t\frac{d_j}{n_j}\]
+
+<p>累積ハザード関数と生存関数の関係式が</p>
+
+\[S(t) = \exp(-H(t))\]
+
+<p>で表せられることに着目し, 累積ハザード関数の推定量としてのネルソンアーレン推定量, $\tilde H(t)$, から生存関数を以下のように表現することができます</p>
+
+\[\begin{align*}
+\tilde H(t) &amp;= \sum_{j=1}^t\frac{d_j}{n_j}\\
+\tilde S(t) &amp;=\prod_{j=1}^t\exp(-\frac{d_j}{n_j})
+\end{align*}\]
+
+<p>一般にこれは小サンプルに有効な推定量と言われていますが, KM推定量との関係性として以下が知られています:</p>
+
+\[\tilde S(t) \geq \hat S(t) \forall t\]
+
+<blockquote>
+  <p>Proof</p>
+</blockquote>
+
+<p>まず$f(x) = \exp(-x) - (1 - x)$を考えます. 導関数を確認すればわかりますが, 任意の$x$において</p>
+
+\[\exp(-x) \geq (1 - x)\]
+
+<p>が成立します. 従って,</p>
+
+<div class="math display" style="overflow: auto">
+  <p>\(\begin{align*}
+\tilde S(t) &amp;= \prod_{j=1}^t\exp(-\frac{d_j}{n_j})\\
+&amp;\geq \prod_{j=1}^t \left(1 - \frac{d_j}{n_j}\right)\\
+&amp;= \hat S(t)
+\end{align*}\)</p>
+</div>
+
+<h4 id="standard-errors-for-the-nelson-aalen-estimator">Standard errors for the Nelson-Aalen estimator</h4>
+
+<p>standard errorの計算のIntuitionは, NA推定量は毎期のイベント発生 or notのbinomial probabilityの合計を計算しているのと同じなので</p>
+
+<div class="math display" style="overflow: auto">
+  <p>\(\begin{align*}
+Var(\tilde H(t)) &amp;= \sum Var\left(\frac{d_j}{n_j}\right)\\
+&amp;= \sum\left(\frac{d_j(n_j - d_j)}{n_j^3}\right)
+\end{align*}\)</p>
+</div>
+
+<h3 id="medianの評価">Medianの評価</h3>
+
+<p>生存分析のデータの多くはcensored dataなので means を計算することができません(条件付き means なら計算できますが).
+一方, median は計算することができ</p>
+
+\[\text{Median}(t) = \min(t) \text{ s.t. } \hat S(t) \leq 0.5\]
+
+<h2 id="the-log-rank-test">The log-rank test</h2>
+<h3 id="問題設定">問題設定</h3>
+
+<ul>
+  <li>２つのグループの生存時間分布に差が存在するか検定したいとする, i.e., 生存関数について$H_0: S_1 = S_2$</li>
+  <li>$n_{1j}, d_{1j}$: the time, $t_j$におけるグループ1の観察人数と死亡人数</li>
+  <li>$n_{2j}, d_{2j}$: the time, $t_j$におけるグループ2の観察人数と死亡人数</li>
+</ul>
+
+<h3 id="検定統計量の導出">検定統計量の導出</h3>
+
+<blockquote>
+  <p>the time, $t_j$, におけるContingency Table</p>
+</blockquote>
+
+<table>
+  <thead>
+    <tr>
+      <th> </th>
+      <th>Group 1</th>
+      <th>Group 2</th>
+      <th>Total</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>Deaths</td>
+      <td>$d_{1j}$</td>
+      <td>$d_{2j}$</td>
+      <td>$d_{j}$</td>
+    </tr>
+    <tr>
+      <td>Survivors</td>
+      <td>$n_{1j} - d_{1j}$</td>
+      <td>$n_{2j} - d_{2j}$</td>
+      <td>$n_{j} - d_{j}$</td>
+    </tr>
+    <tr>
+      <td>Obs</td>
+      <td>$n_{1j}$</td>
+      <td>$n_{2j}$</td>
+      <td>$n_{j}$</td>
+    </tr>
+  </tbody>
+</table>
+
+<blockquote>
+  <p>chi-squared distributionの導出</p>
+</blockquote>
+
+<p>The null hypothesis, $S_1 = S_2$の下では, 確率変数$D_{1j}$はthe hypergeometric distribution(超幾何分布)に従うので, meanとvarianceはそれぞれ</p>
+
+\[\begin{align*}
+e_{1j} &amp;= n_{1j}\frac{d_j}{n_j}\\
+v_{1j} &amp;= \frac{d_j}{n_j}\frac{n_j - d_j}{n_j}\frac{n_{1j}n_{2j}}{n_j - 1}
+\end{align*}\]
+
+<p>このとき, $w_j = d_{1j} − e_{1j}$はaprroximatelyに$N(0, v_{1j})$に従うと考えられるので, 条件付き独立の仮定の下,</p>
+
+\[W \sim N(0, V), \text{ where } W = \sum_{j=1}^T w_j, V = \sum_{j=1}^T v_j\]
+
+<p>従って, 検定統計量は, 自由度1のカイ自乗分布に従うことから</p>
+
+\[\frac{W^2}{V} = \frac{(\sum w_j)^2}{\sum v_j} \sim \chi^2_1\]
+
+<ul>
+  <li>これはthe log-rank test, または the Cochran-Mantel-Haenszel testと呼ばれます</li>
+</ul>
+
+<h3 id="multiple-groupsへの拡張">Multiple groupsへの拡張</h3>
+
+<p>Reference Group１つ(便宜上group indexは0とする)を含む$K + 1$ groupsを考えます. このとき, 次のベクトルを考えます:</p>
+
+\[\bold w_j = (w_{1j}, w_{2j}, \cdots, w_{Kj})\]
+
+<p>$\bold w_j$のconditional covariance matrix, $\bold V_j$は</p>
+
+\[\begin{align*}
+(V_j)_{ii} &amp; = \frac{d_j}{n_j}\frac{n_j - d_j}{n_j}\frac{n_{1j}(n_{j}-n_{ij})}{n_j - 1}\\
+(V_j)_{ik} &amp; = - \frac{n_{ij}n_{kj}d_j(n_j - d_j)}{n_j^2(n_j-1)}\text{ where } i \neq k
+\end{align*}\]
+
+<p>Then,</p>
+
+\[\bold w^T \bold V^{-1} \bold w \sim \chi^2_K\]
+
+<h3 id="pythonで検定関数を書いてみる">Pythonで検定関数を書いてみる</h3>
+
+<ul>
+  <li><code class="language-plaintext highlighter-rouge">lifelines.statistics.logrank_test</code>と出力結果が一致することは確認済み</li>
+</ul>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
+2
+3
+4
+5
+6
+7
+8
+9
+10
+11
+12
+13
+14
+15
+16
+17
+18
+19
+20
+21
+22
+23
+24
+25
+26
+27
+28
+29
+30
+31
+32
+33
+34
+35
+36
+37
+38
+39
+40
+41
+42
+43
+44
+45
+46
+47
+48
+49
+50
+51
+52
+53
+54
+55
+56
+57
+58
+59
+60
+61
+62
+63
+64
+65
+66
+67
+68
+69
+70
+71
+72
+73
+74
+75
+76
+77
+78
+79
+80
+81
+82
+83
+84
+85
+86
+87
+88
+89
+90
+91
+92
+93
+94
+95
+96
+97
+98
+99
+100
+101
+102
+103
+</pre></td><td class="rouge-code"><pre><span class="kn">from</span> <span class="nn">scipy</span> <span class="kn">import</span> <span class="n">stats</span>
+<span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="n">np</span>
+<span class="kn">import</span> <span class="nn">pandas</span> <span class="k">as</span> <span class="n">pd</span>
+<span class="kn">from</span> <span class="nn">collections</span> <span class="kn">import</span> <span class="n">OrderedDict</span>
+
+<span class="k">def</span> <span class="nf">survival_logrank_test</span><span class="p">(</span><span class="n">duration_array</span><span class="p">,</span> <span class="n">event_array</span><span class="p">,</span> <span class="n">group_array</span><span class="p">):</span>
+    <span class="s">"""K-sample log-rank hypothesis test of identical survival functions.
+    Compares the pooled hazard rate with each group-specific
+    hazard rate. The alternative hypothesis is that the hazard
+    rate of at least one group differs from the others at some time.
+
+    Parameters
+    ----------
+    duration_array : time of event or time of censoring array, shape = (n_samples,)
+    
+    event_array : the binary event indicator array
+                  1: event observed
+                  0: censored
+    
+    group_array : array-like, shape = (n_samples,)
+                  Group membership of each sample.
+    
+    Returns
+    -------
+    chisq : float
+        Test statistic.
+    pvalue : float
+        Two-sided p-value with respect to the null hypothesis
+        that the hazard rates across all groups are equal.
+    stats : pandas.DataFrame
+        Summary statistics for each group:  number of samples,
+        observed number of events, expected number of events,
+        and test statistic.
+        Only provided if `return_stats` is True.
+    covariance : array, shape=(n_groups, n_groups)
+        Covariance matrix of the test statistic.
+        Only provided if `return_stats` is True.
+    
+    References
+    ----------
+    .. [1] Fleming, T. R. and Harrington, D. P.
+           A Class of Hypothesis Tests for One and Two Samples of Censored Survival Data.
+           Communications In Statistics 10 (1981): 763-794.
+    """</span>
+
+    <span class="n">n_samples</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">duration_array</span><span class="p">)</span>
+    <span class="n">groups</span><span class="p">,</span> <span class="n">group_counts</span> <span class="o">=</span> <span class="n">np</span><span class="p">.</span><span class="n">unique</span><span class="p">(</span><span class="n">group_array</span><span class="p">,</span> <span class="n">return_counts</span><span class="o">=</span><span class="bp">True</span><span class="p">)</span>
+    <span class="n">n_groups</span> <span class="o">=</span> <span class="n">groups</span><span class="p">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
+
+    <span class="c1"># sort descending
+</span>    <span class="n">o</span> <span class="o">=</span> <span class="n">np</span><span class="p">.</span><span class="n">argsort</span><span class="p">(</span><span class="o">-</span><span class="n">duration_array</span><span class="p">,</span> <span class="n">kind</span><span class="o">=</span><span class="s">"mergesort"</span><span class="p">)</span>
+    <span class="n">x</span> <span class="o">=</span> <span class="n">group_array</span><span class="p">[</span><span class="n">o</span><span class="p">]</span>
+    <span class="n">event</span> <span class="o">=</span> <span class="n">event_array</span><span class="p">[</span><span class="n">o</span><span class="p">]</span>
+    <span class="n">time</span> <span class="o">=</span> <span class="n">duration_array</span><span class="p">[</span><span class="n">o</span><span class="p">]</span>
+
+    <span class="n">at_risk</span> <span class="o">=</span> <span class="n">np</span><span class="p">.</span><span class="n">zeros</span><span class="p">(</span><span class="n">n_groups</span><span class="p">,</span> <span class="n">dtype</span><span class="o">=</span><span class="nb">int</span><span class="p">)</span>
+    <span class="n">observed</span> <span class="o">=</span> <span class="n">np</span><span class="p">.</span><span class="n">zeros</span><span class="p">(</span><span class="n">n_groups</span><span class="p">,</span> <span class="n">dtype</span><span class="o">=</span><span class="nb">int</span><span class="p">)</span>
+    <span class="n">expected</span> <span class="o">=</span> <span class="n">np</span><span class="p">.</span><span class="n">zeros</span><span class="p">(</span><span class="n">n_groups</span><span class="p">,</span> <span class="n">dtype</span><span class="o">=</span><span class="nb">float</span><span class="p">)</span>
+    <span class="n">covar</span> <span class="o">=</span> <span class="n">np</span><span class="p">.</span><span class="n">zeros</span><span class="p">((</span><span class="n">n_groups</span><span class="p">,</span> <span class="n">n_groups</span><span class="p">),</span> <span class="n">dtype</span><span class="o">=</span><span class="nb">float</span><span class="p">)</span>
+    <span class="n">covar_indices</span> <span class="o">=</span> <span class="n">np</span><span class="p">.</span><span class="n">diag_indices</span><span class="p">(</span><span class="n">n_groups</span><span class="p">)</span>
+
+    <span class="n">k</span> <span class="o">=</span> <span class="mi">0</span>
+    <span class="k">while</span> <span class="n">k</span> <span class="o">&lt;</span> <span class="n">n_samples</span><span class="p">:</span>
+        <span class="n">ti</span> <span class="o">=</span> <span class="n">time</span><span class="p">[</span><span class="n">k</span><span class="p">]</span>
+        <span class="n">total_events</span> <span class="o">=</span> <span class="mi">0</span>
+        <span class="k">while</span> <span class="n">k</span> <span class="o">&lt;</span> <span class="n">n_samples</span> <span class="ow">and</span> <span class="n">ti</span> <span class="o">==</span> <span class="n">time</span><span class="p">[</span><span class="n">k</span><span class="p">]:</span>
+            <span class="n">idx</span> <span class="o">=</span> <span class="n">np</span><span class="p">.</span><span class="n">searchsorted</span><span class="p">(</span><span class="n">groups</span><span class="p">,</span> <span class="n">x</span><span class="p">[</span><span class="n">k</span><span class="p">])</span>
+            <span class="k">if</span> <span class="n">event</span><span class="p">[</span><span class="n">k</span><span class="p">]:</span>
+                <span class="n">observed</span><span class="p">[</span><span class="n">idx</span><span class="p">]</span> <span class="o">+=</span> <span class="mi">1</span>
+                <span class="n">total_events</span> <span class="o">+=</span> <span class="mi">1</span>
+            <span class="n">at_risk</span><span class="p">[</span><span class="n">idx</span><span class="p">]</span> <span class="o">+=</span> <span class="mi">1</span>
+            <span class="n">k</span> <span class="o">+=</span> <span class="mi">1</span>
+        <span class="k">if</span> <span class="n">total_events</span> <span class="o">!=</span> <span class="mi">0</span><span class="p">:</span>
+            <span class="n">total_at_risk</span> <span class="o">=</span> <span class="n">k</span>
+            <span class="n">expected</span> <span class="o">+=</span> <span class="n">at_risk</span> <span class="o">*</span> <span class="p">(</span><span class="n">total_events</span> <span class="o">/</span> <span class="n">total_at_risk</span><span class="p">)</span>
+            <span class="k">if</span> <span class="n">total_at_risk</span> <span class="o">&gt;</span> <span class="mi">1</span><span class="p">:</span>
+                <span class="n">multiplier</span> <span class="o">=</span> <span class="n">total_events</span> <span class="o">*</span> <span class="p">(</span><span class="n">total_at_risk</span> <span class="o">-</span> <span class="n">total_events</span><span class="p">)</span> <span class="o">/</span> <span class="p">(</span><span class="n">total_at_risk</span> <span class="o">*</span> <span class="p">(</span><span class="n">total_at_risk</span> <span class="o">-</span> <span class="mi">1</span><span class="p">))</span>
+                <span class="n">temp</span> <span class="o">=</span> <span class="n">at_risk</span> <span class="o">*</span> <span class="n">multiplier</span>
+                <span class="n">covar</span><span class="p">[</span><span class="n">covar_indices</span><span class="p">]</span> <span class="o">+=</span> <span class="n">temp</span>
+                <span class="n">covar</span> <span class="o">-=</span> <span class="n">np</span><span class="p">.</span><span class="n">outer</span><span class="p">(</span><span class="n">temp</span><span class="p">,</span> <span class="n">at_risk</span><span class="p">)</span> <span class="o">/</span> <span class="n">total_at_risk</span>
+    
+    <span class="n">chi_df</span> <span class="o">=</span> <span class="n">n_groups</span> <span class="o">-</span> <span class="mi">1</span>
+    <span class="n">numerator</span> <span class="o">=</span> <span class="n">observed</span><span class="p">[:</span><span class="n">chi_df</span><span class="p">]</span> <span class="o">-</span> <span class="n">expected</span><span class="p">[:</span><span class="n">chi_df</span><span class="p">]</span>
+    
+    <span class="n">chisq</span> <span class="o">=</span> <span class="n">np</span><span class="p">.</span><span class="n">linalg</span><span class="p">.</span><span class="n">solve</span><span class="p">(</span><span class="n">covar</span><span class="p">[:</span><span class="n">chi_df</span><span class="p">,</span> <span class="p">:</span><span class="n">chi_df</span><span class="p">],</span> <span class="n">numerator</span><span class="p">)</span> <span class="o">@</span> <span class="n">numerator</span>
+    <span class="n">pval</span> <span class="o">=</span> <span class="n">stats</span><span class="p">.</span><span class="n">chi2</span><span class="p">.</span><span class="n">sf</span><span class="p">(</span><span class="n">chisq</span><span class="p">,</span> <span class="n">chi_df</span><span class="p">)</span>
+    
+    <span class="n">table</span> <span class="o">=</span> <span class="n">OrderedDict</span><span class="p">()</span>
+    <span class="n">table</span><span class="p">[</span><span class="s">"counts"</span><span class="p">]</span> <span class="o">=</span> <span class="n">group_counts</span>
+    <span class="n">table</span><span class="p">[</span><span class="s">"observed"</span><span class="p">]</span> <span class="o">=</span> <span class="n">observed</span>
+    <span class="n">table</span><span class="p">[</span><span class="s">"expected"</span><span class="p">]</span> <span class="o">=</span> <span class="n">expected</span>
+    <span class="n">table</span><span class="p">[</span><span class="s">"statistic"</span><span class="p">]</span> <span class="o">=</span> <span class="n">observed</span> <span class="o">-</span> <span class="n">expected</span>
+    <span class="n">table</span> <span class="o">=</span> <span class="n">pd</span><span class="p">.</span><span class="n">DataFrame</span><span class="p">.</span><span class="n">from_dict</span><span class="p">(</span><span class="n">table</span><span class="p">)</span>
+    <span class="n">table</span><span class="p">.</span><span class="n">index</span> <span class="o">=</span> <span class="n">pd</span><span class="p">.</span><span class="n">Index</span><span class="p">(</span><span class="n">groups</span><span class="p">,</span> <span class="n">name</span><span class="o">=</span><span class="s">"group"</span><span class="p">,</span> <span class="n">dtype</span><span class="o">=</span><span class="n">groups</span><span class="p">.</span><span class="n">dtype</span><span class="p">)</span>
+    
+    <span class="k">return</span> <span class="n">chisq</span><span class="p">,</span> <span class="n">pval</span><span class="p">,</span> <span class="n">table</span><span class="p">,</span> <span class="n">covar</span><span class="p">,</span> <span class="n">chi_df</span>
+
+
+<span class="c1"># numpy example
+</span><span class="n">G</span> <span class="o">=</span> <span class="n">np</span><span class="p">.</span><span class="n">array</span><span class="p">([</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">2</span><span class="p">])</span>
+<span class="n">T</span> <span class="o">=</span> <span class="n">np</span><span class="p">.</span><span class="n">array</span><span class="p">([</span><span class="mi">5</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">9</span><span class="p">,</span> <span class="mi">8</span><span class="p">,</span> <span class="mi">7</span><span class="p">,</span> <span class="mi">4</span><span class="p">,</span> <span class="mi">4</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">5</span><span class="p">,</span> <span class="mi">6</span><span class="p">,</span> <span class="mi">7</span><span class="p">])</span>
+<span class="n">E</span> <span class="o">=</span> <span class="n">np</span><span class="p">.</span><span class="n">array</span><span class="p">([</span><span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">0</span><span class="p">])</span>
+<span class="n">survival_logrank_test</span><span class="p">(</span><span class="n">duration_array</span><span class="o">=</span><span class="n">T</span><span class="p">,</span> <span class="n">event_array</span><span class="o">=</span><span class="n">E</span><span class="p">,</span> <span class="n">group_array</span><span class="o">=</span><span class="n">G</span><span class="p">)</span>
+</pre></td></tr></tbody></table></code></pre></div></div>
+
+<h2 id="references">References</h2>
+
+<blockquote>
+  <p>ライブラリー</p>
+</blockquote>
+
+<ul>
+  <li><a href="https://i.imgur.com/EOowdSD.png">LIFELINES</a></li>
+  <li><a href="https://scikit-survival.readthedocs.io/en/stable/user_guide/00-introduction.html">scikit-survival &gt; Introduction to Survival Analysis with scikit-survival</a></li>
+</ul>
+
+<blockquote>
+  <p>Lecture Notes</p>
+</blockquote>
+
+<ul>
+  <li><a href="http://www.stat.columbia.edu/~madigan/W2025/notes/survival.pdf">BIOST 515, 2004, Lecture 15 Introduction to Survival Analysis</a></li>
+  <li><a href="https://myweb.uiowa.edu/pbreheny/7210/f15/notes.html">Inference for the Kaplan-Meier Estimator</a></li>
+</ul>
+
+<blockquote>
+  <p>Stackoverflow</p>
+</blockquote>
+
+<ul>
+  <li><a href="https://stackoverflow.com/questions/32589829/how-to-get-value-counts-for-multiple-columns-at-once-in-pandas-dataframe">How to get value counts for multiple columns at once in Pandas DataFrame?</a></li>
+</ul>
+
+
+                <hr style="visibility: hidden;">
+                <hr/>
+                <b><fontsize="5">Share Buttons</font><br></b>
+                <!--see 
+    https://jekyllcodex.org/without-plugin/share-buttons/ 
+    https://ranvir.xyz/blog/why-and-how-to-add-social-sharing-buttons-on-your-jekyll-blog-using-github-pages/
+-->
+
+
+
+<style>
+#share-buttons {display: inline-block; vertical-align: middle; }
+#share-buttons:after {content: ""; display: block; clear: both;}
+#share-buttons > div {
+    position: relative;
+    text-align: left; 
+    height: 36px; 
+    width: 32px; 
+    float: left; 
+    text-align: center;
+}
+#share-buttons > div > svg {height: 16px; fill: #d5d5d5; margin-top: 10px;}
+#share-buttons > div:hover {cursor: pointer;}
+#share-buttons > div.facebook:hover > svg {fill: #3B5998;}
+#share-buttons > div.twitter:hover > svg {fill: #55ACEE;}
+#share-buttons > div.linkedin:hover > svg {fill: #0077b5;}
+#share-buttons > div.pinterest:hover > svg {fill: #CB2027;}
+#share-buttons > div.gplus:hover > svg {fill: #dd4b39;}
+#share-buttons > div.mail:hover > svg {fill: #7D7D7D;}
+#share-buttons > div.instagram:hover > svg {fill: #C73B92;}
+#share-buttons > div.facebook > svg {height: 18px; margin-top: 9px;}
+#share-buttons > div.twitter > svg {height: 20px; margin-top: 8px;}
+#share-buttons > div.linkedin > svg {height: 19px; margin-top: 7px;}
+#share-buttons > div.pinterest > svg {height: 20px; margin-top: 9px;}
+#share-buttons > div.gplus > svg {height: 17px; margin-top: 9px; position: relative; left: 1px;}
+#share-buttons > div.mail > svg {height: 14px; margin-top: 11px;}
+</style>
+
+<span style="color: black">Share on: </span><div id="share-buttons">
+    <div class="facebook" title="Share this on Facebook" onclick="gtag('event', 'Facebook', {'event_category':'Post Shared','event_label':'Facebook'}); location.href='http://www.facebook.com/share.php?u=https://ryonakagami.github.io/2022/08/07/eda-kaplanmeier/';"><svg viewBox="0 0 1792 1792" xmlns="http://www.w3.org/2000/svg"><path d="M1343 12v264h-157q-86 0-116 36t-30 108v189h293l-39 296h-254v759h-306v-759h-255v-296h255v-218q0-186 104-288.5t277-102.5q147 0 228 12z"/></svg></div>
+    <div class="twitter" title="Share this on Twitter" onclick="gtag('event', 'Twitter', {'event_category':'Post Shared','event_label':'Twitter'}); location.href='https://twitter.com/intent/tweet?text=EDA CookBook - 生存分析とKaplanMeier推定量&url=https://ryonakagami.github.io/2022/08/07/eda-kaplanmeier/';"><svg viewBox="0 0 1792 1792" xmlns="http://www.w3.org/2000/svg"><path d="M1684 408q-67 98-162 167 1 14 1 42 0 130-38 259.5t-115.5 248.5-184.5 210.5-258 146-323 54.5q-271 0-496-145 35 4 78 4 225 0 401-138-105-2-188-64.5t-114-159.5q33 5 61 5 43 0 85-11-112-23-185.5-111.5t-73.5-205.5v-4q68 38 146 41-66-44-105-115t-39-154q0-88 44-163 121 149 294.5 238.5t371.5 99.5q-8-38-8-74 0-134 94.5-228.5t228.5-94.5q140 0 236 102 109-21 205-78-37 115-142 178 93-10 186-50z"/></svg></div>
+    <div class="linkedin" title="Share this on Linkedin" onclick="gtag('event', 'Linkedin', {'event_category':'Post Shared','event_label':'Linkedin'}); location.href='https://www.linkedin.com/shareArticle?mini=true&url=https://ryonakagami.github.io/2022/08/07/eda-kaplanmeier/&title=&summary=&source=';"><svg viewBox="0 0 1792 1792" xmlns="http://www.w3.org/2000/svg"><path d="M477 625v991h-330v-991h330zm21-306q1 73-50.5 122t-135.5 49h-2q-82 0-132-49t-50-122q0-74 51.5-122.5t134.5-48.5 133 48.5 51 122.5zm1166 729v568h-329v-530q0-105-40.5-164.5t-126.5-59.5q-63 0-105.5 34.5t-63.5 85.5q-11 30-11 81v553h-329q2-399 2-647t-1-296l-1-48h329v144h-2q20-32 41-56t56.5-52 87-43.5 114.5-15.5q171 0 275 113.5t104 332.5z"/></svg></div>
+    
+    <div class="mail" title="Share this through Email" onclick="gtag('event', 'Email', {'event_category':'Post Shared','event_label':'Email'}); location.href='mailto:?&body=https://ryonakagami.github.io/2022/08/07/eda-kaplanmeier/';"><svg viewBox="0 0 1792 1792" xmlns="http://www.w3.org/2000/svg"><path d="M1792 710v794q0 66-47 113t-113 47h-1472q-66 0-113-47t-47-113v-794q44 49 101 87 362 246 497 345 57 42 92.5 65.5t94.5 48 110 24.5h2q51 0 110-24.5t94.5-48 92.5-65.5q170-123 498-345 57-39 100-87zm0-294q0 79-49 151t-122 123q-376 261-468 325-10 7-42.5 30.5t-54 38-52 32.5-57.5 27-50 9h-2q-23 0-50-9t-57.5-27-52-32.5-54-38-42.5-30.5q-91-64-262-182.5t-205-142.5q-62-42-117-115.5t-55-136.5q0-78 41.5-130t118.5-52h1472q65 0 112.5 47t47.5 113z"/></svg></div>
+</div>
+
+                
+                <hr/>
+
+                <!-- Featured Tags -->
+                <b><fontsize="5">Feature Tags</b>
+                    <div id="tag_cloud" class="tags tags-sup js-tags" 
+                    style="line-height: 0px !important;">
+                        
+                        
+                        
+                        
+                        
+                                <a data-sort="0288" 
+                                    href="/archive/?tag=%E7%B5%B1%E8%A8%88"
+                                    title="統計"
+                                    style="color: #337ab7 !important;"
+                                    rel="61">統計</a>
+                        
+                                <a data-sort="0298" 
+                                    href="/archive/?tag=Python"
+                                    title="Python"
+                                    style="color: #337ab7 !important;"
+                                    rel="51">Python</a>
+                        
+                                <a data-sort="0300" 
+                                    href="/archive/?tag=math"
+                                    title="math"
+                                    style="color: #337ab7 !important;"
+                                    rel="49">math</a>
+                        
+                                <a data-sort="0303" 
+                                    href="/archive/?tag=Linux"
+                                    title="Linux"
+                                    style="color: #337ab7 !important;"
+                                    rel="46">Linux</a>
+                        
+                                <a data-sort="0316" 
+                                    href="/archive/?tag=Ubuntu+20.04+LTS"
+                                    title="Ubuntu 20.04 LTS"
+                                    style="color: #337ab7 !important;"
+                                    rel="33">Ubuntu 20.04 LTS</a>
+                        
+                                <a data-sort="0319" 
+                                    href="/archive/?tag=Shell"
+                                    title="Shell"
+                                    style="color: #337ab7 !important;"
+                                    rel="30">Shell</a>
+                        
+                                <a data-sort="0321" 
+                                    href="/archive/?tag=English"
+                                    title="English"
+                                    style="color: #337ab7 !important;"
+                                    rel="28">English</a>
+                        
+                                <a data-sort="0324" 
+                                    href="/archive/?tag=git"
+                                    title="git"
+                                    style="color: #337ab7 !important;"
+                                    rel="25">git</a>
+                        
+                                <a data-sort="0329" 
+                                    href="/archive/?tag=%E6%96%B9%E6%B3%95%E8%AB%96"
+                                    title="方法論"
+                                    style="color: #337ab7 !important;"
+                                    rel="20">方法論</a>
+                        
+                                <a data-sort="0333" 
+                                    href="/archive/?tag=Ubuntu+22.04+LTS"
+                                    title="Ubuntu 22.04 LTS"
+                                    style="color: #337ab7 !important;"
+                                    rel="16">Ubuntu 22.04 LTS</a>
+                        
+                                <a data-sort="0337" 
+                                    href="/archive/?tag=%E7%B5%B1%E8%A8%88%E6%A4%9C%E5%AE%9A"
+                                    title="統計検定"
+                                    style="color: #337ab7 !important;"
+                                    rel="12">統計検定</a>
+                        
+                                <a data-sort="0338" 
+                                    href="/archive/?tag=%E7%AB%B6%E6%8A%80%E3%83%97%E3%83%AD%E3%82%B0%E3%83%A9%E3%83%9F%E3%83%B3%E3%82%B0"
+                                    title="競技プログラミング"
+                                    style="color: #337ab7 !important;"
+                                    rel="11">競技プログラミング</a>
+                        
+                                <a data-sort="0339" 
+                                    href="/archive/?tag=%E3%83%95%E3%83%BC%E3%83%AA%E3%82%A8%E8%A7%A3%E6%9E%90"
+                                    title="フーリエ解析"
+                                    style="color: #337ab7 !important;"
+                                    rel="10">フーリエ解析</a>
+                        
+                                <a data-sort="0340" 
+                                    href="/archive/?tag=%E5%89%8D%E5%87%A6%E7%90%86"
+                                    title="前処理"
+                                    style="color: #337ab7 !important;"
+                                    rel="9">前処理</a>
+                        
+                                <a data-sort="0340" 
+                                    href="/archive/?tag=SQL"
+                                    title="SQL"
+                                    style="color: #337ab7 !important;"
+                                    rel="9">SQL</a>
+                        
+                                <a data-sort="0340" 
+                                    href="/archive/?tag=coding"
+                                    title="coding"
+                                    style="color: #337ab7 !important;"
+                                    rel="9">coding</a>
+                        
+                                <a data-sort="0341" 
+                                    href="/archive/?tag=%E3%82%B3%E3%83%9F%E3%83%A5%E3%83%8B%E3%82%B1%E3%83%BC%E3%82%B7%E3%83%A7%E3%83%B3"
+                                    title="コミュニケーション"
+                                    style="color: #337ab7 !important;"
+                                    rel="8">コミュニケーション</a>
+                        
+                                <a data-sort="0342" 
+                                    href="/archive/?tag=Network"
+                                    title="Network"
+                                    style="color: #337ab7 !important;"
+                                    rel="7">Network</a>
+                        
+                                <a data-sort="0342" 
+                                    href="/archive/?tag=ssh"
+                                    title="ssh"
+                                    style="color: #337ab7 !important;"
+                                    rel="7">ssh</a>
+                        
+                                <a data-sort="0343" 
+                                    href="/archive/?tag=%E5%B0%86%E6%A3%8B"
+                                    title="将棋"
+                                    style="color: #337ab7 !important;"
+                                    rel="6">将棋</a>
+                        
+                                <a data-sort="0343" 
+                                    href="/archive/?tag=Data+visualization"
+                                    title="Data visualization"
+                                    style="color: #337ab7 !important;"
+                                    rel="6">Data visualization</a>
+                        
+                                <a data-sort="0343" 
+                                    href="/archive/?tag=Docker"
+                                    title="Docker"
+                                    style="color: #337ab7 !important;"
+                                    rel="6">Docker</a>
+                        
+                                <a data-sort="0343" 
+                                    href="/archive/?tag=Econometrics"
+                                    title="Econometrics"
+                                    style="color: #337ab7 !important;"
+                                    rel="6">Econometrics</a>
+                        
+                                <a data-sort="0343" 
+                                    href="/archive/?tag=VSCode"
+                                    title="VSCode"
+                                    style="color: #337ab7 !important;"
+                                    rel="6">VSCode</a>
+                        
+                                <a data-sort="0343" 
+                                    href="/archive/?tag=statistical+inference"
+                                    title="statistical inference"
+                                    style="color: #337ab7 !important;"
+                                    rel="6">statistical inference</a>
+                        
+                                <a data-sort="0344" 
+                                    href="/archive/?tag=GitHub+Pages"
+                                    title="GitHub Pages"
+                                    style="color: #337ab7 !important;"
+                                    rel="5">GitHub Pages</a>
+                        
+                                <a data-sort="0344" 
+                                    href="/archive/?tag=apt"
+                                    title="apt"
+                                    style="color: #337ab7 !important;"
+                                    rel="5">apt</a>
+                        
+                                <a data-sort="0344" 
+                                    href="/archive/?tag=development"
+                                    title="development"
+                                    style="color: #337ab7 !important;"
+                                    rel="5">development</a>
+                        
+                                <a data-sort="0345" 
+                                    href="/archive/?tag=%E3%82%B7%E3%82%B9%E3%83%86%E3%83%A0%E7%AE%A1%E7%90%86"
+                                    title="システム管理"
+                                    style="color: #337ab7 !important;"
+                                    rel="4">システム管理</a>
+                        
+                                <a data-sort="0345" 
+                                    href="/archive/?tag=Coffee"
+                                    title="Coffee"
+                                    style="color: #337ab7 !important;"
+                                    rel="4">Coffee</a>
+                        
+                                <a data-sort="0345" 
+                                    href="/archive/?tag=cloud"
+                                    title="cloud"
+                                    style="color: #337ab7 !important;"
+                                    rel="4">cloud</a>
+                        
+                                <a data-sort="0346" 
+                                    href="/archive/?tag=%E6%95%B0%E5%80%A4%E8%A8%88%E7%AE%97"
+                                    title="数値計算"
+                                    style="color: #337ab7 !important;"
+                                    rel="3">数値計算</a>
+                        
+                                <a data-sort="0346" 
+                                    href="/archive/?tag=%E7%B4%A0%E6%95%B0"
+                                    title="素数"
+                                    style="color: #337ab7 !important;"
+                                    rel="3">素数</a>
+                        
+                                <a data-sort="0346" 
+                                    href="/archive/?tag=Book"
+                                    title="Book"
+                                    style="color: #337ab7 !important;"
+                                    rel="3">Book</a>
+                        
+                                <a data-sort="0346" 
+                                    href="/archive/?tag=Font"
+                                    title="Font"
+                                    style="color: #337ab7 !important;"
+                                    rel="3">Font</a>
+                        
+                                <a data-sort="0346" 
+                                    href="/archive/?tag=Metrics"
+                                    title="Metrics"
+                                    style="color: #337ab7 !important;"
+                                    rel="3">Metrics</a>
+                        
+                                <a data-sort="0346" 
+                                    href="/archive/?tag=Poetry"
+                                    title="Poetry"
+                                    style="color: #337ab7 !important;"
+                                    rel="3">Poetry</a>
+                        
+                                <a data-sort="0346" 
+                                    href="/archive/?tag=Ubuntu+24.04+LTS"
+                                    title="Ubuntu 24.04 LTS"
+                                    style="color: #337ab7 !important;"
+                                    rel="3">Ubuntu 24.04 LTS</a>
+                        
+                                <a data-sort="0346" 
+                                    href="/archive/?tag=architecture"
+                                    title="architecture"
+                                    style="color: #337ab7 !important;"
+                                    rel="3">architecture</a>
+                        
+                                <a data-sort="0346" 
+                                    href="/archive/?tag=aws"
+                                    title="aws"
+                                    style="color: #337ab7 !important;"
+                                    rel="3">aws</a>
+                        
+                                <a data-sort="0346" 
+                                    href="/archive/?tag=shell"
+                                    title="shell"
+                                    style="color: #337ab7 !important;"
+                                    rel="3">shell</a>
+                        
+                                <a data-sort="0346" 
+                                    href="/archive/?tag=systemctl"
+                                    title="systemctl"
+                                    style="color: #337ab7 !important;"
+                                    rel="3">systemctl</a>
+                        
+                                <a data-sort="0347" 
+                                    href="/archive/?tag=%E3%83%86%E3%83%B3%E3%83%97%E3%83%AC%E3%83%BC%E3%83%88"
+                                    title="テンプレート"
+                                    style="color: #337ab7 !important;"
+                                    rel="2">テンプレート</a>
+                        
+                                <a data-sort="0347" 
+                                    href="/archive/?tag=%E3%83%87%E3%83%BC%E3%82%BF%E6%A7%8B%E9%80%A0"
+                                    title="データ構造"
+                                    style="color: #337ab7 !important;"
+                                    rel="2">データ構造</a>
+                        
+                                <a data-sort="0347" 
+                                    href="/archive/?tag=%E3%83%9D%E3%83%AF%E3%82%BD%E3%83%B3%E5%88%86%E5%B8%83"
+                                    title="ポワソン分布"
+                                    style="color: #337ab7 !important;"
+                                    rel="2">ポワソン分布</a>
+                        
+                                <a data-sort="0347" 
+                                    href="/archive/?tag=%E4%BC%9A%E8%A8%88%E5%88%86%E6%9E%90"
+                                    title="会計分析"
+                                    style="color: #337ab7 !important;"
+                                    rel="2">会計分析</a>
+                        
+                                <a data-sort="0347" 
+                                    href="/archive/?tag=%E6%96%87%E5%AD%97%E3%82%B3%E3%83%BC%E3%83%89"
+                                    title="文字コード"
+                                    style="color: #337ab7 !important;"
+                                    rel="2">文字コード</a>
+                        
+                                <a data-sort="0347" 
+                                    href="/archive/?tag=%E7%92%B0%E5%A2%83%E6%A7%8B%E7%AF%89"
+                                    title="環境構築"
+                                    style="color: #337ab7 !important;"
+                                    rel="2">環境構築</a>
+                        
+                                <a data-sort="0347" 
+                                    href="/archive/?tag=%E8%AB%96%E6%96%87"
+                                    title="論文"
+                                    style="color: #337ab7 !important;"
+                                    rel="2">論文</a>
+                        
+                                <a data-sort="0347" 
+                                    href="/archive/?tag=App"
+                                    title="App"
+                                    style="color: #337ab7 !important;"
+                                    rel="2">App</a>
+                        
+                                <a data-sort="0347" 
+                                    href="/archive/?tag=Bayesian"
+                                    title="Bayesian"
+                                    style="color: #337ab7 !important;"
+                                    rel="2">Bayesian</a>
+                        
+                                <a data-sort="0347" 
+                                    href="/archive/?tag=Dynamic+Programming"
+                                    title="Dynamic Programming"
+                                    style="color: #337ab7 !important;"
+                                    rel="2">Dynamic Programming</a>
+                        
+                                <a data-sort="0347" 
+                                    href="/archive/?tag=Keyboard"
+                                    title="Keyboard"
+                                    style="color: #337ab7 !important;"
+                                    rel="2">Keyboard</a>
+                        
+                                <a data-sort="0347" 
+                                    href="/archive/?tag=Processing"
+                                    title="Processing"
+                                    style="color: #337ab7 !important;"
+                                    rel="2">Processing</a>
+                        
+                                <a data-sort="0347" 
+                                    href="/archive/?tag=R"
+                                    title="R"
+                                    style="color: #337ab7 !important;"
+                                    rel="2">R</a>
+                        
+                                <a data-sort="0347" 
+                                    href="/archive/?tag=Steam"
+                                    title="Steam"
+                                    style="color: #337ab7 !important;"
+                                    rel="2">Steam</a>
+                        
+                                <a data-sort="0347" 
+                                    href="/archive/?tag=filesystem"
+                                    title="filesystem"
+                                    style="color: #337ab7 !important;"
+                                    rel="2">filesystem</a>
+                        
+                                <a data-sort="0347" 
+                                    href="/archive/?tag=quarto"
+                                    title="quarto"
+                                    style="color: #337ab7 !important;"
+                                    rel="2">quarto</a>
+                        
+                                <a data-sort="0347" 
+                                    href="/archive/?tag=regex"
+                                    title="regex"
+                                    style="color: #337ab7 !important;"
+                                    rel="2">regex</a>
+                    </div>
+
+                <br>
+
+                <b><fontsize="5">Leave a Comment</font><br>(注意：GitHub Accountが必要となります）</b>
+                
+                <script src="https://utteranc.es/client.js"
+                    repo="RyoNakagami/RyoNakagami.github.io"
+                    issue-term="url"
+                    theme="github-light"
+                    crossorigin="anonymous"
+                    async>Reduce unused JavaScript
+                
+                </script>
+
+
+            </div>  
+
+    <!-- Side Catalog Container -->
+        
+            <div class="
+                col-lg-1 col-lg-offset-0
+                visible-lg-block
+                sidebar-container
+                catalog-container">
+                <div class="side-catalog fixed" style="margin-top:3%">
+                    <hr class="hidden-sm hidden-xs">
+                    <h5>
+                        <a class="catalog-toggle" href="#">CONTENTS</a>
+                    </h5>
+                    <ul class="catalog-body"></ul>
+                </div>
+            </div>
+        
+    <!-- Sidebar Container -->
+            <!-- <div class="
+                col-lg-10 col-lg-offset-1
+                col-md-10 col-md-offset-1
+                sidebar-container row"> -->
+                <!-- 
+<hr>
+<h5>FRIENDS</h5>
+<ul class="list-inline">
+  
+  <li><a href="https://twitter.com/bluesky0804?ref_src=twsrc%5Egoogle%7Ctwcamp%5Eserp%7Ctwgr%5Eauthor">bluesky0804</a></li>
+  
+</ul>
+
+ -->
+            </div>
+        </div>
+    </div>
+</article>
+
+<!-- add support for mathjax by voleking-->
+
+  <script async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml.js" id="MathJax-script"></script>
+<script>
+  MathJax = {
+    tex: {
+      inlineMath: [['$','$'], ['\\(','\\)']],
+      displayMath: [['$$','$$'], ['\\[','\\]']],
+      processEscapes: true,
+      processEnvironments: true, // for pseudo
+      tags: "ams",
+      autoload: {
+        color: [],
+        colorV2: ['color']
+      },
+      packages: {'[+]': ['noerrors']}
+    },
+    chtml: {
+      matchFontHeight: false,
+      displayAlign: "left",
+      displayIndent: "2em"
+    },
+    options: {
+      renderActions: {
+        /* add a new named action to render <script type="math/tex"> */
+        find_script_mathtex: [10, function (doc) {
+          for (const node of document.querySelectorAll('script[type^="math/tex"]')) {
+            const display = !!node.type.match(/; *mode=display/);
+            const math = new doc.options.MathItem(node.textContent, doc.inputJax[0], display);
+            const text = document.createTextNode('');
+            node.parentNode.replaceChild(text, node);
+            math.start = {node: text, delim: '', n: 0};
+            math.end = {node: text, delim: '', n: 0};
+            doc.math.push(math);
+          }
+        }, '']
+      }
+    },
+    loader: {
+      load: ['[tex]/noerrors']
+    }
+  };
+</script>
+
+
+
+
+
+<!-- async load function -->
+<script>
+    function async(u, c) {
+      var d = document, t = 'script',
+          o = d.createElement(t),
+          s = d.getElementsByTagName(t)[0];
+      o.src = u;
+      if (c) { o.addEventListener('load', function (e) { c(null, e); }, false); }
+      s.parentNode.insertBefore(o, s);
+    }
+</script>
+<!-- anchor-js, Doc:http://bryanbraun.github.io/anchorjs/ -->
+<script>
+    async("//cdnjs.cloudflare.com/ajax/libs/anchor-js/1.1.1/anchor.min.js",function(){
+        anchors.options = {
+          visible: 'hover',
+          placement: 'right',
+          // icon: '#'
+        };
+        anchors.add().remove('.intro-header h1').remove('.subheading').remove('.sidebar-container h5');
+    })
+</script>
+<style>
+    /* place left on bigger screen */
+    @media all and (min-width: 800px) {
+        .anchorjs-link{
+            position: absolute;
+            left: -0.75em;
+            font-size: 1.1em;
+            margin-top : -0.1em;
+        }
+    }
+</style>
+
+
+<body>
+    <!-- enable mermaid language on markdown post -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/mermaid/10.6.1/mermaid.min.js"></script>
+<script>
+   mermaid.initialize({
+       startOnLoad:true,
+       theme: 'default'
+   });
+   window.mermaid.init(undefined, document.querySelectorAll('.language-mermaid'));
+</script>
+
+</body>
+
+    <script>
+    
+    var elements = document.querySelectorAll('p');
+    Array.prototype.forEach.call(elements, function(el, i){
+        if(el.innerHTML=='[expand]') {
+            var parentcontent = el.parentNode.innerHTML.replace('<p>[expand]</p>','<div class="expand" style="display: none; height: 0; overflow: hidden;">').replace('<p>[/expand]</p>','</div>');
+            el.parentNode.innerHTML = parentcontent;
+        }
+    });
+
+    var elements = document.querySelectorAll('div.expand');
+    Array.prototype.forEach.call(elements, function(el, i){
+        el.previousElementSibling.innerHTML = el.previousElementSibling.innerHTML + '<span>..&nbsp; <a href="#" style="cursor: pointer;" onclick="this.parentNode.parentNode.nextElementSibling.style.display = \'block\'; this.parentNode.parentNode.nextElementSibling.style.height = \'auto\'; this.parentNode.style.display = \'none\';">read&nbsp;more&nbsp;&rarr;</a></span>';
+    });
+
+</script>
+
+    <!-- Footer -->
+<footer>
+    <div class="container">
+        <div class="row">
+            <!--<div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1"> -->
+                <!-- SNS Link -->
+            
+
+
+<ul class="list-inline text-center">
+
+
+  
+  
+  
+  
+  <li>
+    <a target="_blank" href="https://github.com/RyoNakagami">
+      <span class="fa-stack fa-lg">
+        <i class="fa fa-circle fa-stack-2x"></i>
+        <i class="fa fa-github fa-stack-1x fa-inverse"></i>
+      </span>
+    </a>
+  </li>
+  
+  
+</ul>
+
+            
+            <p class="copyright text-muted">
+                Copyright &copy; Ryo's Tech Blog 2025
+                <br>
+                Powered by <a href="https://ryonakagami.github.io">Ryo's Tech Blog</a> |
+                <iframe style="margin-left: 2px; margin-bottom:-5px;" frameborder="0" scrolling="0" width="100px"
+                    height="20px"
+                    title="RyoNakagami.github.io github stars"
+                    src="https://ghbtns.com/github-btn.html?user=RyoNakagami&repo=RyoNakagami.github.io&type=star&count=true">
+                </iframe>
+            </p>
+            <!--</div> -->
+        </div>
+    </div>
+</footer>
+
+<!-- jQuery -->
+<script src="/js/jquery.min.js "></script>
+
+<!-- Bootstrap Core JavaScript -->
+<!-- Currently, only navbar scroll-down effect at desktop still depends on this -->
+<script src="/js/bootstrap.min.js "></script>
+
+<!-- Custom Theme JavaScript -->
+<script src="/js/ryo-blog.min.js "></script>
+
+<!-- Simple Jekyll Search -->
+<script src="/js/simple-jekyll-search.min.js"></script>
+
+<!-- Service Worker -->
+
+<script src="/js/snackbar.js "></script>
+<script src="/js/sw-registration.js "></script>
+
+
+<!-- async load function -->
+<script>
+    function async(u, c) {
+        var d = document, t = 'script',
+            o = d.createElement(t),
+            s = d.getElementsByTagName(t)[0];
+        o.src = u;
+        if (c) { o.addEventListener('load', function (e) { c(null, e); }, false); }
+        s.parentNode.insertBefore(o, s);
+    }
+</script>
+
+<!--
+     Because of the native support for backtick-style fenced code blocks
+     right within the Markdown is landed in Github Pages,
+     From V1.6, There is no need for Highlight.js,
+     so Huxblog drops it officially.
+
+     - https://github.com/blog/2100-github-pages-now-faster-and-simpler-with-jekyll-3-0
+     - https://help.github.com/articles/creating-and-highlighting-code-blocks/
+     - https://github.com/jneen/rouge/wiki/list-of-supported-languages-and-lexers
+-->
+<!--
+    <script>
+        async("http://cdn.bootcss.com/highlight.js/8.6/highlight.min.js", function(){
+            hljs.initHighlightingOnLoad();
+        })
+    </script>
+    <link href="http://cdn.bootcss.com/highlight.js/8.6/styles/github.min.css" rel="stylesheet">
+-->
+
+
+
+
+
+
+
+<!--fastClick.js -->
+<script>
+    async("//cdnjs.cloudflare.com/ajax/libs/fastclick/1.0.6/fastclick.min.js", function () {
+        var $nav = document.querySelector("nav");
+        if ($nav) FastClick.attach($nav);
+    })
+</script>
+
+
+<!-- Global site tag (gtag.js) - Google Analytics -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-LVL413SV09"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+  gtag('config', 'G-LVL413SV09');
+</script>
+
+
+
+<!-- Side Catalog -->
+
+<script type="text/javascript">
+    function generateCatalog(selector) {
+
+        // interop with multilangual 
+        if ('' == 'true') {
+            _containerSelector = 'div.post-container.active'
+        } else {
+            _containerSelector = 'div.post-container'
+        }
+
+        // init
+        var P = $(_containerSelector), a, n, t, l, i, c;
+        a = P.find('h1,h2,h3,h4,h5,h6');
+
+        // clean
+        $(selector).html('')
+
+        // appending
+        a.each(function () {
+            n = $(this).prop('tagName').toLowerCase();
+            i = "#" + $(this).prop('id');
+            t = $(this).text();
+            c = $('<a href="' + i + '" rel="nofollow">' + t + '</a>');
+            l = $('<li class="' + n + '_nav"></li>').append(c);
+            $(selector).append(l);
+        });
+        return true;
+    }
+
+    generateCatalog(".catalog-body");
+
+    // toggle side catalog
+    $(".catalog-toggle").click((function (e) {
+        e.preventDefault();
+        $('.side-catalog').toggleClass("fold")
+    }))
+
+    /*
+     * Doc: https://github.com/davist11/jQuery-One-Page-Nav
+     * Fork by Hux to support padding
+     */
+    async("/js/jquery.nav.js", function () {
+        $('.catalog-body').onePageNav({
+            currentClass: "active",
+            changeHash: !1,
+            easing: "swing",
+            filter: "",
+            scrollSpeed: 700,
+            scrollOffset: 0,
+            scrollThreshold: .2,
+            begin: null,
+            end: null,
+            scrollChange: null,
+            padding: 80
+        });
+    });
+</script>
+
+
+
+<!-- Multi-Lingual -->
+
+
+<!-- Simple Jekyll Search -->
+<script>
+    // https://stackoverflow.com/questions/1912501/unescape-html-entities-in-javascript
+    function htmlDecode(input) {
+        var e = document.createElement('textarea');
+        e.innerHTML = input;
+        // handle case of empty input
+        return e.childNodes.length === 0 ? "" : e.childNodes[0].nodeValue;
+    }
+
+    SimpleJekyllSearch({
+        searchInput: document.getElementById('search-input'),
+        resultsContainer: document.getElementById('search-results'),
+        json: '/search.json',
+        searchResultTemplate: '<div class="post-preview item"><a href="{url}"><h2 class="post-title">{title}</h2><h3 class="post-subtitle">{subtitle}</h3><hr></a></div>',
+        noResultsText: 'No results',
+        limit: 50,
+        fuzzy: false,
+        // a hack to get escaped subtitle unescaped. for some reason, 
+        // post.subtitle w/o escape filter nuke entire search.
+        templateMiddleware: function (prop, value, template) {
+            if (prop === 'subtitle' || prop === 'title') {
+                if (value.indexOf("code")) {
+                    return htmlDecode(value);
+                } else {
+                    return value;
+                }
+            }
+        }
+    });
+
+    $(document).ready(function () {
+        var $searchPage = $('.search-page');
+        var $searchOpen = $('.search-icon');
+        var $searchClose = $('.search-icon-close');
+        var $searchInput = $('#search-input');
+        var $body = $('body');
+
+        $searchOpen.on('click', function (e) {
+            e.preventDefault();
+            $searchPage.toggleClass('search-active');
+            var prevClasses = $body.attr('class') || '';
+            setTimeout(function () {
+                $body.addClass('no-scroll');
+            }, 400)
+
+            if ($searchPage.hasClass('search-active')) {
+                $searchClose.on('click', function (e) {
+                    e.preventDefault();
+                    $searchPage.removeClass('search-active');
+                    $body.attr('class', prevClasses);  // from closure 
+                });
+                $searchInput.focus();
+            }
+        });
+    });
+</script>
+
+
+
+<!-- Image to Github 
+<img src="/img/icon_wechat.png" width="0" height="0" />
+<-- Migrate from head to bottom, no longer block render and still work -->
+<script>
+    
+    var elements = document.querySelectorAll('p');
+    Array.prototype.forEach.call(elements, function(el, i){
+        if(el.innerHTML=='[expand]') {
+            var parentcontent = el.parentNode.innerHTML.replace('<p>[expand]</p>','<div class="expand" style="display: none; height: 0; overflow: hidden;">').replace('<p>[/expand]</p>','</div>');
+            el.parentNode.innerHTML = parentcontent;
+        }
+    });
+
+    var elements = document.querySelectorAll('div.expand');
+    Array.prototype.forEach.call(elements, function(el, i){
+        el.previousElementSibling.innerHTML = el.previousElementSibling.innerHTML + '<span>..&nbsp; <a href="#" style="cursor: pointer;" onclick="this.parentNode.parentNode.nextElementSibling.style.display = \'block\'; this.parentNode.parentNode.nextElementSibling.style.height = \'auto\'; this.parentNode.style.display = \'none\';">read&nbsp;more&nbsp;&rarr;</a></span>';
+    });
+
+</script>
+
+</body>
+</html>

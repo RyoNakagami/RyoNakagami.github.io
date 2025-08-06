@@ -1,0 +1,1956 @@
+<!DOCTYPE html>
+<html lang="ja">
+
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="google-site-verification" content="gSMaswRY9iRfG4QaQrx6aj481bgr503qEZh-QPsMYNU" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+    <meta name="description" content="元経済学徒, 現在どっかでデータサイエンティストもどきやってる人間の勉強日記">
+    <meta name="keywords"  content="Statistics, Economics, Econometrics, Python, C, Shell, Linux, Data scientist">
+    <meta name="theme-color" content="#000000">
+    
+    <!-- Open Graph -->
+    <meta property="og:title" content="Non Parameteric Tests - Permutation Test - Ryo's Tech Blog">
+    
+    <meta property="og:type" content="article">
+    <meta property="og:description" content="Table of Contents
+
+
+
+">
+    
+    <meta property="article:published_time" content="2022-02-08T00:00:00Z">
+    
+    
+    <meta property="article:author" content="Ryo">
+    
+    
+    <meta property="article:tag" content="統計">
+    
+    <meta property="article:tag" content="statistical inference">
+    
+    
+    <meta property="og:image" content="https://ryonakagami.github.io/img/avatar_rio_cat.jpg">
+    <meta property="og:url" content="https://ryonakagami.github.io/2022/02/08/Nonparametric-Tests/">
+    <meta property="og:site_name" content="Ryo's Tech Blog">
+    
+    <title>Non Parameteric Tests - Permutation Test - Ryo's Tech Blog</title>
+
+    <!-- Web App Manifest -->
+    <link rel="manifest" href="/pwa/manifest.json">
+
+    <!-- Favicon -->
+    <link rel="shortcut icon" href="/img/favicon.ico">
+    
+    <!-- Canonical URL -->
+    <link rel="canonical" href="https://ryonakagami.github.io/2022/02/08/Nonparametric-Tests/">
+
+    <!-- Bootstrap Core CSS -->
+    <link rel="stylesheet" href="/css/bootstrap.min.css">
+
+    <!-- Custom CSS -->
+    <link rel="stylesheet" href="/css/ryo-blog.min.css">
+
+    <!-- Custom Fonts -->
+    <!-- <link href="http://maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css" rel="stylesheet" type="text/css"> -->
+    <!-- https://stackoverflow.com/questions/45983301/google-pagespeed-eliminate-render-blocking-resources-above-the-fold-caused-fro -->
+    <!--link href="//cdnjs.cloudflare.com/ajax/libs/font-awesome/4.6.3/css/font-awesome.min.css" rel="stylesheet" type="text/css"-->
+    <!--<link href="https://fonts.googleapis.com/earlyaccess/notosansjapanese.css" rel="stylesheet" type="text/css" media="print" onload="this.media='all'" > -->
+    <link href="https://fonts.googleapis.com/earlyaccess/notosansjapanese.css" rel="preload" type="text/css" media="print" onload="this.media='all'" >
+
+
+    <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
+    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+    <!--[if lt IE 9]>
+        <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+        <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
+    <![endif]-->
+
+    <!-- ga & ba script hoook -->
+    <script></script>
+</head>
+
+
+<!-- hack iOS CSS :active style -->
+<body ontouchstart="">
+
+    <!-- Navigation -->
+
+<nav class="navbar navbar-default navbar-custom navbar-fixed-top invert">
+    
+        <div class="container-fluid">
+            <!-- Brand and toggle get grouped for better mobile display -->
+            <div class="navbar-header page-scroll">
+                <button type="button" class="navbar-toggle">
+                    <span class="sr-only">Toggle navigation</span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
+                <a class="navbar-brand" href="/">Ryo's Tech Blog</a>
+            </div>
+
+            <!-- Collect the nav links, forms, and other content for toggling -->
+            <div id="huxblog_navbar">
+                <div class="navbar-collapse">
+                    <ul class="nav navbar-nav navbar-left">
+                                                <li>
+                            <a href="https://ryonakagami.github.io/statistics-for-regression-monkey/">Statistics for
+                                Regression Monkeys</a>
+                        </li>
+                        <li>
+                            <a href="https://ohgoshgit.github.io/">OhGoshGit!?!</a>
+                        </li>
+                        <!-- <li>
+                            <a><button onclick="mainDropDown()" style="border-color: rgba(70, 83, 111, 0.989); background-color: rgba(70, 83, 111, 0.989)">Dropdown</button></a> 
+                            <div id="myDropdown" class="dropdown-content">
+                              <a href="#" onclick="subMenu(this)">A</a>
+                              <div class="sub-menu-item" id="subMenu1">
+                              <a href="#">A.1</a>
+                              </div>
+                              <a href="#" onclick="subMenu(this)">B</a>
+                              <div class="sub-menu-item" id="subMenu2">
+                              <a href="#">B.1</a>
+                              </div>
+                              <a href="#">C</a>
+                              <a href="#">D</a>
+                              <a href="#">E</a>
+                              <a href="#">F</a>
+                              <a href="#">G</a>
+                            </div>
+                        </li> -->
+                    </ul>
+                    </ul>
+                    <ul class="nav navbar-nav navbar-right">
+                        
+                        
+                        
+                        
+                        <li>
+                            <a href="/about/">About</a>
+                        </li>
+                        
+                        
+                        
+                        <li>
+                            <a href="/archive/">Tag Search</a>
+                        </li>
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        <!--about fa-search see https://stackoverflow.com/questions/41950677/how-to-make-my-search-icon-fixed-->
+                        <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css"
+                            rel="stylesheet" />
+                        <li class="search-icon">
+                            <a href="javascript:void(0)" aria-label="Search" target="_blank">
+                                <i class="fa fa-search"></i>
+                            </a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+            <!-- /.navbar-collapse -->
+        </div>
+        <!-- /.container -->
+    </nav>
+
+    <script>
+        // Drop Bootstarp low-performance Navbar
+        // Use customize navbar with high-quality material design animation
+        // in high-perf jank-free CSS3 implementation
+        var $body = document.body;
+        var $toggle = document.querySelector('.navbar-toggle');
+        var $navbar = document.querySelector('#huxblog_navbar');
+        var $collapse = document.querySelector('.navbar-collapse');
+
+        var __HuxNav__ = {
+            close: function () {
+                $navbar.className = " ";
+                // wait until animation end.
+                setTimeout(function () {
+                    // prevent frequently toggle
+                    if ($navbar.className.indexOf('in') < 0) {
+                        $collapse.style.height = "0px"
+                    }
+                }, 400)
+            },
+            open: function () {
+                $collapse.style.height = "auto"
+                $navbar.className += " in";
+            }
+        }
+
+        // Bind Event
+        $toggle.addEventListener('click', function (e) {
+            if ($navbar.className.indexOf('in') > 0) {
+                __HuxNav__.close()
+            } else {
+                __HuxNav__.open()
+            }
+        })
+
+        /**
+         * Since Fastclick is used to delegate 'touchstart' globally
+         * to hack 300ms delay in iOS by performing a fake 'click',
+         * Using 'e.stopPropagation' to stop 'touchstart' event from 
+         * $toggle/$collapse will break global delegation.
+         * 
+         * Instead, we use a 'e.target' filter to prevent handler
+         * added to document close HuxNav.  
+         *
+         * Also, we use 'click' instead of 'touchstart' as compromise
+         */
+        document.addEventListener('click', function (e) {
+            if (e.target == $toggle) return;
+            if (e.target.className == 'icon-bar') return;
+            __HuxNav__.close();
+        })
+    </script>
+
+    <!-- Search -->
+<div class="search-page">
+  <div class="search-icon-close-container">
+    <span class="search-icon-close">
+      <i class="fa fa-chevron-down"></i>
+    </span>
+  </div>
+  <div class="search-main container">
+    <div class="row">
+      <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+        <form></form>
+        <input type="text" id="search-input" placeholder="$ grep...">
+        </form>
+        <div id="search-results" class="mini-post-list"></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+    <!-- Image to hack wechat -->
+<!-- <img src="/img/icon_wechat.png" width="0" height="0"> -->
+<!-- <img src="/img/home-bg.jpg" width="0" height="0"> -->
+
+<!-- Post Header -->
+
+
+
+<style type="text/css">
+    header.intro-header{
+        position: relative;
+        background-image: url('/img/home-bg.jpg');
+        background: ;
+    }
+
+    
+    header.intro-header .header-mask{
+        width: 100%;
+        height: 100%;
+        position: absolute;
+        background: rgba(0,0,0, 0.0);
+    }
+    
+</style>
+
+
+
+
+<header class="intro-header style-text" >
+
+    <div class="header-mask"></div>
+    
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+                <div class="post-heading">
+                    <div class="tags">
+                        
+                        <a class="tag" href="/archive/?tag=%E7%B5%B1%E8%A8%88" title="統計">統計</a>
+                        
+                        <a class="tag" href="/archive/?tag=statistical+inference" title="statistical inference">statistical inference</a>
+                        
+                    </div>
+                    <h1>Non Parameteric Tests - Permutation Test</h1>
+                    
+                    <h2 class="subheading">Statistical Inference: Significance Testing Note 1/N</h2>
+                    <p>
+                        公開日: 2022-02-08
+                        <br>
+                        更新日: 2022-10-31
+                        
+                    </p>
+                </div>
+            </div>
+        </div>
+    </div>
+</header>
+
+
+
+
+
+
+
+<!-- Post Content -->
+<article>
+    <div class="container">
+        <div class="row">
+
+    <!-- Post Container -->
+         <div class="
+                col-lg-8 col-lg-offset-2
+                col-md-10 col-md-offset-1
+                post-container">
+
+                <!-- Multi-Lingual -->
+                
+
+				<p><strong>Table of Contents</strong>
+<!-- START doctoc generated TOC please keep comment here to allow auto update -->
+<!-- DON'T EDIT THIS SECTION, INSTEAD RE-RUN doctoc TO UPDATE --></p>
+
+<ul>
+  <li><a href="#%E5%95%8F%E9%A1%8C%E6%84%8F%E8%AD%98">問題意識</a>
+    <ul>
+      <li><a href="#p-value%E3%81%AE%E6%B3%A8%E6%84%8F%E7%82%B9">p-valueの注意点</a></li>
+    </ul>
+  </li>
+  <li><a href="#permutation-test">Permutation Test</a>
+    <ul>
+      <li><a href="#permutation-test-mechanics">Permutation Test Mechanics</a></li>
+      <li><a href="#python%E3%81%A7%E3%81%AEpermutation-test%E5%AE%9F%E8%A1%8C">PythonでのPermutation Test実行</a></li>
+    </ul>
+  </li>
+  <li><a href="#paired-permutation-test">Paired Permutation Test</a>
+    <ul>
+      <li><a href="#scipy%E3%81%A7%E3%81%AE%E5%AE%9F%E8%A1%8C%E6%96%B9%E6%B3%95">Scipyでの実行方法</a></li>
+    </ul>
+  </li>
+  <li><a href="#%E7%9B%B8%E9%96%A2%E4%BF%82%E6%95%B0%E3%81%A8permutation-test">相関係数とPermutation Test</a></li>
+  <li><a href="#regression-coefficient%E3%81%A8permutation-test">Regression CoefficientとPermutation Test</a>
+    <ul>
+      <li><a href="#monte-carlo-simulation%E8%A8%AD%E5%AE%9A">Monte Carlo Simulation設定</a></li>
+    </ul>
+  </li>
+  <li><a href="#references">References</a></li>
+</ul>
+
+<!-- END doctoc generated TOC please keep comment here to allow auto update -->
+
+<h2 id="問題意識">問題意識</h2>
+
+<p>２つ以上の分布の同一性を確かめる手法の一つとして, 「ウェルチのT検定」はよく用いられてます（例: ABテストとかの文脈）. 
+しかし, 母集団分布に形状に応じてはhighly skewedなどの理由で「mean」を母集団を特徴づける統計量として用いることが適切ではないとか, 
+T分布に従うという仮説に下で検定することが少し無理がある場合など, 分布形の仮定無しで検定したいというニーズがあります.</p>
+
+<p>このノートではノンパラメトリック検定の1つ, Permutation Testを簡単にまとめます.</p>
+
+<h3 id="p-valueの注意点">p-valueの注意点</h3>
+
+<p>Permutation Testにおいてp-valueという言葉が出てきますが意味としては</p>
+
+<ul>
+  <li>p-value: Given that the null hypothesis is true, the p-value is the probability that we measure a statistic at least as extreme as the observed result</li>
+</ul>
+
+<p>つまり, いわゆるthe null hypothesisが正しい確率ではなくて, the null hypothesisが正しいと仮定したときに観測された統計量がどれだけレアなのかを意味するに過ぎません. (the null hypothesisとデータがどれだけ整合的か？と解釈することは良いと思いますが)</p>
+
+<h2 id="permutation-test">Permutation Test</h2>
+
+<p>Permutation Test(並べ替え検定)は２つのグループを比較するノンパラメトリック検定の一つです. 
+帰無仮説の下では２つのグループが同一分布に従う, 対立仮説は２つのグループが異なる分布に従うとします.</p>
+
+<h3 id="permutation-test-mechanics">Permutation Test Mechanics</h3>
+
+<ol>
+  <li>観察データに基づき, ２つにグループ間の差の統計量(例: mean, medianの差)を計算する</li>
+  <li>データについてAll possible permutationを実行し, 上記と同じグループ間統計量をそれぞれ計算する</li>
+  <li>(1)について計算した統計量が(2)の統計量と照らし合わせて, どれくらい極端であったか計算する(いわゆるp-valueの計算)</li>
+</ol>
+
+\[p(t \geq t_0) = \frac{1}{(n+m)!} \sum^{(n+m)!}_{j=1} I(t_j \geq t_0),\]
+
+<ul>
+  <li>$t_0$: 観察されたグループ間統計量(例: mean, medianの差)</li>
+  <li>$n, m$はそれぞれのグループのサイズ</li>
+  <li>$n, m$のサイズに対して, permutationすべてを評価する計算量が$O((n+m)!)$であることに留意</li>
+</ul>
+
+<h3 id="pythonでのpermutation-test実行">PythonでのPermutation Test実行</h3>
+
+<p>observationsを<code class="language-plaintext highlighter-rouge">treat</code>と<code class="language-plaintext highlighter-rouge">control</code>の２つのグループに分け, なにかしらの値を測定したとします.
+この測定した値が<code class="language-plaintext highlighter-rouge">treat</code>と<code class="language-plaintext highlighter-rouge">control</code>で異なる分布になるのか否か検定する場合の例を紹介します.</p>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
+2
+3
+4
+5
+6
+7
+8
+9
+10
+11
+12
+13
+14
+15
+</pre></td><td class="rouge-code"><pre><span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="n">np</span>
+<span class="kn">from</span> <span class="nn">scipy.stats</span> <span class="kn">import</span> <span class="n">permutation_test</span>
+
+<span class="n">treat</span> <span class="o">=</span> <span class="n">np</span><span class="p">.</span><span class="n">array</span><span class="p">([</span><span class="mi">114</span><span class="p">,</span> <span class="mi">203</span><span class="p">,</span> <span class="mi">217</span><span class="p">,</span> <span class="mi">254</span><span class="p">,</span> <span class="mi">256</span><span class="p">,</span> <span class="mi">284</span><span class="p">,</span> <span class="mi">296</span><span class="p">])</span>
+<span class="n">control</span>  <span class="o">=</span> <span class="n">np</span><span class="p">.</span><span class="n">array</span><span class="p">([</span><span class="mi">4</span><span class="p">,</span> <span class="mi">7</span><span class="p">,</span> <span class="mi">24</span><span class="p">,</span> <span class="mi">25</span><span class="p">,</span> <span class="mi">48</span><span class="p">,</span> <span class="mi">71</span><span class="p">,</span> <span class="mi">294</span><span class="p">])</span>
+
+<span class="k">def</span> <span class="nf">statistic</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">,</span> <span class="n">axis</span><span class="p">):</span>
+    <span class="k">return</span> <span class="n">np</span><span class="p">.</span><span class="n">median</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">axis</span><span class="p">)</span> <span class="o">-</span> <span class="n">np</span><span class="p">.</span><span class="n">median</span><span class="p">(</span><span class="n">y</span><span class="p">,</span> <span class="n">axis</span><span class="p">)</span>
+
+<span class="n">res</span> <span class="o">=</span> <span class="n">permutation_test</span><span class="p">((</span><span class="n">treat</span><span class="p">,</span> <span class="n">control</span><span class="p">),</span> <span class="n">statistic</span><span class="p">,</span> <span class="n">vectorized</span><span class="o">=</span><span class="bp">True</span><span class="p">,</span>
+                       <span class="n">n_resamples</span><span class="o">=</span><span class="n">np</span><span class="p">.</span><span class="n">inf</span><span class="p">,</span> <span class="n">alternative</span><span class="o">=</span><span class="s">'greater'</span><span class="p">)</span> <span class="c1">##n_samples=np.infはexact test
+</span>
+<span class="n">res_median</span><span class="p">,</span> <span class="n">res_pvalue</span><span class="p">,</span> <span class="n">res_null</span> <span class="o">=</span> <span class="n">res</span><span class="p">.</span><span class="n">statistic</span><span class="p">,</span> <span class="n">res</span><span class="p">.</span><span class="n">pvalue</span><span class="p">,</span> <span class="n">res</span><span class="p">.</span><span class="n">null_distribution</span>
+<span class="k">print</span><span class="p">(</span><span class="n">res_pvalue</span><span class="p">)</span>
+<span class="o">&gt;&gt;&gt;</span> <span class="mf">0.017482517482517484</span>
+</pre></td></tr></tbody></table></code></pre></div></div>
+
+<p>なお, ここでのp-valueは以下の計算と一致します:</p>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
+2
+</pre></td><td class="rouge-code"><pre><span class="n">np</span><span class="p">.</span><span class="n">count_nonzero</span><span class="p">(</span><span class="n">res_null</span> <span class="o">&gt;=</span> <span class="n">res_median</span> <span class="o">-</span> <span class="nb">max</span><span class="p">(</span><span class="mf">1e-14</span><span class="p">,</span> <span class="n">res_median</span> <span class="o">*</span> <span class="mf">1e-14</span><span class="p">))</span> <span class="o">/</span> <span class="nb">len</span><span class="p">(</span><span class="n">res_null</span><span class="p">)</span>
+<span class="o">&gt;&gt;&gt;</span> <span class="mf">0.017482517482517484</span>
+</pre></td></tr></tbody></table></code></pre></div></div>
+
+<ul>
+  <li><code class="language-plaintext highlighter-rouge">permutation_test</code>では統計量について<code class="language-plaintext highlighter-rouge">max(1e-14, abs(r)*1e-14)</code>の範囲内に該当するnull distributionもカウントしているとのこと</li>
+  <li>scipy documentでは「This method of comparison is expected to be accurate in most practical situations」と一応コメントしている</li>
+</ul>
+
+<blockquote>
+  <p>Median Differenceの95% CIの計算方法</p>
+</blockquote>
+
+<p>２つの分布の検定だけでなくConfidence Intervalによる不確実性(統計量の分散)も確認したいケースは多々あります.
+ここで紹介するやり方はシンプルにBootstrap法に基づいて計算する方法となります.</p>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
+2
+3
+4
+5
+6
+7
+8
+9
+10
+11
+12
+13
+14
+15
+</pre></td><td class="rouge-code"><pre><span class="k">def</span> <span class="nf">two_sample_bootstrap</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">,</span> <span class="n">statistic</span><span class="p">,</span> <span class="n">size</span><span class="p">,</span> <span class="n">percentile</span><span class="p">):</span>
+    <span class="n">boot_res</span> <span class="o">=</span> <span class="p">[]</span>
+    <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">size</span><span class="p">):</span>
+        <span class="n">tmp_x</span> <span class="o">=</span> <span class="n">np</span><span class="p">.</span><span class="n">random</span><span class="p">.</span><span class="n">choice</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="nb">len</span><span class="p">(</span><span class="n">x</span><span class="p">),</span> <span class="n">replace</span><span class="o">=</span><span class="bp">True</span><span class="p">)</span> <span class="c1">## x[np.random.randint(0, len(x), len(x))]の方が早い
+</span>        <span class="n">tmp_y</span> <span class="o">=</span> <span class="n">np</span><span class="p">.</span><span class="n">random</span><span class="p">.</span><span class="n">choice</span><span class="p">(</span><span class="n">y</span><span class="p">,</span> <span class="nb">len</span><span class="p">(</span><span class="n">y</span><span class="p">),</span> <span class="n">replace</span><span class="o">=</span><span class="bp">True</span><span class="p">)</span>
+        <span class="n">tmp_stats</span> <span class="o">=</span> <span class="n">statistic</span><span class="p">(</span><span class="n">tmp_x</span><span class="p">,</span> <span class="n">tmp_y</span><span class="p">)</span>
+        <span class="n">boot_res</span><span class="p">.</span><span class="n">append</span><span class="p">(</span><span class="n">tmp_stats</span><span class="p">)</span>
+    
+    <span class="k">return</span> <span class="n">np</span><span class="p">.</span><span class="n">quantile</span><span class="p">(</span><span class="n">boot_res</span><span class="p">,</span> <span class="p">[</span><span class="mi">1</span> <span class="o">-</span> <span class="n">percentile</span><span class="p">,</span> <span class="n">percentile</span><span class="p">])</span>
+
+<span class="k">def</span> <span class="nf">statistic_median</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">):</span>
+    <span class="k">return</span> <span class="n">np</span><span class="p">.</span><span class="n">median</span><span class="p">(</span><span class="n">x</span><span class="p">)</span> <span class="o">-</span> <span class="n">np</span><span class="p">.</span><span class="n">median</span><span class="p">(</span><span class="n">y</span><span class="p">)</span>
+
+<span class="n">two_sample_bootstrap</span><span class="p">(</span><span class="n">treat</span><span class="p">,</span> <span class="n">control</span><span class="p">,</span> <span class="n">statistic_median</span><span class="p">,</span> <span class="mi">100000</span><span class="p">,</span> <span class="mf">0.975</span><span class="p">)</span>
+<span class="o">&gt;&gt;&gt;</span> <span class="p">(</span><span class="mi">132</span><span class="p">,</span> <span class="mi">260</span><span class="p">)</span> <span class="c1">### Rのsimpleboot, bootと結果は一致
+</span></pre></td></tr></tbody></table></code></pre></div></div>
+
+<h2 id="paired-permutation-test">Paired Permutation Test</h2>
+
+<p>細胞にとある処置をするとその細胞の成長スピードが上昇するという仮説をいま持っているとします.
+これを検証するRCTを実施するため, 10個の細胞をどこかから取得してきて, それぞれに対してクローンを作成します(同じ細胞を元に作成されたペアの作成).</p>
+
+<p>それぞれのペアについて, 独立にコインを投げて<code class="language-plaintext highlighter-rouge">treated</code>, <code class="language-plaintext highlighter-rouge">control</code>の分類をし, 一定時間後にそれらの成長スピードを観測したとします, = $(x_i, y_i)$を観測. コインの出るパターンは $2^{100}$通り存在しますが, そのうちの一つが実現したと理解できます.</p>
+
+<p>観測したデータに基づき, 平均やMedianの差といった統計量 $T_{obs}$を計算し, それをテストしたいというのがモチベーションです.</p>
+
+\[(x_1, y_1), \cdots, (x_{100}, y_{100}) \to T_{obs}\]
+
+<p>Paired Permutation Testは, the null hypothesisがどちらも同一分布に従っているという仮説(具体的には平均やMedianが同じ)の下ならば, 
+実現値である$(x_i, y_i)$を入れ替えて $T$を新たに計算してもその$T$に対して$T_{obs}$は極端な値にならないはずだし, 入れ替えパターン$2^{100}$通りについても同様に計算し, simulation dataについて得られた$2^{100}$通りの$T$に対しても, $T_{obs}$はそんなに極端にはならないだろうという形で実行するノンパラ検定です.</p>
+
+<table>
+  <thead>
+    <tr>
+      <th>observed pair</th>
+      <th>simulated pair(例)</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>[3.67, 2.11]</td>
+      <td>[3.67, 2.11]</td>
+    </tr>
+    <tr>
+      <td>[1.72, 1.79]</td>
+      <td>[1.79, 1.72]</td>
+    </tr>
+    <tr>
+      <td>[3.46, 2.71]</td>
+      <td>[2.71, 3.46]</td>
+    </tr>
+    <tr>
+      <td>[2.60, 1.89]</td>
+      <td>[2.60, 1.89]</td>
+    </tr>
+  </tbody>
+</table>
+
+<h3 id="scipyでの実行方法">Scipyでの実行方法</h3>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
+2
+3
+4
+5
+6
+7
+8
+9
+10
+11
+12
+13
+14
+15
+</pre></td><td class="rouge-code"><pre><span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="n">np</span>
+<span class="kn">from</span> <span class="nn">scipy.stats</span> <span class="kn">import</span> <span class="n">permutation_test</span>
+
+<span class="k">def</span> <span class="nf">statistic</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">):</span>
+    <span class="k">return</span> <span class="n">np</span><span class="p">.</span><span class="n">median</span><span class="p">(</span><span class="n">x</span><span class="p">)</span> <span class="o">-</span> <span class="n">np</span><span class="p">.</span><span class="n">median</span><span class="p">(</span><span class="n">y</span><span class="p">)</span>
+
+<span class="n">x</span> <span class="o">=</span> <span class="p">[</span><span class="mf">3.67</span><span class="p">,</span> <span class="mf">1.72</span><span class="p">,</span> <span class="mf">3.46</span><span class="p">,</span> <span class="mf">2.60</span><span class="p">,</span> <span class="mf">2.03</span><span class="p">,</span> <span class="mf">2.10</span><span class="p">,</span> <span class="mf">3.01</span><span class="p">]</span>
+<span class="n">y</span> <span class="o">=</span> <span class="p">[</span><span class="mf">2.11</span><span class="p">,</span> <span class="mf">1.79</span><span class="p">,</span> <span class="mf">2.71</span><span class="p">,</span> <span class="mf">1.89</span><span class="p">,</span> <span class="mf">1.69</span><span class="p">,</span> <span class="mf">1.71</span><span class="p">,</span> <span class="mf">2.01</span><span class="p">]</span>
+
+<span class="n">res_sci</span> <span class="o">=</span> <span class="n">permutation_test</span><span class="p">((</span><span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">),</span> <span class="n">statistic</span><span class="p">,</span> <span class="n">vectorized</span><span class="o">=</span><span class="bp">False</span><span class="p">,</span>
+                       <span class="n">n_resamples</span><span class="o">=</span><span class="n">np</span><span class="p">.</span><span class="n">inf</span><span class="p">,</span>
+                       <span class="n">permutation_type</span><span class="o">=</span><span class="s">'samples'</span><span class="p">,</span>
+                       <span class="n">alternative</span><span class="o">=</span><span class="s">'two-sided'</span><span class="p">)</span>
+<span class="k">print</span><span class="p">(</span><span class="n">res_sci</span><span class="p">.</span><span class="n">pvalue</span><span class="p">)</span>
+<span class="o">&gt;&gt;&gt;</span> <span class="mf">0.0625</span>
+</pre></td></tr></tbody></table></code></pre></div></div>
+
+<ul>
+  <li><code class="language-plaintext highlighter-rouge">permutation_type='samples'</code>にすることを忘れずに</li>
+</ul>
+
+<p>なお, approximateに実行する場合は基本的には以下のコードと同じ挙動をします
+(上の例における<code class="language-plaintext highlighter-rouge">permutation_test=整数値</code>でも大丈夫です)</p>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
+2
+3
+4
+5
+6
+7
+8
+9
+10
+11
+12
+13
+14
+15
+16
+17
+18
+19
+20
+21
+</pre></td><td class="rouge-code"><pre><span class="n">x</span> <span class="o">=</span> <span class="p">[</span><span class="mf">3.67</span><span class="p">,</span> <span class="mf">1.72</span><span class="p">,</span> <span class="mf">3.46</span><span class="p">,</span> <span class="mf">2.60</span><span class="p">,</span> <span class="mf">2.03</span><span class="p">,</span> <span class="mf">2.10</span><span class="p">,</span> <span class="mf">3.01</span><span class="p">]</span>
+<span class="n">y</span> <span class="o">=</span> <span class="p">[</span><span class="mf">2.11</span><span class="p">,</span> <span class="mf">1.79</span><span class="p">,</span> <span class="mf">2.71</span><span class="p">,</span> <span class="mf">1.89</span><span class="p">,</span> <span class="mf">1.69</span><span class="p">,</span> <span class="mf">1.71</span><span class="p">,</span> <span class="mf">2.01</span><span class="p">]</span>
+<span class="n">z</span> <span class="o">=</span> <span class="n">np</span><span class="p">.</span><span class="n">array</span><span class="p">([</span><span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">])</span>
+
+<span class="k">def</span> <span class="nf">two_sample_permutation</span><span class="p">(</span><span class="n">z</span><span class="p">,</span> <span class="n">statistic</span><span class="p">,</span> <span class="n">size</span><span class="p">):</span>
+    <span class="n">boot_res</span> <span class="o">=</span> <span class="p">[]</span>
+    <span class="n">z_len</span> <span class="o">=</span> <span class="n">z</span><span class="p">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span>
+    <span class="n">array_idx</span> <span class="o">=</span> <span class="n">np</span><span class="p">.</span><span class="n">arange</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="n">z_len</span><span class="p">)</span>
+    <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">size</span><span class="p">):</span>
+        <span class="n">flip_coin</span> <span class="o">=</span> <span class="n">np</span><span class="p">.</span><span class="n">random</span><span class="p">.</span><span class="n">randint</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="n">z_len</span><span class="p">)</span>
+        <span class="n">tmp_x</span> <span class="o">=</span> <span class="n">z</span><span class="p">[</span><span class="n">flip_coin</span><span class="p">,</span> <span class="n">array_idx</span><span class="p">]</span>
+        <span class="n">tmp_y</span> <span class="o">=</span> <span class="n">z</span><span class="p">[</span><span class="mi">1</span> <span class="o">-</span> <span class="n">flip_coin</span><span class="p">,</span> <span class="n">array_idx</span><span class="p">]</span>
+        <span class="n">tmp_stats</span> <span class="o">=</span> <span class="n">statistic</span><span class="p">(</span><span class="n">tmp_x</span><span class="p">,</span> <span class="n">tmp_y</span><span class="p">)</span>
+        <span class="n">boot_res</span><span class="p">.</span><span class="n">append</span><span class="p">(</span><span class="n">tmp_stats</span><span class="p">)</span>
+    
+    <span class="k">return</span> <span class="n">boot_res</span>
+
+<span class="n">res</span> <span class="o">=</span> <span class="n">two_sample_permutation</span><span class="p">(</span><span class="n">z</span><span class="o">=</span><span class="n">z</span><span class="p">,</span> <span class="n">statistic</span><span class="o">=</span><span class="n">statistic</span><span class="p">,</span> <span class="n">size</span><span class="o">=</span><span class="mi">1000</span><span class="p">)</span>
+<span class="n">obs</span> <span class="o">=</span> <span class="n">np</span><span class="p">.</span><span class="n">median</span><span class="p">(</span><span class="n">y</span><span class="p">)</span> <span class="o">-</span> <span class="n">np</span><span class="p">.</span><span class="n">median</span><span class="p">(</span><span class="n">x</span><span class="p">)</span>
+<span class="n">np</span><span class="p">.</span><span class="n">count_nonzero</span><span class="p">(</span><span class="n">np</span><span class="p">.</span><span class="nb">abs</span><span class="p">(</span><span class="n">res</span><span class="p">)</span> <span class="o">&gt;=</span> <span class="n">np</span><span class="p">.</span><span class="nb">abs</span><span class="p">(</span><span class="n">obs</span><span class="p">))</span> <span class="o">/</span> <span class="nb">len</span><span class="p">(</span><span class="n">res</span><span class="p">)</span>
+<span class="o">&gt;&gt;&gt;</span> <span class="mf">0.062</span>
+</pre></td></tr></tbody></table></code></pre></div></div>
+
+<h2 id="相関係数とpermutation-test">相関係数とPermutation Test</h2>
+
+<p>とある変数の組 $(X, Y)$ の関係性についてリサーチしたいとして, その取っ掛かりとして$(X, Y)$の相関係数について分析するとします.
+$(X, Y)$が互いに独立(無相関)だとしても, 相関係数が0と異なる値が出る可能性がある中, 手元のデータが無相関であるというthe null hypothesisとどれだけ整合的か/不整合的か評価する際にもPermutation Testは利用できます.</p>
+
+<p>ただし, 異なる確率変数$(X, Y)$ の関係性について検定したいので, 普通のPermutation Testとは異なり $X = (x_1, x_2, \cdots, x_n)$と$Y = (y_1, y_2, \cdots, y_n)$の中で順番入れ替えを実施します. もしthe null hypothesisが正しいならば$X$と$Y$のそれぞれの中で順番を入れ替えたとしても手元のデータから得られた統計量とそんなに差がないはずだというのがモチベーションです.</p>
+
+<blockquote>
+  <p>手順</p>
+</blockquote>
+
+<ol>
+  <li>検定統計量の設定, 今回は $\rho(X, Y)$</li>
+  <li>the null hypothesisの設定, $H_0: \rho(X, Y)=0$</li>
+  <li>the alternative hypothesisの設定, $H_1: \rho(X, Y)&gt;0$</li>
+  <li>Permutation Setの構築: $X$と$Y$のそれぞれの中で順番をランダムに入れ替える</li>
+</ol>
+
+<blockquote>
+  <p>Pythonでの実行例</p>
+</blockquote>
+
+<p><a href="https://python.quantecon.org/ols.html#id13">QuantEcon</a>より為替レート調整済み一人あたりGDPと資産保護index
+についてのデータを用いて, これら2変数の相関関係を確認してみます.</p>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
+2
+3
+4
+5
+6
+7
+8
+</pre></td><td class="rouge-code"><pre><span class="n">df</span> <span class="o">=</span> <span class="n">pd</span><span class="p">.</span><span class="n">read_stata</span><span class="p">(</span><span class="s">'https://github.com/QuantEcon/lecture-python/blob/master/source/_static/lecture_specific/ols/maketable1.dta?raw=true'</span><span class="p">)</span>
+<span class="n">df</span> <span class="o">=</span> <span class="n">df</span><span class="p">.</span><span class="n">dropna</span><span class="p">()</span>
+<span class="n">y</span><span class="p">,</span> <span class="n">x</span> <span class="o">=</span> <span class="n">df</span><span class="p">[</span><span class="s">'logpgp95'</span><span class="p">].</span><span class="n">values</span><span class="p">,</span> <span class="n">df</span><span class="p">[</span><span class="s">'avexpr'</span><span class="p">].</span><span class="n">values</span>
+
+<span class="n">plt</span><span class="p">.</span><span class="n">scatter</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">)</span>
+<span class="n">plt</span><span class="p">.</span><span class="n">title</span><span class="p">(</span><span class="s">'size = {}, correlation = {:.2}'</span><span class="p">.</span><span class="nb">format</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">x</span><span class="p">),</span> <span class="n">pearsonr</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">)[</span><span class="mi">0</span><span class="p">]))</span>
+<span class="n">plt</span><span class="p">.</span><span class="n">xlabel</span><span class="p">(</span><span class="s">'avexpr'</span><span class="p">)</span>
+<span class="n">plt</span><span class="p">.</span><span class="n">ylabel</span><span class="p">(</span><span class="s">'logpgp95'</span><span class="p">);</span>
+</pre></td></tr></tbody></table></code></pre></div></div>
+
+<p><img src="https://github.com/ryonakimageserver/omorikaizuka/blob/master/%E3%83%96%E3%83%AD%E3%82%B0%E7%94%A8/20220208_logpgp95_avexpr.png?raw=true" /></p>
+
+<p>欠損値を含んだレコードを除去したあとにscatter plotで確認してみると資産保護indexが高いほど一人あたりlog GDPが高い傾向にあるこることがわかります. 相関係数を計算すると0.75という値が出力されますが, $H_0: \rho= 0, H_1:\rho &gt;0$, に対してどれくらいレアなものかPermutation Testで以下検定します.</p>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
+2
+3
+4
+5
+6
+7
+8
+9
+10
+11
+12
+13
+14
+</pre></td><td class="rouge-code"><pre><span class="c1">### Permutation Test
+</span><span class="k">def</span> <span class="nf">statistic_r</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">):</span>
+    <span class="k">return</span> <span class="n">pearsonr</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">)[</span><span class="mi">0</span><span class="p">]</span>
+
+<span class="n">res</span> <span class="o">=</span> <span class="n">permutation_test</span><span class="p">((</span><span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">),</span> <span class="n">statistic_r</span><span class="p">,</span> <span class="n">vectorized</span><span class="o">=</span><span class="bp">False</span><span class="p">,</span>
+                       <span class="n">permutation_type</span><span class="o">=</span><span class="s">'pairings'</span><span class="p">,</span>
+                       <span class="n">alternative</span><span class="o">=</span><span class="s">'greater'</span><span class="p">)</span>
+
+<span class="c1">### 可視化
+</span><span class="n">count</span><span class="p">,</span> <span class="n">bins</span><span class="p">,</span> <span class="n">_</span> <span class="o">=</span> <span class="n">plt</span><span class="p">.</span><span class="n">hist</span><span class="p">(</span><span class="n">res</span><span class="p">.</span><span class="n">null_distribution</span><span class="p">,</span> <span class="n">bins</span><span class="o">=</span><span class="mi">100</span><span class="p">)</span>
+<span class="n">plt</span><span class="p">.</span><span class="n">vlines</span><span class="p">(</span><span class="n">obs_corr</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="nb">max</span><span class="p">(</span><span class="n">count</span><span class="p">),</span> 
+           <span class="n">colors</span><span class="o">=</span><span class="s">'red'</span><span class="p">,</span> <span class="n">linestyles</span><span class="o">=</span><span class="s">'dashed'</span>
+          <span class="p">)</span>
+<span class="n">plt</span><span class="p">.</span><span class="n">title</span><span class="p">(</span><span class="s">'Permuation Test: Corr coef Distirbution: p-value = {}'</span><span class="p">.</span><span class="nb">format</span><span class="p">(</span><span class="n">res</span><span class="p">.</span><span class="n">pvalue</span><span class="p">))</span>
+</pre></td></tr></tbody></table></code></pre></div></div>
+
+<p><img src="https://github.com/ryonakimageserver/omorikaizuka/blob/master/%E3%83%96%E3%83%AD%E3%82%B0%E7%94%A8/20220208_permutationtest_corrcoef_distibution.png?raw=true" /></p>
+
+<p>資産保護indexと一人あたりlog GDPが互いに独立(無相関)というthe null hypothesis下ではなかなか見られない相関係数が
+手元では得られたということが読み取れます.</p>
+
+<h2 id="regression-coefficientとpermutation-test">Regression CoefficientとPermutation Test</h2>
+
+<p>Permutation TestをEconometricsの文脈で用いる際,</p>
+
+<ul>
+  <li>検定の文脈に置いてPermutation Testと一般的なt-testはどのように異なるのか？</li>
+  <li>Permutation Testの検出力はどんなもんなのか？</li>
+</ul>
+
+<p>という観点が気になると思います. 単回帰に関するMonte Carlo Simulationで棄却率をt-testと比較確認してみたいと思います.</p>
+
+<h3 id="monte-carlo-simulation設定">Monte Carlo Simulation設定</h3>
+
+\[y_i = \beta_1 + \beta_2 x_i + \epsilon_i; \ \ i = 1, 2, \cdots, N\]
+
+<p>という単回帰モデルを考えます. $x_i, \epsilon_i$はそれぞれ独立に$N(0, 1)$に従うとします.
+ここでは$\beta_1 = 1$に固定, $(\beta_2, N)$をパラメーターとして, simulation回数を1 batch 2000回で棄却率をt-test, perm-testでそれぞれ計算するとします.</p>
+
+<p>error termがhomoskedastic &amp; iid normally distributedなので, t-testの仮定が満たされる状況下となっています.
+T-testの仮定が正しい中, Perm-testでも似たような棄却率が出てくるのか確認するのが目的です.</p>
+
+<p>Perm testはノンパラ検定なので, iidとかの仮定は必要ですが, homoskedasticityやnot-skewedの仮定がいらないので,
+もし似通った棄却率を叩き出すならば結構良いなというのが期待値です.</p>
+
+<blockquote>
+  <p>パラメーター空間</p>
+</blockquote>
+
+\[\begin{align*}
+\beta_2 &amp; \in (0, 0.1, 0.2, \cdots, 1)\\
+N &amp;\in (15, 30)
+\end{align*}\]
+
+<blockquote>
+  <p>Python Code: 実行時間は30 minくらい</p>
+</blockquote>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
+2
+3
+4
+5
+6
+7
+8
+9
+10
+11
+12
+13
+14
+15
+16
+17
+18
+19
+20
+21
+22
+23
+24
+25
+26
+27
+28
+29
+30
+31
+32
+33
+34
+35
+36
+37
+38
+39
+40
+41
+42
+43
+44
+45
+46
+47
+48
+49
+50
+51
+52
+53
+54
+55
+56
+57
+58
+59
+60
+61
+62
+63
+64
+65
+66
+67
+68
+69
+70
+71
+72
+73
+74
+75
+76
+</pre></td><td class="rouge-code"><pre><span class="kn">import</span> <span class="nn">statsmodels.api</span> <span class="k">as</span> <span class="n">sm</span>
+<span class="kn">import</span> <span class="nn">itertools</span>
+<span class="kn">from</span> <span class="nn">multiprocessing</span> <span class="kn">import</span> <span class="n">Pool</span>
+<span class="kn">import</span> <span class="nn">collections</span>
+
+<span class="n">N</span> <span class="o">=</span> <span class="p">[</span><span class="mi">15</span><span class="p">,</span> <span class="mi">30</span><span class="p">]</span>
+<span class="n">const</span> <span class="o">=</span> <span class="p">[</span><span class="mi">1</span><span class="p">]</span>
+<span class="n">beta</span> <span class="o">=</span> <span class="n">np</span><span class="p">.</span><span class="n">linspace</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">11</span><span class="p">)</span>
+<span class="n">sig_level</span> <span class="o">=</span> <span class="mf">0.05</span>
+<span class="n">nrep</span> <span class="o">=</span> <span class="mi">2000</span>
+<span class="n">seed</span> <span class="o">=</span> <span class="mi">42</span>
+
+<span class="k">def</span> <span class="nf">flatten</span><span class="p">(</span><span class="n">l</span><span class="p">):</span>
+    <span class="k">for</span> <span class="n">el</span> <span class="ow">in</span> <span class="n">l</span><span class="p">:</span>
+        <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">el</span><span class="p">,</span> <span class="n">collections</span><span class="p">.</span><span class="n">abc</span><span class="p">.</span><span class="n">Iterable</span><span class="p">)</span> <span class="ow">and</span> <span class="ow">not</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">el</span><span class="p">,</span> <span class="p">(</span><span class="nb">str</span><span class="p">,</span> <span class="nb">bytes</span><span class="p">)):</span>
+            <span class="k">yield</span> <span class="k">from</span> <span class="n">flatten</span><span class="p">(</span><span class="n">el</span><span class="p">)</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="k">yield</span> <span class="n">el</span>
+
+<span class="k">def</span> <span class="nf">func_dgp</span><span class="p">(</span><span class="n">size</span><span class="p">,</span> <span class="n">const</span><span class="p">,</span> <span class="n">beta</span><span class="p">):</span>
+    <span class="n">eps</span> <span class="o">=</span> <span class="n">np</span><span class="p">.</span><span class="n">random</span><span class="p">.</span><span class="n">normal</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="n">size</span><span class="p">)</span>
+    <span class="n">x</span> <span class="o">=</span> <span class="n">np</span><span class="p">.</span><span class="n">random</span><span class="p">.</span><span class="n">normal</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="n">size</span><span class="p">)</span>
+    <span class="n">y</span> <span class="o">=</span> <span class="n">const</span> <span class="o">+</span> <span class="n">x</span> <span class="o">*</span> <span class="n">beta</span> <span class="o">+</span> <span class="n">eps</span>
+
+    <span class="k">return</span> <span class="n">y</span><span class="p">,</span> <span class="n">x</span>
+
+<span class="k">def</span> <span class="nf">compute_ttest</span><span class="p">(</span><span class="n">y</span><span class="p">,</span> <span class="n">X</span><span class="p">):</span>
+    <span class="n">_X</span> <span class="o">=</span> <span class="n">sm</span><span class="p">.</span><span class="n">add_constant</span><span class="p">(</span><span class="n">X</span><span class="p">)</span>
+    <span class="n">model</span> <span class="o">=</span> <span class="n">sm</span><span class="p">.</span><span class="n">OLS</span><span class="p">(</span><span class="n">y</span><span class="p">,</span><span class="n">_X</span><span class="p">)</span>
+    <span class="n">result</span> <span class="o">=</span> <span class="p">(</span><span class="n">model</span><span class="p">.</span><span class="n">fit</span><span class="p">()).</span><span class="n">t_test</span><span class="p">([</span><span class="mi">0</span><span class="p">,</span><span class="mi">1</span><span class="p">])</span>
+    <span class="k">return</span> <span class="n">result</span><span class="p">.</span><span class="n">effect</span><span class="p">,</span> <span class="n">result</span><span class="p">.</span><span class="n">pvalue</span>
+
+<span class="k">def</span> <span class="nf">compute_permtest</span><span class="p">(</span><span class="n">y</span><span class="p">,</span> <span class="n">X</span><span class="p">):</span>
+    <span class="k">def</span> <span class="nf">perm_statistics</span><span class="p">(</span><span class="n">_y</span><span class="p">,</span> <span class="n">_X</span><span class="p">):</span>
+        <span class="k">return</span> <span class="n">np</span><span class="p">.</span><span class="n">cov</span><span class="p">(</span><span class="n">_y</span><span class="p">,</span> <span class="n">_X</span><span class="p">,</span> <span class="n">ddof</span><span class="o">=-</span><span class="mi">1</span><span class="p">)[</span><span class="mi">0</span><span class="p">,</span><span class="mi">1</span><span class="p">]</span><span class="o">/</span><span class="n">np</span><span class="p">.</span><span class="n">var</span><span class="p">(</span><span class="n">_X</span><span class="p">,</span> <span class="n">ddof</span><span class="o">=-</span><span class="mi">1</span><span class="p">)</span>
+
+    <span class="n">res</span> <span class="o">=</span> <span class="n">permutation_test</span><span class="p">((</span><span class="n">y</span><span class="p">,</span> <span class="n">X</span><span class="p">),</span> <span class="n">perm_statistics</span><span class="p">,</span> <span class="n">vectorized</span><span class="o">=</span><span class="bp">False</span><span class="p">,</span>
+                            <span class="n">n_resamples</span><span class="o">=</span><span class="mi">2000</span><span class="p">,</span>
+                            <span class="n">permutation_type</span><span class="o">=</span><span class="s">'pairings'</span><span class="p">,</span>
+                            <span class="n">alternative</span><span class="o">=</span><span class="s">'two-sided'</span><span class="p">)</span>
+    
+    <span class="k">return</span> <span class="n">res</span><span class="p">.</span><span class="n">statistic</span><span class="p">,</span> <span class="n">res</span><span class="p">.</span><span class="n">pvalue</span>
+
+
+<span class="k">def</span> <span class="nf">compute_power_analysis</span><span class="p">(</span><span class="n">params</span><span class="p">):</span>
+    <span class="n">record</span> <span class="o">=</span> <span class="p">[]</span>
+    <span class="n">t_power</span><span class="p">,</span> <span class="n">p_power</span> <span class="o">=</span> <span class="p">[],</span> <span class="p">[]</span>
+    <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">nrep</span><span class="p">):</span>
+        <span class="n">y</span><span class="p">,</span> <span class="n">X</span> <span class="o">=</span> <span class="n">func_dgp</span><span class="p">(</span><span class="o">*</span><span class="n">params</span><span class="p">)</span>
+        <span class="n">t_coef</span><span class="p">,</span> <span class="n">t_pval</span> <span class="o">=</span> <span class="n">compute_ttest</span><span class="p">(</span><span class="n">y</span><span class="p">,</span> <span class="n">X</span><span class="p">)</span>
+        <span class="n">t_power</span><span class="p">.</span><span class="n">append</span><span class="p">(</span><span class="n">t_pval</span><span class="p">)</span>
+        <span class="n">p_coef</span><span class="p">,</span> <span class="n">p_pval</span> <span class="o">=</span> <span class="n">compute_permtest</span><span class="p">(</span><span class="n">y</span><span class="p">,</span> <span class="n">X</span><span class="p">)</span>
+        <span class="n">p_power</span><span class="p">.</span><span class="n">append</span><span class="p">(</span><span class="n">p_pval</span><span class="p">)</span>
+
+    <span class="n">power_list</span> <span class="o">=</span> <span class="p">[</span><span class="n">np</span><span class="p">.</span><span class="n">mean</span><span class="p">(</span><span class="n">np</span><span class="p">.</span><span class="n">array</span><span class="p">(</span><span class="n">t_power</span><span class="p">)</span> <span class="o">&lt;</span> <span class="n">sig_level</span><span class="p">),</span> <span class="n">np</span><span class="p">.</span><span class="n">mean</span><span class="p">(</span><span class="n">np</span><span class="p">.</span><span class="n">array</span><span class="p">(</span><span class="n">p_power</span><span class="p">)</span> <span class="o">&lt;</span> <span class="n">sig_level</span><span class="p">)]</span>
+
+    <span class="n">params</span> <span class="o">=</span> <span class="nb">list</span><span class="p">(</span><span class="n">params</span><span class="p">)</span>
+    <span class="n">params</span><span class="p">.</span><span class="n">extend</span><span class="p">(</span><span class="o">*</span><span class="nb">zip</span><span class="p">([</span><span class="n">power_list</span><span class="p">]))</span>
+
+    <span class="n">record</span><span class="p">.</span><span class="n">extend</span><span class="p">(</span><span class="nb">list</span><span class="p">(</span><span class="n">flatten</span><span class="p">(</span><span class="n">params</span><span class="p">)))</span>
+    
+    <span class="k">return</span> <span class="n">record</span>
+
+<span class="c1">## table 
+</span><span class="n">p</span> <span class="o">=</span> <span class="n">Pool</span><span class="p">(</span><span class="mi">6</span><span class="p">)</span>
+<span class="n">res</span> <span class="o">=</span> <span class="n">p</span><span class="p">.</span><span class="nb">map</span><span class="p">(</span><span class="n">compute_power_analysis</span><span class="p">,</span> <span class="p">[</span><span class="n">param</span> <span class="k">for</span> <span class="n">param</span> <span class="ow">in</span> <span class="nb">list</span><span class="p">(</span><span class="n">itertools</span><span class="p">.</span><span class="n">product</span><span class="p">(</span><span class="o">*</span><span class="p">[</span><span class="n">N</span><span class="p">,</span> <span class="n">const</span><span class="p">,</span> <span class="n">beta</span><span class="p">]))])</span>
+<span class="n">table_1</span> <span class="o">=</span> <span class="n">pd</span><span class="p">.</span><span class="n">DataFrame</span><span class="p">(</span><span class="n">res</span><span class="p">,</span> <span class="n">columns</span><span class="o">=</span><span class="p">[</span><span class="s">'obs_size'</span><span class="p">,</span> <span class="s">'const'</span><span class="p">,</span> <span class="s">'beta'</span><span class="p">,</span> <span class="s">'t_test_power'</span><span class="p">,</span> <span class="s">'perm_test_power'</span><span class="p">])</span>
+
+<span class="c1">## p-value distribution
+</span><span class="n">p</span> <span class="o">=</span> <span class="n">Pool</span><span class="p">(</span><span class="mi">6</span><span class="p">)</span>
+<span class="n">res_pval_dist</span> <span class="o">=</span>  <span class="n">p</span><span class="p">.</span><span class="nb">map</span><span class="p">(</span><span class="n">compute_power_analysis_pval</span><span class="p">,</span> <span class="p">[(</span><span class="mi">15</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">2000</span><span class="p">)])</span>
+<span class="n">plt</span><span class="p">.</span><span class="n">hist</span><span class="p">(</span><span class="n">res_pval_dist</span><span class="p">,</span> <span class="n">bins</span><span class="o">=</span><span class="n">np</span><span class="p">.</span><span class="n">linspace</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">11</span><span class="p">),</span> <span class="n">density</span><span class="o">=</span><span class="bp">True</span><span class="p">);</span>
+
+<span class="kn">from</span> <span class="nn">scipy</span> <span class="kn">import</span> <span class="n">stats</span>
+<span class="n">stats</span><span class="p">.</span><span class="n">kstest</span><span class="p">(</span><span class="n">res_pval_dist</span><span class="p">,</span><span class="n">stats</span><span class="p">.</span><span class="n">norm</span><span class="p">.</span><span class="n">cdf</span><span class="p">)</span>
+<span class="o">&gt;&gt;&gt;</span> <span class="n">KstestResult</span><span class="p">(</span><span class="n">statistic</span><span class="o">=</span><span class="mf">0.8413447460685429</span><span class="p">,</span> <span class="n">pvalue</span><span class="o">=</span><span class="mf">0.31731050786291415</span><span class="p">)</span>
+</pre></td></tr></tbody></table></code></pre></div></div>
+
+<blockquote>
+  <p>Simulation結果</p>
+</blockquote>
+
+<p>下のテーブルがsimulation結果となります. 棄却率はt-test, Perm-testそれぞれ似通った値となっています.
+また, $\beta_2=0$の時のp-value distributionを確認すると “reasonably uniform” となっており一応期待された結果となっております
+実際に, p-valueヒストグラムを確認すると特定のp-valueが出力されやすいということは確認されなかったと解釈しても良いかもですし, KS testで一様性の検定をしたところ, 棄却はされなかったという結果になっております.</p>
+
+<table>
+  <thead>
+    <tr>
+      <th>obs_size</th>
+      <th>True beta</th>
+      <th>t-test棄却率</th>
+      <th>perm-test棄却率</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>15</td>
+      <td>0.0</td>
+      <td>0.0460</td>
+      <td>0.0505</td>
+    </tr>
+    <tr>
+      <td>15</td>
+      <td>0.1</td>
+      <td>0.0550</td>
+      <td>0.0570</td>
+    </tr>
+    <tr>
+      <td>15</td>
+      <td>0.2</td>
+      <td>0.0975</td>
+      <td>0.0965</td>
+    </tr>
+    <tr>
+      <td>15</td>
+      <td>0.3</td>
+      <td>0.1735</td>
+      <td>0.1700</td>
+    </tr>
+    <tr>
+      <td>15</td>
+      <td>0.4</td>
+      <td>0.2715</td>
+      <td>0.2665</td>
+    </tr>
+    <tr>
+      <td>15</td>
+      <td>0.5</td>
+      <td>0.3965</td>
+      <td>0.3985</td>
+    </tr>
+    <tr>
+      <td>15</td>
+      <td>0.6</td>
+      <td>0.5180</td>
+      <td>0.5115</td>
+    </tr>
+    <tr>
+      <td>15</td>
+      <td>0.7</td>
+      <td>0.6305</td>
+      <td>0.6220</td>
+    </tr>
+    <tr>
+      <td>15</td>
+      <td>0.8</td>
+      <td>0.7420</td>
+      <td>0.7355</td>
+    </tr>
+    <tr>
+      <td>15</td>
+      <td>0.9</td>
+      <td>0.8255</td>
+      <td>0.8190</td>
+    </tr>
+    <tr>
+      <td>15</td>
+      <td>1.0</td>
+      <td>0.8990</td>
+      <td>0.8915</td>
+    </tr>
+    <tr>
+      <td>30</td>
+      <td>0.0</td>
+      <td>0.0485</td>
+      <td>0.0500</td>
+    </tr>
+    <tr>
+      <td>30</td>
+      <td>0.1</td>
+      <td>0.0960</td>
+      <td>0.0945</td>
+    </tr>
+    <tr>
+      <td>30</td>
+      <td>0.2</td>
+      <td>0.1920</td>
+      <td>0.1890</td>
+    </tr>
+    <tr>
+      <td>30</td>
+      <td>0.3</td>
+      <td>0.3360</td>
+      <td>0.3345</td>
+    </tr>
+    <tr>
+      <td>30</td>
+      <td>0.4</td>
+      <td>0.5335</td>
+      <td>0.5305</td>
+    </tr>
+    <tr>
+      <td>30</td>
+      <td>0.5</td>
+      <td>0.7200</td>
+      <td>0.7160</td>
+    </tr>
+    <tr>
+      <td>30</td>
+      <td>0.6</td>
+      <td>0.8500</td>
+      <td>0.8495</td>
+    </tr>
+    <tr>
+      <td>30</td>
+      <td>0.7</td>
+      <td>0.9305</td>
+      <td>0.9290</td>
+    </tr>
+    <tr>
+      <td>30</td>
+      <td>0.8</td>
+      <td>0.9725</td>
+      <td>0.9715</td>
+    </tr>
+    <tr>
+      <td>30</td>
+      <td>0.9</td>
+      <td>0.9905</td>
+      <td>0.9915</td>
+    </tr>
+    <tr>
+      <td>30</td>
+      <td>1.0</td>
+      <td>0.9970</td>
+      <td>0.9975</td>
+    </tr>
+  </tbody>
+</table>
+
+<p><img src="https://github.com/ryonakimageserver/omorikaizuka/blob/master/%E3%83%96%E3%83%AD%E3%82%B0%E7%94%A8/20220208_pval_distribution.png?raw=true" /></p>
+
+<h2 id="references">References</h2>
+
+<ul>
+  <li><a href="https://www.routledge.com/Foundations-of-Statistics-for-Data-Scientists-With-R-and-Python/Agresti-Kateri/p/book/9780367748456">Foundations of Statistics for Data Scientists: With R and Python</a></li>
+  <li><a href="https://docs.scipy.org/doc/scipy/reference/generated/scipy.stats.permutation_test.html">scipy &gt; scipy.stats.permutation_test</a></li>
+  <li><a href="http://rasbt.github.io/mlxtend/user_guide/evaluate/permutation_test/">mlxtend &gt; permutation_test: Permutation test for hypothesis testing</a></li>
+  <li><a href="https://dgarcia-eu.github.io/SocialDataScience/5_SocialNetworkPhenomena/056_PermutationTests/PermutationTests">David Garcia, 2021, Permutation Tests</a></li>
+  <li><a href="https://python.quantecon.org/ols.html">QuantEcon &gt; 75. Linear Regression in Python</a></li>
+  <li><a href="https://www.r-bloggers.com/2019/04/a-permutation-test-regression-example/">R bloggers &gt; A Permutation Test Regression Example</a></li>
+</ul>
+
+
+                <hr style="visibility: hidden;">
+                <hr/>
+                <b><fontsize="5">Share Buttons</font><br></b>
+                <!--see 
+    https://jekyllcodex.org/without-plugin/share-buttons/ 
+    https://ranvir.xyz/blog/why-and-how-to-add-social-sharing-buttons-on-your-jekyll-blog-using-github-pages/
+-->
+
+
+
+<style>
+#share-buttons {display: inline-block; vertical-align: middle; }
+#share-buttons:after {content: ""; display: block; clear: both;}
+#share-buttons > div {
+    position: relative;
+    text-align: left; 
+    height: 36px; 
+    width: 32px; 
+    float: left; 
+    text-align: center;
+}
+#share-buttons > div > svg {height: 16px; fill: #d5d5d5; margin-top: 10px;}
+#share-buttons > div:hover {cursor: pointer;}
+#share-buttons > div.facebook:hover > svg {fill: #3B5998;}
+#share-buttons > div.twitter:hover > svg {fill: #55ACEE;}
+#share-buttons > div.linkedin:hover > svg {fill: #0077b5;}
+#share-buttons > div.pinterest:hover > svg {fill: #CB2027;}
+#share-buttons > div.gplus:hover > svg {fill: #dd4b39;}
+#share-buttons > div.mail:hover > svg {fill: #7D7D7D;}
+#share-buttons > div.instagram:hover > svg {fill: #C73B92;}
+#share-buttons > div.facebook > svg {height: 18px; margin-top: 9px;}
+#share-buttons > div.twitter > svg {height: 20px; margin-top: 8px;}
+#share-buttons > div.linkedin > svg {height: 19px; margin-top: 7px;}
+#share-buttons > div.pinterest > svg {height: 20px; margin-top: 9px;}
+#share-buttons > div.gplus > svg {height: 17px; margin-top: 9px; position: relative; left: 1px;}
+#share-buttons > div.mail > svg {height: 14px; margin-top: 11px;}
+</style>
+
+<span style="color: black">Share on: </span><div id="share-buttons">
+    <div class="facebook" title="Share this on Facebook" onclick="gtag('event', 'Facebook', {'event_category':'Post Shared','event_label':'Facebook'}); location.href='http://www.facebook.com/share.php?u=https://ryonakagami.github.io/2022/02/08/Nonparametric-Tests/';"><svg viewBox="0 0 1792 1792" xmlns="http://www.w3.org/2000/svg"><path d="M1343 12v264h-157q-86 0-116 36t-30 108v189h293l-39 296h-254v759h-306v-759h-255v-296h255v-218q0-186 104-288.5t277-102.5q147 0 228 12z"/></svg></div>
+    <div class="twitter" title="Share this on Twitter" onclick="gtag('event', 'Twitter', {'event_category':'Post Shared','event_label':'Twitter'}); location.href='https://twitter.com/intent/tweet?text=Non Parameteric Tests - Permutation Test&url=https://ryonakagami.github.io/2022/02/08/Nonparametric-Tests/';"><svg viewBox="0 0 1792 1792" xmlns="http://www.w3.org/2000/svg"><path d="M1684 408q-67 98-162 167 1 14 1 42 0 130-38 259.5t-115.5 248.5-184.5 210.5-258 146-323 54.5q-271 0-496-145 35 4 78 4 225 0 401-138-105-2-188-64.5t-114-159.5q33 5 61 5 43 0 85-11-112-23-185.5-111.5t-73.5-205.5v-4q68 38 146 41-66-44-105-115t-39-154q0-88 44-163 121 149 294.5 238.5t371.5 99.5q-8-38-8-74 0-134 94.5-228.5t228.5-94.5q140 0 236 102 109-21 205-78-37 115-142 178 93-10 186-50z"/></svg></div>
+    <div class="linkedin" title="Share this on Linkedin" onclick="gtag('event', 'Linkedin', {'event_category':'Post Shared','event_label':'Linkedin'}); location.href='https://www.linkedin.com/shareArticle?mini=true&url=https://ryonakagami.github.io/2022/02/08/Nonparametric-Tests/&title=&summary=&source=';"><svg viewBox="0 0 1792 1792" xmlns="http://www.w3.org/2000/svg"><path d="M477 625v991h-330v-991h330zm21-306q1 73-50.5 122t-135.5 49h-2q-82 0-132-49t-50-122q0-74 51.5-122.5t134.5-48.5 133 48.5 51 122.5zm1166 729v568h-329v-530q0-105-40.5-164.5t-126.5-59.5q-63 0-105.5 34.5t-63.5 85.5q-11 30-11 81v553h-329q2-399 2-647t-1-296l-1-48h329v144h-2q20-32 41-56t56.5-52 87-43.5 114.5-15.5q171 0 275 113.5t104 332.5z"/></svg></div>
+    
+    <div class="mail" title="Share this through Email" onclick="gtag('event', 'Email', {'event_category':'Post Shared','event_label':'Email'}); location.href='mailto:?&body=https://ryonakagami.github.io/2022/02/08/Nonparametric-Tests/';"><svg viewBox="0 0 1792 1792" xmlns="http://www.w3.org/2000/svg"><path d="M1792 710v794q0 66-47 113t-113 47h-1472q-66 0-113-47t-47-113v-794q44 49 101 87 362 246 497 345 57 42 92.5 65.5t94.5 48 110 24.5h2q51 0 110-24.5t94.5-48 92.5-65.5q170-123 498-345 57-39 100-87zm0-294q0 79-49 151t-122 123q-376 261-468 325-10 7-42.5 30.5t-54 38-52 32.5-57.5 27-50 9h-2q-23 0-50-9t-57.5-27-52-32.5-54-38-42.5-30.5q-91-64-262-182.5t-205-142.5q-62-42-117-115.5t-55-136.5q0-78 41.5-130t118.5-52h1472q65 0 112.5 47t47.5 113z"/></svg></div>
+</div>
+
+                
+                <hr/>
+
+                <!-- Featured Tags -->
+                <b><fontsize="5">Feature Tags</b>
+                    <div id="tag_cloud" class="tags tags-sup js-tags" 
+                    style="line-height: 0px !important;">
+                        
+                        
+                        
+                        
+                        
+                                <a data-sort="0288" 
+                                    href="/archive/?tag=%E7%B5%B1%E8%A8%88"
+                                    title="統計"
+                                    style="color: #337ab7 !important;"
+                                    rel="61">統計</a>
+                        
+                                <a data-sort="0298" 
+                                    href="/archive/?tag=Python"
+                                    title="Python"
+                                    style="color: #337ab7 !important;"
+                                    rel="51">Python</a>
+                        
+                                <a data-sort="0300" 
+                                    href="/archive/?tag=math"
+                                    title="math"
+                                    style="color: #337ab7 !important;"
+                                    rel="49">math</a>
+                        
+                                <a data-sort="0303" 
+                                    href="/archive/?tag=Linux"
+                                    title="Linux"
+                                    style="color: #337ab7 !important;"
+                                    rel="46">Linux</a>
+                        
+                                <a data-sort="0316" 
+                                    href="/archive/?tag=Ubuntu+20.04+LTS"
+                                    title="Ubuntu 20.04 LTS"
+                                    style="color: #337ab7 !important;"
+                                    rel="33">Ubuntu 20.04 LTS</a>
+                        
+                                <a data-sort="0319" 
+                                    href="/archive/?tag=Shell"
+                                    title="Shell"
+                                    style="color: #337ab7 !important;"
+                                    rel="30">Shell</a>
+                        
+                                <a data-sort="0321" 
+                                    href="/archive/?tag=English"
+                                    title="English"
+                                    style="color: #337ab7 !important;"
+                                    rel="28">English</a>
+                        
+                                <a data-sort="0324" 
+                                    href="/archive/?tag=git"
+                                    title="git"
+                                    style="color: #337ab7 !important;"
+                                    rel="25">git</a>
+                        
+                                <a data-sort="0329" 
+                                    href="/archive/?tag=%E6%96%B9%E6%B3%95%E8%AB%96"
+                                    title="方法論"
+                                    style="color: #337ab7 !important;"
+                                    rel="20">方法論</a>
+                        
+                                <a data-sort="0333" 
+                                    href="/archive/?tag=Ubuntu+22.04+LTS"
+                                    title="Ubuntu 22.04 LTS"
+                                    style="color: #337ab7 !important;"
+                                    rel="16">Ubuntu 22.04 LTS</a>
+                        
+                                <a data-sort="0337" 
+                                    href="/archive/?tag=%E7%B5%B1%E8%A8%88%E6%A4%9C%E5%AE%9A"
+                                    title="統計検定"
+                                    style="color: #337ab7 !important;"
+                                    rel="12">統計検定</a>
+                        
+                                <a data-sort="0338" 
+                                    href="/archive/?tag=%E7%AB%B6%E6%8A%80%E3%83%97%E3%83%AD%E3%82%B0%E3%83%A9%E3%83%9F%E3%83%B3%E3%82%B0"
+                                    title="競技プログラミング"
+                                    style="color: #337ab7 !important;"
+                                    rel="11">競技プログラミング</a>
+                        
+                                <a data-sort="0339" 
+                                    href="/archive/?tag=%E3%83%95%E3%83%BC%E3%83%AA%E3%82%A8%E8%A7%A3%E6%9E%90"
+                                    title="フーリエ解析"
+                                    style="color: #337ab7 !important;"
+                                    rel="10">フーリエ解析</a>
+                        
+                                <a data-sort="0340" 
+                                    href="/archive/?tag=%E5%89%8D%E5%87%A6%E7%90%86"
+                                    title="前処理"
+                                    style="color: #337ab7 !important;"
+                                    rel="9">前処理</a>
+                        
+                                <a data-sort="0340" 
+                                    href="/archive/?tag=SQL"
+                                    title="SQL"
+                                    style="color: #337ab7 !important;"
+                                    rel="9">SQL</a>
+                        
+                                <a data-sort="0340" 
+                                    href="/archive/?tag=coding"
+                                    title="coding"
+                                    style="color: #337ab7 !important;"
+                                    rel="9">coding</a>
+                        
+                                <a data-sort="0341" 
+                                    href="/archive/?tag=%E3%82%B3%E3%83%9F%E3%83%A5%E3%83%8B%E3%82%B1%E3%83%BC%E3%82%B7%E3%83%A7%E3%83%B3"
+                                    title="コミュニケーション"
+                                    style="color: #337ab7 !important;"
+                                    rel="8">コミュニケーション</a>
+                        
+                                <a data-sort="0342" 
+                                    href="/archive/?tag=Network"
+                                    title="Network"
+                                    style="color: #337ab7 !important;"
+                                    rel="7">Network</a>
+                        
+                                <a data-sort="0342" 
+                                    href="/archive/?tag=ssh"
+                                    title="ssh"
+                                    style="color: #337ab7 !important;"
+                                    rel="7">ssh</a>
+                        
+                                <a data-sort="0343" 
+                                    href="/archive/?tag=%E5%B0%86%E6%A3%8B"
+                                    title="将棋"
+                                    style="color: #337ab7 !important;"
+                                    rel="6">将棋</a>
+                        
+                                <a data-sort="0343" 
+                                    href="/archive/?tag=Data+visualization"
+                                    title="Data visualization"
+                                    style="color: #337ab7 !important;"
+                                    rel="6">Data visualization</a>
+                        
+                                <a data-sort="0343" 
+                                    href="/archive/?tag=Docker"
+                                    title="Docker"
+                                    style="color: #337ab7 !important;"
+                                    rel="6">Docker</a>
+                        
+                                <a data-sort="0343" 
+                                    href="/archive/?tag=Econometrics"
+                                    title="Econometrics"
+                                    style="color: #337ab7 !important;"
+                                    rel="6">Econometrics</a>
+                        
+                                <a data-sort="0343" 
+                                    href="/archive/?tag=VSCode"
+                                    title="VSCode"
+                                    style="color: #337ab7 !important;"
+                                    rel="6">VSCode</a>
+                        
+                                <a data-sort="0343" 
+                                    href="/archive/?tag=statistical+inference"
+                                    title="statistical inference"
+                                    style="color: #337ab7 !important;"
+                                    rel="6">statistical inference</a>
+                        
+                                <a data-sort="0344" 
+                                    href="/archive/?tag=GitHub+Pages"
+                                    title="GitHub Pages"
+                                    style="color: #337ab7 !important;"
+                                    rel="5">GitHub Pages</a>
+                        
+                                <a data-sort="0344" 
+                                    href="/archive/?tag=apt"
+                                    title="apt"
+                                    style="color: #337ab7 !important;"
+                                    rel="5">apt</a>
+                        
+                                <a data-sort="0344" 
+                                    href="/archive/?tag=development"
+                                    title="development"
+                                    style="color: #337ab7 !important;"
+                                    rel="5">development</a>
+                        
+                                <a data-sort="0345" 
+                                    href="/archive/?tag=%E3%82%B7%E3%82%B9%E3%83%86%E3%83%A0%E7%AE%A1%E7%90%86"
+                                    title="システム管理"
+                                    style="color: #337ab7 !important;"
+                                    rel="4">システム管理</a>
+                        
+                                <a data-sort="0345" 
+                                    href="/archive/?tag=Coffee"
+                                    title="Coffee"
+                                    style="color: #337ab7 !important;"
+                                    rel="4">Coffee</a>
+                        
+                                <a data-sort="0345" 
+                                    href="/archive/?tag=cloud"
+                                    title="cloud"
+                                    style="color: #337ab7 !important;"
+                                    rel="4">cloud</a>
+                        
+                                <a data-sort="0346" 
+                                    href="/archive/?tag=%E6%95%B0%E5%80%A4%E8%A8%88%E7%AE%97"
+                                    title="数値計算"
+                                    style="color: #337ab7 !important;"
+                                    rel="3">数値計算</a>
+                        
+                                <a data-sort="0346" 
+                                    href="/archive/?tag=%E7%B4%A0%E6%95%B0"
+                                    title="素数"
+                                    style="color: #337ab7 !important;"
+                                    rel="3">素数</a>
+                        
+                                <a data-sort="0346" 
+                                    href="/archive/?tag=Book"
+                                    title="Book"
+                                    style="color: #337ab7 !important;"
+                                    rel="3">Book</a>
+                        
+                                <a data-sort="0346" 
+                                    href="/archive/?tag=Font"
+                                    title="Font"
+                                    style="color: #337ab7 !important;"
+                                    rel="3">Font</a>
+                        
+                                <a data-sort="0346" 
+                                    href="/archive/?tag=Metrics"
+                                    title="Metrics"
+                                    style="color: #337ab7 !important;"
+                                    rel="3">Metrics</a>
+                        
+                                <a data-sort="0346" 
+                                    href="/archive/?tag=Poetry"
+                                    title="Poetry"
+                                    style="color: #337ab7 !important;"
+                                    rel="3">Poetry</a>
+                        
+                                <a data-sort="0346" 
+                                    href="/archive/?tag=Ubuntu+24.04+LTS"
+                                    title="Ubuntu 24.04 LTS"
+                                    style="color: #337ab7 !important;"
+                                    rel="3">Ubuntu 24.04 LTS</a>
+                        
+                                <a data-sort="0346" 
+                                    href="/archive/?tag=architecture"
+                                    title="architecture"
+                                    style="color: #337ab7 !important;"
+                                    rel="3">architecture</a>
+                        
+                                <a data-sort="0346" 
+                                    href="/archive/?tag=aws"
+                                    title="aws"
+                                    style="color: #337ab7 !important;"
+                                    rel="3">aws</a>
+                        
+                                <a data-sort="0346" 
+                                    href="/archive/?tag=shell"
+                                    title="shell"
+                                    style="color: #337ab7 !important;"
+                                    rel="3">shell</a>
+                        
+                                <a data-sort="0346" 
+                                    href="/archive/?tag=systemctl"
+                                    title="systemctl"
+                                    style="color: #337ab7 !important;"
+                                    rel="3">systemctl</a>
+                        
+                                <a data-sort="0347" 
+                                    href="/archive/?tag=%E3%83%86%E3%83%B3%E3%83%97%E3%83%AC%E3%83%BC%E3%83%88"
+                                    title="テンプレート"
+                                    style="color: #337ab7 !important;"
+                                    rel="2">テンプレート</a>
+                        
+                                <a data-sort="0347" 
+                                    href="/archive/?tag=%E3%83%87%E3%83%BC%E3%82%BF%E6%A7%8B%E9%80%A0"
+                                    title="データ構造"
+                                    style="color: #337ab7 !important;"
+                                    rel="2">データ構造</a>
+                        
+                                <a data-sort="0347" 
+                                    href="/archive/?tag=%E3%83%9D%E3%83%AF%E3%82%BD%E3%83%B3%E5%88%86%E5%B8%83"
+                                    title="ポワソン分布"
+                                    style="color: #337ab7 !important;"
+                                    rel="2">ポワソン分布</a>
+                        
+                                <a data-sort="0347" 
+                                    href="/archive/?tag=%E4%BC%9A%E8%A8%88%E5%88%86%E6%9E%90"
+                                    title="会計分析"
+                                    style="color: #337ab7 !important;"
+                                    rel="2">会計分析</a>
+                        
+                                <a data-sort="0347" 
+                                    href="/archive/?tag=%E6%96%87%E5%AD%97%E3%82%B3%E3%83%BC%E3%83%89"
+                                    title="文字コード"
+                                    style="color: #337ab7 !important;"
+                                    rel="2">文字コード</a>
+                        
+                                <a data-sort="0347" 
+                                    href="/archive/?tag=%E7%92%B0%E5%A2%83%E6%A7%8B%E7%AF%89"
+                                    title="環境構築"
+                                    style="color: #337ab7 !important;"
+                                    rel="2">環境構築</a>
+                        
+                                <a data-sort="0347" 
+                                    href="/archive/?tag=%E8%AB%96%E6%96%87"
+                                    title="論文"
+                                    style="color: #337ab7 !important;"
+                                    rel="2">論文</a>
+                        
+                                <a data-sort="0347" 
+                                    href="/archive/?tag=App"
+                                    title="App"
+                                    style="color: #337ab7 !important;"
+                                    rel="2">App</a>
+                        
+                                <a data-sort="0347" 
+                                    href="/archive/?tag=Bayesian"
+                                    title="Bayesian"
+                                    style="color: #337ab7 !important;"
+                                    rel="2">Bayesian</a>
+                        
+                                <a data-sort="0347" 
+                                    href="/archive/?tag=Dynamic+Programming"
+                                    title="Dynamic Programming"
+                                    style="color: #337ab7 !important;"
+                                    rel="2">Dynamic Programming</a>
+                        
+                                <a data-sort="0347" 
+                                    href="/archive/?tag=Keyboard"
+                                    title="Keyboard"
+                                    style="color: #337ab7 !important;"
+                                    rel="2">Keyboard</a>
+                        
+                                <a data-sort="0347" 
+                                    href="/archive/?tag=Processing"
+                                    title="Processing"
+                                    style="color: #337ab7 !important;"
+                                    rel="2">Processing</a>
+                        
+                                <a data-sort="0347" 
+                                    href="/archive/?tag=R"
+                                    title="R"
+                                    style="color: #337ab7 !important;"
+                                    rel="2">R</a>
+                        
+                                <a data-sort="0347" 
+                                    href="/archive/?tag=Steam"
+                                    title="Steam"
+                                    style="color: #337ab7 !important;"
+                                    rel="2">Steam</a>
+                        
+                                <a data-sort="0347" 
+                                    href="/archive/?tag=filesystem"
+                                    title="filesystem"
+                                    style="color: #337ab7 !important;"
+                                    rel="2">filesystem</a>
+                        
+                                <a data-sort="0347" 
+                                    href="/archive/?tag=quarto"
+                                    title="quarto"
+                                    style="color: #337ab7 !important;"
+                                    rel="2">quarto</a>
+                        
+                                <a data-sort="0347" 
+                                    href="/archive/?tag=regex"
+                                    title="regex"
+                                    style="color: #337ab7 !important;"
+                                    rel="2">regex</a>
+                    </div>
+
+                <br>
+
+                <b><fontsize="5">Leave a Comment</font><br>(注意：GitHub Accountが必要となります）</b>
+                
+                <script src="https://utteranc.es/client.js"
+                    repo="RyoNakagami/RyoNakagami.github.io"
+                    issue-term="url"
+                    theme="github-light"
+                    crossorigin="anonymous"
+                    async>Reduce unused JavaScript
+                
+                </script>
+
+
+            </div>  
+
+    <!-- Side Catalog Container -->
+        
+            <div class="
+                col-lg-1 col-lg-offset-0
+                visible-lg-block
+                sidebar-container
+                catalog-container">
+                <div class="side-catalog fixed" style="margin-top:3%">
+                    <hr class="hidden-sm hidden-xs">
+                    <h5>
+                        <a class="catalog-toggle" href="#">CONTENTS</a>
+                    </h5>
+                    <ul class="catalog-body"></ul>
+                </div>
+            </div>
+        
+    <!-- Sidebar Container -->
+            <!-- <div class="
+                col-lg-10 col-lg-offset-1
+                col-md-10 col-md-offset-1
+                sidebar-container row"> -->
+                <!-- 
+<hr>
+<h5>FRIENDS</h5>
+<ul class="list-inline">
+  
+  <li><a href="https://twitter.com/bluesky0804?ref_src=twsrc%5Egoogle%7Ctwcamp%5Eserp%7Ctwgr%5Eauthor">bluesky0804</a></li>
+  
+</ul>
+
+ -->
+            </div>
+        </div>
+    </div>
+</article>
+
+<!-- add support for mathjax by voleking-->
+
+  <script async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml.js" id="MathJax-script"></script>
+<script>
+  MathJax = {
+    tex: {
+      inlineMath: [['$','$'], ['\\(','\\)']],
+      displayMath: [['$$','$$'], ['\\[','\\]']],
+      processEscapes: true,
+      processEnvironments: true, // for pseudo
+      tags: "ams",
+      autoload: {
+        color: [],
+        colorV2: ['color']
+      },
+      packages: {'[+]': ['noerrors']}
+    },
+    chtml: {
+      matchFontHeight: false,
+      displayAlign: "left",
+      displayIndent: "2em"
+    },
+    options: {
+      renderActions: {
+        /* add a new named action to render <script type="math/tex"> */
+        find_script_mathtex: [10, function (doc) {
+          for (const node of document.querySelectorAll('script[type^="math/tex"]')) {
+            const display = !!node.type.match(/; *mode=display/);
+            const math = new doc.options.MathItem(node.textContent, doc.inputJax[0], display);
+            const text = document.createTextNode('');
+            node.parentNode.replaceChild(text, node);
+            math.start = {node: text, delim: '', n: 0};
+            math.end = {node: text, delim: '', n: 0};
+            doc.math.push(math);
+          }
+        }, '']
+      }
+    },
+    loader: {
+      load: ['[tex]/noerrors']
+    }
+  };
+</script>
+
+
+
+
+
+<!-- async load function -->
+<script>
+    function async(u, c) {
+      var d = document, t = 'script',
+          o = d.createElement(t),
+          s = d.getElementsByTagName(t)[0];
+      o.src = u;
+      if (c) { o.addEventListener('load', function (e) { c(null, e); }, false); }
+      s.parentNode.insertBefore(o, s);
+    }
+</script>
+<!-- anchor-js, Doc:http://bryanbraun.github.io/anchorjs/ -->
+<script>
+    async("//cdnjs.cloudflare.com/ajax/libs/anchor-js/1.1.1/anchor.min.js",function(){
+        anchors.options = {
+          visible: 'hover',
+          placement: 'right',
+          // icon: '#'
+        };
+        anchors.add().remove('.intro-header h1').remove('.subheading').remove('.sidebar-container h5');
+    })
+</script>
+<style>
+    /* place left on bigger screen */
+    @media all and (min-width: 800px) {
+        .anchorjs-link{
+            position: absolute;
+            left: -0.75em;
+            font-size: 1.1em;
+            margin-top : -0.1em;
+        }
+    }
+</style>
+
+
+<body>
+    <!-- enable mermaid language on markdown post -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/mermaid/10.6.1/mermaid.min.js"></script>
+<script>
+   mermaid.initialize({
+       startOnLoad:true,
+       theme: 'default'
+   });
+   window.mermaid.init(undefined, document.querySelectorAll('.language-mermaid'));
+</script>
+
+</body>
+
+    <script>
+    
+    var elements = document.querySelectorAll('p');
+    Array.prototype.forEach.call(elements, function(el, i){
+        if(el.innerHTML=='[expand]') {
+            var parentcontent = el.parentNode.innerHTML.replace('<p>[expand]</p>','<div class="expand" style="display: none; height: 0; overflow: hidden;">').replace('<p>[/expand]</p>','</div>');
+            el.parentNode.innerHTML = parentcontent;
+        }
+    });
+
+    var elements = document.querySelectorAll('div.expand');
+    Array.prototype.forEach.call(elements, function(el, i){
+        el.previousElementSibling.innerHTML = el.previousElementSibling.innerHTML + '<span>..&nbsp; <a href="#" style="cursor: pointer;" onclick="this.parentNode.parentNode.nextElementSibling.style.display = \'block\'; this.parentNode.parentNode.nextElementSibling.style.height = \'auto\'; this.parentNode.style.display = \'none\';">read&nbsp;more&nbsp;&rarr;</a></span>';
+    });
+
+</script>
+
+    <!-- Footer -->
+<footer>
+    <div class="container">
+        <div class="row">
+            <!--<div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1"> -->
+                <!-- SNS Link -->
+            
+
+
+<ul class="list-inline text-center">
+
+
+  
+  
+  
+  
+  <li>
+    <a target="_blank" href="https://github.com/RyoNakagami">
+      <span class="fa-stack fa-lg">
+        <i class="fa fa-circle fa-stack-2x"></i>
+        <i class="fa fa-github fa-stack-1x fa-inverse"></i>
+      </span>
+    </a>
+  </li>
+  
+  
+</ul>
+
+            
+            <p class="copyright text-muted">
+                Copyright &copy; Ryo's Tech Blog 2025
+                <br>
+                Powered by <a href="https://ryonakagami.github.io">Ryo's Tech Blog</a> |
+                <iframe style="margin-left: 2px; margin-bottom:-5px;" frameborder="0" scrolling="0" width="100px"
+                    height="20px"
+                    title="RyoNakagami.github.io github stars"
+                    src="https://ghbtns.com/github-btn.html?user=RyoNakagami&repo=RyoNakagami.github.io&type=star&count=true">
+                </iframe>
+            </p>
+            <!--</div> -->
+        </div>
+    </div>
+</footer>
+
+<!-- jQuery -->
+<script src="/js/jquery.min.js "></script>
+
+<!-- Bootstrap Core JavaScript -->
+<!-- Currently, only navbar scroll-down effect at desktop still depends on this -->
+<script src="/js/bootstrap.min.js "></script>
+
+<!-- Custom Theme JavaScript -->
+<script src="/js/ryo-blog.min.js "></script>
+
+<!-- Simple Jekyll Search -->
+<script src="/js/simple-jekyll-search.min.js"></script>
+
+<!-- Service Worker -->
+
+<script src="/js/snackbar.js "></script>
+<script src="/js/sw-registration.js "></script>
+
+
+<!-- async load function -->
+<script>
+    function async(u, c) {
+        var d = document, t = 'script',
+            o = d.createElement(t),
+            s = d.getElementsByTagName(t)[0];
+        o.src = u;
+        if (c) { o.addEventListener('load', function (e) { c(null, e); }, false); }
+        s.parentNode.insertBefore(o, s);
+    }
+</script>
+
+<!--
+     Because of the native support for backtick-style fenced code blocks
+     right within the Markdown is landed in Github Pages,
+     From V1.6, There is no need for Highlight.js,
+     so Huxblog drops it officially.
+
+     - https://github.com/blog/2100-github-pages-now-faster-and-simpler-with-jekyll-3-0
+     - https://help.github.com/articles/creating-and-highlighting-code-blocks/
+     - https://github.com/jneen/rouge/wiki/list-of-supported-languages-and-lexers
+-->
+<!--
+    <script>
+        async("http://cdn.bootcss.com/highlight.js/8.6/highlight.min.js", function(){
+            hljs.initHighlightingOnLoad();
+        })
+    </script>
+    <link href="http://cdn.bootcss.com/highlight.js/8.6/styles/github.min.css" rel="stylesheet">
+-->
+
+
+
+
+
+
+
+<!--fastClick.js -->
+<script>
+    async("//cdnjs.cloudflare.com/ajax/libs/fastclick/1.0.6/fastclick.min.js", function () {
+        var $nav = document.querySelector("nav");
+        if ($nav) FastClick.attach($nav);
+    })
+</script>
+
+
+<!-- Global site tag (gtag.js) - Google Analytics -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-LVL413SV09"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+  gtag('config', 'G-LVL413SV09');
+</script>
+
+
+
+<!-- Side Catalog -->
+
+<script type="text/javascript">
+    function generateCatalog(selector) {
+
+        // interop with multilangual 
+        if ('' == 'true') {
+            _containerSelector = 'div.post-container.active'
+        } else {
+            _containerSelector = 'div.post-container'
+        }
+
+        // init
+        var P = $(_containerSelector), a, n, t, l, i, c;
+        a = P.find('h1,h2,h3,h4,h5,h6');
+
+        // clean
+        $(selector).html('')
+
+        // appending
+        a.each(function () {
+            n = $(this).prop('tagName').toLowerCase();
+            i = "#" + $(this).prop('id');
+            t = $(this).text();
+            c = $('<a href="' + i + '" rel="nofollow">' + t + '</a>');
+            l = $('<li class="' + n + '_nav"></li>').append(c);
+            $(selector).append(l);
+        });
+        return true;
+    }
+
+    generateCatalog(".catalog-body");
+
+    // toggle side catalog
+    $(".catalog-toggle").click((function (e) {
+        e.preventDefault();
+        $('.side-catalog').toggleClass("fold")
+    }))
+
+    /*
+     * Doc: https://github.com/davist11/jQuery-One-Page-Nav
+     * Fork by Hux to support padding
+     */
+    async("/js/jquery.nav.js", function () {
+        $('.catalog-body').onePageNav({
+            currentClass: "active",
+            changeHash: !1,
+            easing: "swing",
+            filter: "",
+            scrollSpeed: 700,
+            scrollOffset: 0,
+            scrollThreshold: .2,
+            begin: null,
+            end: null,
+            scrollChange: null,
+            padding: 80
+        });
+    });
+</script>
+
+
+
+<!-- Multi-Lingual -->
+
+
+<!-- Simple Jekyll Search -->
+<script>
+    // https://stackoverflow.com/questions/1912501/unescape-html-entities-in-javascript
+    function htmlDecode(input) {
+        var e = document.createElement('textarea');
+        e.innerHTML = input;
+        // handle case of empty input
+        return e.childNodes.length === 0 ? "" : e.childNodes[0].nodeValue;
+    }
+
+    SimpleJekyllSearch({
+        searchInput: document.getElementById('search-input'),
+        resultsContainer: document.getElementById('search-results'),
+        json: '/search.json',
+        searchResultTemplate: '<div class="post-preview item"><a href="{url}"><h2 class="post-title">{title}</h2><h3 class="post-subtitle">{subtitle}</h3><hr></a></div>',
+        noResultsText: 'No results',
+        limit: 50,
+        fuzzy: false,
+        // a hack to get escaped subtitle unescaped. for some reason, 
+        // post.subtitle w/o escape filter nuke entire search.
+        templateMiddleware: function (prop, value, template) {
+            if (prop === 'subtitle' || prop === 'title') {
+                if (value.indexOf("code")) {
+                    return htmlDecode(value);
+                } else {
+                    return value;
+                }
+            }
+        }
+    });
+
+    $(document).ready(function () {
+        var $searchPage = $('.search-page');
+        var $searchOpen = $('.search-icon');
+        var $searchClose = $('.search-icon-close');
+        var $searchInput = $('#search-input');
+        var $body = $('body');
+
+        $searchOpen.on('click', function (e) {
+            e.preventDefault();
+            $searchPage.toggleClass('search-active');
+            var prevClasses = $body.attr('class') || '';
+            setTimeout(function () {
+                $body.addClass('no-scroll');
+            }, 400)
+
+            if ($searchPage.hasClass('search-active')) {
+                $searchClose.on('click', function (e) {
+                    e.preventDefault();
+                    $searchPage.removeClass('search-active');
+                    $body.attr('class', prevClasses);  // from closure 
+                });
+                $searchInput.focus();
+            }
+        });
+    });
+</script>
+
+
+
+<!-- Image to Github 
+<img src="/img/icon_wechat.png" width="0" height="0" />
+<-- Migrate from head to bottom, no longer block render and still work -->
+<script>
+    
+    var elements = document.querySelectorAll('p');
+    Array.prototype.forEach.call(elements, function(el, i){
+        if(el.innerHTML=='[expand]') {
+            var parentcontent = el.parentNode.innerHTML.replace('<p>[expand]</p>','<div class="expand" style="display: none; height: 0; overflow: hidden;">').replace('<p>[/expand]</p>','</div>');
+            el.parentNode.innerHTML = parentcontent;
+        }
+    });
+
+    var elements = document.querySelectorAll('div.expand');
+    Array.prototype.forEach.call(elements, function(el, i){
+        el.previousElementSibling.innerHTML = el.previousElementSibling.innerHTML + '<span>..&nbsp; <a href="#" style="cursor: pointer;" onclick="this.parentNode.parentNode.nextElementSibling.style.display = \'block\'; this.parentNode.parentNode.nextElementSibling.style.height = \'auto\'; this.parentNode.style.display = \'none\';">read&nbsp;more&nbsp;&rarr;</a></span>';
+    });
+
+</script>
+
+</body>
+</html>

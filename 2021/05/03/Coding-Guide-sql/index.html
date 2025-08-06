@@ -1,0 +1,2282 @@
+<!DOCTYPE html>
+<html lang="ja">
+
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="google-site-verification" content="gSMaswRY9iRfG4QaQrx6aj481bgr503qEZh-QPsMYNU" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+    <meta name="description" content="元経済学徒, 現在どっかでデータサイエンティストもどきやってる人間の勉強日記">
+    <meta name="keywords"  content="Statistics, Economics, Econometrics, Python, C, Shell, Linux, Data scientist">
+    <meta name="theme-color" content="#000000">
+    
+    <!-- Open Graph -->
+    <meta property="og:title" content="Coding Style Guide Part 2 - Ryo's Tech Blog">
+    
+    <meta property="og:type" content="article">
+    <meta property="og:description" content="
+  
+    
+       
+      概要
+    
+  
+  
+    
+      目的
+      SQL Style Guide
+    
+    
+      参考
+      - The Art of Readable Code by Dustin Boswell and Trevor Foucher. Copyright 2012 Dustin Boswell and ...">
+    
+    <meta property="article:published_time" content="2021-05-03T00:00:00Z">
+    
+    
+    <meta property="article:author" content="Ryo">
+    
+    
+    <meta property="article:tag" content="SQL">
+    
+    <meta property="article:tag" content="coding">
+    
+    
+    <meta property="og:image" content="https://ryonakagami.github.io/img/avatar_rio_cat.jpg">
+    <meta property="og:url" content="https://ryonakagami.github.io/2021/05/03/Coding-Guide-sql/">
+    <meta property="og:site_name" content="Ryo's Tech Blog">
+    
+    <title>Coding Style Guide Part 2 - Ryo's Tech Blog</title>
+
+    <!-- Web App Manifest -->
+    <link rel="manifest" href="/pwa/manifest.json">
+
+    <!-- Favicon -->
+    <link rel="shortcut icon" href="/img/favicon.ico">
+    
+    <!-- Canonical URL -->
+    <link rel="canonical" href="https://ryonakagami.github.io/2021/05/03/Coding-Guide-sql/">
+
+    <!-- Bootstrap Core CSS -->
+    <link rel="stylesheet" href="/css/bootstrap.min.css">
+
+    <!-- Custom CSS -->
+    <link rel="stylesheet" href="/css/ryo-blog.min.css">
+
+    <!-- Custom Fonts -->
+    <!-- <link href="http://maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css" rel="stylesheet" type="text/css"> -->
+    <!-- https://stackoverflow.com/questions/45983301/google-pagespeed-eliminate-render-blocking-resources-above-the-fold-caused-fro -->
+    <!--link href="//cdnjs.cloudflare.com/ajax/libs/font-awesome/4.6.3/css/font-awesome.min.css" rel="stylesheet" type="text/css"-->
+    <!--<link href="https://fonts.googleapis.com/earlyaccess/notosansjapanese.css" rel="stylesheet" type="text/css" media="print" onload="this.media='all'" > -->
+    <link href="https://fonts.googleapis.com/earlyaccess/notosansjapanese.css" rel="preload" type="text/css" media="print" onload="this.media='all'" >
+
+
+    <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
+    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+    <!--[if lt IE 9]>
+        <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+        <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
+    <![endif]-->
+
+    <!-- ga & ba script hoook -->
+    <script></script>
+</head>
+
+
+<!-- hack iOS CSS :active style -->
+<body ontouchstart="">
+
+    <!-- Navigation -->
+
+<nav class="navbar navbar-default navbar-custom navbar-fixed-top invert">
+    
+        <div class="container-fluid">
+            <!-- Brand and toggle get grouped for better mobile display -->
+            <div class="navbar-header page-scroll">
+                <button type="button" class="navbar-toggle">
+                    <span class="sr-only">Toggle navigation</span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
+                <a class="navbar-brand" href="/">Ryo's Tech Blog</a>
+            </div>
+
+            <!-- Collect the nav links, forms, and other content for toggling -->
+            <div id="huxblog_navbar">
+                <div class="navbar-collapse">
+                    <ul class="nav navbar-nav navbar-left">
+                                                <li>
+                            <a href="https://ryonakagami.github.io/statistics-for-regression-monkey/">Statistics for
+                                Regression Monkeys</a>
+                        </li>
+                        <li>
+                            <a href="https://ohgoshgit.github.io/">OhGoshGit!?!</a>
+                        </li>
+                        <!-- <li>
+                            <a><button onclick="mainDropDown()" style="border-color: rgba(70, 83, 111, 0.989); background-color: rgba(70, 83, 111, 0.989)">Dropdown</button></a> 
+                            <div id="myDropdown" class="dropdown-content">
+                              <a href="#" onclick="subMenu(this)">A</a>
+                              <div class="sub-menu-item" id="subMenu1">
+                              <a href="#">A.1</a>
+                              </div>
+                              <a href="#" onclick="subMenu(this)">B</a>
+                              <div class="sub-menu-item" id="subMenu2">
+                              <a href="#">B.1</a>
+                              </div>
+                              <a href="#">C</a>
+                              <a href="#">D</a>
+                              <a href="#">E</a>
+                              <a href="#">F</a>
+                              <a href="#">G</a>
+                            </div>
+                        </li> -->
+                    </ul>
+                    </ul>
+                    <ul class="nav navbar-nav navbar-right">
+                        
+                        
+                        
+                        
+                        <li>
+                            <a href="/about/">About</a>
+                        </li>
+                        
+                        
+                        
+                        <li>
+                            <a href="/archive/">Tag Search</a>
+                        </li>
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        <!--about fa-search see https://stackoverflow.com/questions/41950677/how-to-make-my-search-icon-fixed-->
+                        <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css"
+                            rel="stylesheet" />
+                        <li class="search-icon">
+                            <a href="javascript:void(0)" aria-label="Search" target="_blank">
+                                <i class="fa fa-search"></i>
+                            </a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+            <!-- /.navbar-collapse -->
+        </div>
+        <!-- /.container -->
+    </nav>
+
+    <script>
+        // Drop Bootstarp low-performance Navbar
+        // Use customize navbar with high-quality material design animation
+        // in high-perf jank-free CSS3 implementation
+        var $body = document.body;
+        var $toggle = document.querySelector('.navbar-toggle');
+        var $navbar = document.querySelector('#huxblog_navbar');
+        var $collapse = document.querySelector('.navbar-collapse');
+
+        var __HuxNav__ = {
+            close: function () {
+                $navbar.className = " ";
+                // wait until animation end.
+                setTimeout(function () {
+                    // prevent frequently toggle
+                    if ($navbar.className.indexOf('in') < 0) {
+                        $collapse.style.height = "0px"
+                    }
+                }, 400)
+            },
+            open: function () {
+                $collapse.style.height = "auto"
+                $navbar.className += " in";
+            }
+        }
+
+        // Bind Event
+        $toggle.addEventListener('click', function (e) {
+            if ($navbar.className.indexOf('in') > 0) {
+                __HuxNav__.close()
+            } else {
+                __HuxNav__.open()
+            }
+        })
+
+        /**
+         * Since Fastclick is used to delegate 'touchstart' globally
+         * to hack 300ms delay in iOS by performing a fake 'click',
+         * Using 'e.stopPropagation' to stop 'touchstart' event from 
+         * $toggle/$collapse will break global delegation.
+         * 
+         * Instead, we use a 'e.target' filter to prevent handler
+         * added to document close HuxNav.  
+         *
+         * Also, we use 'click' instead of 'touchstart' as compromise
+         */
+        document.addEventListener('click', function (e) {
+            if (e.target == $toggle) return;
+            if (e.target.className == 'icon-bar') return;
+            __HuxNav__.close();
+        })
+    </script>
+
+    <!-- Search -->
+<div class="search-page">
+  <div class="search-icon-close-container">
+    <span class="search-icon-close">
+      <i class="fa fa-chevron-down"></i>
+    </span>
+  </div>
+  <div class="search-main container">
+    <div class="row">
+      <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+        <form></form>
+        <input type="text" id="search-input" placeholder="$ grep...">
+        </form>
+        <div id="search-results" class="mini-post-list"></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+    <!-- Image to hack wechat -->
+<!-- <img src="/img/icon_wechat.png" width="0" height="0"> -->
+<!-- <img src="/img/home-bg.jpg" width="0" height="0"> -->
+
+<!-- Post Header -->
+
+
+
+<style type="text/css">
+    header.intro-header{
+        position: relative;
+        background-image: url('/img/home-bg.jpg');
+        background: ;
+    }
+
+    
+    header.intro-header .header-mask{
+        width: 100%;
+        height: 100%;
+        position: absolute;
+        background: rgba(0,0,0, 0.0);
+    }
+    
+</style>
+
+
+
+
+<header class="intro-header style-text" >
+
+    <div class="header-mask"></div>
+    
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+                <div class="post-heading">
+                    <div class="tags">
+                        
+                        <a class="tag" href="/archive/?tag=SQL" title="SQL">SQL</a>
+                        
+                        <a class="tag" href="/archive/?tag=coding" title="coding">coding</a>
+                        
+                    </div>
+                    <h1>Coding Style Guide Part 2</h1>
+                    
+                    <h2 class="subheading">SQL Style Guide</h2>
+                    <p>
+                        公開日: 2021-05-03
+                        <br>
+                        更新日: 2022-07-25
+                        
+                    </p>
+                </div>
+            </div>
+        </div>
+    </div>
+</header>
+
+
+
+
+
+
+
+<!-- Post Content -->
+<article>
+    <div class="container">
+        <div class="row">
+
+    <!-- Post Container -->
+         <div class="
+                col-lg-8 col-lg-offset-2
+                col-md-10 col-md-offset-1
+                post-container">
+
+                <!-- Multi-Lingual -->
+                
+
+				<table>
+  <thead>
+    <tr>
+      <th> </th>
+      <th>概要</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>目的</td>
+      <td>SQL Style Guide</td>
+    </tr>
+    <tr>
+      <td>参考</td>
+      <td>- <a href="https://www.oreilly.co.jp/books/9784873115658/">The Art of Readable Code by Dustin Boswell and Trevor Foucher. Copyright 2012 Dustin Boswell and Trevor Foucher, 978-0-596-80229-5</a><br /> -<a href="https://ryonakagami.github.io/2021/05/02/Coding-Guide/">Coding Style Guide Part 1</a><br />- <a href="https://www.alisa-in.tech/post/2019-10-02-ctes/">CTEs versus Subqueries</a></td>
+    </tr>
+  </tbody>
+</table>
+
+<p>本ドキュメントは,「Readable,ReusableなSQLクエリの書く」ことを目的に, SQLコーディング規約についてまとめたものです. RDBMSとしてAmazon Redshift / Google Bigqueryを念頭としています. <code class="language-plaintext highlighter-rouge">DO</code>は推奨,<code class="language-plaintext highlighter-rouge">AVOID</code>は非推奨を表しています.</p>
+
+<p><strong>Table of Contents</strong></p>
+
+<!-- START doctoc generated TOC please keep comment here to allow auto update -->
+<!-- DON'T EDIT THIS SECTION, INSTEAD RE-RUN doctoc TO UPDATE -->
+
+<ul>
+  <li><a href="#%E5%91%BD%E5%90%8D%E8%A6%8F%E5%89%87">命名規則</a>
+    <ul>
+      <li><a href="#%E5%A4%89%E6%95%B0%E5%90%8D%E3%81%AE%E8%A6%8F%E5%89%87">変数名の規則</a>
+        <ul>
+          <li><a href="#suffix-rule">SUFFIX RULE</a></li>
+          <li><a href="#preffix-rule">PREFFIX RULE</a></li>
+          <li><a href="#%E3%81%AA%E3%81%9Cfield-name%E3%81%AF30-byte%E4%BB%A5%E4%B8%8B%E3%81%AA%E3%81%AE%E3%81%8B">なぜfield nameは30 byte以下なのか？</a></li>
+        </ul>
+      </li>
+      <li><a href="#table-alias">TABLE ALIAS</a></li>
+    </ul>
+  </li>
+  <li><a href="#query-syntax">Query Syntax</a>
+    <ul>
+      <li><a href="#%E3%83%96%E3%83%AD%E3%83%83%E3%82%AF%E3%81%A8%E3%82%A4%E3%83%B3%E3%83%87%E3%83%B3%E3%83%88">ブロックとインデント</a>
+        <ul>
+          <li><a href="#union%E5%8F%A5%E3%81%A8%E3%83%96%E3%83%AD%E3%83%83%E3%82%AF">UNION句とブロック</a></li>
+          <li><a href="#case%E6%96%87%E3%81%A8%E3%83%96%E3%83%AD%E3%83%83%E3%82%AF">CASE文とブロック</a></li>
+          <li><a href="#window%E9%96%A2%E6%95%B0">WINDOW関数</a></li>
+        </ul>
+      </li>
+      <li><a href="#join%E5%8F%A5%E3%81%A7%E3%81%AFleft-outer-inner%E3%82%92%E6%98%8E%E7%A4%BA%E3%81%99%E3%82%8B">JOIN句では<code class="language-plaintext highlighter-rouge">LEFT</code>, <code class="language-plaintext highlighter-rouge">OUTER</code>, <code class="language-plaintext highlighter-rouge">INNER</code>を明示する</a></li>
+      <li><a href="#%E3%82%B5%E3%83%96%E3%82%AF%E3%82%A8%E3%83%AA">サブクエリ</a>
+        <ul>
+          <li><a href="#%E3%82%B5%E3%83%96%E3%82%AF%E3%82%A8%E3%83%AA%E5%8F%A5%E3%81%A7%E3%81%AF%E3%81%AA%E3%81%8Fctescommon-table-expressions--with%E5%8F%A5%E3%82%92%E7%94%A8%E3%81%84%E3%82%8B">サブクエリ句ではなくCTEs(Common Table Expressions = WITH句)を用いる</a></li>
+        </ul>
+      </li>
+    </ul>
+  </li>
+  <li><a href="#bigquery-best-practices">BigQuery Best Practices</a>
+    <ul>
+      <li><a href="#%E5%BF%85%E8%A6%81%E3%81%AA%E3%82%AB%E3%83%A9%E3%83%A0%E3%81%AE%E3%81%BF%E3%82%AF%E3%82%A8%E3%83%AA%E3%81%99%E3%82%8B">必要なカラムのみクエリする</a></li>
+      <li><a href="#limit%E3%81%A7%E3%81%AF%E3%81%AA%E3%81%8F_partitiondate%E3%81%AA%E3%81%A9%E3%81%AEpartition%E3%82%92%E7%94%A8%E3%81%84%E3%82%8B"><code class="language-plaintext highlighter-rouge">LIMIT</code>ではなく<code class="language-plaintext highlighter-rouge">_PARTITIONDATE</code>などのPARTITIONを用いる</a>
+        <ul>
+          <li><a href="#partition%E3%81%AE%E6%8C%87%E5%AE%9A%E5%8F%AF%E8%83%BD%E5%AF%BE%E8%B1%A1">PARTITIONの指定可能対象</a></li>
+        </ul>
+      </li>
+      <li><a href="#shared-table-vs-partitioned-table">Shared Table vs PARTITIONED TABLE</a></li>
+      <li><a href="#join%E5%8F%A5%E3%81%A7%E7%B5%90%E5%90%88%E3%81%99%E3%82%8B%E5%89%8D%E3%81%AB%E3%83%86%E3%83%BC%E3%83%96%E3%83%AB%E3%82%B5%E3%82%A4%E3%82%BA%E3%82%92%E5%B0%8F%E3%81%95%E3%81%8F%E3%81%99%E3%82%8B"><code class="language-plaintext highlighter-rouge">JOIN</code>句で結合する前にテーブルサイズを小さくする</a></li>
+      <li><a href="#join%E5%8F%A5%E3%81%AE%E3%83%86%E3%83%BC%E3%83%96%E3%83%AB%E3%81%AE%E9%A0%86%E7%95%AA"><code class="language-plaintext highlighter-rouge">JOIN</code>句のテーブルの順番</a></li>
+      <li><a href="#%E3%82%AF%E3%83%A9%E3%82%B9%E3%82%BF%E3%83%AA%E3%83%B3%E3%82%B0">クラスタリング</a></li>
+    </ul>
+  </li>
+  <li><a href="#references">References</a>
+    <ul>
+      <li><a href="#online-contents">Online-contents</a></li>
+    </ul>
+  </li>
+</ul>
+
+<!-- END doctoc generated TOC please keep comment here to allow auto update -->
+
+<h2 id="命名規則">命名規則</h2>
+<h3 id="変数名の規則">変数名の規則</h3>
+
+<blockquote>
+  <p>DO</p>
+</blockquote>
+
+<ul>
+  <li>Field nameは小文字を使用する</li>
+  <li><code class="language-plaintext highlighter-rouge">id</code>, <code class="language-plaintext highlighter-rouge">name</code>, <code class="language-plaintext highlighter-rouge">type</code>といった文字列はなんのidentifierやnameを表しているか曖昧なので,objectをprefixとして付与すること</li>
+  <li>名前にスペースを含めるのが自然な場合はアンダースコアを使用する。（first nameはfirst_name）</li>
+  <li>30 byte以下の名前にする(日本語用いる場合,10文字目安)</li>
+</ul>
+
+<blockquote>
+  <p>AVOID</p>
+</blockquote>
+
+<ul>
+  <li>CamelCase, camelBackは使わない(= snake_caseを用いる)</li>
+  <li>複数形を避ける = できるだけ集合体を表す用語を使用する. たとえばemployeesの代わりにstaff,またはindividualsの代わりにpeopleを使用する（スペルミスの恐れを回避するため）</li>
+  <li>略語を避ける. 略語を使う必要がある場合は,一般的に通じるものであることを確認する</li>
+  <li>予約語は変数名には用いない</li>
+  <li>アルファベット, 数字, アンダースコア以外の文字は使用しない</li>
+</ul>
+
+<blockquote>
+  <p>EXAMPLE</p>
+</blockquote>
+
+<div class="language-sql highlighter-rouge"><div class="highlight"><pre class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
+2
+3
+4
+5
+6
+7
+8
+9
+10
+11
+12
+13
+14
+15
+</pre></td><td class="rouge-code"><pre><span class="c1">--- Good</span>
+<span class="k">SELECT</span>
+    <span class="n">id</span>    <span class="k">AS</span> <span class="n">account_id</span><span class="p">,</span>
+    <span class="n">name</span>  <span class="k">AS</span> <span class="n">account_name</span><span class="p">,</span>
+    <span class="k">type</span>  <span class="k">AS</span> <span class="n">account_type</span><span class="p">,</span>
+<span class="k">FROM</span>
+    <span class="n">account_table</span>
+
+<span class="c1">--- Bad</span>
+<span class="k">SELECT</span>
+    <span class="n">id</span><span class="p">,</span>
+    <span class="n">name</span><span class="p">,</span>
+    <span class="k">type</span><span class="p">,</span>
+<span class="k">FROM</span>
+    <span class="n">account_table</span>
+</pre></td></tr></tbody></table></code></pre></div></div>
+
+<h4 id="suffix-rule">SUFFIX RULE</h4>
+
+<table>
+  <thead>
+    <tr>
+      <th>suffix</th>
+      <th>説明</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td><code class="language-plaintext highlighter-rouge">_id</code></td>
+      <td>主キーである列など一意の識別子</td>
+    </tr>
+    <tr>
+      <td><code class="language-plaintext highlighter-rouge">_total</code></td>
+      <td>値の集合の合計または総計</td>
+    </tr>
+    <tr>
+      <td><code class="language-plaintext highlighter-rouge">_num</code></td>
+      <td>フィールドに数値が含まれていることを表す</td>
+    </tr>
+    <tr>
+      <td><code class="language-plaintext highlighter-rouge">_name</code></td>
+      <td>first_nameのように名前を強調する</td>
+    </tr>
+    <tr>
+      <td><code class="language-plaintext highlighter-rouge">_seq</code></td>
+      <td>連続した数値を含む</td>
+    </tr>
+    <tr>
+      <td><code class="language-plaintext highlighter-rouge">_cnt</code></td>
+      <td>カウント</td>
+    </tr>
+    <tr>
+      <td><code class="language-plaintext highlighter-rouge">_size</code></td>
+      <td>ファイルサイズや衣類などのサイズ</td>
+    </tr>
+    <tr>
+      <td><code class="language-plaintext highlighter-rouge">_date</code></td>
+      <td>何かの日付を含む列であることを表す</td>
+    </tr>
+    <tr>
+      <td><code class="language-plaintext highlighter-rouge">_at</code></td>
+      <td>TIMESTAMP型のデータタイプを表す</td>
+    </tr>
+    <tr>
+      <td><code class="language-plaintext highlighter-rouge">_type</code></td>
+      <td>カテゴリ変数を表す, 例: <code class="language-plaintext highlighter-rouge">coupon_type</code></td>
+    </tr>
+  </tbody>
+</table>
+
+<h4 id="preffix-rule">PREFFIX RULE</h4>
+
+<table>
+  <thead>
+    <tr>
+      <th>prefix</th>
+      <th>説明</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td><code class="language-plaintext highlighter-rouge">taxed_</code></td>
+      <td>税込の値を表す</td>
+    </tr>
+    <tr>
+      <td><code class="language-plaintext highlighter-rouge">first_</code>, <code class="language-plaintext highlighter-rouge">last_</code></td>
+      <td>期間の境界値を示す(<code class="language-plaintext highlighter-rouge">last_</code>は範囲に含まれる)</td>
+    </tr>
+    <tr>
+      <td><code class="language-plaintext highlighter-rouge">satrt_</code>, <code class="language-plaintext highlighter-rouge">end_</code></td>
+      <td>期間の境界値を示す(<code class="language-plaintext highlighter-rouge">end_</code>は範囲に含まれない)</td>
+    </tr>
+    <tr>
+      <td><code class="language-plaintext highlighter-rouge">is_</code>, <code class="language-plaintext highlighter-rouge">has_</code></td>
+      <td>BOOLEAN型のデータタイプを表す</td>
+    </tr>
+    <tr>
+      <td><code class="language-plaintext highlighter-rouge">avg_</code></td>
+      <td>平均を表す</td>
+    </tr>
+  </tbody>
+</table>
+
+<h4 id="なぜfield-nameは30-byte以下なのか">なぜfield nameは30 byte以下なのか？</h4>
+
+<p>RDBMSの種類(Oracle Database 12.1)によって,カラム文字は30 byte以下という制約があるためです. とあるデータベースでは有効だったクエリが他に移植できなくなるというリスクを回避するためにこのルールがあります.</p>
+
+<h3 id="table-alias">TABLE ALIAS</h3>
+
+<blockquote>
+  <p>DO</p>
+</blockquote>
+
+<ol>
+  <li>アンダースコアでテーブル名をsplitし,それぞれの頭文字を結合したエイリアスを用いる</li>
+  <li>同じテーブル同士で結合する場合は,(1)のルールと出現順番の組み合わせを用いる</li>
+</ol>
+
+<blockquote>
+  <p>EXAMPLE</p>
+</blockquote>
+
+<div class="language-sql highlighter-rouge"><div class="highlight"><pre class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
+2
+3
+4
+5
+6
+7
+8
+9
+10
+11
+12
+13
+14
+15
+16
+17
+18
+19
+20
+21
+22
+23
+24
+25
+26
+27
+28
+</pre></td><td class="rouge-code"><pre><span class="c1">--- Good</span>
+<span class="k">SELECT</span>
+    <span class="n">bfco</span><span class="p">.</span><span class="n">account_id</span><span class="p">,</span>
+    <span class="n">dd</span><span class="p">.</span><span class="n">fiscal_year</span><span class="p">,</span>
+    <span class="n">dd</span><span class="p">.</span><span class="n">fiscal_quarter</span><span class="p">,</span>
+    <span class="n">dd</span><span class="p">.</span><span class="n">fiscal_quarter_name</span><span class="p">,</span>
+    <span class="n">cc</span><span class="p">.</span><span class="n">cost_category_level_1</span><span class="p">,</span>
+    <span class="n">cc</span><span class="p">.</span><span class="n">cost_category_level_2</span>
+<span class="k">FROM</span> 
+    <span class="n">budget_forecast_cogs_opex</span> <span class="k">AS</span> <span class="n">bfco</span>
+    <span class="k">LEFT</span> <span class="k">JOIN</span> <span class="n">date_details</span> <span class="k">AS</span> <span class="n">dd</span>
+        <span class="k">ON</span> <span class="n">bfco</span><span class="p">.</span><span class="n">accounting_period</span> <span class="o">=</span> <span class="n">dd</span><span class="p">.</span><span class="n">first_day_of_month</span>
+    <span class="k">LEFT</span> <span class="k">JOIN</span> <span class="n">cost_category</span> <span class="k">AS</span> <span class="n">cc</span>
+        <span class="k">ON</span> <span class="n">bfco</span><span class="p">.</span><span class="n">unique_account_name</span> <span class="o">=</span> <span class="n">cc</span><span class="p">.</span><span class="n">unique_account_name</span>
+
+<span class="c1">--- Bad</span>
+<span class="k">SELECT</span>
+    <span class="n">a</span><span class="p">.</span><span class="o">*</span><span class="p">,</span>
+    <span class="n">b</span><span class="p">.</span><span class="n">fiscal_year</span><span class="p">,</span>
+    <span class="n">b</span><span class="p">.</span><span class="n">fiscal_quarter</span><span class="p">,</span>
+    <span class="n">b</span><span class="p">.</span><span class="n">fiscal_quarter_name</span><span class="p">,</span>
+    <span class="k">c</span><span class="p">.</span><span class="n">cost_category_level_1</span><span class="p">,</span>
+    <span class="k">c</span><span class="p">.</span><span class="n">cost_category_level_2</span>
+<span class="k">FROM</span> <span class="n">budget_forecast_cogs_opex</span> <span class="n">a</span>
+<span class="k">LEFT</span> <span class="k">JOIN</span> <span class="n">date_details</span> <span class="n">b</span>
+ <span class="k">ON</span> <span class="n">b</span><span class="p">.</span><span class="n">first_day_of_month</span> <span class="o">=</span> <span class="n">a</span><span class="p">.</span><span class="n">accounting_period</span>
+<span class="k">LEFT</span> <span class="k">JOIN</span> <span class="n">cost_category</span> <span class="k">c</span>
+ <span class="k">ON</span> <span class="n">b</span><span class="p">.</span><span class="n">unique_account_name</span> <span class="o">=</span> <span class="k">c</span><span class="p">.</span><span class="n">unique_account_name</span>
+</pre></td></tr></tbody></table></code></pre></div></div>
+
+<h2 id="query-syntax">Query Syntax</h2>
+
+<blockquote>
+  <p>DO</p>
+</blockquote>
+
+<ul>
+  <li>予約語は大文字を使用する(<code class="language-plaintext highlighter-rouge">SELECT</code>, <code class="language-plaintext highlighter-rouge">WHERE</code>, <code class="language-plaintext highlighter-rouge">FROM</code>, <code class="language-plaintext highlighter-rouge">SUM</code>など)</li>
+  <li>常にASキーワードを記載する</li>
+  <li>原則1行につき１文</li>
+  <li>1文70文字超えたら改行</li>
+  <li>インデントはspace 4</li>
+  <li>比較演算子 (<code class="language-plaintext highlighter-rouge">=</code>, <code class="language-plaintext highlighter-rouge">&gt;</code> <code class="language-plaintext highlighter-rouge">!=</code>）の前後にはスペースをいれる</li>
+  <li>カンマ（<code class="language-plaintext highlighter-rouge">,</code>）の後にスペース入れる</li>
+  <li>NOT EQUALの演算をする際は <code class="language-plaintext highlighter-rouge">&lt;&gt;</code> ではなくて <code class="language-plaintext highlighter-rouge">!=</code> を用いる（<code class="language-plaintext highlighter-rouge">!=</code>のほうがプログラミング言語との観点では一般的な表現方法）</li>
+  <li><code class="language-plaintext highlighter-rouge">UNION</code>句は<code class="language-plaintext highlighter-rouge">UNION ALL</code>か<code class="language-plaintext highlighter-rouge">UNION DISTINCT</code>を明示的に記述する</li>
+  <li><code class="language-plaintext highlighter-rouge">GROUP BY</code>, <code class="language-plaintext highlighter-rouge">ORDER BY</code>は数字で表現する</li>
+</ul>
+
+<blockquote>
+  <p>EXAMPLE</p>
+</blockquote>
+
+<div class="language-sql highlighter-rouge"><div class="highlight"><pre class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
+2
+3
+4
+5
+6
+7
+8
+9
+10
+11
+12
+13
+14
+15
+16
+17
+18
+19
+20
+21
+22
+</pre></td><td class="rouge-code"><pre>  <span class="c1">-- Good: indent with space 4</span>
+<span class="k">WITH</span> <span class="n">my_data</span> <span class="k">AS</span> <span class="p">(</span>
+
+    <span class="k">SELECT</span> 
+        <span class="n">md</span><span class="p">.</span><span class="o">*</span>
+    <span class="k">FROM</span> 
+        <span class="n">prod</span><span class="p">.</span><span class="n">my_data</span> <span class="k">AS</span> <span class="n">md</span>
+    <span class="k">WHERE</span> 
+        <span class="n">md</span><span class="p">.</span><span class="n">filter</span> <span class="o">=</span> <span class="s1">'my_filter'</span>
+<span class="p">)</span>
+<span class="p">...</span>
+
+
+<span class="c1">-- Bad: indent with space 2</span>
+<span class="k">WITH</span> <span class="n">my_data</span> <span class="k">AS</span> <span class="p">(</span>
+
+  <span class="k">SELECT</span> <span class="o">*</span>
+  <span class="k">FROM</span> <span class="n">prod</span><span class="p">.</span><span class="n">my_data</span>
+  <span class="k">WHERE</span> <span class="n">filter</span> <span class="o">=</span> <span class="s1">'my_filter'</span>
+<span class="p">)</span>
+<span class="p">...</span>
+
+</pre></td></tr></tbody></table></code></pre></div></div>
+
+<h3 id="ブロックとインデント">ブロックとインデント</h3>
+
+<blockquote>
+  <p>DO</p>
+</blockquote>
+
+<ul>
+  <li>インデントを活用し,同じブロックに属するkeywordsがすべて同じ位置で開始するようにコードを整列させる</li>
+  <li><code class="language-plaintext highlighter-rouge">JOIN</code>句は,「ブロック」の向こう側にインデントし,必要に応じて改行でグループ化する</li>
+  <li><code class="language-plaintext highlighter-rouge">DISTINCT</code>は<code class="language-plaintext highlighter-rouge">SELECT</code>と同じ行に配置する</li>
+</ul>
+
+<blockquote>
+  <p>EXAMPLE: インデントを用いてブロックを整列する</p>
+</blockquote>
+
+<div class="language-sql highlighter-rouge"><div class="highlight"><pre class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
+2
+3
+4
+5
+6
+7
+8
+9
+10
+11
+12
+13
+</pre></td><td class="rouge-code"><pre><span class="k">SELECT</span> <span class="k">DISTINCT</span>
+    <span class="n">ph</span><span class="p">.</span><span class="n">COLUMN1</span> <span class="k">AS</span> <span class="n">COLUMN1</span><span class="p">,</span>
+    <span class="n">dd</span><span class="p">.</span><span class="n">COLUMN2</span> <span class="k">AS</span> <span class="n">COLUMN2</span>
+<span class="k">FROM</span>
+    <span class="n">purchase_history</span> <span class="k">AS</span> <span class="n">ph</span><span class="p">,</span>	
+    <span class="k">INNER</span> <span class="k">JOIN</span> <span class="n">delivery_data</span> <span class="k">AS</span> <span class="n">dd</span>
+        <span class="k">ON</span> <span class="n">ph</span><span class="p">.</span><span class="n">COLUMN3</span> <span class="o">=</span> <span class="n">dd</span><span class="p">.</span><span class="n">COLUMN3</span>
+       <span class="k">AND</span> <span class="n">ph</span><span class="p">.</span><span class="n">COLUMN4</span> <span class="o">=</span> <span class="n">dd</span><span class="p">.</span><span class="n">COLUMN4</span>
+<span class="k">WHERE</span>
+    <span class="n">ph</span><span class="p">.</span><span class="n">COLUMN5</span> <span class="o">=</span> <span class="mi">1</span>
+<span class="k">AND</span>	<span class="n">dd</span><span class="p">.</span><span class="n">COLUMN6</span> <span class="o">=</span> <span class="nb">DATE</span><span class="p">(</span><span class="s1">'2020-12-01'</span><span class="p">)</span>
+<span class="k">ORDER</span> <span class="k">BY</span>
+    <span class="mi">1</span><span class="p">,</span> <span class="mi">2</span>
+</pre></td></tr></tbody></table></code></pre></div></div>
+
+<h4 id="union句とブロック">UNION句とブロック</h4>
+
+<blockquote>
+  <p>DO</p>
+  <ul>
+    <li><code class="language-plaintext highlighter-rouge">UNION</code>句を用いる場合は,<code class="language-plaintext highlighter-rouge">UNION</code>の前後を改行し１行ずつ空ける</li>
+  </ul>
+</blockquote>
+
+<blockquote>
+  <p>EXAMPLE</p>
+</blockquote>
+
+<div class="language-sql highlighter-rouge"><div class="highlight"><pre class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
+2
+3
+4
+5
+6
+7
+8
+9
+10
+11
+12
+13
+</pre></td><td class="rouge-code"><pre><span class="k">SELECT</span>
+    <span class="n">table1</span><span class="p">.</span><span class="n">COLUMN1</span><span class="p">,</span>
+    <span class="n">table1</span><span class="p">.</span><span class="n">COLUMN2</span><span class="p">,</span>
+<span class="k">FROM</span>
+    <span class="k">table</span> <span class="mi">1</span>
+
+<span class="k">UNION</span> <span class="k">ALL</span>
+
+<span class="k">SELECT</span>
+    <span class="n">table2</span><span class="p">.</span><span class="n">COLUMN1</span><span class="p">,</span>
+    <span class="n">table2</span><span class="p">.</span><span class="n">COLUMN2</span><span class="p">,</span>
+<span class="k">FROM</span>
+    <span class="k">table</span> <span class="mi">2</span>
+</pre></td></tr></tbody></table></code></pre></div></div>
+
+<h4 id="case文とブロック">CASE文とブロック</h4>
+
+<blockquote>
+  <p>DO</p>
+</blockquote>
+
+<ul>
+  <li><code class="language-plaintext highlighter-rouge">WHEN</code>とそれに対応する<code class="language-plaintext highlighter-rouge">THEN</code>が一つのブロックとなるようにする</li>
+</ul>
+
+<blockquote>
+  <p>EXAMPLE</p>
+</blockquote>
+
+<div class="language-sql highlighter-rouge"><div class="highlight"><pre class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
+2
+3
+4
+5
+6
+7
+</pre></td><td class="rouge-code"><pre><span class="k">SELECT</span>
+    <span class="k">CASE</span>
+        <span class="k">WHEN</span> <span class="n">XXX</span><span class="p">.</span><span class="n">HOGE</span> <span class="o">=</span> <span class="mi">1</span> <span class="k">THEN</span> <span class="mi">1</span>
+        <span class="k">ELSE</span> <span class="mi">0</span>
+    <span class="k">END</span> <span class="k">AS</span> <span class="n">is_hoge</span>
+<span class="k">FROM</span>
+    <span class="n">XXX</span>
+</pre></td></tr></tbody></table></code></pre></div></div>
+
+<h4 id="window関数">WINDOW関数</h4>
+
+<blockquote>
+  <p>DO</p>
+</blockquote>
+
+<ul>
+  <li>順序 (<code class="language-plaintext highlighter-rouge">ASC</code>, <code class="language-plaintext highlighter-rouge">DESC</code>)は明示する</li>
+</ul>
+
+<blockquote>
+  <p>EXAMPLE</p>
+</blockquote>
+
+<div class="language-sql highlighter-rouge"><div class="highlight"><pre class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
+2
+3
+4
+</pre></td><td class="rouge-code"><pre><span class="k">SUM</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span> <span class="n">OVER</span> <span class="p">(</span>
+                <span class="k">PARTITION</span> <span class="k">BY</span> <span class="n">category_id</span><span class="p">,</span> <span class="nb">year</span>
+                <span class="k">ORDER</span> <span class="k">BY</span> <span class="n">pledged</span> <span class="k">DESC</span>
+            <span class="p">)</span> <span class="k">AS</span> <span class="n">category_year</span>
+</pre></td></tr></tbody></table></code></pre></div></div>
+
+<h3 id="join句ではleft-outer-innerを明示する">JOIN句では<code class="language-plaintext highlighter-rouge">LEFT</code>, <code class="language-plaintext highlighter-rouge">OUTER</code>, <code class="language-plaintext highlighter-rouge">INNER</code>を明示する</h3>
+
+<blockquote>
+  <p>DO</p>
+</blockquote>
+
+<ul>
+  <li><code class="language-plaintext highlighter-rouge">JOIN</code>ではなく<code class="language-plaintext highlighter-rouge">LEFT OUTER JOIN</code>とテーブル同士の関係性を明示する</li>
+  <li>JOINキーの順番はテーブルの出現順番に合わせる</li>
+  <li>JOIN方向は<code class="language-plaintext highlighter-rouge">LEFT</code>に統一する(<code class="language-plaintext highlighter-rouge">RIGHT JOIN</code>は用いない)
+    <ul>
+      <li>JOIN方向が左からと統一されていないと,集約Keyはどちらベースなのかの解釈に頭をつかってしまい,読みづらいコードとなってしまうため</li>
+    </ul>
+  </li>
+</ul>
+
+<blockquote>
+  <blockquote>
+    <p>EXAMPLE: JOINキーの順番</p>
+  </blockquote>
+</blockquote>
+
+<div class="language-sql highlighter-rouge"><div class="highlight"><pre class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
+2
+3
+4
+5
+6
+7
+8
+9
+10
+11
+12
+13
+14
+15
+16
+17
+18
+19
+</pre></td><td class="rouge-code"><pre><span class="c1">--- Good</span>
+<span class="k">SELECT</span>
+    <span class="p">...</span>
+<span class="k">FROM</span> 
+    <span class="k">source</span>
+    <span class="k">LEFT</span> <span class="k">JOIN</span> <span class="n">other_source</span>
+        <span class="k">ON</span> <span class="k">source</span><span class="p">.</span><span class="n">id</span> <span class="o">=</span> <span class="n">other_source</span><span class="p">.</span><span class="n">id</span>
+<span class="k">WHERE</span> 
+    <span class="p">...</span>
+
+<span class="c1">--- Bad</span>
+<span class="k">SELECT</span>
+    <span class="p">...</span>
+<span class="k">FROM</span> 
+    <span class="k">source</span>
+    <span class="k">LEFT</span> <span class="k">JOIN</span> <span class="n">other_source</span>
+        <span class="k">ON</span> <span class="n">other_source</span><span class="p">.</span><span class="n">id</span> <span class="o">=</span> <span class="k">source</span><span class="p">.</span><span class="n">id</span>
+<span class="k">WHERE</span> 
+    <span class="p">...</span>
+</pre></td></tr></tbody></table></code></pre></div></div>
+
+<h3 id="サブクエリ">サブクエリ</h3>
+
+<blockquote>
+  <p>DO</p>
+</blockquote>
+
+<ul>
+  <li>サブクエリのブロックは他と区別できるように配置する</li>
+  <li>サブクエリ内は改行を厳密にやらなくてもいいとする</li>
+</ul>
+
+<blockquote>
+  <p>AVOID</p>
+</blockquote>
+
+<ul>
+  <li>避けることができるならサブクエリは用いない</li>
+</ul>
+
+<blockquote>
+  <p>EXAMPLE</p>
+</blockquote>
+
+<div class="language-sql highlighter-rouge"><div class="highlight"><pre class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
+2
+3
+4
+5
+6
+7
+8
+9
+10
+11
+12
+13
+14
+15
+16
+17
+18
+</pre></td><td class="rouge-code"><pre><span class="k">SELECT</span> 
+    <span class="n">r</span><span class="p">.</span><span class="n">last_name</span><span class="p">,</span>
+    <span class="p">(</span>
+        <span class="k">SELECT</span> <span class="k">MAX</span><span class="p">(</span><span class="nb">YEAR</span><span class="p">(</span><span class="n">championship_date</span><span class="p">))</span>
+        <span class="k">FROM</span> <span class="n">champions</span> <span class="k">AS</span> <span class="k">c</span>
+        <span class="k">WHERE</span> <span class="k">c</span><span class="p">.</span><span class="n">last_name</span> <span class="o">=</span> <span class="n">r</span><span class="p">.</span><span class="n">last_name</span>
+          <span class="k">AND</span> <span class="k">c</span><span class="p">.</span><span class="n">confirmed</span> <span class="o">=</span> <span class="s1">'Y'</span>
+    <span class="p">)</span> <span class="k">AS</span> <span class="n">last_championship_year</span>
+<span class="k">FROM</span>
+    <span class="n">riders</span> <span class="k">AS</span> <span class="n">r</span>
+<span class="k">WHERE</span>
+    <span class="n">r</span><span class="p">.</span><span class="n">last_name</span> <span class="k">IN</span> <span class="p">(</span>
+                        <span class="k">SELECT</span> <span class="k">c</span><span class="p">.</span><span class="n">last_name</span>
+                        <span class="k">FROM</span> <span class="n">champions</span> <span class="k">AS</span> <span class="k">c</span>
+                        <span class="k">WHERE</span> <span class="nb">YEAR</span><span class="p">(</span><span class="n">championship_date</span><span class="p">)</span> <span class="o">&gt;</span> <span class="s1">'2008'</span>
+                        <span class="k">AND</span> <span class="k">c</span><span class="p">.</span><span class="n">confirmed</span> <span class="o">=</span> <span class="s1">'Y'</span>
+                    <span class="p">)</span>
+<span class="p">;</span>
+</pre></td></tr></tbody></table></code></pre></div></div>
+
+<h4 id="サブクエリ句ではなくctescommon-table-expressions--with句を用いる">サブクエリ句ではなくCTEs(Common Table Expressions = WITH句)を用いる</h4>
+
+<ul>
+  <li>CTEsの方がサブクエリ句を用いるよりも可読性があがる</li>
+  <li>CTEsの方がQuery Peformanceが改善するケースがある</li>
+</ul>
+
+<blockquote>
+  <p>EXAMPLE: CTEsの方がQuery Peformanceが改善するケース</p>
+</blockquote>
+
+<p>以下の例では,CTE statmentを用いたクエリに対して,サブクエリ句を用いたクエリのデータスキャン量は大きくなってしまいます.
+<code class="language-plaintext highlighter-rouge">apc1</code>と<code class="language-plaintext highlighter-rouge">apc2</code>が<code class="language-plaintext highlighter-rouge">JOIN</code>句で呼ばれる際,CTE statementは<code class="language-plaintext highlighter-rouge">avg_pet_count_over_time</code>を1回作成するだけで住みますが,WITH句の方ではそれぞれ独立に2回<code class="language-plaintext highlighter-rouge">avg_pet_count_over_time</code>が作られてしまうことに起因しています.</p>
+
+<div class="language-sql highlighter-rouge"><div class="highlight"><pre class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
+2
+3
+4
+5
+6
+7
+8
+9
+10
+11
+12
+13
+14
+15
+16
+17
+18
+19
+20
+21
+22
+</pre></td><td class="rouge-code"><pre><span class="k">WITH</span> 
+    <span class="n">avg_pet_count_over_time</span> <span class="k">AS</span> <span class="p">(</span>
+        <span class="k">SELECT</span> 
+            <span class="n">cat_id</span><span class="p">,</span> 
+            <span class="k">MAX</span><span class="p">(</span><span class="nb">timestamp</span><span class="p">)::</span><span class="nb">DATE</span> <span class="k">AS</span> <span class="n">max_pet_date</span><span class="p">,</span> 
+            <span class="k">MIN</span><span class="p">(</span><span class="nb">timestamp</span><span class="p">)::</span><span class="nb">DATE</span> <span class="k">AS</span> <span class="n">min_pet_date</span> 
+        <span class="k">FROM</span> 
+            <span class="n">cat_pet_fact</span>
+        <span class="k">GROUP</span> <span class="k">BY</span> 
+            <span class="mi">1</span>
+    <span class="p">)</span>
+<span class="k">SELECT</span> 
+    <span class="n">cd</span><span class="p">.</span><span class="n">cat_name</span><span class="p">,</span>
+    <span class="n">apc1</span><span class="p">.</span><span class="n">max_pet_date</span><span class="p">,</span>
+    <span class="n">apc2</span><span class="p">.</span><span class="n">min_pet_date</span>
+<span class="k">FROM</span> 
+    <span class="n">cat_dim</span> <span class="k">AS</span> <span class="n">cd</span>
+    <span class="k">LEFT</span> <span class="k">JOIN</span> <span class="n">avg_pet_count_over_time</span> <span class="k">as</span> <span class="n">apc1</span>
+        <span class="k">ON</span> <span class="n">cd</span><span class="p">.</span><span class="n">cat_id</span> <span class="o">=</span> <span class="n">apc1</span><span class="p">.</span><span class="n">cat_id</span>
+    <span class="k">LEFT</span> <span class="k">JOIN</span> <span class="n">avg_pet_count_over_time</span> <span class="k">as</span> <span class="n">apc2</span>
+        <span class="k">ON</span> <span class="n">cd</span><span class="p">.</span><span class="n">cat_id</span> <span class="o">=</span> <span class="n">apc2</span><span class="p">.</span><span class="n">cat_id</span>
+<span class="p">;</span>
+</pre></td></tr></tbody></table></code></pre></div></div>
+
+<blockquote>
+  <p>AVOID</p>
+</blockquote>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
+2
+3
+4
+5
+6
+7
+8
+9
+10
+11
+12
+13
+14
+15
+16
+17
+18
+19
+20
+21
+</pre></td><td class="rouge-code"><pre>SELECT 
+  cat_name,
+  apc1.max_pet_date,
+  apc2.min_pet_date 
+FROM cat_dim
+LEFT JOIN 
+  (SELECT 
+    cat_id, 
+    MAX(timestamp)::DATE AS max_pet_date,
+    MIN(timestamp)::DATE AS min_pet_date
+  FROM cat_pet_fact
+  GROUP BY 1) AS apc1
+ON cat_dim.cat_id = apc1.cat_id
+LEFT JOIN 
+  (SELECT 
+    cat_id,
+    MAX(timestamp)::DATE AS max_pet_date,
+    MIN(timestamp)::DATE AS min_pet_date
+  FROM cat_pet_fact
+  GROUP BY 1) as apc2
+ON cat_dim.cat_id = apc2.cat_id;
+</pre></td></tr></tbody></table></code></pre></div></div>
+
+<h2 id="bigquery-best-practices">BigQuery Best Practices</h2>
+<h3 id="必要なカラムのみクエリする">必要なカラムのみクエリする</h3>
+
+<blockquote>
+  <p>DO</p>
+</blockquote>
+
+<ul>
+  <li>分析に必要なカラムのみクエリする</li>
+</ul>
+
+<p>BigQueryはカラム指向ストレージであるため,指定されたカラムは上から下までフルスキャンされます. そのため,指定されたカラムが多いほどスキャンのデータ量が増えます. スキャンデータ量が多いほど処理に時間がかかりパフォーマンスが下がり,また料金コストも上昇するというデメリットがあります.</p>
+
+<blockquote>
+  <p>カラム指向スト-レジとは？</p>
+</blockquote>
+
+<ul>
+  <li>カラム指向ストレージとは,列単位でデータを格納する仕組みのこと(多くの他のRDBはレコード単位でデータを格納)</li>
+  <li>列単位ではデータタイプが同一なので,データの圧縮効率が高くなる(=ストレージコストが安くなる)というメリットがあります</li>
+</ul>
+
+<h3 id="limitではなく_partitiondateなどのpartitionを用いる"><code class="language-plaintext highlighter-rouge">LIMIT</code>ではなく<code class="language-plaintext highlighter-rouge">_PARTITIONDATE</code>などのPARTITIONを用いる</h3>
+
+<ul>
+  <li><code class="language-plaintext highlighter-rouge">LIMIT</code>句はデータのスキャン量には影響を与えません. なのでQuery Performanceの観点からもクエリコスト管理の観点からも推奨されません</li>
+  <li>一部のデータだけ見たい場合は,<code class="language-plaintext highlighter-rouge">_PARTITIONDATE = "2017-01-01"</code>などのPARTITION機能を用いると,データスキャン量が減らせます</li>
+</ul>
+
+<p>なお,一部のカラムを除いてクエリしたい場合は<code class="language-plaintext highlighter-rouge">EXCEPT</code>関数を用います.</p>
+
+<div class="language-sql highlighter-rouge"><div class="highlight"><pre class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
+2
+3
+4
+5
+6
+7
+</pre></td><td class="rouge-code"><pre><span class="cm">/*update_timestampカラム以外をクエリしたい場合*/</span>
+<span class="k">SELECT</span>
+    <span class="o">*</span> <span class="n">EXPECT</span><span class="p">(</span><span class="n">update_timestamp</span><span class="p">)</span>
+<span class="k">FROM</span>
+    <span class="n">TABLE1</span>
+<span class="k">WHERE</span>
+    <span class="n">_PARTITIONDATE</span> <span class="k">BETWEEN</span> <span class="nb">TIMESTAMP</span><span class="p">(</span><span class="nv">"2016-01-01"</span><span class="p">)</span> <span class="k">AND</span> <span class="nb">TIMESTAMP</span><span class="p">(</span><span class="nv">"2016-01-31"</span><span class="p">)</span>
+</pre></td></tr></tbody></table></code></pre></div></div>
+
+<h4 id="partitionの指定可能対象">PARTITIONの指定可能対象</h4>
+
+<blockquote>
+  <p>設定可能対象</p>
+</blockquote>
+
+<ul>
+  <li>データ読み込み時の日付部分</li>
+  <li>TIMESTAMP列</li>
+  <li>DATE列</li>
+  <li>DATETIME列</li>
+  <li>INTEGER列</li>
+</ul>
+
+<blockquote>
+  <p>EXAMPLE</p>
+</blockquote>
+
+<div class="language-sql highlighter-rouge"><div class="highlight"><pre class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
+2
+3
+4
+5
+6
+7
+8
+9
+10
+11
+12
+13
+14
+15
+16
+17
+18
+19
+20
+21
+22
+23
+24
+25
+26
+27
+28
+29
+30
+31
+32
+33
+34
+35
+36
+37
+38
+39
+40
+41
+42
+43
+44
+45
+46
+47
+48
+49
+50
+51
+</pre></td><td class="rouge-code"><pre><span class="c1">--- DATE列をPARTITION列として指定</span>
+<span class="k">CREATE</span> <span class="k">TABLE</span>
+  <span class="n">mydataset</span><span class="p">.</span><span class="n">newtable</span> <span class="p">(</span><span class="n">transaction_id</span> <span class="n">INT64</span><span class="p">,</span> <span class="n">transaction_date</span> <span class="nb">DATE</span><span class="p">)</span>
+<span class="k">PARTITION</span> <span class="k">BY</span>
+  <span class="n">transaction_date</span>
+<span class="k">OPTIONS</span><span class="p">(</span>
+  <span class="n">require_partition_filter</span><span class="o">=</span><span class="k">false</span>
+<span class="p">);</span>
+
+<span class="k">CREATE</span> <span class="k">TABLE</span>
+  <span class="n">mydataset</span><span class="p">.</span><span class="n">newtable</span> <span class="p">(</span><span class="n">transaction_id</span> <span class="n">INT64</span><span class="p">,</span> <span class="n">transaction_date</span> <span class="nb">DATE</span><span class="p">)</span>
+<span class="k">PARTITION</span> <span class="k">BY</span>
+  <span class="n">transaction_date</span>
+<span class="k">AS</span> <span class="k">SELECT</span> <span class="n">transaction_id</span><span class="p">,</span> <span class="n">transaction_date</span> <span class="k">FROM</span> <span class="n">mydataset</span><span class="p">.</span><span class="n">mytable</span><span class="p">;</span>
+
+
+<span class="c1">--- DATE列をMonthlyにトランクして,PARTITION列として指定</span>
+<span class="k">CREATE</span> <span class="k">TABLE</span>
+  <span class="n">mydataset</span><span class="p">.</span><span class="n">newtable</span> <span class="p">(</span><span class="n">transaction_id</span> <span class="n">INT64</span><span class="p">,</span> <span class="n">transaction_date</span> <span class="nb">DATE</span><span class="p">)</span>
+<span class="k">PARTITION</span> <span class="k">BY</span>
+  <span class="n">DATE_TRUNC</span><span class="p">(</span><span class="n">transaction_date</span><span class="p">,</span> <span class="k">MONTH</span><span class="p">)</span>
+<span class="k">OPTIONS</span><span class="p">(</span>
+  <span class="n">require_partition_filter</span><span class="o">=</span><span class="k">false</span>
+<span class="p">);</span>
+
+
+<span class="c1">--- TIMESTAMP列をDailyにトランクして,PARTITION列として指定</span>
+<span class="k">CREATE</span> <span class="k">TABLE</span>
+  <span class="n">mydataset</span><span class="p">.</span><span class="n">newtable</span> <span class="p">(</span><span class="n">transaction_id</span> <span class="n">INT64</span><span class="p">,</span> <span class="n">transaction_ts</span> <span class="nb">TIMESTAMP</span><span class="p">)</span>
+<span class="k">PARTITION</span> <span class="k">BY</span>
+  <span class="n">TIMESTAMP_TRUNC</span><span class="p">(</span><span class="n">transaction_ts</span><span class="p">,</span> <span class="k">DAY</span><span class="p">)</span>
+<span class="k">OPTIONS</span><span class="p">(</span>
+  <span class="n">require_partition_filter</span><span class="o">=</span><span class="k">false</span>
+<span class="p">);</span>
+
+
+<span class="c1">--- データ取り込み日をPARTITION列として指定</span>
+<span class="k">CREATE</span> <span class="k">TABLE</span>
+  <span class="n">mydataset</span><span class="p">.</span><span class="n">newtable</span> <span class="p">(</span><span class="n">transaction_id</span> <span class="n">INT64</span><span class="p">)</span>
+<span class="k">PARTITION</span> <span class="k">BY</span>
+  <span class="n">_PARTITIONDATE</span>
+<span class="p">;</span>
+
+
+<span class="c1">--- INTERGER列をPARTITION列として指定</span>
+<span class="k">CREATE</span> <span class="k">TABLE</span> <span class="n">mydataset</span><span class="p">.</span><span class="n">newtable</span> <span class="p">(</span><span class="n">customer_id</span> <span class="n">INT64</span><span class="p">,</span> <span class="n">date1</span> <span class="nb">DATE</span><span class="p">)</span>
+<span class="k">PARTITION</span> <span class="k">BY</span>
+  <span class="n">RANGE_BUCKET</span><span class="p">(</span><span class="n">customer_id</span><span class="p">,</span> <span class="n">GENERATE_ARRAY</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">100</span><span class="p">,</span> <span class="mi">10</span><span class="p">))</span>
+<span class="k">OPTIONS</span><span class="p">(</span>
+  <span class="n">require_partition_filter</span><span class="o">=</span><span class="k">false</span>
+<span class="p">)</span>
+</pre></td></tr></tbody></table></code></pre></div></div>
+
+<h3 id="shared-table-vs-partitioned-table">Shared Table vs PARTITIONED TABLE</h3>
+
+<blockquote>
+  <p>DO</p>
+</blockquote>
+
+<ul>
+  <li>日付ごとにテーブル(<code class="language-plaintext highlighter-rouge">PREFIX_YYYYMMDD</code>)を作るのではなく,パーティション分割テーブルを利用する</li>
+</ul>
+
+<blockquote>
+  <p>WHY</p>
+</blockquote>
+
+<p>日付ごとにテーブルを作るアプローチは,以下のオーバーヘッドがあります:</p>
+
+<ul>
+  <li>個別のテーブルごとにメタデータを保持する</li>
+  <li>クエリ実行時に個別のテーブルごとに権限を確認する必要がある</li>
+</ul>
+
+<blockquote>
+  <p>例外</p>
+</blockquote>
+
+<p>日毎にrawデータ形式が異なる場合は,日付ごとに異なるスキーマを適用できるシャーディングテーブルを活用する(活用例：データソースでカラムが増減した場合でもそのまま取り込める)</p>
+
+<h3 id="join句で結合する前にテーブルサイズを小さくする"><code class="language-plaintext highlighter-rouge">JOIN</code>句で結合する前にテーブルサイズを小さくする</h3>
+
+<p>BigQueryでは<code class="language-plaintext highlighter-rouge">JOIN</code>句を用いてテーブルを結合する際,まずBigQueryは両方のテーブルデータをシャッフルして,結合条件の演算を実施します. このシャッフルはスロットをオーバーロードするリスクがあります. ですので,事前にテーブルサイズを小さくできるならば,小さくしてから結合することが推奨されます.</p>
+
+<ul>
+  <li>BigQueryはストレージコストは大きくないので,データは非正規化したほうがよいとされています(=<code class="language-plaintext highlighter-rouge">JOIN</code>句を避けるようなテーブル設計)</li>
+</ul>
+
+<h3 id="join句のテーブルの順番"><code class="language-plaintext highlighter-rouge">JOIN</code>句のテーブルの順番</h3>
+
+<blockquote>
+  <p>DO</p>
+</blockquote>
+
+<ul>
+  <li>可能であるならば,<code class="language-plaintext highlighter-rouge">JOIN</code>句で指定するテーブルはデータサイズが大きいテーブル（行数が大きいテーブル）から呼んだほうがよい</li>
+</ul>
+
+<p>大きなテーブルをJOINの左側に,小さなテーブルをJOINの右側に配置すると,<code class="language-plaintext highlighter-rouge">broadcast join</code> が作成されます. <code class="language-plaintext highlighter-rouge">broadcast join</code>は,小さい方のテーブルのすべてのデータを,大きい方のテーブルを処理する各スロットに送ります. 具体的には,内部表側のデータがブロードキャストされる一方,外部表側のデータはそのままで移動されないことを指しています.</p>
+
+<h3 id="クラスタリング">クラスタリング</h3>
+
+<blockquote>
+  <p>DO</p>
+</blockquote>
+
+<ul>
+  <li>連続性の高いフィールドをクラスタキーとして設定</li>
+</ul>
+
+<blockquote>
+  <p>効果</p>
+</blockquote>
+
+<ul>
+  <li>クラスタキーでスキャンしたブロックのみ費用が発生する(=費用削減)</li>
+  <li>データはパーティション内でソートされて保持されているので,<code class="language-plaintext highlighter-rouge">WHERE</code>句でクラスタキーとなるフィールドでフィルターを指定した場合,不要なデータのスキャンを省略してくれる</li>
+  <li>RDBのINDEXのイメージが近い</li>
+</ul>
+
+<blockquote>
+  <p>設定可能対象</p>
+</blockquote>
+
+<ul>
+  <li>DATE</li>
+  <li>BOOL</li>
+  <li>GEOGRAPHY</li>
+  <li>INT64</li>
+  <li>NUMERIC</li>
+  <li>BIGNUMERIC</li>
+  <li>STRING</li>
+  <li>TIMESTAMP</li>
+  <li>DATETIME</li>
+</ul>
+
+<blockquote>
+  <p>LIMITATIONS</p>
+</blockquote>
+
+<ul>
+  <li>クラスタキーは４つまで設定可能</li>
+  <li>STRINGをキーに設定した場合,最初の1,024 charactersのみソートに用いられる</li>
+</ul>
+
+<blockquote>
+  <p>EXAMPLE</p>
+</blockquote>
+
+<div class="language-sql highlighter-rouge"><div class="highlight"><pre class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
+2
+3
+4
+5
+6
+7
+8
+9
+10
+11
+12
+</pre></td><td class="rouge-code"><pre><span class="k">CREATE</span> <span class="k">TABLE</span>
+    <span class="nv">`mydataset.ClusteredSalesData`</span>
+<span class="k">PARTITION</span> <span class="k">BY</span>
+    <span class="nb">DATE</span><span class="p">(</span><span class="nb">timestamp</span><span class="p">)</span>
+<span class="k">CLUSTER</span> <span class="k">BY</span>
+    <span class="n">customer_id</span><span class="p">,</span>
+    <span class="n">product_id</span><span class="p">,</span>
+    <span class="n">order_id</span> <span class="k">AS</span>
+<span class="k">SELECT</span>
+    <span class="o">*</span>
+<span class="k">FROM</span>
+    <span class="nv">`mydataset.SalesData`</span>
+</pre></td></tr></tbody></table></code></pre></div></div>
+
+<h2 id="references">References</h2>
+<h3 id="online-contents">Online-contents</h3>
+
+<ul>
+  <li><a href="https://github.com/sqlfluff/sqlfluff">GitHub &gt;  sqlfluff/sqlfluff</a></li>
+</ul>
+
+
+                <hr style="visibility: hidden;">
+                <hr/>
+                <b><fontsize="5">Share Buttons</font><br></b>
+                <!--see 
+    https://jekyllcodex.org/without-plugin/share-buttons/ 
+    https://ranvir.xyz/blog/why-and-how-to-add-social-sharing-buttons-on-your-jekyll-blog-using-github-pages/
+-->
+
+
+
+<style>
+#share-buttons {display: inline-block; vertical-align: middle; }
+#share-buttons:after {content: ""; display: block; clear: both;}
+#share-buttons > div {
+    position: relative;
+    text-align: left; 
+    height: 36px; 
+    width: 32px; 
+    float: left; 
+    text-align: center;
+}
+#share-buttons > div > svg {height: 16px; fill: #d5d5d5; margin-top: 10px;}
+#share-buttons > div:hover {cursor: pointer;}
+#share-buttons > div.facebook:hover > svg {fill: #3B5998;}
+#share-buttons > div.twitter:hover > svg {fill: #55ACEE;}
+#share-buttons > div.linkedin:hover > svg {fill: #0077b5;}
+#share-buttons > div.pinterest:hover > svg {fill: #CB2027;}
+#share-buttons > div.gplus:hover > svg {fill: #dd4b39;}
+#share-buttons > div.mail:hover > svg {fill: #7D7D7D;}
+#share-buttons > div.instagram:hover > svg {fill: #C73B92;}
+#share-buttons > div.facebook > svg {height: 18px; margin-top: 9px;}
+#share-buttons > div.twitter > svg {height: 20px; margin-top: 8px;}
+#share-buttons > div.linkedin > svg {height: 19px; margin-top: 7px;}
+#share-buttons > div.pinterest > svg {height: 20px; margin-top: 9px;}
+#share-buttons > div.gplus > svg {height: 17px; margin-top: 9px; position: relative; left: 1px;}
+#share-buttons > div.mail > svg {height: 14px; margin-top: 11px;}
+</style>
+
+<span style="color: black">Share on: </span><div id="share-buttons">
+    <div class="facebook" title="Share this on Facebook" onclick="gtag('event', 'Facebook', {'event_category':'Post Shared','event_label':'Facebook'}); location.href='http://www.facebook.com/share.php?u=https://ryonakagami.github.io/2021/05/03/Coding-Guide-sql/';"><svg viewBox="0 0 1792 1792" xmlns="http://www.w3.org/2000/svg"><path d="M1343 12v264h-157q-86 0-116 36t-30 108v189h293l-39 296h-254v759h-306v-759h-255v-296h255v-218q0-186 104-288.5t277-102.5q147 0 228 12z"/></svg></div>
+    <div class="twitter" title="Share this on Twitter" onclick="gtag('event', 'Twitter', {'event_category':'Post Shared','event_label':'Twitter'}); location.href='https://twitter.com/intent/tweet?text=Coding Style Guide Part 2&url=https://ryonakagami.github.io/2021/05/03/Coding-Guide-sql/';"><svg viewBox="0 0 1792 1792" xmlns="http://www.w3.org/2000/svg"><path d="M1684 408q-67 98-162 167 1 14 1 42 0 130-38 259.5t-115.5 248.5-184.5 210.5-258 146-323 54.5q-271 0-496-145 35 4 78 4 225 0 401-138-105-2-188-64.5t-114-159.5q33 5 61 5 43 0 85-11-112-23-185.5-111.5t-73.5-205.5v-4q68 38 146 41-66-44-105-115t-39-154q0-88 44-163 121 149 294.5 238.5t371.5 99.5q-8-38-8-74 0-134 94.5-228.5t228.5-94.5q140 0 236 102 109-21 205-78-37 115-142 178 93-10 186-50z"/></svg></div>
+    <div class="linkedin" title="Share this on Linkedin" onclick="gtag('event', 'Linkedin', {'event_category':'Post Shared','event_label':'Linkedin'}); location.href='https://www.linkedin.com/shareArticle?mini=true&url=https://ryonakagami.github.io/2021/05/03/Coding-Guide-sql/&title=&summary=&source=';"><svg viewBox="0 0 1792 1792" xmlns="http://www.w3.org/2000/svg"><path d="M477 625v991h-330v-991h330zm21-306q1 73-50.5 122t-135.5 49h-2q-82 0-132-49t-50-122q0-74 51.5-122.5t134.5-48.5 133 48.5 51 122.5zm1166 729v568h-329v-530q0-105-40.5-164.5t-126.5-59.5q-63 0-105.5 34.5t-63.5 85.5q-11 30-11 81v553h-329q2-399 2-647t-1-296l-1-48h329v144h-2q20-32 41-56t56.5-52 87-43.5 114.5-15.5q171 0 275 113.5t104 332.5z"/></svg></div>
+    
+    <div class="mail" title="Share this through Email" onclick="gtag('event', 'Email', {'event_category':'Post Shared','event_label':'Email'}); location.href='mailto:?&body=https://ryonakagami.github.io/2021/05/03/Coding-Guide-sql/';"><svg viewBox="0 0 1792 1792" xmlns="http://www.w3.org/2000/svg"><path d="M1792 710v794q0 66-47 113t-113 47h-1472q-66 0-113-47t-47-113v-794q44 49 101 87 362 246 497 345 57 42 92.5 65.5t94.5 48 110 24.5h2q51 0 110-24.5t94.5-48 92.5-65.5q170-123 498-345 57-39 100-87zm0-294q0 79-49 151t-122 123q-376 261-468 325-10 7-42.5 30.5t-54 38-52 32.5-57.5 27-50 9h-2q-23 0-50-9t-57.5-27-52-32.5-54-38-42.5-30.5q-91-64-262-182.5t-205-142.5q-62-42-117-115.5t-55-136.5q0-78 41.5-130t118.5-52h1472q65 0 112.5 47t47.5 113z"/></svg></div>
+</div>
+
+                
+                <hr/>
+
+                <!-- Featured Tags -->
+                <b><fontsize="5">Feature Tags</b>
+                    <div id="tag_cloud" class="tags tags-sup js-tags" 
+                    style="line-height: 0px !important;">
+                        
+                        
+                        
+                        
+                        
+                                <a data-sort="0288" 
+                                    href="/archive/?tag=%E7%B5%B1%E8%A8%88"
+                                    title="統計"
+                                    style="color: #337ab7 !important;"
+                                    rel="61">統計</a>
+                        
+                                <a data-sort="0298" 
+                                    href="/archive/?tag=Python"
+                                    title="Python"
+                                    style="color: #337ab7 !important;"
+                                    rel="51">Python</a>
+                        
+                                <a data-sort="0300" 
+                                    href="/archive/?tag=math"
+                                    title="math"
+                                    style="color: #337ab7 !important;"
+                                    rel="49">math</a>
+                        
+                                <a data-sort="0303" 
+                                    href="/archive/?tag=Linux"
+                                    title="Linux"
+                                    style="color: #337ab7 !important;"
+                                    rel="46">Linux</a>
+                        
+                                <a data-sort="0316" 
+                                    href="/archive/?tag=Ubuntu+20.04+LTS"
+                                    title="Ubuntu 20.04 LTS"
+                                    style="color: #337ab7 !important;"
+                                    rel="33">Ubuntu 20.04 LTS</a>
+                        
+                                <a data-sort="0319" 
+                                    href="/archive/?tag=Shell"
+                                    title="Shell"
+                                    style="color: #337ab7 !important;"
+                                    rel="30">Shell</a>
+                        
+                                <a data-sort="0321" 
+                                    href="/archive/?tag=English"
+                                    title="English"
+                                    style="color: #337ab7 !important;"
+                                    rel="28">English</a>
+                        
+                                <a data-sort="0324" 
+                                    href="/archive/?tag=git"
+                                    title="git"
+                                    style="color: #337ab7 !important;"
+                                    rel="25">git</a>
+                        
+                                <a data-sort="0329" 
+                                    href="/archive/?tag=%E6%96%B9%E6%B3%95%E8%AB%96"
+                                    title="方法論"
+                                    style="color: #337ab7 !important;"
+                                    rel="20">方法論</a>
+                        
+                                <a data-sort="0333" 
+                                    href="/archive/?tag=Ubuntu+22.04+LTS"
+                                    title="Ubuntu 22.04 LTS"
+                                    style="color: #337ab7 !important;"
+                                    rel="16">Ubuntu 22.04 LTS</a>
+                        
+                                <a data-sort="0337" 
+                                    href="/archive/?tag=%E7%B5%B1%E8%A8%88%E6%A4%9C%E5%AE%9A"
+                                    title="統計検定"
+                                    style="color: #337ab7 !important;"
+                                    rel="12">統計検定</a>
+                        
+                                <a data-sort="0338" 
+                                    href="/archive/?tag=%E7%AB%B6%E6%8A%80%E3%83%97%E3%83%AD%E3%82%B0%E3%83%A9%E3%83%9F%E3%83%B3%E3%82%B0"
+                                    title="競技プログラミング"
+                                    style="color: #337ab7 !important;"
+                                    rel="11">競技プログラミング</a>
+                        
+                                <a data-sort="0339" 
+                                    href="/archive/?tag=%E3%83%95%E3%83%BC%E3%83%AA%E3%82%A8%E8%A7%A3%E6%9E%90"
+                                    title="フーリエ解析"
+                                    style="color: #337ab7 !important;"
+                                    rel="10">フーリエ解析</a>
+                        
+                                <a data-sort="0340" 
+                                    href="/archive/?tag=%E5%89%8D%E5%87%A6%E7%90%86"
+                                    title="前処理"
+                                    style="color: #337ab7 !important;"
+                                    rel="9">前処理</a>
+                        
+                                <a data-sort="0340" 
+                                    href="/archive/?tag=SQL"
+                                    title="SQL"
+                                    style="color: #337ab7 !important;"
+                                    rel="9">SQL</a>
+                        
+                                <a data-sort="0340" 
+                                    href="/archive/?tag=coding"
+                                    title="coding"
+                                    style="color: #337ab7 !important;"
+                                    rel="9">coding</a>
+                        
+                                <a data-sort="0341" 
+                                    href="/archive/?tag=%E3%82%B3%E3%83%9F%E3%83%A5%E3%83%8B%E3%82%B1%E3%83%BC%E3%82%B7%E3%83%A7%E3%83%B3"
+                                    title="コミュニケーション"
+                                    style="color: #337ab7 !important;"
+                                    rel="8">コミュニケーション</a>
+                        
+                                <a data-sort="0342" 
+                                    href="/archive/?tag=Network"
+                                    title="Network"
+                                    style="color: #337ab7 !important;"
+                                    rel="7">Network</a>
+                        
+                                <a data-sort="0342" 
+                                    href="/archive/?tag=ssh"
+                                    title="ssh"
+                                    style="color: #337ab7 !important;"
+                                    rel="7">ssh</a>
+                        
+                                <a data-sort="0343" 
+                                    href="/archive/?tag=%E5%B0%86%E6%A3%8B"
+                                    title="将棋"
+                                    style="color: #337ab7 !important;"
+                                    rel="6">将棋</a>
+                        
+                                <a data-sort="0343" 
+                                    href="/archive/?tag=Data+visualization"
+                                    title="Data visualization"
+                                    style="color: #337ab7 !important;"
+                                    rel="6">Data visualization</a>
+                        
+                                <a data-sort="0343" 
+                                    href="/archive/?tag=Docker"
+                                    title="Docker"
+                                    style="color: #337ab7 !important;"
+                                    rel="6">Docker</a>
+                        
+                                <a data-sort="0343" 
+                                    href="/archive/?tag=Econometrics"
+                                    title="Econometrics"
+                                    style="color: #337ab7 !important;"
+                                    rel="6">Econometrics</a>
+                        
+                                <a data-sort="0343" 
+                                    href="/archive/?tag=VSCode"
+                                    title="VSCode"
+                                    style="color: #337ab7 !important;"
+                                    rel="6">VSCode</a>
+                        
+                                <a data-sort="0343" 
+                                    href="/archive/?tag=statistical+inference"
+                                    title="statistical inference"
+                                    style="color: #337ab7 !important;"
+                                    rel="6">statistical inference</a>
+                        
+                                <a data-sort="0344" 
+                                    href="/archive/?tag=GitHub+Pages"
+                                    title="GitHub Pages"
+                                    style="color: #337ab7 !important;"
+                                    rel="5">GitHub Pages</a>
+                        
+                                <a data-sort="0344" 
+                                    href="/archive/?tag=apt"
+                                    title="apt"
+                                    style="color: #337ab7 !important;"
+                                    rel="5">apt</a>
+                        
+                                <a data-sort="0344" 
+                                    href="/archive/?tag=development"
+                                    title="development"
+                                    style="color: #337ab7 !important;"
+                                    rel="5">development</a>
+                        
+                                <a data-sort="0345" 
+                                    href="/archive/?tag=%E3%82%B7%E3%82%B9%E3%83%86%E3%83%A0%E7%AE%A1%E7%90%86"
+                                    title="システム管理"
+                                    style="color: #337ab7 !important;"
+                                    rel="4">システム管理</a>
+                        
+                                <a data-sort="0345" 
+                                    href="/archive/?tag=Coffee"
+                                    title="Coffee"
+                                    style="color: #337ab7 !important;"
+                                    rel="4">Coffee</a>
+                        
+                                <a data-sort="0345" 
+                                    href="/archive/?tag=cloud"
+                                    title="cloud"
+                                    style="color: #337ab7 !important;"
+                                    rel="4">cloud</a>
+                        
+                                <a data-sort="0346" 
+                                    href="/archive/?tag=%E6%95%B0%E5%80%A4%E8%A8%88%E7%AE%97"
+                                    title="数値計算"
+                                    style="color: #337ab7 !important;"
+                                    rel="3">数値計算</a>
+                        
+                                <a data-sort="0346" 
+                                    href="/archive/?tag=%E7%B4%A0%E6%95%B0"
+                                    title="素数"
+                                    style="color: #337ab7 !important;"
+                                    rel="3">素数</a>
+                        
+                                <a data-sort="0346" 
+                                    href="/archive/?tag=Book"
+                                    title="Book"
+                                    style="color: #337ab7 !important;"
+                                    rel="3">Book</a>
+                        
+                                <a data-sort="0346" 
+                                    href="/archive/?tag=Font"
+                                    title="Font"
+                                    style="color: #337ab7 !important;"
+                                    rel="3">Font</a>
+                        
+                                <a data-sort="0346" 
+                                    href="/archive/?tag=Metrics"
+                                    title="Metrics"
+                                    style="color: #337ab7 !important;"
+                                    rel="3">Metrics</a>
+                        
+                                <a data-sort="0346" 
+                                    href="/archive/?tag=Poetry"
+                                    title="Poetry"
+                                    style="color: #337ab7 !important;"
+                                    rel="3">Poetry</a>
+                        
+                                <a data-sort="0346" 
+                                    href="/archive/?tag=Ubuntu+24.04+LTS"
+                                    title="Ubuntu 24.04 LTS"
+                                    style="color: #337ab7 !important;"
+                                    rel="3">Ubuntu 24.04 LTS</a>
+                        
+                                <a data-sort="0346" 
+                                    href="/archive/?tag=architecture"
+                                    title="architecture"
+                                    style="color: #337ab7 !important;"
+                                    rel="3">architecture</a>
+                        
+                                <a data-sort="0346" 
+                                    href="/archive/?tag=aws"
+                                    title="aws"
+                                    style="color: #337ab7 !important;"
+                                    rel="3">aws</a>
+                        
+                                <a data-sort="0346" 
+                                    href="/archive/?tag=shell"
+                                    title="shell"
+                                    style="color: #337ab7 !important;"
+                                    rel="3">shell</a>
+                        
+                                <a data-sort="0346" 
+                                    href="/archive/?tag=systemctl"
+                                    title="systemctl"
+                                    style="color: #337ab7 !important;"
+                                    rel="3">systemctl</a>
+                        
+                                <a data-sort="0347" 
+                                    href="/archive/?tag=%E3%83%86%E3%83%B3%E3%83%97%E3%83%AC%E3%83%BC%E3%83%88"
+                                    title="テンプレート"
+                                    style="color: #337ab7 !important;"
+                                    rel="2">テンプレート</a>
+                        
+                                <a data-sort="0347" 
+                                    href="/archive/?tag=%E3%83%87%E3%83%BC%E3%82%BF%E6%A7%8B%E9%80%A0"
+                                    title="データ構造"
+                                    style="color: #337ab7 !important;"
+                                    rel="2">データ構造</a>
+                        
+                                <a data-sort="0347" 
+                                    href="/archive/?tag=%E3%83%9D%E3%83%AF%E3%82%BD%E3%83%B3%E5%88%86%E5%B8%83"
+                                    title="ポワソン分布"
+                                    style="color: #337ab7 !important;"
+                                    rel="2">ポワソン分布</a>
+                        
+                                <a data-sort="0347" 
+                                    href="/archive/?tag=%E4%BC%9A%E8%A8%88%E5%88%86%E6%9E%90"
+                                    title="会計分析"
+                                    style="color: #337ab7 !important;"
+                                    rel="2">会計分析</a>
+                        
+                                <a data-sort="0347" 
+                                    href="/archive/?tag=%E6%96%87%E5%AD%97%E3%82%B3%E3%83%BC%E3%83%89"
+                                    title="文字コード"
+                                    style="color: #337ab7 !important;"
+                                    rel="2">文字コード</a>
+                        
+                                <a data-sort="0347" 
+                                    href="/archive/?tag=%E7%92%B0%E5%A2%83%E6%A7%8B%E7%AF%89"
+                                    title="環境構築"
+                                    style="color: #337ab7 !important;"
+                                    rel="2">環境構築</a>
+                        
+                                <a data-sort="0347" 
+                                    href="/archive/?tag=%E8%AB%96%E6%96%87"
+                                    title="論文"
+                                    style="color: #337ab7 !important;"
+                                    rel="2">論文</a>
+                        
+                                <a data-sort="0347" 
+                                    href="/archive/?tag=App"
+                                    title="App"
+                                    style="color: #337ab7 !important;"
+                                    rel="2">App</a>
+                        
+                                <a data-sort="0347" 
+                                    href="/archive/?tag=Bayesian"
+                                    title="Bayesian"
+                                    style="color: #337ab7 !important;"
+                                    rel="2">Bayesian</a>
+                        
+                                <a data-sort="0347" 
+                                    href="/archive/?tag=Dynamic+Programming"
+                                    title="Dynamic Programming"
+                                    style="color: #337ab7 !important;"
+                                    rel="2">Dynamic Programming</a>
+                        
+                                <a data-sort="0347" 
+                                    href="/archive/?tag=Keyboard"
+                                    title="Keyboard"
+                                    style="color: #337ab7 !important;"
+                                    rel="2">Keyboard</a>
+                        
+                                <a data-sort="0347" 
+                                    href="/archive/?tag=Processing"
+                                    title="Processing"
+                                    style="color: #337ab7 !important;"
+                                    rel="2">Processing</a>
+                        
+                                <a data-sort="0347" 
+                                    href="/archive/?tag=R"
+                                    title="R"
+                                    style="color: #337ab7 !important;"
+                                    rel="2">R</a>
+                        
+                                <a data-sort="0347" 
+                                    href="/archive/?tag=Steam"
+                                    title="Steam"
+                                    style="color: #337ab7 !important;"
+                                    rel="2">Steam</a>
+                        
+                                <a data-sort="0347" 
+                                    href="/archive/?tag=filesystem"
+                                    title="filesystem"
+                                    style="color: #337ab7 !important;"
+                                    rel="2">filesystem</a>
+                        
+                                <a data-sort="0347" 
+                                    href="/archive/?tag=quarto"
+                                    title="quarto"
+                                    style="color: #337ab7 !important;"
+                                    rel="2">quarto</a>
+                        
+                                <a data-sort="0347" 
+                                    href="/archive/?tag=regex"
+                                    title="regex"
+                                    style="color: #337ab7 !important;"
+                                    rel="2">regex</a>
+                    </div>
+
+                <br>
+
+                <b><fontsize="5">Leave a Comment</font><br>(注意：GitHub Accountが必要となります）</b>
+                
+                <script src="https://utteranc.es/client.js"
+                    repo="RyoNakagami/RyoNakagami.github.io"
+                    issue-term="url"
+                    theme="github-light"
+                    crossorigin="anonymous"
+                    async>Reduce unused JavaScript
+                
+                </script>
+
+
+            </div>  
+
+    <!-- Side Catalog Container -->
+        
+            <div class="
+                col-lg-1 col-lg-offset-0
+                visible-lg-block
+                sidebar-container
+                catalog-container">
+                <div class="side-catalog fixed" style="margin-top:3%">
+                    <hr class="hidden-sm hidden-xs">
+                    <h5>
+                        <a class="catalog-toggle" href="#">CONTENTS</a>
+                    </h5>
+                    <ul class="catalog-body"></ul>
+                </div>
+            </div>
+        
+    <!-- Sidebar Container -->
+            <!-- <div class="
+                col-lg-10 col-lg-offset-1
+                col-md-10 col-md-offset-1
+                sidebar-container row"> -->
+                <!-- 
+<hr>
+<h5>FRIENDS</h5>
+<ul class="list-inline">
+  
+  <li><a href="https://twitter.com/bluesky0804?ref_src=twsrc%5Egoogle%7Ctwcamp%5Eserp%7Ctwgr%5Eauthor">bluesky0804</a></li>
+  
+</ul>
+
+ -->
+            </div>
+        </div>
+    </div>
+</article>
+
+<!-- add support for mathjax by voleking-->
+
+  <script async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml.js" id="MathJax-script"></script>
+<script>
+  MathJax = {
+    tex: {
+      inlineMath: [['$','$'], ['\\(','\\)']],
+      displayMath: [['$$','$$'], ['\\[','\\]']],
+      processEscapes: true,
+      processEnvironments: true, // for pseudo
+      tags: "ams",
+      autoload: {
+        color: [],
+        colorV2: ['color']
+      },
+      packages: {'[+]': ['noerrors']}
+    },
+    chtml: {
+      matchFontHeight: false,
+      displayAlign: "left",
+      displayIndent: "2em"
+    },
+    options: {
+      renderActions: {
+        /* add a new named action to render <script type="math/tex"> */
+        find_script_mathtex: [10, function (doc) {
+          for (const node of document.querySelectorAll('script[type^="math/tex"]')) {
+            const display = !!node.type.match(/; *mode=display/);
+            const math = new doc.options.MathItem(node.textContent, doc.inputJax[0], display);
+            const text = document.createTextNode('');
+            node.parentNode.replaceChild(text, node);
+            math.start = {node: text, delim: '', n: 0};
+            math.end = {node: text, delim: '', n: 0};
+            doc.math.push(math);
+          }
+        }, '']
+      }
+    },
+    loader: {
+      load: ['[tex]/noerrors']
+    }
+  };
+</script>
+
+
+
+
+
+<!-- async load function -->
+<script>
+    function async(u, c) {
+      var d = document, t = 'script',
+          o = d.createElement(t),
+          s = d.getElementsByTagName(t)[0];
+      o.src = u;
+      if (c) { o.addEventListener('load', function (e) { c(null, e); }, false); }
+      s.parentNode.insertBefore(o, s);
+    }
+</script>
+<!-- anchor-js, Doc:http://bryanbraun.github.io/anchorjs/ -->
+<script>
+    async("//cdnjs.cloudflare.com/ajax/libs/anchor-js/1.1.1/anchor.min.js",function(){
+        anchors.options = {
+          visible: 'hover',
+          placement: 'right',
+          // icon: '#'
+        };
+        anchors.add().remove('.intro-header h1').remove('.subheading').remove('.sidebar-container h5');
+    })
+</script>
+<style>
+    /* place left on bigger screen */
+    @media all and (min-width: 800px) {
+        .anchorjs-link{
+            position: absolute;
+            left: -0.75em;
+            font-size: 1.1em;
+            margin-top : -0.1em;
+        }
+    }
+</style>
+
+
+<body>
+    <!-- enable mermaid language on markdown post -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/mermaid/10.6.1/mermaid.min.js"></script>
+<script>
+   mermaid.initialize({
+       startOnLoad:true,
+       theme: 'default'
+   });
+   window.mermaid.init(undefined, document.querySelectorAll('.language-mermaid'));
+</script>
+
+</body>
+
+    <script>
+    
+    var elements = document.querySelectorAll('p');
+    Array.prototype.forEach.call(elements, function(el, i){
+        if(el.innerHTML=='[expand]') {
+            var parentcontent = el.parentNode.innerHTML.replace('<p>[expand]</p>','<div class="expand" style="display: none; height: 0; overflow: hidden;">').replace('<p>[/expand]</p>','</div>');
+            el.parentNode.innerHTML = parentcontent;
+        }
+    });
+
+    var elements = document.querySelectorAll('div.expand');
+    Array.prototype.forEach.call(elements, function(el, i){
+        el.previousElementSibling.innerHTML = el.previousElementSibling.innerHTML + '<span>..&nbsp; <a href="#" style="cursor: pointer;" onclick="this.parentNode.parentNode.nextElementSibling.style.display = \'block\'; this.parentNode.parentNode.nextElementSibling.style.height = \'auto\'; this.parentNode.style.display = \'none\';">read&nbsp;more&nbsp;&rarr;</a></span>';
+    });
+
+</script>
+
+    <!-- Footer -->
+<footer>
+    <div class="container">
+        <div class="row">
+            <!--<div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1"> -->
+                <!-- SNS Link -->
+            
+
+
+<ul class="list-inline text-center">
+
+
+  
+  
+  
+  
+  <li>
+    <a target="_blank" href="https://github.com/RyoNakagami">
+      <span class="fa-stack fa-lg">
+        <i class="fa fa-circle fa-stack-2x"></i>
+        <i class="fa fa-github fa-stack-1x fa-inverse"></i>
+      </span>
+    </a>
+  </li>
+  
+  
+</ul>
+
+            
+            <p class="copyright text-muted">
+                Copyright &copy; Ryo's Tech Blog 2025
+                <br>
+                Powered by <a href="https://ryonakagami.github.io">Ryo's Tech Blog</a> |
+                <iframe style="margin-left: 2px; margin-bottom:-5px;" frameborder="0" scrolling="0" width="100px"
+                    height="20px"
+                    title="RyoNakagami.github.io github stars"
+                    src="https://ghbtns.com/github-btn.html?user=RyoNakagami&repo=RyoNakagami.github.io&type=star&count=true">
+                </iframe>
+            </p>
+            <!--</div> -->
+        </div>
+    </div>
+</footer>
+
+<!-- jQuery -->
+<script src="/js/jquery.min.js "></script>
+
+<!-- Bootstrap Core JavaScript -->
+<!-- Currently, only navbar scroll-down effect at desktop still depends on this -->
+<script src="/js/bootstrap.min.js "></script>
+
+<!-- Custom Theme JavaScript -->
+<script src="/js/ryo-blog.min.js "></script>
+
+<!-- Simple Jekyll Search -->
+<script src="/js/simple-jekyll-search.min.js"></script>
+
+<!-- Service Worker -->
+
+<script src="/js/snackbar.js "></script>
+<script src="/js/sw-registration.js "></script>
+
+
+<!-- async load function -->
+<script>
+    function async(u, c) {
+        var d = document, t = 'script',
+            o = d.createElement(t),
+            s = d.getElementsByTagName(t)[0];
+        o.src = u;
+        if (c) { o.addEventListener('load', function (e) { c(null, e); }, false); }
+        s.parentNode.insertBefore(o, s);
+    }
+</script>
+
+<!--
+     Because of the native support for backtick-style fenced code blocks
+     right within the Markdown is landed in Github Pages,
+     From V1.6, There is no need for Highlight.js,
+     so Huxblog drops it officially.
+
+     - https://github.com/blog/2100-github-pages-now-faster-and-simpler-with-jekyll-3-0
+     - https://help.github.com/articles/creating-and-highlighting-code-blocks/
+     - https://github.com/jneen/rouge/wiki/list-of-supported-languages-and-lexers
+-->
+<!--
+    <script>
+        async("http://cdn.bootcss.com/highlight.js/8.6/highlight.min.js", function(){
+            hljs.initHighlightingOnLoad();
+        })
+    </script>
+    <link href="http://cdn.bootcss.com/highlight.js/8.6/styles/github.min.css" rel="stylesheet">
+-->
+
+
+
+
+
+
+
+<!--fastClick.js -->
+<script>
+    async("//cdnjs.cloudflare.com/ajax/libs/fastclick/1.0.6/fastclick.min.js", function () {
+        var $nav = document.querySelector("nav");
+        if ($nav) FastClick.attach($nav);
+    })
+</script>
+
+
+<!-- Global site tag (gtag.js) - Google Analytics -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-LVL413SV09"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+  gtag('config', 'G-LVL413SV09');
+</script>
+
+
+
+<!-- Side Catalog -->
+
+<script type="text/javascript">
+    function generateCatalog(selector) {
+
+        // interop with multilangual 
+        if ('' == 'true') {
+            _containerSelector = 'div.post-container.active'
+        } else {
+            _containerSelector = 'div.post-container'
+        }
+
+        // init
+        var P = $(_containerSelector), a, n, t, l, i, c;
+        a = P.find('h1,h2,h3,h4,h5,h6');
+
+        // clean
+        $(selector).html('')
+
+        // appending
+        a.each(function () {
+            n = $(this).prop('tagName').toLowerCase();
+            i = "#" + $(this).prop('id');
+            t = $(this).text();
+            c = $('<a href="' + i + '" rel="nofollow">' + t + '</a>');
+            l = $('<li class="' + n + '_nav"></li>').append(c);
+            $(selector).append(l);
+        });
+        return true;
+    }
+
+    generateCatalog(".catalog-body");
+
+    // toggle side catalog
+    $(".catalog-toggle").click((function (e) {
+        e.preventDefault();
+        $('.side-catalog').toggleClass("fold")
+    }))
+
+    /*
+     * Doc: https://github.com/davist11/jQuery-One-Page-Nav
+     * Fork by Hux to support padding
+     */
+    async("/js/jquery.nav.js", function () {
+        $('.catalog-body').onePageNav({
+            currentClass: "active",
+            changeHash: !1,
+            easing: "swing",
+            filter: "",
+            scrollSpeed: 700,
+            scrollOffset: 0,
+            scrollThreshold: .2,
+            begin: null,
+            end: null,
+            scrollChange: null,
+            padding: 80
+        });
+    });
+</script>
+
+
+
+<!-- Multi-Lingual -->
+
+
+<!-- Simple Jekyll Search -->
+<script>
+    // https://stackoverflow.com/questions/1912501/unescape-html-entities-in-javascript
+    function htmlDecode(input) {
+        var e = document.createElement('textarea');
+        e.innerHTML = input;
+        // handle case of empty input
+        return e.childNodes.length === 0 ? "" : e.childNodes[0].nodeValue;
+    }
+
+    SimpleJekyllSearch({
+        searchInput: document.getElementById('search-input'),
+        resultsContainer: document.getElementById('search-results'),
+        json: '/search.json',
+        searchResultTemplate: '<div class="post-preview item"><a href="{url}"><h2 class="post-title">{title}</h2><h3 class="post-subtitle">{subtitle}</h3><hr></a></div>',
+        noResultsText: 'No results',
+        limit: 50,
+        fuzzy: false,
+        // a hack to get escaped subtitle unescaped. for some reason, 
+        // post.subtitle w/o escape filter nuke entire search.
+        templateMiddleware: function (prop, value, template) {
+            if (prop === 'subtitle' || prop === 'title') {
+                if (value.indexOf("code")) {
+                    return htmlDecode(value);
+                } else {
+                    return value;
+                }
+            }
+        }
+    });
+
+    $(document).ready(function () {
+        var $searchPage = $('.search-page');
+        var $searchOpen = $('.search-icon');
+        var $searchClose = $('.search-icon-close');
+        var $searchInput = $('#search-input');
+        var $body = $('body');
+
+        $searchOpen.on('click', function (e) {
+            e.preventDefault();
+            $searchPage.toggleClass('search-active');
+            var prevClasses = $body.attr('class') || '';
+            setTimeout(function () {
+                $body.addClass('no-scroll');
+            }, 400)
+
+            if ($searchPage.hasClass('search-active')) {
+                $searchClose.on('click', function (e) {
+                    e.preventDefault();
+                    $searchPage.removeClass('search-active');
+                    $body.attr('class', prevClasses);  // from closure 
+                });
+                $searchInput.focus();
+            }
+        });
+    });
+</script>
+
+
+
+<!-- Image to Github 
+<img src="/img/icon_wechat.png" width="0" height="0" />
+<-- Migrate from head to bottom, no longer block render and still work -->
+<script>
+    
+    var elements = document.querySelectorAll('p');
+    Array.prototype.forEach.call(elements, function(el, i){
+        if(el.innerHTML=='[expand]') {
+            var parentcontent = el.parentNode.innerHTML.replace('<p>[expand]</p>','<div class="expand" style="display: none; height: 0; overflow: hidden;">').replace('<p>[/expand]</p>','</div>');
+            el.parentNode.innerHTML = parentcontent;
+        }
+    });
+
+    var elements = document.querySelectorAll('div.expand');
+    Array.prototype.forEach.call(elements, function(el, i){
+        el.previousElementSibling.innerHTML = el.previousElementSibling.innerHTML + '<span>..&nbsp; <a href="#" style="cursor: pointer;" onclick="this.parentNode.parentNode.nextElementSibling.style.display = \'block\'; this.parentNode.parentNode.nextElementSibling.style.height = \'auto\'; this.parentNode.style.display = \'none\';">read&nbsp;more&nbsp;&rarr;</a></span>';
+    });
+
+</script>
+
+</body>
+</html>

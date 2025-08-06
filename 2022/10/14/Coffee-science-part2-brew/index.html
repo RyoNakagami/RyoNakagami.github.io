@@ -1,0 +1,1532 @@
+<!DOCTYPE html>
+<html lang="ja">
+
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="google-site-verification" content="gSMaswRY9iRfG4QaQrx6aj481bgr503qEZh-QPsMYNU" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+    <meta name="description" content="元経済学徒, 現在どっかでデータサイエンティストもどきやってる人間の勉強日記">
+    <meta name="keywords"  content="Statistics, Economics, Econometrics, Python, C, Shell, Linux, Data scientist">
+    <meta name="theme-color" content="#000000">
+    
+    <!-- Open Graph -->
+    <meta property="og:title" content="コーヒー抽出の仕組み - Ryo's Tech Blog">
+    
+    <meta property="og:type" content="article">
+    <meta property="og:description" content="
+    Table of Contents
+  
+  
+
+
+">
+    
+    <meta property="article:published_time" content="2022-10-14T00:00:00Z">
+    
+    
+    <meta property="article:author" content="Ryo">
+    
+    
+    <meta property="article:tag" content="Coffee">
+    
+    
+    <meta property="og:image" content="https://ryonakagami.github.io/img/avatar_rio_cat.jpg">
+    <meta property="og:url" content="https://ryonakagami.github.io/2022/10/14/Coffee-science-part2-brew/">
+    <meta property="og:site_name" content="Ryo's Tech Blog">
+    
+    <title>コーヒー抽出の仕組み - Ryo's Tech Blog</title>
+
+    <!-- Web App Manifest -->
+    <link rel="manifest" href="/pwa/manifest.json">
+
+    <!-- Favicon -->
+    <link rel="shortcut icon" href="/img/favicon.ico">
+    
+    <!-- Canonical URL -->
+    <link rel="canonical" href="https://ryonakagami.github.io/2022/10/14/Coffee-science-part2-brew/">
+
+    <!-- Bootstrap Core CSS -->
+    <link rel="stylesheet" href="/css/bootstrap.min.css">
+
+    <!-- Custom CSS -->
+    <link rel="stylesheet" href="/css/ryo-blog.min.css">
+
+    <!-- Custom Fonts -->
+    <!-- <link href="http://maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css" rel="stylesheet" type="text/css"> -->
+    <!-- https://stackoverflow.com/questions/45983301/google-pagespeed-eliminate-render-blocking-resources-above-the-fold-caused-fro -->
+    <!--link href="//cdnjs.cloudflare.com/ajax/libs/font-awesome/4.6.3/css/font-awesome.min.css" rel="stylesheet" type="text/css"-->
+    <!--<link href="https://fonts.googleapis.com/earlyaccess/notosansjapanese.css" rel="stylesheet" type="text/css" media="print" onload="this.media='all'" > -->
+    <link href="https://fonts.googleapis.com/earlyaccess/notosansjapanese.css" rel="preload" type="text/css" media="print" onload="this.media='all'" >
+
+
+    <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
+    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+    <!--[if lt IE 9]>
+        <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+        <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
+    <![endif]-->
+
+    <!-- ga & ba script hoook -->
+    <script></script>
+</head>
+
+
+<!-- hack iOS CSS :active style -->
+<body ontouchstart="">
+
+    <!-- Navigation -->
+
+<nav class="navbar navbar-default navbar-custom navbar-fixed-top invert">
+    
+        <div class="container-fluid">
+            <!-- Brand and toggle get grouped for better mobile display -->
+            <div class="navbar-header page-scroll">
+                <button type="button" class="navbar-toggle">
+                    <span class="sr-only">Toggle navigation</span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
+                <a class="navbar-brand" href="/">Ryo's Tech Blog</a>
+            </div>
+
+            <!-- Collect the nav links, forms, and other content for toggling -->
+            <div id="huxblog_navbar">
+                <div class="navbar-collapse">
+                    <ul class="nav navbar-nav navbar-left">
+                                                <li>
+                            <a href="https://ryonakagami.github.io/statistics-for-regression-monkey/">Statistics for
+                                Regression Monkeys</a>
+                        </li>
+                        <li>
+                            <a href="https://ohgoshgit.github.io/">OhGoshGit!?!</a>
+                        </li>
+                        <!-- <li>
+                            <a><button onclick="mainDropDown()" style="border-color: rgba(70, 83, 111, 0.989); background-color: rgba(70, 83, 111, 0.989)">Dropdown</button></a> 
+                            <div id="myDropdown" class="dropdown-content">
+                              <a href="#" onclick="subMenu(this)">A</a>
+                              <div class="sub-menu-item" id="subMenu1">
+                              <a href="#">A.1</a>
+                              </div>
+                              <a href="#" onclick="subMenu(this)">B</a>
+                              <div class="sub-menu-item" id="subMenu2">
+                              <a href="#">B.1</a>
+                              </div>
+                              <a href="#">C</a>
+                              <a href="#">D</a>
+                              <a href="#">E</a>
+                              <a href="#">F</a>
+                              <a href="#">G</a>
+                            </div>
+                        </li> -->
+                    </ul>
+                    </ul>
+                    <ul class="nav navbar-nav navbar-right">
+                        
+                        
+                        
+                        
+                        <li>
+                            <a href="/about/">About</a>
+                        </li>
+                        
+                        
+                        
+                        <li>
+                            <a href="/archive/">Tag Search</a>
+                        </li>
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        <!--about fa-search see https://stackoverflow.com/questions/41950677/how-to-make-my-search-icon-fixed-->
+                        <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css"
+                            rel="stylesheet" />
+                        <li class="search-icon">
+                            <a href="javascript:void(0)" aria-label="Search" target="_blank">
+                                <i class="fa fa-search"></i>
+                            </a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+            <!-- /.navbar-collapse -->
+        </div>
+        <!-- /.container -->
+    </nav>
+
+    <script>
+        // Drop Bootstarp low-performance Navbar
+        // Use customize navbar with high-quality material design animation
+        // in high-perf jank-free CSS3 implementation
+        var $body = document.body;
+        var $toggle = document.querySelector('.navbar-toggle');
+        var $navbar = document.querySelector('#huxblog_navbar');
+        var $collapse = document.querySelector('.navbar-collapse');
+
+        var __HuxNav__ = {
+            close: function () {
+                $navbar.className = " ";
+                // wait until animation end.
+                setTimeout(function () {
+                    // prevent frequently toggle
+                    if ($navbar.className.indexOf('in') < 0) {
+                        $collapse.style.height = "0px"
+                    }
+                }, 400)
+            },
+            open: function () {
+                $collapse.style.height = "auto"
+                $navbar.className += " in";
+            }
+        }
+
+        // Bind Event
+        $toggle.addEventListener('click', function (e) {
+            if ($navbar.className.indexOf('in') > 0) {
+                __HuxNav__.close()
+            } else {
+                __HuxNav__.open()
+            }
+        })
+
+        /**
+         * Since Fastclick is used to delegate 'touchstart' globally
+         * to hack 300ms delay in iOS by performing a fake 'click',
+         * Using 'e.stopPropagation' to stop 'touchstart' event from 
+         * $toggle/$collapse will break global delegation.
+         * 
+         * Instead, we use a 'e.target' filter to prevent handler
+         * added to document close HuxNav.  
+         *
+         * Also, we use 'click' instead of 'touchstart' as compromise
+         */
+        document.addEventListener('click', function (e) {
+            if (e.target == $toggle) return;
+            if (e.target.className == 'icon-bar') return;
+            __HuxNav__.close();
+        })
+    </script>
+
+    <!-- Search -->
+<div class="search-page">
+  <div class="search-icon-close-container">
+    <span class="search-icon-close">
+      <i class="fa fa-chevron-down"></i>
+    </span>
+  </div>
+  <div class="search-main container">
+    <div class="row">
+      <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+        <form></form>
+        <input type="text" id="search-input" placeholder="$ grep...">
+        </form>
+        <div id="search-results" class="mini-post-list"></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+    <!-- Image to hack wechat -->
+<!-- <img src="/img/icon_wechat.png" width="0" height="0"> -->
+<!-- <img src="/img/home-bg.jpg" width="0" height="0"> -->
+
+<!-- Post Header -->
+
+
+
+<style type="text/css">
+    header.intro-header{
+        position: relative;
+        background-image: url('/img/home-bg.jpg');
+        background: ;
+    }
+
+    
+    header.intro-header .header-mask{
+        width: 100%;
+        height: 100%;
+        position: absolute;
+        background: rgba(0,0,0, 0.0);
+    }
+    
+</style>
+
+
+
+
+<header class="intro-header style-text" >
+
+    <div class="header-mask"></div>
+    
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+                <div class="post-heading">
+                    <div class="tags">
+                        
+                        <a class="tag" href="/archive/?tag=Coffee" title="Coffee">Coffee</a>
+                        
+                    </div>
+                    <h1>コーヒー抽出の仕組み</h1>
+                    
+                    <h2 class="subheading">抽出研究編 1/N</h2>
+                    <p>
+                        公開日: 2022-10-14
+                        <br>
+                        更新日: 2022-10-20
+                        
+                    </p>
+                </div>
+            </div>
+        </div>
+    </div>
+</header>
+
+
+
+
+
+
+
+<!-- Post Content -->
+<article>
+    <div class="container">
+        <div class="row">
+
+    <!-- Post Container -->
+         <div class="
+                col-lg-8 col-lg-offset-2
+                col-md-10 col-md-offset-1
+                post-container">
+
+                <!-- Multi-Lingual -->
+                
+
+				<div style="border-radius: 1em; border-style:solid; border-color:#D3D3D3; background-color:#F8F8F8">
+  <p class="h4">  Table of Contents</p>
+  <!-- START doctoc generated TOC please keep comment here to allow auto update -->
+  <!-- DON'T EDIT THIS SECTION, INSTEAD RE-RUN doctoc TO UPDATE -->
+
+  <ul>
+    <li><a href="#%E3%81%AA%E3%81%9C%E6%8A%BD%E5%87%BA%E3%81%AE%E4%BB%95%E7%B5%84%E3%81%BF%E3%82%92%E5%AD%A6%E3%81%B6%E3%81%AE%E3%81%8B">なぜ抽出の仕組みを学ぶのか？</a></li>
+    <li><a href="#%E6%8A%BD%E5%87%BA%E3%81%A8%E3%81%AF">抽出とは？</a>
+      <ul>
+        <li><a href="#%E9%80%8F%E9%81%8E%E6%8A%BD%E5%87%BA%E3%81%A8%E6%B5%B8%E6%BC%AC%E6%8A%BD%E5%87%BA">透過抽出と浸漬抽出</a></li>
+        <li><a href="#%E8%A6%AA%E6%B2%B9%E6%80%A7">親油性</a></li>
+      </ul>
+    </li>
+    <li><a href="#%E3%83%9A%E3%83%BC%E3%83%91%E3%83%BC%E3%83%89%E3%83%AA%E3%83%83%E3%83%97%E6%8A%BD%E5%87%BA%E5%8E%9F%E5%89%87">ペーパードリップ抽出原則</a>
+      <ul>
+        <li><a href="#rule-1-%E7%B2%92%E3%81%AE%E5%A4%A7%E3%81%8D%E3%81%95%E3%81%AF%E5%9D%87%E4%B8%80%E3%81%AB">RULE 1: 粒の大きさは均一に</a></li>
+        <li><a href="#rule-2-%E7%B2%89%E7%A0%95%E6%99%82%E3%81%AB%E7%86%B1%E3%82%92%E7%99%BA%E7%94%9F%E3%81%95%E3%81%9B%E3%81%AA%E3%81%84">RULE 2: 粉砕時に熱を発生させない</a></li>
+        <li><a href="#rule-3-%E6%B9%AF%E6%B8%A9%E3%81%AF%E6%B5%85%E9%AB%98%E6%B7%B1%E4%BD%8E">RULE 3: 湯温は浅高深低</a></li>
+        <li><a href="#rule-4-%E6%B9%AF%E9%87%8F%E3%81%AE%E3%82%B3%E3%83%B3%E3%83%88%E3%83%AD%E3%83%BC%E3%83%AB">RULE 4: 湯量のコントロール</a></li>
+        <li><a href="#rule-5-%E3%83%8F%E3%83%B3%E3%83%90%E3%83%BC%E3%82%B0%E3%82%92%E4%BD%9C%E3%82%8B">RULE 5: ハンバーグを作る</a></li>
+        <li><a href="#rule-6-%E6%BF%BE%E9%81%8E%E5%B1%A4%E3%81%AE%E7%B8%81%E3%82%92%E5%B4%A9%E3%81%95%E3%81%AA%E3%81%84">RULE 6: 濾過層の縁を崩さない</a></li>
+        <li><a href="#rule-7-%E6%8A%BD%E5%87%BA%E6%B6%B2%E3%81%AF%E3%81%99%E3%81%90%E9%A3%B2%E3%82%80">RULE 7: 抽出液はすぐ飲む</a></li>
+        <li><a href="#%E3%83%9A%E3%83%BC%E3%83%91%E3%83%BC%E3%83%89%E3%83%AA%E3%83%83%E3%83%97%E6%8A%BD%E5%87%BA%E3%81%AE%E3%82%A2%E3%83%B3%E3%83%81%E3%83%91%E3%82%BF%E3%83%BC%E3%83%B3">ペーパードリップ抽出のアンチパターン</a></li>
+      </ul>
+    </li>
+    <li><a href="#%E3%83%9A%E3%83%BC%E3%83%91%E3%83%BC%E3%83%89%E3%83%AA%E3%83%83%E3%83%97%E3%81%AB%E3%82%88%E3%82%8B%E6%8A%BD%E5%87%BA">ペーパードリップによる抽出</a></li>
+    <li><a href="#references">References</a></li>
+  </ul>
+
+  <!-- END doctoc generated TOC please keep comment here to allow auto update -->
+
+</div>
+
+<h2 id="なぜ抽出の仕組みを学ぶのか">なぜ抽出の仕組みを学ぶのか？</h2>
+
+<p>コーヒー豆のハンドピックから始まる一連のコーヒー作成プロセスの最後の工程が抽出です.
+豆のコンディション, 焙煎の出来など味を左右する要素の状態を踏まえた上で最後に「味のコントロール」ができるチャンスです.</p>
+
+<p>ただカフェイン摂取したいだけならば適当に湯を注いでコーヒーを淹れて飲むでもいいですが, 「こーいう味を出したい」であるとか「いつもどおりの味を出したい」という「味の再現性」を突き詰めることが
+コーヒーを楽しむ上で重要であるとするならば, 湯温や注ぎ方といった抽出方法をちょっと変えるだけで味が変化するので, その仕組みを理解することは重要です.</p>
+
+<h2 id="抽出とは">抽出とは？</h2>
+
+<p>抽出とは, 焙煎までのプロセスを経て生成されたコーヒーの香味成分を「どのようにどれだけ引き出すか？」という工程です.
+豆のまま煮出してもコーヒー成分は抽出できないので, 豆を粉砕(グラインディング)して, それをペーパードリップなり浸漬方式なりでお湯にコーヒー成分を溶け出させることが抽出の基本的な流れです.</p>
+
+<h3 id="透過抽出と浸漬抽出">透過抽出と浸漬抽出</h3>
+
+<p>コーヒーの抽出方法は基本原理から２つに分類されます</p>
+
+<table>
+  <thead>
+    <tr>
+      <th>方式</th>
+      <th>抽出例</th>
+      <th>説明</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>透過方式</td>
+      <td>ドリップ, エスプレッソ, 水出し式</td>
+      <td>コーヒー粉でできた層に水を透過させる</td>
+    </tr>
+    <tr>
+      <td>浸漬方式</td>
+      <td>プレス式, サイフォン, ボイル式</td>
+      <td>コーヒー粉を水に漬けてコーヒーを作成する</td>
+    </tr>
+  </tbody>
+</table>
+
+<p>どの方式が優れているとかはなくそれぞれ抽出の特徴があるという感じですが, 浸漬式では
+「長く抽出しすぎると雑味が出る」, 透過方式では「美味しい成分が先に出て, その後雑味が流れ出てくる」ということが一般的に言われています.</p>
+
+<h3 id="親油性">親油性</h3>
+
+<p>親油性(疏水性, hydrophobic）とは水に対する親和性が低い, すなわち水に溶解しにくい, あるいは水と混ざりにくい物質または分子の性質のことです. 
+コーヒーの文脈における「美味しい成分が先に出て, その後雑味が流れ出てくる」は, 美味しい成分は親水性で, 雑味と言われるものは親油性に分類される傾向があると理解することが出来ます.</p>
+
+<blockquote>
+  <p>なぜコーヒーの泡は重要なのか？</p>
+</blockquote>
+
+<p>コーヒーの泡を舐めてみると不快感のある渋みを感じると思います. これはコーヒーの泡が疎水性の苦味成分を集めているためと考えられています.
+液相の中で生じる泡の内部は気相となっており, ２つは交わることがないことから, 気相の部分が疎水的, 液相の部分が親水的という二層分配が起こります. 二層分配が発生することにより, コーヒー粉内部にある疎水成分(あと界面活性成分も)が泡に選択的に吸収されていきます.</p>
+
+<p>苦い焦げ成分であるコーヒーメラノイジン(親油性)や微粉や脂質といった成分がコーヒー泡に吸着するので, 苦味を抑えるという観点からコーヒーの泡は重要と理解することが出来ます.</p>
+
+<h2 id="ペーパードリップ抽出原則">ペーパードリップ抽出原則</h2>
+<h3 id="rule-1-粒の大きさは均一に">RULE 1: 粒の大きさは均一に</h3>
+
+<p>同じ時間, 同じ湯温に浸した場合を考えると, 大きな粒は内側の成分が溶け出しにくいが, 小さな粒であればすべての成分がすぐ溶け出します. 両者が混在すると, 溶け出す成分が場所場所で均一にはならず, 抽出された味の分散なるものが定義できるとするとその分散が大きくなってしまいます.</p>
+
+<p>家庭ではグラインディングの段階で大きさを均一にすることは難しいので微粉を取り除くために粉砕後, 茶こしなどで微粉をふるいにかけることが推奨されます.
+また, コーヒーミルに微粉が付着し酸化したものが, 次のタイミングのコーヒーに付着してしまうことも考えられるので, コーヒーミルのクリーリングも重要です.</p>
+
+<blockquote>
+  <p>コーヒー粉ふるい機器: KRUVE SIFTERシリーズ</p>
+</blockquote>
+
+<iframe width="560" height="315" src="https://www.youtube.com/embed/GrRrXMEvJ4s" frameborder="0" allow="autoplay; encrypted-media" allowfullscreen=""></iframe>
+
+<h3 id="rule-2-粉砕時に熱を発生させない">RULE 2: 粉砕時に熱を発生させない</h3>
+
+<p>粉砕時に発生する摩擦熱が大きいと, 酸化のスピードが早まりコーヒーの風味に影響を与えると言われます.
+実際に, カリタKH-3を使用し新鮮な焙煎豆をグラインドし, その時に発生する粉砕熱を熱電対により測定した結果, 「2人分のコーヒー豆26gを,特に意識しないスピードで粉砕する際に,ミルの粉砕物が堆積する底部において5℃程度の温度上昇が確認できた」との科研研究があります. <a href="https://kaken.nii.ac.jp/ja/grant/KAKENHI-PROJECT-24917004/">here</a></p>
+
+<p>ただし, 摩擦熱による「味の違いはプロの僕が飲み比べて分かる程度」と言われたりもするので余り神経質にならなくて良いと思います.</p>
+
+<h3 id="rule-3-湯温は浅高深低">RULE 3: 湯温は浅高深低</h3>
+
+<p>物質の溶解度が温度によって変化するため, どのような成分がどのような比率で抽出されるかは湯温が大きく影響します.
+一般的には以下のことが知られています:</p>
+
+<ul>
+  <li>温度が高いほうが溶け出す成分の総量が増える</li>
+  <li>酸味は移動速度が早く, あまり湯温の影響を受けない</li>
+  <li>苦味成分の移動速度は早いものから遅いものまでさまざまだが, その中で遅いものほど渋味を伴い, 湯温や接触時間の影響を受けやすい</li>
+</ul>
+
+<p>高い湯温で淹れると苦味（場合によっては不要な雑味も）がしっかり出て, 低い湯温で淹れた場合は(苦味が相対的に出ないため)酸味を感じやすくなる傾向があります.
+そのため, 一般論として「湯温は浅高深低」と言われていると理解しています.</p>
+
+<blockquote>
+  <p>カフェバッハの焙煎度と湯温目安</p>
+</blockquote>
+
+<table>
+  <tbody>
+    <tr>
+      <td>浅煎り</td>
+      <td>中~高温(82~85℃)</td>
+      <td>苦味成分が元から少ないので, 成分を効率よく抽出するため湯温を高めにする</td>
+    </tr>
+    <tr>
+      <td>中煎り</td>
+      <td>中温(82~83℃)</td>
+      <td>いわゆる適温と呼ばれる湯温で, バランスよく抽出する</td>
+    </tr>
+    <tr>
+      <td>深煎り</td>
+      <td>やや低温〜中温(75~81℃)</td>
+      <td>苦味を抑えつつ抽出という目的</td>
+    </tr>
+  </tbody>
+</table>
+
+<p>湯温が86℃以上の場合は「泡が出て膨らみすぎて表面が割れ, 蒸らしが不十分になる」, 74℃以下の場合は「旨味が十分抽出できない &amp; 蒸らしも不十分になる」とのこと.
+ただし, ディッティング コーヒーグラインダー KR-804の中挽き（メモリ 5.5）での目安湯温なので, あくまで参考値として用いること.</p>
+
+<h3 id="rule-4-湯量のコントロール">RULE 4: 湯量のコントロール</h3>
+
+<p>「湯は粉面から3~4cmの高さ, 湯柱の太さは2~3mmが良い」,「落とし始めはゆっくり細く, 後半は苦味成分抽出を抑えるために徐々に太く」と言われたりしますが, これらのような抽出を実現するためには湯量の太さを自由に安定的に調整できる技量が必要となります. 安定的に湯を注ぐためには, 不確定要素を減らす = 毎回の環境を同じにするという方向性で努力すればよく, その一例として
+「たとえ１人分だとしても, コーヒーポットには必ず８分目まで湯を注ぎ, ポットの傾き方と湯量の関係を毎回同じにする」というベスプラがあります.</p>
+
+<h3 id="rule-5-ハンバーグを作る">RULE 5: ハンバーグを作る</h3>
+
+<p><img src="https://github.com/ryonakimageserver/omorikaizuka/blob/master/%E3%83%96%E3%83%AD%E3%82%B0%E7%94%A8/Coffee/20221015-coffee-murashi.jpg?raw=true" /></p>
+
+<p>一般的なドリップ式のコーヒーの淹れ方では最初に少量のお湯を注いて, コーヒー粉を蒸らす工程があります. 
+このとき写真のようにハンバーグを一旦作り, 目安として20~30秒ほど待ちます. このときサーバーに落ちるコーヒー液はできる限り少なく数滴程度に留めることが良いとされています.</p>
+
+<p>蒸らしは <strong><em>コーヒーとお湯をなじませるための工程</em></strong> です. コーヒー粉の内部炭酸ガスのせいでお湯とコーヒー粉が接触せず成分抽出できたりできなかったりする箇所が生まれると味にムラができてしまいます.
+お湯で蒸らすことでコーヒー粉から炭酸ガスを放出させ, 炭酸ガスが抽出の際に邪魔をすることを防ぐことができる(=コーヒーエキスを安定的に抽出できるようになる)とされています. 
+ただし, この炭酸ガスがコーヒーの香りに影響を与える要素でもあるので必ずしも悪の存在というわけでもないです. 
+蒸らしによって炭酸ガスをお湯にゆっくり溶け込ませ, 香り成分を抽出するという側面もあるかもしれません.</p>
+
+<blockquote>
+  <p>蒸らしの目安：20~30秒</p>
+</blockquote>
+
+<p>20~30秒ほどが蒸らしの目安ですが, 「コーヒーとお湯をなじんだ」状態がわかるならばその段階がストップのタイミングとなります.
+コーヒーとお湯をなじませる理由の一つとして「炭酸ガスを放出させる」という事象があるので「炭酸ガスが抜けた」タイミングが止め時となります.</p>
+
+<p>ハンバーグ状態とは, お湯に炭酸ガスが溶け込んでプクプク膨らんで来ることなので, 「炭酸ガスが抜けた」タイミングとは「プクプク膨らみが止まる時」となります.
+人によっては, 「ぷしゅ」と小さく萎む瞬間で判断しているようですが, だいたいこのタイミングが20~30秒なので, それが蒸らし工程の目安時間となっています.</p>
+
+<blockquote>
+  <p>蒸らし工程での注意点</p>
+</blockquote>
+
+<ol>
+  <li>ドリッパーに粉を入れたら, 静かに揺らして粉面を平らにすること</li>
+  <li>ペーパーに直接お湯をかけないように注意</li>
+  <li>「の」（５円玉とも）を描きながらゆっくり注ぎ, コーヒー粉全体に湯が染み渡るように「蒸らし」をする</li>
+</ol>
+
+<blockquote>
+  <p>蒸らし時間によって味わいが変化</p>
+</blockquote>
+
+<p>蒸らす時間を短めにすると甘みが出にくくスッキリとした味わいになります:</p>
+
+<ul>
+  <li>時間短め: 酸味が強く出る傾向にある</li>
+  <li>時間長め: 渋みが増しやすくなる</li>
+</ul>
+
+<h3 id="rule-6-濾過層の縁を崩さない">RULE 6: 濾過層の縁を崩さない</h3>
+
+<p>蒸らしが終えたら, 2投目, 3投目と注湯をしますが, 「の」を描くように全体に行き渡るようにする他に, 
+「濾過層の縁を崩さない」ように注意する必要があります.</p>
+
+<p>濾過層の縁を崩すことは, (1) お湯がペーパーに直接いってしまう, (2) 抽出層が注湯のたびに異なってしまう, という２つの観点から
+成分抽出の安定性と効率性を崩してしまい薄っぺらい味になってしまうというデメリットがあります.</p>
+
+<blockquote>
+  <p>カフェ・バッハ式注湯は三投目まで？</p>
+</blockquote>
+
+<p>バッハ式では「コーヒー成分は3回目までの注湯で抽出される」としています. これ以降の4投目とかは濃度と抽出量の調整と考えています.
+なお3投目以降の抽出お作法として, 濾過層の形をできる限りキープするため「粉面の中心部が少し凹み, 湯が落ちきる寸前に注湯する」と推奨しています.</p>
+
+<p>抽出層の形をできる限りキープすることで, 抽出の不確実要素を減らすというカフェ・バッハ式らしいアドバイスかなと思います.</p>
+
+<h3 id="rule-7-抽出液はすぐ飲む">RULE 7: 抽出液はすぐ飲む</h3>
+
+<p>ハンドドリップ後に抽出液を保存しておくと, 熱によって水分蒸発が進み, 抽出液の濃度が上昇してしまいます.
+濃度変化は味変化に繋がるので, 再現性のある味を良いコーヒーとするならば, 抽出液はすぐ飲むことが推奨されます.</p>
+
+<p>また, 密閉された容器に入れて保存したとしても, 熱による成分変化による味の変化が発生してしまうので,
+作ったら出来るだけ早く飲むべきと言えます.</p>
+
+<h3 id="ペーパードリップ抽出のアンチパターン">ペーパードリップ抽出のアンチパターン</h3>
+
+<blockquote>
+  <p>蒸らしタイミングにおける陥没</p>
+</blockquote>
+
+<p>蒸らしのタイミングで中央部分が陥没したり, 膨らまない場合は基本的には炭酸ガスの不足が原因となります. 炭酸ガス不足のパターン例は以下が考えられます:</p>
+
+<ul>
+  <li>豆の鮮度が落ちているため, 炭酸ガス等の香味が抜けきってしまいハンバーグが形成されない</li>
+  <li>湯温が低すぎて, コーヒー豆内の炭酸ガスが溶け出さないため</li>
+</ul>
+
+<blockquote>
+  <p>蒸らし時に蒸気が吹き出す</p>
+</blockquote>
+
+<p>蒸らしの際にプツプツと蒸気が吹き出して大きな気泡が形成されハンバーグが割れることがあります. 
+このとき, 蒸らしが不十分となりまとまりのない味（＝ムラのある味）になるリスクがあります.</p>
+
+<p>この場合は煎りたて, メッシュが細かい, 湯温が高すぎる, メッシュが細かすぎるて炭酸ガスが多くなってしまっている or/and 発生したガスを上手く逃しきれていない事が考えられます.</p>
+
+<p>対応策としては, 大きな気泡が形成されそうである兆候を見つけたときに投入する湯量を少なくすることが一つ考えられます.</p>
+
+<h2 id="ペーパードリップによる抽出">ペーパードリップによる抽出</h2>
+
+<blockquote>
+  <p>コーヒー粉の量の目安</p>
+</blockquote>
+
+<p>コーヒーカップ１杯を 120 cc程度と定義した時, 目安としてのコーヒー粉の量は以下となります:</p>
+
+<table>
+  <tbody>
+    <tr>
+      <td>1杯</td>
+      <td>12~15g</td>
+    </tr>
+    <tr>
+      <td>2杯</td>
+      <td>20~24g</td>
+    </tr>
+    <tr>
+      <td>3杯</td>
+      <td>24~28g</td>
+    </tr>
+    <tr>
+      <td>4杯</td>
+      <td>28~32g</td>
+    </tr>
+    <tr>
+      <td>5杯</td>
+      <td>35g</td>
+    </tr>
+  </tbody>
+</table>
+
+<h2 id="references">References</h2>
+
+<blockquote>
+  <p>オンラインマテリアル</p>
+</blockquote>
+
+<ul>
+  <li><a href="https://every-coffee.com/article/doriper-rib.html">コーヒードリッパーのリブって意味あるの？</a></li>
+  <li><a href="https://www.thecoffeeshop.jp/ct_beans/%E5%BE%AE%E7%B2%89%E3%82%92%E5%8F%96%E3%82%8A%E9%99%A4%E3%81%8F%E3%81%A8%E3%82%B3%E3%83%BC%E3%83%92%E3%83%BC%E3%81%AE%E5%91%B3%E3%81%AF%E3%81%A9%E3%81%86%E5%A4%89%E3%82%8F%E3%82%8B%E3%81%AE%E3%81%8B/">THE COFFEESHOP &gt; 微粉を取り除くとコーヒーの味はどう変わるのか｜フルイにかけて検証</a></li>
+  <li><a href="https://www.ejcra.org/column/ca_129.html">COFFEE TOWN &gt; コーヒーを蒸らすのは何のため？コーヒーを美味しく味わうための大切なコツも紹介</a></li>
+  <li><a href="https://kaken.nii.ac.jp/ja/grant/KAKENHI-PROJECT-24917004/">コーヒー豆粉砕時における熱発生および熱伝達挙動の解析</a></li>
+</ul>
+
+<blockquote>
+  <p>書籍</p>
+</blockquote>
+
+<ul>
+  <li><a href="https://www.nhk-book.co.jp/detail/000000333002019.html">NHK出版, コーヒー抽出の法則, 著田口護, 山田康一</a></li>
+  <li><a href="https://www.amazon.co.jp/%E3%82%B3%E3%83%BC%E3%83%92%E3%83%BC%E3%81%AE%E7%A7%91%E5%AD%A6-%E3%80%8C%E3%81%8A%E3%81%84%E3%81%97%E3%81%95%E3%80%8D%E3%81%AF%E3%81%A9%E3%81%93%E3%81%A7%E7%94%9F%E3%81%BE%E3%82%8C%E3%82%8B%E3%81%AE%E3%81%8B-%E3%83%96%E3%83%AB%E3%83%BC%E3%83%90%E3%83%83%E3%82%AF%E3%82%B9-%E6%97%A6%E9%83%A8-%E5%B9%B8%E5%8D%9A/dp/4062579561/ref=as_li_ss_tl?_encoding=UTF8&amp;qid=&amp;sr=&amp;linkCode=sl1&amp;tag=bluebacks-22&amp;linkId=ab75490fd32cb18af305fbe65ec42018&amp;language=ja_JP">BLUE BACKS, コーヒーの科学 「おいしさ」はどこで生まれるのか (ブルーバックス) 新書, 旦部 幸博 (著)</a></li>
+</ul>
+
+
+                <hr style="visibility: hidden;">
+                <hr/>
+                <b><fontsize="5">Share Buttons</font><br></b>
+                <!--see 
+    https://jekyllcodex.org/without-plugin/share-buttons/ 
+    https://ranvir.xyz/blog/why-and-how-to-add-social-sharing-buttons-on-your-jekyll-blog-using-github-pages/
+-->
+
+
+
+<style>
+#share-buttons {display: inline-block; vertical-align: middle; }
+#share-buttons:after {content: ""; display: block; clear: both;}
+#share-buttons > div {
+    position: relative;
+    text-align: left; 
+    height: 36px; 
+    width: 32px; 
+    float: left; 
+    text-align: center;
+}
+#share-buttons > div > svg {height: 16px; fill: #d5d5d5; margin-top: 10px;}
+#share-buttons > div:hover {cursor: pointer;}
+#share-buttons > div.facebook:hover > svg {fill: #3B5998;}
+#share-buttons > div.twitter:hover > svg {fill: #55ACEE;}
+#share-buttons > div.linkedin:hover > svg {fill: #0077b5;}
+#share-buttons > div.pinterest:hover > svg {fill: #CB2027;}
+#share-buttons > div.gplus:hover > svg {fill: #dd4b39;}
+#share-buttons > div.mail:hover > svg {fill: #7D7D7D;}
+#share-buttons > div.instagram:hover > svg {fill: #C73B92;}
+#share-buttons > div.facebook > svg {height: 18px; margin-top: 9px;}
+#share-buttons > div.twitter > svg {height: 20px; margin-top: 8px;}
+#share-buttons > div.linkedin > svg {height: 19px; margin-top: 7px;}
+#share-buttons > div.pinterest > svg {height: 20px; margin-top: 9px;}
+#share-buttons > div.gplus > svg {height: 17px; margin-top: 9px; position: relative; left: 1px;}
+#share-buttons > div.mail > svg {height: 14px; margin-top: 11px;}
+</style>
+
+<span style="color: black">Share on: </span><div id="share-buttons">
+    <div class="facebook" title="Share this on Facebook" onclick="gtag('event', 'Facebook', {'event_category':'Post Shared','event_label':'Facebook'}); location.href='http://www.facebook.com/share.php?u=https://ryonakagami.github.io/2022/10/14/Coffee-science-part2-brew/';"><svg viewBox="0 0 1792 1792" xmlns="http://www.w3.org/2000/svg"><path d="M1343 12v264h-157q-86 0-116 36t-30 108v189h293l-39 296h-254v759h-306v-759h-255v-296h255v-218q0-186 104-288.5t277-102.5q147 0 228 12z"/></svg></div>
+    <div class="twitter" title="Share this on Twitter" onclick="gtag('event', 'Twitter', {'event_category':'Post Shared','event_label':'Twitter'}); location.href='https://twitter.com/intent/tweet?text=コーヒー抽出の仕組み&url=https://ryonakagami.github.io/2022/10/14/Coffee-science-part2-brew/';"><svg viewBox="0 0 1792 1792" xmlns="http://www.w3.org/2000/svg"><path d="M1684 408q-67 98-162 167 1 14 1 42 0 130-38 259.5t-115.5 248.5-184.5 210.5-258 146-323 54.5q-271 0-496-145 35 4 78 4 225 0 401-138-105-2-188-64.5t-114-159.5q33 5 61 5 43 0 85-11-112-23-185.5-111.5t-73.5-205.5v-4q68 38 146 41-66-44-105-115t-39-154q0-88 44-163 121 149 294.5 238.5t371.5 99.5q-8-38-8-74 0-134 94.5-228.5t228.5-94.5q140 0 236 102 109-21 205-78-37 115-142 178 93-10 186-50z"/></svg></div>
+    <div class="linkedin" title="Share this on Linkedin" onclick="gtag('event', 'Linkedin', {'event_category':'Post Shared','event_label':'Linkedin'}); location.href='https://www.linkedin.com/shareArticle?mini=true&url=https://ryonakagami.github.io/2022/10/14/Coffee-science-part2-brew/&title=&summary=&source=';"><svg viewBox="0 0 1792 1792" xmlns="http://www.w3.org/2000/svg"><path d="M477 625v991h-330v-991h330zm21-306q1 73-50.5 122t-135.5 49h-2q-82 0-132-49t-50-122q0-74 51.5-122.5t134.5-48.5 133 48.5 51 122.5zm1166 729v568h-329v-530q0-105-40.5-164.5t-126.5-59.5q-63 0-105.5 34.5t-63.5 85.5q-11 30-11 81v553h-329q2-399 2-647t-1-296l-1-48h329v144h-2q20-32 41-56t56.5-52 87-43.5 114.5-15.5q171 0 275 113.5t104 332.5z"/></svg></div>
+    
+    <div class="mail" title="Share this through Email" onclick="gtag('event', 'Email', {'event_category':'Post Shared','event_label':'Email'}); location.href='mailto:?&body=https://ryonakagami.github.io/2022/10/14/Coffee-science-part2-brew/';"><svg viewBox="0 0 1792 1792" xmlns="http://www.w3.org/2000/svg"><path d="M1792 710v794q0 66-47 113t-113 47h-1472q-66 0-113-47t-47-113v-794q44 49 101 87 362 246 497 345 57 42 92.5 65.5t94.5 48 110 24.5h2q51 0 110-24.5t94.5-48 92.5-65.5q170-123 498-345 57-39 100-87zm0-294q0 79-49 151t-122 123q-376 261-468 325-10 7-42.5 30.5t-54 38-52 32.5-57.5 27-50 9h-2q-23 0-50-9t-57.5-27-52-32.5-54-38-42.5-30.5q-91-64-262-182.5t-205-142.5q-62-42-117-115.5t-55-136.5q0-78 41.5-130t118.5-52h1472q65 0 112.5 47t47.5 113z"/></svg></div>
+</div>
+
+                
+                <hr/>
+
+                <!-- Featured Tags -->
+                <b><fontsize="5">Feature Tags</b>
+                    <div id="tag_cloud" class="tags tags-sup js-tags" 
+                    style="line-height: 0px !important;">
+                        
+                        
+                        
+                        
+                        
+                                <a data-sort="0288" 
+                                    href="/archive/?tag=%E7%B5%B1%E8%A8%88"
+                                    title="統計"
+                                    style="color: #337ab7 !important;"
+                                    rel="61">統計</a>
+                        
+                                <a data-sort="0298" 
+                                    href="/archive/?tag=Python"
+                                    title="Python"
+                                    style="color: #337ab7 !important;"
+                                    rel="51">Python</a>
+                        
+                                <a data-sort="0300" 
+                                    href="/archive/?tag=math"
+                                    title="math"
+                                    style="color: #337ab7 !important;"
+                                    rel="49">math</a>
+                        
+                                <a data-sort="0303" 
+                                    href="/archive/?tag=Linux"
+                                    title="Linux"
+                                    style="color: #337ab7 !important;"
+                                    rel="46">Linux</a>
+                        
+                                <a data-sort="0316" 
+                                    href="/archive/?tag=Ubuntu+20.04+LTS"
+                                    title="Ubuntu 20.04 LTS"
+                                    style="color: #337ab7 !important;"
+                                    rel="33">Ubuntu 20.04 LTS</a>
+                        
+                                <a data-sort="0319" 
+                                    href="/archive/?tag=Shell"
+                                    title="Shell"
+                                    style="color: #337ab7 !important;"
+                                    rel="30">Shell</a>
+                        
+                                <a data-sort="0321" 
+                                    href="/archive/?tag=English"
+                                    title="English"
+                                    style="color: #337ab7 !important;"
+                                    rel="28">English</a>
+                        
+                                <a data-sort="0324" 
+                                    href="/archive/?tag=git"
+                                    title="git"
+                                    style="color: #337ab7 !important;"
+                                    rel="25">git</a>
+                        
+                                <a data-sort="0329" 
+                                    href="/archive/?tag=%E6%96%B9%E6%B3%95%E8%AB%96"
+                                    title="方法論"
+                                    style="color: #337ab7 !important;"
+                                    rel="20">方法論</a>
+                        
+                                <a data-sort="0333" 
+                                    href="/archive/?tag=Ubuntu+22.04+LTS"
+                                    title="Ubuntu 22.04 LTS"
+                                    style="color: #337ab7 !important;"
+                                    rel="16">Ubuntu 22.04 LTS</a>
+                        
+                                <a data-sort="0337" 
+                                    href="/archive/?tag=%E7%B5%B1%E8%A8%88%E6%A4%9C%E5%AE%9A"
+                                    title="統計検定"
+                                    style="color: #337ab7 !important;"
+                                    rel="12">統計検定</a>
+                        
+                                <a data-sort="0338" 
+                                    href="/archive/?tag=%E7%AB%B6%E6%8A%80%E3%83%97%E3%83%AD%E3%82%B0%E3%83%A9%E3%83%9F%E3%83%B3%E3%82%B0"
+                                    title="競技プログラミング"
+                                    style="color: #337ab7 !important;"
+                                    rel="11">競技プログラミング</a>
+                        
+                                <a data-sort="0339" 
+                                    href="/archive/?tag=%E3%83%95%E3%83%BC%E3%83%AA%E3%82%A8%E8%A7%A3%E6%9E%90"
+                                    title="フーリエ解析"
+                                    style="color: #337ab7 !important;"
+                                    rel="10">フーリエ解析</a>
+                        
+                                <a data-sort="0340" 
+                                    href="/archive/?tag=%E5%89%8D%E5%87%A6%E7%90%86"
+                                    title="前処理"
+                                    style="color: #337ab7 !important;"
+                                    rel="9">前処理</a>
+                        
+                                <a data-sort="0340" 
+                                    href="/archive/?tag=SQL"
+                                    title="SQL"
+                                    style="color: #337ab7 !important;"
+                                    rel="9">SQL</a>
+                        
+                                <a data-sort="0340" 
+                                    href="/archive/?tag=coding"
+                                    title="coding"
+                                    style="color: #337ab7 !important;"
+                                    rel="9">coding</a>
+                        
+                                <a data-sort="0341" 
+                                    href="/archive/?tag=%E3%82%B3%E3%83%9F%E3%83%A5%E3%83%8B%E3%82%B1%E3%83%BC%E3%82%B7%E3%83%A7%E3%83%B3"
+                                    title="コミュニケーション"
+                                    style="color: #337ab7 !important;"
+                                    rel="8">コミュニケーション</a>
+                        
+                                <a data-sort="0342" 
+                                    href="/archive/?tag=Network"
+                                    title="Network"
+                                    style="color: #337ab7 !important;"
+                                    rel="7">Network</a>
+                        
+                                <a data-sort="0342" 
+                                    href="/archive/?tag=ssh"
+                                    title="ssh"
+                                    style="color: #337ab7 !important;"
+                                    rel="7">ssh</a>
+                        
+                                <a data-sort="0343" 
+                                    href="/archive/?tag=%E5%B0%86%E6%A3%8B"
+                                    title="将棋"
+                                    style="color: #337ab7 !important;"
+                                    rel="6">将棋</a>
+                        
+                                <a data-sort="0343" 
+                                    href="/archive/?tag=Data+visualization"
+                                    title="Data visualization"
+                                    style="color: #337ab7 !important;"
+                                    rel="6">Data visualization</a>
+                        
+                                <a data-sort="0343" 
+                                    href="/archive/?tag=Docker"
+                                    title="Docker"
+                                    style="color: #337ab7 !important;"
+                                    rel="6">Docker</a>
+                        
+                                <a data-sort="0343" 
+                                    href="/archive/?tag=Econometrics"
+                                    title="Econometrics"
+                                    style="color: #337ab7 !important;"
+                                    rel="6">Econometrics</a>
+                        
+                                <a data-sort="0343" 
+                                    href="/archive/?tag=VSCode"
+                                    title="VSCode"
+                                    style="color: #337ab7 !important;"
+                                    rel="6">VSCode</a>
+                        
+                                <a data-sort="0343" 
+                                    href="/archive/?tag=statistical+inference"
+                                    title="statistical inference"
+                                    style="color: #337ab7 !important;"
+                                    rel="6">statistical inference</a>
+                        
+                                <a data-sort="0344" 
+                                    href="/archive/?tag=GitHub+Pages"
+                                    title="GitHub Pages"
+                                    style="color: #337ab7 !important;"
+                                    rel="5">GitHub Pages</a>
+                        
+                                <a data-sort="0344" 
+                                    href="/archive/?tag=apt"
+                                    title="apt"
+                                    style="color: #337ab7 !important;"
+                                    rel="5">apt</a>
+                        
+                                <a data-sort="0344" 
+                                    href="/archive/?tag=development"
+                                    title="development"
+                                    style="color: #337ab7 !important;"
+                                    rel="5">development</a>
+                        
+                                <a data-sort="0345" 
+                                    href="/archive/?tag=%E3%82%B7%E3%82%B9%E3%83%86%E3%83%A0%E7%AE%A1%E7%90%86"
+                                    title="システム管理"
+                                    style="color: #337ab7 !important;"
+                                    rel="4">システム管理</a>
+                        
+                                <a data-sort="0345" 
+                                    href="/archive/?tag=Coffee"
+                                    title="Coffee"
+                                    style="color: #337ab7 !important;"
+                                    rel="4">Coffee</a>
+                        
+                                <a data-sort="0345" 
+                                    href="/archive/?tag=cloud"
+                                    title="cloud"
+                                    style="color: #337ab7 !important;"
+                                    rel="4">cloud</a>
+                        
+                                <a data-sort="0346" 
+                                    href="/archive/?tag=%E6%95%B0%E5%80%A4%E8%A8%88%E7%AE%97"
+                                    title="数値計算"
+                                    style="color: #337ab7 !important;"
+                                    rel="3">数値計算</a>
+                        
+                                <a data-sort="0346" 
+                                    href="/archive/?tag=%E7%B4%A0%E6%95%B0"
+                                    title="素数"
+                                    style="color: #337ab7 !important;"
+                                    rel="3">素数</a>
+                        
+                                <a data-sort="0346" 
+                                    href="/archive/?tag=Book"
+                                    title="Book"
+                                    style="color: #337ab7 !important;"
+                                    rel="3">Book</a>
+                        
+                                <a data-sort="0346" 
+                                    href="/archive/?tag=Font"
+                                    title="Font"
+                                    style="color: #337ab7 !important;"
+                                    rel="3">Font</a>
+                        
+                                <a data-sort="0346" 
+                                    href="/archive/?tag=Metrics"
+                                    title="Metrics"
+                                    style="color: #337ab7 !important;"
+                                    rel="3">Metrics</a>
+                        
+                                <a data-sort="0346" 
+                                    href="/archive/?tag=Poetry"
+                                    title="Poetry"
+                                    style="color: #337ab7 !important;"
+                                    rel="3">Poetry</a>
+                        
+                                <a data-sort="0346" 
+                                    href="/archive/?tag=Ubuntu+24.04+LTS"
+                                    title="Ubuntu 24.04 LTS"
+                                    style="color: #337ab7 !important;"
+                                    rel="3">Ubuntu 24.04 LTS</a>
+                        
+                                <a data-sort="0346" 
+                                    href="/archive/?tag=architecture"
+                                    title="architecture"
+                                    style="color: #337ab7 !important;"
+                                    rel="3">architecture</a>
+                        
+                                <a data-sort="0346" 
+                                    href="/archive/?tag=aws"
+                                    title="aws"
+                                    style="color: #337ab7 !important;"
+                                    rel="3">aws</a>
+                        
+                                <a data-sort="0346" 
+                                    href="/archive/?tag=shell"
+                                    title="shell"
+                                    style="color: #337ab7 !important;"
+                                    rel="3">shell</a>
+                        
+                                <a data-sort="0346" 
+                                    href="/archive/?tag=systemctl"
+                                    title="systemctl"
+                                    style="color: #337ab7 !important;"
+                                    rel="3">systemctl</a>
+                        
+                                <a data-sort="0347" 
+                                    href="/archive/?tag=%E3%83%86%E3%83%B3%E3%83%97%E3%83%AC%E3%83%BC%E3%83%88"
+                                    title="テンプレート"
+                                    style="color: #337ab7 !important;"
+                                    rel="2">テンプレート</a>
+                        
+                                <a data-sort="0347" 
+                                    href="/archive/?tag=%E3%83%87%E3%83%BC%E3%82%BF%E6%A7%8B%E9%80%A0"
+                                    title="データ構造"
+                                    style="color: #337ab7 !important;"
+                                    rel="2">データ構造</a>
+                        
+                                <a data-sort="0347" 
+                                    href="/archive/?tag=%E3%83%9D%E3%83%AF%E3%82%BD%E3%83%B3%E5%88%86%E5%B8%83"
+                                    title="ポワソン分布"
+                                    style="color: #337ab7 !important;"
+                                    rel="2">ポワソン分布</a>
+                        
+                                <a data-sort="0347" 
+                                    href="/archive/?tag=%E4%BC%9A%E8%A8%88%E5%88%86%E6%9E%90"
+                                    title="会計分析"
+                                    style="color: #337ab7 !important;"
+                                    rel="2">会計分析</a>
+                        
+                                <a data-sort="0347" 
+                                    href="/archive/?tag=%E6%96%87%E5%AD%97%E3%82%B3%E3%83%BC%E3%83%89"
+                                    title="文字コード"
+                                    style="color: #337ab7 !important;"
+                                    rel="2">文字コード</a>
+                        
+                                <a data-sort="0347" 
+                                    href="/archive/?tag=%E7%92%B0%E5%A2%83%E6%A7%8B%E7%AF%89"
+                                    title="環境構築"
+                                    style="color: #337ab7 !important;"
+                                    rel="2">環境構築</a>
+                        
+                                <a data-sort="0347" 
+                                    href="/archive/?tag=%E8%AB%96%E6%96%87"
+                                    title="論文"
+                                    style="color: #337ab7 !important;"
+                                    rel="2">論文</a>
+                        
+                                <a data-sort="0347" 
+                                    href="/archive/?tag=App"
+                                    title="App"
+                                    style="color: #337ab7 !important;"
+                                    rel="2">App</a>
+                        
+                                <a data-sort="0347" 
+                                    href="/archive/?tag=Bayesian"
+                                    title="Bayesian"
+                                    style="color: #337ab7 !important;"
+                                    rel="2">Bayesian</a>
+                        
+                                <a data-sort="0347" 
+                                    href="/archive/?tag=Dynamic+Programming"
+                                    title="Dynamic Programming"
+                                    style="color: #337ab7 !important;"
+                                    rel="2">Dynamic Programming</a>
+                        
+                                <a data-sort="0347" 
+                                    href="/archive/?tag=Keyboard"
+                                    title="Keyboard"
+                                    style="color: #337ab7 !important;"
+                                    rel="2">Keyboard</a>
+                        
+                                <a data-sort="0347" 
+                                    href="/archive/?tag=Processing"
+                                    title="Processing"
+                                    style="color: #337ab7 !important;"
+                                    rel="2">Processing</a>
+                        
+                                <a data-sort="0347" 
+                                    href="/archive/?tag=R"
+                                    title="R"
+                                    style="color: #337ab7 !important;"
+                                    rel="2">R</a>
+                        
+                                <a data-sort="0347" 
+                                    href="/archive/?tag=Steam"
+                                    title="Steam"
+                                    style="color: #337ab7 !important;"
+                                    rel="2">Steam</a>
+                        
+                                <a data-sort="0347" 
+                                    href="/archive/?tag=filesystem"
+                                    title="filesystem"
+                                    style="color: #337ab7 !important;"
+                                    rel="2">filesystem</a>
+                        
+                                <a data-sort="0347" 
+                                    href="/archive/?tag=quarto"
+                                    title="quarto"
+                                    style="color: #337ab7 !important;"
+                                    rel="2">quarto</a>
+                        
+                                <a data-sort="0347" 
+                                    href="/archive/?tag=regex"
+                                    title="regex"
+                                    style="color: #337ab7 !important;"
+                                    rel="2">regex</a>
+                    </div>
+
+                <br>
+
+                <b><fontsize="5">Leave a Comment</font><br>(注意：GitHub Accountが必要となります）</b>
+                
+                <script src="https://utteranc.es/client.js"
+                    repo="RyoNakagami/RyoNakagami.github.io"
+                    issue-term="url"
+                    theme="github-light"
+                    crossorigin="anonymous"
+                    async>Reduce unused JavaScript
+                
+                </script>
+
+
+            </div>  
+
+    <!-- Side Catalog Container -->
+        
+            <div class="
+                col-lg-1 col-lg-offset-0
+                visible-lg-block
+                sidebar-container
+                catalog-container">
+                <div class="side-catalog fixed" style="margin-top:3%">
+                    <hr class="hidden-sm hidden-xs">
+                    <h5>
+                        <a class="catalog-toggle" href="#">CONTENTS</a>
+                    </h5>
+                    <ul class="catalog-body"></ul>
+                </div>
+            </div>
+        
+    <!-- Sidebar Container -->
+            <!-- <div class="
+                col-lg-10 col-lg-offset-1
+                col-md-10 col-md-offset-1
+                sidebar-container row"> -->
+                <!-- 
+<hr>
+<h5>FRIENDS</h5>
+<ul class="list-inline">
+  
+  <li><a href="https://twitter.com/bluesky0804?ref_src=twsrc%5Egoogle%7Ctwcamp%5Eserp%7Ctwgr%5Eauthor">bluesky0804</a></li>
+  
+</ul>
+
+ -->
+            </div>
+        </div>
+    </div>
+</article>
+
+<!-- add support for mathjax by voleking-->
+
+  <script async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml.js" id="MathJax-script"></script>
+<script>
+  MathJax = {
+    tex: {
+      inlineMath: [['$','$'], ['\\(','\\)']],
+      displayMath: [['$$','$$'], ['\\[','\\]']],
+      processEscapes: true,
+      processEnvironments: true, // for pseudo
+      tags: "ams",
+      autoload: {
+        color: [],
+        colorV2: ['color']
+      },
+      packages: {'[+]': ['noerrors']}
+    },
+    chtml: {
+      matchFontHeight: false,
+      displayAlign: "left",
+      displayIndent: "2em"
+    },
+    options: {
+      renderActions: {
+        /* add a new named action to render <script type="math/tex"> */
+        find_script_mathtex: [10, function (doc) {
+          for (const node of document.querySelectorAll('script[type^="math/tex"]')) {
+            const display = !!node.type.match(/; *mode=display/);
+            const math = new doc.options.MathItem(node.textContent, doc.inputJax[0], display);
+            const text = document.createTextNode('');
+            node.parentNode.replaceChild(text, node);
+            math.start = {node: text, delim: '', n: 0};
+            math.end = {node: text, delim: '', n: 0};
+            doc.math.push(math);
+          }
+        }, '']
+      }
+    },
+    loader: {
+      load: ['[tex]/noerrors']
+    }
+  };
+</script>
+
+
+
+
+
+<!-- async load function -->
+<script>
+    function async(u, c) {
+      var d = document, t = 'script',
+          o = d.createElement(t),
+          s = d.getElementsByTagName(t)[0];
+      o.src = u;
+      if (c) { o.addEventListener('load', function (e) { c(null, e); }, false); }
+      s.parentNode.insertBefore(o, s);
+    }
+</script>
+<!-- anchor-js, Doc:http://bryanbraun.github.io/anchorjs/ -->
+<script>
+    async("//cdnjs.cloudflare.com/ajax/libs/anchor-js/1.1.1/anchor.min.js",function(){
+        anchors.options = {
+          visible: 'hover',
+          placement: 'right',
+          // icon: '#'
+        };
+        anchors.add().remove('.intro-header h1').remove('.subheading').remove('.sidebar-container h5');
+    })
+</script>
+<style>
+    /* place left on bigger screen */
+    @media all and (min-width: 800px) {
+        .anchorjs-link{
+            position: absolute;
+            left: -0.75em;
+            font-size: 1.1em;
+            margin-top : -0.1em;
+        }
+    }
+</style>
+
+
+<body>
+    <!-- enable mermaid language on markdown post -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/mermaid/10.6.1/mermaid.min.js"></script>
+<script>
+   mermaid.initialize({
+       startOnLoad:true,
+       theme: 'default'
+   });
+   window.mermaid.init(undefined, document.querySelectorAll('.language-mermaid'));
+</script>
+
+</body>
+
+    <script>
+    
+    var elements = document.querySelectorAll('p');
+    Array.prototype.forEach.call(elements, function(el, i){
+        if(el.innerHTML=='[expand]') {
+            var parentcontent = el.parentNode.innerHTML.replace('<p>[expand]</p>','<div class="expand" style="display: none; height: 0; overflow: hidden;">').replace('<p>[/expand]</p>','</div>');
+            el.parentNode.innerHTML = parentcontent;
+        }
+    });
+
+    var elements = document.querySelectorAll('div.expand');
+    Array.prototype.forEach.call(elements, function(el, i){
+        el.previousElementSibling.innerHTML = el.previousElementSibling.innerHTML + '<span>..&nbsp; <a href="#" style="cursor: pointer;" onclick="this.parentNode.parentNode.nextElementSibling.style.display = \'block\'; this.parentNode.parentNode.nextElementSibling.style.height = \'auto\'; this.parentNode.style.display = \'none\';">read&nbsp;more&nbsp;&rarr;</a></span>';
+    });
+
+</script>
+
+    <!-- Footer -->
+<footer>
+    <div class="container">
+        <div class="row">
+            <!--<div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1"> -->
+                <!-- SNS Link -->
+            
+
+
+<ul class="list-inline text-center">
+
+
+  
+  
+  
+  
+  <li>
+    <a target="_blank" href="https://github.com/RyoNakagami">
+      <span class="fa-stack fa-lg">
+        <i class="fa fa-circle fa-stack-2x"></i>
+        <i class="fa fa-github fa-stack-1x fa-inverse"></i>
+      </span>
+    </a>
+  </li>
+  
+  
+</ul>
+
+            
+            <p class="copyright text-muted">
+                Copyright &copy; Ryo's Tech Blog 2025
+                <br>
+                Powered by <a href="https://ryonakagami.github.io">Ryo's Tech Blog</a> |
+                <iframe style="margin-left: 2px; margin-bottom:-5px;" frameborder="0" scrolling="0" width="100px"
+                    height="20px"
+                    title="RyoNakagami.github.io github stars"
+                    src="https://ghbtns.com/github-btn.html?user=RyoNakagami&repo=RyoNakagami.github.io&type=star&count=true">
+                </iframe>
+            </p>
+            <!--</div> -->
+        </div>
+    </div>
+</footer>
+
+<!-- jQuery -->
+<script src="/js/jquery.min.js "></script>
+
+<!-- Bootstrap Core JavaScript -->
+<!-- Currently, only navbar scroll-down effect at desktop still depends on this -->
+<script src="/js/bootstrap.min.js "></script>
+
+<!-- Custom Theme JavaScript -->
+<script src="/js/ryo-blog.min.js "></script>
+
+<!-- Simple Jekyll Search -->
+<script src="/js/simple-jekyll-search.min.js"></script>
+
+<!-- Service Worker -->
+
+<script src="/js/snackbar.js "></script>
+<script src="/js/sw-registration.js "></script>
+
+
+<!-- async load function -->
+<script>
+    function async(u, c) {
+        var d = document, t = 'script',
+            o = d.createElement(t),
+            s = d.getElementsByTagName(t)[0];
+        o.src = u;
+        if (c) { o.addEventListener('load', function (e) { c(null, e); }, false); }
+        s.parentNode.insertBefore(o, s);
+    }
+</script>
+
+<!--
+     Because of the native support for backtick-style fenced code blocks
+     right within the Markdown is landed in Github Pages,
+     From V1.6, There is no need for Highlight.js,
+     so Huxblog drops it officially.
+
+     - https://github.com/blog/2100-github-pages-now-faster-and-simpler-with-jekyll-3-0
+     - https://help.github.com/articles/creating-and-highlighting-code-blocks/
+     - https://github.com/jneen/rouge/wiki/list-of-supported-languages-and-lexers
+-->
+<!--
+    <script>
+        async("http://cdn.bootcss.com/highlight.js/8.6/highlight.min.js", function(){
+            hljs.initHighlightingOnLoad();
+        })
+    </script>
+    <link href="http://cdn.bootcss.com/highlight.js/8.6/styles/github.min.css" rel="stylesheet">
+-->
+
+
+
+
+
+
+
+<!--fastClick.js -->
+<script>
+    async("//cdnjs.cloudflare.com/ajax/libs/fastclick/1.0.6/fastclick.min.js", function () {
+        var $nav = document.querySelector("nav");
+        if ($nav) FastClick.attach($nav);
+    })
+</script>
+
+
+<!-- Global site tag (gtag.js) - Google Analytics -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-LVL413SV09"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+  gtag('config', 'G-LVL413SV09');
+</script>
+
+
+
+<!-- Side Catalog -->
+
+<script type="text/javascript">
+    function generateCatalog(selector) {
+
+        // interop with multilangual 
+        if ('' == 'true') {
+            _containerSelector = 'div.post-container.active'
+        } else {
+            _containerSelector = 'div.post-container'
+        }
+
+        // init
+        var P = $(_containerSelector), a, n, t, l, i, c;
+        a = P.find('h1,h2,h3,h4,h5,h6');
+
+        // clean
+        $(selector).html('')
+
+        // appending
+        a.each(function () {
+            n = $(this).prop('tagName').toLowerCase();
+            i = "#" + $(this).prop('id');
+            t = $(this).text();
+            c = $('<a href="' + i + '" rel="nofollow">' + t + '</a>');
+            l = $('<li class="' + n + '_nav"></li>').append(c);
+            $(selector).append(l);
+        });
+        return true;
+    }
+
+    generateCatalog(".catalog-body");
+
+    // toggle side catalog
+    $(".catalog-toggle").click((function (e) {
+        e.preventDefault();
+        $('.side-catalog').toggleClass("fold")
+    }))
+
+    /*
+     * Doc: https://github.com/davist11/jQuery-One-Page-Nav
+     * Fork by Hux to support padding
+     */
+    async("/js/jquery.nav.js", function () {
+        $('.catalog-body').onePageNav({
+            currentClass: "active",
+            changeHash: !1,
+            easing: "swing",
+            filter: "",
+            scrollSpeed: 700,
+            scrollOffset: 0,
+            scrollThreshold: .2,
+            begin: null,
+            end: null,
+            scrollChange: null,
+            padding: 80
+        });
+    });
+</script>
+
+
+
+<!-- Multi-Lingual -->
+
+
+<!-- Simple Jekyll Search -->
+<script>
+    // https://stackoverflow.com/questions/1912501/unescape-html-entities-in-javascript
+    function htmlDecode(input) {
+        var e = document.createElement('textarea');
+        e.innerHTML = input;
+        // handle case of empty input
+        return e.childNodes.length === 0 ? "" : e.childNodes[0].nodeValue;
+    }
+
+    SimpleJekyllSearch({
+        searchInput: document.getElementById('search-input'),
+        resultsContainer: document.getElementById('search-results'),
+        json: '/search.json',
+        searchResultTemplate: '<div class="post-preview item"><a href="{url}"><h2 class="post-title">{title}</h2><h3 class="post-subtitle">{subtitle}</h3><hr></a></div>',
+        noResultsText: 'No results',
+        limit: 50,
+        fuzzy: false,
+        // a hack to get escaped subtitle unescaped. for some reason, 
+        // post.subtitle w/o escape filter nuke entire search.
+        templateMiddleware: function (prop, value, template) {
+            if (prop === 'subtitle' || prop === 'title') {
+                if (value.indexOf("code")) {
+                    return htmlDecode(value);
+                } else {
+                    return value;
+                }
+            }
+        }
+    });
+
+    $(document).ready(function () {
+        var $searchPage = $('.search-page');
+        var $searchOpen = $('.search-icon');
+        var $searchClose = $('.search-icon-close');
+        var $searchInput = $('#search-input');
+        var $body = $('body');
+
+        $searchOpen.on('click', function (e) {
+            e.preventDefault();
+            $searchPage.toggleClass('search-active');
+            var prevClasses = $body.attr('class') || '';
+            setTimeout(function () {
+                $body.addClass('no-scroll');
+            }, 400)
+
+            if ($searchPage.hasClass('search-active')) {
+                $searchClose.on('click', function (e) {
+                    e.preventDefault();
+                    $searchPage.removeClass('search-active');
+                    $body.attr('class', prevClasses);  // from closure 
+                });
+                $searchInput.focus();
+            }
+        });
+    });
+</script>
+
+
+
+<!-- Image to Github 
+<img src="/img/icon_wechat.png" width="0" height="0" />
+<-- Migrate from head to bottom, no longer block render and still work -->
+<script>
+    
+    var elements = document.querySelectorAll('p');
+    Array.prototype.forEach.call(elements, function(el, i){
+        if(el.innerHTML=='[expand]') {
+            var parentcontent = el.parentNode.innerHTML.replace('<p>[expand]</p>','<div class="expand" style="display: none; height: 0; overflow: hidden;">').replace('<p>[/expand]</p>','</div>');
+            el.parentNode.innerHTML = parentcontent;
+        }
+    });
+
+    var elements = document.querySelectorAll('div.expand');
+    Array.prototype.forEach.call(elements, function(el, i){
+        el.previousElementSibling.innerHTML = el.previousElementSibling.innerHTML + '<span>..&nbsp; <a href="#" style="cursor: pointer;" onclick="this.parentNode.parentNode.nextElementSibling.style.display = \'block\'; this.parentNode.parentNode.nextElementSibling.style.height = \'auto\'; this.parentNode.style.display = \'none\';">read&nbsp;more&nbsp;&rarr;</a></span>';
+    });
+
+</script>
+
+</body>
+</html>

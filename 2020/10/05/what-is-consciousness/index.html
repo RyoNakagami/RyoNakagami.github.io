@@ -1,0 +1,1837 @@
+<!DOCTYPE html>
+<html lang="ja">
+
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="google-site-verification" content="gSMaswRY9iRfG4QaQrx6aj481bgr503qEZh-QPsMYNU" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+    <meta name="description" content="元経済学徒, 現在どっかでデータサイエンティストもどきやってる人間の勉強日記">
+    <meta name="keywords"  content="Statistics, Economics, Econometrics, Python, C, Shell, Linux, Data scientist">
+    <meta name="theme-color" content="#000000">
+    
+    <!-- Open Graph -->
+    <meta property="og:title" content="What is consciousness - Ryo's Tech Blog">
+    
+    <meta property="og:type" content="article">
+    <meta property="og:description" content="このノートは, The Economist &gt; What is consciousnessのスクリプトです
+
+">
+    
+    <meta property="article:published_time" content="2020-10-05T00:00:00Z">
+    
+    
+    <meta property="article:author" content="Ryo">
+    
+    
+    <meta property="article:tag" content="English">
+    
+    
+    <meta property="og:image" content="https://ryonakagami.github.io/img/avatar_rio_cat.jpg">
+    <meta property="og:url" content="https://ryonakagami.github.io/2020/10/05/what-is-consciousness/">
+    <meta property="og:site_name" content="Ryo's Tech Blog">
+    
+    <title>What is consciousness - Ryo's Tech Blog</title>
+
+    <!-- Web App Manifest -->
+    <link rel="manifest" href="/pwa/manifest.json">
+
+    <!-- Favicon -->
+    <link rel="shortcut icon" href="/img/favicon.ico">
+    
+    <!-- Canonical URL -->
+    <link rel="canonical" href="https://ryonakagami.github.io/2020/10/05/what-is-consciousness/">
+
+    <!-- Bootstrap Core CSS -->
+    <link rel="stylesheet" href="/css/bootstrap.min.css">
+
+    <!-- Custom CSS -->
+    <link rel="stylesheet" href="/css/ryo-blog.min.css">
+
+    <!-- Custom Fonts -->
+    <!-- <link href="http://maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css" rel="stylesheet" type="text/css"> -->
+    <!-- https://stackoverflow.com/questions/45983301/google-pagespeed-eliminate-render-blocking-resources-above-the-fold-caused-fro -->
+    <!--link href="//cdnjs.cloudflare.com/ajax/libs/font-awesome/4.6.3/css/font-awesome.min.css" rel="stylesheet" type="text/css"-->
+    <!--<link href="https://fonts.googleapis.com/earlyaccess/notosansjapanese.css" rel="stylesheet" type="text/css" media="print" onload="this.media='all'" > -->
+    <link href="https://fonts.googleapis.com/earlyaccess/notosansjapanese.css" rel="preload" type="text/css" media="print" onload="this.media='all'" >
+
+
+    <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
+    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+    <!--[if lt IE 9]>
+        <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+        <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
+    <![endif]-->
+
+    <!-- ga & ba script hoook -->
+    <script></script>
+</head>
+
+
+<!-- hack iOS CSS :active style -->
+<body ontouchstart="">
+
+    <!-- Navigation -->
+
+<nav class="navbar navbar-default navbar-custom navbar-fixed-top invert">
+    
+        <div class="container-fluid">
+            <!-- Brand and toggle get grouped for better mobile display -->
+            <div class="navbar-header page-scroll">
+                <button type="button" class="navbar-toggle">
+                    <span class="sr-only">Toggle navigation</span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
+                <a class="navbar-brand" href="/">Ryo's Tech Blog</a>
+            </div>
+
+            <!-- Collect the nav links, forms, and other content for toggling -->
+            <div id="huxblog_navbar">
+                <div class="navbar-collapse">
+                    <ul class="nav navbar-nav navbar-left">
+                                                <li>
+                            <a href="https://ryonakagami.github.io/statistics-for-regression-monkey/">Statistics for
+                                Regression Monkeys</a>
+                        </li>
+                        <li>
+                            <a href="https://ohgoshgit.github.io/">OhGoshGit!?!</a>
+                        </li>
+                        <!-- <li>
+                            <a><button onclick="mainDropDown()" style="border-color: rgba(70, 83, 111, 0.989); background-color: rgba(70, 83, 111, 0.989)">Dropdown</button></a> 
+                            <div id="myDropdown" class="dropdown-content">
+                              <a href="#" onclick="subMenu(this)">A</a>
+                              <div class="sub-menu-item" id="subMenu1">
+                              <a href="#">A.1</a>
+                              </div>
+                              <a href="#" onclick="subMenu(this)">B</a>
+                              <div class="sub-menu-item" id="subMenu2">
+                              <a href="#">B.1</a>
+                              </div>
+                              <a href="#">C</a>
+                              <a href="#">D</a>
+                              <a href="#">E</a>
+                              <a href="#">F</a>
+                              <a href="#">G</a>
+                            </div>
+                        </li> -->
+                    </ul>
+                    </ul>
+                    <ul class="nav navbar-nav navbar-right">
+                        
+                        
+                        
+                        
+                        <li>
+                            <a href="/about/">About</a>
+                        </li>
+                        
+                        
+                        
+                        <li>
+                            <a href="/archive/">Tag Search</a>
+                        </li>
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        <!--about fa-search see https://stackoverflow.com/questions/41950677/how-to-make-my-search-icon-fixed-->
+                        <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css"
+                            rel="stylesheet" />
+                        <li class="search-icon">
+                            <a href="javascript:void(0)" aria-label="Search" target="_blank">
+                                <i class="fa fa-search"></i>
+                            </a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+            <!-- /.navbar-collapse -->
+        </div>
+        <!-- /.container -->
+    </nav>
+
+    <script>
+        // Drop Bootstarp low-performance Navbar
+        // Use customize navbar with high-quality material design animation
+        // in high-perf jank-free CSS3 implementation
+        var $body = document.body;
+        var $toggle = document.querySelector('.navbar-toggle');
+        var $navbar = document.querySelector('#huxblog_navbar');
+        var $collapse = document.querySelector('.navbar-collapse');
+
+        var __HuxNav__ = {
+            close: function () {
+                $navbar.className = " ";
+                // wait until animation end.
+                setTimeout(function () {
+                    // prevent frequently toggle
+                    if ($navbar.className.indexOf('in') < 0) {
+                        $collapse.style.height = "0px"
+                    }
+                }, 400)
+            },
+            open: function () {
+                $collapse.style.height = "auto"
+                $navbar.className += " in";
+            }
+        }
+
+        // Bind Event
+        $toggle.addEventListener('click', function (e) {
+            if ($navbar.className.indexOf('in') > 0) {
+                __HuxNav__.close()
+            } else {
+                __HuxNav__.open()
+            }
+        })
+
+        /**
+         * Since Fastclick is used to delegate 'touchstart' globally
+         * to hack 300ms delay in iOS by performing a fake 'click',
+         * Using 'e.stopPropagation' to stop 'touchstart' event from 
+         * $toggle/$collapse will break global delegation.
+         * 
+         * Instead, we use a 'e.target' filter to prevent handler
+         * added to document close HuxNav.  
+         *
+         * Also, we use 'click' instead of 'touchstart' as compromise
+         */
+        document.addEventListener('click', function (e) {
+            if (e.target == $toggle) return;
+            if (e.target.className == 'icon-bar') return;
+            __HuxNav__.close();
+        })
+    </script>
+
+    <!-- Search -->
+<div class="search-page">
+  <div class="search-icon-close-container">
+    <span class="search-icon-close">
+      <i class="fa fa-chevron-down"></i>
+    </span>
+  </div>
+  <div class="search-main container">
+    <div class="row">
+      <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+        <form></form>
+        <input type="text" id="search-input" placeholder="$ grep...">
+        </form>
+        <div id="search-results" class="mini-post-list"></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+    <!-- Image to hack wechat -->
+<!-- <img src="/img/icon_wechat.png" width="0" height="0"> -->
+<!-- <img src="/img/home-bg.jpg" width="0" height="0"> -->
+
+<!-- Post Header -->
+
+
+
+<style type="text/css">
+    header.intro-header{
+        position: relative;
+        background-image: url('/img/home-bg.jpg');
+        background: ;
+    }
+
+    
+    header.intro-header .header-mask{
+        width: 100%;
+        height: 100%;
+        position: absolute;
+        background: rgba(0,0,0, 0.0);
+    }
+    
+</style>
+
+
+
+
+<header class="intro-header style-text" >
+
+    <div class="header-mask"></div>
+    
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+                <div class="post-heading">
+                    <div class="tags">
+                        
+                        <a class="tag" href="/archive/?tag=English" title="English">English</a>
+                        
+                    </div>
+                    <h1>What is consciousness</h1>
+                    
+                    <h2 class="subheading">Today's words and phrases 5/N</h2>
+                    <p>
+                        公開日: 2020-10-05
+                        <br>
+                        更新日: 2023-11-10
+                        
+                    </p>
+                </div>
+            </div>
+        </div>
+    </div>
+</header>
+
+
+
+
+
+
+
+<!-- Post Content -->
+<article>
+    <div class="container">
+        <div class="row">
+
+    <!-- Post Container -->
+         <div class="
+                col-lg-8 col-lg-offset-2
+                col-md-10 col-md-offset-1
+                post-container">
+
+                <!-- Multi-Lingual -->
+                
+
+				<p>このノートは, <a href="https://www.youtube.com/watch?v=ir8XITVmeY4">The Economist &gt; What is consciousness</a>のスクリプトです</p>
+
+<div style="border-radius: 1em; border-style:solid; border-color:#D3D3D3; background-color:#F8F8F8">
+
+  <p class="h4">  Table of Contents</p>
+
+  <!-- START doctoc generated TOC please keep comment here to allow auto update -->
+  <!-- DON'T EDIT THIS SECTION, INSTEAD RE-RUN doctoc TO UPDATE -->
+
+  <ul>
+    <li><a href="#script">Script</a>
+      <ul>
+        <li><a href="#what-is-consciousness">What is consciousness?</a></li>
+        <li><a href="#consciousness-and-the-brain">Consciousness and the brain</a></li>
+        <li><a href="#the-evolution-of-consciousness">The evolution of consciousness</a></li>
+        <li><a href="#the-hard-problem">The hard problem</a></li>
+      </ul>
+    </li>
+    <li><a href="#words-and-phrases">Words and phrases</a></li>
+    <li><a href="#references">References</a></li>
+  </ul>
+
+  <!-- END doctoc generated TOC please keep comment here to allow auto update -->
+
+</div>
+
+<h2 id="script">Script</h2>
+
+<iframe width="560" height="315" src="https://www.youtube.com/embed/ir8XITVmeY4?si=gk8YNPrHbF21nUdD" frameborder="0" allow="autoplay; encrypted-media" allowfullscreen=""></iframe>
+
+<h3 id="what-is-consciousness">What is consciousness?</h3>
+
+<p>It is the most fundamental experience of all defining our waking moments and giving rise to all
+we think and feel. Without consciousness, we have no way of proving we or anything else exists, 
+and yet what it is and why we have it remains a mystery that some of the greatest minds have been unable to solve.</p>
+
+<p>The only way I know I exist is because I’m conscious. I wake up in the dark of a hotel room and I’m discombobulated
+because I’m jet-lagged. I’ve no idea where I am, who I am and what country I am yet I know I exist
+because I see something.</p>
+
+<p>Rapid advances in our understanding of how the brain works might one day allow us to pinpoint 
+the parts of the brain that generate consciousness. But will something as objective as science
+be able to explain what it feels like to be us?</p>
+
+<p>“Consciousness by its nature is private. It’s subjective, I know about my consciousness 
+from the first-person point of view. Other people cannot know about my consciousness very indirectly.”</p>
+
+<p>Philosophers have been trying to answer some of these questions for millenia. 
+In the past couple of centurioes scientists have joined them. Debate can be fierce.</p>
+
+<p>In fact, some scholars reckon that the puzzle of consciousness is something that the human mind is incaplable of solving.</p>
+
+<p>“I think that’s not just wrong. I think it’s culpably wrong. It isn’t impossible at all.
+It’s just that we have to buckle down and do it.”</p>
+
+<p>One thing that both disciplines can agree on is that consciousness arises in the brain.</p>
+
+<h3 id="consciousness-and-the-brain">Consciousness and the brain</h3>
+
+<p>Made up of roughly 85 billion neurons and other supporting cells about which we know little, 
+the brain consumes almost 20% of our energy despite comprising just 2% of our mass.</p>
+
+<p>“Eevry so often I get kind of intereted in astronomy and cosmology because you look out there and you think oh gosh it’s amazing.
+It is almost limitless. But then I turn around and kind of introspective and think about the brain and it’s kind of like a universe within.
+We’re a long way of understanding how it works. but if we can get down to figuring out how a neuron works. By God, then we 
+could deal with two neurons and four neurons and then four million neurons and then a hundred million.”</p>
+
+<p>Helped by developments in imaging, partly pioneered by Dr. Reichal and his team, scientists can
+study in some detail the two enourmous folded sheets of outer brain called the cerebral cortex(大脳皮質).
+This plays a crucial role in higher brain functions like memory, perception, thought, and language.</p>
+
+<p>“I have two of them in my left and right. And the part of this sheet that gives rise 
+to consciousness and this sheet also gives rise to intelligence and reasoning and all other things
+that we hold and that brought the human brain and the human mind.”</p>
+
+<p>Christof Koch wants to come up with a satisfactory scientific theory of consciousness before he dies.</p>
+
+<p>“Science wants to explain everything. If science fails to explain the central fact of my existence, 
+I would say then it’s a failure.”</p>
+
+<p>In order to gain a better understanding of how parts of the brain work, scientists often
+look at bits of it that are broken.</p>
+
+<p>“It is a little part of the brain called the cerebellum which is at the back of my brain. If I lose it
+, I will be unable to, let’s say, to dance or beer or climb, and have difficulty moving, my speech becomes slurred. But
+my consciousness will not be impaired.”</p>
+
+<p>On the flip side, it seems that some of some parts of the brain may be essential for consciousness&gt;
+Identifying these so called neural correlates of consciousness(意識に相関した脳活動) would help
+pin down what is happening.</p>
+
+<p>“What might the NCC, the neural correlates of consciousness be like? Assuming that it is an emergent 
+and nuero scientific process, let me say straight away that we don’t know what is like.”</p>
+
+<p>Before his death in 2004, Francis Crick, the co-discoverer of the structure of DNA, 
+worked with Dr. Coch on something they termed the binding problem. Put simply, 
+the binding problem asks how the brain integrates different bits of information it gets, both 
+sensory and internal, into our conscious experience.</p>
+
+<p>“In real life the brain is terribly good and puts everything together, the movement, the shape, and the color.
+The usual way of saying the binding problem is if you have a red square and a green triangle, how is it
+that you see it as that get the colors mixed up the shapes. Thats’ basically the problem.”</p>
+
+<p>Becasue our experience of consciousnes is derived from the data we get from lots of 
+different systems, the visual and motor being just two, the two men looked at a part of the brain
+that is connected to all these reigions.</p>
+
+<p>They were especially interested in the claustrum(前障), a thin sheet of nerve cells that 
+sits at the bottom cerebral cortex in each hemisphere of the brain. Because testinh the claustrum
+in a live human brain is invasive and risky, no formal experiments have been done.
+But one happened accidentally last year when a neurologist trying to understand
+the source of his patient’s epilepsy implanted electrodes near her claustra. 
+When he switched the current on, she lost consciousness. As soon as he switched it off,
+she regained it.</p>
+
+<h3 id="the-evolution-of-consciousness">The evolution of consciousness</h3>
+
+<p>“No one knows why we have consciousness. It’s one of the big mysteries.
+Why did evolution bother putting consciouness in? How did evolution put consciousness in?
+Why couldn’t we have done everything that we do with a set of objective mechanisms and no
+first-person subjective experience of the world? It’s one of the biggest questions for philosophy and science.”</p>
+
+<p>Just as the processeses of consciousnes remain a mystery, so does its purpose.
+Is it a high-level summary the brain generates to help us plan for what comes next? 
+A clear way of designing our brains to make us more adept at being social? neither? both?
+One evolutionary explanation for why we have consciousness suggests an animal capable of modeling 
+the behavior of another can anticipate it to its advantage.</p>
+
+<p>“The suprprising thing is that so few animals actually have this ability humans have it. So I have a 
+verygood idea of what you’re going to do and when you’re going to do and you’re going to do. 
+And children, starting it maybe around three years old, get that.”</p>
+
+<p>Jenet Metcalfe study something called the theory of mind.</p>
+
+<p>“The theory of mind is actually misnomer. The way we test it, whether a person or animal,
+can give evidence that they can get into the other person’s shoes or the other person’s mind and see the world from that person’s
+perspective. Now the test of it is often not just can you see from the viewpoint of the other person, 
+but could you see that someone has a different viewpoint from your own.”</p>
+
+<p>The theory of mind might provide one way of working out if animals other than humans are 
+conscious.</p>
+
+<p>“The only species that we’re absolutely sure has theory of mind is human. And maybe
+humans older than roughly three years old. It’s very controversial whether any other animals
+have it. They’re arguing about whether chimps have theory of mind or not.”</p>
+
+<p>Before we can have a theory of mind, we must recognize ourselves. For decades scientists have used something called “rouge test”
+to see whether animals do just that. Human babies do from about 18 months old.
+Chimpanzees presented with mirrors soon use them to groom themselves much as we do.
+Elephants, dolphines, and Magpies also can respond to mirrors in ways that suggest self-recognition.</p>
+
+<p>“The problem with the rouge test the animal researcher always raises is that maybe it’s just a body knowledge.
+That is not mind knowledge. So it was intepreted as the animal knowing that they have a mind and theory of mind
+as we normally think about it is related to another person, not to the self. 
+BUt presumably you have to know that you have a mind abefore you project that same capability onto 
+someone else”</p>
+
+<p>Identifying the neural correlates of self recognition in animals would be a hard task.
+But if we were able to do it, comparative studies would be possible. That would be
+hugely valuable.</p>
+
+<p>Science is edging close to understanding what parts of teh brain might be involved in
+generating conscious experience. By some estimates we may not be far away from an empirically
+sound theory of consciousness and how it evolved. But could a physical theory ever satisfactorily 
+address what it is that poeple are feeling when they are conscious?</p>
+
+<h3 id="the-hard-problem">The hard problem</h3>
+
+<p>David Chalmers calles consciousness the hard problem, a deft description for 
+something is hard to explain and hard to solve.</p>
+
+<p>“The methods of science right now are great for explaining objective processes and objective fuinctions. 
+So when it comes even to explaining things like the behavior of an organism, you can tell some story
+about a bit of the brain, a neural process, or a computer-like process in the brain that 
+make us behave a certain way. but the problem of consciousness, what we call the hard problem of consciousness,
+which is explaining how we get subjective experience from the brain is not that kind of question.
+It’s not question about how we behave, but it’s a question about what it’s like how it feels from the inside
+and looks like you can explain all those objective mechanisms and objective processes
+and you still won’t have answered the hard problem which is why is it that all that fuctioning is accomapnied
+by consciousness.”</p>
+
+<p>The hard problem divides philosophers and scientists alike. Some phisophers argue that 
+consciousness can be explained far more simply.</p>
+
+<p>“A lot of puzzles no mysteries. We’re going to understand it from the bottom-up and from the top-down. I ahev no doubt about that.”</p>
+
+<p>Daniel Dennett argues that consicousness is nothing more than a cognitive illusion that science will in due course explain.</p>
+
+<p>“Our brains have been designed by evolution and then redesigned by cultural evolution to give us
+a user-friendly systems of things in the world that we deal with. So the user-friendly world we live in, the manifest image,
+is a sort of friendly user illusion in the same way that the desktop of your laptop is a user illusion.
+It simplifies and it distorts in helpful ways for most purposes. If you really want to know what’s going on
+there, you have to go backstage and the same thing true about the brain or consciousness.
+Until recently we didn’t havevery good tools doing it and the brain was just off-limits, off-limits as distant galaxies.
+We’re now developing the tools for non-invasively studying the brain and we’re developing computational ideas and models so that
+we can understand how a brain can non-miraculously deal with information and refine it and uncover the semantics of the world, the outside and the inside.
+So we’re now, we now ahave the toolkit and it’s taken this long to develop it now. We just have to use the tools.”</p>
+
+<p>Perhaps but for the time being the puzzle of consciousnes continues to pose more questions than
+it does answers. Yet another philosopher, Protagoras of Abdera, proclaimed that man is the measure of all things.
+Until the problem of consciounessis solved though, that might better be rephrased “the measure of all things but himself”</p>
+
+<h2 id="words-and-phrases">Words and phrases</h2>
+
+<p><strong>Man is the measure of all things</strong></p>
+
+<p>This idea reflects a form of relativism, emphasizing the subjective nature of human experience and perception. 
+Protagoras is suggesting that individual humans, or humanity collectively, serve as the standard or measure by which we assess and understand everything.</p>
+
+<p>When you say “the measure of all things but himself”, it could be interpreted to mean that while humans may have the capacity to measure and interpret the external world, there are limitations or challenges in applying this measure to oneself. This could reflect the complexity and subjectivity involved in self-perception and introspection. It acknowledges that understanding oneself might be more challenging or nuanced than understanding external phenomena.</p>
+
+<p><strong>semantics</strong></p>
+
+<p>The sentence “We will uncover the semantics of the world” suggests that the speaker or the group mentioned intends to reveal or understand the meaning and significance of various aspects of the world. In this context, “semantics” refers to the study of meaning in language and communication. So, the sentence implies a commitment to exploring and understanding the deeper meaning or significance embedded in the various elements or phenomena present in the world. It could involve delving into the meaning of words, symbols, cultural contexts, or even broader concepts to gain a more profound understanding of the world.</p>
+
+<p>The key points of this philosophy include:</p>
+
+<ul>
+  <li>Subjectivity: It implies that truth and meaning are subjective and depend on individual perspectives. What is true or real for one person may not be the same for another.</li>
+  <li>Relativity: There is no absolute or universal truth; instead, truth is relative to the observer. Different people may have different experiences and interpretations of reality.</li>
+  <li>Human-Centered Perspective: The phrase puts humans at the center of the philosophical framework, indicating that our perceptions and judgments shape our understanding of the world.</li>
+</ul>
+
+<p><strong>presumably</strong></p>
+
+<div style="padding-left: 2em; padding-right: 2em; border-radius: 1em; border-style:solid; border-color:#D3D3D3; background-color:#F8F8F8">
+  <p class="h4"><ins>Def: presumably</ins></p>
+
+  <ul>
+    <li>used to say that you think that sth is probabily true</li>
+  </ul>
+
+</div>
+
+<ul>
+  <li>Presumably this is where the accident happened</li>
+  <li>You’ll be taking the car, presumably?</li>
+  <li>I couldn’t concentrate, presumably because I was so tired</li>
+</ul>
+
+<p><strong>consciousness</strong></p>
+
+<div style="padding-left: 2em; padding-right: 2em; border-radius: 1em; border-style:solid; border-color:#D3D3D3; background-color:#F8F8F8">
+  <p class="h4"><ins>Def: consciousness</ins></p>
+
+  <ul>
+    <li>It means the state of being able to to use your senses and mental powers to understand what is happening.</li>
+    <li>It is an uncountable noun</li>
+  </ul>
+
+</div>
+
+<ul>
+  <li>I can’t remember any more. I must have lost consciousness.</li>
+  <li>She did not reghain consciousness and died the next day.</li>
+</ul>
+
+<p><strong>conscious</strong>(adj)</p>
+
+<div style="padding-left: 2em; padding-right: 2em; border-radius: 1em; border-style:solid; border-color:#D3D3D3; background-color:#F8F8F8">
+  <p class="h4"><ins>Def: aware</ins></p>
+
+  <ul>
+    <li>aware of sth; noticing sth</li>
+    <li>not before noun</li>
+  </ul>
+
+</div>
+
+<ul>
+  <li>She’s very conscious of the problems involvedfrom</li>
+  <li>He became acutely conscious of having failed his parenets</li>
+  <li>I was vaguely conscious that I was being watched</li>
+</ul>
+
+<div style="padding-left: 2em; padding-right: 2em; border-radius: 1em; border-style:solid; border-color:#D3D3D3; background-color:#F8F8F8">
+  <p class="h4"><ins>Def: able to use your senses and mental powers</ins></p>
+
+  <ul>
+    <li>able to to use your senses and mental powers to understand what is happening</li>
+  </ul>
+
+</div>
+
+<ul>
+  <li>A patient who is not fully conscious should never be left alone</li>
+</ul>
+
+<div style="padding-left: 2em; padding-right: 2em; border-radius: 1em; border-style:solid; border-color:#D3D3D3; background-color:#F8F8F8">
+  <p class="h4"><ins>Def: deliberate</ins></p>
+
+  <ul>
+    <li>deliberate or controlled</li>
+    <li>it is used with actions or feelings</li>
+  </ul>
+
+</div>
+<ul>
+  <li><a href="#consciousness">consciousness</a></li>
+  <li><a href="#consciousadj">conscious(adj)</a></li>
+  <li><a href="#discombobulated">discombobulated</a></li>
+  <li><a href="#fundamental">fundamental</a></li>
+  <li><a href="#existverb">exist(verb)</a></li>
+  <li><a href="#pinpointverb">pinpoint(verb)</a></li>
+  <li><a href="#fierceadj">fierce(adj)</a></li>
+  <li><a href="#buckle-down">buckle down</a></li>
+  <li><a href="#comprise">comprise</a></li>
+  <li><a href="#every-so-often">Every so often</a></li>
+  <li><a href="#crucial">crucial</a></li>
+  <li><a href="#slur">slur</a></li>
+  <li><a href="#impaired">impaired</a></li>
+  <li><a href="#on-the-flip-side">on the flip side</a></li>
+  <li><a href="#derive">derive</a></li>
+  <li>
+    <p><a href="#epilepsy">epilepsy</a></p>
+  </li>
+  <li>I made a conscious effort to get there on time</li>
+  <li>to make a conscious decision</li>
+  <li>Consciouly or unconsciously, you made a choice</li>
+</ul>
+
+<p><strong>discombobulated</strong></p>
+
+<div style="padding-left: 2em; padding-right: 2em; border-radius: 1em; border-style:solid; border-color:#D3D3D3; background-color:#F8F8F8">
+  <p class="h4"><ins>Def: discombobulated</ins></p>
+
+  <ul>
+    <li>confused and disconcerted.</li>
+  </ul>
+
+</div>
+
+<ul>
+  <li>He was discombobulated, utterly confused as to what had happened.</li>
+  <li>But you’ve also probably noticed that oversleeping can make you feel discombobulated</li>
+</ul>
+
+<p><strong>fundamental</strong></p>
+
+<div style="padding-left: 2em; padding-right: 2em; border-radius: 1em; border-style:solid; border-color:#D3D3D3; background-color:#F8F8F8">
+  <p class="h4"><ins>Def: fundamental</ins></p>
+
+  <p>serious and very important; affecting the most central and important parts of sth</p>
+
+</div>
+
+<ul>
+  <li>There is a fundamental difference between the two points of view</li>
+  <li>A fundamental change in the organization of heath services was required.</li>
+  <li>Hard work is fundamental to success</li>
+</ul>
+
+<p><strong>exist</strong>(verb)</p>
+
+<div style="padding-left: 2em; padding-right: 2em; border-radius: 1em; border-style:solid; border-color:#D3D3D3; background-color:#F8F8F8">
+  <p class="h4"><ins>Def: exist</ins></p>
+
+  <ul>
+    <li>to be real</li>
+    <li>to be present in a place or situation</li>
+  </ul>
+
+</div>
+<ul>
+  <li><a href="#consciousness">consciousness</a></li>
+  <li><a href="#consciousadj">conscious(adj)</a></li>
+  <li><a href="#discombobulated">discombobulated</a></li>
+  <li><a href="#fundamental">fundamental</a></li>
+  <li><a href="#existverb">exist(verb)</a></li>
+  <li><a href="#pinpointverb">pinpoint(verb)</a></li>
+  <li><a href="#fierceadj">fierce(adj)</a></li>
+  <li><a href="#buckle-down">buckle down</a></li>
+  <li><a href="#comprise">comprise</a></li>
+  <li><a href="#every-so-often">Every so often</a></li>
+  <li><a href="#crucial">crucial</a></li>
+  <li><a href="#slur">slur</a></li>
+  <li><a href="#impaired">impaired</a></li>
+  <li><a href="#on-the-flip-side">on the flip side</a></li>
+  <li><a href="#derive">derive</a></li>
+  <li>
+    <p><a href="#epilepsy">epilepsy</a></p>
+  </li>
+  <li>Does life exist on other planets?</li>
+  <li>The problem only exists in your head, Jane.</li>
+  <li>Few of these monkeys still exist in the wild</li>
+  <li>The charity exists to support victims of crime</li>
+</ul>
+
+<p><strong>pinpoint</strong>(verb)</p>
+
+<div style="padding-left: 2em; padding-right: 2em; border-radius: 1em; border-style:solid; border-color:#D3D3D3; background-color:#F8F8F8">
+  <p class="h4"><ins>Def: pinpoint</ins></p>
+  <p>from</p>
+  <ul>
+    <li>to and and show the exact position of sth/sb or the exact time that sth happened</li>
+  </ul>
+
+</div>
+
+<ul>
+  <li>He was able to pinpoint on the map the site of the medieval village</li>
+  <li>The report pinpointed the areas most in need of help</li>
+</ul>
+
+<p><strong>fierce</strong>(adj)</p>
+
+<div style="padding-left: 2em; padding-right: 2em; border-radius: 1em; border-style:solid; border-color:#D3D3D3; background-color:#F8F8F8">
+  <p class="h4"><ins>Def: angry</ins></p>
+
+  <ul>
+    <li>angry and aggresive in a way that is frighteningfrom</li>
+    <li>especially of people of animals</li>
+  </ul>
+
+</div>
+
+<ul>
+  <li>Two fierce eys glared at him</li>
+  <li>He suddenly looked fierce</li>
+  <li>She spoke in a fierce whisper</li>
+  <li>Let go of me, she said fiercely</li>
+</ul>
+
+<div style="padding-left: 2em; padding-right: 2em; border-radius: 1em; border-style:solid; border-color:#D3D3D3; background-color:#F8F8F8">
+  <p class="h4"><ins>Def: strong</ins></p>
+
+  <ul>
+    <li>showing strong feelings or a lot of activity, often in  a way that is violent</li>
+  </ul>
+
+</div>
+
+<ul>
+  <li>He launched a fierce attack on the Democrats</li>
+  <li>Debate can be fierce</li>
+  <li>The aircraft was burning fiercely</li>
+</ul>
+
+<p><strong>buckle</strong> down</p>
+
+<div style="padding-left: 2em; padding-right: 2em; border-radius: 1em; border-style:solid; border-color:#D3D3D3; background-color:#F8F8F8">
+  <p class="h4"><ins>Def: buckle down</ins></p>
+
+  <ul>
+    <li>to start to do sth seriously</li>
+    <li>informal</li>
+  </ul>
+
+</div>
+
+<ul>
+  <li>I’d better buckle down to those reports</li>
+  <li>It’s just that we have to buckle down and do it.</li>
+</ul>
+
+<p><strong>comprise</strong></p>
+
+<div style="padding-left: 2em; padding-right: 2em; border-radius: 1em; border-style:solid; border-color:#D3D3D3; background-color:#F8F8F8">
+  <p class="h4"><ins>Def: comprise</ins></p>
+
+  <ul>
+    <li>to have sth/sb as parts or members(similar to consist of)</li>
+    <li>to be the parts or members that form sth</li>
+  </ul>
+
+</div>
+
+<ul>
+  <li>The collection comprises 327 paintings</li>
+  <li>The committee is comporised of representatives from both th public and private sectors</li>
+  <li>Older people comprise a large proportion of those living in poverty</li>
+</ul>
+
+<p><strong>Every</strong> so often</p>
+
+<div style="padding-left: 2em; padding-right: 2em; border-radius: 1em; border-style:solid; border-color:#D3D3D3; background-color:#F8F8F8">
+  <p class="h4"><ins>Def: Every so often</ins></p>
+
+  <p>The phrase “every so often” is an idiom that means at intervals or occasionally, but not regularly or frequently. It suggests that something happens from time to time but without a fixed or predictable pattern.</p>
+
+</div>
+
+<ul>
+  <li>I visit my grandparents every so often</li>
+</ul>
+
+<p>The above example indicates that you visit them occasionally, but not on a set schedule.</p>
+
+<p><strong>crucial</strong></p>
+
+<div style="padding-left: 2em; padding-right: 2em; border-radius: 1em; border-style:solid; border-color:#D3D3D3; background-color:#F8F8F8">
+  <p class="h4"><ins>Def: crucial</ins></p>
+
+  <p>extremely important, because it will affect other things</p>
+
+</div>
+
+<ul>
+  <li>The next few weeks are going to be crucial</li>
+  <li>winning this contract is crucial to the success of the company</li>
+  <li>It is crucial that we get this right</li>
+  <li>Parenets play a crucial role in preparing their child for school</li>
+</ul>
+
+<p><strong>slur</strong></p>
+
+<div style="padding-left: 2em; padding-right: 2em; border-radius: 1em; border-style:solid; border-color:#D3D3D3; background-color:#F8F8F8">
+  <p class="h4"><ins>Def: slur</ins></p>
+
+  <ul>
+    <li>to pronounce words in a way that is not clear so that they run into each other, usually because you are drunk or tired</li>
+    <li>to harm sb’s reputation by making unfair or false statements about them</li>
+  </ul>
+
+</div>
+
+<ul>
+  <li>She had drunk too much and her sppech was slurred</li>
+  <li>She accused the programme of slurring the company’s name</li>
+</ul>
+
+<p><strong>impaired</strong></p>
+
+<div style="padding-left: 2em; padding-right: 2em; border-radius: 1em; border-style:solid; border-color:#D3D3D3; background-color:#F8F8F8">
+  <p class="h4"><ins>Def: damaged</ins></p>
+
+  <ul>
+    <li>damaged or not functioning narmally</li>
+  </ul>
+
+</div>
+
+<ul>
+  <li>impaired memory</li>
+</ul>
+
+<p><strong>on</strong> the flip side</p>
+
+<div style="padding-left: 2em; padding-right: 2em; border-radius: 1em; border-style:solid; border-color:#D3D3D3; background-color:#F8F8F8">
+  <p class="h4"><ins>Def: on the flip side</ins></p>
+
+  <p>The phrase “on the flip side” is an idiom commonly used to introduce a contrasting or opposite perspective or viewpoint. It’s often employed to present an alternative aspect of a situation, issue, or argument. When someone says “on the flip side,” they are indicating a shift to a different side or aspect of the topic being discussed.</p>
+
+</div>
+
+<ul>
+  <li>John was excited about the promotion at work, and on the flip side, it meant he would have to relocate to a different city.</li>
+</ul>
+
+<p><strong>derive</strong></p>
+
+<div style="padding-left: 2em; padding-right: 2em; border-radius: 1em; border-style:solid; border-color:#D3D3D3; background-color:#F8F8F8">
+  <p class="h4"><ins>Def: </ins></p>
+
+  <ul>
+    <li>to come oer develop from sth</li>
+    <li>to get sth from sth else</li>
+  </ul>
+
+</div>
+
+<ul>
+  <li>The word ‘politics’ is derived from a Greek word meaning ‘city’</li>
+  <li>He derived great pleasure from painting</li>
+  <li>The new drug is derived from fish oil</li>
+</ul>
+
+<p><strong>epilepsy</strong></p>
+
+<div style="padding-left: 2em; padding-right: 2em; border-radius: 1em; border-style:solid; border-color:#D3D3D3; background-color:#F8F8F8">
+  <p class="h4"><ins>Def: epilepsy</ins></p>
+
+  <p>a disorder of the nervous system that causes a person to beocome unconscious suddenly, often with  violent movements of the body</p>
+
+</div>
+
+<ul>
+  <li>Is she an epileptic?</li>
+</ul>
+
+<p><strong>bother</strong></p>
+
+<div style="padding-left: 2em; padding-right: 2em; border-radius: 1em; border-style:solid; border-color:#D3D3D3; background-color:#F8F8F8">
+  <p class="h4"><ins>Def: spend time and energy</ins></p>
+
+  <ul>
+    <li>to spend time and/or energy doing sth</li>
+  </ul>
+
+</div>
+
+<ul>
+  <li>Shall I wait? No, don’t bother</li>
+  <li>It’s not worth bothering an umbrella, the car’s just outside</li>
+  <li>I don’t know why you bother with that crowd</li>
+  <li>He didn’t even bother to let me know he was coming</li>
+  <li>Why bother asking if you’re not really interested?</li>
+</ul>
+
+<div style="padding-left: 2em; padding-right: 2em; border-radius: 1em; border-style:solid; border-color:#D3D3D3; background-color:#F8F8F8">
+  <p class="h4"><ins>Def: annoy</ins></p>
+
+  <ul>
+    <li>to annoy, worry or upset sb; to cause sb trouble or pain</li>
+  </ul>
+
+</div>
+
+<ul>
+  <li>That sprained ankle is still bothering her.</li>
+  <li>I don’t bother her with my problems at the moment</li>
+  <li>Does it bother you that she earns mor than you?</li>
+</ul>
+
+<p><strong>adept</strong>(adj)</p>
+
+<div style="padding-left: 2em; padding-right: 2em; border-radius: 1em; border-style:solid; border-color:#D3D3D3; background-color:#F8F8F8">
+  <p class="h4"><ins>Def: adept</ins></p>
+
+  <ul>
+    <li>good at doing sth that is quite difficult</li>
+  </ul>
+
+</div>
+
+<ul>
+  <li>He became adept at getting even the shyest studensts to talk</li>
+</ul>
+
+<p><strong>capable</strong>(adj)</p>
+
+<div style="padding-left: 2em; padding-right: 2em; border-radius: 1em; border-style:solid; border-color:#D3D3D3; background-color:#F8F8F8">
+  <p class="h4"><ins>Def: capable</ins></p>
+
+  <ul>
+    <li>having the ability or qualities necessary for doing sth</li>
+    <li>having the ability to do things well</li>
+  </ul>
+
+</div>
+
+<ul>
+  <li>You are capable of better work  than this</li>
+  <li>He is quite capable of lying to get our of trouble</li>
+  <li>I’m perfectly capable of oding it myself, thank you.</li>
+  <li>She is a very capable teacher</li>
+  <li>I’ll leave the organization in your capable hands</li>
+</ul>
+
+<h2 id="references">References</h2>
+<ul>
+  <li><a href="https://www.youtube.com/watch?v=ir8XITVmeY4">The Economist &gt; What is consciousness</a></li>
+  <li><a href="https://www.ncbi.nlm.nih.gov/pmc/articles/PMC3538094/">Cogn Neurodyn. 2013 Feb; 7(1): 1–11., The neural binding problem(s)</a></li>
+</ul>
+
+
+                <hr style="visibility: hidden;">
+                <hr/>
+                <b><fontsize="5">Share Buttons</font><br></b>
+                <!--see 
+    https://jekyllcodex.org/without-plugin/share-buttons/ 
+    https://ranvir.xyz/blog/why-and-how-to-add-social-sharing-buttons-on-your-jekyll-blog-using-github-pages/
+-->
+
+
+
+<style>
+#share-buttons {display: inline-block; vertical-align: middle; }
+#share-buttons:after {content: ""; display: block; clear: both;}
+#share-buttons > div {
+    position: relative;
+    text-align: left; 
+    height: 36px; 
+    width: 32px; 
+    float: left; 
+    text-align: center;
+}
+#share-buttons > div > svg {height: 16px; fill: #d5d5d5; margin-top: 10px;}
+#share-buttons > div:hover {cursor: pointer;}
+#share-buttons > div.facebook:hover > svg {fill: #3B5998;}
+#share-buttons > div.twitter:hover > svg {fill: #55ACEE;}
+#share-buttons > div.linkedin:hover > svg {fill: #0077b5;}
+#share-buttons > div.pinterest:hover > svg {fill: #CB2027;}
+#share-buttons > div.gplus:hover > svg {fill: #dd4b39;}
+#share-buttons > div.mail:hover > svg {fill: #7D7D7D;}
+#share-buttons > div.instagram:hover > svg {fill: #C73B92;}
+#share-buttons > div.facebook > svg {height: 18px; margin-top: 9px;}
+#share-buttons > div.twitter > svg {height: 20px; margin-top: 8px;}
+#share-buttons > div.linkedin > svg {height: 19px; margin-top: 7px;}
+#share-buttons > div.pinterest > svg {height: 20px; margin-top: 9px;}
+#share-buttons > div.gplus > svg {height: 17px; margin-top: 9px; position: relative; left: 1px;}
+#share-buttons > div.mail > svg {height: 14px; margin-top: 11px;}
+</style>
+
+<span style="color: black">Share on: </span><div id="share-buttons">
+    <div class="facebook" title="Share this on Facebook" onclick="gtag('event', 'Facebook', {'event_category':'Post Shared','event_label':'Facebook'}); location.href='http://www.facebook.com/share.php?u=https://ryonakagami.github.io/2020/10/05/what-is-consciousness/';"><svg viewBox="0 0 1792 1792" xmlns="http://www.w3.org/2000/svg"><path d="M1343 12v264h-157q-86 0-116 36t-30 108v189h293l-39 296h-254v759h-306v-759h-255v-296h255v-218q0-186 104-288.5t277-102.5q147 0 228 12z"/></svg></div>
+    <div class="twitter" title="Share this on Twitter" onclick="gtag('event', 'Twitter', {'event_category':'Post Shared','event_label':'Twitter'}); location.href='https://twitter.com/intent/tweet?text=What is consciousness&url=https://ryonakagami.github.io/2020/10/05/what-is-consciousness/';"><svg viewBox="0 0 1792 1792" xmlns="http://www.w3.org/2000/svg"><path d="M1684 408q-67 98-162 167 1 14 1 42 0 130-38 259.5t-115.5 248.5-184.5 210.5-258 146-323 54.5q-271 0-496-145 35 4 78 4 225 0 401-138-105-2-188-64.5t-114-159.5q33 5 61 5 43 0 85-11-112-23-185.5-111.5t-73.5-205.5v-4q68 38 146 41-66-44-105-115t-39-154q0-88 44-163 121 149 294.5 238.5t371.5 99.5q-8-38-8-74 0-134 94.5-228.5t228.5-94.5q140 0 236 102 109-21 205-78-37 115-142 178 93-10 186-50z"/></svg></div>
+    <div class="linkedin" title="Share this on Linkedin" onclick="gtag('event', 'Linkedin', {'event_category':'Post Shared','event_label':'Linkedin'}); location.href='https://www.linkedin.com/shareArticle?mini=true&url=https://ryonakagami.github.io/2020/10/05/what-is-consciousness/&title=&summary=&source=';"><svg viewBox="0 0 1792 1792" xmlns="http://www.w3.org/2000/svg"><path d="M477 625v991h-330v-991h330zm21-306q1 73-50.5 122t-135.5 49h-2q-82 0-132-49t-50-122q0-74 51.5-122.5t134.5-48.5 133 48.5 51 122.5zm1166 729v568h-329v-530q0-105-40.5-164.5t-126.5-59.5q-63 0-105.5 34.5t-63.5 85.5q-11 30-11 81v553h-329q2-399 2-647t-1-296l-1-48h329v144h-2q20-32 41-56t56.5-52 87-43.5 114.5-15.5q171 0 275 113.5t104 332.5z"/></svg></div>
+    
+    <div class="mail" title="Share this through Email" onclick="gtag('event', 'Email', {'event_category':'Post Shared','event_label':'Email'}); location.href='mailto:?&body=https://ryonakagami.github.io/2020/10/05/what-is-consciousness/';"><svg viewBox="0 0 1792 1792" xmlns="http://www.w3.org/2000/svg"><path d="M1792 710v794q0 66-47 113t-113 47h-1472q-66 0-113-47t-47-113v-794q44 49 101 87 362 246 497 345 57 42 92.5 65.5t94.5 48 110 24.5h2q51 0 110-24.5t94.5-48 92.5-65.5q170-123 498-345 57-39 100-87zm0-294q0 79-49 151t-122 123q-376 261-468 325-10 7-42.5 30.5t-54 38-52 32.5-57.5 27-50 9h-2q-23 0-50-9t-57.5-27-52-32.5-54-38-42.5-30.5q-91-64-262-182.5t-205-142.5q-62-42-117-115.5t-55-136.5q0-78 41.5-130t118.5-52h1472q65 0 112.5 47t47.5 113z"/></svg></div>
+</div>
+
+                
+                <hr/>
+
+                <!-- Featured Tags -->
+                <b><fontsize="5">Feature Tags</b>
+                    <div id="tag_cloud" class="tags tags-sup js-tags" 
+                    style="line-height: 0px !important;">
+                        
+                        
+                        
+                        
+                        
+                                <a data-sort="0288" 
+                                    href="/archive/?tag=%E7%B5%B1%E8%A8%88"
+                                    title="統計"
+                                    style="color: #337ab7 !important;"
+                                    rel="61">統計</a>
+                        
+                                <a data-sort="0298" 
+                                    href="/archive/?tag=Python"
+                                    title="Python"
+                                    style="color: #337ab7 !important;"
+                                    rel="51">Python</a>
+                        
+                                <a data-sort="0300" 
+                                    href="/archive/?tag=math"
+                                    title="math"
+                                    style="color: #337ab7 !important;"
+                                    rel="49">math</a>
+                        
+                                <a data-sort="0303" 
+                                    href="/archive/?tag=Linux"
+                                    title="Linux"
+                                    style="color: #337ab7 !important;"
+                                    rel="46">Linux</a>
+                        
+                                <a data-sort="0316" 
+                                    href="/archive/?tag=Ubuntu+20.04+LTS"
+                                    title="Ubuntu 20.04 LTS"
+                                    style="color: #337ab7 !important;"
+                                    rel="33">Ubuntu 20.04 LTS</a>
+                        
+                                <a data-sort="0319" 
+                                    href="/archive/?tag=Shell"
+                                    title="Shell"
+                                    style="color: #337ab7 !important;"
+                                    rel="30">Shell</a>
+                        
+                                <a data-sort="0321" 
+                                    href="/archive/?tag=English"
+                                    title="English"
+                                    style="color: #337ab7 !important;"
+                                    rel="28">English</a>
+                        
+                                <a data-sort="0324" 
+                                    href="/archive/?tag=git"
+                                    title="git"
+                                    style="color: #337ab7 !important;"
+                                    rel="25">git</a>
+                        
+                                <a data-sort="0329" 
+                                    href="/archive/?tag=%E6%96%B9%E6%B3%95%E8%AB%96"
+                                    title="方法論"
+                                    style="color: #337ab7 !important;"
+                                    rel="20">方法論</a>
+                        
+                                <a data-sort="0333" 
+                                    href="/archive/?tag=Ubuntu+22.04+LTS"
+                                    title="Ubuntu 22.04 LTS"
+                                    style="color: #337ab7 !important;"
+                                    rel="16">Ubuntu 22.04 LTS</a>
+                        
+                                <a data-sort="0337" 
+                                    href="/archive/?tag=%E7%B5%B1%E8%A8%88%E6%A4%9C%E5%AE%9A"
+                                    title="統計検定"
+                                    style="color: #337ab7 !important;"
+                                    rel="12">統計検定</a>
+                        
+                                <a data-sort="0338" 
+                                    href="/archive/?tag=%E7%AB%B6%E6%8A%80%E3%83%97%E3%83%AD%E3%82%B0%E3%83%A9%E3%83%9F%E3%83%B3%E3%82%B0"
+                                    title="競技プログラミング"
+                                    style="color: #337ab7 !important;"
+                                    rel="11">競技プログラミング</a>
+                        
+                                <a data-sort="0339" 
+                                    href="/archive/?tag=%E3%83%95%E3%83%BC%E3%83%AA%E3%82%A8%E8%A7%A3%E6%9E%90"
+                                    title="フーリエ解析"
+                                    style="color: #337ab7 !important;"
+                                    rel="10">フーリエ解析</a>
+                        
+                                <a data-sort="0340" 
+                                    href="/archive/?tag=%E5%89%8D%E5%87%A6%E7%90%86"
+                                    title="前処理"
+                                    style="color: #337ab7 !important;"
+                                    rel="9">前処理</a>
+                        
+                                <a data-sort="0340" 
+                                    href="/archive/?tag=SQL"
+                                    title="SQL"
+                                    style="color: #337ab7 !important;"
+                                    rel="9">SQL</a>
+                        
+                                <a data-sort="0340" 
+                                    href="/archive/?tag=coding"
+                                    title="coding"
+                                    style="color: #337ab7 !important;"
+                                    rel="9">coding</a>
+                        
+                                <a data-sort="0341" 
+                                    href="/archive/?tag=%E3%82%B3%E3%83%9F%E3%83%A5%E3%83%8B%E3%82%B1%E3%83%BC%E3%82%B7%E3%83%A7%E3%83%B3"
+                                    title="コミュニケーション"
+                                    style="color: #337ab7 !important;"
+                                    rel="8">コミュニケーション</a>
+                        
+                                <a data-sort="0342" 
+                                    href="/archive/?tag=Network"
+                                    title="Network"
+                                    style="color: #337ab7 !important;"
+                                    rel="7">Network</a>
+                        
+                                <a data-sort="0342" 
+                                    href="/archive/?tag=ssh"
+                                    title="ssh"
+                                    style="color: #337ab7 !important;"
+                                    rel="7">ssh</a>
+                        
+                                <a data-sort="0343" 
+                                    href="/archive/?tag=%E5%B0%86%E6%A3%8B"
+                                    title="将棋"
+                                    style="color: #337ab7 !important;"
+                                    rel="6">将棋</a>
+                        
+                                <a data-sort="0343" 
+                                    href="/archive/?tag=Data+visualization"
+                                    title="Data visualization"
+                                    style="color: #337ab7 !important;"
+                                    rel="6">Data visualization</a>
+                        
+                                <a data-sort="0343" 
+                                    href="/archive/?tag=Docker"
+                                    title="Docker"
+                                    style="color: #337ab7 !important;"
+                                    rel="6">Docker</a>
+                        
+                                <a data-sort="0343" 
+                                    href="/archive/?tag=Econometrics"
+                                    title="Econometrics"
+                                    style="color: #337ab7 !important;"
+                                    rel="6">Econometrics</a>
+                        
+                                <a data-sort="0343" 
+                                    href="/archive/?tag=VSCode"
+                                    title="VSCode"
+                                    style="color: #337ab7 !important;"
+                                    rel="6">VSCode</a>
+                        
+                                <a data-sort="0343" 
+                                    href="/archive/?tag=statistical+inference"
+                                    title="statistical inference"
+                                    style="color: #337ab7 !important;"
+                                    rel="6">statistical inference</a>
+                        
+                                <a data-sort="0344" 
+                                    href="/archive/?tag=GitHub+Pages"
+                                    title="GitHub Pages"
+                                    style="color: #337ab7 !important;"
+                                    rel="5">GitHub Pages</a>
+                        
+                                <a data-sort="0344" 
+                                    href="/archive/?tag=apt"
+                                    title="apt"
+                                    style="color: #337ab7 !important;"
+                                    rel="5">apt</a>
+                        
+                                <a data-sort="0344" 
+                                    href="/archive/?tag=development"
+                                    title="development"
+                                    style="color: #337ab7 !important;"
+                                    rel="5">development</a>
+                        
+                                <a data-sort="0345" 
+                                    href="/archive/?tag=%E3%82%B7%E3%82%B9%E3%83%86%E3%83%A0%E7%AE%A1%E7%90%86"
+                                    title="システム管理"
+                                    style="color: #337ab7 !important;"
+                                    rel="4">システム管理</a>
+                        
+                                <a data-sort="0345" 
+                                    href="/archive/?tag=Coffee"
+                                    title="Coffee"
+                                    style="color: #337ab7 !important;"
+                                    rel="4">Coffee</a>
+                        
+                                <a data-sort="0345" 
+                                    href="/archive/?tag=cloud"
+                                    title="cloud"
+                                    style="color: #337ab7 !important;"
+                                    rel="4">cloud</a>
+                        
+                                <a data-sort="0346" 
+                                    href="/archive/?tag=%E6%95%B0%E5%80%A4%E8%A8%88%E7%AE%97"
+                                    title="数値計算"
+                                    style="color: #337ab7 !important;"
+                                    rel="3">数値計算</a>
+                        
+                                <a data-sort="0346" 
+                                    href="/archive/?tag=%E7%B4%A0%E6%95%B0"
+                                    title="素数"
+                                    style="color: #337ab7 !important;"
+                                    rel="3">素数</a>
+                        
+                                <a data-sort="0346" 
+                                    href="/archive/?tag=Book"
+                                    title="Book"
+                                    style="color: #337ab7 !important;"
+                                    rel="3">Book</a>
+                        
+                                <a data-sort="0346" 
+                                    href="/archive/?tag=Font"
+                                    title="Font"
+                                    style="color: #337ab7 !important;"
+                                    rel="3">Font</a>
+                        
+                                <a data-sort="0346" 
+                                    href="/archive/?tag=Metrics"
+                                    title="Metrics"
+                                    style="color: #337ab7 !important;"
+                                    rel="3">Metrics</a>
+                        
+                                <a data-sort="0346" 
+                                    href="/archive/?tag=Poetry"
+                                    title="Poetry"
+                                    style="color: #337ab7 !important;"
+                                    rel="3">Poetry</a>
+                        
+                                <a data-sort="0346" 
+                                    href="/archive/?tag=Ubuntu+24.04+LTS"
+                                    title="Ubuntu 24.04 LTS"
+                                    style="color: #337ab7 !important;"
+                                    rel="3">Ubuntu 24.04 LTS</a>
+                        
+                                <a data-sort="0346" 
+                                    href="/archive/?tag=architecture"
+                                    title="architecture"
+                                    style="color: #337ab7 !important;"
+                                    rel="3">architecture</a>
+                        
+                                <a data-sort="0346" 
+                                    href="/archive/?tag=aws"
+                                    title="aws"
+                                    style="color: #337ab7 !important;"
+                                    rel="3">aws</a>
+                        
+                                <a data-sort="0346" 
+                                    href="/archive/?tag=shell"
+                                    title="shell"
+                                    style="color: #337ab7 !important;"
+                                    rel="3">shell</a>
+                        
+                                <a data-sort="0346" 
+                                    href="/archive/?tag=systemctl"
+                                    title="systemctl"
+                                    style="color: #337ab7 !important;"
+                                    rel="3">systemctl</a>
+                        
+                                <a data-sort="0347" 
+                                    href="/archive/?tag=%E3%83%86%E3%83%B3%E3%83%97%E3%83%AC%E3%83%BC%E3%83%88"
+                                    title="テンプレート"
+                                    style="color: #337ab7 !important;"
+                                    rel="2">テンプレート</a>
+                        
+                                <a data-sort="0347" 
+                                    href="/archive/?tag=%E3%83%87%E3%83%BC%E3%82%BF%E6%A7%8B%E9%80%A0"
+                                    title="データ構造"
+                                    style="color: #337ab7 !important;"
+                                    rel="2">データ構造</a>
+                        
+                                <a data-sort="0347" 
+                                    href="/archive/?tag=%E3%83%9D%E3%83%AF%E3%82%BD%E3%83%B3%E5%88%86%E5%B8%83"
+                                    title="ポワソン分布"
+                                    style="color: #337ab7 !important;"
+                                    rel="2">ポワソン分布</a>
+                        
+                                <a data-sort="0347" 
+                                    href="/archive/?tag=%E4%BC%9A%E8%A8%88%E5%88%86%E6%9E%90"
+                                    title="会計分析"
+                                    style="color: #337ab7 !important;"
+                                    rel="2">会計分析</a>
+                        
+                                <a data-sort="0347" 
+                                    href="/archive/?tag=%E6%96%87%E5%AD%97%E3%82%B3%E3%83%BC%E3%83%89"
+                                    title="文字コード"
+                                    style="color: #337ab7 !important;"
+                                    rel="2">文字コード</a>
+                        
+                                <a data-sort="0347" 
+                                    href="/archive/?tag=%E7%92%B0%E5%A2%83%E6%A7%8B%E7%AF%89"
+                                    title="環境構築"
+                                    style="color: #337ab7 !important;"
+                                    rel="2">環境構築</a>
+                        
+                                <a data-sort="0347" 
+                                    href="/archive/?tag=%E8%AB%96%E6%96%87"
+                                    title="論文"
+                                    style="color: #337ab7 !important;"
+                                    rel="2">論文</a>
+                        
+                                <a data-sort="0347" 
+                                    href="/archive/?tag=App"
+                                    title="App"
+                                    style="color: #337ab7 !important;"
+                                    rel="2">App</a>
+                        
+                                <a data-sort="0347" 
+                                    href="/archive/?tag=Bayesian"
+                                    title="Bayesian"
+                                    style="color: #337ab7 !important;"
+                                    rel="2">Bayesian</a>
+                        
+                                <a data-sort="0347" 
+                                    href="/archive/?tag=Dynamic+Programming"
+                                    title="Dynamic Programming"
+                                    style="color: #337ab7 !important;"
+                                    rel="2">Dynamic Programming</a>
+                        
+                                <a data-sort="0347" 
+                                    href="/archive/?tag=Keyboard"
+                                    title="Keyboard"
+                                    style="color: #337ab7 !important;"
+                                    rel="2">Keyboard</a>
+                        
+                                <a data-sort="0347" 
+                                    href="/archive/?tag=Processing"
+                                    title="Processing"
+                                    style="color: #337ab7 !important;"
+                                    rel="2">Processing</a>
+                        
+                                <a data-sort="0347" 
+                                    href="/archive/?tag=R"
+                                    title="R"
+                                    style="color: #337ab7 !important;"
+                                    rel="2">R</a>
+                        
+                                <a data-sort="0347" 
+                                    href="/archive/?tag=Steam"
+                                    title="Steam"
+                                    style="color: #337ab7 !important;"
+                                    rel="2">Steam</a>
+                        
+                                <a data-sort="0347" 
+                                    href="/archive/?tag=filesystem"
+                                    title="filesystem"
+                                    style="color: #337ab7 !important;"
+                                    rel="2">filesystem</a>
+                        
+                                <a data-sort="0347" 
+                                    href="/archive/?tag=quarto"
+                                    title="quarto"
+                                    style="color: #337ab7 !important;"
+                                    rel="2">quarto</a>
+                        
+                                <a data-sort="0347" 
+                                    href="/archive/?tag=regex"
+                                    title="regex"
+                                    style="color: #337ab7 !important;"
+                                    rel="2">regex</a>
+                    </div>
+
+                <br>
+
+                <b><fontsize="5">Leave a Comment</font><br>(注意：GitHub Accountが必要となります）</b>
+                
+                <script src="https://utteranc.es/client.js"
+                    repo="RyoNakagami/RyoNakagami.github.io"
+                    issue-term="url"
+                    theme="github-light"
+                    crossorigin="anonymous"
+                    async>Reduce unused JavaScript
+                
+                </script>
+
+
+            </div>  
+
+    <!-- Side Catalog Container -->
+        
+            <div class="
+                col-lg-1 col-lg-offset-0
+                visible-lg-block
+                sidebar-container
+                catalog-container">
+                <div class="side-catalog fixed" style="margin-top:3%">
+                    <hr class="hidden-sm hidden-xs">
+                    <h5>
+                        <a class="catalog-toggle" href="#">CONTENTS</a>
+                    </h5>
+                    <ul class="catalog-body"></ul>
+                </div>
+            </div>
+        
+    <!-- Sidebar Container -->
+            <!-- <div class="
+                col-lg-10 col-lg-offset-1
+                col-md-10 col-md-offset-1
+                sidebar-container row"> -->
+                <!-- 
+<hr>
+<h5>FRIENDS</h5>
+<ul class="list-inline">
+  
+  <li><a href="https://twitter.com/bluesky0804?ref_src=twsrc%5Egoogle%7Ctwcamp%5Eserp%7Ctwgr%5Eauthor">bluesky0804</a></li>
+  
+</ul>
+
+ -->
+            </div>
+        </div>
+    </div>
+</article>
+
+<!-- add support for mathjax by voleking-->
+
+
+
+
+<!-- async load function -->
+<script>
+    function async(u, c) {
+      var d = document, t = 'script',
+          o = d.createElement(t),
+          s = d.getElementsByTagName(t)[0];
+      o.src = u;
+      if (c) { o.addEventListener('load', function (e) { c(null, e); }, false); }
+      s.parentNode.insertBefore(o, s);
+    }
+</script>
+<!-- anchor-js, Doc:http://bryanbraun.github.io/anchorjs/ -->
+<script>
+    async("//cdnjs.cloudflare.com/ajax/libs/anchor-js/1.1.1/anchor.min.js",function(){
+        anchors.options = {
+          visible: 'hover',
+          placement: 'right',
+          // icon: '#'
+        };
+        anchors.add().remove('.intro-header h1').remove('.subheading').remove('.sidebar-container h5');
+    })
+</script>
+<style>
+    /* place left on bigger screen */
+    @media all and (min-width: 800px) {
+        .anchorjs-link{
+            position: absolute;
+            left: -0.75em;
+            font-size: 1.1em;
+            margin-top : -0.1em;
+        }
+    }
+</style>
+
+
+<body>
+    <!-- enable mermaid language on markdown post -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/mermaid/10.6.1/mermaid.min.js"></script>
+<script>
+   mermaid.initialize({
+       startOnLoad:true,
+       theme: 'default'
+   });
+   window.mermaid.init(undefined, document.querySelectorAll('.language-mermaid'));
+</script>
+
+</body>
+
+    <script>
+    
+    var elements = document.querySelectorAll('p');
+    Array.prototype.forEach.call(elements, function(el, i){
+        if(el.innerHTML=='[expand]') {
+            var parentcontent = el.parentNode.innerHTML.replace('<p>[expand]</p>','<div class="expand" style="display: none; height: 0; overflow: hidden;">').replace('<p>[/expand]</p>','</div>');
+            el.parentNode.innerHTML = parentcontent;
+        }
+    });
+
+    var elements = document.querySelectorAll('div.expand');
+    Array.prototype.forEach.call(elements, function(el, i){
+        el.previousElementSibling.innerHTML = el.previousElementSibling.innerHTML + '<span>..&nbsp; <a href="#" style="cursor: pointer;" onclick="this.parentNode.parentNode.nextElementSibling.style.display = \'block\'; this.parentNode.parentNode.nextElementSibling.style.height = \'auto\'; this.parentNode.style.display = \'none\';">read&nbsp;more&nbsp;&rarr;</a></span>';
+    });
+
+</script>
+
+    <!-- Footer -->
+<footer>
+    <div class="container">
+        <div class="row">
+            <!--<div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1"> -->
+                <!-- SNS Link -->
+            
+
+
+<ul class="list-inline text-center">
+
+
+  
+  
+  
+  
+  <li>
+    <a target="_blank" href="https://github.com/RyoNakagami">
+      <span class="fa-stack fa-lg">
+        <i class="fa fa-circle fa-stack-2x"></i>
+        <i class="fa fa-github fa-stack-1x fa-inverse"></i>
+      </span>
+    </a>
+  </li>
+  
+  
+</ul>
+
+            
+            <p class="copyright text-muted">
+                Copyright &copy; Ryo's Tech Blog 2025
+                <br>
+                Powered by <a href="https://ryonakagami.github.io">Ryo's Tech Blog</a> |
+                <iframe style="margin-left: 2px; margin-bottom:-5px;" frameborder="0" scrolling="0" width="100px"
+                    height="20px"
+                    title="RyoNakagami.github.io github stars"
+                    src="https://ghbtns.com/github-btn.html?user=RyoNakagami&repo=RyoNakagami.github.io&type=star&count=true">
+                </iframe>
+            </p>
+            <!--</div> -->
+        </div>
+    </div>
+</footer>
+
+<!-- jQuery -->
+<script src="/js/jquery.min.js "></script>
+
+<!-- Bootstrap Core JavaScript -->
+<!-- Currently, only navbar scroll-down effect at desktop still depends on this -->
+<script src="/js/bootstrap.min.js "></script>
+
+<!-- Custom Theme JavaScript -->
+<script src="/js/ryo-blog.min.js "></script>
+
+<!-- Simple Jekyll Search -->
+<script src="/js/simple-jekyll-search.min.js"></script>
+
+<!-- Service Worker -->
+
+<script src="/js/snackbar.js "></script>
+<script src="/js/sw-registration.js "></script>
+
+
+<!-- async load function -->
+<script>
+    function async(u, c) {
+        var d = document, t = 'script',
+            o = d.createElement(t),
+            s = d.getElementsByTagName(t)[0];
+        o.src = u;
+        if (c) { o.addEventListener('load', function (e) { c(null, e); }, false); }
+        s.parentNode.insertBefore(o, s);
+    }
+</script>
+
+<!--
+     Because of the native support for backtick-style fenced code blocks
+     right within the Markdown is landed in Github Pages,
+     From V1.6, There is no need for Highlight.js,
+     so Huxblog drops it officially.
+
+     - https://github.com/blog/2100-github-pages-now-faster-and-simpler-with-jekyll-3-0
+     - https://help.github.com/articles/creating-and-highlighting-code-blocks/
+     - https://github.com/jneen/rouge/wiki/list-of-supported-languages-and-lexers
+-->
+<!--
+    <script>
+        async("http://cdn.bootcss.com/highlight.js/8.6/highlight.min.js", function(){
+            hljs.initHighlightingOnLoad();
+        })
+    </script>
+    <link href="http://cdn.bootcss.com/highlight.js/8.6/styles/github.min.css" rel="stylesheet">
+-->
+
+
+
+
+
+
+
+<!--fastClick.js -->
+<script>
+    async("//cdnjs.cloudflare.com/ajax/libs/fastclick/1.0.6/fastclick.min.js", function () {
+        var $nav = document.querySelector("nav");
+        if ($nav) FastClick.attach($nav);
+    })
+</script>
+
+
+<!-- Global site tag (gtag.js) - Google Analytics -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-LVL413SV09"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+  gtag('config', 'G-LVL413SV09');
+</script>
+
+
+
+<!-- Side Catalog -->
+
+<script type="text/javascript">
+    function generateCatalog(selector) {
+
+        // interop with multilangual 
+        if ('' == 'true') {
+            _containerSelector = 'div.post-container.active'
+        } else {
+            _containerSelector = 'div.post-container'
+        }
+
+        // init
+        var P = $(_containerSelector), a, n, t, l, i, c;
+        a = P.find('h1,h2,h3,h4,h5,h6');
+
+        // clean
+        $(selector).html('')
+
+        // appending
+        a.each(function () {
+            n = $(this).prop('tagName').toLowerCase();
+            i = "#" + $(this).prop('id');
+            t = $(this).text();
+            c = $('<a href="' + i + '" rel="nofollow">' + t + '</a>');
+            l = $('<li class="' + n + '_nav"></li>').append(c);
+            $(selector).append(l);
+        });
+        return true;
+    }
+
+    generateCatalog(".catalog-body");
+
+    // toggle side catalog
+    $(".catalog-toggle").click((function (e) {
+        e.preventDefault();
+        $('.side-catalog').toggleClass("fold")
+    }))
+
+    /*
+     * Doc: https://github.com/davist11/jQuery-One-Page-Nav
+     * Fork by Hux to support padding
+     */
+    async("/js/jquery.nav.js", function () {
+        $('.catalog-body').onePageNav({
+            currentClass: "active",
+            changeHash: !1,
+            easing: "swing",
+            filter: "",
+            scrollSpeed: 700,
+            scrollOffset: 0,
+            scrollThreshold: .2,
+            begin: null,
+            end: null,
+            scrollChange: null,
+            padding: 80
+        });
+    });
+</script>
+
+
+
+<!-- Multi-Lingual -->
+
+
+<!-- Simple Jekyll Search -->
+<script>
+    // https://stackoverflow.com/questions/1912501/unescape-html-entities-in-javascript
+    function htmlDecode(input) {
+        var e = document.createElement('textarea');
+        e.innerHTML = input;
+        // handle case of empty input
+        return e.childNodes.length === 0 ? "" : e.childNodes[0].nodeValue;
+    }
+
+    SimpleJekyllSearch({
+        searchInput: document.getElementById('search-input'),
+        resultsContainer: document.getElementById('search-results'),
+        json: '/search.json',
+        searchResultTemplate: '<div class="post-preview item"><a href="{url}"><h2 class="post-title">{title}</h2><h3 class="post-subtitle">{subtitle}</h3><hr></a></div>',
+        noResultsText: 'No results',
+        limit: 50,
+        fuzzy: false,
+        // a hack to get escaped subtitle unescaped. for some reason, 
+        // post.subtitle w/o escape filter nuke entire search.
+        templateMiddleware: function (prop, value, template) {
+            if (prop === 'subtitle' || prop === 'title') {
+                if (value.indexOf("code")) {
+                    return htmlDecode(value);
+                } else {
+                    return value;
+                }
+            }
+        }
+    });
+
+    $(document).ready(function () {
+        var $searchPage = $('.search-page');
+        var $searchOpen = $('.search-icon');
+        var $searchClose = $('.search-icon-close');
+        var $searchInput = $('#search-input');
+        var $body = $('body');
+
+        $searchOpen.on('click', function (e) {
+            e.preventDefault();
+            $searchPage.toggleClass('search-active');
+            var prevClasses = $body.attr('class') || '';
+            setTimeout(function () {
+                $body.addClass('no-scroll');
+            }, 400)
+
+            if ($searchPage.hasClass('search-active')) {
+                $searchClose.on('click', function (e) {
+                    e.preventDefault();
+                    $searchPage.removeClass('search-active');
+                    $body.attr('class', prevClasses);  // from closure 
+                });
+                $searchInput.focus();
+            }
+        });
+    });
+</script>
+
+
+
+<!-- Image to Github 
+<img src="/img/icon_wechat.png" width="0" height="0" />
+<-- Migrate from head to bottom, no longer block render and still work -->
+<script>
+    
+    var elements = document.querySelectorAll('p');
+    Array.prototype.forEach.call(elements, function(el, i){
+        if(el.innerHTML=='[expand]') {
+            var parentcontent = el.parentNode.innerHTML.replace('<p>[expand]</p>','<div class="expand" style="display: none; height: 0; overflow: hidden;">').replace('<p>[/expand]</p>','</div>');
+            el.parentNode.innerHTML = parentcontent;
+        }
+    });
+
+    var elements = document.querySelectorAll('div.expand');
+    Array.prototype.forEach.call(elements, function(el, i){
+        el.previousElementSibling.innerHTML = el.previousElementSibling.innerHTML + '<span>..&nbsp; <a href="#" style="cursor: pointer;" onclick="this.parentNode.parentNode.nextElementSibling.style.display = \'block\'; this.parentNode.parentNode.nextElementSibling.style.height = \'auto\'; this.parentNode.style.display = \'none\';">read&nbsp;more&nbsp;&rarr;</a></span>';
+    });
+
+</script>
+
+</body>
+</html>

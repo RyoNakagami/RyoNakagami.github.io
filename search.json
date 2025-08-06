@@ -1,0 +1,2795 @@
+[
+  
+    {
+      "title"    : "Quarto Version Updateの備忘録",
+      "subtitle" : "quarto version update to 1.5.57",
+      "tags"     : "quarto",
+      "url"      : "/2024/11/07/quarto-update/",
+      "date"     : "2024-11-07 00:00:00 +0000"
+    } ,
+  
+    {
+      "title"    : "Pypiへpublishメモ",
+      "subtitle" : "Poetry",
+      "tags"     : "python",
+      "url"      : "/2024/10/08/poetry-pypi-publish/",
+      "date"     : "2024-10-08 00:00:00 +0000"
+    } ,
+  
+    {
+      "title"    : "砂の女より引用: メビウスの輪",
+      "subtitle" : "",
+      "tags"     : "English",
+      "url"      : "/2024/08/11/mobius-strip/",
+      "date"     : "2024-08-11 00:00:00 +0000"
+    } ,
+  
+    {
+      "title"    : "引用: 利己的な願望の現れ",
+      "subtitle" : "",
+      "tags"     : "English",
+      "url"      : "/2024/08/04/sunanoonya-phrase/",
+      "date"     : "2024-08-04 00:00:00 +0000"
+    } ,
+  
+    {
+      "title"    : "Colors of Lie",
+      "subtitle" : "",
+      "tags"     : "コミュニケーション, English",
+      "url"      : "/2024/08/03/color-of-lie/",
+      "date"     : "2024-08-03 00:00:00 +0000"
+    } ,
+  
+    {
+      "title"    : "ネットワークインターフェイス カード(Network Interface Card)の基礎知識",
+      "subtitle" : "コンピューターの基礎 3/N",
+      "tags"     : "development",
+      "url"      : "/2024/08/02/network-iterface-card/",
+      "date"     : "2024-08-02 00:00:00 +0000"
+    } ,
+  
+    {
+      "title"    : "What&#39;s the difference between &#39;where are you&#39; and &#39;whereabouts are you?&#39;",
+      "subtitle" : "",
+      "tags"     : "コミュニケーション, English",
+      "url"      : "/2024/08/01/where-vs-whereabouts/",
+      "date"     : "2024-08-01 00:00:00 +0000"
+    } ,
+  
+    {
+      "title"    : "メモリのパフォーマンス",
+      "subtitle" : "コンピューターの基礎 2/N",
+      "tags"     : "development",
+      "url"      : "/2024/08/01/what-is-memory-dram/",
+      "date"     : "2024-08-01 00:00:00 +0000"
+    } ,
+  
+    {
+      "title"    : "CPUコア数 vs ソケット数",
+      "subtitle" : "コンピューターの基礎 1/N",
+      "tags"     : "development",
+      "url"      : "/2024/07/31/infrastructure-engineer-03-cpu/",
+      "date"     : "2024-07-31 00:00:00 +0000"
+    } ,
+  
+    {
+      "title"    : "サーバーの種類と選定",
+      "subtitle" : "Understanding Infrasturacture Engineer 2/N",
+      "tags"     : "development",
+      "url"      : "/2024/07/30/infrastructure-engineer-02/",
+      "date"     : "2024-07-30 00:00:00 +0000"
+    } ,
+  
+    {
+      "title"    : "インフラエンジニアのお仕事を理解する",
+      "subtitle" : "Understanding Infrasturacture Engineer 1/N",
+      "tags"     : "development",
+      "url"      : "/2024/07/29/infrastructure-engineer-01/",
+      "date"     : "2024-07-29 00:00:00 +0000"
+    } ,
+  
+    {
+      "title"    : "Comparison for deepening understanding",
+      "subtitle" : "",
+      "tags"     : "コミュニケーション, 方法論",
+      "url"      : "/2024/07/23/weaving-the-threads-of-comparison/",
+      "date"     : "2024-07-23 00:00:00 +0000"
+    } ,
+  
+    {
+      "title"    : "Quartoでpublishしたサイトにgoogle tag managerを埋め込む方法",
+      "subtitle" : "GitHub Pages published by Quarto 1/N",
+      "tags"     : "GitHub Pages, quarto",
+      "url"      : "/2024/07/13/quarto-googletagmanager/",
+      "date"     : "2024-07-13 00:00:00 +0000"
+    } ,
+  
+    {
+      "title"    : "Docker Volumne",
+      "subtitle" : "Dockerの基礎知識 */N",
+      "tags"     : "Docker",
+      "url"      : "/2024/07/01/docker-volume/",
+      "date"     : "2024-07-01 00:00:00 +0000"
+    } ,
+  
+    {
+      "title"    : "Byobu Terminalのセットアップ",
+      "subtitle" : "分析用サーバーとしてのUbuntu Desktop Noble Numbat Setup 3/N",
+      "tags"     : "Ubuntu 24.04 LTS, ssh",
+      "url"      : "/2024/06/09/ubuntu-byobu-setup/",
+      "date"     : "2024-06-09 00:00:00 +0000"
+    } ,
+  
+    {
+      "title"    : "ssh接続セットアップ: Tailscaleを用いた接続設定",
+      "subtitle" : "分析用サーバーとしてのUbuntu Desktop Noble Numbat Setup 2/N",
+      "tags"     : "Ubuntu 24.04 LTS, ssh",
+      "url"      : "/2024/06/08/ubuntu-mlflow-server-setup/",
+      "date"     : "2024-06-08 00:00:00 +0000"
+    } ,
+  
+    {
+      "title"    : "Ubuntu Desktop Noble Numbatのインストール",
+      "subtitle" : "分析用サーバーとしてのUbuntu Desktop Noble Numbat Setup 1/N",
+      "tags"     : "Ubuntu 24.04 LTS",
+      "url"      : "/2024/06/07/ubuntu-noble-numbat-setup/",
+      "date"     : "2024-06-07 00:00:00 +0000"
+    } ,
+  
+    {
+      "title"    : "DAGにおけるPATH概念の整理",
+      "subtitle" : "識別戦略の考え方 2/N",
+      "tags"     : "統計, Econometrics",
+      "url"      : "/2024/05/10/dag-d-separated/",
+      "date"     : "2024-05-10 00:00:00 +0000"
+    } ,
+  
+    {
+      "title"    : "論文紹介: Potential Outcome and Directed Acyclic Graph Approaches to Causality: Relevance for Empirical Practice in Economics",
+      "subtitle" : "識別戦略の考え方 1/N",
+      "tags"     : "統計, Econometrics",
+      "url"      : "/2024/05/09/potential-outcomes-vs-dag/",
+      "date"     : "2024-05-09 00:00:00 +0000"
+    } ,
+  
+    {
+      "title"    : "財務諸表: 貸借対照表と損益計算書",
+      "subtitle" : "日商簿記３級勉強ノート 1/N",
+      "tags"     : "簿記",
+      "url"      : "/2024/04/09/nisshoboki-sankyu-ch01/",
+      "date"     : "2024-04-09 00:00:00 +0000"
+    } ,
+  
+    {
+      "title"    : "Keychron V10 初期設定",
+      "subtitle" : "VIAを用いたKey remappingとキーボードマクロの設定",
+      "tags"     : "Keyboard, Ubuntu 22.04 LTS",
+      "url"      : "/2024/04/08/keychronV10-setup/",
+      "date"     : "2024-04-08 00:00:00 +0000"
+    } ,
+  
+    {
+      "title"    : "Ubuntu 22.04 LTSへのhexalyのインストール",
+      "subtitle" : "Mathematical Optimization with hexaly 1/N",
+      "tags"     : "hexaly, optimization",
+      "url"      : "/2024/03/20/setup-hexaly/",
+      "date"     : "2024-03-20 00:00:00 +0000"
+    } ,
+  
+    {
+      "title"    : "Type Annotationsの書き方",
+      "subtitle" : "Robust Python Programming 4/N",
+      "tags"     : "coding, 方法論, Python",
+      "url"      : "/2024/03/15/robust-python-constrraining-type/",
+      "date"     : "2024-03-15 00:00:00 +0000"
+    } ,
+  
+    {
+      "title"    : "Type Annotationsのすすめ",
+      "subtitle" : "Robust Python Programming 3/N",
+      "tags"     : "coding, 方法論, Python",
+      "url"      : "/2024/03/14/robust-python-type-annotations/",
+      "date"     : "2024-03-14 00:00:00 +0000"
+    } ,
+  
+    {
+      "title"    : "Python Typesのすすめ",
+      "subtitle" : "Robust Python Programming 2/N",
+      "tags"     : "coding, 方法論, Python",
+      "url"      : "/2024/03/13/robust-python-python-types/",
+      "date"     : "2024-03-13 00:00:00 +0000"
+    } ,
+  
+    {
+      "title"    : "Robust Codeを書くためのプログラミング姿勢について",
+      "subtitle" : "Robust Python Programming 1/N",
+      "tags"     : "coding, 方法論, Python",
+      "url"      : "/2024/03/12/robust-python-what-is-robustness/",
+      "date"     : "2024-03-12 00:00:00 +0000"
+    } ,
+  
+    {
+      "title"    : "Ubuntu 22.04 LTSに Meslo LGSとUDEV Gothicをインストールする",
+      "subtitle" : "フォント設定 3/N",
+      "tags"     : "Ubuntu 22.04 LTS, Font",
+      "url"      : "/2024/03/11/install-menlo-into-ubuntu/",
+      "date"     : "2024-03-11 00:00:00 +0000"
+    } ,
+  
+    {
+      "title"    : "MacBookPro2016年モデルにUbuntu 22.04 LTSをインストールする",
+      "subtitle" : "",
+      "tags"     : "Ubuntu 22.04, Linux",
+      "url"      : "/2024/02/27/macbookpro-ubuntu-setup/",
+      "date"     : "2024-02-27 00:00:00 +0000"
+    } ,
+  
+    {
+      "title"    : "はじめてのオブジェクト指向",
+      "subtitle" : "オブジェクト指向設計 1/N",
+      "tags"     : "coding, 方法論",
+      "url"      : "/2023/12/01/object-oriented-note/",
+      "date"     : "2023-12-01 00:00:00 +0000"
+    } ,
+  
+    {
+      "title"    : "Angular Bisector and Tangent - Project Euler Problem 296",
+      "subtitle" : "Python: Competitive Programming 4/N",
+      "tags"     : "競技プログラミング, Python",
+      "url"      : "/2023/11/14/project-euler-angular-bisector-and-tangent/",
+      "date"     : "2023-11-14 00:00:00 +0000"
+    } ,
+  
+    {
+      "title"    : "What happens to your brain as you age",
+      "subtitle" : "Today&#39;s words and phrases */N",
+      "tags"     : "English",
+      "url"      : "/2023/11/05/what-happens-toyour-brain-as-you-age/",
+      "date"     : "2023-11-05 00:00:00 +0000"
+    } ,
+  
+    {
+      "title"    : "The Learning Pyramid",
+      "subtitle" : "",
+      "tags"     : "English, 方法論",
+      "url"      : "/2023/11/04/the-learning-pyramid/",
+      "date"     : "2023-11-04 00:00:00 +0000"
+    } ,
+  
+    {
+      "title"    : "論文紹介: Basu 2014, Randomisation, Causality and the Role of Reasoned Intuition",
+      "subtitle" : "RCT分析におけるReasoningやIntuitionの重要性",
+      "tags"     : "統計, 論文",
+      "url"      : "/2023/11/03/randomization-causality-and-reasoned-intuition/",
+      "date"     : "2023-11-03 00:00:00 +0000"
+    } ,
+  
+    {
+      "title"    : "Book: The Wind in the Willows by Kenneth Grahame",
+      "subtitle" : "Chapter 3: The Wild Wood",
+      "tags"     : "English, Book",
+      "url"      : "/2023/10/31/The-Wind-in-the-Willows-Wilod-Wood/",
+      "date"     : "2023-10-31 00:00:00 +0000"
+    } ,
+  
+    {
+      "title"    : "coupon collector problemの期待値の導出",
+      "subtitle" : "本日の統計ドリル",
+      "tags"     : "統計",
+      "url"      : "/2023/10/30/first-success-distribution/",
+      "date"     : "2023-10-30 00:00:00 +0000"
+    } ,
+  
+    {
+      "title"    : "Book: The Wind in the Willows by Kenneth Grahame",
+      "subtitle" : "Chapter 2: The Open Road",
+      "tags"     : "English, Book",
+      "url"      : "/2023/10/29/The-Wind-in-the-Willows-Open-Road/",
+      "date"     : "2023-10-29 00:00:00 +0000"
+    } ,
+  
+    {
+      "title"    : "Book: The Wind in the Willows by Kenneth Grahame",
+      "subtitle" : "Chapter 1: The River Bank",
+      "tags"     : "English, Book",
+      "url"      : "/2023/10/28/The-Wind-in-the-Willows-River-Bank/",
+      "date"     : "2023-10-28 00:00:00 +0000"
+    } ,
+  
+    {
+      "title"    : "2Sum and 3Sum - Leetcode 1 &amp; 15",
+      "subtitle" : "Python: Competitive Programming 2/N",
+      "tags"     : "競技プログラミング, Python",
+      "url"      : "/2023/09/29/two-sum-and-three-sum/",
+      "date"     : "2023-09-29 00:00:00 +0000"
+    } ,
+  
+    {
+      "title"    : "Single Number - Leetcode 136",
+      "subtitle" : "Python: Competitive Programming 1/N",
+      "tags"     : "競技プログラミング, Python",
+      "url"      : "/2023/09/28/single-number/",
+      "date"     : "2023-09-28 00:00:00 +0000"
+    } ,
+  
+    {
+      "title"    : "原始ピタゴラス数",
+      "subtitle" : "競技プログラミングに役に立つ数学 1/N",
+      "tags"     : "競技プログラミング, math",
+      "url"      : "/2023/09/20/primitive-pythagorean-triples/",
+      "date"     : "2023-09-20 00:00:00 +0000"
+    } ,
+  
+    {
+      "title"    : "Ubuntu 22.04 LTSにおけるロケール設定",
+      "subtitle" : "Ubuntu Jammy Jellyfish Setup 2/N",
+      "tags"     : "Ubuntu 22.04 LTS",
+      "url"      : "/2023/08/14/ubuntu-locale-setting/",
+      "date"     : "2023-08-14 00:00:00 +0000"
+    } ,
+  
+    {
+      "title"    : "リモートサーバーにRStudio Serverをインストール &amp; sshアクセス",
+      "subtitle" : "R環境構築ノート 2/N",
+      "tags"     : "Ubuntu 22.04 LTS, R, ssh",
+      "url"      : "/2023/08/13/Rstudio-Server-setup/",
+      "date"     : "2023-08-13 00:00:00 +0000"
+    } ,
+  
+    {
+      "title"    : "fcitx5-mozcを用いた日本語入力設定",
+      "subtitle" : "Ubuntu Jammy Jellyfish Setup 1/N",
+      "tags"     : "Ubuntu 22.04 LTS, Mozc",
+      "url"      : "/2023/08/12/ubuntu-japanese-input-mozc/",
+      "date"     : "2023-08-12 00:00:00 +0000"
+    } ,
+  
+    {
+      "title"    : "Universally Unique ID Generatorの設計",
+      "subtitle" : "System Design 2/N",
+      "tags"     : "architecture",
+      "url"      : "/2023/08/11/setting-UID-generator/",
+      "date"     : "2023-08-11 00:00:00 +0000"
+    } ,
+  
+    {
+      "title"    : "Linux: マルチタスクとプロセス制御",
+      "subtitle" : "ps command 1/N",
+      "tags"     : "shell, Linux",
+      "url"      : "/2023/08/10/ps-command-linux/",
+      "date"     : "2023-08-10 00:00:00 +0000"
+    } ,
+  
+    {
+      "title"    : "Causality - an Introduction",
+      "subtitle" : "Memo on Causal Inference and Discovery in Python 1/N",
+      "tags"     : "Python, Econometrics",
+      "url"      : "/2023/08/09/causal-inference-and-discovery-in-python-chapter1/",
+      "date"     : "2023-08-09 00:00:00 +0000"
+    } ,
+  
+    {
+      "title"    : "S3上のディレクトリを任意のLocal Directoryへコピーする",
+      "subtitle" : "AWS CLI Command 1/N",
+      "tags"     : "aws, cloud",
+      "url"      : "/2023/08/06/aws-sync-with-filter/",
+      "date"     : "2023-08-06 00:00:00 +0000"
+    } ,
+  
+    {
+      "title"    : "find &amp; rename files &amp; mv: 条件にあったファイルをmvし一つのディレクトリに集約する",
+      "subtitle" : "find command 2/N",
+      "tags"     : "Linux, Shell",
+      "url"      : "/2023/08/05/find-and-mv-files/",
+      "date"     : "2023-08-05 00:00:00 +0000"
+    } ,
+  
+    {
+      "title"    : "AWS CLI setup",
+      "subtitle" : "Getting used to AWS Service 2/N",
+      "tags"     : "aws, cloud",
+      "url"      : "/2023/08/04/aws-cli-install/",
+      "date"     : "2023-08-04 00:00:00 +0000"
+    } ,
+  
+    {
+      "title"    : "AWS Identity and Access Management",
+      "subtitle" : "Getting used to AWS Service 1/N",
+      "tags"     : "aws, cloud",
+      "url"      : "/2023/08/03/aws-iam-basic/",
+      "date"     : "2023-08-03 00:00:00 +0000"
+    } ,
+  
+    {
+      "title"    : "東大数学解説: 三角関数の微分と積分",
+      "subtitle" : "",
+      "tags"     : "math",
+      "url"      : "/2023/08/02/math-todai-sugaku/",
+      "date"     : "2023-08-02 00:00:00 +0000"
+    } ,
+  
+    {
+      "title"    : "split command: split files without irreversible effect",
+      "subtitle" : "split a large file into smaller files and recover it",
+      "tags"     : "Linux, Shell",
+      "url"      : "/2023/08/01/linux-split-command/",
+      "date"     : "2023-08-01 00:00:00 +0000"
+    } ,
+  
+    {
+      "title"    : "pyproject.tomlからPoetry installする仕組み",
+      "subtitle" : "Ubuntu Python 分析環境の構築 3/N",
+      "tags"     : "Poetry, Python",
+      "url"      : "/2023/07/31/poetry-install/",
+      "date"     : "2023-07-31 00:00:00 +0000"
+    } ,
+  
+    {
+      "title"    : "Poetry configuration Tips",
+      "subtitle" : "Ubuntu Python 分析環境の構築 2/N",
+      "tags"     : "Poetry, Python",
+      "url"      : "/2023/07/30/poetry-configuration/",
+      "date"     : "2023-07-30 00:00:00 +0000"
+    } ,
+  
+    {
+      "title"    : "個人用gcloud project設定",
+      "subtitle" : "個人用アカウントとその他アカウントの両立",
+      "tags"     : "google cloud, Ubuntu 22.04 LTS, cloud",
+      "url"      : "/2023/07/29/google-cloud-setup/",
+      "date"     : "2023-07-29 00:00:00 +0000"
+    } ,
+  
+    {
+      "title"    : "How To Install R on Ubuntu 22.04 and set-up Renv",
+      "subtitle" : "R環境構築ノート 1/N",
+      "tags"     : "Ubuntu 22.04 LTS, R",
+      "url"      : "/2023/07/28/Ubuntu-R-setup/",
+      "date"     : "2023-07-28 00:00:00 +0000"
+    } ,
+  
+    {
+      "title"    : "Ubuntu Startup Application Settings",
+      "subtitle" : "Login時に自動的に実行されるスクリプトの設定",
+      "tags"     : "Ubuntu 22.04 LTS, Shell",
+      "url"      : "/2023/07/27/Ubuntu-startup-app-setup/",
+      "date"     : "2023-07-27 00:00:00 +0000"
+    } ,
+  
+    {
+      "title"    : "Quick and simple setup with pyenv and poetry",
+      "subtitle" : "Ubuntu Python 分析環境の構築 1/N",
+      "tags"     : "Ubuntu 22.04 LTS, Python, Poetry",
+      "url"      : "/2023/07/26/Ubuntu-python-setup/",
+      "date"     : "2023-07-26 00:00:00 +0000"
+    } ,
+  
+    {
+      "title"    : "Install Brave into Ubuntu 22.04.2 LTS",
+      "subtitle" : "YouTube Ad Block Browser",
+      "tags"     : "Ubuntu 22.04 LTS, App",
+      "url"      : "/2023/07/25/webbrowser-brave-setup/",
+      "date"     : "2023-07-25 00:00:00 +0000"
+    } ,
+  
+    {
+      "title"    : "Sys V initに基づくLinux Boot Sequence",
+      "subtitle" : "Understanding systemd, systemctl 3/N",
+      "tags"     : "Linux, systemctl",
+      "url"      : "/2023/07/15/linux-boot-sequence/",
+      "date"     : "2023-07-15 00:00:00 +0000"
+    } ,
+  
+    {
+      "title"    : "傾向スコアのAUCの良さは推定量の性質の良さにつながるのか？",
+      "subtitle" : "Propensity score &amp; Conditional Independence Assumption（続編）",
+      "tags"     : "統計, Python",
+      "url"      : "/2023/07/07/propensity-score-and-auc/",
+      "date"     : "2023-07-07 00:00:00 +0000"
+    } ,
+  
+    {
+      "title"    : "Propensity score &amp; Conditional Independence Assumption",
+      "subtitle" : "条件付き期待値の基本的理解 2/N",
+      "tags"     : "統計, Econometrics, Python",
+      "url"      : "/2023/07/06/propensity-score-conditional-independence/",
+      "date"     : "2023-07-06 00:00:00 +0000"
+    } ,
+  
+    {
+      "title"    : "対数変換と回帰モデル",
+      "subtitle" : "弾力性は一致するのか？",
+      "tags"     : "統計",
+      "url"      : "/2023/07/05/log-exp-regression-difference/",
+      "date"     : "2023-07-05 00:00:00 +0000"
+    } ,
+  
+    {
+      "title"    : "Conditional Expectation operator",
+      "subtitle" : "条件付き期待値の基本的理解 1/N",
+      "tags"     : "統計",
+      "url"      : "/2023/07/04/conditional-expectation-operator/",
+      "date"     : "2023-07-04 00:00:00 +0000"
+    } ,
+  
+    {
+      "title"    : "Regressor and Regressand",
+      "subtitle" : "統計用語 1/N",
+      "tags"     : "English, 統計",
+      "url"      : "/2023/07/03/regressor-and-regressand/",
+      "date"     : "2023-07-03 00:00:00 +0000"
+    } ,
+  
+    {
+      "title"    : "Kolmogorov-Smirnov test",
+      "subtitle" : "",
+      "tags"     : "statistics, KS test",
+      "url"      : "/2023/07/02/Kolmogorov-Smirnov-test/",
+      "date"     : "2023-07-02 00:00:00 +0000"
+    } ,
+  
+    {
+      "title"    : "A Clockwork Orange, Anthony Burgess",
+      "subtitle" : "",
+      "tags"     : "English",
+      "url"      : "/2023/07/01/A-Clockwork-Orange/",
+      "date"     : "2023-07-01 00:00:00 +0000"
+    } ,
+  
+    {
+      "title"    : "SRE, SLIs, SLOs, SLAs?",
+      "subtitle" : "MLOps tutorial 1/N",
+      "tags"     : "architecture",
+      "url"      : "/2023/06/01/sli-drive-slo-which-inform-sla/",
+      "date"     : "2023-06-01 00:00:00 +0000"
+    } ,
+  
+    {
+      "title"    : "Linux: 標準出力とリダイレクト",
+      "subtitle" : "terminal出力結果をコントロールする",
+      "tags"     : "Shell, Linux",
+      "url"      : "/2023/05/02/Linux-redirect/",
+      "date"     : "2023-05-02 00:00:00 +0000"
+    } ,
+  
+    {
+      "title"    : "How to Use the phrase &#39;Could have&#39; in a daily datascience situation?",
+      "subtitle" : "",
+      "tags"     : "English",
+      "url"      : "/2023/05/01/english-could-have/",
+      "date"     : "2023-05-01 00:00:00 +0000"
+    } ,
+  
+    {
+      "title"    : "物語の視点",
+      "subtitle" : "森本哲郎 - 経験の教えについてより",
+      "tags"     : "English, 方法論",
+      "url"      : "/2023/04/06/a-wise-man-learns/",
+      "date"     : "2023-04-06 00:00:00 +0000"
+    } ,
+  
+    {
+      "title"    : "エアコンの仕組み",
+      "subtitle" : "身近なテクノロジーを知ろう 1/N",
+      "tags"     : "technology",
+      "url"      : "/2023/04/05/air-conditioner-unit/",
+      "date"     : "2023-04-05 00:00:00 +0000"
+    } ,
+  
+    {
+      "title"    : "Check the log file to find out the source of the problem",
+      "subtitle" : "Server Trouble Shooting 1/N",
+      "tags"     : "Linux, trouble shooting",
+      "url"      : "/2023/04/04/Linux-trouble-shooting-01/",
+      "date"     : "2023-04-04 00:00:00 +0000"
+    } ,
+  
+    {
+      "title"    : "grep: Basic vs Extended Regular Expressions",
+      "subtitle" : "grep command 2/N",
+      "tags"     : "Linux, Shell",
+      "url"      : "/2023/04/03/grep-and-count-keywords/",
+      "date"     : "2023-04-03 00:00:00 +0000"
+    } ,
+  
+    {
+      "title"    : "grep: List up files with/without match",
+      "subtitle" : "grep command 1/N&quot;",
+      "tags"     : "Linux, Shell",
+      "url"      : "/2023/04/01/grep-files-with-search-words/",
+      "date"     : "2023-04-01 00:00:00 +0000"
+    } ,
+  
+    {
+      "title"    : "Kanbanボードを用いた開発環境整理",
+      "subtitle" : "カンバンとはなに？",
+      "tags"     : "Development",
+      "url"      : "/2023/03/14/kanban-workflow/",
+      "date"     : "2023-03-14 00:00:00 +0000"
+    } ,
+  
+    {
+      "title"    : "後手番で序盤でなにを考えるか？",
+      "subtitle" : "角換わり戦法研究 1/N",
+      "tags"     : "将棋",
+      "url"      : "/2023/03/13/shougisenkei-aiibisya-kakugawari/",
+      "date"     : "2023-03-13 00:00:00 +0000"
+    } ,
+  
+    {
+      "title"    : "VS Codeにおける開発ンテナ機能",
+      "subtitle" : "Visual Studio Code Dev Containers extensionの導入",
+      "tags"     : "VSCode, Docker",
+      "url"      : "/2023/03/10/remote-container-in-vscode/",
+      "date"     : "2023-03-10 00:00:00 +0000"
+    } ,
+  
+    {
+      "title"    : "Build and Use Dockerized Wolfram Engine + Jupyter Lab",
+      "subtitle" : "Ubuntu Desktop環境構築 Part 27",
+      "tags"     : "Wolfram Engine, Docker",
+      "url"      : "/2023/03/09/wolfram-engine-setup/",
+      "date"     : "2023-03-09 00:00:00 +0000"
+    } ,
+  
+    {
+      "title"    : "対居玉攻め筋",
+      "subtitle" : "実践攻め筋 1/N",
+      "tags"     : "将棋",
+      "url"      : "/2023/03/05/shougi-hisshi-igyoku-01/",
+      "date"     : "2023-03-05 00:00:00 +0000"
+    } ,
+  
+    {
+      "title"    : "対矢倉囲い詰将棋",
+      "subtitle" : "実践詰将棋練習 居飛車編 4/N",
+      "tags"     : "将棋",
+      "url"      : "/2023/03/04/shougi-levelup-tsumeshogi-04/",
+      "date"     : "2023-03-04 00:00:00 +0000"
+    } ,
+  
+    {
+      "title"    : "対雁木囲い詰将棋",
+      "subtitle" : "実践詰将棋練習 居飛車編 3/N",
+      "tags"     : "将棋",
+      "url"      : "/2023/03/03/shougi-levelup-tsumeshogi-03/",
+      "date"     : "2023-03-03 00:00:00 +0000"
+    } ,
+  
+    {
+      "title"    : "金頭の桂で詰む",
+      "subtitle" : "実践詰将棋練習 居飛車編 2/N",
+      "tags"     : "将棋",
+      "url"      : "/2023/03/02/shougi-levelup-tsumeshogi-02/",
+      "date"     : "2023-03-02 00:00:00 +0000"
+    } ,
+  
+    {
+      "title"    : "馬の利きを通す",
+      "subtitle" : "実践詰将棋練習 居飛車編 1/N",
+      "tags"     : "将棋",
+      "url"      : "/2023/03/01/shougi-levelup-tsumeshogi-01/",
+      "date"     : "2023-03-01 00:00:00 +0000"
+    } ,
+  
+    {
+      "title"    : "VS CodeでHTML + JavaScript + CSS開発環境構築",
+      "subtitle" : "VS Code Live Previewの紹介",
+      "tags"     : "環境構築, VSCode",
+      "url"      : "/2023/02/28/setup-html-javascript-css-environment/",
+      "date"     : "2023-02-28 00:00:00 +0000"
+    } ,
+  
+    {
+      "title"    : "Chebyshev inequalityの導出",
+      "subtitle" : "",
+      "tags"     : "統計, statistical inference",
+      "url"      : "/2023/02/27/chebyshev-inequality/",
+      "date"     : "2023-02-27 00:00:00 +0000"
+    } ,
+  
+    {
+      "title"    : "多項分布の周辺密度関数としての二項分布密度関数",
+      "subtitle" : "",
+      "tags"     : "統計",
+      "url"      : "/2023/02/26/binomial-and-multinomial-distirbution/",
+      "date"     : "2023-02-26 00:00:00 +0000"
+    } ,
+  
+    {
+      "title"    : "Granular: being able to manipulate individual elements or settings ",
+      "subtitle" : "",
+      "tags"     : "Terminology",
+      "url"      : "/2023/02/02/terminology-granular/",
+      "date"     : "2023-02-02 00:00:00 +0000"
+    } ,
+  
+    {
+      "title"    : "順序統計量(order statistic)と密度関数",
+      "subtitle" : "",
+      "tags"     : "統計",
+      "url"      : "/2023/02/01/order-statistic/",
+      "date"     : "2023-02-01 00:00:00 +0000"
+    } ,
+  
+    {
+      "title"    : "Arrayに対する任意のReduce Operationの定義の仕方",
+      "subtitle" : "itertools.accumulate の確認",
+      "tags"     : "Python, 前処理",
+      "url"      : "/2023/01/21/cumulative-reduce-function/",
+      "date"     : "2023-01-21 00:00:00 +0000"
+    } ,
+  
+    {
+      "title"    : "周期変数の平均の導出",
+      "subtitle" : "三角関数を用いた座標変換による計算",
+      "tags"     : "Python, 前処理",
+      "url"      : "/2023/01/20/circlemean/",
+      "date"     : "2023-01-20 00:00:00 +0000"
+    } ,
+  
+    {
+      "title"    : "Distinction between the terms accomplish and achieve",
+      "subtitle" : "",
+      "tags"     : "English",
+      "url"      : "/2023/01/05/english-achieve-vs-accomplish/",
+      "date"     : "2023-01-05 00:00:00 +0000"
+    } ,
+  
+    {
+      "title"    : "Linux System Monitor - BPYTOPのインストール",
+      "subtitle" : "Ubuntu Desktop環境構築 Part 26",
+      "tags"     : "Ubuntu 20.04 LTS",
+      "url"      : "/2023/01/04/bpytop-installation/",
+      "date"     : "2023-01-04 00:00:00 +0000"
+    } ,
+  
+    {
+      "title"    : "条件を指定してファイルを検索する",
+      "subtitle" : "find command 1/N",
+      "tags"     : "Linux, shell",
+      "url"      : "/2023/01/01/Linux-find-command/",
+      "date"     : "2023-01-01 00:00:00 +0000"
+    } ,
+  
+    {
+      "title"    : "Start Wars Jedi: Fallen Orderプレイ環境設定",
+      "subtitle" : "Ubuntu Desktop環境構築: Steam編 2/N",
+      "tags"     : "Ubuntu 20.04 LTS, Steam",
+      "url"      : "/2022/12/26/Fallen-Order-Steam/",
+      "date"     : "2022-12-26 00:00:00 +0000"
+    } ,
+  
+    {
+      "title"    : "Understanding Q-Q Plots",
+      "subtitle" : "Story-telling with data 6/N",
+      "tags"     : "Data visualization, Python",
+      "url"      : "/2022/11/06/data-visualization-QQplot/",
+      "date"     : "2022-11-06 00:00:00 +0000"
+    } ,
+  
+    {
+      "title"    : "Horizontal bar plot with categorical order specified",
+      "subtitle" : "Story-telling with data 4/N",
+      "tags"     : "Data visualization, Python",
+      "url"      : "/2022/11/04/data-visualization-stacked-barhplot-color-specification/",
+      "date"     : "2022-11-04 00:00:00 +0000"
+    } ,
+  
+    {
+      "title"    : "Horizontal bar plot with categorical order specified",
+      "subtitle" : "Story-telling with data 3/N",
+      "tags"     : "Data visualization, Python",
+      "url"      : "/2022/11/03/data-visualization-barhplot-categorical-order/",
+      "date"     : "2022-11-03 00:00:00 +0000"
+    } ,
+  
+    {
+      "title"    : "Scatterplot",
+      "subtitle" : "Story-telling with data 2/N",
+      "tags"     : "Data visualization, Python",
+      "url"      : "/2022/11/02/data-visualization-scatterplot/",
+      "date"     : "2022-11-02 00:00:00 +0000"
+    } ,
+  
+    {
+      "title"    : "Plotlyを用いた2つの時系列データ比較",
+      "subtitle" : "Story-telling with data 1/N",
+      "tags"     : "Data visualization, Python",
+      "url"      : "/2022/11/01/data-visualization/",
+      "date"     : "2022-11-01 00:00:00 +0000"
+    } ,
+  
+    {
+      "title"    : "コーヒー豆の栽培と収穫",
+      "subtitle" : "1杯のコーヒーができるまで 1/N",
+      "tags"     : "Coffee",
+      "url"      : "/2022/10/16/Coffee-science-part4-coffee-harvest/",
+      "date"     : "2022-10-16 00:00:00 +0000"
+    } ,
+  
+    {
+      "title"    : "コーヒーチャフとは？",
+      "subtitle" : "焙煎研究編 2/N",
+      "tags"     : "Coffee",
+      "url"      : "/2022/10/15/Coffee-science-part3-coffee-chaff/",
+      "date"     : "2022-10-15 00:00:00 +0000"
+    } ,
+  
+    {
+      "title"    : "コーヒー抽出の仕組み",
+      "subtitle" : "抽出研究編 1/N",
+      "tags"     : "Coffee",
+      "url"      : "/2022/10/14/Coffee-science-part2-brew/",
+      "date"     : "2022-10-14 00:00:00 +0000"
+    } ,
+  
+    {
+      "title"    : "焙煎によるコーヒー豆の変化の仕組み",
+      "subtitle" : "焙煎研究編 1/N",
+      "tags"     : "Coffee",
+      "url"      : "/2022/10/13/Coffee-science-part1/",
+      "date"     : "2022-10-13 00:00:00 +0000"
+    } ,
+  
+    {
+      "title"    : "リサーチヒアリングメモのテンプレート",
+      "subtitle" : "Business communication 3/N",
+      "tags"     : "方法論, テンプレート",
+      "url"      : "/2022/10/02/research-hearing-memo-template/",
+      "date"     : "2022-10-02 00:00:00 +0000"
+    } ,
+  
+    {
+      "title"    : "議事録テンプレート",
+      "subtitle" : "Business communication 2/N",
+      "tags"     : "方法論, テンプレート",
+      "url"      : "/2022/10/01/minutes-template/",
+      "date"     : "2022-10-01 00:00:00 +0000"
+    } ,
+  
+    {
+      "title"    : "分かりやすい文章",
+      "subtitle" : "Business communication 4/N",
+      "tags"     : "コミュニケーション, 方法論",
+      "url"      : "/2022/09/10/readable-communication/",
+      "date"     : "2022-09-10 00:00:00 +0000"
+    } ,
+  
+    {
+      "title"    : "言語活動にあたっての心がけ",
+      "subtitle" : "Business communication 3/N",
+      "tags"     : "コミュニケーション, 方法論",
+      "url"      : "/2022/09/09/communication-principle/",
+      "date"     : "2022-09-09 00:00:00 +0000"
+    } ,
+  
+    {
+      "title"    : "Figurative Expressions",
+      "subtitle" : "",
+      "tags"     : "",
+      "url"      : "/2022/09/08/figurative-expressions/",
+      "date"     : "2022-09-08 00:00:00 +0000"
+    } ,
+  
+    {
+      "title"    : "アンチパターン: 枝葉にとらわれないで",
+      "subtitle" : "Business communication 2/N",
+      "tags"     : "コミュニケーション, 方法論",
+      "url"      : "/2022/09/07/business-comm-anti-pattern/",
+      "date"     : "2022-09-07 00:00:00 +0000"
+    } ,
+  
+    {
+      "title"    : "LinuxにおけるUser: nobodyとはだれか？",
+      "subtitle" : "Linux general 1/N",
+      "tags"     : "Linux",
+      "url"      : "/2022/09/06/linux-user-and-groups/",
+      "date"     : "2022-09-06 00:00:00 +0000"
+    } ,
+  
+    {
+      "title"    : "テキストコミュニケーションのお作法",
+      "subtitle" : "Business communication 1/N",
+      "tags"     : "コミュニケーション, 方法論",
+      "url"      : "/2022/09/05/text-communication-guideline/",
+      "date"     : "2022-09-05 00:00:00 +0000"
+    } ,
+  
+    {
+      "title"    : "円卓テーブルの座り方問題",
+      "subtitle" : "組合せ論シリーズ 2/N",
+      "tags"     : "math",
+      "url"      : "/2022/09/04/table-order/",
+      "date"     : "2022-09-04 00:00:00 +0000"
+    } ,
+  
+    {
+      "title"    : "正弦関数の積の積分公式",
+      "subtitle" : "フーリエ解析 2/N",
+      "tags"     : "math, フーリエ解析",
+      "url"      : "/2022/09/01/integrals-of-trigonometric-functions/",
+      "date"     : "2022-09-01 00:00:00 +0000"
+    } ,
+  
+    {
+      "title"    : "Combinationの性質: 二項定理の応用",
+      "subtitle" : "組合せ論シリーズ 1/N",
+      "tags"     : "math",
+      "url"      : "/2022/08/31/combination-and-math/",
+      "date"     : "2022-08-31 00:00:00 +0000"
+    } ,
+  
+    {
+      "title"    : "フーリエ級数の練習問題",
+      "subtitle" : "フーリエ解析 7/N",
+      "tags"     : "math, フーリエ解析",
+      "url"      : "/2022/08/18/fourier-expanssion-wrap-up-questions/",
+      "date"     : "2022-08-18 00:00:00 +0000"
+    } ,
+  
+    {
+      "title"    : "任意の周期をもつ周期関数対するフーリエ展開",
+      "subtitle" : "フーリエ解析 6/N",
+      "tags"     : "math, フーリエ解析",
+      "url"      : "/2022/08/17/fourier-with-general-period/",
+      "date"     : "2022-08-17 00:00:00 +0000"
+    } ,
+  
+    {
+      "title"    : "フーリエ正弦展開と余弦展開",
+      "subtitle" : "フーリエ解析 5/N",
+      "tags"     : "math, フーリエ解析",
+      "url"      : "/2022/08/16/fourier-sine-cosine-expansion/",
+      "date"     : "2022-08-16 00:00:00 +0000"
+    } ,
+  
+    {
+      "title"    : "フーリエ級数展開とバーゼル問題の関係性",
+      "subtitle" : "フーリエ解析 4/N",
+      "tags"     : "math, フーリエ解析",
+      "url"      : "/2022/08/15/fourier-and-basel/",
+      "date"     : "2022-08-15 00:00:00 +0000"
+    } ,
+  
+    {
+      "title"    : "フーリエ級数展開の計算例",
+      "subtitle" : "フーリエ解析 3/N",
+      "tags"     : "math, フーリエ解析",
+      "url"      : "/2022/08/14/fourier-series-example/",
+      "date"     : "2022-08-14 00:00:00 +0000"
+    } ,
+  
+    {
+      "title"    : "三角関数系の直交性",
+      "subtitle" : "フーリエ解析 2/N",
+      "tags"     : "math, フーリエ解析",
+      "url"      : "/2022/08/13/triangular-functions/",
+      "date"     : "2022-08-13 00:00:00 +0000"
+    } ,
+  
+    {
+      "title"    : "フーリエ級数の着想",
+      "subtitle" : "フーリエ解析 1/N",
+      "tags"     : "math, フーリエ解析",
+      "url"      : "/2022/08/12/fourier-introduction/",
+      "date"     : "2022-08-12 00:00:00 +0000"
+    } ,
+  
+    {
+      "title"    : "Shebangにおける/bin/bashと/usr/bin/bashの違い",
+      "subtitle" : "shellscript basic 1/N",
+      "tags"     : "shell, Linux",
+      "url"      : "/2022/08/11/difference-usr-bin-bash-bin-bash/",
+      "date"     : "2022-08-11 00:00:00 +0000"
+    } ,
+  
+    {
+      "title"    : "shell historyをtimestampでフィルターする",
+      "subtitle" : "awk command 3/N",
+      "tags"     : "Linux, Shell",
+      "url"      : "/2022/08/10/history-date-filter/",
+      "date"     : "2022-08-10 00:00:00 +0000"
+    } ,
+  
+    {
+      "title"    : "last command: システムのログイン履歴の表示",
+      "subtitle" : "Linux command 3/N",
+      "tags"     : "Ubuntu 22.04 LTS, Linux, log",
+      "url"      : "/2022/08/09/last-command/",
+      "date"     : "2022-08-09 00:00:00 +0000"
+    } ,
+  
+    {
+      "title"    : "ファイルリストから日付リストを抽出",
+      "subtitle" : "awk command 2/N",
+      "tags"     : "Linux, Shell",
+      "url"      : "/2022/08/08/awk-date-filter/",
+      "date"     : "2022-08-08 00:00:00 +0000"
+    } ,
+  
+    {
+      "title"    : "EDA CookBook - 生存分析とKaplanMeier推定量",
+      "subtitle" : "生存分析 1/N",
+      "tags"     : "Python, 統計, 統計検定",
+      "url"      : "/2022/08/07/eda-kaplanmeier/",
+      "date"     : "2022-08-07 00:00:00 +0000"
+    } ,
+  
+    {
+      "title"    : "CSV FILEの重複レコードをシェルスクリプトで除去する",
+      "subtitle" : "AWK(gawk)コマンドの連想配列の活用",
+      "tags"     : "Shell",
+      "url"      : "/2022/08/06/awk-drop-duplicate/",
+      "date"     : "2022-08-06 00:00:00 +0000"
+    } ,
+  
+    {
+      "title"    : "Private Repository用git cloneシェルスクリプトの作成(Obsolete)",
+      "subtitle" : "アクセストークンを用いたgit clone",
+      "tags"     : "git, Shell",
+      "url"      : "/2022/08/05/git-clone-shellscript/",
+      "date"     : "2022-08-05 00:00:00 +0000"
+    } ,
+  
+    {
+      "title"    : "Linux基礎知識：カレントディレクトリ下のフォルダ一覧表示",
+      "subtitle" : "du,grep,awkを活用してls likeに出力する",
+      "tags"     : "Linux, Shell",
+      "url"      : "/2022/08/04/list-up-directory-using-ls-command/",
+      "date"     : "2022-08-04 00:00:00 +0000"
+    } ,
+  
+    {
+      "title"    : "GitLab開発環境設定 1/N",
+      "subtitle" : "個人アクセストークンの設定",
+      "tags"     : "Ubuntu 20.04 LTS, git, GitLab",
+      "url"      : "/2022/08/03/Gitlab-setup/",
+      "date"     : "2022-08-03 00:00:00 +0000"
+    } ,
+  
+    {
+      "title"    : "lsof: list open files",
+      "subtitle" : "Linux command 2/N",
+      "tags"     : "Linux, Shell",
+      "url"      : "/2022/08/02/linux-lsof-command/",
+      "date"     : "2022-08-02 00:00:00 +0000"
+    } ,
+  
+    {
+      "title"    : "ちょっとしたLinux便利コマンド集",
+      "subtitle" : "Linux command 1/N",
+      "tags"     : "Linux, Shell",
+      "url"      : "/2022/08/01/linux-command-tips/",
+      "date"     : "2022-08-01 00:00:00 +0000"
+    } ,
+  
+    {
+      "title"    : "有限母集団からの標本抽出と有限母集団修正項",
+      "subtitle" : "Random Samplingの理論と実践 1/N",
+      "tags"     : "統計, 統計検定, RCT",
+      "url"      : "/2022/07/18/finite-population-correction-factor/",
+      "date"     : "2022-07-18 00:00:00 +0000"
+    } ,
+  
+    {
+      "title"    : "Standard SQL CookBook - 6/N",
+      "subtitle" : "異なるサービスの会員データを複数カラムをマッチさせて名前寄せをする",
+      "tags"     : "SQL",
+      "url"      : "/2022/07/17/SQLCookBook-merge-different-service/",
+      "date"     : "2022-07-17 00:00:00 +0000"
+    } ,
+  
+    {
+      "title"    : "Ubuntu 20.04 LTSでの古いカーネルの削除",
+      "subtitle" : "",
+      "tags"     : "Ubuntu 20.04 LTS, Linux, Shell",
+      "url"      : "/2022/07/16/ubuntu-remove-old-kernel/",
+      "date"     : "2022-07-16 00:00:00 +0000"
+    } ,
+  
+    {
+      "title"    : "Standard SQL CookBook - 5/N",
+      "subtitle" : "ユーザーごとの開始日, 終了日が記録されたレコードから開始日から終了日までのDate sequenceを作成する",
+      "tags"     : "SQL, Python, 前処理",
+      "url"      : "/2022/07/15/SQLCookBook-generate_date_range-from-minmax-date/",
+      "date"     : "2022-07-15 00:00:00 +0000"
+    } ,
+  
+    {
+      "title"    : "Standard SQL CookBook - 4/N",
+      "subtitle" : "Bigquery standard SQLにおけるset operaters syntaxの確認",
+      "tags"     : "SQL",
+      "url"      : "/2022/07/14/SQLCookBook-set-operator/",
+      "date"     : "2022-07-14 00:00:00 +0000"
+    } ,
+  
+    {
+      "title"    : "Standard SQL CookBook - 3/N",
+      "subtitle" : "RCTにおけるunit of observationのsampling - Farm Fingerprint",
+      "tags"     : "SQL, Python, Farm Fingerprint",
+      "url"      : "/2022/07/13/SQLCookBook-random-sampling/",
+      "date"     : "2022-07-13 00:00:00 +0000"
+    } ,
+  
+    {
+      "title"    : "Pandas CookBook - 1/N",
+      "subtitle" : "Group毎の集計値を用いたデータ処理方法の紹介",
+      "tags"     : "Python, 前処理",
+      "url"      : "/2022/07/12/PandasCookBook-calculate-within-group-ratio-transform/",
+      "date"     : "2022-07-12 00:00:00 +0000"
+    } ,
+  
+    {
+      "title"    : "論文の読み方",
+      "subtitle" : "実証分析プロジェクトの方法論　2/N",
+      "tags"     : "方法論",
+      "url"      : "/2022/04/04/research-design-2/",
+      "date"     : "2022-04-04 00:00:00 +0000"
+    } ,
+  
+    {
+      "title"    : "カイ二乗適合度検定",
+      "subtitle" : "数理統計：適合度検定 1/N",
+      "tags"     : "統計, Python",
+      "url"      : "/2022/04/03/chi-squared-test-basic/",
+      "date"     : "2022-04-03 00:00:00 +0000"
+    } ,
+  
+    {
+      "title"    : "需要の価格弾力性の識別はなぜ難しいのか?",
+      "subtitle" : "市場均衡価格とEndogeneity bias",
+      "tags"     : "Economics",
+      "url"      : "/2022/04/02/why-difficult-toidentify-price-elasticity-of-demand/",
+      "date"     : "2022-04-02 00:00:00 +0000"
+    } ,
+  
+    {
+      "title"    : "初心者からのリサーチデザイン",
+      "subtitle" : "実証分析プロジェクトの方法論　1/N",
+      "tags"     : "方法論",
+      "url"      : "/2022/04/01/research-design/",
+      "date"     : "2022-04-01 00:00:00 +0000"
+    } ,
+  
+    {
+      "title"    : "機械学習モデル精度の評価",
+      "subtitle" : "二値分類におけるMetricsの紹介",
+      "tags"     : "Metrics, 統計, Python",
+      "url"      : "/2022/03/02/Wilcoxon-Test-And-ROCAUC/",
+      "date"     : "2022-03-02 00:00:00 +0000"
+    } ,
+  
+    {
+      "title"    : "Ridge/Lasso推定量の性質",
+      "subtitle" : "LassoとRidgeの性能比較",
+      "tags"     : "統計, Python",
+      "url"      : "/2022/03/01/ShrinkageMethod-Lasso-Ridge/",
+      "date"     : "2022-03-01 00:00:00 +0000"
+    } ,
+  
+    {
+      "title"    : "微分方程式の基礎と分析モデルの紹介",
+      "subtitle" : "The COVID-19 SEIR Modelの紹介",
+      "tags"     : "微分方程式, COVID-19, Python",
+      "url"      : "/2022/02/28/differential-equation-and-SEIRmodel/",
+      "date"     : "2022-02-28 00:00:00 +0000"
+    } ,
+  
+    {
+      "title"    : "吸収マルコフ連鎖の紹介",
+      "subtitle" : "コミュニティー内部でNewsはどのように広がるのか",
+      "tags"     : "統計検定, マルコフ連鎖",
+      "url"      : "/2022/02/27/absorbing-markov-chain/",
+      "date"     : "2022-02-27 00:00:00 +0000"
+    } ,
+  
+    {
+      "title"    : "Linux基礎知識：lsコマンドのカラー引数の挙動差",
+      "subtitle" : "--color=autoと--color=alwaysの挙動差",
+      "tags"     : "Linux, Shell",
+      "url"      : "/2022/02/26/ls-autocouor/",
+      "date"     : "2022-02-26 00:00:00 +0000"
+    } ,
+  
+    {
+      "title"    : "Mahalanobis Distance",
+      "subtitle" : "意思決定とモデル精度の橋渡し 2/N",
+      "tags"     : "統計, Metrics",
+      "url"      : "/2022/02/10/MahalanobisDistance/",
+      "date"     : "2022-02-10 00:00:00 +0000"
+    } ,
+  
+    {
+      "title"    : "論文紹介: Topmpson 1989, On The Statistical Analysis of ROC Curve",
+      "subtitle" : "ROC曲線の解釈指標としての「Binormal ROCを仮定したAUC」",
+      "tags"     : "統計, statistical inference, 論文",
+      "url"      : "/2022/02/09/on-the-statistical-analysis-of-roc-curve/",
+      "date"     : "2022-02-09 00:00:00 +0000"
+    } ,
+  
+    {
+      "title"    : "Non Parameteric Tests - Permutation Test",
+      "subtitle" : "Statistical Inference: Significance Testing Note 1/N",
+      "tags"     : "統計, statistical inference",
+      "url"      : "/2022/02/08/Nonparametric-Tests/",
+      "date"     : "2022-02-08 00:00:00 +0000"
+    } ,
+  
+    {
+      "title"    : "Bishop: パターン認識と機械学習の勉強用ノート 1/N",
+      "subtitle" : "Chapter 1: 多項式曲線Fitting",
+      "tags"     : "PRML, Python",
+      "url"      : "/2022/02/07/PRML-chapter01-01/",
+      "date"     : "2022-02-07 00:00:00 +0000"
+    } ,
+  
+    {
+      "title"    : "Linux基礎知識：bash環境でのパッケージのサジェスト機能",
+      "subtitle" : "command-not-foundの実装の確認",
+      "tags"     : "Linux",
+      "url"      : "/2022/02/06/suggest-apt-packages-function/",
+      "date"     : "2022-02-06 00:00:00 +0000"
+    } ,
+  
+    {
+      "title"    : "タンジェントのN乗の区間積分と数列",
+      "subtitle" : "H31東京大学大学院工学研究科入試問1を題材に",
+      "tags"     : "math",
+      "url"      : "/2022/02/04/integral-of-tangent-x/",
+      "date"     : "2022-02-04 00:00:00 +0000"
+    } ,
+  
+    {
+      "title"    : "Latent variableに依存したパラメーターの推定",
+      "subtitle" : "罹患率から背景のパラメーターを推定する",
+      "tags"     : "統計, statistical inference, delta method",
+      "url"      : "/2022/02/03/binomial-trial-wth-latent-variable/",
+      "date"     : "2022-02-03 00:00:00 +0000"
+    } ,
+  
+    {
+      "title"    : "機械学習モデル精度の評価",
+      "subtitle" : "意思決定とモデル精度の橋渡し 1/N",
+      "tags"     : "Metrics, 統計, statistical inference",
+      "url"      : "/2022/02/02/model-evaluation-01/",
+      "date"     : "2022-02-02 00:00:00 +0000"
+    } ,
+  
+    {
+      "title"    : "Create VSCode + Dockernized LaTeX Environment",
+      "subtitle" : "Ubuntu Desktop環境構築 Part 26",
+      "tags"     : "Ubuntu 20.04 LTS, Linux",
+      "url"      : "/2022/01/29/ubuntu-latex-setup/",
+      "date"     : "2022-01-29 00:00:00 +0000"
+    } ,
+  
+    {
+      "title"    : "システム起動時に自動的にドライブをマウントする",
+      "subtitle" : "Ubuntu Desktop環境構築 Part 25",
+      "tags"     : "Ubuntu 20.04 LTS, Linux",
+      "url"      : "/2022/01/28/ubuntu-external-storage-setup/",
+      "date"     : "2022-01-28 00:00:00 +0000"
+    } ,
+  
+    {
+      "title"    : "Ubuntu 20.04 LTSでメタルギアソリッドVをやりたい",
+      "subtitle" : "Ubuntu Desktop環境構築: Steam編 1/N",
+      "tags"     : "Ubuntu 20.04 LTS, Steam",
+      "url"      : "/2022/01/27/ubuntu-steam-setup/",
+      "date"     : "2022-01-27 00:00:00 +0000"
+    } ,
+  
+    {
+      "title"    : "ベルヌーイ試行と漸化式",
+      "subtitle" : "練習問題編",
+      "tags"     : "統計, 統計検定, ベルヌーイ試行",
+      "url"      : "/2022/01/26/bernoulli-trials-problem01/",
+      "date"     : "2022-01-26 00:00:00 +0000"
+    } ,
+  
+    {
+      "title"    : "調査法におけるサンプリングバイアスの考察",
+      "subtitle" : "来店調査における顧客年間来店回数の導出が含むバイアスの紹介",
+      "tags"     : "統計, 統計検定, sampling bias",
+      "url"      : "/2022/01/25/survey-and-sampling-bias/",
+      "date"     : "2022-01-25 00:00:00 +0000"
+    } ,
+  
+    {
+      "title"    : "spaceなどお行儀の悪い文字がPATHに含まれている場合の対処",
+      "subtitle" : "シングルクォートとダブルクォートの挙動の違い",
+      "tags"     : "Linux, Shell",
+      "url"      : "/2022/01/02/dealing-with-awkward-file-path/",
+      "date"     : "2022-01-02 00:00:00 +0000"
+    } ,
+  
+    {
+      "title"    : "分散分析の考え方",
+      "subtitle" : "Design of Experiments 1/N",
+      "tags"     : "DoE, 統計",
+      "url"      : "/2022/01/01/design-of-experiments-01/",
+      "date"     : "2022-01-01 00:00:00 +0000"
+    } ,
+  
+    {
+      "title"    : "Linuxファイルシステムの作成",
+      "subtitle" : "Linux filesystem 2/N",
+      "tags"     : "Linux, filesystem",
+      "url"      : "/2021/12/30/filesystem-formatting-linux/",
+      "date"     : "2021-12-30 00:00:00 +0000"
+    } ,
+  
+    {
+      "title"    : "Partitioning Storage Volumnes",
+      "subtitle" : "Linux filesystem 1/N",
+      "tags"     : "Linux, filesystem",
+      "url"      : "/2021/12/29/partitiioning-device-linux/",
+      "date"     : "2021-12-29 00:00:00 +0000"
+    } ,
+  
+    {
+      "title"    : "統計検定：ポワソン分布と条件付き分布 その２",
+      "subtitle" : "19-20シーズンのMan Utdの得点力をポワソン分布で表現してみる",
+      "tags"     : "統計, ポワソン分布, スポーツ",
+      "url"      : "/2021/12/28/poisson-distribution-football/",
+      "date"     : "2021-12-28 00:00:00 +0000"
+    } ,
+  
+    {
+      "title"    : "統計検定：ポワソン分布と条件付き分布",
+      "subtitle" : "MLE, Method of Moment, EMアルゴリズムによるパラメータ推定",
+      "tags"     : "統計, 統計検定, Data visualization, ポワソン分布",
+      "url"      : "/2021/12/27/poisson-distribution/",
+      "date"     : "2021-12-27 00:00:00 +0000"
+    } ,
+  
+    {
+      "title"    : "統計検定：一様分布の性質の紹介",
+      "subtitle" : "Appendix: 十分統計量",
+      "tags"     : "統計",
+      "url"      : "/2021/12/26/uniform-distirbution-tokeikentei/",
+      "date"     : "2021-12-26 00:00:00 +0000"
+    } ,
+  
+    {
+      "title"    : "一様分布の変数変換",
+      "subtitle" : "数理統計：変数変換 3/n",
+      "tags"     : "統計検定, 統計",
+      "url"      : "/2021/12/25/variable-transformation-part3/",
+      "date"     : "2021-12-25 00:00:00 +0000"
+    } ,
+  
+    {
+      "title"    : "ベータ分布の性質",
+      "subtitle" : "ベイズ統計入門 2/N",
+      "tags"     : "統計, Bayesian",
+      "url"      : "/2021/12/18/bayesian-beta-distribution/",
+      "date"     : "2021-12-18 00:00:00 +0000"
+    } ,
+  
+    {
+      "title"    : "Flip a Coin and Bayesian estimation",
+      "subtitle" : "ベイズ統計入門 1/N",
+      "tags"     : "統計, Bayesian",
+      "url"      : "/2021/12/17/bayesian-basic/",
+      "date"     : "2021-12-17 00:00:00 +0000"
+    } ,
+  
+    {
+      "title"    : "awkコマンドを用いた前処理の紹介",
+      "subtitle" : "awk command 1/N",
+      "tags"     : "Linux, Shell",
+      "url"      : "/2021/12/16/awk-command-basic/",
+      "date"     : "2021-12-16 00:00:00 +0000"
+    } ,
+  
+    {
+      "title"    : "Keychron K6 Wireless Mechanical Keyboardとショートカットの整理",
+      "subtitle" : "Ubuntu Desktop環境構築 Part 24",
+      "tags"     : "Ubuntu 20.04 LTS, VSCode, Keyboard",
+      "url"      : "/2021/12/08/ubuntu-keyboard-setting/",
+      "date"     : "2021-12-08 00:00:00 +0000"
+    } ,
+  
+    {
+      "title"    : "SF Monoのインストールと各アプリケーションのfontFamilyの設定変更",
+      "subtitle" : "フォント設定 2/N",
+      "tags"     : "Ubuntu 20.04 LTS, Font",
+      "url"      : "/2021/12/07/ubuntu-SFMono-Font-Setting/",
+      "date"     : "2021-12-07 00:00:00 +0000"
+    } ,
+  
+    {
+      "title"    : "Wald複合仮説検定",
+      "subtitle" : "",
+      "tags"     : "Econometrics, statistical inference, 統計",
+      "url"      : "/2021/11/02/Wald-Multiple-Constraint-Test/",
+      "date"     : "2021-11-02 00:00:00 +0000"
+    } ,
+  
+    {
+      "title"    : "Econometrics101 - 復習",
+      "subtitle" : "Linear Regression: OLS finite sample and larger sample property",
+      "tags"     : "Econometrics",
+      "url"      : "/2021/11/01/Econometrics101-01-LinearRegression/",
+      "date"     : "2021-11-01 00:00:00 +0000"
+    } ,
+  
+    {
+      "title"    : "順位相関係数: Spearman と Kendall",
+      "subtitle" : "相関係数 4/N",
+      "tags"     : "統計検定, 統計",
+      "url"      : "/2021/10/03/rank-correlation/",
+      "date"     : "2021-10-03 00:00:00 +0000"
+    } ,
+  
+    {
+      "title"    : "確率変数の独立性",
+      "subtitle" : "",
+      "tags"     : "統計",
+      "url"      : "/2021/09/28/probability-independence/",
+      "date"     : "2021-09-28 00:00:00 +0000"
+    } ,
+  
+    {
+      "title"    : "Standard SQL CookBook - 2/N",
+      "subtitle" : "複数カラムのmin, maxのとり方 - GREATEST, LEAST",
+      "tags"     : "SQL, Python, 前処理",
+      "url"      : "/2021/09/27/SQLCookBook-minimax_multiplecolumns/",
+      "date"     : "2021-09-27 00:00:00 +0000"
+    } ,
+  
+    {
+      "title"    : "Standard SQL CookBook - 1/N",
+      "subtitle" : "Averageのとり方 - Weighted Average, Moving Average, Moving Weighted Average",
+      "tags"     : "SQL",
+      "url"      : "/2021/09/26/SQLCookBook-average/",
+      "date"     : "2021-09-26 00:00:00 +0000"
+    } ,
+  
+    {
+      "title"    : "データ設計のいろは",
+      "subtitle" : "実務で使えるデータ設計のコツ",
+      "tags"     : "SQL, テーブル設計",
+      "url"      : "/2021/09/24/datamart-design/",
+      "date"     : "2021-09-24 00:00:00 +0000"
+    } ,
+  
+    {
+      "title"    : "Numpy 1D-arrayを複製して2D-arrayへ変換する",
+      "subtitle" : "Pythonista Tips 5/N",
+      "tags"     : "Python",
+      "url"      : "/2021/09/03/numpy-broadcast/",
+      "date"     : "2021-09-03 00:00:00 +0000"
+    } ,
+  
+    {
+      "title"    : "Generator: yield and filter",
+      "subtitle" : "Pythonista Tips 4/N",
+      "tags"     : "Python",
+      "url"      : "/2021/09/02/Python-generator/",
+      "date"     : "2021-09-02 00:00:00 +0000"
+    } ,
+  
+    {
+      "title"    : "List of stringsから正規表現で指定文字列を検索する",
+      "subtitle" : "Pythonista Tips 3/N",
+      "tags"     : "Python",
+      "url"      : "/2021/09/01/python-search-word-from-list/",
+      "date"     : "2021-09-01 00:00:00 +0000"
+    } ,
+  
+    {
+      "title"    : "PythonにおけるNoneとは？いつつかうのか？",
+      "subtitle" : "Pythonista Tips 2/N",
+      "tags"     : "Python",
+      "url"      : "/2021/08/31/python-when-to-use-none/",
+      "date"     : "2021-08-31 00:00:00 +0000"
+    } ,
+  
+    {
+      "title"    : "Convert list of ints to one number",
+      "subtitle" : "Pythonista Tips 1/N",
+      "tags"     : "Python, 競技プログラミング",
+      "url"      : "/2021/08/01/list-of-ints-to-single-int/",
+      "date"     : "2021-08-01 00:00:00 +0000"
+    } ,
+  
+    {
+      "title"    : "性能の定義: throughput and response time",
+      "subtitle" : "Syetem Design 1/N",
+      "tags"     : "architecture",
+      "url"      : "/2021/07/01/throughput-responsetime/",
+      "date"     : "2021-07-01 00:00:00 +0000"
+    } ,
+  
+    {
+      "title"    : "git clean: untracked filesを削除する",
+      "subtitle" : "How to use git command 17/N",
+      "tags"     : "git",
+      "url"      : "/2021/05/17/git-clean-remove-untracked-files/",
+      "date"     : "2021-05-17 00:00:00 +0000"
+    } ,
+  
+    {
+      "title"    : "Remote Repositoryの変更とミラーリング",
+      "subtitle" : "How to use git command 16/N",
+      "tags"     : "git",
+      "url"      : "/2021/05/16/change-git-remote-url/",
+      "date"     : "2021-05-16 00:00:00 +0000"
+    } ,
+  
+    {
+      "title"    : "git log: Quick Overview of Past Changes",
+      "subtitle" : "How to use git command 15/N",
+      "tags"     : "git",
+      "url"      : "/2021/05/15/git-log-and-whatchanged/",
+      "date"     : "2021-05-15 00:00:00 +0000"
+    } ,
+  
+    {
+      "title"    : "git switch: 任意の過去commitに戻り, 新たにbranchを作成する",
+      "subtitle" : "How to use git command 14/N",
+      "tags"     : "git",
+      "url"      : "/2021/05/14/git-switch-commitid-and-branch/",
+      "date"     : "2021-05-14 00:00:00 +0000"
+    } ,
+  
+    {
+      "title"    : "定数についての命名規則",
+      "subtitle" : "Python Programming Styling Part 1",
+      "tags"     : "coding, 方法論, Python",
+      "url"      : "/2021/05/13/python-pep8-programming-style/",
+      "date"     : "2021-05-13 00:00:00 +0000"
+    } ,
+  
+    {
+      "title"    : "Display ManagerとしてのX Window System の仕組み",
+      "subtitle" : "Understanding systemd, systemctl 2/N",
+      "tags"     : "Linux, systemctl",
+      "url"      : "/2021/05/12/X-Window-System/",
+      "date"     : "2021-05-12 00:00:00 +0000"
+    } ,
+  
+    {
+      "title"    : "指定のディレクトリのmodified fileのファイルのみをgit addする",
+      "subtitle" : "How to use git command 13/N",
+      "tags"     : "git",
+      "url"      : "/2021/05/11/git-add-with-condition/",
+      "date"     : "2021-05-11 00:00:00 +0000"
+    } ,
+  
+    {
+      "title"    : "Delete Git branch and tag with same name",
+      "subtitle" : "How to use git command 12/N",
+      "tags"     : "git",
+      "url"      : "/2021/05/10/name-conflict-between-branch-and-tag/",
+      "date"     : "2021-05-10 00:00:00 +0000"
+    } ,
+  
+    {
+      "title"    : "管理者権限: sudo コマンド",
+      "subtitle" : "Linux Permission 3/N",
+      "tags"     : "Linux, システム管理",
+      "url"      : "/2021/05/09/ubuntu-user-root/",
+      "date"     : "2021-05-09 00:00:00 +0000"
+    } ,
+  
+    {
+      "title"    : "SUID, SGID, スティッキービット",
+      "subtitle" : "Linux Permission 2/N",
+      "tags"     : "Linux, システム管理",
+      "url"      : "/2021/05/08/ubuntu-permission-02/",
+      "date"     : "2021-05-08 00:00:00 +0000"
+    } ,
+  
+    {
+      "title"    : "Linuxにおける時刻管理",
+      "subtitle" : "date command &amp; NTP settting",
+      "tags"     : "Linux, システム管理",
+      "url"      : "/2021/05/07/Linux-date-clock/",
+      "date"     : "2021-05-07 00:00:00 +0000"
+    } ,
+  
+    {
+      "title"    : "SSH(Secure Shell)の基礎知識",
+      "subtitle" : "ssh series 2/N",
+      "tags"     : "Linux, ssh",
+      "url"      : "/2021/05/06/ssh-basics/",
+      "date"     : "2021-05-06 00:00:00 +0000"
+    } ,
+  
+    {
+      "title"    : "権限管理入門",
+      "subtitle" : "Linux Permission 1/N",
+      "tags"     : "Linux, システム管理",
+      "url"      : "/2021/05/05/ubuntu-permission/",
+      "date"     : "2021-05-05 00:00:00 +0000"
+    } ,
+  
+    {
+      "title"    : "Google Chrome経由でLINEをDesktop Appのように使う",
+      "subtitle" : "Ubuntu Desktop環境構築 Part 22",
+      "tags"     : "Ubuntu 20.04 LTS, App",
+      "url"      : "/2021/05/04/ubuntu-desktop-app-via-googlechrome/",
+      "date"     : "2021-05-04 00:00:00 +0000"
+    } ,
+  
+    {
+      "title"    : "Coding Style Guide Part 2",
+      "subtitle" : "SQL Style Guide",
+      "tags"     : "SQL, coding",
+      "url"      : "/2021/05/03/Coding-Guide-sql/",
+      "date"     : "2021-05-03 00:00:00 +0000"
+    } ,
+  
+    {
+      "title"    : "Coding Style Guide Part 1",
+      "subtitle" : "哲学：良いコードとは？",
+      "tags"     : "方法論, coding",
+      "url"      : "/2021/05/02/Coding-Guide/",
+      "date"     : "2021-05-02 00:00:00 +0000"
+    } ,
+  
+    {
+      "title"    : "GistとVS Codeの連携",
+      "subtitle" : "VS CodeからGistにgist createできるようにする",
+      "tags"     : "VSCode, git",
+      "url"      : "/2021/05/01/GIST-VSCode-Setup/",
+      "date"     : "2021-05-01 00:00:00 +0000"
+    } ,
+  
+    {
+      "title"    : "データサイエンティストのための会計入門",
+      "subtitle" : "企業活動とBS, PL, CSの数字",
+      "tags"     : "会計分析",
+      "url"      : "/2021/04/30/pl-analysis-01/",
+      "date"     : "2021-04-30 00:00:00 +0000"
+    } ,
+  
+    {
+      "title"    : "道具としてのファイナンス勉強ノート",
+      "subtitle" : "プロジェクト投資判断のポイントまとめ",
+      "tags"     : "finance",
+      "url"      : "/2021/04/29/finance-as-a-tool-01/",
+      "date"     : "2021-04-29 00:00:00 +0000"
+    } ,
+  
+    {
+      "title"    : "reboot コマンド／poweroff コマンドの仕組み",
+      "subtitle" : "Understanding systemd, systemctl 1/N",
+      "tags"     : "Linux, systemctl",
+      "url"      : "/2021/04/28/ubuntu-reboot-systemd/",
+      "date"     : "2021-04-28 00:00:00 +0000"
+    } ,
+  
+    {
+      "title"    : "Vimのインストールとチュートリアル",
+      "subtitle" : "Ubuntu Desktop環境構築 Part 21",
+      "tags"     : "Ubuntu 20.04 LTS, vim",
+      "url"      : "/2021/04/27/ubuntu-vim-tutorial/",
+      "date"     : "2021-04-27 00:00:00 +0000"
+    } ,
+  
+    {
+      "title"    : "LinuxのGPU機械学習環境構築: GPUドライバ/CUDA toolkitのインストール",
+      "subtitle" : "Ubuntu Desktop Datascience環境構築 2/N",
+      "tags"     : "Ubuntu 20.04 LTS, GPU",
+      "url"      : "/2021/04/26/ubuntu-gpu-driver/",
+      "date"     : "2021-04-26 00:00:00 +0000"
+    } ,
+  
+    {
+      "title"    : "Set Up Personal Access Token for GitHub",
+      "subtitle" : "Githubパスワード認証廃止への対応",
+      "tags"     : "Ubuntu 20.04 LTS, Ubuntu 22.04 LTS, git",
+      "url"      : "/2021/04/25/github-token-authentication/",
+      "date"     : "2021-04-25 00:00:00 +0000"
+    } ,
+  
+    {
+      "title"    : "メイリオフォントをUbuntuにインストール",
+      "subtitle" : "フォント設定 1/N",
+      "tags"     : "Ubuntu 20.04 LTS, Font",
+      "url"      : "/2021/04/24/ubuntu-fonts-meiryo-setting/",
+      "date"     : "2021-04-24 00:00:00 +0000"
+    } ,
+  
+    {
+      "title"    : "Sony WF-1000XM3 Bluetoothの設定",
+      "subtitle" : "Ubuntu Desktop環境構築 Part 18",
+      "tags"     : "Ubuntu 20.04 LTS, bluetooth, Network",
+      "url"      : "/2021/04/23/ubuntu-sony-bluetooth-setting/",
+      "date"     : "2021-04-23 00:00:00 +0000"
+    } ,
+  
+    {
+      "title"    : "変数変換を用いて異なる分布間の関係性を理解する",
+      "subtitle" : "数理統計：変数変換 2/n",
+      "tags"     : "統計検定, 統計, Python",
+      "url"      : "/2021/04/22/variable-transformation-part2/",
+      "date"     : "2021-04-22 00:00:00 +0000"
+    } ,
+  
+    {
+      "title"    : "変数変換のルールをまとめる",
+      "subtitle" : "数理統計：変数変換 1/n",
+      "tags"     : "統計検定, 統計, Python",
+      "url"      : "/2021/04/21/variable-transformation/",
+      "date"     : "2021-04-21 00:00:00 +0000"
+    } ,
+  
+    {
+      "title"    : "2人が同じ回数コインを投げて、表が出る回数が同じになる確率",
+      "subtitle" : "二項係数とGauss hypergeometric function",
+      "tags"     : "math, 統計, Python",
+      "url"      : "/2021/04/20/flip-the-coin-and-hypergeometric-function/",
+      "date"     : "2021-04-20 00:00:00 +0000"
+    } ,
+  
+    {
+      "title"    : "GitHub Repositoryの任意のサブディレクトリのみをローカル側で取得する",
+      "subtitle" : "How to use git command 11/N",
+      "tags"     : "git",
+      "url"      : "/2021/04/19/how-to-git-pull-subdirectory/",
+      "date"     : "2021-04-19 00:00:00 +0000"
+    } ,
+  
+    {
+      "title"    : "GitHub Pages環境構築: GA4 Source/Medium 設定",
+      "subtitle" : "GA4 カスタム URL で集客ソースデータを収集する",
+      "tags"     : "GA4, GitHub Pages",
+      "url"      : "/2021/04/18/google-analytics-source-setting/",
+      "date"     : "2021-04-18 00:00:00 +0000"
+    } ,
+  
+    {
+      "title"    : "素数の分布と素数定理",
+      "subtitle" : "",
+      "tags"     : "math, 素数",
+      "url"      : "/2021/04/17/prime-number-theorem/",
+      "date"     : "2021-04-17 00:00:00 +0000"
+    } ,
+  
+    {
+      "title"    : "数学的帰納法の原理",
+      "subtitle" : "数学の技法その１",
+      "tags"     : "math",
+      "url"      : "/2021/04/16/mathematical-induction/",
+      "date"     : "2021-04-16 00:00:00 +0000"
+    } ,
+  
+    {
+      "title"    : "統計検定：二項分布の性質",
+      "subtitle" : "条件付き期待値の計算",
+      "tags"     : "統計検定, 統計, Python, 二項分布",
+      "url"      : "/2021/04/15/binomial-distribution/",
+      "date"     : "2021-04-15 00:00:00 +0000"
+    } ,
+  
+    {
+      "title"    : "巴戦の確率",
+      "subtitle" : "巴戦の勝利確率と公平な巴戦の検討",
+      "tags"     : "math, 統計, Python",
+      "url"      : "/2021/04/14/tomoesen-problem/",
+      "date"     : "2021-04-14 00:00:00 +0000"
+    } ,
+  
+    {
+      "title"    : "集合と確率",
+      "subtitle" : "ポーカーの手札の確率",
+      "tags"     : "math, 統計",
+      "url"      : "/2021/04/13/sets-and-probability/",
+      "date"     : "2021-04-13 00:00:00 +0000"
+    } ,
+  
+    {
+      "title"    : "調和級数からみるオイラーの世界",
+      "subtitle" : "調和級数, オイラーの定理,ゼータ関数",
+      "tags"     : "math, Python, 素数",
+      "url"      : "/2021/04/12/harmonic-sequence-and-euler/",
+      "date"     : "2021-04-12 00:00:00 +0000"
+    } ,
+  
+    {
+      "title"    : "コインの両替問題とプログラミング",
+      "subtitle" : "コインの両替問題に関係して面白いなと思った問題をまとめる",
+      "tags"     : "math, 競技プログラミング, Python, Dynamic Programming",
+      "url"      : "/2021/04/11/coin-related-problems/",
+      "date"     : "2021-04-11 00:00:00 +0000"
+    } ,
+  
+    {
+      "title"    : "SQL結合演算で用いられるアルゴリズムの紹介",
+      "subtitle" : "",
+      "tags"     : "SQL",
+      "url"      : "/2021/04/10/sql-merge-algorithm/",
+      "date"     : "2021-04-10 00:00:00 +0000"
+    } ,
+  
+    {
+      "title"    : "VLCを使って Ubuntu 20.04 で DVD 視聴",
+      "subtitle" : "Ubuntu Desktop環境構築 Part 18",
+      "tags"     : "Ubuntu 20.04 LTS",
+      "url"      : "/2021/04/09/ubuntu-dvdsetup/",
+      "date"     : "2021-04-09 00:00:00 +0000"
+    } ,
+  
+    {
+      "title"    : "ユークリッドの互除法とジェネラティブアート",
+      "subtitle" : "Processingでユークリッドの互除法の可視化",
+      "tags"     : "Processing, math",
+      "url"      : "/2021/04/08/Euclidean-Algorithm/",
+      "date"     : "2021-04-08 00:00:00 +0000"
+    } ,
+  
+    {
+      "title"    : "Ubuntu Desktop環境構築 Part 17",
+      "subtitle" : "Processing 3.5.4の導入",
+      "tags"     : "Ubuntu 20.04 LTS, Processing",
+      "url"      : "/2021/04/07/ubuntu-processing/",
+      "date"     : "2021-04-07 00:00:00 +0000"
+    } ,
+  
+    {
+      "title"    : "条件を満たす整数の選び方について",
+      "subtitle" : "組合せ論 4/N",
+      "tags"     : "math",
+      "url"      : "/2021/04/06/pickup-numbers/",
+      "date"     : "2021-04-06 00:00:00 +0000"
+    } ,
+  
+    {
+      "title"    : "握手会における社交的な人数の最大値問題",
+      "subtitle" : "組合せ論 3/N",
+      "tags"     : "math",
+      "url"      : "/2021/04/05/shake-hands-problem/",
+      "date"     : "2021-04-05 00:00:00 +0000"
+    } ,
+  
+    {
+      "title"    : "有限要素の全体集合から２つの部分集合をつくるとき",
+      "subtitle" : "組合せ論 2/N",
+      "tags"     : "math",
+      "url"      : "/2021/04/04/assign-elements/",
+      "date"     : "2021-04-04 00:00:00 +0000"
+    } ,
+  
+    {
+      "title"    : "回転しても異なる模様になるマスの選び方",
+      "subtitle" : "組合せ論 1/N",
+      "tags"     : "math",
+      "url"      : "/2021/04/03/pickup-square/",
+      "date"     : "2021-04-03 00:00:00 +0000"
+    } ,
+  
+    {
+      "title"    : "機械学習パイプラインにおけるデータの質",
+      "subtitle" : "特徴量エンジニアリング 1/N",
+      "tags"     : "機械学習, 統計",
+      "url"      : "/2021/04/02/machine-learning-data-classification/",
+      "date"     : "2021-04-02 00:00:00 +0000"
+    } ,
+  
+    {
+      "title"    : "VSCodeのインストールと初期設定",
+      "subtitle" : "VSCode setup 1/N",
+      "tags"     : "Ubuntu 20.04 LTS, VSCode",
+      "url"      : "/2021/04/01/ubuntu-vscode-setting/",
+      "date"     : "2021-04-01 00:00:00 +0000"
+    } ,
+  
+    {
+      "title"    : "Capital Expenditures vs. Operating Expenses",
+      "subtitle" : "CapExとOPEXの理解",
+      "tags"     : "会計分析",
+      "url"      : "/2021/03/16/capital-expenditure-vs-operating-expenses/",
+      "date"     : "2021-03-16 00:00:00 +0000"
+    } ,
+  
+    {
+      "title"    : "いかにして問題を解くか",
+      "subtitle" : "問題を解くときの方法論の紹介",
+      "tags"     : "方法論",
+      "url"      : "/2021/03/09/How-to-Solve-It/",
+      "date"     : "2021-03-09 00:00:00 +0000"
+    } ,
+  
+    {
+      "title"    : "ssh接続時のシステムメッセージを非表示にする",
+      "subtitle" : "ssh series 2/N",
+      "tags"     : "ssh",
+      "url"      : "/2021/03/05/ssh-hushlogin/",
+      "date"     : "2021-03-05 00:00:00 +0000"
+    } ,
+  
+    {
+      "title"    : "公開鍵暗号方式の仕組み: RSAとEuler&#39;s totient function",
+      "subtitle" : "ssh series 1/N",
+      "tags"     : "ssh, 公開鍵暗号方式, 素数",
+      "url"      : "/2021/03/04/rsa-encryption-system/",
+      "date"     : "2021-03-04 00:00:00 +0000"
+    } ,
+  
+    {
+      "title"    : "意図していないブランチにcommitをしてしまったときの修正方法",
+      "subtitle" : "git trouble-shooting 2/N",
+      "tags"     : "git",
+      "url"      : "/2021/02/27/commit-wrong-branch/",
+      "date"     : "2021-02-27 00:00:00 +0000"
+    } ,
+  
+    {
+      "title"    : "Ubuntu Desktop環境構築 Part 16",
+      "subtitle" : "Dockerによる環境構築 Part 2: サンプルアプリケーションを動かしてみる",
+      "tags"     : "Ubuntu 20.04 LTS, Docker",
+      "url"      : "/2021/02/26/ubuntu-docker-setup-part2/",
+      "date"     : "2021-02-26 00:00:00 +0000"
+    } ,
+  
+    {
+      "title"    : "Pipe to/from the clipboard with shell script",
+      "subtitle" : "Shell Environement Set-up 4/N",
+      "tags"     : "Shell",
+      "url"      : "/2021/02/22/clipboard-pipe-function/",
+      "date"     : "2021-02-22 00:00:00 +0000"
+    } ,
+  
+    {
+      "title"    : "apt-file &amp; apt-cache command: パッケージを検索する",
+      "subtitle" : "APTによるパッケージ管理 5/N",
+      "tags"     : "Linux, apt",
+      "url"      : "/2021/02/21/apt-file-showfileinfo/",
+      "date"     : "2021-02-21 00:00:00 +0000"
+    } ,
+  
+    {
+      "title"    : "ビルトインコマンドの無効とfc command",
+      "subtitle" : "Shell Environement Set-up 3/N",
+      "tags"     : "Ubuntu 20.04 LTS, Ubuntu 22.04 LTS, Shell",
+      "url"      : "/2021/02/20/disable-shell-built-in-command/",
+      "date"     : "2021-02-20 00:00:00 +0000"
+    } ,
+  
+    {
+      "title"    : "シェルにおけるPOSIX準拠の終了ステータス",
+      "subtitle" : "shell script preprocess 4/N",
+      "tags"     : "Shell",
+      "url"      : "/2021/02/19/exit-status/",
+      "date"     : "2021-02-19 00:00:00 +0000"
+    } ,
+  
+    {
+      "title"    : "指定した通常ファイルの存在確認",
+      "subtitle" : "shell script preprocess 3/N",
+      "tags"     : "Shell",
+      "url"      : "/2021/02/18/check-if-targetedfile-exist/",
+      "date"     : "2021-02-18 00:00:00 +0000"
+    } ,
+  
+    {
+      "title"    : "双曲線関数の定義と性質: sinh, cosh, tanh",
+      "subtitle" : "統計のための数学 8/N",
+      "tags"     : "math",
+      "url"      : "/2021/02/17/hyperbolic-function/",
+      "date"     : "2021-02-17 00:00:00 +0000"
+    } ,
+  
+    {
+      "title"    : "三角関数と自然対数についての積分",
+      "subtitle" : "統計のための数学 7/N",
+      "tags"     : "math, フーリエ解析",
+      "url"      : "/2021/02/16/integral-and-trigonometric-functions/",
+      "date"     : "2021-02-16 00:00:00 +0000"
+    } ,
+  
+    {
+      "title"    : "テイラー展開",
+      "subtitle" : "統計のための数学 6/N",
+      "tags"     : "math, 統計",
+      "url"      : "/2021/02/15/taylor-expansion/",
+      "date"     : "2021-02-15 00:00:00 +0000"
+    } ,
+  
+    {
+      "title"    : "加法定理と積和の公式の図形的理解",
+      "subtitle" : "統計のための数学 5/N",
+      "tags"     : "math, フーリエ解析",
+      "url"      : "/2021/02/14/addition-theorem/",
+      "date"     : "2021-02-14 00:00:00 +0000"
+    } ,
+  
+    {
+      "title"    : "部分積分練習帳",
+      "subtitle" : "統計のための数学 4/N",
+      "tags"     : "math, 統計",
+      "url"      : "/2021/02/13/integration-by-parts/",
+      "date"     : "2021-02-13 00:00:00 +0000"
+    } ,
+  
+    {
+      "title"    : "数理統計: 重複順列と順列",
+      "subtitle" : "Permuation and Permutation with repetitionの実装",
+      "tags"     : "Permuation, Python, 競技プログラミング, 統計",
+      "url"      : "/2021/02/12/permutation-and-statistics/",
+      "date"     : "2021-02-12 00:00:00 +0000"
+    } ,
+  
+    {
+      "title"    : "Nmapコマンドのチュートリアル",
+      "subtitle" : "ネットワークを学ぶ 6/N",
+      "tags"     : "Network, Linux",
+      "url"      : "/2021/02/10/linux-nmap-command/",
+      "date"     : "2021-02-10 00:00:00 +0000"
+    } ,
+  
+    {
+      "title"    : "シェル変数の定義と操作",
+      "subtitle" : "shell script preprocess 2/N",
+      "tags"     : "Shell",
+      "url"      : "/2021/02/09/shell-define-variable-and-reference/",
+      "date"     : "2021-02-09 00:00:00 +0000"
+    } ,
+  
+    {
+      "title"    : "因数分解と巨大な数の割り算",
+      "subtitle" : "確率と数学ドリル 13/N",
+      "tags"     : "math",
+      "url"      : "/2021/02/08/calculate-big-order-number/",
+      "date"     : "2021-02-08 00:00:00 +0000"
+    } ,
+  
+    {
+      "title"    : "置換積分を用いて基本統計量を計算する",
+      "subtitle" : "確率と数学ドリル 12/N",
+      "tags"     : "math, 統計",
+      "url"      : "/2021/02/07/daily-statistics-quiz/",
+      "date"     : "2021-02-07 00:00:00 +0000"
+    } ,
+  
+    {
+      "title"    : "Gaussian Elimination, LU Decomposition",
+      "subtitle" : "数値計算入門 1/N",
+      "tags"     : "数値計算",
+      "url"      : "/2021/02/06/gaussian-elimination/",
+      "date"     : "2021-02-06 00:00:00 +0000"
+    } ,
+  
+    {
+      "title"    : "信号と待ち時間について",
+      "subtitle" : "確率と数学ドリル 11/N",
+      "tags"     : "math, 統計",
+      "url"      : "/2021/02/05/waiting-time/",
+      "date"     : "2021-02-05 00:00:00 +0000"
+    } ,
+  
+    {
+      "title"    : "半円周上に一様分布する点の高さの分布",
+      "subtitle" : "確率と数学ドリル 10/N",
+      "tags"     : "math, 統計",
+      "url"      : "/2021/02/04/uniform-on-circular-and-height-distribution/",
+      "date"     : "2021-02-04 00:00:00 +0000"
+    } ,
+  
+    {
+      "title"    : "min, max関数を絶対値を用いて表現する",
+      "subtitle" : "確率と数学ドリル 9/N",
+      "tags"     : "math, 統計",
+      "url"      : "/2021/02/03/min-max-abs/",
+      "date"     : "2021-02-03 00:00:00 +0000"
+    } ,
+  
+    {
+      "title"    : "Discordのインストールと使い方",
+      "subtitle" : "Ubuntu Desktop環境構築 Part 15",
+      "tags"     : "Ubuntu 20.04 LTS, Ubuntu 22.04 LTS",
+      "url"      : "/2021/02/02/ubuntu-discord-setup/",
+      "date"     : "2021-02-02 00:00:00 +0000"
+    } ,
+  
+    {
+      "title"    : "join command: Header付きcsv fileのjoin",
+      "subtitle" : "shell script preprocess 1/N",
+      "tags"     : "Linux, Shell, 前処理",
+      "url"      : "/2021/02/01/shell-script-join-with-header/",
+      "date"     : "2021-02-01 00:00:00 +0000"
+    } ,
+  
+    {
+      "title"    : "定積分の漸化式とベータ関数",
+      "subtitle" : "統計のための数学 2/N",
+      "tags"     : "math, 統計",
+      "url"      : "/2021/01/30/integral-and-reccurrence-relation/",
+      "date"     : "2021-01-30 00:00:00 +0000"
+    } ,
+  
+    {
+      "title"    : "指数分布と幾何分布の関係性",
+      "subtitle" : "確率と数学ドリル 8/N",
+      "tags"     : "math, 統計",
+      "url"      : "/2021/01/29/exponential-distirbution-and-geometric-distribution/",
+      "date"     : "2021-01-29 00:00:00 +0000"
+    } ,
+  
+    {
+      "title"    : "Ubuntu Desktop環境構築 Part 14",
+      "subtitle" : "Dockerによる環境構築 Part 1: Dockerのインストール",
+      "tags"     : "Ubuntu 20.04 LTS, Docker",
+      "url"      : "/2021/01/27/ubuntu-docker-setup/",
+      "date"     : "2021-01-27 00:00:00 +0000"
+    } ,
+  
+    {
+      "title"    : "独立な確率変数と関数変換後の独立",
+      "subtitle" : "確率と数学ドリル 6/N",
+      "tags"     : "math, 統計",
+      "url"      : "/2021/01/26/transformation-and-independence/",
+      "date"     : "2021-01-26 00:00:00 +0000"
+    } ,
+  
+    {
+      "title"    : " 数字が記載されたカードの並べ替え問題:カード数字とindexの一致確率",
+      "subtitle" : "確率と数学ドリル 5/N",
+      "tags"     : "math, 統計",
+      "url"      : "/2021/01/25/card-sequence/",
+      "date"     : "2021-01-25 00:00:00 +0000"
+    } ,
+  
+    {
+      "title"    : "Trapped Miner Problem",
+      "subtitle" : "確率と数学ドリル 4/N",
+      "tags"     : "math, 統計",
+      "url"      : "/2021/01/24/miner-choose-door/",
+      "date"     : "2021-01-24 00:00:00 +0000"
+    } ,
+  
+    {
+      "title"    : "正規分布に従う確率変数を指数関数に変換したときの分布",
+      "subtitle" : "確率と数学ドリル 3/N",
+      "tags"     : "math, 統計",
+      "url"      : "/2021/01/23/transform-normal-to-exponential/",
+      "date"     : "2021-01-23 00:00:00 +0000"
+    } ,
+  
+    {
+      "title"    : "指数分布に従う複数の独立な確率変数の最小値の分布",
+      "subtitle" : "確率と数学ドリル 2/N",
+      "tags"     : "math, 統計",
+      "url"      : "/2021/01/22/exponential-dist-and-min/",
+      "date"     : "2021-01-22 00:00:00 +0000"
+    } ,
+  
+    {
+      "title"    : "自然対数の底ネイピア数とバウンド",
+      "subtitle" : "統計のための数学 1/N",
+      "tags"     : "math, 統計",
+      "url"      : "/2021/01/21/sequence-and-napiers-constant/",
+      "date"     : "2021-01-21 00:00:00 +0000"
+    } ,
+  
+    {
+      "title"    : "GitHubの設定",
+      "subtitle" : "GitとGitHubの設定 3/N",
+      "tags"     : "git, ssh",
+      "url"      : "/2021/01/20/github-setup-memo/",
+      "date"     : "2021-01-20 00:00:00 +0000"
+    } ,
+  
+    {
+      "title"    : "Bald assertion: How to Avoid it?",
+      "subtitle" : "English in practice 1/N",
+      "tags"     : "方法論, English",
+      "url"      : "/2021/01/19/bald-assertion-how-to-avoid-it/",
+      "date"     : "2021-01-19 00:00:00 +0000"
+    } ,
+  
+    {
+      "title"    : "Hashing: Consistent Hashing",
+      "subtitle" : "Data Structures 2/N",
+      "tags"     : "競技プログラミング, データ構造, Python",
+      "url"      : "/2021/01/18/consistent-hashing/",
+      "date"     : "2021-01-18 00:00:00 +0000"
+    } ,
+  
+    {
+      "title"    : "Hashing: Hash Table, Hash Set, Hash Map",
+      "subtitle" : "Data Structures 1/N",
+      "tags"     : "競技プログラミング, データ構造, Python",
+      "url"      : "/2021/01/17/hash-table/",
+      "date"     : "2021-01-17 00:00:00 +0000"
+    } ,
+  
+    {
+      "title"    : "add-apt-repository ppaとはなにか？",
+      "subtitle" : "APTによるパッケージ管理 4/N",
+      "tags"     : "Linux, apt",
+      "url"      : "/2021/01/16/apt-ppa-repository/",
+      "date"     : "2021-01-16 00:00:00 +0000"
+    } ,
+  
+    {
+      "title"    : "packages are being kept back: not able to upgrade packages",
+      "subtitle" : "APTによるパッケージ管理 3/N",
+      "tags"     : "Linux, apt",
+      "url"      : "/2021/01/15/when-apt-upgrade-doesnot-work/",
+      "date"     : "2021-01-15 00:00:00 +0000"
+    } ,
+  
+    {
+      "title"    : "Highly divisible triangular numberの計算",
+      "subtitle" : "Project Euler Problem 12の解説",
+      "tags"     : "math, 競技プログラミング",
+      "url"      : "/2021/01/14/highly-divisible-triangular-number/",
+      "date"     : "2021-01-14 00:00:00 +0000"
+    } ,
+  
+    {
+      "title"    : "Vandermondeの行列式",
+      "subtitle" : "Vandermondeの行列式の証明",
+      "tags"     : "math",
+      "url"      : "/2021/01/13/Vandermonde-matrix/",
+      "date"     : "2021-01-13 00:00:00 +0000"
+    } ,
+  
+    {
+      "title"    : "apt vs apt-get",
+      "subtitle" : "APTによるパッケージ管理 2/N",
+      "tags"     : "Linux, apt",
+      "url"      : "/2021/01/12/difference-apt-and-aptget/",
+      "date"     : "2021-01-12 00:00:00 +0000"
+    } ,
+  
+    {
+      "title"    : "プログラムができるまでの流れとフローチャート",
+      "subtitle" : "料理レシピをフローチャートで書いてみる",
+      "tags"     : "coding, 料理",
+      "url"      : "/2021/01/11/flowchart-and-how-programing-get-started/",
+      "date"     : "2021-01-11 00:00:00 +0000"
+    } ,
+  
+    {
+      "title"    : "git HEAD: the difference between HEAD~ and HEAD^",
+      "subtitle" : "How to use git command 9/N",
+      "tags"     : "git",
+      "url"      : "/2021/01/10/git-and-HEAD-concept/",
+      "date"     : "2021-01-10 00:00:00 +0000"
+    } ,
+  
+    {
+      "title"    : "Psuedo code Tutorial",
+      "subtitle" : "疑似コードの読み方と書き方",
+      "tags"     : "Pseudo code",
+      "url"      : "/2021/01/09/learning-psuedocode/",
+      "date"     : "2021-01-09 00:00:00 +0000"
+    } ,
+  
+    {
+      "title"    : "git commit: commit messageの修正",
+      "subtitle" : "How to use git command 8/N",
+      "tags"     : "git",
+      "url"      : "/2021/01/08/how-to-modify-commit/",
+      "date"     : "2021-01-08 00:00:00 +0000"
+    } ,
+  
+    {
+      "title"    : "Remote Repositoryの設定と変更",
+      "subtitle" : "How to use git command 7/N",
+      "tags"     : "git",
+      "url"      : "/2021/01/07/remote-repository-setup/",
+      "date"     : "2021-01-07 00:00:00 +0000"
+    } ,
+  
+    {
+      "title"    : "git add: stage/unstageの便利コマンド紹介",
+      "subtitle" : "How to use git command 6/N",
+      "tags"     : "git",
+      "url"      : "/2021/01/06/git-add-u/",
+      "date"     : "2021-01-06 00:00:00 +0000"
+    } ,
+  
+    {
+      "title"    : "Why Do We Set Upstream Branch and What is it?",
+      "subtitle" : "How to use git command 5/N",
+      "tags"     : "git",
+      "url"      : "/2021/01/05/git-what-is-upstream/",
+      "date"     : "2021-01-05 00:00:00 +0000"
+    } ,
+  
+    {
+      "title"    : "C言語練習環境の作成",
+      "subtitle" : "プログラミング練習環境の構築例",
+      "tags"     : "C, 環境構築",
+      "url"      : "/2021/01/04/setup-C-language-dev-env/",
+      "date"     : "2021-01-04 00:00:00 +0000"
+    } ,
+  
+    {
+      "title"    : "git fetch and pull",
+      "subtitle" : "How to use git command 4/N",
+      "tags"     : "git",
+      "url"      : "/2021/01/03/git-pull-and-fetch/",
+      "date"     : "2021-01-03 00:00:00 +0000"
+    } ,
+  
+    {
+      "title"    : "VSCode設定: VSCodeとGitの連携",
+      "subtitle" : "Ubuntu Desktop環境構築 Part 14",
+      "tags"     : "Ubuntu 20.04 LTS, git, VSCode",
+      "url"      : "/2021/01/02/git-and-VSCode-setup/",
+      "date"     : "2021-01-02 00:00:00 +0000"
+    } ,
+  
+    {
+      "title"    : "xargs: 複数のファイルを別ディレクトリにgit mvしたい",
+      "subtitle" : "How to use git command 3/N",
+      "tags"     : "git",
+      "url"      : "/2021/01/01/git-mv-and-xargs/",
+      "date"     : "2021-01-01 00:00:00 +0000"
+    } ,
+  
+    {
+      "title"    : "git stash: 作業途中内容を退避する",
+      "subtitle" : "How to use git command 2/N",
+      "tags"     : "git",
+      "url"      : "/2020/12/31/git-command-git-stash/",
+      "date"     : "2020-12-31 00:00:00 +0000"
+    } ,
+  
+    {
+      "title"    : "リモートリポジトリの更新後にローカルリポジトリを編集 &amp; commitした場合のエラー対策",
+      "subtitle" : "git trouble-shooting 1/N",
+      "tags"     : "git",
+      "url"      : "/2020/12/30/git-pull-error-updating-local-after-remote-change/",
+      "date"     : "2020-12-30 00:00:00 +0000"
+    } ,
+  
+    {
+      "title"    : "git commandを用いたブランチ操作",
+      "subtitle" : "How to use git command 1/N",
+      "tags"     : "git",
+      "url"      : "/2020/12/29/git-remote-branch-operation/",
+      "date"     : "2020-12-29 00:00:00 +0000"
+    } ,
+  
+    {
+      "title"    : "What is Git?",
+      "subtitle" : "GitとGitHubの設定 1/N",
+      "tags"     : "git",
+      "url"      : "/2020/12/28/ubuntu-git-and-github-setup/",
+      "date"     : "2020-12-28 00:00:00 +0000"
+    } ,
+  
+    {
+      "title"    : "静的サイトジェネレーター Jekyllのインストール",
+      "subtitle" : "GitHub Pages作成環境の構築 3/N",
+      "tags"     : "GitHub Pages",
+      "url"      : "/2020/12/27/ubuntu-jekyll-install/",
+      "date"     : "2020-12-27 00:00:00 +0000"
+    } ,
+  
+    {
+      "title"    : "Markdown目次作成ツール doctocのインストール",
+      "subtitle" : "GitHub Pages作成環境の構築 2/N",
+      "tags"     : "GitHub Pages, Shell",
+      "url"      : "/2020/12/26/ubuntu-doctoc/",
+      "date"     : "2020-12-26 00:00:00 +0000"
+    } ,
+  
+    {
+      "title"    : "シェルスクリプトと前処理 Part 2",
+      "subtitle" : "シェルコマンドを用いたデータの取得",
+      "tags"     : "前処理, Shell",
+      "url"      : "/2020/12/25/datascience-in-commandline-part2/",
+      "date"     : "2020-12-25 00:00:00 +0000"
+    } ,
+  
+    {
+      "title"    : "Dockerを用いたシェルスクリプト練習環境の作成",
+      "subtitle" : "Data Science at the Command Lineの練習環境の作成",
+      "tags"     : "前処理, Shell, Docker",
+      "url"      : "/2020/12/24/datascience-in-commandline-part1/",
+      "date"     : "2020-12-24 00:00:00 +0000"
+    } ,
+  
+    {
+      "title"    : "Z shell installation and configuration",
+      "subtitle" : "Shell Environement Set-up 2/N",
+      "tags"     : "Ubuntu 20.04 LTS, Ubuntu 22.04 LTS, Shell",
+      "url"      : "/2020/12/23/ubuntu-zshsetup/",
+      "date"     : "2020-12-23 00:00:00 +0000"
+    } ,
+  
+    {
+      "title"    : "ターミナル環境の構築: Terminatorのインストール",
+      "subtitle" : "Shell Environement Set-up 1/N",
+      "tags"     : "Ubuntu 20.04 LTS, Ubuntu 22.04 LTS, Shell",
+      "url"      : "/2020/12/22/ubuntu-terminator/",
+      "date"     : "2020-12-22 00:00:00 +0000"
+    } ,
+  
+    {
+      "title"    : "キャッシュ削除ツール Bleachbitのインストール",
+      "subtitle" : "Ubuntu Desktop環境構築 Part 8",
+      "tags"     : "Ubuntu 20.04 LTS",
+      "url"      : "/2020/12/21/ubuntu-bleachbit/",
+      "date"     : "2020-12-21 00:00:00 +0000"
+    } ,
+  
+    {
+      "title"    : "Linux環境構築基礎知識：パッケージマネジャーの導入",
+      "subtitle" : "APTによるパッケージ管理 1/N",
+      "tags"     : "Linux, apt",
+      "url"      : "/2020/12/20/packages-manager-apt-command/",
+      "date"     : "2020-12-20 00:00:00 +0000"
+    } ,
+  
+    {
+      "title"    : "google-drive-ocamlfuseのインストール: Linux版google-drive-stream",
+      "subtitle" : "Ubuntu Desktop環境構築 Part 7",
+      "tags"     : "Ubuntu 20.04 LTS, Shell",
+      "url"      : "/2020/12/19/ubuntu-google-drive-setup/",
+      "date"     : "2020-12-19 00:00:00 +0000"
+    } ,
+  
+    {
+      "title"    : "Ubuntu Desktop環境構築 Part 6",
+      "subtitle" : "最低限のセキュリティ対策",
+      "tags"     : "Ubuntu 20.04 LTS",
+      "url"      : "/2020/12/18/ubuntu-security-part2/",
+      "date"     : "2020-12-18 00:00:00 +0000"
+    } ,
+  
+    {
+      "title"    : "Ubuntu Desktop環境構築 Part 5 (未実施 Part)",
+      "subtitle" : "デスクトップへのリモート接続：WoL設定",
+      "tags"     : "Ubuntu 20.04 LTS, 未完成記事",
+      "url"      : "/2020/12/17/ubuntu-network-setting/",
+      "date"     : "2020-12-17 00:00:00 +0000"
+    } ,
+  
+    {
+      "title"    : "ファイヤウォールの設定: ufw と Gufw",
+      "subtitle" : "Ubuntu Desktop環境構築 Part 4",
+      "tags"     : "Ubuntu 20.04 LTS",
+      "url"      : "/2020/12/16/ubuntu-security/",
+      "date"     : "2020-12-16 00:00:00 +0000"
+    } ,
+  
+    {
+      "title"    : "Ubuntu 20.04 LTS マルチディスプレイ設定",
+      "subtitle" : "Ubuntu Desktop環境構築 Part 3",
+      "tags"     : "Ubuntu 20.04 LTS",
+      "url"      : "/2020/12/11/ubuntu-display/",
+      "date"     : "2020-12-11 00:00:00 +0000"
+    } ,
+  
+    {
+      "title"    : "Ubuntuのディレクトリ名をEnglishにrename &amp; 日本語入力環境を整える",
+      "subtitle" : "Ubuntu Desktop環境構築 Part 2",
+      "tags"     : "Ubuntu 20.04 LTS, Linux",
+      "url"      : "/2020/12/09/ubuntu-language-settings/",
+      "date"     : "2020-12-09 00:00:00 +0000"
+    } ,
+  
+    {
+      "title"    : "network overheadを理解する",
+      "subtitle" : "",
+      "tags"     : "Network",
+      "url"      : "/2020/12/08/network-overhead/",
+      "date"     : "2020-12-08 00:00:00 +0000"
+    } ,
+  
+    {
+      "title"    : "PCにUbuntu 20.04 LTS (Focal Fossa)をインストールする",
+      "subtitle" : "Ubuntu Desktop環境構築 Part 1",
+      "tags"     : "Ubuntu 20.04 LTS",
+      "url"      : "/2020/12/07/ubuntu-setup/",
+      "date"     : "2020-12-07 00:00:00 +0000"
+    } ,
+  
+    {
+      "title"    : "Memoization(メモ化)のまとめ Part 1",
+      "subtitle" : "PythonにおけるMemoizationの実践",
+      "tags"     : "Python, Memoization",
+      "url"      : "/2020/11/30/Memoization-part-1/",
+      "date"     : "2020-11-30 00:00:00 +0000"
+    } ,
+  
+    {
+      "title"    : "「御社」と「貴社」の使い分け",
+      "subtitle" : "Today&#39;s words and phrases 13/N",
+      "tags"     : "コミュニケーション",
+      "url"      : "/2020/11/08/japanese-company-noun/",
+      "date"     : "2020-11-08 00:00:00 +0000"
+    } ,
+  
+    {
+      "title"    : "somthing naturally follow suit: somthingは自然と身につく, 自然とやって来る",
+      "subtitle" : "Today&#39;s words and phrases 12/N",
+      "tags"     : "English",
+      "url"      : "/2020/11/07/naturally-follow-suit/",
+      "date"     : "2020-11-07 00:00:00 +0000"
+    } ,
+  
+    {
+      "title"    : "Opposites attract",
+      "subtitle" : "Today&#39;s words and phrases 11/N",
+      "tags"     : "English",
+      "url"      : "/2020/11/06/opposites-attarct/",
+      "date"     : "2020-11-06 00:00:00 +0000"
+    } ,
+  
+    {
+      "title"    : "Would you like this heated up?: こちらの商品あたためますか？",
+      "subtitle" : "Today&#39;s words and phrases 10/N",
+      "tags"     : "English",
+      "url"      : "/2020/11/05/would-you-like-this-heated-up/",
+      "date"     : "2020-11-05 00:00:00 +0000"
+    } ,
+  
+    {
+      "title"    : "dire, Proxy, Prioritize, and we only have a certain amount of time",
+      "subtitle" : "Today&#39;s words and phrases 9/N",
+      "tags"     : "English",
+      "url"      : "/2020/11/04/todays-words/",
+      "date"     : "2020-11-04 00:00:00 +0000"
+    } ,
+  
+    {
+      "title"    : "List comprehensionとmapとfilterの比較",
+      "subtitle" : "PythonとList comprehension",
+      "tags"     : "Python, 前処理",
+      "url"      : "/2020/11/03/List-Comprehension-instead-of-map-and-filter/",
+      "date"     : "2020-11-03 00:00:00 +0000"
+    } ,
+  
+    {
+      "title"    : "All hands on deck",
+      "subtitle" : "Today&#39;s words and phrases 8/N",
+      "tags"     : "English",
+      "url"      : "/2020/11/02/idiom-all-hands-on-deck/",
+      "date"     : "2020-11-02 00:00:00 +0000"
+    } ,
+  
+    {
+      "title"    : "Working day by day toward what you want to be",
+      "subtitle" : "Today&#39;s words and phrases 7/N",
+      "tags"     : "English",
+      "url"      : "/2020/11/01/motivational-phrase-working-day-by-day/",
+      "date"     : "2020-11-01 00:00:00 +0000"
+    } ,
+  
+    {
+      "title"    : "デバイスが利用しているグローバルIPアドレスとローカルネットワーク内のデバイスの検索",
+      "subtitle" : "ネットワークを学ぶ 5/N",
+      "tags"     : "Network, Linux",
+      "url"      : "/2020/10/27/find-device-within-local-network/",
+      "date"     : "2020-10-27 00:00:00 +0000"
+    } ,
+  
+    {
+      "title"    : "Pearson相関係数: 多項分布とサイコロの出目の相関係数",
+      "subtitle" : "相関係数 3/N",
+      "tags"     : "統計",
+      "url"      : "/2020/10/26/PEarson-correlation-dice/",
+      "date"     : "2020-10-26 00:00:00 +0000"
+    } ,
+  
+    {
+      "title"    : "変数間の直線的関係性の尺度としてのPearsonの相関係数",
+      "subtitle" : "相関係数 2/N",
+      "tags"     : "統計検定, 統計",
+      "url"      : "/2020/10/25/Pearson-correlation/",
+      "date"     : "2020-10-25 00:00:00 +0000"
+    } ,
+  
+    {
+      "title"    : "文字コードをUTF-8へ変換 &amp; 改行コードを変換",
+      "subtitle" : "文字コードに親しむ 2/N",
+      "tags"     : "Shell, 文字コード",
+      "url"      : "/2020/10/24/convert-character-code-by-nkf/",
+      "date"     : "2020-10-24 00:00:00 +0000"
+    } ,
+  
+    {
+      "title"    : "二匹目のどじょうを狙う",
+      "subtitle" : "Today&#39;s words and phrases 6/N",
+      "tags"     : "English",
+      "url"      : "/2020/10/23/japanese-expression-the-second-loach/",
+      "date"     : "2020-10-23 00:00:00 +0000"
+    } ,
+  
+    {
+      "title"    : "死神とのコイントスゲーム",
+      "subtitle" : "確率と数学ドリル 1/N",
+      "tags"     : "Dynamic Programming, Python, 競技プログラミング, 統計",
+      "url"      : "/2020/10/22/CoinFlip-Programming/",
+      "date"     : "2020-10-22 00:00:00 +0000"
+    } ,
+  
+    {
+      "title"    : "Prove Pearson Correlation always between -1 and 1",
+      "subtitle" : "相関係数 1/N",
+      "tags"     : "統計",
+      "url"      : "/2020/10/21/pearson-correlation-cauchy-schwarz/",
+      "date"     : "2020-10-21 00:00:00 +0000"
+    } ,
+  
+    {
+      "title"    : "DNSと名前解決",
+      "subtitle" : "ネットワークを学ぶ 4/N",
+      "tags"     : "ネットワーク, Linux",
+      "url"      : "/2020/10/20/DNS-and-name-resolve/",
+      "date"     : "2020-10-20 00:00:00 +0000"
+    } ,
+  
+    {
+      "title"    : "正規表現入門 part 2",
+      "subtitle" : "Pythonと正規表現によるパターンマッチング",
+      "tags"     : "regex, Python",
+      "url"      : "/2020/10/19/Regular-Expression-part2/",
+      "date"     : "2020-10-19 00:00:00 +0000"
+    } ,
+  
+    {
+      "title"    : "IPアドレスの構造",
+      "subtitle" : "ネットワークを学ぶ 3/N",
+      "tags"     : "Network",
+      "url"      : "/2020/10/17/IP-Address/",
+      "date"     : "2020-10-17 00:00:00 +0000"
+    } ,
+  
+    {
+      "title"    : "正規表現入門 part 1",
+      "subtitle" : "正規表現は何か？",
+      "tags"     : "regex",
+      "url"      : "/2020/10/16/Regular-Expression-part1/",
+      "date"     : "2020-10-16 00:00:00 +0000"
+    } ,
+  
+    {
+      "title"    : "電子メールの仕組み",
+      "subtitle" : "ネットワークを学ぶ 2/N",
+      "tags"     : "Network",
+      "url"      : "/2020/10/15/Mail-system-basic/",
+      "date"     : "2020-10-15 00:00:00 +0000"
+    } ,
+  
+    {
+      "title"    : "初心者がTCP/IPを理解する",
+      "subtitle" : "ネットワークを学ぶ 1/N",
+      "tags"     : "Network",
+      "url"      : "/2020/10/14/TCP-IP-protocol/",
+      "date"     : "2020-10-14 00:00:00 +0000"
+    } ,
+  
+    {
+      "title"    : "GitHub Pages: GA4の設定",
+      "subtitle" : "GitHub Pages作成環境の構築 1/N",
+      "tags"     : "GitHub Pages",
+      "url"      : "/2020/10/13/Blog-development/",
+      "date"     : "2020-10-13 00:00:00 +0000"
+    } ,
+  
+    {
+      "title"    : "固定小数点表示と浮動小数点表示",
+      "subtitle" : "コンピューターにおける算術演算 3/N",
+      "tags"     : "数値計算",
+      "url"      : "/2020/10/12/floating-point-format/",
+      "date"     : "2020-10-12 00:00:00 +0000"
+    } ,
+  
+    {
+      "title"    : "文字コード &gt; ギリシア文字",
+      "subtitle" : "文字コードに親しむ 1/N",
+      "tags"     : "文字コード",
+      "url"      : "/2020/10/11/Greek-alphabet/",
+      "date"     : "2020-10-11 00:00:00 +0000"
+    } ,
+  
+    {
+      "title"    : "補数を用いた整数の表現",
+      "subtitle" : "コンピューターにおける算術演算 2/N",
+      "tags"     : "数値計算",
+      "url"      : "/2020/10/09/ArithmeticOperationsPerformedbytheComputers/",
+      "date"     : "2020-10-09 00:00:00 +0000"
+    } ,
+  
+    {
+      "title"    : "一般教養としてのComputer Science",
+      "subtitle" : "プログラムが動作する根本的な仕組みを理解する",
+      "tags"     : "Linux",
+      "url"      : "/2020/10/08/How-Programm-Works/",
+      "date"     : "2020-10-08 00:00:00 +0000"
+    } ,
+  
+    {
+      "title"    : "数字の並べ替え",
+      "subtitle" : "確率と数学ドリル 1/N",
+      "tags"     : "math, Python",
+      "url"      : "/2020/10/07/daigakuenosugaku-permutation/",
+      "date"     : "2020-10-07 00:00:00 +0000"
+    } ,
+  
+    {
+      "title"    : "言語習得のための７つの習慣",
+      "subtitle" : "How to learn a new language: 7 secrets from TED Translators",
+      "tags"     : "English",
+      "url"      : "/2020/10/06/how-to-learn-a-new-language/",
+      "date"     : "2020-10-06 00:00:00 +0000"
+    } ,
+  
+    {
+      "title"    : "What is consciousness",
+      "subtitle" : "Today&#39;s words and phrases 5/N",
+      "tags"     : "English",
+      "url"      : "/2020/10/05/what-is-consciousness/",
+      "date"     : "2020-10-05 00:00:00 +0000"
+    } ,
+  
+    {
+      "title"    : "Overthink",
+      "subtitle" : "Today&#39;s words and phrases 4/N",
+      "tags"     : "English",
+      "url"      : "/2020/10/04/terminology-overthink/",
+      "date"     : "2020-10-04 00:00:00 +0000"
+    } ,
+  
+    {
+      "title"    : "Catch a lead when it’s hot",
+      "subtitle" : "Today&#39;s words and phrases 3/N",
+      "tags"     : "English",
+      "url"      : "/2020/10/03/terminology-catch-a-lead-when-its-hot/",
+      "date"     : "2020-10-03 00:00:00 +0000"
+    } ,
+  
+    {
+      "title"    : "Wimpy and Wimpiness",
+      "subtitle" : "Today&#39;s words and phrases 2/N",
+      "tags"     : "English",
+      "url"      : "/2020/10/02/terminology-wimpiness/",
+      "date"     : "2020-10-02 00:00:00 +0000"
+    } ,
+  
+    {
+      "title"    : "FTE: Full-time equivalent",
+      "subtitle" : "Today&#39;s words and phrases 1/N",
+      "tags"     : "English",
+      "url"      : "/2020/10/01/terminology-FTE/",
+      "date"     : "2020-10-01 00:00:00 +0000"
+    } ,
+  
+    {
+      "title"    : "数と数の関係",
+      "subtitle" : "数学・統計周り雑学 2/N",
+      "tags"     : "math",
+      "url"      : "/2020/09/04/correspondance-and-function/",
+      "date"     : "2020-09-04 00:00:00 +0000"
+    } ,
+  
+    {
+      "title"    : "360度ではなくラジアンで表すのはなぜ",
+      "subtitle" : "数学・統計周り雑学 1/N",
+      "tags"     : "math",
+      "url"      : "/2020/09/03/radian/",
+      "date"     : "2020-09-03 00:00:00 +0000"
+    } ,
+  
+    {
+      "title"    : "Intel Core マイクロアーキテクチャーの構成",
+      "subtitle" : "Computer science 101 1/N",
+      "tags"     : "computer science, Linux",
+      "url"      : "/2020/09/02/pc-architecture/",
+      "date"     : "2020-09-02 00:00:00 +0000"
+    } ,
+  
+    {
+      "title"    : "退化分布: degenerate distribution",
+      "subtitle" : "確率分布 1/N",
+      "tags"     : "統計, math",
+      "url"      : "/2020/09/01/degenerate-distribution/",
+      "date"     : "2020-09-01 00:00:00 +0000"
+    } 
+  
+]

@@ -1,0 +1,726 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Ryo&apos;s Tech Blog</title>
+    <description>元経済学徒, 現在どっかでデータサイエンティストもどきやってる人間の勉強日記</description>
+    <link>https://ryonakagami.github.io/</link>
+    <atom:link href="https://ryonakagami.github.io/feed.xml" rel="self" type="application/rss+xml" />
+    <pubDate>Wed, 06 Aug 2025 23:56:06 +0000</pubDate>
+    <lastBuildDate>Wed, 06 Aug 2025 23:56:06 +0000</lastBuildDate>
+    <generator>Jekyll v3.9.5</generator>
+    
+      <item>
+        <title>Quarto Version Updateの備忘録</title>
+        <description>&lt;h2 id=&quot;update-steps&quot;&gt;Update Steps&lt;/h2&gt;
+
+&lt;div class=&quot;language-zsh highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;table class=&quot;rouge-table&quot;&gt;&lt;tbody&gt;&lt;tr&gt;&lt;td class=&quot;rouge-gutter gl&quot;&gt;&lt;pre class=&quot;lineno&quot;&gt;1
+2
+3
+4
+5
+6
+7
+8
+9
+10
+11
+12
+&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;rouge-code&quot;&gt;&lt;pre&gt;&lt;span class=&quot;c&quot;&gt;# Linux&lt;/span&gt;
+&lt;span class=&quot;c&quot;&gt;# Step 1: remove the bug version&lt;/span&gt;
+&lt;span class=&quot;nb&quot;&gt;sudo &lt;/span&gt;dpkg &lt;span class=&quot;nt&quot;&gt;-r&lt;/span&gt; quarto
+
+&lt;span class=&quot;c&quot;&gt;# Step 2: download the 1.5.57&lt;/span&gt;
+wget https://github.com/quarto-dev/quarto-cli/releases/download/v1.5.57/quarto-1.5.57-linux-amd64.deb
+
+&lt;span class=&quot;c&quot;&gt;# Step 3: install via gdebi&lt;/span&gt;
+&lt;span class=&quot;nb&quot;&gt;sudo &lt;/span&gt;gdebi quarto-1.5.57-linux-amd64.deb
+
+&lt;span class=&quot;c&quot;&gt;# Step 4: check if you installed the version you intended&lt;/span&gt;
+quarto check
+&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/tbody&gt;&lt;/table&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;div style=&quot;padding-left: 2em; padding-right: 2em; border-radius: 0em; border-style:solid; border-color:#00008B;&quot;&gt;
+  &lt;p&gt;&lt;strong&gt;📘 REMARKS&lt;/strong&gt; &lt;br /&gt;&lt;/p&gt;
+
+  &lt;ul&gt;
+    &lt;li&gt;Version &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;1.6.32&lt;/code&gt; はbugあり&lt;/li&gt;
+  &lt;/ul&gt;
+
+&lt;/div&gt;
+</description>
+        <pubDate>Thu, 07 Nov 2024 00:00:00 +0000</pubDate>
+        <link>https://ryonakagami.github.io/2024/11/07/quarto-update/</link>
+        <guid isPermaLink="true">https://ryonakagami.github.io/2024/11/07/quarto-update/</guid>
+        
+        <category>quarto</category>
+        
+        
+      </item>
+    
+      <item>
+        <title>Pypiへpublishメモ</title>
+        <description>&lt;h2 id=&quot;how-to-publish-your-repository&quot;&gt;How to publish your repository&lt;/h2&gt;
+
+&lt;p&gt;Install Poetry: This command installs Poetry, a tool for dependency management and packaging in Python.
+Configure PyPI Credentials: This step configures your PyPI credentials so that Poetry can authenticate with PyPI.
+Build the Package: This command builds the source distribution and wheel for your package.
+Publish the Package: This command publishes your package to PyPI.
+Make sure your pyproject.toml file is correctly configured, as shown in your provided excerpt. This includes specifying the package name, version, description, authors, dependencies, and build system.
+After running these commands, your package should be available on PyPI.&lt;/p&gt;
+
+&lt;p&gt;&lt;strong&gt; ▶  Steps&lt;/strong&gt;&lt;/p&gt;
+
+&lt;ol&gt;
+  &lt;li&gt;Register to PyPI.&lt;/li&gt;
+  &lt;li&gt;Register the PyPI token in Poetry.&lt;/li&gt;
+  &lt;li&gt;Commit the latest version to the main branch and add a tag.&lt;/li&gt;
+  &lt;li&gt;Publish.&lt;/li&gt;
+&lt;/ol&gt;
+
+&lt;div class=&quot;language-zsh highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;table class=&quot;rouge-table&quot;&gt;&lt;tbody&gt;&lt;tr&gt;&lt;td class=&quot;rouge-gutter gl&quot;&gt;&lt;pre class=&quot;lineno&quot;&gt;1
+2
+3
+4
+5
+6
+7
+8
+9
+10
+11
+12
+13
+14
+&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;rouge-code&quot;&gt;&lt;pre&gt;&lt;span class=&quot;c&quot;&gt;# Configure PyPI credentials&lt;/span&gt;
+poetry config pypi-token.pypi &amp;lt;your-pypi-token&amp;gt;
+
+&lt;span class=&quot;c&quot;&gt;# commit&lt;/span&gt;
+git commit &lt;span class=&quot;nt&quot;&gt;-m&lt;/span&gt; &lt;span class=&quot;s2&quot;&gt;&quot;PUB: v.1.4.0&quot;&lt;/span&gt;  
+
+&lt;span class=&quot;c&quot;&gt;# add tag&lt;/span&gt;
+git tag v1.4.0
+
+&lt;span class=&quot;c&quot;&gt;# push&lt;/span&gt;
+git push
+
+&lt;span class=&quot;c&quot;&gt;# Publish the package&lt;/span&gt;
+poetry publish &lt;span class=&quot;nt&quot;&gt;--build&lt;/span&gt;
+&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/tbody&gt;&lt;/table&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;p&gt;&lt;strong&gt; ▶  Is it okay to add the &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;dist&lt;/code&gt; folder to .gitignore, which is created when running the &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;poetry publish --build&lt;/code&gt; command?&lt;/strong&gt;&lt;/p&gt;
+
+&lt;p&gt;the &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;poetry publish --build&lt;/code&gt; command creates the &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;dist&lt;/code&gt; folder. Here’s why:&lt;/p&gt;
+
+&lt;ol&gt;
+  &lt;li&gt;Build Process: When you run &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;poetry publish --build&lt;/code&gt;, Poetry first builds your package. This involves creating distribution archives (e.g., source distribution &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;.tar.gz&lt;/code&gt; and wheel &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;.whl&lt;/code&gt; files) for your project.&lt;/li&gt;
+  &lt;li&gt;Output Location: These distribution files are placed in the &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;dist&lt;/code&gt; folder by default. This folder is where Poetry stores the built artifacts before they are uploaded to PyPI.&lt;/li&gt;
+&lt;/ol&gt;
+
+&lt;p&gt;The &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;dist&lt;/code&gt; folder is essentially a temporary storage location for the built package files. 
+Since these files can be regenerated by running the build command again, it is common practice to add the &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;dist&lt;/code&gt; folder to your &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;.gitignore&lt;/code&gt; file to avoid cluttering your repository with build artifacts.&lt;/p&gt;
+</description>
+        <pubDate>Tue, 08 Oct 2024 00:00:00 +0000</pubDate>
+        <link>https://ryonakagami.github.io/2024/10/08/poetry-pypi-publish/</link>
+        <guid isPermaLink="true">https://ryonakagami.github.io/2024/10/08/poetry-pypi-publish/</guid>
+        
+        <category>python</category>
+        
+        
+      </item>
+    
+      <item>
+        <title>砂の女より引用: メビウスの輪</title>
+        <description>&lt;h2 id=&quot;メビウスの輪のような人物像&quot;&gt;メビウスの輪のような人物像&lt;/h2&gt;
+
+&lt;div style=&quot;padding-left: 2em; padding-right: 2em; border-radius: 0em; border-style:solid; border-color:#00008B;&quot;&gt;
+  &lt;p&gt;&lt;strong&gt;📘 メビウスの輪&lt;/strong&gt; &lt;br /&gt;&lt;/p&gt;
+
+  &lt;p&gt;誰かが，彼のことをメビウスの輪のようだと評したことがある．メビウスの輪とは，一度ひねった紙テープの両端を丸く張り合わせたもので，つまり裏も表もない空間のことだ．仕事と，私生活とが，メビウスの輪のようにつながっているというほどの意味だろうか．皮肉と同時に，多少は称賛の気持ちも込められていたように思う&lt;/p&gt;
+
+&lt;/div&gt;
+
+&lt;p&gt;&lt;br /&gt;&lt;/p&gt;
+
+&lt;p&gt;&lt;strong&gt; ▶  English Translation&lt;/strong&gt;&lt;/p&gt;
+
+&lt;p&gt;Someone once described him as being like a Möbius strip. A Möbius strip is created by taking a strip of paper, giving it a half-twist, and then joining the ends together to form a loop. This results in a surface with only one side, blurring the distinction between front and back. The description may suggest that his work and personal life are interconnected, much like the continuous loop of a Möbius strip, without clear boundaries between the two. There seems to be a blend of irony and admiration in this characterization.&lt;/p&gt;
+</description>
+        <pubDate>Sun, 11 Aug 2024 00:00:00 +0000</pubDate>
+        <link>https://ryonakagami.github.io/2024/08/11/mobius-strip/</link>
+        <guid isPermaLink="true">https://ryonakagami.github.io/2024/08/11/mobius-strip/</guid>
+        
+        <category>English</category>
+        
+        
+      </item>
+    
+      <item>
+        <title>引用: 利己的な願望の現れ</title>
+        <description>&lt;h2 id=&quot;安部公房砂の女逃走中の意識の流れにて&quot;&gt;安部公房「砂の女」逃走中の意識の流れにて&lt;/h2&gt;
+
+&lt;p&gt;「お前が大好きだった，おれに行水を使わせる儀式」などと，センチメンタルに回顧し，
+女への同情モードに入っている場面について，文筆家のヤマザキマリさんは以下のような読み方をしています：&lt;/p&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;これまで「女」と呼んでいたところ，男が女を「おまえ」と二人称で呼んでいる&lt;/li&gt;
+  &lt;li&gt;置き去りにして逃げたことを詫びるような気持ちもあるけど，彼はその気持ちに自分で酔っている&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;そして以下のように結んでいます：&lt;/p&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;他者への慮りのようでありながら，それまで自分に起こったすべてをフィクションにしてしまいたいという，利己的な願望の現れなのかもしれません&lt;/li&gt;
+  &lt;li&gt;It may be a manifestation of selfish desire, while appearing to be considerate of others, to want to turn all that has happened to oneself into fiction.&lt;/li&gt;
+&lt;/ul&gt;
+</description>
+        <pubDate>Sun, 04 Aug 2024 00:00:00 +0000</pubDate>
+        <link>https://ryonakagami.github.io/2024/08/04/sunanoonya-phrase/</link>
+        <guid isPermaLink="true">https://ryonakagami.github.io/2024/08/04/sunanoonya-phrase/</guid>
+        
+        <category>English</category>
+        
+        
+      </item>
+    
+      <item>
+        <title>Colors of Lie</title>
+        <description>&lt;h2 id=&quot;different-colors-of-lie&quot;&gt;Different Colors of lie&lt;/h2&gt;
+
+&lt;p&gt;Lie us a way of deceiving someone. It is known that humans start telling lies from around the age of two to three, and this tendency peaks around the age of seven. Interestingly, from then on, the tendency to lie decreases continuously until the age of sixteen. So basically, the teenager years are the most honest of period of development.&lt;/p&gt;
+
+&lt;p&gt;This raises a question: What changes between teenagers and adults, and why do they start lying more again?
+One theory involves moral licensing, where adults come up with all sorts of ways to rationalize the lies they tell.&lt;/p&gt;
+
+&lt;p&gt;Moral licensing is a social psychological concept that describes how individuals tend to justify their behaviors, particularly those that may be considered immoral or unethical. In simpler terms, it’s the idea that doing something good can make people feel licensed or entitled to do something not-so-good.&lt;/p&gt;
+
+&lt;p&gt;When it comes to lying, it’s important to distinguish between acceptable and unacceptable lies to understand when and why lying occurs.&lt;/p&gt;
+
+&lt;table&gt;
+  &lt;thead&gt;
+    &lt;tr&gt;
+      &lt;th&gt;Types of Lie&lt;/th&gt;
+      &lt;th&gt;Comments&lt;/th&gt;
+    &lt;/tr&gt;
+  &lt;/thead&gt;
+  &lt;tbody&gt;
+    &lt;tr&gt;
+      &lt;td&gt;&lt;strong&gt;white lies&lt;/strong&gt;&lt;/td&gt;
+      &lt;td&gt;a lie we tell to be polite or spare others feeling&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;td&gt;&lt;strong&gt;Grey lies&lt;/strong&gt;&lt;/td&gt;
+      &lt;td&gt;a lie to cover up our own mistakes&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;td&gt;&lt;strong&gt;Blue lies&lt;/strong&gt;&lt;/td&gt;
+      &lt;td&gt;a lie in the interest of a collective or group&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;td&gt;&lt;strong&gt;Purple lies&lt;/strong&gt;&lt;/td&gt;
+      &lt;td&gt;a lie to be modest or to remain low-key&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;td&gt;&lt;strong&gt;Red lies&lt;/strong&gt;&lt;/td&gt;
+      &lt;td&gt;a lie told out of spite and revenge&lt;/td&gt;
+    &lt;/tr&gt;
+  &lt;/tbody&gt;
+&lt;/table&gt;
+
+&lt;h2 id=&quot;deception-vs-deceit&quot;&gt;Deception vs Deceit&lt;/h2&gt;
+
+&lt;p&gt;“Deceit” and “deception” are closely related terms that refer to the act of misleading or providing false information,
+but they differ in their usage and nuances.&lt;/p&gt;
+
+&lt;p&gt;&lt;strong&gt; ▶  Deceit&lt;/strong&gt;&lt;/p&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;the act or practice of deceiving someone&lt;/li&gt;
+  &lt;li&gt;It implies a deliberate and intentional effort to mislead or give false information.&lt;/li&gt;
+  &lt;li&gt;“He was accused of deceit when he lied about his qualifications.”&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;&lt;strong&gt; ▶  Deception&lt;/strong&gt;&lt;/p&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;“Deception” has a broader meaning and can refer to the act, practice, or result of deceiving someone&lt;/li&gt;
+  &lt;li&gt;it includes not only intentional lies but also tactics or strategies that create a false or misleading impression&lt;/li&gt;
+  &lt;li&gt;“The magician’s performance relied on clever deception to astound the audience”&lt;/li&gt;
+&lt;/ul&gt;
+</description>
+        <pubDate>Sat, 03 Aug 2024 00:00:00 +0000</pubDate>
+        <link>https://ryonakagami.github.io/2024/08/03/color-of-lie/</link>
+        <guid isPermaLink="true">https://ryonakagami.github.io/2024/08/03/color-of-lie/</guid>
+        
+        <category>コミュニケーション</category>
+        
+        <category>English</category>
+        
+        
+      </item>
+    
+      <item>
+        <title>ネットワークインターフェイス カード(Network Interface Card)の基礎知識</title>
+        <description>&lt;h2 id=&quot;nicとは&quot;&gt;NICとは？&lt;/h2&gt;
+
+&lt;p&gt;ネットワークインターフェイス カード (Network Interface Card, NIC) は，
+コンピューターまたはネットワーク対応デバイスをネットワークにつなげるためのプリント基板としてのハードウェアコンポーネントです．
+ネットワークアダプター，ネットワーク カード，LANアダプターとも呼ばれたりします．
+ネットワーク上のデバイスを識別するMAC(Media Access Control)アドレスは，NICが持っています．&lt;/p&gt;
+
+&lt;p&gt;NICは通常、コンピューターのマザーボードに直接接続するか，または拡張スロット(PCI ExpressスロットやUSBスロット)
+に挿入する拡張カードの形式で提供されます．&lt;/p&gt;
+
+&lt;h3 id=&quot;nicオフロード機能&quot;&gt;NICオフロード機能&lt;/h3&gt;
+
+&lt;p&gt;NICの帯域幅は1Gbpsが標準的だが，10Gbps，25Gbps，50Gbpsと広い帯域幅までカバーする種類が登場してきました．
+NICはパケット（ネットワークで送受信するデータの伝送単位）の処理をサーバのCPUに受け渡しますが，
+ネットワークの高速化（帯域幅の拡大）に伴い，CPUがパケットを処理する際の負担が大きくなることが問題になり始めました．&lt;/p&gt;
+
+&lt;p&gt;CPUはパケットの処理に掛かる負荷が増えるほど，アプリケーション側の処理にリソースを割けなくなってしまいます．
+この問題を解決するために，CPUの処理の一部をNICのプロセッサに担わせる，いわゆる「NICへのオフロード」という手法が登場しました．&lt;/p&gt;
+
+&lt;p&gt;具体的には，以下の３つの処理をNICオフロード機能が代行しています：&lt;/p&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;TCP/IPチェックサムのオフロード&lt;/li&gt;
+  &lt;li&gt;TCPセグメント化オフロード&lt;/li&gt;
+  &lt;li&gt;IPSecオフロード&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;ただし，NICオフロード機能が原因で障害が発生する事例もあるので利用には注意は必要です．&lt;/p&gt;
+
+&lt;h2 id=&quot;enp6s0-vs-eth0&quot;&gt;enp6s0 vs eth0&lt;/h2&gt;
+
+&lt;p&gt;Ubuntu 22.04にて，ネットワークI/Fの設定，表示を行うコマンド&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;ifconfig&lt;/code&gt;や&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;ip address&lt;/code&gt;を実行すると&lt;/p&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;enp6s0&lt;/code&gt;: ethenet connection&lt;/li&gt;
+  &lt;li&gt;&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;lo&lt;/code&gt;: loopback&lt;/li&gt;
+  &lt;li&gt;&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;wlp5s0&lt;/code&gt;: Wireless connection&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;が表示されるはずです．古くは&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;eth0&lt;/code&gt;, &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;wl0&lt;/code&gt;などのように表示されていましsたが新しいsystemdベースでは
+上記のような表現に変更されました．&lt;/p&gt;
+
+&lt;p&gt;&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;enp6s0&lt;/code&gt;という名前は，次の部分で構成されています：&lt;/p&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;en&lt;/code&gt;: ネットワークインターフェス（今回はethernet）&lt;/li&gt;
+  &lt;li&gt;&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;p6&lt;/code&gt;: 物理的なスロットまたはポートを示す&lt;/li&gt;
+  &lt;li&gt;&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;s0&lt;/code&gt;: 同じ物理スロットまたはポートに接続されているインターフェイスの最初のものを示す&lt;/li&gt;
+&lt;/ul&gt;
+</description>
+        <pubDate>Fri, 02 Aug 2024 00:00:00 +0000</pubDate>
+        <link>https://ryonakagami.github.io/2024/08/02/network-iterface-card/</link>
+        <guid isPermaLink="true">https://ryonakagami.github.io/2024/08/02/network-iterface-card/</guid>
+        
+        <category>development</category>
+        
+        
+      </item>
+    
+      <item>
+        <title>What&apos;s the difference between &apos;where are you&apos; and &apos;whereabouts are you?&apos;</title>
+        <description>&lt;h2 id=&quot;phrase-whereabouts-are-you&quot;&gt;Phrase: Whereabouts are you?&lt;/h2&gt;
+
+&lt;p&gt;Ive just come arross the phrase, “whereabouts int the world are you?”, when listing to
+&lt;a href=&quot;https://www.youtube.com/watch?v=0LCgem1OAcE&amp;amp;t=416s&quot;&gt;Why do we lie? - CrowdScience podcast, BBC World Service&lt;/a&gt;.&lt;/p&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;Interviewer: whereabouts in the world are you?&lt;/li&gt;
+  &lt;li&gt;Interviewee: I am in West Virgina Charleston in the United States.&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;When I heard of this conversation, one questions come up in my mind, whats the difference 
+between “whereabouts are you?” and simply asking “where are you”?&lt;/p&gt;
+
+&lt;h3 id=&quot;where-are-you-and-whereabouts-are-you&quot;&gt;where are you?” and “whereabouts are you?”&lt;/h3&gt;
+
+&lt;p&gt;The primary difference between the phrases “whereabouts are you?” and “simply asking “where are you?” lies in the level of specificity and the implied intent behind the question. In general, “whereabouts are you?” focuses on the general area or vicinity, while “where are you?” demands a more detailed and pinpoint location.&lt;/p&gt;
+
+&lt;p&gt;&lt;strong&gt; ▶  “Whereabouts are you?”:&lt;/strong&gt;&lt;/p&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;This phrase suggests a request for a more general or approximate location. It indicates a desire to understand the speaker’s or writer’s broad vicinity or region. For example, answering “I’m in the city center” or “I’m in the suburbs” would suffice.&lt;/li&gt;
+  &lt;li&gt;“Whereabouts” is often used when the exact address or precise location is not the primary concern. It can be useful when trying to establish a person’s proximity to a particular area or when gauging their general surroundings.&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;&lt;strong&gt; ▶  “Wherea are you?”:&lt;/strong&gt;&lt;/p&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;This question typically seeks a more specific and precise location. It implies a need or desire for an exact address, landmark, or geographical coordinates. For instance, an appropriate response might be “I’m at 123 Main Street” or “I’m near the town hall.”&lt;/li&gt;
+  &lt;li&gt;“Where are you?” is often used in situations where knowing the exact location is crucial, such as providing directions, arranging a meeting point, or coordinating emergency services.&lt;/li&gt;
+&lt;/ul&gt;
+</description>
+        <pubDate>Thu, 01 Aug 2024 00:00:00 +0000</pubDate>
+        <link>https://ryonakagami.github.io/2024/08/01/where-vs-whereabouts/</link>
+        <guid isPermaLink="true">https://ryonakagami.github.io/2024/08/01/where-vs-whereabouts/</guid>
+        
+        <category>コミュニケーション</category>
+        
+        <category>English</category>
+        
+        
+      </item>
+    
+      <item>
+        <title>メモリのパフォーマンス</title>
+        <description>&lt;h2 id=&quot;メモリのパフォーマンス&quot;&gt;メモリのパフォーマンス&lt;/h2&gt;
+
+&lt;p&gt;メモリのパフォーマンスは耐障害性，省電力という観点も有りますが，個人用PCの選定では&lt;/p&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;容量&lt;/li&gt;
+  &lt;li&gt;データ転送速度&lt;/li&gt;
+  &lt;li&gt;データ送信幅&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;の３点に着目するのが良いと思います．&lt;/p&gt;
+
+&lt;p&gt;&lt;strong&gt; ▶  データ転送速度&lt;/strong&gt;&lt;/p&gt;
+
+&lt;p&gt;チップ規格が「DDR4-4000」の場合，4000の部分がデータ転送速度4000MHzであることを表しています．
+DDR4メモリでは一度のメモリアクセスで64ビットずつのデータを転送するので，&lt;/p&gt;
+
+\[4000\text{MHz} \times 8\text{byte} = 32,0000 \text{MB/s} = 32 \text{GB/s}\]
+
+&lt;p&gt;32GB/秒の転送速度となります．&lt;/p&gt;
+
+&lt;table&gt;
+  &lt;thead&gt;
+    &lt;tr&gt;
+      &lt;th&gt;チップ規格/モジュール規格&lt;/th&gt;
+      &lt;th&gt;メモリクロック/バスクロック&lt;/th&gt;
+      &lt;th&gt;データ転送速度&lt;/th&gt;
+      &lt;th&gt;モジュールのデータ転送速度&lt;/th&gt;
+    &lt;/tr&gt;
+  &lt;/thead&gt;
+  &lt;tbody&gt;
+    &lt;tr&gt;
+      &lt;td&gt;DDR4-2400/PC4-19200&lt;/td&gt;
+      &lt;td&gt;150/1200 MHz&lt;/td&gt;
+      &lt;td&gt;2400 MHz&lt;/td&gt;
+      &lt;td&gt;19.2GB/s&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;td&gt;DDR4-3200/PC4-25600&lt;/td&gt;
+      &lt;td&gt;200/1600 MHz&lt;/td&gt;
+      &lt;td&gt;3200 MHz&lt;/td&gt;
+      &lt;td&gt;25.6GB/s&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;td&gt;DDR4-4622/PC4-34100&lt;/td&gt;
+      &lt;td&gt;266/2311 MHz&lt;/td&gt;
+      &lt;td&gt;4622 MHz&lt;/td&gt;
+      &lt;td&gt;34.1GB/s&lt;/td&gt;
+    &lt;/tr&gt;
+  &lt;/tbody&gt;
+&lt;/table&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;PC4はDDR4を意味&lt;/li&gt;
+  &lt;li&gt;メモリ表記として，通常 32GB 2Rx4 PC4-2133P-Rのように，容量，ランク，DDR規格，転送速度の順番でラベルが付与されてる&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;&lt;strong&gt; ▶  データ転送幅&lt;/strong&gt;&lt;/p&gt;
+
+&lt;p&gt;CPUや各種バス間で通信を行う際，DDR4では64ビットずつのデータを転送しますがこの64ビットがデータ転送幅になります．
+このデータ転送幅はマルチチャネルやマルチランクという仕組みを利用することで２倍や３倍にすることができます．&lt;/p&gt;
+
+&lt;h3 id=&quot;マルチチャネルとマルチランク&quot;&gt;マルチチャネルとマルチランク&lt;/h3&gt;
+
+&lt;p&gt;&lt;strong&gt; ▶  チャネル&lt;/strong&gt;&lt;/p&gt;
+
+&lt;p&gt;メモリモジュールへのアクセス経路をチャネルといいます．複数のチャネルが同時に動作（＝マルチチャネル）することで，メモリの帯域幅が増加します．&lt;/p&gt;
+
+&lt;p&gt;マルチチャネルメモリの利点として&lt;/p&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;帯域幅の増加：複数のチャネルが同時に動作することで，メモリの帯域幅が増加し，データ転送速度が向上&lt;/li&gt;
+  &lt;li&gt;並列処理：複数のチャネルが並行してデータを転送できるため，メモリ操作の並列処理が可能になり，システムのパフォーマンスが向上&lt;/li&gt;
+  &lt;li&gt;効率性：各チャネルが個別にアクセスできるため，メモリリソースの競合が減少し，レイテンシが短縮&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;マルチチャネルメモリを実装するには，マザーボード，メモリコントローラー，およびメモリモジュールがマルチチャネル構成をサポートしている必要があります．
+また，メモリモジュールを適切なスロットにインストールし，BIOSやシステム設定でマルチチャネルモードを有効にする必要があります.&lt;/p&gt;
+
+&lt;p&gt;&lt;strong&gt; ▶  ランク&lt;/strong&gt;&lt;/p&gt;
+
+&lt;p&gt;メモリコントローラーがメモリ上のDRAMからデータを入出力する単位をランクと呼びます．１つのランクは64ビットの単位で入出力をします．
+ランクの種類としてシングルランク(1R)，デュアルランク(2R)，クアッドランク(4R)があります．メモリはDRAMチップの組み合わせで構成されていますが，
+シングルメモリでは72ビット分のDRAMチップが掲載されて居る一方，デュアルランクメモリでは１枚のメモリに144ビット分のDRAMチップが掲載されています．&lt;/p&gt;
+
+&lt;p&gt;サーバーにメモリを指すときにランクの双子葉数が多くなるような組み合わせをすることでアクセス精度が向上しますが，
+メモリコントローラーが扱えるランク数には制限がある点に注意が必要です．4Rのメモリをを使用することはシングルランクメモリ４枚指していることと同じため，
+スロット数が余っていてもメモリを最大枚数させないという問題が発生する可能性が有ります．&lt;/p&gt;
+
+&lt;h2 id=&quot;メモリ用語&quot;&gt;メモリ用語&lt;/h2&gt;
+
+&lt;p&gt;&lt;strong&gt; ▶  メモリスロット&lt;/strong&gt;&lt;/p&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;メモリスロットとはマザーボード上にあるメモリを差し込む場所のこと&lt;/li&gt;
+  &lt;li&gt;個人利用を想定したパソコンは通常４スロットだが，サーバーでは数十スロットの場合もある&lt;/li&gt;
+  &lt;li&gt;DIMM (Dual In-line Memory Module) スロットが一般的なメモリスロットの１つ&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;&lt;strong&gt; ▶  ECC&lt;/strong&gt;&lt;/p&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;ECCはError Correcting Codeの略語&lt;/li&gt;
+  &lt;li&gt;メモリ故障などに寄って1ビットの反転エラーが発生したときに検知・自動補正ができるように誤り訂正符号(ECC)と呼ばれるパリティ情報が付与されたメモリ&lt;/li&gt;
+  &lt;li&gt;メモリ故障が発生するとECCメモリではない場合，OSレベルの異常終了になってしまうが，ECCメモリの場合ではOSが以上を検知してアラートを出してくれる
+    &lt;ul&gt;
+      &lt;li&gt;アラート発報後，通常終了を行いメモリを交換というアクションが可能&lt;/li&gt;
+    &lt;/ul&gt;
+  &lt;/li&gt;
+&lt;/ul&gt;
+</description>
+        <pubDate>Thu, 01 Aug 2024 00:00:00 +0000</pubDate>
+        <link>https://ryonakagami.github.io/2024/08/01/what-is-memory-dram/</link>
+        <guid isPermaLink="true">https://ryonakagami.github.io/2024/08/01/what-is-memory-dram/</guid>
+        
+        <category>development</category>
+        
+        
+      </item>
+    
+      <item>
+        <title>CPUコア数 vs ソケット数</title>
+        <description>&lt;h2 id=&quot;cpuの演算能力&quot;&gt;CPUの演算能力&lt;/h2&gt;
+
+&lt;p&gt;１秒間に刻むクロック数を意味する動作周波数が高ければ高いほど演算処理能力が上がりますが，その分電力効率が悪くなり，
+発熱も増えます．現在では，動作周波数を上げるとパフォーマンス以上に消費電力量の増大によるデメリットのほうが目立つので，
+マルチコアによる演算能力の向上という形でCPUは進化していっています．&lt;/p&gt;
+
+&lt;p&gt;ですので，基本的にはコア数の多さに着目してCPUの性能の良さを判断しますが，個人利用を想定したパソコンと異なりサーバー構築においては
+ソケット数（物理搭載CPU数）を増やす方向という選択肢もあります．例えば，４コアCPUを２ソケット搭載することで８コアを確保するなどです．&lt;/p&gt;
+
+&lt;h3 id=&quot;４コアcpu２ソケットは８コアcpu１つより遅い&quot;&gt;４コアCPU２ソケットは８コアCPU１つより遅い？&lt;/h3&gt;
+
+&lt;p&gt;CPUを複数ソケット搭載する場合，それぞれのCPUソケットがNUMA(Non-Uniform Memory Access)ノードと呼ばれる単位で区分され，
+各ノードごとに物理メモリを持ちます．&lt;/p&gt;
+
+&lt;p&gt;各CPUからそれぞれのノードの物理メモリに対してお互いアクセスすることは可能ですが，
+以下の図のように同一ノード内のメモリに対しては高速にアクセスできるが，他のノードのメモリに対してのアクセスは比較的
+低速になってしまうという特徴が有ります．CPU自身のノード内にないメモリ （リモートメモリ） にプロセッサがアクセスする場合，
+ローカルメモリのアクセスよりも低速なNUMA接続を通じてデータを転送する必要があるためです．&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;https://github.com/ryonakimageserver/omorikaizuka/blob/master/Development/device/20240731-NUMA.png?raw=true&quot; alt=&quot;What-is-NUMA&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;ただし，デメリットだけではありません．ローカルメモリーへ各CPUが同時に並行してアクセスできるため，
+SMP(同時マルチスレッディング)で発生する同じシステムバス上で多くのプロセッサがバンド幅を奪い合うリスクを回避することができます．&lt;/p&gt;
+
+&lt;p&gt;一概に「４コアCPU２ソケットは８コアCPU１つより遅い」とは言えず，どちらのほうがパフォーマンスが良いかは
+&lt;strong&gt;システムのタスクの特徴に依存&lt;/strong&gt;します．&lt;/p&gt;
+</description>
+        <pubDate>Wed, 31 Jul 2024 00:00:00 +0000</pubDate>
+        <link>https://ryonakagami.github.io/2024/07/31/infrastructure-engineer-03-cpu/</link>
+        <guid isPermaLink="true">https://ryonakagami.github.io/2024/07/31/infrastructure-engineer-03-cpu/</guid>
+        
+        <category>development</category>
+        
+        
+      </item>
+    
+      <item>
+        <title>サーバーの種類と選定</title>
+        <description>&lt;h2 id=&quot;サーバーとパソコンの違い&quot;&gt;サーバーとパソコンの違い&lt;/h2&gt;
+
+&lt;p&gt;&lt;strong&gt; ▶  構成部品&lt;/strong&gt;&lt;/p&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;どちらもマザーボード, CPU, メモリ, ディスクによって構成されている&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;&lt;strong&gt; ▶  用途&lt;/strong&gt;&lt;/p&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;サーバーは24時間365日稼働することを前提
+    &lt;ul&gt;
+      &lt;li&gt;ハードウェアの故障が発生しにくい&lt;/li&gt;
+      &lt;li&gt;発生したとしてもパーツに冗長性をもたせることでシステムが止まらないように工夫している&lt;/li&gt;
+      &lt;li&gt;サービスを止めずにパーツ交換を可能としている&lt;/li&gt;
+    &lt;/ul&gt;
+  &lt;/li&gt;
+  &lt;li&gt;パソコンは個人利用を目的としている
+    &lt;ul&gt;
+      &lt;li&gt;グラフィックスやサウンドといったマルチメディア機能が充実している&lt;/li&gt;
+    &lt;/ul&gt;
+  &lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h2 id=&quot;物理特徴に基づくサーバーの種類&quot;&gt;物理特徴に基づくサーバーの種類&lt;/h2&gt;
+
+&lt;p&gt;物理的計上に着目するサーバーは以下３種類に分類できます&lt;/p&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;&lt;strong&gt;ブレードサーバー&lt;/strong&gt;: CPU，ネットワークコントローラー，メモリ，および一部の内蔵ストレージドライブを細長い小型の筐体に搭載するスリムでコンパクトなサーバー&lt;/li&gt;
+  &lt;li&gt;&lt;strong&gt;ラックマウントサーバー&lt;/strong&gt;: サーバーラックに格納されるように設計されたサーバー&lt;/li&gt;
+  &lt;li&gt;&lt;strong&gt;タワー型サーバー&lt;/strong&gt;: スタンドアロンのシャーシ構成で，一般的なデスクトップPCに似ている&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;&lt;img src=&quot;https://github.com/ryonakimageserver/omorikaizuka/blob/master/Development/device/20240730-server-classification.png?raw=true&quot; alt=&quot;server-classification&quot; /&gt;&lt;/p&gt;
+
+&lt;table&gt;
+  &lt;thead&gt;
+    &lt;tr&gt;
+      &lt;th&gt; &lt;/th&gt;
+      &lt;th&gt;ブレードサーバー&lt;/th&gt;
+      &lt;th&gt;ラックマウントサーバー&lt;/th&gt;
+      &lt;th&gt;タワー型サーバー&lt;/th&gt;
+    &lt;/tr&gt;
+  &lt;/thead&gt;
+  &lt;tbody&gt;
+    &lt;tr&gt;
+      &lt;td&gt;導入費用&lt;/td&gt;
+      &lt;td&gt;大&lt;/td&gt;
+      &lt;td&gt;中&lt;/td&gt;
+      &lt;td&gt;小&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;td&gt;サーバーラックの有無&lt;/td&gt;
+      &lt;td&gt;必要&lt;/td&gt;
+      &lt;td&gt;必要&lt;/td&gt;
+      &lt;td&gt;不要&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;td&gt;搭載サーバー数&lt;/td&gt;
+      &lt;td&gt;多い&lt;/td&gt;
+      &lt;td&gt;普通&lt;/td&gt;
+      &lt;td&gt;少ない&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;td&gt;設置や増設の煩雑さ&lt;/td&gt;
+      &lt;td&gt;容易&lt;/td&gt;
+      &lt;td&gt;煩雑&lt;/td&gt;
+      &lt;td&gt;容易&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;td&gt;システムの規模&lt;/td&gt;
+      &lt;td&gt;大規模～中規模&lt;/td&gt;
+      &lt;td&gt;大規模～中規模&lt;/td&gt;
+      &lt;td&gt;小規模&lt;/td&gt;
+    &lt;/tr&gt;
+  &lt;/tbody&gt;
+&lt;/table&gt;
+
+&lt;h2 id=&quot;サーバー選定の進め方&quot;&gt;サーバー選定の進め方&lt;/h2&gt;
+
+&lt;p&gt;サーバースペックを決める場合，必要なハードウェアリソースの使用量を決めた上でCPU，メモリ，ディスク，NIC(Network Interface Card)数
+などを決定します．&lt;/p&gt;
+
+&lt;table&gt;
+  &lt;thead&gt;
+    &lt;tr&gt;
+      &lt;th&gt;検討項目&lt;/th&gt;
+      &lt;th&gt;選択肢&lt;/th&gt;
+    &lt;/tr&gt;
+  &lt;/thead&gt;
+  &lt;tbody&gt;
+    &lt;tr&gt;
+      &lt;td&gt;CPU&lt;/td&gt;
+      &lt;td&gt;Freq, ソケット数(CPUの個数), コア数，キャッシュ容量 etc&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;td&gt;メモリ&lt;/td&gt;
+      &lt;td&gt;容量，メモリ速度&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;td&gt;ディスク&lt;/td&gt;
+      &lt;td&gt;容量，読み書き速度&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;td&gt;RAID&lt;/td&gt;
+      &lt;td&gt;RAID1/5/6/10/50/60&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;td&gt;NIC&lt;/td&gt;
+      &lt;td&gt;2port, 4port, etc&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;td&gt;電源ユニット&lt;/td&gt;
+      &lt;td&gt;総ワット数，冗長化&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;td&gt;保守年数&lt;/td&gt;
+      &lt;td&gt;何年使うのか&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;td&gt;保守レベル&lt;/td&gt;
+      &lt;td&gt;平日翌営業日対応など障害対応の際のサポートレベル&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;td&gt;拡張性&lt;/td&gt;
+      &lt;td&gt;メモリソケット数，PCIスロット数，ディスク搭載数&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;td&gt;物理サイズと重量&lt;/td&gt;
+      &lt;td&gt;1U, 2Uなどのサイズと総重量&lt;/td&gt;
+    &lt;/tr&gt;
+  &lt;/tbody&gt;
+&lt;/table&gt;
+
+&lt;div style=&quot;padding-left: 2em; padding-right: 2em; border-radius: 0em; border-style:solid; border-color:#e6e6fa; background-color:#F8F8F8&quot;&gt;
+  &lt;p class=&quot;h4&quot;&gt;&lt;ins&gt;&lt;strong&gt; 📘 耐荷重を忘れるな&lt;/strong&gt;&lt;/ins&gt;&lt;/p&gt;
+
+  &lt;p&gt;サーバーは数kgから数十kgもの重量が有ります．そのため，ラックの最大搭載荷重と床の耐荷重という観点は
+設置にあたっての注意すべきポイントとなります．&lt;/p&gt;
+
+  &lt;p&gt;一般的に床の耐荷重は1平方メートル当たり500kg程度の場合が多いものです．一方，一般的なサーバーラックは幅600mm×奥行き1000mmなので，0.6平方メートルしかありません．ラックは通常100kg以上あるので，ストレージ1台（90kg），UPS１台（50kg）だと，サーバーに割り当てることのできる重量は60kg程度．
+サーバー1台当たり30kgをと考えると，ラックに余裕があっても一般的な床を使用しているならば，２台程度しか割り当てることができません．&lt;/p&gt;
+
+  &lt;p&gt;床の耐荷重を考えずに，ラックの最大搭載荷重を踏まえた上で空きスペースがあると判断してどんどんサーバーを追加してしまうと，
+床に穴が空きかねないので注意しましょう．&lt;/p&gt;
+
+&lt;/div&gt;
+
+&lt;h3 id=&quot;そもそもどうやってサーバースペックの基準を算出するのか&quot;&gt;そもそもどうやってサーバースペックの基準を算出するのか？&lt;/h3&gt;
+
+&lt;p&gt;サーバースペック決定にあたり，必要リソースをどのように算出するかについて考え方は３つあります:&lt;/p&gt;
+
+&lt;ol&gt;
+  &lt;li&gt;実際の環境を試験的に構築し，測定結果から判断する&lt;/li&gt;
+  &lt;li&gt;そもそも事前に必要サーバースペックの厳密な見積もりは不可能なので，初めは仮ぎめのスペックで運用し，実態に合わせてスケールアップなどで対応する&lt;/li&gt;
+  &lt;li&gt;頑張って計算する&lt;/li&gt;
+&lt;/ol&gt;
+
+&lt;p&gt;▶  &lt;u&gt;&lt;strong&gt;(1) 実際の環境を試験的に構築し，測定結果から判断する&lt;/strong&gt;&lt;/u&gt;&lt;/p&gt;
+
+&lt;p&gt;勘定システムなどの基幹系システムの場合は(1)の選択肢が取られるケースが多いですが．ただし，テスト環境構築という工程が入るのでリリースまでの時間がかかってしまいます．&lt;/p&gt;
+
+&lt;p&gt;▶  &lt;u&gt;&lt;strong&gt; (2) 臨機応変，実勢に合わせ調整するスタイル&lt;/strong&gt;&lt;/u&gt;&lt;/p&gt;
+
+&lt;p&gt;オンラインゲームのように，実際にリリースしないと負荷がわからないケースは(2)の手法が取られます．事前に余裕を持った仮見積をし，実勢に合わせ適宜スペックを調整していきます．このような場合，自前でサーバーを調達するのでなく，クラウドなどを利用して必要リソースを見極めてから，自前のサーバーを構築しに行くという流れが良いと思われます．&lt;/p&gt;
+
+&lt;p&gt;&lt;br /&gt;&lt;/p&gt;
+
+&lt;div style=&quot;padding-left: 2em; padding-right: 2em; border-radius: 0em; border-style:solid; border-color:#e6e6fa; background-color:#F8F8F8&quot;&gt;
+  &lt;p class=&quot;h4&quot;&gt;&lt;ins&gt;&lt;strong&gt;📘 スケールアウトとスケールアップ&lt;/strong&gt;&lt;/ins&gt;&lt;/p&gt;
+
+  &lt;ul&gt;
+    &lt;li&gt;スケールアウト: サーバ台数を増やすことでキャパシティを増やす方法
+      &lt;ul&gt;
+        &lt;li&gt;Webサーバーのように負荷分散が容易なケースでよく採用される&lt;/li&gt;
+      &lt;/ul&gt;
+    &lt;/li&gt;
+    &lt;li&gt;スケールアップ: メモリ増設やパーツ交換でサーバー性能を増やす方法
+      &lt;ul&gt;
+        &lt;li&gt;負荷分散が難しいケースで採用される&lt;/li&gt;
+      &lt;/ul&gt;
+    &lt;/li&gt;
+  &lt;/ul&gt;
+
+&lt;/div&gt;
+</description>
+        <pubDate>Tue, 30 Jul 2024 00:00:00 +0000</pubDate>
+        <link>https://ryonakagami.github.io/2024/07/30/infrastructure-engineer-02/</link>
+        <guid isPermaLink="true">https://ryonakagami.github.io/2024/07/30/infrastructure-engineer-02/</guid>
+        
+        <category>development</category>
+        
+        
+      </item>
+    
+  </channel>
+</rss>
