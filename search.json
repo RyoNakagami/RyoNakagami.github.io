@@ -1,6 +1,14 @@
 [
   
     {
+      "title"    : "退化分布2: degenerate distribution",
+      "subtitle" : "確率分布 1/N",
+      "tags"     : "統計, math",
+      "url"      : "/2025/09/01/test/",
+      "date"     : "2025-09-01 00:00:00 +0000"
+    } ,
+  
+    {
       "title"    : "Quarto Version Updateの備忘録",
       "subtitle" : "quarto version update to 1.5.57",
       "tags"     : "quarto",

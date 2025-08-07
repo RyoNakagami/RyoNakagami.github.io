@@ -1,152 +1,480 @@
-<html lang="en">
 
-<head>
-    <meta charset="UTF-8">
-    <title>Ryos Tech Blog</title>
-    <script src="https://cdn.tailwindcss.com"></script>
-    <meta name="google-site-verification" content="gSMaswRY9iRfG4QaQrx6aj481bgr503qEZh-QPsMYNU" />
-</head>
-<header class="w-full bg-white shadow-md p-4 mb-6 fixed top-0 z-10">
-    <div class="max-w-5xl mx-auto flex items-center justify-between">
-        <a href="/" class="text-xl font-bold text-blue-600">Ryo's Tech Blog</a>
-        <nav class="space-x-4">
-            <a href="/about" class="text-gray-700 hover:text-blue-500">About</a>
-            <a href="/archive" class="text-gray-700 hover:text-blue-500">Archives</a>
-        </nav>
-    </div>
-</header>
-
-<body class="h-screen flex flex-col">
-
-    <div class="flex-grow bg-gray-50 flex flex-col items-center justify-start pt-24">
-        <!-- Title Above Cards Section -->
-        <h2 class="text-3xl font-bold text-gray-800 mb-8 text-center">Explore</h2>
-
-        <div class="grid grid-cols-1 md:grid-cols-3 gap-6 p-6 max-w-4xl w-full">
-
-            <!-- App Card -->
-            <div id="toggleApps" class="bg-blue-100 shadow-lg rounded-2xl p-6 text-center relative">
-                <h2 class="text-xl font-semibold">App</h2>
-                <p class="text-gray-500">Click here</p>
-                <!-- <button id="toggleApps" class="text-blue-500 hover:underline">Choose App from here</button> -->
-                <div id="appList" class="mt-4 hidden text-left">
-                    <ul class="list-disc list-inside text-blue-700 space-y-2">
-                        <li class="hover:underline cursor-pointer">
-                            <button onclick="location.href='/app/mathjax-renderer.html'">
-                                Math Renderer
-                            </button>
-                        </li>
-                    </ul>
-                </div>
-            </div>
-
-            <!-- Posts Card -->
-            <div id="toggleBlogs" class="bg-blue-100 shadow-lg rounded-2xl p-6 text-center relative">
-                <h2 class="text-xl font-semibold">Blogs</h2>
-                <p class="text-gray-500">Click here</p>
-                <div id="blogList" class="mt-4 hidden text-left">
-                    <ul class="list-disc list-inside text-blue-700 space-y-2">
-                        <li class="cursor-pointer hover:underline">
-                            <button onclick="location.href='https://ryonakagami.github.io/regmonkey-datascience-blog/'">
-                                DS Blog
-                            </button>
-                        </li>
-                        <li class="cursor-pointer hover:underline">
-                            <button onclick="location.href='https://ryonakagami.github.io/statistics-for-regression-monkey/'">
-                                Statistics Book
-                            </button>
-                        </li>
-                        <li class="cursor-pointer hover:underline">
-                            <button onclick="location.href='https://ryonakagami.github.io/regmonkey_datavisualization/'">
-                                Data Visualization
-                            </button>
-                        </li>
-                        <li class="cursor-pointer hover:underline">
-                            <button onclick="location.href='https://ohgoshgit.github.io/'">
-                                Git Troubleshooting
-                            </button>
-                        </li>
-                    </ul>
-                </div>
-            </div>
-
-            <!-- About Card -->
-            <div onclick="location.href='/archive'"
-                class="bg-blue-100 shadow-lg rounded-2xl p-6 text-center cursor-pointer hover:shadow-xl transition">
-                <h2 class="text-xl font-semibold">Archives</h2>
-                <p class="text-gray-500">Old blog posts</p>
-            </div>
-        </div>
-
-
-    </div>
-
-    <!-- Projects Section -->
-
-    <!-- <div class="flex-grow bg-gray-50 flex flex-col items-center justify-start pt-12">
-        <h2 class="text-3xl font-bold text-gray-800 mb-8 text-center">Projects</h2>
-    </div> -->
-
-
-
-
-
-    <footer class="bg-gray-100 py-4">
-        <div class="container mx-auto text-center">
-            <!-- SNS Link -->
-            
-
-
-<ul class="list-inline text-center">
-
-
-  
-  
-  
-  
-  <li>
-    <a target="_blank" href="https://github.com/RyoNakagami">
-      <span class="fa-stack fa-lg">
-        <i class="fa fa-circle fa-stack-2x"></i>
-        <i class="fa fa-github fa-stack-1x fa-inverse"></i>
-      </span>
+<div class="post-preview">
+    <a href="/2024/04/09/nisshoboki-sankyu-ch01/">
+        <h2 class="post-title">
+            財務諸表: 貸借対照表と損益計算書
+        </h2>
+        
+        <h3 class="post-subtitle">
+            日商簿記３級勉強ノート 1/N
+        </h3>
+        
     </a>
-  </li>
-  
-  
+    <div class="post-tags">
+        
+        &#9658;
+        <a class="post-tag" 
+            href="/archive/?tag=%E7%B0%BF%E8%A8%98"
+            rel="2"
+            style="line-height: 1.1;
+                   padding: 2px; margin-bottom: 6px; border: 1px dotted rgba(255, 255, 255, 0.8); 
+                   font-size: 14px; 
+                   border-radius: 99em; color: #0085a1; font-weight: bold;"
+            >簿記 
+        </a>
+        
+    </div >
+        <!--Posted by Ryo on April 9, 2024  -->
+        <font color="gray" size='2'>
+            投稿日 2024-04-09<br>更新日 2024-07-11
+        </font>
+</div>
+<hr>
+
+<div class="post-preview">
+    <a href="/2024/04/08/keychronV10-setup/">
+        <h2 class="post-title">
+            Keychron V10 初期設定
+        </h2>
+        
+        <h3 class="post-subtitle">
+            VIAを用いたKey remappingとキーボードマクロの設定
+        </h3>
+        
+    </a>
+    <div class="post-tags">
+        
+        &#9658;
+        <a class="post-tag" 
+            href="/archive/?tag=Keyboard"
+            rel="8"
+            style="line-height: 1.1;
+                   padding: 2px; margin-bottom: 6px; border: 1px dotted rgba(255, 255, 255, 0.8); 
+                   font-size: 14px; 
+                   border-radius: 99em; color: #0085a1; font-weight: bold;"
+            >Keyboard 
+        </a>
+        
+        &#9658;
+        <a class="post-tag" 
+            href="/archive/?tag=Ubuntu+22.04+LTS"
+            rel="16"
+            style="line-height: 1.1;
+                   padding: 2px; margin-bottom: 6px; border: 1px dotted rgba(255, 255, 255, 0.8); 
+                   font-size: 14px; 
+                   border-radius: 99em; color: #0085a1; font-weight: bold;"
+            >Ubuntu 22.04 LTS 
+        </a>
+        
+    </div >
+        <!--Posted by Ryo on April 8, 2024  -->
+        <font color="gray" size='2'>
+            投稿日 2024-04-08<br>更新日 2024-04-09
+        </font>
+</div>
+<hr>
+
+<div class="post-preview">
+    <a href="/2024/03/20/setup-hexaly/">
+        <h2 class="post-title">
+            Ubuntu 22.04 LTSへのhexalyのインストール
+        </h2>
+        
+        <h3 class="post-subtitle">
+            Mathematical Optimization with hexaly 1/N
+        </h3>
+        
+    </a>
+    <div class="post-tags">
+        
+        &#9658;
+        <a class="post-tag" 
+            href="/archive/?tag=hexaly"
+            rel="6"
+            style="line-height: 1.1;
+                   padding: 2px; margin-bottom: 6px; border: 1px dotted rgba(255, 255, 255, 0.8); 
+                   font-size: 14px; 
+                   border-radius: 99em; color: #0085a1; font-weight: bold;"
+            >hexaly 
+        </a>
+        
+        &#9658;
+        <a class="post-tag" 
+            href="/archive/?tag=optimization"
+            rel="12"
+            style="line-height: 1.1;
+                   padding: 2px; margin-bottom: 6px; border: 1px dotted rgba(255, 255, 255, 0.8); 
+                   font-size: 14px; 
+                   border-radius: 99em; color: #0085a1; font-weight: bold;"
+            >optimization 
+        </a>
+        
+    </div >
+        <!--Posted by Ryo on March 20, 2024  -->
+        <font color="gray" size='2'>
+            投稿日 2024-03-20<br>更新日 2024-03-20
+        </font>
+</div>
+<hr>
+
+<div class="post-preview">
+    <a href="/2024/03/15/robust-python-constrraining-type/">
+        <h2 class="post-title">
+            Type Annotationsの書き方
+        </h2>
+        
+        <h3 class="post-subtitle">
+            Robust Python Programming 4/N
+        </h3>
+        
+    </a>
+    <div class="post-tags">
+        
+        &#9658;
+        <a class="post-tag" 
+            href="/archive/?tag=coding"
+            rel="6"
+            style="line-height: 1.1;
+                   padding: 2px; margin-bottom: 6px; border: 1px dotted rgba(255, 255, 255, 0.8); 
+                   font-size: 14px; 
+                   border-radius: 99em; color: #0085a1; font-weight: bold;"
+            >coding 
+        </a>
+        
+        &#9658;
+        <a class="post-tag" 
+            href="/archive/?tag=%E6%96%B9%E6%B3%95%E8%AB%96"
+            rel="3"
+            style="line-height: 1.1;
+                   padding: 2px; margin-bottom: 6px; border: 1px dotted rgba(255, 255, 255, 0.8); 
+                   font-size: 14px; 
+                   border-radius: 99em; color: #0085a1; font-weight: bold;"
+            >方法論 
+        </a>
+        
+        &#9658;
+        <a class="post-tag" 
+            href="/archive/?tag=Python"
+            rel="6"
+            style="line-height: 1.1;
+                   padding: 2px; margin-bottom: 6px; border: 1px dotted rgba(255, 255, 255, 0.8); 
+                   font-size: 14px; 
+                   border-radius: 99em; color: #0085a1; font-weight: bold;"
+            >Python 
+        </a>
+        
+    </div >
+        <!--Posted by Ryo on March 15, 2024  -->
+        <font color="gray" size='2'>
+            投稿日 2024-03-15<br>更新日 2024-03-16
+        </font>
+</div>
+<hr>
+
+<div class="post-preview">
+    <a href="/2024/03/14/robust-python-type-annotations/">
+        <h2 class="post-title">
+            Type Annotationsのすすめ
+        </h2>
+        
+        <h3 class="post-subtitle">
+            Robust Python Programming 3/N
+        </h3>
+        
+    </a>
+    <div class="post-tags">
+        
+        &#9658;
+        <a class="post-tag" 
+            href="/archive/?tag=coding"
+            rel="6"
+            style="line-height: 1.1;
+                   padding: 2px; margin-bottom: 6px; border: 1px dotted rgba(255, 255, 255, 0.8); 
+                   font-size: 14px; 
+                   border-radius: 99em; color: #0085a1; font-weight: bold;"
+            >coding 
+        </a>
+        
+        &#9658;
+        <a class="post-tag" 
+            href="/archive/?tag=%E6%96%B9%E6%B3%95%E8%AB%96"
+            rel="3"
+            style="line-height: 1.1;
+                   padding: 2px; margin-bottom: 6px; border: 1px dotted rgba(255, 255, 255, 0.8); 
+                   font-size: 14px; 
+                   border-radius: 99em; color: #0085a1; font-weight: bold;"
+            >方法論 
+        </a>
+        
+        &#9658;
+        <a class="post-tag" 
+            href="/archive/?tag=Python"
+            rel="6"
+            style="line-height: 1.1;
+                   padding: 2px; margin-bottom: 6px; border: 1px dotted rgba(255, 255, 255, 0.8); 
+                   font-size: 14px; 
+                   border-radius: 99em; color: #0085a1; font-weight: bold;"
+            >Python 
+        </a>
+        
+    </div >
+        <!--Posted by Ryo on March 14, 2024  -->
+        <font color="gray" size='2'>
+            投稿日 2024-03-14<br>更新日 2024-03-14
+        </font>
+</div>
+<hr>
+
+<div class="post-preview">
+    <a href="/2024/03/13/robust-python-python-types/">
+        <h2 class="post-title">
+            Python Typesのすすめ
+        </h2>
+        
+        <h3 class="post-subtitle">
+            Robust Python Programming 2/N
+        </h3>
+        
+    </a>
+    <div class="post-tags">
+        
+        &#9658;
+        <a class="post-tag" 
+            href="/archive/?tag=coding"
+            rel="6"
+            style="line-height: 1.1;
+                   padding: 2px; margin-bottom: 6px; border: 1px dotted rgba(255, 255, 255, 0.8); 
+                   font-size: 14px; 
+                   border-radius: 99em; color: #0085a1; font-weight: bold;"
+            >coding 
+        </a>
+        
+        &#9658;
+        <a class="post-tag" 
+            href="/archive/?tag=%E6%96%B9%E6%B3%95%E8%AB%96"
+            rel="3"
+            style="line-height: 1.1;
+                   padding: 2px; margin-bottom: 6px; border: 1px dotted rgba(255, 255, 255, 0.8); 
+                   font-size: 14px; 
+                   border-radius: 99em; color: #0085a1; font-weight: bold;"
+            >方法論 
+        </a>
+        
+        &#9658;
+        <a class="post-tag" 
+            href="/archive/?tag=Python"
+            rel="6"
+            style="line-height: 1.1;
+                   padding: 2px; margin-bottom: 6px; border: 1px dotted rgba(255, 255, 255, 0.8); 
+                   font-size: 14px; 
+                   border-radius: 99em; color: #0085a1; font-weight: bold;"
+            >Python 
+        </a>
+        
+    </div >
+        <!--Posted by Ryo on March 13, 2024  -->
+        <font color="gray" size='2'>
+            投稿日 2024-03-13<br>更新日 2024-03-13
+        </font>
+</div>
+<hr>
+
+<div class="post-preview">
+    <a href="/2024/03/12/robust-python-what-is-robustness/">
+        <h2 class="post-title">
+            Robust Codeを書くためのプログラミング姿勢について
+        </h2>
+        
+        <h3 class="post-subtitle">
+            Robust Python Programming 1/N
+        </h3>
+        
+    </a>
+    <div class="post-tags">
+        
+        &#9658;
+        <a class="post-tag" 
+            href="/archive/?tag=coding"
+            rel="6"
+            style="line-height: 1.1;
+                   padding: 2px; margin-bottom: 6px; border: 1px dotted rgba(255, 255, 255, 0.8); 
+                   font-size: 14px; 
+                   border-radius: 99em; color: #0085a1; font-weight: bold;"
+            >coding 
+        </a>
+        
+        &#9658;
+        <a class="post-tag" 
+            href="/archive/?tag=%E6%96%B9%E6%B3%95%E8%AB%96"
+            rel="3"
+            style="line-height: 1.1;
+                   padding: 2px; margin-bottom: 6px; border: 1px dotted rgba(255, 255, 255, 0.8); 
+                   font-size: 14px; 
+                   border-radius: 99em; color: #0085a1; font-weight: bold;"
+            >方法論 
+        </a>
+        
+        &#9658;
+        <a class="post-tag" 
+            href="/archive/?tag=Python"
+            rel="6"
+            style="line-height: 1.1;
+                   padding: 2px; margin-bottom: 6px; border: 1px dotted rgba(255, 255, 255, 0.8); 
+                   font-size: 14px; 
+                   border-radius: 99em; color: #0085a1; font-weight: bold;"
+            >Python 
+        </a>
+        
+    </div >
+        <!--Posted by Ryo on March 12, 2024  -->
+        <font color="gray" size='2'>
+            投稿日 2024-03-12<br>更新日 2024-03-12
+        </font>
+</div>
+<hr>
+
+<div class="post-preview">
+    <a href="/2024/03/11/install-menlo-into-ubuntu/">
+        <h2 class="post-title">
+            Ubuntu 22.04 LTSに Meslo LGSとUDEV Gothicをインストールする
+        </h2>
+        
+        <h3 class="post-subtitle">
+            フォント設定 3/N
+        </h3>
+        
+    </a>
+    <div class="post-tags">
+        
+        &#9658;
+        <a class="post-tag" 
+            href="/archive/?tag=Ubuntu+22.04+LTS"
+            rel="16"
+            style="line-height: 1.1;
+                   padding: 2px; margin-bottom: 6px; border: 1px dotted rgba(255, 255, 255, 0.8); 
+                   font-size: 14px; 
+                   border-radius: 99em; color: #0085a1; font-weight: bold;"
+            >Ubuntu 22.04 LTS 
+        </a>
+        
+        &#9658;
+        <a class="post-tag" 
+            href="/archive/?tag=Font"
+            rel="4"
+            style="line-height: 1.1;
+                   padding: 2px; margin-bottom: 6px; border: 1px dotted rgba(255, 255, 255, 0.8); 
+                   font-size: 14px; 
+                   border-radius: 99em; color: #0085a1; font-weight: bold;"
+            >Font 
+        </a>
+        
+    </div >
+        <!--Posted by Ryo on March 11, 2024  -->
+        <font color="gray" size='2'>
+            投稿日 2024-03-11<br>更新日 2024-03-11
+        </font>
+</div>
+<hr>
+
+<div class="post-preview">
+    <a href="/2024/02/27/macbookpro-ubuntu-setup/">
+        <h2 class="post-title">
+            MacBookPro2016年モデルにUbuntu 22.04 LTSをインストールする
+        </h2>
+        
+        <h3 class="post-subtitle">
+            
+        </h3>
+        
+    </a>
+    <div class="post-tags">
+        
+        &#9658;
+        <a class="post-tag" 
+            href="/archive/?tag=Ubuntu+22.04"
+            rel="12"
+            style="line-height: 1.1;
+                   padding: 2px; margin-bottom: 6px; border: 1px dotted rgba(255, 255, 255, 0.8); 
+                   font-size: 14px; 
+                   border-radius: 99em; color: #0085a1; font-weight: bold;"
+            >Ubuntu 22.04 
+        </a>
+        
+        &#9658;
+        <a class="post-tag" 
+            href="/archive/?tag=Linux"
+            rel="5"
+            style="line-height: 1.1;
+                   padding: 2px; margin-bottom: 6px; border: 1px dotted rgba(255, 255, 255, 0.8); 
+                   font-size: 14px; 
+                   border-radius: 99em; color: #0085a1; font-weight: bold;"
+            >Linux 
+        </a>
+        
+    </div >
+        <!--Posted by Ryo on February 27, 2024  -->
+        <font color="gray" size='2'>
+            投稿日 2024-02-27<br>更新日 2024-02-29
+        </font>
+</div>
+<hr>
+
+<div class="post-preview">
+    <a href="/2023/12/01/object-oriented-note/">
+        <h2 class="post-title">
+            はじめてのオブジェクト指向
+        </h2>
+        
+        <h3 class="post-subtitle">
+            オブジェクト指向設計 1/N
+        </h3>
+        
+    </a>
+    <div class="post-tags">
+        
+        &#9658;
+        <a class="post-tag" 
+            href="/archive/?tag=coding"
+            rel="6"
+            style="line-height: 1.1;
+                   padding: 2px; margin-bottom: 6px; border: 1px dotted rgba(255, 255, 255, 0.8); 
+                   font-size: 14px; 
+                   border-radius: 99em; color: #0085a1; font-weight: bold;"
+            >coding 
+        </a>
+        
+        &#9658;
+        <a class="post-tag" 
+            href="/archive/?tag=%E6%96%B9%E6%B3%95%E8%AB%96"
+            rel="3"
+            style="line-height: 1.1;
+                   padding: 2px; margin-bottom: 6px; border: 1px dotted rgba(255, 255, 255, 0.8); 
+                   font-size: 14px; 
+                   border-radius: 99em; color: #0085a1; font-weight: bold;"
+            >方法論 
+        </a>
+        
+    </div >
+        <!--Posted by Ryo on December 1, 2023  -->
+        <font color="gray" size='2'>
+            投稿日 2023-12-01<br>更新日 2023-12-26
+        </font>
+</div>
+<hr>
+
+
+<!-- Pager -->
+
+<ul class="pager">
+    
+    <li class="previous">
+        <a href="/page2">&larr; Newer Posts</a>
+    </li>
+    
+    
+    <li class="next">
+        <a href="/page4">Older Posts &rarr;</a>
+    </li>
+    
 </ul>
 
-
-            <p class="copyright text-gray-600 text-sm">
-                Copyright &copy; Ryo's Tech Blog 2025
-                <br>
-                Powered by <span href="https://ryonakagami.github.io" class="text-blue-500 hover:underline">Ryo's Tech
-                    Blog</span>
-            </p>
-            <div class="flex justify-center mt-2">
-                <iframe class="align-middle" style="margin-left: 2px; margin-bottom:-5px;" frameborder="0" scrolling="0"
-                    width="80px" height="20px" title="RyoNakagami.github.io github stars"
-                    src="https://ghbtns.com/github-btn.html?user=RyoNakagami&repo=RyoNakagami.github.io&type=star&count=true">
-                </iframe>
-            </div>
-        </div>
-    </footer>
-
-    <script>
-        const toggleButton = document.getElementById("toggleApps");
-        const toggleButton_blog = document.getElementById("toggleBlogs");
-        const appList = document.getElementById("appList");
-        const blogList = document.getElementById("blogList");
-
-        toggleButton.addEventListener("click", () => {
-            appList.classList.toggle("hidden");
-        });
-
-        toggleButton_blog.addEventListener("click", () => {
-            blogList.classList.toggle("hidden");
-        });
-
-    </script>
-</body>
-
-</html>

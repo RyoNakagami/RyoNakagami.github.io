@@ -1,152 +1,425 @@
-<html lang="en">
 
-<head>
-    <meta charset="UTF-8">
-    <title>Ryos Tech Blog</title>
-    <script src="https://cdn.tailwindcss.com"></script>
-    <meta name="google-site-verification" content="gSMaswRY9iRfG4QaQrx6aj481bgr503qEZh-QPsMYNU" />
-</head>
-<header class="w-full bg-white shadow-md p-4 mb-6 fixed top-0 z-10">
-    <div class="max-w-5xl mx-auto flex items-center justify-between">
-        <a href="/" class="text-xl font-bold text-blue-600">Ryo's Tech Blog</a>
-        <nav class="space-x-4">
-            <a href="/about" class="text-gray-700 hover:text-blue-500">About</a>
-            <a href="/archive" class="text-gray-700 hover:text-blue-500">Archives</a>
-        </nav>
-    </div>
-</header>
-
-<body class="h-screen flex flex-col">
-
-    <div class="flex-grow bg-gray-50 flex flex-col items-center justify-start pt-24">
-        <!-- Title Above Cards Section -->
-        <h2 class="text-3xl font-bold text-gray-800 mb-8 text-center">Explore</h2>
-
-        <div class="grid grid-cols-1 md:grid-cols-3 gap-6 p-6 max-w-4xl w-full">
-
-            <!-- App Card -->
-            <div id="toggleApps" class="bg-blue-100 shadow-lg rounded-2xl p-6 text-center relative">
-                <h2 class="text-xl font-semibold">App</h2>
-                <p class="text-gray-500">Click here</p>
-                <!-- <button id="toggleApps" class="text-blue-500 hover:underline">Choose App from here</button> -->
-                <div id="appList" class="mt-4 hidden text-left">
-                    <ul class="list-disc list-inside text-blue-700 space-y-2">
-                        <li class="hover:underline cursor-pointer">
-                            <button onclick="location.href='/app/mathjax-renderer.html'">
-                                Math Renderer
-                            </button>
-                        </li>
-                    </ul>
-                </div>
-            </div>
-
-            <!-- Posts Card -->
-            <div id="toggleBlogs" class="bg-blue-100 shadow-lg rounded-2xl p-6 text-center relative">
-                <h2 class="text-xl font-semibold">Blogs</h2>
-                <p class="text-gray-500">Click here</p>
-                <div id="blogList" class="mt-4 hidden text-left">
-                    <ul class="list-disc list-inside text-blue-700 space-y-2">
-                        <li class="cursor-pointer hover:underline">
-                            <button onclick="location.href='https://ryonakagami.github.io/regmonkey-datascience-blog/'">
-                                DS Blog
-                            </button>
-                        </li>
-                        <li class="cursor-pointer hover:underline">
-                            <button onclick="location.href='https://ryonakagami.github.io/statistics-for-regression-monkey/'">
-                                Statistics Book
-                            </button>
-                        </li>
-                        <li class="cursor-pointer hover:underline">
-                            <button onclick="location.href='https://ryonakagami.github.io/regmonkey_datavisualization/'">
-                                Data Visualization
-                            </button>
-                        </li>
-                        <li class="cursor-pointer hover:underline">
-                            <button onclick="location.href='https://ohgoshgit.github.io/'">
-                                Git Troubleshooting
-                            </button>
-                        </li>
-                    </ul>
-                </div>
-            </div>
-
-            <!-- About Card -->
-            <div onclick="location.href='/archive'"
-                class="bg-blue-100 shadow-lg rounded-2xl p-6 text-center cursor-pointer hover:shadow-xl transition">
-                <h2 class="text-xl font-semibold">Archives</h2>
-                <p class="text-gray-500">Old blog posts</p>
-            </div>
-        </div>
-
-
-    </div>
-
-    <!-- Projects Section -->
-
-    <!-- <div class="flex-grow bg-gray-50 flex flex-col items-center justify-start pt-12">
-        <h2 class="text-3xl font-bold text-gray-800 mb-8 text-center">Projects</h2>
-    </div> -->
-
-
-
-
-
-    <footer class="bg-gray-100 py-4">
-        <div class="container mx-auto text-center">
-            <!-- SNS Link -->
-            
-
-
-<ul class="list-inline text-center">
-
-
-  
-  
-  
-  
-  <li>
-    <a target="_blank" href="https://github.com/RyoNakagami">
-      <span class="fa-stack fa-lg">
-        <i class="fa fa-circle fa-stack-2x"></i>
-        <i class="fa fa-github fa-stack-1x fa-inverse"></i>
-      </span>
+<div class="post-preview">
+    <a href="/2021/05/06/ssh-basics/">
+        <h2 class="post-title">
+            SSH(Secure Shell)の基礎知識
+        </h2>
+        
+        <h3 class="post-subtitle">
+            ssh series 2/N
+        </h3>
+        
     </a>
-  </li>
-  
-  
+    <div class="post-tags">
+        
+        &#9658;
+        <a class="post-tag" 
+            href="/archive/?tag=Linux"
+            rel="5"
+            style="line-height: 1.1;
+                   padding: 2px; margin-bottom: 6px; border: 1px dotted rgba(255, 255, 255, 0.8); 
+                   font-size: 14px; 
+                   border-radius: 99em; color: #0085a1; font-weight: bold;"
+            >Linux 
+        </a>
+        
+        &#9658;
+        <a class="post-tag" 
+            href="/archive/?tag=ssh"
+            rel="3"
+            style="line-height: 1.1;
+                   padding: 2px; margin-bottom: 6px; border: 1px dotted rgba(255, 255, 255, 0.8); 
+                   font-size: 14px; 
+                   border-radius: 99em; color: #0085a1; font-weight: bold;"
+            >ssh 
+        </a>
+        
+    </div >
+        <!--Posted by Ryo on May 6, 2021  -->
+        <font color="gray" size='2'>
+            投稿日 2021-05-06<br>更新日 2024-04-16
+        </font>
+</div>
+<hr>
+
+<div class="post-preview">
+    <a href="/2021/05/05/ubuntu-permission/">
+        <h2 class="post-title">
+            権限管理入門
+        </h2>
+        
+        <h3 class="post-subtitle">
+            Linux Permission 1/N
+        </h3>
+        
+    </a>
+    <div class="post-tags">
+        
+        &#9658;
+        <a class="post-tag" 
+            href="/archive/?tag=Linux"
+            rel="5"
+            style="line-height: 1.1;
+                   padding: 2px; margin-bottom: 6px; border: 1px dotted rgba(255, 255, 255, 0.8); 
+                   font-size: 14px; 
+                   border-radius: 99em; color: #0085a1; font-weight: bold;"
+            >Linux 
+        </a>
+        
+        &#9658;
+        <a class="post-tag" 
+            href="/archive/?tag=%E3%82%B7%E3%82%B9%E3%83%86%E3%83%A0%E7%AE%A1%E7%90%86"
+            rel="6"
+            style="line-height: 1.1;
+                   padding: 2px; margin-bottom: 6px; border: 1px dotted rgba(255, 255, 255, 0.8); 
+                   font-size: 14px; 
+                   border-radius: 99em; color: #0085a1; font-weight: bold;"
+            >システム管理 
+        </a>
+        
+    </div >
+        <!--Posted by Ryo on May 5, 2021  -->
+        <font color="gray" size='2'>
+            投稿日 2021-05-05<br>更新日 2023-08-08
+        </font>
+</div>
+<hr>
+
+<div class="post-preview">
+    <a href="/2021/05/04/ubuntu-desktop-app-via-googlechrome/">
+        <h2 class="post-title">
+            Google Chrome経由でLINEをDesktop Appのように使う
+        </h2>
+        
+        <h3 class="post-subtitle">
+            Ubuntu Desktop環境構築 Part 22
+        </h3>
+        
+    </a>
+    <div class="post-tags">
+        
+        &#9658;
+        <a class="post-tag" 
+            href="/archive/?tag=Ubuntu+20.04+LTS"
+            rel="16"
+            style="line-height: 1.1;
+                   padding: 2px; margin-bottom: 6px; border: 1px dotted rgba(255, 255, 255, 0.8); 
+                   font-size: 14px; 
+                   border-radius: 99em; color: #0085a1; font-weight: bold;"
+            >Ubuntu 20.04 LTS 
+        </a>
+        
+        &#9658;
+        <a class="post-tag" 
+            href="/archive/?tag=App"
+            rel="3"
+            style="line-height: 1.1;
+                   padding: 2px; margin-bottom: 6px; border: 1px dotted rgba(255, 255, 255, 0.8); 
+                   font-size: 14px; 
+                   border-radius: 99em; color: #0085a1; font-weight: bold;"
+            >App 
+        </a>
+        
+    </div >
+        <!--Posted by Ryo on May 4, 2021  -->
+        <font color="gray" size='2'>
+            投稿日 2021-05-04
+        </font>
+</div>
+<hr>
+
+<div class="post-preview">
+    <a href="/2021/05/03/Coding-Guide-sql/">
+        <h2 class="post-title">
+            Coding Style Guide Part 2
+        </h2>
+        
+        <h3 class="post-subtitle">
+            SQL Style Guide
+        </h3>
+        
+    </a>
+    <div class="post-tags">
+        
+        &#9658;
+        <a class="post-tag" 
+            href="/archive/?tag=SQL"
+            rel="3"
+            style="line-height: 1.1;
+                   padding: 2px; margin-bottom: 6px; border: 1px dotted rgba(255, 255, 255, 0.8); 
+                   font-size: 14px; 
+                   border-radius: 99em; color: #0085a1; font-weight: bold;"
+            >SQL 
+        </a>
+        
+        &#9658;
+        <a class="post-tag" 
+            href="/archive/?tag=coding"
+            rel="6"
+            style="line-height: 1.1;
+                   padding: 2px; margin-bottom: 6px; border: 1px dotted rgba(255, 255, 255, 0.8); 
+                   font-size: 14px; 
+                   border-radius: 99em; color: #0085a1; font-weight: bold;"
+            >coding 
+        </a>
+        
+    </div >
+        <!--Posted by Ryo on May 3, 2021  -->
+        <font color="gray" size='2'>
+            投稿日 2021-05-03<br>更新日 2022-07-25
+        </font>
+</div>
+<hr>
+
+<div class="post-preview">
+    <a href="/2021/05/02/Coding-Guide/">
+        <h2 class="post-title">
+            Coding Style Guide Part 1
+        </h2>
+        
+        <h3 class="post-subtitle">
+            哲学：良いコードとは？
+        </h3>
+        
+    </a>
+    <div class="post-tags">
+        
+        &#9658;
+        <a class="post-tag" 
+            href="/archive/?tag=%E6%96%B9%E6%B3%95%E8%AB%96"
+            rel="3"
+            style="line-height: 1.1;
+                   padding: 2px; margin-bottom: 6px; border: 1px dotted rgba(255, 255, 255, 0.8); 
+                   font-size: 14px; 
+                   border-radius: 99em; color: #0085a1; font-weight: bold;"
+            >方法論 
+        </a>
+        
+        &#9658;
+        <a class="post-tag" 
+            href="/archive/?tag=coding"
+            rel="6"
+            style="line-height: 1.1;
+                   padding: 2px; margin-bottom: 6px; border: 1px dotted rgba(255, 255, 255, 0.8); 
+                   font-size: 14px; 
+                   border-radius: 99em; color: #0085a1; font-weight: bold;"
+            >coding 
+        </a>
+        
+    </div >
+        <!--Posted by Ryo on May 2, 2021  -->
+        <font color="gray" size='2'>
+            投稿日 2021-05-02<br>更新日 2024-03-12
+        </font>
+</div>
+<hr>
+
+<div class="post-preview">
+    <a href="/2021/05/01/GIST-VSCode-Setup/">
+        <h2 class="post-title">
+            GistとVS Codeの連携
+        </h2>
+        
+        <h3 class="post-subtitle">
+            VS CodeからGistにgist createできるようにする
+        </h3>
+        
+    </a>
+    <div class="post-tags">
+        
+        &#9658;
+        <a class="post-tag" 
+            href="/archive/?tag=VSCode"
+            rel="6"
+            style="line-height: 1.1;
+                   padding: 2px; margin-bottom: 6px; border: 1px dotted rgba(255, 255, 255, 0.8); 
+                   font-size: 14px; 
+                   border-radius: 99em; color: #0085a1; font-weight: bold;"
+            >VSCode 
+        </a>
+        
+        &#9658;
+        <a class="post-tag" 
+            href="/archive/?tag=git"
+            rel="3"
+            style="line-height: 1.1;
+                   padding: 2px; margin-bottom: 6px; border: 1px dotted rgba(255, 255, 255, 0.8); 
+                   font-size: 14px; 
+                   border-radius: 99em; color: #0085a1; font-weight: bold;"
+            >git 
+        </a>
+        
+    </div >
+        <!--Posted by Ryo on May 1, 2021  -->
+        <font color="gray" size='2'>
+            投稿日 2021-05-01<br>更新日 2022-08-04
+        </font>
+</div>
+<hr>
+
+<div class="post-preview">
+    <a href="/2021/04/30/pl-analysis-01/">
+        <h2 class="post-title">
+            データサイエンティストのための会計入門
+        </h2>
+        
+        <h3 class="post-subtitle">
+            企業活動とBS, PL, CSの数字
+        </h3>
+        
+    </a>
+    <div class="post-tags">
+        
+        &#9658;
+        <a class="post-tag" 
+            href="/archive/?tag=%E4%BC%9A%E8%A8%88%E5%88%86%E6%9E%90"
+            rel="4"
+            style="line-height: 1.1;
+                   padding: 2px; margin-bottom: 6px; border: 1px dotted rgba(255, 255, 255, 0.8); 
+                   font-size: 14px; 
+                   border-radius: 99em; color: #0085a1; font-weight: bold;"
+            >会計分析 
+        </a>
+        
+    </div >
+        <!--Posted by Ryo on April 30, 2021  -->
+        <font color="gray" size='2'>
+            投稿日 2021-04-30
+        </font>
+</div>
+<hr>
+
+<div class="post-preview">
+    <a href="/2021/04/29/finance-as-a-tool-01/">
+        <h2 class="post-title">
+            道具としてのファイナンス勉強ノート
+        </h2>
+        
+        <h3 class="post-subtitle">
+            プロジェクト投資判断のポイントまとめ
+        </h3>
+        
+    </a>
+    <div class="post-tags">
+        
+        &#9658;
+        <a class="post-tag" 
+            href="/archive/?tag=finance"
+            rel="7"
+            style="line-height: 1.1;
+                   padding: 2px; margin-bottom: 6px; border: 1px dotted rgba(255, 255, 255, 0.8); 
+                   font-size: 14px; 
+                   border-radius: 99em; color: #0085a1; font-weight: bold;"
+            >finance 
+        </a>
+        
+    </div >
+        <!--Posted by Ryo on April 29, 2021  -->
+        <font color="gray" size='2'>
+            投稿日 2021-04-29
+        </font>
+</div>
+<hr>
+
+<div class="post-preview">
+    <a href="/2021/04/28/ubuntu-reboot-systemd/">
+        <h2 class="post-title">
+            reboot コマンド／poweroff コマンドの仕組み
+        </h2>
+        
+        <h3 class="post-subtitle">
+            Understanding systemd, systemctl 1/N
+        </h3>
+        
+    </a>
+    <div class="post-tags">
+        
+        &#9658;
+        <a class="post-tag" 
+            href="/archive/?tag=Linux"
+            rel="5"
+            style="line-height: 1.1;
+                   padding: 2px; margin-bottom: 6px; border: 1px dotted rgba(255, 255, 255, 0.8); 
+                   font-size: 14px; 
+                   border-radius: 99em; color: #0085a1; font-weight: bold;"
+            >Linux 
+        </a>
+        
+        &#9658;
+        <a class="post-tag" 
+            href="/archive/?tag=systemctl"
+            rel="9"
+            style="line-height: 1.1;
+                   padding: 2px; margin-bottom: 6px; border: 1px dotted rgba(255, 255, 255, 0.8); 
+                   font-size: 14px; 
+                   border-radius: 99em; color: #0085a1; font-weight: bold;"
+            >systemctl 
+        </a>
+        
+    </div >
+        <!--Posted by Ryo on April 28, 2021  -->
+        <font color="gray" size='2'>
+            投稿日 2021-04-28<br>更新日 2023-08-04
+        </font>
+</div>
+<hr>
+
+<div class="post-preview">
+    <a href="/2021/04/27/ubuntu-vim-tutorial/">
+        <h2 class="post-title">
+            Vimのインストールとチュートリアル
+        </h2>
+        
+        <h3 class="post-subtitle">
+            Ubuntu Desktop環境構築 Part 21
+        </h3>
+        
+    </a>
+    <div class="post-tags">
+        
+        &#9658;
+        <a class="post-tag" 
+            href="/archive/?tag=Ubuntu+20.04+LTS"
+            rel="16"
+            style="line-height: 1.1;
+                   padding: 2px; margin-bottom: 6px; border: 1px dotted rgba(255, 255, 255, 0.8); 
+                   font-size: 14px; 
+                   border-radius: 99em; color: #0085a1; font-weight: bold;"
+            >Ubuntu 20.04 LTS 
+        </a>
+        
+        &#9658;
+        <a class="post-tag" 
+            href="/archive/?tag=vim"
+            rel="3"
+            style="line-height: 1.1;
+                   padding: 2px; margin-bottom: 6px; border: 1px dotted rgba(255, 255, 255, 0.8); 
+                   font-size: 14px; 
+                   border-radius: 99em; color: #0085a1; font-weight: bold;"
+            >vim 
+        </a>
+        
+    </div >
+        <!--Posted by Ryo on April 27, 2021  -->
+        <font color="gray" size='2'>
+            投稿日 2021-04-27<br>更新日 2023-10-06
+        </font>
+</div>
+<hr>
+
+
+<!-- Pager -->
+
+<ul class="pager">
+    
+    <li class="previous">
+        <a href="/page20">&larr; Newer Posts</a>
+    </li>
+    
+    
+    <li class="next">
+        <a href="/page22">Older Posts &rarr;</a>
+    </li>
+    
 </ul>
 
-
-            <p class="copyright text-gray-600 text-sm">
-                Copyright &copy; Ryo's Tech Blog 2025
-                <br>
-                Powered by <span href="https://ryonakagami.github.io" class="text-blue-500 hover:underline">Ryo's Tech
-                    Blog</span>
-            </p>
-            <div class="flex justify-center mt-2">
-                <iframe class="align-middle" style="margin-left: 2px; margin-bottom:-5px;" frameborder="0" scrolling="0"
-                    width="80px" height="20px" title="RyoNakagami.github.io github stars"
-                    src="https://ghbtns.com/github-btn.html?user=RyoNakagami&repo=RyoNakagami.github.io&type=star&count=true">
-                </iframe>
-            </div>
-        </div>
-    </footer>
-
-    <script>
-        const toggleButton = document.getElementById("toggleApps");
-        const toggleButton_blog = document.getElementById("toggleBlogs");
-        const appList = document.getElementById("appList");
-        const blogList = document.getElementById("blogList");
-
-        toggleButton.addEventListener("click", () => {
-            appList.classList.toggle("hidden");
-        });
-
-        toggleButton_blog.addEventListener("click", () => {
-            blogList.classList.toggle("hidden");
-        });
-
-    </script>
-</body>
-
-</html>

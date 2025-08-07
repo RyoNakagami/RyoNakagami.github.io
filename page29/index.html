@@ -1,152 +1,370 @@
-<html lang="en">
 
-<head>
-    <meta charset="UTF-8">
-    <title>Ryos Tech Blog</title>
-    <script src="https://cdn.tailwindcss.com"></script>
-    <meta name="google-site-verification" content="gSMaswRY9iRfG4QaQrx6aj481bgr503qEZh-QPsMYNU" />
-</head>
-<header class="w-full bg-white shadow-md p-4 mb-6 fixed top-0 z-10">
-    <div class="max-w-5xl mx-auto flex items-center justify-between">
-        <a href="/" class="text-xl font-bold text-blue-600">Ryo's Tech Blog</a>
-        <nav class="space-x-4">
-            <a href="/about" class="text-gray-700 hover:text-blue-500">About</a>
-            <a href="/archive" class="text-gray-700 hover:text-blue-500">Archives</a>
-        </nav>
-    </div>
-</header>
-
-<body class="h-screen flex flex-col">
-
-    <div class="flex-grow bg-gray-50 flex flex-col items-center justify-start pt-24">
-        <!-- Title Above Cards Section -->
-        <h2 class="text-3xl font-bold text-gray-800 mb-8 text-center">Explore</h2>
-
-        <div class="grid grid-cols-1 md:grid-cols-3 gap-6 p-6 max-w-4xl w-full">
-
-            <!-- App Card -->
-            <div id="toggleApps" class="bg-blue-100 shadow-lg rounded-2xl p-6 text-center relative">
-                <h2 class="text-xl font-semibold">App</h2>
-                <p class="text-gray-500">Click here</p>
-                <!-- <button id="toggleApps" class="text-blue-500 hover:underline">Choose App from here</button> -->
-                <div id="appList" class="mt-4 hidden text-left">
-                    <ul class="list-disc list-inside text-blue-700 space-y-2">
-                        <li class="hover:underline cursor-pointer">
-                            <button onclick="location.href='/app/mathjax-renderer.html'">
-                                Math Renderer
-                            </button>
-                        </li>
-                    </ul>
-                </div>
-            </div>
-
-            <!-- Posts Card -->
-            <div id="toggleBlogs" class="bg-blue-100 shadow-lg rounded-2xl p-6 text-center relative">
-                <h2 class="text-xl font-semibold">Blogs</h2>
-                <p class="text-gray-500">Click here</p>
-                <div id="blogList" class="mt-4 hidden text-left">
-                    <ul class="list-disc list-inside text-blue-700 space-y-2">
-                        <li class="cursor-pointer hover:underline">
-                            <button onclick="location.href='https://ryonakagami.github.io/regmonkey-datascience-blog/'">
-                                DS Blog
-                            </button>
-                        </li>
-                        <li class="cursor-pointer hover:underline">
-                            <button onclick="location.href='https://ryonakagami.github.io/statistics-for-regression-monkey/'">
-                                Statistics Book
-                            </button>
-                        </li>
-                        <li class="cursor-pointer hover:underline">
-                            <button onclick="location.href='https://ryonakagami.github.io/regmonkey_datavisualization/'">
-                                Data Visualization
-                            </button>
-                        </li>
-                        <li class="cursor-pointer hover:underline">
-                            <button onclick="location.href='https://ohgoshgit.github.io/'">
-                                Git Troubleshooting
-                            </button>
-                        </li>
-                    </ul>
-                </div>
-            </div>
-
-            <!-- About Card -->
-            <div onclick="location.href='/archive'"
-                class="bg-blue-100 shadow-lg rounded-2xl p-6 text-center cursor-pointer hover:shadow-xl transition">
-                <h2 class="text-xl font-semibold">Archives</h2>
-                <p class="text-gray-500">Old blog posts</p>
-            </div>
-        </div>
-
-
-    </div>
-
-    <!-- Projects Section -->
-
-    <!-- <div class="flex-grow bg-gray-50 flex flex-col items-center justify-start pt-12">
-        <h2 class="text-3xl font-bold text-gray-800 mb-8 text-center">Projects</h2>
-    </div> -->
-
-
-
-
-
-    <footer class="bg-gray-100 py-4">
-        <div class="container mx-auto text-center">
-            <!-- SNS Link -->
-            
-
-
-<ul class="list-inline text-center">
-
-
-  
-  
-  
-  
-  <li>
-    <a target="_blank" href="https://github.com/RyoNakagami">
-      <span class="fa-stack fa-lg">
-        <i class="fa fa-circle fa-stack-2x"></i>
-        <i class="fa fa-github fa-stack-1x fa-inverse"></i>
-      </span>
+<div class="post-preview">
+    <a href="/2021/01/12/difference-apt-and-aptget/">
+        <h2 class="post-title">
+            apt vs apt-get
+        </h2>
+        
+        <h3 class="post-subtitle">
+            APTによるパッケージ管理 2/N
+        </h3>
+        
     </a>
-  </li>
-  
-  
+    <div class="post-tags">
+        
+        &#9658;
+        <a class="post-tag" 
+            href="/archive/?tag=Linux"
+            rel="5"
+            style="line-height: 1.1;
+                   padding: 2px; margin-bottom: 6px; border: 1px dotted rgba(255, 255, 255, 0.8); 
+                   font-size: 14px; 
+                   border-radius: 99em; color: #0085a1; font-weight: bold;"
+            >Linux 
+        </a>
+        
+        &#9658;
+        <a class="post-tag" 
+            href="/archive/?tag=apt"
+            rel="3"
+            style="line-height: 1.1;
+                   padding: 2px; margin-bottom: 6px; border: 1px dotted rgba(255, 255, 255, 0.8); 
+                   font-size: 14px; 
+                   border-radius: 99em; color: #0085a1; font-weight: bold;"
+            >apt 
+        </a>
+        
+    </div >
+        <!--Posted by Ryo on January 12, 2021  -->
+        <font color="gray" size='2'>
+            投稿日 2021-01-12
+        </font>
+</div>
+<hr>
+
+<div class="post-preview">
+    <a href="/2021/01/11/flowchart-and-how-programing-get-started/">
+        <h2 class="post-title">
+            プログラムができるまでの流れとフローチャート
+        </h2>
+        
+        <h3 class="post-subtitle">
+            料理レシピをフローチャートで書いてみる
+        </h3>
+        
+    </a>
+    <div class="post-tags">
+        
+        &#9658;
+        <a class="post-tag" 
+            href="/archive/?tag=coding"
+            rel="6"
+            style="line-height: 1.1;
+                   padding: 2px; margin-bottom: 6px; border: 1px dotted rgba(255, 255, 255, 0.8); 
+                   font-size: 14px; 
+                   border-radius: 99em; color: #0085a1; font-weight: bold;"
+            >coding 
+        </a>
+        
+        &#9658;
+        <a class="post-tag" 
+            href="/archive/?tag=%E6%96%99%E7%90%86"
+            rel="2"
+            style="line-height: 1.1;
+                   padding: 2px; margin-bottom: 6px; border: 1px dotted rgba(255, 255, 255, 0.8); 
+                   font-size: 14px; 
+                   border-radius: 99em; color: #0085a1; font-weight: bold;"
+            >料理 
+        </a>
+        
+    </div >
+        <!--Posted by Ryo on January 11, 2021  -->
+        <font color="gray" size='2'>
+            投稿日 2021-01-11<br>更新日 2022-10-05
+        </font>
+</div>
+<hr>
+
+<div class="post-preview">
+    <a href="/2021/01/10/git-and-HEAD-concept/">
+        <h2 class="post-title">
+            git HEAD: the difference between HEAD~ and HEAD^
+        </h2>
+        
+        <h3 class="post-subtitle">
+            How to use git command 9/N
+        </h3>
+        
+    </a>
+    <div class="post-tags">
+        
+        &#9658;
+        <a class="post-tag" 
+            href="/archive/?tag=git"
+            rel="3"
+            style="line-height: 1.1;
+                   padding: 2px; margin-bottom: 6px; border: 1px dotted rgba(255, 255, 255, 0.8); 
+                   font-size: 14px; 
+                   border-radius: 99em; color: #0085a1; font-weight: bold;"
+            >git 
+        </a>
+        
+    </div >
+        <!--Posted by Ryo on January 10, 2021  -->
+        <font color="gray" size='2'>
+            投稿日 2021-01-10<br>更新日 2023-06-24
+        </font>
+</div>
+<hr>
+
+<div class="post-preview">
+    <a href="/2021/01/09/learning-psuedocode/">
+        <h2 class="post-title">
+            Psuedo code Tutorial
+        </h2>
+        
+        <h3 class="post-subtitle">
+            疑似コードの読み方と書き方
+        </h3>
+        
+    </a>
+    <div class="post-tags">
+        
+        &#9658;
+        <a class="post-tag" 
+            href="/archive/?tag=Pseudo+code"
+            rel="11"
+            style="line-height: 1.1;
+                   padding: 2px; margin-bottom: 6px; border: 1px dotted rgba(255, 255, 255, 0.8); 
+                   font-size: 14px; 
+                   border-radius: 99em; color: #0085a1; font-weight: bold;"
+            >Pseudo code 
+        </a>
+        
+    </div >
+        <!--Posted by Ryo on January 9, 2021  -->
+        <font color="gray" size='2'>
+            投稿日 2021-01-09
+        </font>
+</div>
+<hr>
+
+<div class="post-preview">
+    <a href="/2021/01/08/how-to-modify-commit/">
+        <h2 class="post-title">
+            git commit: commit messageの修正
+        </h2>
+        
+        <h3 class="post-subtitle">
+            How to use git command 8/N
+        </h3>
+        
+    </a>
+    <div class="post-tags">
+        
+        &#9658;
+        <a class="post-tag" 
+            href="/archive/?tag=git"
+            rel="3"
+            style="line-height: 1.1;
+                   padding: 2px; margin-bottom: 6px; border: 1px dotted rgba(255, 255, 255, 0.8); 
+                   font-size: 14px; 
+                   border-radius: 99em; color: #0085a1; font-weight: bold;"
+            >git 
+        </a>
+        
+    </div >
+        <!--Posted by Ryo on January 8, 2021  -->
+        <font color="gray" size='2'>
+            投稿日 2021-01-08<br>更新日 2024-07-11
+        </font>
+</div>
+<hr>
+
+<div class="post-preview">
+    <a href="/2021/01/07/remote-repository-setup/">
+        <h2 class="post-title">
+            Remote Repositoryの設定と変更
+        </h2>
+        
+        <h3 class="post-subtitle">
+            How to use git command 7/N
+        </h3>
+        
+    </a>
+    <div class="post-tags">
+        
+        &#9658;
+        <a class="post-tag" 
+            href="/archive/?tag=git"
+            rel="3"
+            style="line-height: 1.1;
+                   padding: 2px; margin-bottom: 6px; border: 1px dotted rgba(255, 255, 255, 0.8); 
+                   font-size: 14px; 
+                   border-radius: 99em; color: #0085a1; font-weight: bold;"
+            >git 
+        </a>
+        
+    </div >
+        <!--Posted by Ryo on January 7, 2021  -->
+        <font color="gray" size='2'>
+            投稿日 2021-01-07<br>更新日 2023-06-16
+        </font>
+</div>
+<hr>
+
+<div class="post-preview">
+    <a href="/2021/01/06/git-add-u/">
+        <h2 class="post-title">
+            git add: stage/unstageの便利コマンド紹介
+        </h2>
+        
+        <h3 class="post-subtitle">
+            How to use git command 6/N
+        </h3>
+        
+    </a>
+    <div class="post-tags">
+        
+        &#9658;
+        <a class="post-tag" 
+            href="/archive/?tag=git"
+            rel="3"
+            style="line-height: 1.1;
+                   padding: 2px; margin-bottom: 6px; border: 1px dotted rgba(255, 255, 255, 0.8); 
+                   font-size: 14px; 
+                   border-radius: 99em; color: #0085a1; font-weight: bold;"
+            >git 
+        </a>
+        
+    </div >
+        <!--Posted by Ryo on January 6, 2021  -->
+        <font color="gray" size='2'>
+            投稿日 2021-01-06<br>更新日 2024-04-23
+        </font>
+</div>
+<hr>
+
+<div class="post-preview">
+    <a href="/2021/01/05/git-what-is-upstream/">
+        <h2 class="post-title">
+            Why Do We Set Upstream Branch and What is it?
+        </h2>
+        
+        <h3 class="post-subtitle">
+            How to use git command 5/N
+        </h3>
+        
+    </a>
+    <div class="post-tags">
+        
+        &#9658;
+        <a class="post-tag" 
+            href="/archive/?tag=git"
+            rel="3"
+            style="line-height: 1.1;
+                   padding: 2px; margin-bottom: 6px; border: 1px dotted rgba(255, 255, 255, 0.8); 
+                   font-size: 14px; 
+                   border-radius: 99em; color: #0085a1; font-weight: bold;"
+            >git 
+        </a>
+        
+    </div >
+        <!--Posted by Ryo on January 5, 2021  -->
+        <font color="gray" size='2'>
+            投稿日 2021-01-05<br>更新日 2023-06-13
+        </font>
+</div>
+<hr>
+
+<div class="post-preview">
+    <a href="/2021/01/04/setup-C-language-dev-env/">
+        <h2 class="post-title">
+            C言語練習環境の作成
+        </h2>
+        
+        <h3 class="post-subtitle">
+            プログラミング練習環境の構築例
+        </h3>
+        
+    </a>
+    <div class="post-tags">
+        
+        &#9658;
+        <a class="post-tag" 
+            href="/archive/?tag=C"
+            rel="1"
+            style="line-height: 1.1;
+                   padding: 2px; margin-bottom: 6px; border: 1px dotted rgba(255, 255, 255, 0.8); 
+                   font-size: 14px; 
+                   border-radius: 99em; color: #0085a1; font-weight: bold;"
+            >C 
+        </a>
+        
+        &#9658;
+        <a class="post-tag" 
+            href="/archive/?tag=%E7%92%B0%E5%A2%83%E6%A7%8B%E7%AF%89"
+            rel="4"
+            style="line-height: 1.1;
+                   padding: 2px; margin-bottom: 6px; border: 1px dotted rgba(255, 255, 255, 0.8); 
+                   font-size: 14px; 
+                   border-radius: 99em; color: #0085a1; font-weight: bold;"
+            >環境構築 
+        </a>
+        
+    </div >
+        <!--Posted by Ryo on January 4, 2021  -->
+        <font color="gray" size='2'>
+            投稿日 2021-01-04
+        </font>
+</div>
+<hr>
+
+<div class="post-preview">
+    <a href="/2021/01/03/git-pull-and-fetch/">
+        <h2 class="post-title">
+            git fetch and pull
+        </h2>
+        
+        <h3 class="post-subtitle">
+            How to use git command 4/N
+        </h3>
+        
+    </a>
+    <div class="post-tags">
+        
+        &#9658;
+        <a class="post-tag" 
+            href="/archive/?tag=git"
+            rel="3"
+            style="line-height: 1.1;
+                   padding: 2px; margin-bottom: 6px; border: 1px dotted rgba(255, 255, 255, 0.8); 
+                   font-size: 14px; 
+                   border-radius: 99em; color: #0085a1; font-weight: bold;"
+            >git 
+        </a>
+        
+    </div >
+        <!--Posted by Ryo on January 3, 2021  -->
+        <font color="gray" size='2'>
+            投稿日 2021-01-03<br>更新日 2023-05-29
+        </font>
+</div>
+<hr>
+
+
+<!-- Pager -->
+
+<ul class="pager">
+    
+    <li class="previous">
+        <a href="/page28">&larr; Newer Posts</a>
+    </li>
+    
+    
+    <li class="next">
+        <a href="/page30">Older Posts &rarr;</a>
+    </li>
+    
 </ul>
 
-
-            <p class="copyright text-gray-600 text-sm">
-                Copyright &copy; Ryo's Tech Blog 2025
-                <br>
-                Powered by <span href="https://ryonakagami.github.io" class="text-blue-500 hover:underline">Ryo's Tech
-                    Blog</span>
-            </p>
-            <div class="flex justify-center mt-2">
-                <iframe class="align-middle" style="margin-left: 2px; margin-bottom:-5px;" frameborder="0" scrolling="0"
-                    width="80px" height="20px" title="RyoNakagami.github.io github stars"
-                    src="https://ghbtns.com/github-btn.html?user=RyoNakagami&repo=RyoNakagami.github.io&type=star&count=true">
-                </iframe>
-            </div>
-        </div>
-    </footer>
-
-    <script>
-        const toggleButton = document.getElementById("toggleApps");
-        const toggleButton_blog = document.getElementById("toggleBlogs");
-        const appList = document.getElementById("appList");
-        const blogList = document.getElementById("blogList");
-
-        toggleButton.addEventListener("click", () => {
-            appList.classList.toggle("hidden");
-        });
-
-        toggleButton_blog.addEventListener("click", () => {
-            blogList.classList.toggle("hidden");
-        });
-
-    </script>
-</body>
-
-</html>

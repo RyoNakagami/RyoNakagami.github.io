@@ -1,152 +1,348 @@
-<html lang="en">
 
-<head>
-    <meta charset="UTF-8">
-    <title>Ryos Tech Blog</title>
-    <script src="https://cdn.tailwindcss.com"></script>
-    <meta name="google-site-verification" content="gSMaswRY9iRfG4QaQrx6aj481bgr503qEZh-QPsMYNU" />
-</head>
-<header class="w-full bg-white shadow-md p-4 mb-6 fixed top-0 z-10">
-    <div class="max-w-5xl mx-auto flex items-center justify-between">
-        <a href="/" class="text-xl font-bold text-blue-600">Ryo's Tech Blog</a>
-        <nav class="space-x-4">
-            <a href="/about" class="text-gray-700 hover:text-blue-500">About</a>
-            <a href="/archive" class="text-gray-700 hover:text-blue-500">Archives</a>
-        </nav>
-    </div>
-</header>
-
-<body class="h-screen flex flex-col">
-
-    <div class="flex-grow bg-gray-50 flex flex-col items-center justify-start pt-24">
-        <!-- Title Above Cards Section -->
-        <h2 class="text-3xl font-bold text-gray-800 mb-8 text-center">Explore</h2>
-
-        <div class="grid grid-cols-1 md:grid-cols-3 gap-6 p-6 max-w-4xl w-full">
-
-            <!-- App Card -->
-            <div id="toggleApps" class="bg-blue-100 shadow-lg rounded-2xl p-6 text-center relative">
-                <h2 class="text-xl font-semibold">App</h2>
-                <p class="text-gray-500">Click here</p>
-                <!-- <button id="toggleApps" class="text-blue-500 hover:underline">Choose App from here</button> -->
-                <div id="appList" class="mt-4 hidden text-left">
-                    <ul class="list-disc list-inside text-blue-700 space-y-2">
-                        <li class="hover:underline cursor-pointer">
-                            <button onclick="location.href='/app/mathjax-renderer.html'">
-                                Math Renderer
-                            </button>
-                        </li>
-                    </ul>
-                </div>
-            </div>
-
-            <!-- Posts Card -->
-            <div id="toggleBlogs" class="bg-blue-100 shadow-lg rounded-2xl p-6 text-center relative">
-                <h2 class="text-xl font-semibold">Blogs</h2>
-                <p class="text-gray-500">Click here</p>
-                <div id="blogList" class="mt-4 hidden text-left">
-                    <ul class="list-disc list-inside text-blue-700 space-y-2">
-                        <li class="cursor-pointer hover:underline">
-                            <button onclick="location.href='https://ryonakagami.github.io/regmonkey-datascience-blog/'">
-                                DS Blog
-                            </button>
-                        </li>
-                        <li class="cursor-pointer hover:underline">
-                            <button onclick="location.href='https://ryonakagami.github.io/statistics-for-regression-monkey/'">
-                                Statistics Book
-                            </button>
-                        </li>
-                        <li class="cursor-pointer hover:underline">
-                            <button onclick="location.href='https://ryonakagami.github.io/regmonkey_datavisualization/'">
-                                Data Visualization
-                            </button>
-                        </li>
-                        <li class="cursor-pointer hover:underline">
-                            <button onclick="location.href='https://ohgoshgit.github.io/'">
-                                Git Troubleshooting
-                            </button>
-                        </li>
-                    </ul>
-                </div>
-            </div>
-
-            <!-- About Card -->
-            <div onclick="location.href='/archive'"
-                class="bg-blue-100 shadow-lg rounded-2xl p-6 text-center cursor-pointer hover:shadow-xl transition">
-                <h2 class="text-xl font-semibold">Archives</h2>
-                <p class="text-gray-500">Old blog posts</p>
-            </div>
-        </div>
-
-
-    </div>
-
-    <!-- Projects Section -->
-
-    <!-- <div class="flex-grow bg-gray-50 flex flex-col items-center justify-start pt-12">
-        <h2 class="text-3xl font-bold text-gray-800 mb-8 text-center">Projects</h2>
-    </div> -->
-
-
-
-
-
-    <footer class="bg-gray-100 py-4">
-        <div class="container mx-auto text-center">
-            <!-- SNS Link -->
-            
-
-
-<ul class="list-inline text-center">
-
-
-  
-  
-  
-  
-  <li>
-    <a target="_blank" href="https://github.com/RyoNakagami">
-      <span class="fa-stack fa-lg">
-        <i class="fa fa-circle fa-stack-2x"></i>
-        <i class="fa fa-github fa-stack-1x fa-inverse"></i>
-      </span>
+<div class="post-preview">
+    <a href="/2020/10/17/IP-Address/">
+        <h2 class="post-title">
+            IPアドレスの構造
+        </h2>
+        
+        <h3 class="post-subtitle">
+            ネットワークを学ぶ 3/N
+        </h3>
+        
     </a>
-  </li>
-  
-  
+    <div class="post-tags">
+        
+        &#9658;
+        <a class="post-tag" 
+            href="/archive/?tag=Network"
+            rel="7"
+            style="line-height: 1.1;
+                   padding: 2px; margin-bottom: 6px; border: 1px dotted rgba(255, 255, 255, 0.8); 
+                   font-size: 14px; 
+                   border-radius: 99em; color: #0085a1; font-weight: bold;"
+            >Network 
+        </a>
+        
+    </div >
+        <!--Posted by Ryo on October 17, 2020  -->
+        <font color="gray" size='2'>
+            投稿日 2020-10-17<br>更新日 2023-04-13
+        </font>
+</div>
+<hr>
+
+<div class="post-preview">
+    <a href="/2020/10/16/Regular-Expression-part1/">
+        <h2 class="post-title">
+            正規表現入門 part 1
+        </h2>
+        
+        <h3 class="post-subtitle">
+            正規表現は何か？
+        </h3>
+        
+    </a>
+    <div class="post-tags">
+        
+        &#9658;
+        <a class="post-tag" 
+            href="/archive/?tag=regex"
+            rel="5"
+            style="line-height: 1.1;
+                   padding: 2px; margin-bottom: 6px; border: 1px dotted rgba(255, 255, 255, 0.8); 
+                   font-size: 14px; 
+                   border-radius: 99em; color: #0085a1; font-weight: bold;"
+            >regex 
+        </a>
+        
+    </div >
+        <!--Posted by Ryo on October 16, 2020  -->
+        <font color="gray" size='2'>
+            投稿日 2020-10-16
+        </font>
+</div>
+<hr>
+
+<div class="post-preview">
+    <a href="/2020/10/15/Mail-system-basic/">
+        <h2 class="post-title">
+            電子メールの仕組み
+        </h2>
+        
+        <h3 class="post-subtitle">
+            ネットワークを学ぶ 2/N
+        </h3>
+        
+    </a>
+    <div class="post-tags">
+        
+        &#9658;
+        <a class="post-tag" 
+            href="/archive/?tag=Network"
+            rel="7"
+            style="line-height: 1.1;
+                   padding: 2px; margin-bottom: 6px; border: 1px dotted rgba(255, 255, 255, 0.8); 
+                   font-size: 14px; 
+                   border-radius: 99em; color: #0085a1; font-weight: bold;"
+            >Network 
+        </a>
+        
+    </div >
+        <!--Posted by Ryo on October 15, 2020  -->
+        <font color="gray" size='2'>
+            投稿日 2020-10-15<br>更新日 2023-04-07
+        </font>
+</div>
+<hr>
+
+<div class="post-preview">
+    <a href="/2020/10/14/TCP-IP-protocol/">
+        <h2 class="post-title">
+            初心者がTCP/IPを理解する
+        </h2>
+        
+        <h3 class="post-subtitle">
+            ネットワークを学ぶ 1/N
+        </h3>
+        
+    </a>
+    <div class="post-tags">
+        
+        &#9658;
+        <a class="post-tag" 
+            href="/archive/?tag=Network"
+            rel="7"
+            style="line-height: 1.1;
+                   padding: 2px; margin-bottom: 6px; border: 1px dotted rgba(255, 255, 255, 0.8); 
+                   font-size: 14px; 
+                   border-radius: 99em; color: #0085a1; font-weight: bold;"
+            >Network 
+        </a>
+        
+    </div >
+        <!--Posted by Ryo on October 14, 2020  -->
+        <font color="gray" size='2'>
+            投稿日 2020-10-14<br>更新日 2023-04-07
+        </font>
+</div>
+<hr>
+
+<div class="post-preview">
+    <a href="/2020/10/13/Blog-development/">
+        <h2 class="post-title">
+            GitHub Pages: GA4の設定
+        </h2>
+        
+        <h3 class="post-subtitle">
+            GitHub Pages作成環境の構築 1/N
+        </h3>
+        
+    </a>
+    <div class="post-tags">
+        
+        &#9658;
+        <a class="post-tag" 
+            href="/archive/?tag=GitHub+Pages"
+            rel="12"
+            style="line-height: 1.1;
+                   padding: 2px; margin-bottom: 6px; border: 1px dotted rgba(255, 255, 255, 0.8); 
+                   font-size: 14px; 
+                   border-radius: 99em; color: #0085a1; font-weight: bold;"
+            >GitHub Pages 
+        </a>
+        
+    </div >
+        <!--Posted by Ryo on October 13, 2020  -->
+        <font color="gray" size='2'>
+            投稿日 2020-10-13<br>更新日 2023-11-15
+        </font>
+</div>
+<hr>
+
+<div class="post-preview">
+    <a href="/2020/10/12/floating-point-format/">
+        <h2 class="post-title">
+            固定小数点表示と浮動小数点表示
+        </h2>
+        
+        <h3 class="post-subtitle">
+            コンピューターにおける算術演算 3/N
+        </h3>
+        
+    </a>
+    <div class="post-tags">
+        
+        &#9658;
+        <a class="post-tag" 
+            href="/archive/?tag=%E6%95%B0%E5%80%A4%E8%A8%88%E7%AE%97"
+            rel="4"
+            style="line-height: 1.1;
+                   padding: 2px; margin-bottom: 6px; border: 1px dotted rgba(255, 255, 255, 0.8); 
+                   font-size: 14px; 
+                   border-radius: 99em; color: #0085a1; font-weight: bold;"
+            >数値計算 
+        </a>
+        
+    </div >
+        <!--Posted by Ryo on October 12, 2020  -->
+        <font color="gray" size='2'>
+            投稿日 2020-10-12<br>更新日 2023-04-01
+        </font>
+</div>
+<hr>
+
+<div class="post-preview">
+    <a href="/2020/10/11/Greek-alphabet/">
+        <h2 class="post-title">
+            文字コード > ギリシア文字
+        </h2>
+        
+        <h3 class="post-subtitle">
+            文字コードに親しむ 1/N
+        </h3>
+        
+    </a>
+    <div class="post-tags">
+        
+        &#9658;
+        <a class="post-tag" 
+            href="/archive/?tag=%E6%96%87%E5%AD%97%E3%82%B3%E3%83%BC%E3%83%89"
+            rel="5"
+            style="line-height: 1.1;
+                   padding: 2px; margin-bottom: 6px; border: 1px dotted rgba(255, 255, 255, 0.8); 
+                   font-size: 14px; 
+                   border-radius: 99em; color: #0085a1; font-weight: bold;"
+            >文字コード 
+        </a>
+        
+    </div >
+        <!--Posted by Ryo on October 11, 2020  -->
+        <font color="gray" size='2'>
+            投稿日 2020-10-11<br>更新日 2020-10-11
+        </font>
+</div>
+<hr>
+
+<div class="post-preview">
+    <a href="/2020/10/09/ArithmeticOperationsPerformedbytheComputers/">
+        <h2 class="post-title">
+            補数を用いた整数の表現
+        </h2>
+        
+        <h3 class="post-subtitle">
+            コンピューターにおける算術演算 2/N
+        </h3>
+        
+    </a>
+    <div class="post-tags">
+        
+        &#9658;
+        <a class="post-tag" 
+            href="/archive/?tag=%E6%95%B0%E5%80%A4%E8%A8%88%E7%AE%97"
+            rel="4"
+            style="line-height: 1.1;
+                   padding: 2px; margin-bottom: 6px; border: 1px dotted rgba(255, 255, 255, 0.8); 
+                   font-size: 14px; 
+                   border-radius: 99em; color: #0085a1; font-weight: bold;"
+            >数値計算 
+        </a>
+        
+    </div >
+        <!--Posted by Ryo on October 9, 2020  -->
+        <font color="gray" size='2'>
+            投稿日 2020-10-09
+        </font>
+</div>
+<hr>
+
+<div class="post-preview">
+    <a href="/2020/10/08/How-Programm-Works/">
+        <h2 class="post-title">
+            一般教養としてのComputer Science
+        </h2>
+        
+        <h3 class="post-subtitle">
+            プログラムが動作する根本的な仕組みを理解する
+        </h3>
+        
+    </a>
+    <div class="post-tags">
+        
+        &#9658;
+        <a class="post-tag" 
+            href="/archive/?tag=Linux"
+            rel="5"
+            style="line-height: 1.1;
+                   padding: 2px; margin-bottom: 6px; border: 1px dotted rgba(255, 255, 255, 0.8); 
+                   font-size: 14px; 
+                   border-radius: 99em; color: #0085a1; font-weight: bold;"
+            >Linux 
+        </a>
+        
+    </div >
+        <!--Posted by Ryo on October 8, 2020  -->
+        <font color="gray" size='2'>
+            投稿日 2020-10-08
+        </font>
+</div>
+<hr>
+
+<div class="post-preview">
+    <a href="/2020/10/07/daigakuenosugaku-permutation/">
+        <h2 class="post-title">
+            数字の並べ替え
+        </h2>
+        
+        <h3 class="post-subtitle">
+            確率と数学ドリル 1/N
+        </h3>
+        
+    </a>
+    <div class="post-tags">
+        
+        &#9658;
+        <a class="post-tag" 
+            href="/archive/?tag=math"
+            rel="4"
+            style="line-height: 1.1;
+                   padding: 2px; margin-bottom: 6px; border: 1px dotted rgba(255, 255, 255, 0.8); 
+                   font-size: 14px; 
+                   border-radius: 99em; color: #0085a1; font-weight: bold;"
+            >math 
+        </a>
+        
+        &#9658;
+        <a class="post-tag" 
+            href="/archive/?tag=Python"
+            rel="6"
+            style="line-height: 1.1;
+                   padding: 2px; margin-bottom: 6px; border: 1px dotted rgba(255, 255, 255, 0.8); 
+                   font-size: 14px; 
+                   border-radius: 99em; color: #0085a1; font-weight: bold;"
+            >Python 
+        </a>
+        
+    </div >
+        <!--Posted by Ryo on October 7, 2020  -->
+        <font color="gray" size='2'>
+            投稿日 2020-10-07<br>更新日 2023-12-16
+        </font>
+</div>
+<hr>
+
+
+<!-- Pager -->
+
+<ul class="pager">
+    
+    <li class="previous">
+        <a href="/page33">&larr; Newer Posts</a>
+    </li>
+    
+    
+    <li class="next">
+        <a href="/page35">Older Posts &rarr;</a>
+    </li>
+    
 </ul>
 
-
-            <p class="copyright text-gray-600 text-sm">
-                Copyright &copy; Ryo's Tech Blog 2025
-                <br>
-                Powered by <span href="https://ryonakagami.github.io" class="text-blue-500 hover:underline">Ryo's Tech
-                    Blog</span>
-            </p>
-            <div class="flex justify-center mt-2">
-                <iframe class="align-middle" style="margin-left: 2px; margin-bottom:-5px;" frameborder="0" scrolling="0"
-                    width="80px" height="20px" title="RyoNakagami.github.io github stars"
-                    src="https://ghbtns.com/github-btn.html?user=RyoNakagami&repo=RyoNakagami.github.io&type=star&count=true">
-                </iframe>
-            </div>
-        </div>
-    </footer>
-
-    <script>
-        const toggleButton = document.getElementById("toggleApps");
-        const toggleButton_blog = document.getElementById("toggleBlogs");
-        const appList = document.getElementById("appList");
-        const blogList = document.getElementById("blogList");
-
-        toggleButton.addEventListener("click", () => {
-            appList.classList.toggle("hidden");
-        });
-
-        toggleButton_blog.addEventListener("click", () => {
-            blogList.classList.toggle("hidden");
-        });
-
-    </script>
-</body>
-
-</html>

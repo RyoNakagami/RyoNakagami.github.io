@@ -1,152 +1,458 @@
-<html lang="en">
 
-<head>
-    <meta charset="UTF-8">
-    <title>Ryos Tech Blog</title>
-    <script src="https://cdn.tailwindcss.com"></script>
-    <meta name="google-site-verification" content="gSMaswRY9iRfG4QaQrx6aj481bgr503qEZh-QPsMYNU" />
-</head>
-<header class="w-full bg-white shadow-md p-4 mb-6 fixed top-0 z-10">
-    <div class="max-w-5xl mx-auto flex items-center justify-between">
-        <a href="/" class="text-xl font-bold text-blue-600">Ryo's Tech Blog</a>
-        <nav class="space-x-4">
-            <a href="/about" class="text-gray-700 hover:text-blue-500">About</a>
-            <a href="/archive" class="text-gray-700 hover:text-blue-500">Archives</a>
-        </nav>
-    </div>
-</header>
-
-<body class="h-screen flex flex-col">
-
-    <div class="flex-grow bg-gray-50 flex flex-col items-center justify-start pt-24">
-        <!-- Title Above Cards Section -->
-        <h2 class="text-3xl font-bold text-gray-800 mb-8 text-center">Explore</h2>
-
-        <div class="grid grid-cols-1 md:grid-cols-3 gap-6 p-6 max-w-4xl w-full">
-
-            <!-- App Card -->
-            <div id="toggleApps" class="bg-blue-100 shadow-lg rounded-2xl p-6 text-center relative">
-                <h2 class="text-xl font-semibold">App</h2>
-                <p class="text-gray-500">Click here</p>
-                <!-- <button id="toggleApps" class="text-blue-500 hover:underline">Choose App from here</button> -->
-                <div id="appList" class="mt-4 hidden text-left">
-                    <ul class="list-disc list-inside text-blue-700 space-y-2">
-                        <li class="hover:underline cursor-pointer">
-                            <button onclick="location.href='/app/mathjax-renderer.html'">
-                                Math Renderer
-                            </button>
-                        </li>
-                    </ul>
-                </div>
-            </div>
-
-            <!-- Posts Card -->
-            <div id="toggleBlogs" class="bg-blue-100 shadow-lg rounded-2xl p-6 text-center relative">
-                <h2 class="text-xl font-semibold">Blogs</h2>
-                <p class="text-gray-500">Click here</p>
-                <div id="blogList" class="mt-4 hidden text-left">
-                    <ul class="list-disc list-inside text-blue-700 space-y-2">
-                        <li class="cursor-pointer hover:underline">
-                            <button onclick="location.href='https://ryonakagami.github.io/regmonkey-datascience-blog/'">
-                                DS Blog
-                            </button>
-                        </li>
-                        <li class="cursor-pointer hover:underline">
-                            <button onclick="location.href='https://ryonakagami.github.io/statistics-for-regression-monkey/'">
-                                Statistics Book
-                            </button>
-                        </li>
-                        <li class="cursor-pointer hover:underline">
-                            <button onclick="location.href='https://ryonakagami.github.io/regmonkey_datavisualization/'">
-                                Data Visualization
-                            </button>
-                        </li>
-                        <li class="cursor-pointer hover:underline">
-                            <button onclick="location.href='https://ohgoshgit.github.io/'">
-                                Git Troubleshooting
-                            </button>
-                        </li>
-                    </ul>
-                </div>
-            </div>
-
-            <!-- About Card -->
-            <div onclick="location.href='/archive'"
-                class="bg-blue-100 shadow-lg rounded-2xl p-6 text-center cursor-pointer hover:shadow-xl transition">
-                <h2 class="text-xl font-semibold">Archives</h2>
-                <p class="text-gray-500">Old blog posts</p>
-            </div>
-        </div>
-
-
-    </div>
-
-    <!-- Projects Section -->
-
-    <!-- <div class="flex-grow bg-gray-50 flex flex-col items-center justify-start pt-12">
-        <h2 class="text-3xl font-bold text-gray-800 mb-8 text-center">Projects</h2>
-    </div> -->
-
-
-
-
-
-    <footer class="bg-gray-100 py-4">
-        <div class="container mx-auto text-center">
-            <!-- SNS Link -->
-            
-
-
-<ul class="list-inline text-center">
-
-
-  
-  
-  
-  
-  <li>
-    <a target="_blank" href="https://github.com/RyoNakagami">
-      <span class="fa-stack fa-lg">
-        <i class="fa fa-circle fa-stack-2x"></i>
-        <i class="fa fa-github fa-stack-1x fa-inverse"></i>
-      </span>
+<div class="post-preview">
+    <a href="/2022/02/10/MahalanobisDistance/">
+        <h2 class="post-title">
+            Mahalanobis Distance
+        </h2>
+        
+        <h3 class="post-subtitle">
+            意思決定とモデル精度の橋渡し 2/N
+        </h3>
+        
     </a>
-  </li>
-  
-  
+    <div class="post-tags">
+        
+        &#9658;
+        <a class="post-tag" 
+            href="/archive/?tag=%E7%B5%B1%E8%A8%88"
+            rel="2"
+            style="line-height: 1.1;
+                   padding: 2px; margin-bottom: 6px; border: 1px dotted rgba(255, 255, 255, 0.8); 
+                   font-size: 14px; 
+                   border-radius: 99em; color: #0085a1; font-weight: bold;"
+            >統計 
+        </a>
+        
+        &#9658;
+        <a class="post-tag" 
+            href="/archive/?tag=Metrics"
+            rel="7"
+            style="line-height: 1.1;
+                   padding: 2px; margin-bottom: 6px; border: 1px dotted rgba(255, 255, 255, 0.8); 
+                   font-size: 14px; 
+                   border-radius: 99em; color: #0085a1; font-weight: bold;"
+            >Metrics 
+        </a>
+        
+    </div >
+        <!--Posted by Ryo on February 10, 2022  -->
+        <font color="gray" size='2'>
+            投稿日 2022-02-10<br>更新日 2023-03-03
+        </font>
+</div>
+<hr>
+
+<div class="post-preview">
+    <a href="/2022/02/09/on-the-statistical-analysis-of-roc-curve/">
+        <h2 class="post-title">
+            論文紹介: Topmpson 1989, On The Statistical Analysis of ROC Curve
+        </h2>
+        
+        <h3 class="post-subtitle">
+            ROC曲線の解釈指標としての「Binormal ROCを仮定したAUC」
+        </h3>
+        
+    </a>
+    <div class="post-tags">
+        
+        &#9658;
+        <a class="post-tag" 
+            href="/archive/?tag=%E7%B5%B1%E8%A8%88"
+            rel="2"
+            style="line-height: 1.1;
+                   padding: 2px; margin-bottom: 6px; border: 1px dotted rgba(255, 255, 255, 0.8); 
+                   font-size: 14px; 
+                   border-radius: 99em; color: #0085a1; font-weight: bold;"
+            >統計 
+        </a>
+        
+        &#9658;
+        <a class="post-tag" 
+            href="/archive/?tag=statistical+inference"
+            rel="21"
+            style="line-height: 1.1;
+                   padding: 2px; margin-bottom: 6px; border: 1px dotted rgba(255, 255, 255, 0.8); 
+                   font-size: 14px; 
+                   border-radius: 99em; color: #0085a1; font-weight: bold;"
+            >statistical inference 
+        </a>
+        
+        &#9658;
+        <a class="post-tag" 
+            href="/archive/?tag=%E8%AB%96%E6%96%87"
+            rel="2"
+            style="line-height: 1.1;
+                   padding: 2px; margin-bottom: 6px; border: 1px dotted rgba(255, 255, 255, 0.8); 
+                   font-size: 14px; 
+                   border-radius: 99em; color: #0085a1; font-weight: bold;"
+            >論文 
+        </a>
+        
+    </div >
+        <!--Posted by Ryo on February 9, 2022  -->
+        <font color="gray" size='2'>
+            投稿日 2022-02-09<br>更新日 2023-03-03
+        </font>
+</div>
+<hr>
+
+<div class="post-preview">
+    <a href="/2022/02/08/Nonparametric-Tests/">
+        <h2 class="post-title">
+            Non Parameteric Tests - Permutation Test
+        </h2>
+        
+        <h3 class="post-subtitle">
+            Statistical Inference: Significance Testing Note 1/N
+        </h3>
+        
+    </a>
+    <div class="post-tags">
+        
+        &#9658;
+        <a class="post-tag" 
+            href="/archive/?tag=%E7%B5%B1%E8%A8%88"
+            rel="2"
+            style="line-height: 1.1;
+                   padding: 2px; margin-bottom: 6px; border: 1px dotted rgba(255, 255, 255, 0.8); 
+                   font-size: 14px; 
+                   border-radius: 99em; color: #0085a1; font-weight: bold;"
+            >統計 
+        </a>
+        
+        &#9658;
+        <a class="post-tag" 
+            href="/archive/?tag=statistical+inference"
+            rel="21"
+            style="line-height: 1.1;
+                   padding: 2px; margin-bottom: 6px; border: 1px dotted rgba(255, 255, 255, 0.8); 
+                   font-size: 14px; 
+                   border-radius: 99em; color: #0085a1; font-weight: bold;"
+            >statistical inference 
+        </a>
+        
+    </div >
+        <!--Posted by Ryo on February 8, 2022  -->
+        <font color="gray" size='2'>
+            投稿日 2022-02-08<br>更新日 2022-10-31
+        </font>
+</div>
+<hr>
+
+<div class="post-preview">
+    <a href="/2022/02/07/PRML-chapter01-01/">
+        <h2 class="post-title">
+            Bishop: パターン認識と機械学習の勉強用ノート 1/N
+        </h2>
+        
+        <h3 class="post-subtitle">
+            Chapter 1: 多項式曲線Fitting
+        </h3>
+        
+    </a>
+    <div class="post-tags">
+        
+        &#9658;
+        <a class="post-tag" 
+            href="/archive/?tag=PRML"
+            rel="4"
+            style="line-height: 1.1;
+                   padding: 2px; margin-bottom: 6px; border: 1px dotted rgba(255, 255, 255, 0.8); 
+                   font-size: 14px; 
+                   border-radius: 99em; color: #0085a1; font-weight: bold;"
+            >PRML 
+        </a>
+        
+        &#9658;
+        <a class="post-tag" 
+            href="/archive/?tag=Python"
+            rel="6"
+            style="line-height: 1.1;
+                   padding: 2px; margin-bottom: 6px; border: 1px dotted rgba(255, 255, 255, 0.8); 
+                   font-size: 14px; 
+                   border-radius: 99em; color: #0085a1; font-weight: bold;"
+            >Python 
+        </a>
+        
+    </div >
+        <!--Posted by Ryo on February 7, 2022  -->
+        <font color="gray" size='2'>
+            投稿日 2022-02-07<br>更新日 2022-03-15
+        </font>
+</div>
+<hr>
+
+<div class="post-preview">
+    <a href="/2022/02/06/suggest-apt-packages-function/">
+        <h2 class="post-title">
+            Linux基礎知識：bash環境でのパッケージのサジェスト機能
+        </h2>
+        
+        <h3 class="post-subtitle">
+            command-not-foundの実装の確認
+        </h3>
+        
+    </a>
+    <div class="post-tags">
+        
+        &#9658;
+        <a class="post-tag" 
+            href="/archive/?tag=Linux"
+            rel="5"
+            style="line-height: 1.1;
+                   padding: 2px; margin-bottom: 6px; border: 1px dotted rgba(255, 255, 255, 0.8); 
+                   font-size: 14px; 
+                   border-radius: 99em; color: #0085a1; font-weight: bold;"
+            >Linux 
+        </a>
+        
+    </div >
+        <!--Posted by Ryo on February 6, 2022  -->
+        <font color="gray" size='2'>
+            投稿日 2022-02-06<br>更新日 2023-01-26
+        </font>
+</div>
+<hr>
+
+<div class="post-preview">
+    <a href="/2022/02/04/integral-of-tangent-x/">
+        <h2 class="post-title">
+            タンジェントのN乗の区間積分と数列
+        </h2>
+        
+        <h3 class="post-subtitle">
+            H31東京大学大学院工学研究科入試問1を題材に
+        </h3>
+        
+    </a>
+    <div class="post-tags">
+        
+        &#9658;
+        <a class="post-tag" 
+            href="/archive/?tag=math"
+            rel="4"
+            style="line-height: 1.1;
+                   padding: 2px; margin-bottom: 6px; border: 1px dotted rgba(255, 255, 255, 0.8); 
+                   font-size: 14px; 
+                   border-radius: 99em; color: #0085a1; font-weight: bold;"
+            >math 
+        </a>
+        
+    </div >
+        <!--Posted by Ryo on February 4, 2022  -->
+        <font color="gray" size='2'>
+            投稿日 2022-02-04
+        </font>
+</div>
+<hr>
+
+<div class="post-preview">
+    <a href="/2022/02/03/binomial-trial-wth-latent-variable/">
+        <h2 class="post-title">
+            Latent variableに依存したパラメーターの推定
+        </h2>
+        
+        <h3 class="post-subtitle">
+            罹患率から背景のパラメーターを推定する
+        </h3>
+        
+    </a>
+    <div class="post-tags">
+        
+        &#9658;
+        <a class="post-tag" 
+            href="/archive/?tag=%E7%B5%B1%E8%A8%88"
+            rel="2"
+            style="line-height: 1.1;
+                   padding: 2px; margin-bottom: 6px; border: 1px dotted rgba(255, 255, 255, 0.8); 
+                   font-size: 14px; 
+                   border-radius: 99em; color: #0085a1; font-weight: bold;"
+            >統計 
+        </a>
+        
+        &#9658;
+        <a class="post-tag" 
+            href="/archive/?tag=statistical+inference"
+            rel="21"
+            style="line-height: 1.1;
+                   padding: 2px; margin-bottom: 6px; border: 1px dotted rgba(255, 255, 255, 0.8); 
+                   font-size: 14px; 
+                   border-radius: 99em; color: #0085a1; font-weight: bold;"
+            >statistical inference 
+        </a>
+        
+        &#9658;
+        <a class="post-tag" 
+            href="/archive/?tag=delta+method"
+            rel="12"
+            style="line-height: 1.1;
+                   padding: 2px; margin-bottom: 6px; border: 1px dotted rgba(255, 255, 255, 0.8); 
+                   font-size: 14px; 
+                   border-radius: 99em; color: #0085a1; font-weight: bold;"
+            >delta method 
+        </a>
+        
+    </div >
+        <!--Posted by Ryo on February 3, 2022  -->
+        <font color="gray" size='2'>
+            投稿日 2022-02-03
+        </font>
+</div>
+<hr>
+
+<div class="post-preview">
+    <a href="/2022/02/02/model-evaluation-01/">
+        <h2 class="post-title">
+            機械学習モデル精度の評価
+        </h2>
+        
+        <h3 class="post-subtitle">
+            意思決定とモデル精度の橋渡し 1/N
+        </h3>
+        
+    </a>
+    <div class="post-tags">
+        
+        &#9658;
+        <a class="post-tag" 
+            href="/archive/?tag=Metrics"
+            rel="7"
+            style="line-height: 1.1;
+                   padding: 2px; margin-bottom: 6px; border: 1px dotted rgba(255, 255, 255, 0.8); 
+                   font-size: 14px; 
+                   border-radius: 99em; color: #0085a1; font-weight: bold;"
+            >Metrics 
+        </a>
+        
+        &#9658;
+        <a class="post-tag" 
+            href="/archive/?tag=%E7%B5%B1%E8%A8%88"
+            rel="2"
+            style="line-height: 1.1;
+                   padding: 2px; margin-bottom: 6px; border: 1px dotted rgba(255, 255, 255, 0.8); 
+                   font-size: 14px; 
+                   border-radius: 99em; color: #0085a1; font-weight: bold;"
+            >統計 
+        </a>
+        
+        &#9658;
+        <a class="post-tag" 
+            href="/archive/?tag=statistical+inference"
+            rel="21"
+            style="line-height: 1.1;
+                   padding: 2px; margin-bottom: 6px; border: 1px dotted rgba(255, 255, 255, 0.8); 
+                   font-size: 14px; 
+                   border-radius: 99em; color: #0085a1; font-weight: bold;"
+            >statistical inference 
+        </a>
+        
+    </div >
+        <!--Posted by Ryo on February 2, 2022  -->
+        <font color="gray" size='2'>
+            投稿日 2022-02-02<br>更新日 2023-03-13
+        </font>
+</div>
+<hr>
+
+<div class="post-preview">
+    <a href="/2022/01/29/ubuntu-latex-setup/">
+        <h2 class="post-title">
+            Create VSCode + Dockernized LaTeX Environment
+        </h2>
+        
+        <h3 class="post-subtitle">
+            Ubuntu Desktop環境構築 Part 26
+        </h3>
+        
+    </a>
+    <div class="post-tags">
+        
+        &#9658;
+        <a class="post-tag" 
+            href="/archive/?tag=Ubuntu+20.04+LTS"
+            rel="16"
+            style="line-height: 1.1;
+                   padding: 2px; margin-bottom: 6px; border: 1px dotted rgba(255, 255, 255, 0.8); 
+                   font-size: 14px; 
+                   border-radius: 99em; color: #0085a1; font-weight: bold;"
+            >Ubuntu 20.04 LTS 
+        </a>
+        
+        &#9658;
+        <a class="post-tag" 
+            href="/archive/?tag=Linux"
+            rel="5"
+            style="line-height: 1.1;
+                   padding: 2px; margin-bottom: 6px; border: 1px dotted rgba(255, 255, 255, 0.8); 
+                   font-size: 14px; 
+                   border-radius: 99em; color: #0085a1; font-weight: bold;"
+            >Linux 
+        </a>
+        
+    </div >
+        <!--Posted by Ryo on January 29, 2022  -->
+        <font color="gray" size='2'>
+            投稿日 2022-01-29<br>更新日 2023-07-06
+        </font>
+</div>
+<hr>
+
+<div class="post-preview">
+    <a href="/2022/01/28/ubuntu-external-storage-setup/">
+        <h2 class="post-title">
+            システム起動時に自動的にドライブをマウントする
+        </h2>
+        
+        <h3 class="post-subtitle">
+            Ubuntu Desktop環境構築 Part 25
+        </h3>
+        
+    </a>
+    <div class="post-tags">
+        
+        &#9658;
+        <a class="post-tag" 
+            href="/archive/?tag=Ubuntu+20.04+LTS"
+            rel="16"
+            style="line-height: 1.1;
+                   padding: 2px; margin-bottom: 6px; border: 1px dotted rgba(255, 255, 255, 0.8); 
+                   font-size: 14px; 
+                   border-radius: 99em; color: #0085a1; font-weight: bold;"
+            >Ubuntu 20.04 LTS 
+        </a>
+        
+        &#9658;
+        <a class="post-tag" 
+            href="/archive/?tag=Linux"
+            rel="5"
+            style="line-height: 1.1;
+                   padding: 2px; margin-bottom: 6px; border: 1px dotted rgba(255, 255, 255, 0.8); 
+                   font-size: 14px; 
+                   border-radius: 99em; color: #0085a1; font-weight: bold;"
+            >Linux 
+        </a>
+        
+    </div >
+        <!--Posted by Ryo on January 28, 2022  -->
+        <font color="gray" size='2'>
+            投稿日 2022-01-28<br>更新日 2022-08-06
+        </font>
+</div>
+<hr>
+
+
+<!-- Pager -->
+
+<ul class="pager">
+    
+    <li class="previous">
+        <a href="/page15">&larr; Newer Posts</a>
+    </li>
+    
+    
+    <li class="next">
+        <a href="/page17">Older Posts &rarr;</a>
+    </li>
+    
 </ul>
 
-
-            <p class="copyright text-gray-600 text-sm">
-                Copyright &copy; Ryo's Tech Blog 2025
-                <br>
-                Powered by <span href="https://ryonakagami.github.io" class="text-blue-500 hover:underline">Ryo's Tech
-                    Blog</span>
-            </p>
-            <div class="flex justify-center mt-2">
-                <iframe class="align-middle" style="margin-left: 2px; margin-bottom:-5px;" frameborder="0" scrolling="0"
-                    width="80px" height="20px" title="RyoNakagami.github.io github stars"
-                    src="https://ghbtns.com/github-btn.html?user=RyoNakagami&repo=RyoNakagami.github.io&type=star&count=true">
-                </iframe>
-            </div>
-        </div>
-    </footer>
-
-    <script>
-        const toggleButton = document.getElementById("toggleApps");
-        const toggleButton_blog = document.getElementById("toggleBlogs");
-        const appList = document.getElementById("appList");
-        const blogList = document.getElementById("blogList");
-
-        toggleButton.addEventListener("click", () => {
-            appList.classList.toggle("hidden");
-        });
-
-        toggleButton_blog.addEventListener("click", () => {
-            blogList.classList.toggle("hidden");
-        });
-
-    </script>
-</body>
-
-</html>
