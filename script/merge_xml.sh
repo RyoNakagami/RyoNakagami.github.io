@@ -19,9 +19,11 @@ sed -i '$d' $TARGET_FILE
 
 # Append all external URLs
 printf '%s\n' "$external_urls" >> $TARGET_FILE
+echo '</urlset>' >> $TARGET_FILE
 
-# Append closing tag and log it
-echo '</urlset>' | tee -a $TARGET_FILE
+# logging the merge
+echo "📄 Last 20 lines of sitemap.xml:"
+tail -n 20 $TARGET_FILE
 
 # Ensure well-formed XML using xmllint (optional, safe)
 if command -v xmllint &> /dev/null; then
