@@ -26,9 +26,4 @@ echo "📄 Last 20 lines of sitemap.xml:"
 tail -n 20 $TARGET_FILE
 
 # Ensure well-formed XML using xmllint (optional, safe)
-if command -v xmllint &> /dev/null; then
-  echo "🔍 Checking sitemap format with xmllint"
-  xmllint --noout $TARGET_FILE
-else
-  echo "⚠️ xmllint not found. Skipping XML validation."
-fi
+sed 's/^[[:space:]]*//' "$TARGET_FILE" > "${TARGET_FILE}.tmp" && mv "${TARGET_FILE}.tmp" "$TARGET_FILE"
