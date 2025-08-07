@@ -2,3 +2,53 @@
 layout: home
 description: "日々のこつこつ勉強記録"
 ---
+
+{% for post in paginator.posts %}
+<div class="post-preview">
+    <a href="{{ post.url | prepend: site.baseurl }}">
+        <h2 class="post-title">
+            {{ post.title }}
+        </h2>
+        {% if post.subtitle %}
+        <h3 class="post-subtitle">
+            {{ post.subtitle }}
+        </h3>
+        {% endif %}
+    </a>
+    <div class="post-tags">
+        {% for tag in post.tags %}
+        &#9658;
+        <a class="post-tag" 
+            href="{{ site.baseurl }}/archive/?tag={{ tag | url_encode }}"
+            rel="{{ tag.size }}"
+            style="line-height: 1.1;
+                   padding: 2px; margin-bottom: 6px; border: 1px dotted rgba(255, 255, 255, 0.8); 
+                   font-size: 14px; 
+                   border-radius: 99em; color: #0085a1; font-weight: bold;"
+            >{{ tag }} 
+        </a>
+        {% endfor %}
+    </div >
+        <!--Posted by {% if post.author %}{{ post.author }}{% else %}{{ site.title }}{% endif %} on {{ post.date | date: "%B %-d, %Y" }}  -->
+        <font color="gray" size='2'>
+            投稿日 {{ post.date| date: "%Y-%m-%d"}}{% if post.last_modified_at %}<br>更新日 {{ post.last_modified_at | date: "%Y-%m-%d" }}{% endif %}
+        </font>
+</div>
+<hr>
+{% endfor %}
+
+<!-- Pager -->
+{% if paginator.total_pages > 1 %}
+<ul class="pager">
+    {% if paginator.previous_page %}
+    <li class="previous">
+        <a href="{{ paginator.previous_page_path | prepend: site.baseurl | replace: '//', '/' }}">&larr; Newer Posts</a>
+    </li>
+    {% endif %}
+    {% if paginator.next_page %}
+    <li class="next">
+        <a href="{{ paginator.next_page_path | prepend: site.baseurl | replace: '//', '/' }}">Older Posts &rarr;</a>
+    </li>
+    {% endif %}
+</ul>
+{% endif %}

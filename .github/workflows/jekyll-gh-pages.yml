@@ -35,6 +35,9 @@ jobs:
     - name: 🔁 Merge external sitemap
       run: bash script/merge_xml.sh
 
+    - name: Create .nojekyll
+      run: touch _site/.nojekyll
+
     - name: 🚀 Deploy to GitHub Pages
       uses: peaceiris/actions-gh-pages@v4
       with:
