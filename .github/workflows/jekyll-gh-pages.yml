@@ -7,10 +7,12 @@ on:
     - cron: '0 0 * * 0'  # Runs every Sunday at 00:00 UTC
 
 permissions:
-  contents: write  # Required for gh-pages deployment
+  contents: write
+  pages: write
+  id-token: write
 
 jobs:
-  deploy:
+  build:
     runs-on: ubuntu-latest
 
     steps:
@@ -38,14 +40,20 @@ jobs:
     - name: Create .nojekyll
       run: touch _site/.nojekyll
 
-    - name: 🚀 Deploy to GitHub Pages
-      uses: peaceiris/actions-gh-pages@v4
+    - name: 📦 Upload artifact
+      uses: actions/upload-pages-artifact@v3
       with:
-        github_token: ${{ secrets.GITHUB_TOKEN }}
-        publish_dir: ./_site
+        path: ./_site
 
-    # - name: Upload merged sitemap.xml
-    #   uses: actions/upload-artifact@v4
-    #   with:
-    #     name: merged-sitemap
-    #     path: _site/sitemap.xml
+  deploy:
+    name: Publish to GitHub Pages
+    needs: build
+    runs-on: ubuntu-latest
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+
+    steps:
+      - name: Deploy with official GH Pages action
+        id: deployment
+        uses: actions/deploy-pages@v4

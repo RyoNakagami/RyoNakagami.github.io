@@ -55,3 +55,53 @@ ul.horizontal-list {
       }
     }
   }
+
+  /* 全体コンテナ */
+.jekyll-dropdown {
+  position: relative;
+  display: inline-block;
+  font-family: 'Segoe UI', sans-serif;
+}
+
+/* ボタン */
+
+.dropdown-btn:hover {
+  background-color: #f8f8f8;
+}
+
+/* メニュー本体 */
+.dropdown-items {
+  display: none;
+  position: absolute;
+  background-color: white;
+  min-width: 160px;
+  border: 1px solid #ddd;
+  border-radius: 6px;
+  box-shadow: 0 8px 16px rgba(0,0,0,0.08);
+  z-index: 10;
+  margin-top: 4px;
+}
+
+/* メニュー内リンク */
+.dropdown-items a {
+  color: #444;
+  padding: 10px 14px;
+  text-decoration: none;
+  display: block;
+  transition: background-color 0.2s ease;
+}
+
+.dropdown-items a:hover {
+  background-color: #f0f0f0;
+}
+.dropdown-btn {
+  border: none;
+  background-color: rgba(70, 83, 111, 0.989);
+  color: white;
+  font-size: 14px;
+  padding: 8px 12px;
+  cursor: pointer;
+  line-height: 1.5;
+  vertical-align: middle;
+  margin-top: 2px; /* 微調整用 */
+}
