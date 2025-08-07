@@ -5,9 +5,13 @@ TARGET_FILE="_site/sitemap.xml"
 external_urls=$(curl -s https://ryonakagami.github.io/regmonkey-datascience-blog/sitemap.xml \
       | awk '/<url>/,/<\/url>/' )
 
-# Append the Jekyll-generated sitemap entries (if using jekyll-sitemap)
-if [ -f sitemap-p.xml ]; then
-  awk '/<url>/,/<\/url>/' sitemap-p.xml >> $TARGET_FILE
+# # Append the Jekyll-generated sitemap entries (if using jekyll-sitemap)
+# if [ -f $TARGET_FILE ]; then
+#   awk '/<url>/,/<\/url>/' $TARGET_FILE >> $TARGET_FILE
+# fi
+if [ -z "$TARGET_FILE" ]; then
+  echo "⚠️ Target file not found. Skipping XML merging."
+  exit 1
 fi
 
 # Remove closing </urlset>
