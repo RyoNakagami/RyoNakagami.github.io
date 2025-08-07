@@ -36,7 +36,7 @@ jobs:
       run: bash script/merge_xml.sh
 
     - name: 🚀 Deploy to GitHub Pages
-      uses: peaceiris/actions-gh-pages@v4
+      uses: actions/deploy-pages@v4
       with:
         github_token: ${{ secrets.GITHUB_TOKEN }}
         publish_dir: ./_site
