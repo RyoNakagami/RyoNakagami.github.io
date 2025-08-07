@@ -17,8 +17,8 @@ jobs:
     - name: 📥 Checkout code
       uses: actions/checkout@v4
 
-    - name: 🧰 Install xmllint (libxml2-utils)
-      run: sudo apt-get update && sudo apt-get install -y libxml2-utils
+    # - name: 🧰 Install xmllint (libxml2-utils)
+    #   run: sudo apt-get update && sudo apt-get install -y libxml2-utils
 
     - name: 🔧 Setup Ruby
       uses: ruby/setup-ruby@v1
@@ -41,8 +41,8 @@ jobs:
         github_token: ${{ secrets.GITHUB_TOKEN }}
         publish_dir: ./_site
 
-    - name: Upload merged sitemap.xml
-      uses: actions/upload-artifact@v4
-      with:
-        name: merged-sitemap
-        path: _site/sitemap.xml
+    # - name: Upload merged sitemap.xml
+    #   uses: actions/upload-artifact@v4
+    #   with:
+    #     name: merged-sitemap
+    #     path: _site/sitemap.xml
