@@ -2790,6 +2790,14 @@
       "tags"     : "統計, math",
       "url"      : "/2020/09/01/degenerate-distribution/",
       "date"     : "2020-09-01 00:00:00 +0000"
+    } ,
+  
+    {
+      "title"    : "退化分布: degenerate distribution",
+      "subtitle" : "確率分布 1/N",
+      "tags"     : "統計, math",
+      "url"      : "/2010/09/01/test/",
+      "date"     : "2010-09-01 00:00:00 +0000"
     } 
   
 ]
