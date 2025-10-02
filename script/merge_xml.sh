@@ -27,3 +27,21 @@ sed 's/^[[:space:]]*//' "$TARGET_FILE" > "${TARGET_FILE}.tmp" && mv "${TARGET_FI
 # logging the merge
 echo "📄 Last 20 lines of sitemap.xml:"
 tail -n 20 $TARGET_FILE
+
+
+external_urls2=$(curl -s https://ryonakagami.github.io/regmonkey-presentation/sitemap.xml \
+      | awk '/<url>/,/<\/url>/' )
+
+# Remove closing </urlset>
+sed -i '$d' $TARGET_FILE
+
+# Append all external URLs
+printf '%s\n' "$external_urls2" >> $TARGET_FILE
+echo '</urlset>' >> $TARGET_FILE
+
+# Ensure well-formed XML using xmllint (optional, safe)
+sed 's/^[[:space:]]*//' "$TARGET_FILE" > "${TARGET_FILE}.tmp" && mv "${TARGET_FILE}.tmp" "$TARGET_FILE"
+
+# logging the merge
+echo "📄 Last 20 lines of sitemap.xml:"
+tail -n 20 $TARGET_FILE
